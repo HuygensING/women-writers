@@ -1,0 +1,15 @@
+{
+  "name": "neww-edit",
+  "version": "0.0.1",
+  "description": "Women's Writers Edit Environment",
+  "main": "src/app/main.coffee",
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register tests/unit/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git/data/git/neww-edit.git"
+  },
+  "author": "Jona Andersen <jona.andersen@huygens.knaw.nl>",
+  "license": "BSD-2-Clause"
+}
