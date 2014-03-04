@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (grunt) ->
 	require('load-grunt-tasks') grunt
 
@@ -9,19 +11,18 @@ module.exports = (grunt) ->
 				options:
 					port: 9000
 					hostname: '0.0.0.0'
+					server: "#{__dirname}/config/server.coffee"
 					bases: ["#{__dirname}/build"]
-			test:
-				options:
-					port: 9001
-					hostname: '0.0.0.0'
-					server: "#{__dirname}/tests/ui/server.coffee"
-					bases: ["#{__dirname}/tests/ui", "#{__dirname}/build"]
+			# test:
+			# 	options:
+			# 		port: 9001
+			# 		hostname: '0.0.0.0'
+			# 		server: "#{__dirname}/tests/ui/server.coffee"
+			# 		bases: ["#{__dirname}/tests/ui", "#{__dirname}/build"]
 
 		open:
 			all:
 				path: 'http://localhost:<%= express.all.options.port %>'
-			test:
-				path: 'http://localhost:<%= express.test.options.port %>'
 
 		jade:
 			build:
@@ -38,12 +39,12 @@ module.exports = (grunt) ->
 		stylus:
 			build:
 				options:
-					paths: ['src/styles/import']
+					paths: ['src/stylesheets/import']
 					import: ['variables.styl']
 				files:
-					'build/style.css':  [
-						'src/styles/**/*.styl'
-						'!src/styles/import/*.styl'
+					'build/main.css':  [
+						'src/stylesheets/**/*.styl'
+						'!src/stylesheets/import/*.styl'
 					]
 
 		browserify:
@@ -51,7 +52,19 @@ module.exports = (grunt) ->
 				src: 'src/app/main.coffee'
 				dest: 'build/main.js'
 			options:
-				transform: ['coffeeify']
+				transform: ['coffeeify', 'jadeify', 'browserify-data']
+				alias: ['config/development.yaml:config/config.yaml']
+
+		rsync:
+			options:
+				args: ["--verbose", "-i"]
+				exclude: [".git*"]
+				recursive: true
+			static:
+				options:
+					args: ['-q']
+					src: ['./src/static/*']
+					dest: './build'
 
 		watch:
 			options:
@@ -67,10 +80,13 @@ module.exports = (grunt) ->
 				files: ['src/templates/index.jade']
 				tasks: ['jade:index']
 			styles:
-				files: ['src/styles/**/*.styl']
+				files: ['src/stylesheets/**/*.styl']
 				tasks: ['stylus:build']
+			static:
+				files: ['src/static/**/*']
+				tasks: ['rsync:static']
 
 	grunt.registerTask 'default', ['watch']
 	grunt.registerTask 'build', ['browserify']
-	grunt.registerTask 'server', ['express:test', 'express-keepalive']
-	grunt.registerTask 'server:open', ['express:test', 'open', 'express-keepalive']
+	grunt.registerTask 'server', ['express', 'watch']
+	grunt.registerTask 'server:open', ['server']
