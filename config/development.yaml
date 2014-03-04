@@ -1,0 +1,2 @@
+baseUrl: http://localhost:9000/
+facetedSearchBaseUrl: http://localhost:9000/api/
