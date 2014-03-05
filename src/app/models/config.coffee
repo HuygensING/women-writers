@@ -6,6 +6,9 @@ class Config extends Backbone.Model
 	defaults: require 'config/config.yaml'
 
 	personURL: (id) ->
-		@get('facetedSearchBaseUrl') + "domain/wwpersons/#{id}"
+		@get('facetedSearchBaseUrl') + "/domain/wwpersons/#{id}"
+
+	workURL: (id) ->
+		@get('facetedSearchBaseUrl') + "domain/wwdocuments/#{id}"
 
 module.exports = new Config

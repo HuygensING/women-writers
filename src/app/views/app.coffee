@@ -4,6 +4,8 @@ $ = require 'jquery'
 baseTemplate = require '../../templates/views/base.jade'
 config = require '../models/config.coffee'
 
+personDescription = require '../../data/wwperson.json'
+
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
@@ -15,10 +17,13 @@ module.exports = class AppView extends Backbone.View
 	render: ->
 		@$el.html @template()
 
-		xhr = $.getJSON config.personURL 'PERS000000015846'
+		xhr = $.getJSON config.personURL 'PERS000000014854'
 		xhr.done (data) =>
-			console.log data
+			# schema = createTimbuctooSchema personDescription
+			schema = {}
+			schema[key] = 'Text' for key, val of personDescription when not key.match /^\^/
+			console.log schema
 			form = new Form
 				model: new Backbone.Model data
-				schema: createTimbuctooSchema data
-			@$el.append form.el
+				schema: schema
+			@$('.form').html form.el

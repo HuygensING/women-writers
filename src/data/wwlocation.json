@@ -1,0 +1,17 @@
+{
+  "^deleted" : "boolean",
+  "zipcode" : "String",
+  "^created" : "Change",
+  "settlement" : "String",
+  "^modified" : "Change",
+  "country" : "String",
+  "_id" : "String",
+  "address" : "String",
+  "^rev" : "int",
+  "@relations" : "Map of (String, List of (EntityRef))",
+  "^variations" : "List of (String)",
+  "longitude" : "String",
+  "latitude" : "String",
+  "^pid" : "String",
+  "^roles" : "List of (Role)"
+}

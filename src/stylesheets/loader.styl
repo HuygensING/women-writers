@@ -1,0 +1,30 @@
+.huygens-loader
+	width 200px
+	height 150px
+
+	position absolute
+	top 50%
+	left 50%
+	margin -75px 0 0 -100px
+
+	// for flipping
+	-webkit-perspective 800
+
+	.loader-huygens-logo
+		background-image url('images/BasisLogo.png')
+		background-size cover
+	
+		width 100%
+		height 100%
+		position absolute
+		-webkit-transform-style preserve-3d
+		-webkit-transition -webkit-transform 1s ease-out
+		-webkit-animation rotating 6s ease-out infinite
+
+@-webkit-keyframes rotating
+	from
+		-webkit-transform rotateX(0deg)
+	60%
+		-webkit-transform rotateX(360deg)
+	to
+		-webkit-transform rotateX(360deg)

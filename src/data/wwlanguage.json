@@ -1,0 +1,14 @@
+{
+  "_id" : "String",
+  "^code" : "String",
+  "^rev" : "int",
+  "^deleted" : "boolean",
+  "name" : "String",
+  "^created" : "Change",
+  "^variations" : "List of (String)",
+  "@relations" : "Map of (String, List of (EntityRef))",
+  "core" : "boolean",
+  "^pid" : "String",
+  "^modified" : "Change",
+  "^roles" : "List of (Role)"
+}
