@@ -44,7 +44,7 @@ serveMain = browserify "#{__dirname}/../src/app/main.coffee",
 
 app.get '/main.js', serveMain
 
-app.get '/foo', (req, res) ->
+app.get '/', (req, res) ->
 	res.render "#{__dirname}/../src/templates/index"
 
 app.all '/api/*', timbuctooProxy

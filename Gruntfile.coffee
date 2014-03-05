@@ -54,6 +54,7 @@ module.exports = (grunt) ->
 			options:
 				transform: ['coffeeify', 'jadeify', 'browserify-data']
 				alias: ['config/development.yaml:config/config.yaml']
+				extension: ['.coffee', '.js']
 
 		rsync:
 			options:
@@ -87,6 +88,6 @@ module.exports = (grunt) ->
 				tasks: ['rsync:static']
 
 	grunt.registerTask 'default', ['watch']
-	grunt.registerTask 'build', ['browserify']
+	grunt.registerTask 'build', ['jade:build', 'browserify', 'stylus:build', 'rsync:static']
 	grunt.registerTask 'server', ['express', 'watch']
-	grunt.registerTask 'server:open', ['server']
+	grunt.registerTask 'server:open', ['express', 'open', 'watch']
