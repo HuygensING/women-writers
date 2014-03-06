@@ -60,6 +60,7 @@
     "backbone": "~1.1.2",
     "jquery": "~2.1.0",
     "jadeify": "~2.1.1",
-    "browserify-data": "~0.1.1"
+    "browserify-data": "~0.1.1",
+    "underscore": "^1.6.0"
   }
 }

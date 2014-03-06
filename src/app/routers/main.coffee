@@ -1,17 +1,28 @@
 Backbone = require 'backbone'
+_ = require 'underscore'
 
-class Main extends Backbone.Router
+class MainRouter extends Backbone.Router
 	routes:
-		'person': -> 'showPersonForm'
-		'': -> 'home'
+		'person':			'showPersonOverview'
+		'person/:id':	'showPersonForm'
+		'work': 			'showWorkOverview'
+		'work/:id':		'showWorkForm'		
+		'':						'home'
 
-	initialize: ->
-		@on 'route', => console.log arguments
+	initialize: (options) ->
+		super
 
-	home: ->
-		console.log "Hi"
+		{@controller, @root} = options
+		@processRoutes()
 
-	showPersonForm: ->
-		console.log "Person!"
+	start: ->
+		Backbone.history.start
+			root: @root
+			pushState: true 
 
-module.exports = Main
+	processRoutes: ->
+		for route, methodName of @routes when methodName of @controller
+			method = _.bind @controller[methodName], @controller
+			@route route, methodName, method
+
+module.exports = MainRouter
