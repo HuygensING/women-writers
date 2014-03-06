@@ -1,13 +1,56 @@
+body, html
+	background-color backgroundColor
+	font-family Raleway
+	padding 0
+	margin 0
+
 h1
 	font-family 'Raleway'
 	font-weight normal
 	color baseColor
 
-body
-	background-color backgroundColor
+a
+	color linkColor
+	font-family Raleway, sans-serif
+	text-decoration none
 
-.sections
-	margin-bottom 2em
-	text-align center
-	.btn
-		margin-right 1em
+.header
+	position	relative
+	.huygens-ing
+		text-decoration none
+		
+		display block
+		position absolute
+		top 0
+		right 0
+
+		width 80px
+		height 56px
+		background-image url(baseUrl + '/images/huygens-ing-small.png')
+
+.navigation
+	height 50px
+	line-height 50px
+	margin 35px 0
+	box-sizing border-box
+
+	background-color lightBackgroundColor
+	border-top 1px solid lightBackgroundEdgeColor
+	border-bottom 1px solid lightBackgroundEdgeColor
+
+	a
+		color black
+		font-family sans-serif
+		display inline
+
+ul.persons
+	margin 0
+	padding 0
+	list-style none
+
+	li
+		a
+			display block
+			padding 1em .5em
+			&:hover
+				background-color lightGray

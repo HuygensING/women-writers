@@ -47,18 +47,23 @@ module.exports = (grunt) ->
 			options:
 				paths: ['src/stylesheets/import']
 				import: ['fonts.styl', 'variables.styl']
+				compress: false
 			'build-development':
 				files:
 					'build/main.css':  [
 						'src/stylesheets/**/*.styl'
 						'!src/stylesheets/import/*.styl'
 					]
+				options:
+					define: grunt.file.readYAML 'config/development.yaml'
 			'build-test':
 				files:
 					'stage/main.css':  [
 						'src/stylesheets/**/*.styl'
 						'!src/stylesheets/import/*.styl'
 					]
+				options:
+					define: grunt.file.readYAML 'config/test.yaml'
 
 		browserify:
 			options:

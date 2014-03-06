@@ -16,7 +16,7 @@ $ ->
 			e.preventDefault()
 			Backbone.history.navigate href, trigger: true
 
-	$.getJSON(config.allPersonsUrl()).then (data) ->
+	$.getJSON(config.allPersonsUrl() + '?start=14847&rows=200').then (data) ->
 		config.set allPersons: new PersonsCollection data
 		
 		# config.allWorksUrl()
