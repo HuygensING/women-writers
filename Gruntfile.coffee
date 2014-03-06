@@ -139,5 +139,5 @@ module.exports = (grunt) ->
 	]
 	grunt.registerTask 'deploy-test', ['build-test', 'rsync:deploy-test']
 	
-	grunt.registerTask 'server', ['express', 'watch']
-	grunt.registerTask 'server:open', ['express', 'open', 'watch']
+	grunt.registerTask 'server', ['build', 'express', 'watch']
+	grunt.registerTask 'server:open', ['build', 'express', 'open', 'watch']
