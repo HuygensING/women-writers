@@ -46,4 +46,41 @@ var jade_mixins = {};
 buf.push("<h1>Person!</h1><div class=\"form\"></div>");;return buf.join("");
 };
 
+this["templates"]["src/templates/views/work-overview"] = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var locals_ = (locals || {}),works = locals_.works;
+buf.push("<h3>All works</h3><ul class=\"works\">");
+// iterate works
+;(function(){
+  var $$obj = works;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var work = $$obj[$index];
+
+buf.push("<li class=\"work\"><a" + (jade.attr("href", "/work/" + (work.attributes._id) + "", true, false)) + ">" + (jade.escape(null == (jade.interp = work.attributes.title) ? "" : jade.interp)) + "</a></li>");
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var work = $$obj[$index];
+
+buf.push("<li class=\"work\"><a" + (jade.attr("href", "/work/" + (work.attributes._id) + "", true, false)) + ">" + (jade.escape(null == (jade.interp = work.attributes.title) ? "" : jade.interp)) + "</a></li>");
+    }
+
+  }
+}).call(this);
+
+buf.push("</ul>");;return buf.join("");
+};
+
+this["templates"]["src/templates/views/work"] = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+
+buf.push("<h1>Work!</h1><div class=\"form\"></div>");;return buf.join("");
+};
+
 if (typeof exports === 'object' && exports) {module.exports = this["templates"];}

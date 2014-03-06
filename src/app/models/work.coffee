@@ -1,6 +1,9 @@
 Backbone = require 'backbone'
 
+config = require '../config.coffee'
+
 class Work extends Backbone.Model
-	default: {}
+	idAttribute: '_id'
+	urlRoot: config.allWorksUrl()
 
 module.exports = Work

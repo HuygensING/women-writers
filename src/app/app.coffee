@@ -13,6 +13,10 @@ Person = require './models/person.coffee'
 PersonView = require './views/person.coffee'
 PersonOverview = require './views/person-overview.coffee'
 
+Work = require './models/work.coffee'
+WorkForm = require './views/work.coffee'
+WorkOverview = require './views/work-overview.coffee'
+
 class App extends Backbone.View
 	template: baseTemplate
 	initialize: ->
@@ -21,12 +25,20 @@ class App extends Backbone.View
 
 	showPersonOverview: ->
 		new PersonOverview el: '#view'
-
+		
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
 			new PersonView el: '#view', model: person
-
+	
+	showWorkOverview: ->
+		new WorkOverview el: '#view'
+		
+	showWorkForm: (id) ->
+		work = new Work _id: id
+		work.fetch().done =>
+			new WorkForm el: '#view', model: work
+	
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
 		html = $ @template()
