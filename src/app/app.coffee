@@ -17,6 +17,8 @@ Work = require './models/work.coffee'
 WorkForm = require './views/work.coffee'
 WorkOverview = require './views/work-overview.coffee'
 
+FacetedSearch = require 'faceted-search'
+
 class App extends Backbone.View
 	template: baseTemplate
 	initialize: ->
@@ -38,7 +40,19 @@ class App extends Backbone.View
 		work = new Work _id: id
 		work.fetch().done =>
 			new WorkForm el: '#view', model: work
-	
+
+	search: ->
+		@fs ?= new FacetedSearch
+			el: '#view'
+			baseUrl: config.get 'baseUrl'
+			searchPath: config.get 'searchPath'
+			searchRequestOptions:
+				headers:
+					VRE_ID: 'WomenWriters'
+			queryOptions:
+				term: '*'
+				typeString: config.get 'personTypeString'
+
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
 		html = $ @template()

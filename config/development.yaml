@@ -1,4 +1,7 @@
 baseUrl: http://localhost:9000
+searchPath: /api/search
 facetedSearchBaseUrl: http://localhost:9000/api
 personsRootUrl: /domain/wwpersons
 worksRootUrl: /domain/wwdocuments
+
+personTypeString: 'wwperson'
