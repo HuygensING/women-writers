@@ -19,9 +19,9 @@ $ ->
 	$.getJSON(config.allPersonsUrl() + '?start=14847&rows=200').then (data) ->
 		config.set allPersons: new PersonsCollection data
 		
-		# config.allWorksUrl()
-		#.then (data) ->
-		#	config.set allWorks: new WorksCollection data
+	$.getJSON(config.allWorksUrl()).then (data) ->
+		config.set allWorks: new WorksCollection data
+			
 	.done ->
 		# All systems go!
 		app = new App el: 'body'
