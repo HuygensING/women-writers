@@ -68,17 +68,17 @@ module.exports = (grunt) ->
 		browserify:
 			options:
 				transform: ['coffeeify', 'jadeify', 'browserify-data']
-				extension: ['.coffee', '.js']
+				extensions: ['.coffee', '.js', '.yaml']
 			'build-development':
 				src: 'src/app/main.coffee'
 				dest: 'build/main.js'
 				options:
-					alias: ['config/development.yaml:config/config.yaml']	
+					alias: ['./config/development.yaml:./config/config.yaml']	
 			'build-test': 
 				src: 'src/app/main.coffee'
 				dest: 'stage/main.js'
 				options:
-					alias: ['config/test.yaml:config/config.yaml']	
+					alias: ['./config/test.yaml:./config/config.yaml']	
 
 		rsync:
 			options:
