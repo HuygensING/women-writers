@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 
-config = require './config.coffee'
+config = require '../config.coffee'
 
 class Person extends Backbone.Model
 	idAttribute: '_id'

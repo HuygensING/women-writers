@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 $ = Backbone.$ = require 'jquery'
 
-config = require './models/config.coffee'
+config = require './config.coffee'
 
 App = require './app.coffee'
 MainRouter = require './routers/main.coffee'

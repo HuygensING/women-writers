@@ -3,7 +3,7 @@ $ = require 'jquery'
 _ = require 'underscore'
 
 baseTemplate = require '../templates/views/base.jade'
-config = require './models/config.coffee'
+config = require './config.coffee'
 
 # personDescription = require '../../data/wwperson.json'
 # Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'

@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 $ = require 'jquery'
 
 baseTemplate = require '../../templates/views/base.jade'
-config = require '../models/config.coffee'
+config = require '../config.coffee'
 
 personDescription = require '../../data/wwperson.json'
 
