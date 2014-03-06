@@ -46,7 +46,7 @@ class App extends Backbone.View
 			el: '#view'
 			baseUrl: config.get 'baseUrl'
 			searchPath: config.get 'searchPath'
-			searchRequestOptions:
+			requestOptions:
 				headers:
 					VRE_ID: 'WomenWriters'
 			queryOptions:
