@@ -13,6 +13,8 @@ Person = require './models/person.coffee'
 PersonView = require './views/person.coffee'
 PersonOverview = require './views/person-overview.coffee'
 
+FacetedSearch = require 'faceted-search'
+
 class App extends Backbone.View
 	template: baseTemplate
 	initialize: ->
@@ -26,6 +28,19 @@ class App extends Backbone.View
 		person = new Person _id: id
 		person.fetch().done =>
 			new PersonView el: '#view', model: person
+
+	search: ->
+		@fs ?= new FacetedSearch
+			el: '#view'
+			baseUrl: config.get 'baseUrl'
+			searchPath: config.get 'searchPath'
+			searchRequestOptions:
+				headers:
+					VRE_ID: 'WomenWriters'
+			queryOptions:
+				term: '*'
+				typeString: config.get 'personTypeString'
+
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()

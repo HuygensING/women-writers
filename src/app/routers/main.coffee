@@ -6,7 +6,8 @@ class MainRouter extends Backbone.Router
 		'person':			'showPersonOverview'
 		'person/:id':	'showPersonForm'
 		'work': 			'showWorkOverview'
-		'work/:id':		'showWorkForm'		
+		'work/:id':		'showWorkForm'
+		'search(/)':	'search'
 		'':						'home'
 
 	initialize: (options) ->
