@@ -56,7 +56,7 @@
     "http-proxy": "~1.0.2",
     "simple-http-proxy": "~0.5.10",
     "underscore": "~1.6.0",
-    "faceted-search": "git://github.com/HuygensING/faceted-search.git#gulp-browserify"
+    "faceted-search": "git://github.com/HuygensING/faceted-search.git#fix-neww"
   },
   "dependencies": {
     "backbone": "~1.1.2",
