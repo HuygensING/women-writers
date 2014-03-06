@@ -5,16 +5,17 @@ class Config extends Backbone.Model
 	# configuration, such as development, test, or production
 	defaults: require 'config/config.yaml'
 
-	allPersonsURL: ->
-		@get('facetedSearchBaseUrl') + '/domain/wwpersons'
+	allPersonsUrl: ->
+		@get('facetedSearchBaseUrl') + @get('personsRootUrl')
 
-	personURL: (id) ->
-		@get('facetedSearchBaseUrl') + "/domain/wwpersons/#{id}"
+	personUrl: (id) ->
+		@allPersonsUrl() + '/' + id
 
-	allWorksURL: ->
-		@get('facetedSearchBaseUrl') + '/domain/wwdocuments'
+	allWorksUrl: ->
+		console.log "Fetching ", @get 'worksRootUrl'
+		@get('facetedSearchBaseUrl') + @get('worksRootUrl')
 
-	workURL: (id) ->
-		@get('facetedSearchBaseUrl') + "domain/wwdocuments/#{id}"
+	workUrl: (id) ->
+		@allWorksUrl() + '/' + id
 
 module.exports = new Config

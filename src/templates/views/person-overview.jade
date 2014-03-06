@@ -1,3 +1,5 @@
 h1 All persons
+ul.persons
 - for person, idx in persons
-	.person= person.attributes._id
+	li.person
+		a(href="/person/#{person.attributes._id}")= person.attributes._id

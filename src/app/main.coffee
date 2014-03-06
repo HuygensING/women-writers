@@ -16,12 +16,12 @@ $ ->
 			e.preventDefault()
 			Backbone.history.navigate href, trigger: true
 
-	$.getJSON(config.allPersonsURL()).then (data) ->
+	$.getJSON(config.allPersonsUrl()).then (data) ->
 		config.set allPersons: new PersonsCollection data
 		
-		$.getJSON config.allWorksURL()
-	.then (data) ->
-		config.set allWorks: new WorksCollection data
+		# config.allWorksUrl()
+		#.then (data) ->
+		#	config.set allWorks: new WorksCollection data
 	.done ->
 		# All systems go!
 		app = new App el: 'body'

@@ -9,6 +9,8 @@ config = require './models/config.coffee'
 # Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 # {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
+Person = require './models/person.coffee'
+PersonView = require './views/person.coffee'
 PersonOverview = require './views/person-overview.coffee'
 
 class App extends Backbone.View
@@ -19,6 +21,11 @@ class App extends Backbone.View
 
 	showPersonOverview: ->
 		new PersonOverview el: '#view'
+
+	showPersonForm: (id) ->
+		person = new Person _id: id
+		person.fetch().done =>
+			new PersonView el: '#view', model: person
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()

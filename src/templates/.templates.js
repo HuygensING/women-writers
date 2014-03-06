@@ -13,7 +13,7 @@ this["templates"]["src/templates/views/person-overview"] = function template(loc
 var buf = [];
 var jade_mixins = {};
 var locals_ = (locals || {}),persons = locals_.persons;
-buf.push("<h1>All persons</h1>");
+buf.push("<h1>All persons</h1><ul class=\"persons\"></ul>");
 // iterate persons
 ;(function(){
   var $$obj = persons;
@@ -22,7 +22,7 @@ buf.push("<h1>All persons</h1>");
     for (var idx = 0, $$l = $$obj.length; idx < $$l; idx++) {
       var person = $$obj[idx];
 
-buf.push("<div class=\"person\">" + (jade.escape(null == (jade.interp = person.attributes._id) ? "" : jade.interp)) + "</div>");
+buf.push("<li class=\"person\"><a" + (jade.attr("href", "/person/" + (person.attributes._id) + "", true, false)) + ">" + (jade.escape(null == (jade.interp = person.attributes._id) ? "" : jade.interp)) + "</a></li>");
     }
 
   } else {
@@ -30,12 +30,19 @@ buf.push("<div class=\"person\">" + (jade.escape(null == (jade.interp = person.a
     for (var idx in $$obj) {
       $$l++;      var person = $$obj[idx];
 
-buf.push("<div class=\"person\">" + (jade.escape(null == (jade.interp = person.attributes._id) ? "" : jade.interp)) + "</div>");
+buf.push("<li class=\"person\"><a" + (jade.attr("href", "/person/" + (person.attributes._id) + "", true, false)) + ">" + (jade.escape(null == (jade.interp = person.attributes._id) ? "" : jade.interp)) + "</a></li>");
     }
 
   }
 }).call(this);
 ;return buf.join("");
+};
+
+this["templates"]["src/templates/views/person"] = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+
+buf.push("<h1>Person!</h1><div class=\"form\"></div>");;return buf.join("");
 };
 
 if (typeof exports === 'object' && exports) {module.exports = this["templates"];}
