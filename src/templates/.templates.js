@@ -6,7 +6,7 @@ this["templates"]["src/templates/views/base"] = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 
-buf.push("<div class=\"container\"><div class=\"header centered\"><h1>Neww Women Writers</h1><a href=\"http://www.huygens.knaw.nl/\" target=\"_self\" class=\"huygens-ing\"></a></div><div class=\"navigation\"><div class=\"centered\"><a href=\"/person\" class=\"person\">All persons</a><a href=\"/work\" class=\"works\">All works</a></div></div><div id=\"view\" class=\"centered\"></div></div>");;return buf.join("");
+buf.push("<div class=\"container\"><div class=\"header centered\"><h1>Neww Women Writers</h1><a href=\"http://www.huygens.knaw.nl/\" target=\"_self\" class=\"huygens-ing\"></a></div><div class=\"navigation\"><div class=\"centered\"><a href=\"/person\" class=\"person\">All persons</a><a href=\"/work\" class=\"works\">All works</a><a href=\"/search\">Search</a></div></div><div id=\"view\" class=\"centered\"></div></div>");;return buf.join("");
 };
 
 this["templates"]["src/templates/views/person-overview"] = function template(locals) {
