@@ -11,11 +11,17 @@ class Config extends Backbone.Model
 	personUrl: (id) ->
 		@allPersonsUrl() + '/' + id
 
+	personViewUrl: (id) ->
+		@get('baseUrl') + '/person/' + id
+
 	allWorksUrl: ->
-		console.log "Fetching ", @get 'worksRootUrl'
 		@get('facetedSearchBaseUrl') + @get('worksRootUrl')
 
 	workUrl: (id) ->
 		@allWorksUrl() + '/' + id
+
+	workViewUrl: (id) ->
+		@get('baseUrl') + '/work/' + id
+
 
 module.exports = new Config

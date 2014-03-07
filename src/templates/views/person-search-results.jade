@@ -1,0 +1,5 @@
+h4= response.numFound + (response.numFound > 1 ? ' persons' : ' person') + ' found'
+ul
+	- each person in response.results
+		li
+			a(href=config.personViewUrl(person._id))= person.tempName

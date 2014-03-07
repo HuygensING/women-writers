@@ -3,12 +3,13 @@ _ = require 'underscore'
 
 class MainRouter extends Backbone.Router
 	routes:
-		'person':			'showPersonOverview'
-		'person/:id':	'showPersonForm'
-		'work': 			'showWorkOverview'
-		'work/:id':		'showWorkForm'
-		'search(/)':	'search'
-		'':						'home'
+		'person':							'showPersonOverview'
+		'person/search/':			'showPersonSearch'
+		'person/:id':					'showPersonForm'
+		'work': 							'showWorkOverview'
+		'work/search/':				'showWorkSearch'
+		'work/:id':						'showWorkForm'
+		'':										'home'
 
 	initialize: (options) ->
 		super

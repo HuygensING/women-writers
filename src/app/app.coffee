@@ -12,12 +12,12 @@ config = require './config.coffee'
 Person = require './models/person.coffee'
 PersonView = require './views/person.coffee'
 PersonOverview = require './views/person-overview.coffee'
+PersonSearchView = require './views/person-search.coffee'	
 
 Work = require './models/work.coffee'
 WorkForm = require './views/work.coffee'
 WorkOverview = require './views/work-overview.coffee'
-
-FacetedSearch = require 'faceted-search'
+WorkSearchView = require './views/work-search.coffee'	
 
 class App extends Backbone.View
 	template: baseTemplate
@@ -41,17 +41,13 @@ class App extends Backbone.View
 		work.fetch().done =>
 			new WorkForm el: '#view', model: work
 
-	search: ->
-		@fs ?= new FacetedSearch
-			el: '#view'
-			baseUrl: config.get 'baseUrl'
-			searchPath: config.get 'searchPath'
-			requestOptions:
-				headers:
-					VRE_ID: 'WomenWriters'
-			queryOptions:
-				term: '*'
-				typeString: config.get 'personTypeString'
+	showPersonSearch: ->
+		@personSearch ?= new PersonSearchView
+		@$('#view').html @personSearch.el
+
+	showWorkSearch: ->
+		@workSearch ?= new WorkSearchView
+		@$('#view').html @workSearch.el
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
@@ -62,18 +58,5 @@ class App extends Backbone.View
 			.fadeOut 150, => 
 				@$('.body-wrap').remove()
 				html.fadeIn 100
-		
-		# @$el.fadeOut 150, => @$el.html(@template()).fadeIn 50
-
-		# xhr = $.getJSON config.personURL 'PERS000000014854'
-		# xhr.done (data) =>
-		# 	# schema = createTimbuctooSchema personDescription
-		# 	schema = {}
-		# 	schema[key] = 'Text' for key, val of personDescription when not key.match /^\^/
-		# 	console.log schema
-		# 	form = new Form
-		# 		model: new Backbone.Model data
-		# 		schema: schema
-		# 	@$('#view').html form.el
 
 module.exports = App
