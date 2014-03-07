@@ -48,6 +48,16 @@ module.exports = (grunt) ->
 				paths: ['src/stylesheets/import']
 				import: ['fonts.styl', 'variables.styl']
 				compress: false
+			'build-faceted-search':
+				options:
+					paths: ['node_modules/faceted-search/src/stylus/', 'node_modules/faceted-search/src/stylus/import']
+					import: ['functions.styl', 'variables.styl']
+					compress: true
+				files:
+					'build/fs.css': [
+						'node_modules/faceted-search/src/stylus/**/*.styl'
+						'!node_modules/faceted-search/src/stylus/import/*.styl'
+					]
 			'build-development':
 				files:
 					'build/main.css':  [
@@ -64,6 +74,11 @@ module.exports = (grunt) ->
 					]
 				options:
 					define: grunt.file.readYAML 'config/test.yaml'
+
+		concat:
+			'faceted-search-css':
+				src: ['build/fs.css', 'build/main.css']
+				dest: 'build/main.css'
 
 		browserify:
 			options:
@@ -117,24 +132,32 @@ module.exports = (grunt) ->
 				tasks: ['jade:index-development']
 			styles:
 				files: ['src/stylesheets/**/*.styl']
-				tasks: ['stylus:build-development']
+				tasks: ['build-stylesheet-development']
 			static:
 				files: ['src/static/**/*']
 				tasks: ['rsync:static-development']
 
 	grunt.registerTask 'default', ['watch']
+
+	for env in ['test', 'development']
+		grunt.registerTask "build-stylesheet-#{env}", [
+			"stylus:build-#{env}"
+			'stylus:build-faceted-search'
+			'concat:faceted-search-css'
+		]
+	
 	grunt.registerTask 'build', [
 		'jade:build'
 		'jade:index-development'
 		'browserify:build-development'
-		'stylus:build-development'
+		'build-stylesheet-development'
 		'rsync:static-development'
 	]
 	grunt.registerTask 'build-test', [
 		'jade:build'
 		'jade:index-test'
 		'browserify:build-test'
-		'stylus:build-test'
+		'build-stylesheet-test'
 		'rsync:static-test'
 	]
 	grunt.registerTask 'deploy-test', ['build-test', 'rsync:deploy-test']
