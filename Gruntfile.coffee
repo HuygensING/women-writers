@@ -46,7 +46,7 @@ module.exports = (grunt) ->
 		stylus:
 			options:
 				paths: ['src/stylesheets/import']
-				import: ['fonts.styl', 'variables.styl']
+				import: ['mixins.styl', 'fonts.styl', 'variables.styl']
 				compress: false
 			'build-faceted-search':
 				options:

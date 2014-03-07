@@ -22,23 +22,8 @@ input[type=text]
 	width 30em
 
 button, .btn
-	cursor pointer
-	padding .4em .6em
+	button-style()
 	background-color baseColor
-	
 	color white
-	font-weight bold
-	font-family sans-serif
-	text-decoration none
-
-	border none
-	border-radius borderRadius
-	box-shadow 2px 2px 0px rgba(0,0,0,0.2)
-
 	&:hover
 		background-color baseHighlightColor
-	&:active
-		box-shadow 1px 1px 0px rgba(0,0,0,0.2)
-		position relative
-		left 1px
-		top 1px
