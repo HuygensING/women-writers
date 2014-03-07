@@ -1,4 +1,4 @@
-h4= response.numFound + (response.numFound > 1 ? ' persons' : ' person') + ' found'
+h4= response.numFound + (response.numFound != 1 ? ' persons' : ' person') + ' found'
 ul
 	- each person in response.results
 		li
