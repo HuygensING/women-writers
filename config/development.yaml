@@ -3,5 +3,7 @@ searchPath: /api/search
 facetedSearchBaseUrl: http://localhost:9000/api
 personsRootUrl: /domain/wwpersons
 worksRootUrl: /domain/wwdocuments
+VRE_ID: 'WomenWriters'
 
 personTypeString: 'wwperson'
+workTypeString: 'wwdocument'
