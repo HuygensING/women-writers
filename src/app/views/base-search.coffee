@@ -15,7 +15,7 @@ class SearchView extends Backbone.View
 	resultsTemplate: resultsTemplate
 	initialize: (@options={}) ->
 		_.extend @, Backbone.Events
-		console.log "Hello", @options
+
 		@queryOptions = @options.queryOptions ? @queryOptions
 		@facetNameMap = @options.facetNameMap ? @facetNameMap
 
