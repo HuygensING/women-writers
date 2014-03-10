@@ -31,7 +31,8 @@ class App extends Backbone.View
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
-			new PersonView el: '#view', model: person
+			pv = new PersonView model: person
+			@switchView pv
 	
 	showWorkOverview: ->
 		new WorkOverview el: '#view'
@@ -43,11 +44,18 @@ class App extends Backbone.View
 
 	showPersonSearch: ->
 		@personSearch ?= new PersonSearchView
-		@$('#view').html @personSearch.el
+		@switchView @personSearch
 
 	showWorkSearch: ->
 		@workSearch ?= new WorkSearchView
-		@$('#view').html @workSearch.el
+		@switchView @workSearch
+
+	switchView: (view) ->
+		@currentView?.$el.fadeOut 75
+		view.$el.fadeOut 0
+		@$('#view').html view.el
+		view.$el.fadeIn 75
+		@currentView = view
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
