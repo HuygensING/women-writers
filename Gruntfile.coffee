@@ -136,6 +136,12 @@ module.exports = (grunt) ->
 			static:
 				files: ['src/static/**/*']
 				tasks: ['rsync:static-development']
+			dependencies:
+				files: [
+					'node_modules/timbuctoo-edit-forms/**/*'
+					'node_modules/faceted-search/**/*'
+				]
+				tasks: ['browserify:build-development']
 
 	grunt.registerTask 'default', ['watch']
 
