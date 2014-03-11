@@ -27,28 +27,44 @@ class App extends Backbone.View
 
 	showPersonOverview: ->
 		new PersonOverview el: '#view'
+		@$('#search').hide()
+		@$('#view').show()
 		
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
 			pv = new PersonView model: person
 			@switchView pv
+		@$('#search').hide()
+		@$('#view').show()
 	
 	showWorkOverview: ->
 		new WorkOverview el: '#view'
-		
+		@$('#search').hide()
+		@$('#view').show()
+
 	showWorkForm: (id) ->
 		work = new Work _id: id
 		work.fetch().done =>
 			new WorkForm el: '#view', model: work
+		@$('#search').hide()
+		@$('#view').show()
 
 	showPersonSearch: ->
 		@personSearch ?= new PersonSearchView
-		@switchView @personSearch
+			el: '#search .persons'
+		@$('#search').show()
+		@$('#view').hide()
+		@workSearch?.$el.fadeOut 75, =>
+			@personSearch.$el.fadeIn 75
 
 	showWorkSearch: ->
 		@workSearch ?= new WorkSearchView
-		@switchView @workSearch
+			el: '#search .works'
+		@$('#search').show()
+		@$('#view').hide()
+		@personSearch?.$el.fadeOut 75, =>
+			@workSearch.$el.fadeIn 75
 
 	switchView: (view) ->
 		@currentView?.$el.fadeOut 75
