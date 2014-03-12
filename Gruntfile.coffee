@@ -48,13 +48,23 @@ module.exports = (grunt) ->
 				paths: ['src/stylesheets/import']
 				import: ['mixins.styl', 'fonts.styl', 'variables.styl']
 				compress: false
-			'build-faceted-search':
+			'build-faceted-search-development':
 				options:
 					paths: ['node_modules/faceted-search/src/stylus/', 'node_modules/faceted-search/src/stylus/import']
 					import: ['functions.styl', 'variables.styl']
 					compress: true
 				files:
 					'build/fs.css': [
+						'node_modules/faceted-search/src/stylus/**/*.styl'
+						'!node_modules/faceted-search/src/stylus/import/*.styl'
+					]
+			'build-faceted-search-test':
+				options:
+					paths: ['node_modules/faceted-search/src/stylus/', 'node_modules/faceted-search/src/stylus/import']
+					import: ['functions.styl', 'variables.styl']
+					compress: true
+				files:
+					'stage/fs.css': [
 						'node_modules/faceted-search/src/stylus/**/*.styl'
 						'!node_modules/faceted-search/src/stylus/import/*.styl'
 					]
@@ -76,9 +86,13 @@ module.exports = (grunt) ->
 					define: grunt.file.readYAML 'config/test.yaml'
 
 		concat:
-			'faceted-search-css':
+			'faceted-search-css-development':
 				src: ['build/fs.css', 'build/main.css']
 				dest: 'build/main.css'
+			'faceted-search-css-test':
+				src: ['stage/fs.css', 'stage/main.css']
+				dest: 'stage/main.css'
+
 
 		browserify:
 			options:
@@ -142,8 +156,8 @@ module.exports = (grunt) ->
 	for env in ['test', 'development']
 		grunt.registerTask "build-stylesheet-#{env}", [
 			"stylus:build-#{env}"
-			'stylus:build-faceted-search'
-			'concat:faceted-search-css'
+			"stylus:build-faceted-search-#{env}"
+			"concat:faceted-search-css-#{env}"
 		]
 	
 	grunt.registerTask 'build', [
