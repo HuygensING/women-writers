@@ -14,7 +14,7 @@ $ ->
 		href = $(@).attr 'href'	
 		if href?
 			e.preventDefault()
-			href = href.replace /^https?:\/\/[^\/]+/, '' if href.match /^https?:/
+			href = href.replace config.get('baseUrl'), '' if href.match /^https?:/
 			Backbone.history.navigate href, trigger: true
 
 	$.getJSON(config.allPersonsUrl() + '?start=14847&rows=200').then (data) ->
