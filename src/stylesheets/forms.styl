@@ -1,18 +1,3 @@
-fieldset
-	border none
-	padding 0
-
-.form label
-	font-family labelFont
-	color labelColor
-	display inline-block
-	width 15em
-	vertical-align top
-
-.form label + div
-	display inline-block
-	
-
 input[type=text]
 	border 1px solid #eee
 	border-radius borderRadius
@@ -20,17 +5,57 @@ input[type=text]
 	padding .4em .6em
 	color inputTextColor
 
-.form input[type=text]
-	width 30em
-
 button, .btn
 	button-style()
-	background-color baseColor
+	background-color buttonColor
 	color white
 	&:hover
-		background-color baseHighlightColor
-	&:active
-		box-shadow 1px 1px 0px rgba(0,0,0,0.2)
-		position relative
-		left 1px
-		top 1px
+		background-color buttonHighlightColor
+
+	&.gray
+		background-color lightGray
+		color darkGray
+		&:hover
+			background-color darkGray
+			color white
+
+.controls
+	margin 35px 0
+
+.timbuctoo-form
+	fieldset
+		border none
+		padding 0
+
+	legend
+		font-weight bold
+		background lightGray
+		display block
+		padding 1em .5em
+		margin-left -.5em
+		margin-bottom 1em
+		width 100%
+
+	form label
+		font-family labelFont
+		color labelColor
+		display inline-block
+		width 190px
+		vertical-align middle
+		font-size 14px
+
+	form label + div
+		display inline-block
+		width 55%
+
+	form input[type=text]
+		width 500px
+
+	.field
+		margin-bottom 1em
+
+	.readonly-editor
+		font-size .8em
+		line-height 150%
+		display inline-block
+		width 50%
