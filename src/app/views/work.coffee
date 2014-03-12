@@ -7,8 +7,9 @@ Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
 class Work extends Backbone.View
+	className: 'work-edit'
 	template: require '../../templates/views/work.jade'
-	
+
 	initialize: ->
 		@render() if @model?
 		
@@ -18,10 +19,24 @@ class Work extends Backbone.View
 		
 		console.log schema
 		
+		tempFields = (key for key, val of schema when key.match /^temp/)
+		nonTempFields = (key for key, val of schema when not key.match /^temp/)
+
 		form = new Form
+			className: 'timbuctoo-form'
 			model: @model
 			schema: schema
-			
-		@$el.html form.el
+			fieldsets: [
+				{ 
+					fields: nonTempFields,
+					legend: ''
+				},
+				{
+					fields: tempFields,
+					legend: 'Temporary Fields'
+				}
+			]
+
+		@$('.form').html form.el
 
 module.exports = Work
