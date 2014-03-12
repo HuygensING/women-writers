@@ -16,7 +16,8 @@ class Person extends Backbone.View
 
 	render: ->
 		@$el.html @template()
-		schema = createTimbuctooSchema personDescription
+		schema = createTimbuctooSchema personDescription,
+			exclude: [ /^\^/, /^_/ ]
 		
 		# for key, val of personDescription when not key.match /^\^/
 		# 	if key.match /^temp/
