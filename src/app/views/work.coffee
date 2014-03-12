@@ -14,9 +14,10 @@ class Work extends Backbone.View
 		
 	render: ->
 		@$el.html @template()
-		schema = {}
+		schema = createTimbuctooSchema workDescription
 		
-		schema[key] = 'Text' for key, val of workDescription when not key.match /^\^/
+		console.log schema
+		
 		form = new Form
 			model: @model
 			schema: schema

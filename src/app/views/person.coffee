@@ -13,9 +13,10 @@ class Person extends Backbone.View
 
 	render: ->
 		@$el.html @template()
-		schema = {}
-		schema[key] = 'Text' for key, val of personDescription when not key.match /^\^/
+		schema = createTimbuctooSchema personDescription
+		
 		console.log schema
+		
 		form = new Form
 			model: @model
 			schema: schema
