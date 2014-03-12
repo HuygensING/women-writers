@@ -9,8 +9,9 @@ button, .btn
 	button-style()
 	background-color buttonColor
 	color white
+	outline none
 	&:hover
-		background-color buttonHighlightColor
+		background-color baseColor
 
 	&.gray
 		background-color lightGray
@@ -21,6 +22,11 @@ button, .btn
 
 .controls
 	margin 35px 0
+	width 715px
+	button
+		font-size 16px
+	.save
+		float right
 
 .timbuctoo-form
 	fieldset
@@ -46,7 +52,6 @@ button, .btn
 
 	form label + div
 		display inline-block
-		width 55%
 
 	form input[type=text]
 		width 500px
