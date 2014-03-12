@@ -22,6 +22,7 @@ class Person extends Backbone.View
 		# 	if key.match /^temp/
 		# 		schema[key] =
 		# 			type: 'ReadOnly'
+
 		console.log schema
 
 		tempFields = (key for key, val of schema when key.match /^temp/)
