@@ -7,3 +7,6 @@ VRE_ID: 'WomenWriters'
 
 personTypeString: 'wwperson'
 workTypeString: 'wwdocument'
+
+userInfoPath: /api/system/users/me
+userLoginUrl: https://secure.huygens.knaw.nl/saml2/login

@@ -23,5 +23,8 @@ class Config extends Backbone.Model
 	workViewUrl: (id) ->
 		@get('baseUrl') + '/work/' + id
 
+	userInfoUrl: ->
+		@get('baseUrl') + @get('userInfoPath')
+
 
 module.exports = new Config

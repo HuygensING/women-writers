@@ -50,6 +50,21 @@ a
 		display inline
 		margin-right 1em
 
+	.user-status
+		display inline-block
+		float right
+		& > span
+			display none
+		&.logged-in
+			& > span
+				display inline
+				font-size .8em
+				color darkGray
+				.user-name
+					font-weight bold
+			button
+				display none
+
 ul.persons
 	margin 0
 	padding 0

@@ -5,6 +5,10 @@ _ = require 'underscore'
 baseTemplate = require '../templates/views/base.jade'
 config = require './config.coffee'
 
+user = require './models/user.coffee'
+
+UserStatusView = require './views/user-status.coffee'
+
 # personDescription = require '../../data/wwperson.json'
 # Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 # {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
@@ -76,6 +80,11 @@ class App extends Backbone.View
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
 		html = $ @template()
+
+		new UserStatusView
+			el: html.find '.user-status'
+			model: user
+
 		@$el.html(wrapper)
 			.append(html.hide())
 			.find('.body-wrap')
