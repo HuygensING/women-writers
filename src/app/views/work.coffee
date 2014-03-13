@@ -24,6 +24,8 @@ class Work extends Backbone.View
 
 		form = new Form
 			className: 'timbuctoo-form'
+			authToken: config.get 'authToken'
+			VRE_ID: config.get 'VRE_ID'
 			model: @model
 			schema: schema
 			fieldsets: [

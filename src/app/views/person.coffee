@@ -11,8 +11,14 @@ class Person extends Backbone.View
 	className: 'person-edit'
 	template: require '../../templates/views/person.jade'
 
+	events:
+		'click .save': 'savePerson'
+
 	initialize: ->
 		@render() if @model?
+
+	savePerson: ->
+		@form.save()
 
 	render: ->
 		@$el.html @template()
@@ -29,8 +35,10 @@ class Person extends Backbone.View
 		tempFields = (key for key, val of schema when key.match /^temp/)
 		nonTempFields = (key for key, val of schema when not key.match /^temp/)
 
-		form = new Form
+		@form = new Form
 			className: 'timbuctoo-form'
+			authToken: config.get 'authToken'
+			VRE_ID: config.get 'VRE_ID'
 			model: @model
 			schema: schema
 			fieldsets: [
@@ -44,6 +52,6 @@ class Person extends Backbone.View
 				}
 			]
 
-		@$('.form').html form.el
+		@$('.form').html @form.el
 
 module.exports = Person
