@@ -10,3 +10,5 @@ workTypeString: 'wwdocument'
 
 userInfoPath: /api/system/users/me
 userLoginUrl: https://secure.huygens.knaw.nl/saml2/login
+
+resultRows: 25

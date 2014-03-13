@@ -6,6 +6,45 @@
 	float left
 	margin 20px 0 0 resultsLeftPadding
 
+	.cursor
+		no-user-select()
+		position relative
+		margin-bottom 1em
+		height 2em
+		font-size .9em
+
+		.prev, .next
+			position absolute
+			display inline-block
+			padding 1em
+			top 0
+
+			font-weight bold
+			cursor pointer
+
+		.prev
+			left 0
+		.next
+			right 0
+
+		.position
+			display block
+			width 200px
+			margin 0 auto
+			text-align center
+			padding 1em
+
+		.loader
+			width 16px
+			height 16px
+			background-image url('images/small-loader.gif')
+			background-repeat none
+			background-position center center
+			position relative
+			top 16px
+			margin 0 auto
+			display none
+
 	ul
 		list-style none
 		padding 0

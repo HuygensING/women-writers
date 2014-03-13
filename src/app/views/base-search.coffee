@@ -13,6 +13,11 @@ config = require '../config.coffee'
 class SearchView extends Backbone.View
 	template: searchTemplate
 	resultsTemplate: resultsTemplate
+
+	events:
+		'click .cursor .next': 'nextResults'
+		'click .cursor .prev': 'prevResults'
+
 	initialize: (@options={}) ->
 		_.extend @, Backbone.Events
 
@@ -23,11 +28,41 @@ class SearchView extends Backbone.View
 
 		@listenTo @search, 'results:change', (results) => @renderResults results
 
+	nextResults: ->
+		@showLoader()
+		@search.next()
+
+	prevResults: ->
+		@showLoader()
+		@search.prev()
+
+	sortResults: (e) -> # TODO: Dropdown
+		@sortField = $(e.currentTarget).val()
+		@search.sortResultsBy(@sortField)
+
+	resetSearch: -> # TODO: Create button
+		@search.reset()
+
+	showLoader: ->
+		@displayLoader = true
+		doIt = =>
+			if @displayLoader
+				@$('.cursor .position').hide()
+				@$('.cursor .loader').fadeIn 150
+		_.delay doIt, 200
+
 	renderResults: (rsp) ->
 		@$('.results').html @resultsTemplate
 			response: rsp.attributes
 			objectUrl: @objectUrl
 			config: config
+
+		@$('.cursor .loader').hide()
+		@$('.cursor .position').show()
+		@displayLoader = false
+
+		@$('.cursor .next').toggle @search.hasNext()
+		@$('.cursor .prev').toggle @search.hasPrev()
 
 	render: ->
 		@$el.html @template()

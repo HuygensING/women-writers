@@ -1,4 +1,14 @@
 h4= response.numFound + (response.numFound != 1 ? ' persons' : ' person') + ' found'
+.cursor
+	span.prev &laquo; Previous
+	span.position
+		| Page&nbsp;
+		span.current= 1 + (response.start / config.get('resultRows'))
+		| &nbsp;of&nbsp;
+		span.total= Math.ceil(response.numFound / config.get('resultRows'))
+	.loader
+	span.next Next &raquo;
+
 ul.persons
 	- each person in response.results
 		li
