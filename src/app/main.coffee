@@ -24,6 +24,7 @@ $ ->
 	hsid = hasHsId.exec window.location.href
 	if hsid
 		config.set authToken: hsid[1]
+		window.history.replaceState? {}, '', window.location.href.replace /\?.*$/, ''
 
 	$.getJSON(config.allPersonsUrl() + '?start=14847&rows=200').then (data) ->
 		config.set allPersons: new PersonsCollection data
