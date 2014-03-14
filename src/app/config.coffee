@@ -5,6 +5,14 @@ class Config extends Backbone.Model
 	# configuration, such as development, test, or production
 	defaults: require './config/config.yaml'
 
+	initialize: ->
+		hasLocalStorage = window.localStorage?
+
+		if hasLocalStorage and not @get('authToken')?
+			@set authToken: window.localStorage.getItem('authToken')
+			@on 'change:authToken', =>
+				window.localStorage.setItem('authToken', @get 'authToken')
+
 	allPersonsUrl: ->
 		@get('facetedSearchBaseUrl') + @get('personsRootUrl')
 
