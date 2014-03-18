@@ -1,0 +1,27 @@
+{
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "roles" : {
+    "type" : "List of (String)"
+  },
+  "userId" : {
+    "type" : "String"
+  },
+  "vreId" : {
+    "type" : "String"
+  }
+}

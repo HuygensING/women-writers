@@ -1,0 +1,46 @@
+{
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "ID_PREFIX" : {
+    "value" : "USER",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "commonName" : {
+    "type" : "String"
+  },
+  "displayName" : {
+    "type" : "String"
+  },
+  "email" : {
+    "type" : "String"
+  },
+  "firstName" : {
+    "type" : "String"
+  },
+  "lastName" : {
+    "type" : "String"
+  },
+  "organisation" : {
+    "type" : "String"
+  },
+  "persistentId" : {
+    "type" : "String"
+  },
+  "vreAuthorization" : {
+    "type" : "VREAuthorization"
+  }
+}

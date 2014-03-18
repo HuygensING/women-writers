@@ -1,0 +1,14 @@
+{
+  "ARCHETYPE" : {
+    "value" : "ARCHETYPE",
+    "type" : "String"
+  },
+  "AUTHOR" : {
+    "value" : "AUTHOR",
+    "type" : "String"
+  },
+  "PSEUDONYM" : {
+    "value" : "PSEUDONYM",
+    "type" : "String"
+  }
+}

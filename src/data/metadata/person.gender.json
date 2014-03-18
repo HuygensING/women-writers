@@ -1,0 +1,18 @@
+{
+  "FEMALE" : {
+    "value" : "FEMALE",
+    "type" : "String"
+  },
+  "MALE" : {
+    "value" : "MALE",
+    "type" : "String"
+  },
+  "NOT_APPLICABLE" : {
+    "value" : "NOT_APPLICABLE",
+    "type" : "String"
+  },
+  "UNKNOWN" : {
+    "value" : "UNKNOWN",
+    "type" : "String"
+  }
+}

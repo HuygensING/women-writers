@@ -1,0 +1,14 @@
+{
+  "displayName" : {
+    "type" : "String"
+  },
+  "id" : {
+    "type" : "String"
+  },
+  "path" : {
+    "type" : "String"
+  },
+  "type" : {
+    "type" : "String"
+  }
+}

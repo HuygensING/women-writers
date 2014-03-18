@@ -1,0 +1,103 @@
+{
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "beginDate" : {
+    "type" : "String"
+  },
+  "countries" : {
+    "type" : "List of (String)"
+  },
+  "endDate" : {
+    "type" : "String"
+  },
+  "extent" : {
+    "type" : "String"
+  },
+  "findingAid" : {
+    "type" : "String"
+  },
+  "itemNo" : {
+    "type" : "String"
+  },
+  "madeBy" : {
+    "type" : "String"
+  },
+  "notes" : {
+    "type" : "String"
+  },
+  "origFilename" : {
+    "type" : "String"
+  },
+  "periodDescription" : {
+    "type" : "String"
+  },
+  "refCode" : {
+    "type" : "String"
+  },
+  "refCodeArchive" : {
+    "type" : "String"
+  },
+  "reminders" : {
+    "type" : "String"
+  },
+  "scope" : {
+    "type" : "String"
+  },
+  "series" : {
+    "type" : "String"
+  },
+  "subCode" : {
+    "type" : "String"
+  },
+  "titleEng" : {
+    "type" : "String"
+  },
+  "titleNld" : {
+    "type" : "String"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "edition" : {
+    "type" : "String"
+  },
+  "location" : {
+    "type" : "String"
+  },
+  "publisher" : {
+    "type" : "String"
+  },
+  "year" : {
+    "type" : "String"
+  }
+}

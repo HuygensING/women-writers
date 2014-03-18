@@ -1,0 +1,9 @@
+{
+  "type" : {
+    "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
+    "type" : "Type"
+  },
+  "value" : {
+    "type" : "String"
+  }
+}

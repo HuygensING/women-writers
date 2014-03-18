@@ -1,0 +1,100 @@
+{
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "contents" : {
+    "type" : "String"
+  },
+  "date1" : {
+    "type" : "String"
+  },
+  "date2" : {
+    "type" : "String"
+  },
+  "linkArchivalDBase" : {
+    "type" : "String"
+  },
+  "madeBy" : {
+    "type" : "String"
+  },
+  "origFilename" : {
+    "type" : "String"
+  },
+  "originalArchivalSource" : {
+    "type" : "String"
+  },
+  "otherPublications" : {
+    "type" : "List of (String)"
+  },
+  "pages" : {
+    "type" : "String"
+  },
+  "partsToScan" : {
+    "type" : "String"
+  },
+  "reference" : {
+    "type" : "String"
+  },
+  "remarks" : {
+    "type" : "String"
+  },
+  "reminders" : {
+    "type" : "String"
+  },
+  "scan" : {
+    "type" : "String"
+  },
+  "seeAlso" : {
+    "type" : "List of (String)"
+  },
+  "titleEng" : {
+    "type" : "String"
+  },
+  "titleNld" : {
+    "type" : "String"
+  }
+}

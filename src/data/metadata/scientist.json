@@ -1,0 +1,8 @@
+{
+  "@variationRefs" : {
+    "type" : "List of (Reference)"
+  },
+  "fieldsOfInterest" : {
+    "type" : "String"
+  }
+}

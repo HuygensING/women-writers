@@ -1,0 +1,19 @@
+{
+  "CET" : {
+    "value" : "CET",
+    "type" : "TimeZone"
+  },
+  "certainty" : {
+    "value" : [ "HIGH", "MEDIUM", "LOW" ],
+    "type" : "Certainty"
+  },
+  "edtf" : {
+    "type" : "String"
+  },
+  "fromDate" : {
+    "type" : "Date"
+  },
+  "toDate" : {
+    "type" : "Date"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "NO" : {
+    "value" : "NO",
+    "type" : "String"
+  },
+  "UNKNOWN" : {
+    "value" : "UNKNOWN",
+    "type" : "String"
+  },
+  "YES" : {
+    "value" : "YES",
+    "type" : "String"
+  }
+}

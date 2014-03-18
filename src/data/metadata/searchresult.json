@@ -1,0 +1,44 @@
+{
+  "DATE_FIELD" : {
+    "value" : "date",
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "ID_PREFIX" : {
+    "value" : "QURY",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "date" : {
+    "type" : "Date"
+  },
+  "facets" : {
+    "type" : "List of (FacetCount)"
+  },
+  "ids" : {
+    "type" : "List of (String)"
+  },
+  "searchType" : {
+    "type" : "String"
+  },
+  "sort" : {
+    "type" : "String"
+  },
+  "term" : {
+    "type" : "String"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^names" : {
+    "value" : [ ],
+    "type" : "Names"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
+  },
+  "^urn" : {
+    "type" : "String"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "latitude" : {
+    "type" : "String"
+  },
+  "longitude" : {
+    "type" : "String"
+  },
+  "notes" : {
+    "type" : "String"
+  }
+}

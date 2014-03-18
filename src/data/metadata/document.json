@@ -1,0 +1,81 @@
+{
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "date" : {
+    "type" : "Datable"
+  },
+  "description" : {
+    "type" : "String"
+  },
+  "documentType" : {
+    "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "PERIODICAL", "PICTURE", "PUBLICITY", "WORK" ],
+    "type" : "DocumentType"
+  },
+  "links" : {
+    "type" : "List of (Link)"
+  },
+  "publisher" : {
+    "type" : "String"
+  },
+  "reference" : {
+    "type" : "String"
+  },
+  "resourceFormat" : {
+    "type" : "String"
+  },
+  "resourceType" : {
+    "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
+    "type" : "ResourceType"
+  },
+  "rights" : {
+    "type" : "String"
+  },
+  "title" : {
+    "type" : "String"
+  }
+}

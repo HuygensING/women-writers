@@ -1,0 +1,8 @@
+{
+  "defLang" : {
+    "type" : "String"
+  },
+  "map" : {
+    "type" : "Map of (String, PlaceName)"
+  }
+}
