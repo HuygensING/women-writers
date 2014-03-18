@@ -51,8 +51,9 @@ a
 		margin-right 1em
 
 	.user-status
-		display inline-block
-		float right
+		button.login
+			button-light-style()
+
 		& > span
 			display none
 		&.logged-in
@@ -62,7 +63,7 @@ a
 				color darkGray
 				.user-name
 					font-weight bold
-			button
+			button.login
 				display none
 
 ul.persons

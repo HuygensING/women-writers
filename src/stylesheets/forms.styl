@@ -29,6 +29,9 @@ button, .btn
 		float right
 
 .timbuctoo-form
+	& *, & *:hover, & *:active
+		transition all .15s ease 0s
+
 	fieldset
 		border none
 		padding 0
@@ -67,3 +70,38 @@ button, .btn
 		line-height 150%
 		display inline-block
 		width 50%
+
+	button[data-action]
+		background-color transparent
+		color lightGray
+
+		&[data-action="remove"]
+			size = 1.35em
+
+			display inline-block
+
+			height size
+			width size
+
+			line-height size
+			padding 0
+			margin-left .5em
+
+			border-radius size
+			background-color transparent
+
+			&:hover
+				background-color red
+				color white
+
+		&[data-action="add"]
+			float right
+			margin-right 2em
+
+	.field:hover button[data-action]
+		color darkGray
+
+		&[data-action="remove"]
+			color mediumGray
+			&:hover
+				color white
