@@ -1,0 +1,101 @@
+{
+    "@relations": {
+        "iauthored_by": [
+            {
+                "displayName": "Poema ao caso sucedido em Italia na Cidade de Malafeta a hum Clerigo, que mascarado na\u00f5 quis adorar o Santisimo Sacramento",
+                "id": "DOCU000000007878",
+                "path": "domain/wwdocuments/DOCU000000007878",
+                "type": "wwdocument"
+            }
+        ],
+        "language": [
+            {
+                "displayName": "Portuguese",
+                "id": "LANG000000005341",
+                "path": "domain/wwlanguages/LANG000000005341",
+                "type": "wwlanguage"
+            }
+        ]
+    },
+    "@type": "wwperson",
+    "@variationRefs": [
+        {
+            "id": "PERS000000003911",
+            "type": "person"
+        },
+        {
+            "id": "PERS000000003911",
+            "type": "wwperson"
+        }
+    ],
+    "^created": {
+        "timeStamp": 1395141820196,
+        "userId": "importer",
+        "vreId": "neww"
+    },
+    "^deleted": false,
+    "^modified": {
+        "timeStamp": 1395141820196,
+        "userId": "importer",
+        "vreId": "neww"
+    },
+    "^pid": null,
+    "^rev": 1,
+    "^roles": [],
+    "_id": "PERS000000003911",
+    "bibliography": "MENTIONED IN: - Barbosa Machado II: 65 - FARINHA, Bento Jos\u00e9 de Sousa \u2013 Summario de Bibliotheca Lusitana. Tomo II: Lisboa: na Officina de Antonio Gomes, 1786. Pg 31",
+    "birthDate": "1661",
+    "collaborations": [],
+    "deathDate": "1700",
+    "educations": [
+        "Well educated"
+    ],
+    "financials": [],
+    "fsPseudonyms": [],
+    "gender": {},
+    "health": null,
+    "links": [],
+    "livedIn": null,
+    "maritalStatus": "unknown",
+    "memberships": [
+        "unknown"
+    ],
+    "name": {
+        "components": []
+    },
+    "nationality": "Portuguese",
+    "notes": "year death supposition svd",
+    "numberOfChildren": 0,
+    "personalSituation": "new Standardizingjuly12il Origin: \u2022 Location where born : Torres Novas \u2022 Location where died : unknown National identity : \u2022 Nationality : Portuguese \u2022 Mother tongue : Portuguese Marital status : - unknown Number of children : - unknown Social class / position: - unknown Religion - unknown Education - Well educated",
+    "professions": [],
+    "psChildren": [
+        "unknown"
+    ],
+    "religions": [
+        "unknown"
+    ],
+    "socialClasses": [
+        "unknown"
+    ],
+    "tempBirthPlace": "Torres Novas",
+    "tempDeath": null,
+    "tempDeathPlace": null,
+    "tempFinancialSituation": "Standardizingjuly12il Profession(s) and activities: - writer Languages in which she published : - Portuguese Collaboration/connections with male authors/important figures : - unknown Memberships : - unknown",
+    "tempLanguages": [
+        "Portuguese"
+    ],
+    "tempMotherTongue": "Portuguese",
+    "tempName": "Barreto, Filipa Borges",
+    "tempPlaceOfBirth": [
+        "Portugal",
+        "writer"
+    ],
+    "tempPseudonyms": [],
+    "tempPublishingLanguages": [
+        "Portuguese"
+    ],
+    "tempSpouse": null,
+    "types": [
+        {}
+    ]
+}
