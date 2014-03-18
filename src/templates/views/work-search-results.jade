@@ -12,4 +12,4 @@ h4= response.numFound + (response.numFound != 1 ? ' works' : ' work') + ' found'
 ul
 	- each work in response.results
 		li
-			a(href=config.workViewUrl(work._id))= work.tempName
+			a(href=config.workViewUrl(work._id))= work.title
