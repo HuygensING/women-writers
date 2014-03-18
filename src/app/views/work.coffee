@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 
 config = require '../config.coffee'
 
-workDescription = require '../../data/wwdocument.json'
+workDescription = require '../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 

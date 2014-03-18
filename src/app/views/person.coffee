@@ -3,7 +3,7 @@ _ = require 'underscore'
 
 config = require '../config.coffee'
 
-personDescription = require '../../data/wwperson.json'
+personDescription = require '../../data/metadata/wwperson.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
@@ -23,7 +23,16 @@ class Person extends Backbone.View
 	render: ->
 		@$el.html @template()
 		schema = createTimbuctooSchema personDescription,
-			exclude: [ /^\^/, /^_/ ]
+			exclude: [
+				/^[_@^]/
+				'DELETED'
+				'ID'
+				'PID'
+				'ROLES'
+				'VARIATIONS'
+				'children'
+				'names'
+			]
 		
 		# for key, val of personDescription when not key.match /^\^/
 		# 	if key.match /^temp/
