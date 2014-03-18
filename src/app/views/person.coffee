@@ -21,7 +21,7 @@ class Person extends Backbone.View
 		@form.save()
 
 	render: ->
-		@$el.html @template()
+		@$el.html @template person: @model.attributes
 		schema = createTimbuctooSchema personDescription,
 			exclude: [
 				/^[_@^]/
@@ -30,14 +30,9 @@ class Person extends Backbone.View
 				'PID'
 				'ROLES'
 				'VARIATIONS'
-				'children'
 				'names'
 			]
-		
-		# for key, val of personDescription when not key.match /^\^/
-		# 	if key.match /^temp/
-		# 		schema[key] =
-		# 			type: 'ReadOnly'
+			readonly: [ /^temp/	]
 
 		console.log schema
 
@@ -50,16 +45,6 @@ class Person extends Backbone.View
 			VRE_ID: config.get 'VRE_ID'
 			model: @model
 			schema: schema
-			fieldsets: [
-				{ 
-					fields: nonTempFields,
-					legend: ''
-				},
-				{
-					fields: tempFields,
-					legend: 'Temporary Fields'
-				}
-			]
 
 		@$('.form').html @form.el
 
