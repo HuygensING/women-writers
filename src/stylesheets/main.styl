@@ -51,8 +51,19 @@ a
 		margin-right 1em
 
 	.user-status
+		& *, & *:hover, & *:active
+			transition all .15s ease 0s
+	
+		display inline-block
+		float right
+
 		button.login
 			button-light-style()
+			color mediumGray
+			border-color lightGray
+			&:hover
+				color darkGray
+				border-color darkGray
 
 		& > span
 			display none
