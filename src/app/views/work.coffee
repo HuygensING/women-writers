@@ -14,31 +14,26 @@ class Work extends Backbone.View
 		@render() if @model?
 		
 	render: ->
-		@$el.html @template()
-		schema = createTimbuctooSchema workDescription
-		
-		console.log schema
-		
-		tempFields = (key for key, val of schema when key.match /^temp/)
-		nonTempFields = (key for key, val of schema when not key.match /^temp/)
+		@$el.html @template work: @model.attributes
+		schema = createTimbuctooSchema workDescription,
+			exclude: [
+				/^[_@^]/
+				'DELETED'
+				'ID'
+				'PID'
+				'ROLES'
+				'VARIATIONS'
+				'names'
+			]
+			readonly: [ /^temp/	]
 
-		form = new Form
+		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
 			VRE_ID: config.get 'VRE_ID'
 			model: @model
 			schema: schema
-			fieldsets: [
-				{ 
-					fields: nonTempFields,
-					legend: ''
-				},
-				{
-					fields: tempFields,
-					legend: 'Temporary Fields'
-				}
-			]
 
-		@$('.form').html form.el
+		@$('.form').html @form.el
 
 module.exports = Work
