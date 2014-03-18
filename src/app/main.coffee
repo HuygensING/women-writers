@@ -25,7 +25,7 @@ $ ->
 	if hsid
 		config.set authToken: hsid[1]
 
-	$.getJSON(config.allPersonsUrl() + '?start=14847&rows=200').then (data) ->
+	$.getJSON(config.allPersonsUrl() + '?start=0&rows=1000').then (data) ->
 		config.set allPersons: new PersonsCollection data
 		
 	$.getJSON(config.allWorksUrl()).then (data) ->
