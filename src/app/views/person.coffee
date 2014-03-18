@@ -34,11 +34,6 @@ class Person extends Backbone.View
 			]
 			readonly: [ /^temp/	]
 
-		console.log schema
-
-		tempFields = (key for key, val of schema when key.match /^temp/)
-		nonTempFields = (key for key, val of schema when not key.match /^temp/)
-
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
