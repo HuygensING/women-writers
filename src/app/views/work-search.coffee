@@ -9,6 +9,10 @@ class WorkSearch extends BaseSearch
 		term: '*'
 		typeString: config.get 'workTypeString'
 		resultRows: 25
+	facetNameMap:
+		dynamic_s_date: 'Date'
+		dynamic_s_origin: 'Origin'
+		dynamic_s_document_type: 'Document Type'
 
 	initialize: (@options) ->
 		super
