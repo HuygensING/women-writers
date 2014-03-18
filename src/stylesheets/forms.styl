@@ -73,9 +73,11 @@ button, .btn
 
 	button[data-action]
 		background-color transparent
-		color lightGray
+		color mediumGray
+		font-weight normal
 
 		&[data-action="remove"]
+			box-sizing border-box
 			size = 1.35em
 
 			display inline-block
@@ -83,25 +85,49 @@ button, .btn
 			height size
 			width size
 
-			line-height size
 			padding 0
-			margin-left .5em
+			margin-left -(size + .35em)
 
 			border-radius size
 			background-color transparent
 
 			&:hover
-				background-color red
+				background-color darkRed
 				color white
 
 		&[data-action="add"]
+			box-sizing border-box
 			float right
-			margin-right 2em
+
+			margin-right 0
+			padding .1em .2em
+
+			text-transform uppercase
+			font-size 80%
+			font-weight bold
+
+			border 1px solid transparent
+			color lightGray
 
 	.field:hover button[data-action]
 		color darkGray
 
-		&[data-action="remove"]
-			color mediumGray
+		&[data-action="add"]
+			border 1px solid lightGray
+			color darkGray
 			&:hover
 				color white
+				background-color buttonColor
+
+		&[data-action="remove"]
+			// color white
+			// background-color lightRed
+			border-width 1px
+			border-color lightRed
+			border-style solid
+			&:hover
+				background-color darkRed
+				color white
+				border-color rgba(255,255,255,0)
+			&:active
+				background-color darken(darkRed, 20%)
