@@ -13,7 +13,11 @@ ul.persons
 	- each person in response.results
 		li
 			a(href=config.personViewUrl(person._id))
-				.name= person.tempName
+				if person.tempName
+					.name= person.tempName
+				else
+					.name
+						span.empty-name No name provided
 				.alive
 					span.from= person.birthDate ? person.birthDate : 'unknown'
 					| &nbsp;&ndash;&nbsp;
