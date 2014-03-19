@@ -1,5 +1,6 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
+$ = Backbone.$
 
 FacetedSearch = require 'faceted-search'
 
@@ -17,12 +18,14 @@ class SearchView extends Backbone.View
 	events:
 		'click .cursor .next': 'nextResults'
 		'click .cursor .prev': 'prevResults'
+		'change .order-by select': 'sortResults'
 
 	initialize: (@options={}) ->
 		_.extend @, Backbone.Events
 
 		@queryOptions = @options.queryOptions ? @queryOptions
 		@facetNameMap = @options.facetNameMap ? @facetNameMap
+		@sortableFieldsMap = (@options.sortableFieldsMap ? @sortableFieldsMap) ? {}
 
 		@search = createFacetedSearch @queryOptions, @facetNameMap
 
@@ -37,8 +40,10 @@ class SearchView extends Backbone.View
 		@search.prev()
 
 	sortResults: (e) -> # TODO: Dropdown
+		oldSortField = @sortField
 		@sortField = $(e.currentTarget).val()
-		@search.sortResultsBy(@sortField)
+		if @sortField isnt oldSortField
+			@search.sortResultsBy(@sortField)
 
 	resetSearch: -> # TODO: Create button
 		@search.reset()
@@ -54,6 +59,7 @@ class SearchView extends Backbone.View
 	renderResults: (rsp) ->
 		@$('.results').html @resultsTemplate
 			response: rsp.attributes
+			sortableFieldsMap: @sortableFieldsMap
 			objectUrl: @objectUrl
 			config: config
 

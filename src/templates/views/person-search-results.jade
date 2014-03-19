@@ -1,4 +1,11 @@
-h4= response.numFound + (response.numFound != 1 ? ' persons' : ' person') + ' found'
+h4
+	= response.numFound + (response.numFound != 1 ? ' persons' : ' person') + ' found'
+	.order-by
+		span Order by
+		if response.sortableFields
+			select
+				each field in response.sortableFields
+					option(value=field)= sortableFieldsMap[field] ? sortableFieldsMap[field] : field
 .cursor
 	span.prev &laquo; Previous
 	span.position

@@ -14,6 +14,11 @@ class PersonSearch extends BaseSearch
 		dynamic_s_birthDate: 'Year of Birth'
 		dynamic_s_deathDate: 'Year of Death'
 		dynamic_s_gender: 'Gender'
+	sortableFieldsMap:
+		dynamic_s_deathDate: 'Year of Death'
+		dynamic_s_birthDate: 'Year of Birth'
+		dynamic_t_name: 'Name'
+
 
 	initialize: (@options) ->
 		super
