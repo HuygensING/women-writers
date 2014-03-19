@@ -52,6 +52,7 @@ class Person extends Backbone.View
 			title: 'Languages'
 			options: config.get 'languages'
 
+
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
