@@ -34,6 +34,8 @@ class Person extends Backbone.View
 			]
 			readonly: [ /^temp/	]
 
+		schema['timbuctoo-relation.language'] = type: 'Relation'
+
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
