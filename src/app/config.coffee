@@ -13,6 +13,9 @@ class Config extends Backbone.Model
 			@on 'change:authToken', =>
 				window.localStorage.setItem('authToken', @get 'authToken')
 
+	searchUrl: ->
+		@get('baseUrl') + @get('searchPath')
+
 	allPersonsUrl: ->
 		@get('facetedSearchBaseUrl') + @get('personsRootUrl')
 
