@@ -21,7 +21,7 @@ searchQuery = (args) ->
 	req = Backbone.$.ajax
 		type: 'POST'
 		url: options.searchUrl
-		data: JSON.stringify(query)
+		data: JSON.stringify query
 		dataType: 'text'
 		contentType: 'application/json; charset=utf-8'
 		headers:

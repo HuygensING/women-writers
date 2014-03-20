@@ -4,6 +4,7 @@ facetedSearchBaseUrl: http://test.resources.huygens.knaw.nl/womenwriters/api
 personsRootUrl: /domain/wwpersons
 worksRootUrl: /domain/wwdocuments
 VRE_ID: 'WomenWriters'
+relationTypeVariation: 'wwrelation'
 
 personTypeString: 'wwperson'
 workTypeString: 'wwdocument'
