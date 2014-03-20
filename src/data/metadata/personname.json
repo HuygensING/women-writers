@@ -1,13 +1,13 @@
 {
   "SHORT" : {
     "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
-    "type" : "Set of (Type)"
+    "type" : "String"
   },
   "components" : {
     "type" : "List of (PersonNameComponent)"
   },
   "ALL" : {
     "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
-    "type" : "Set of (Type)"
+    "type" : "String"
   }
 }

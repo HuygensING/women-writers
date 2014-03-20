@@ -7,7 +7,7 @@
   },
   "documentType" : {
     "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "PERIODICAL", "PICTURE", "PUBLICITY", "WORK" ],
-    "type" : "WWDocument.DocumentType"
+    "type" : "String"
   },
   "PID" : {
     "value" : "^pid",
@@ -76,7 +76,7 @@
   },
   "resourceType" : {
     "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
-    "type" : "WWDocument.ResourceType"
+    "type" : "String"
   },
   "resourceFormat" : {
     "type" : "String"

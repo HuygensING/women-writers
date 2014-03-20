@@ -1,10 +1,10 @@
 {
   "key2" : {
     "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
-    "type" : "Type"
+    "type" : "String"
   },
   "key1" : {
     "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
-    "type" : "Type"
+    "type" : "String"
   }
 }

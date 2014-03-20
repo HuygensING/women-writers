@@ -3,13 +3,6 @@
     "value" : "^variations",
     "type" : "String"
   },
-  "edition" : {
-    "type" : "String"
-  },
-  "documentType" : {
-    "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "PERIODICAL", "PICTURE", "PUBLICITY", "WORK" ],
-    "type" : "String"
-  },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
@@ -21,32 +14,16 @@
   "^deleted" : {
     "type" : "boolean"
   },
-  "rights" : {
-    "type" : "String"
-  },
   "^created" : {
     "type" : "Change"
-  },
-  "links" : {
-    "type" : "List of (Link)"
-  },
-  "date" : {
-    "type" : "Datable"
-  },
-  "reference" : {
-    "type" : "String"
   },
   "^modified" : {
     "type" : "Change"
   },
-  "resourceType" : {
-    "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
+  "watermerk" : {
     "type" : "String"
   },
-  "title" : {
-    "type" : "String"
-  },
-  "resourceFormat" : {
+  "watermerkId" : {
     "type" : "String"
   },
   "_id" : {
@@ -55,18 +32,18 @@
   "^rev" : {
     "type" : "int"
   },
-  "description" : {
+  "value" : {
     "type" : "String"
   },
   "ID" : {
     "value" : "_id",
     "type" : "String"
   },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
   },
   "DELETED" : {
     "value" : "^deleted",

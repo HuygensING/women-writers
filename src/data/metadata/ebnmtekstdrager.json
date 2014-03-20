@@ -1,0 +1,196 @@
+{
+  "datum_exempl" : {
+    "type" : "String[]"
+  },
+  "sorteerveld" : {
+    "type" : "String[]"
+  },
+  "annotatie_rel__gr_kl" : {
+    "type" : "String[]"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "onderwerp" : {
+    "type" : "String[]"
+  },
+  "onbekende_code" : {
+    "type" : "String[]"
+  },
+  "type" : {
+    "type" : "String"
+  },
+  "selectie_sleutel" : {
+    "type" : "String[]"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "illustrator" : {
+    "type" : "Object[]"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "value" : {
+    "type" : "String"
+  },
+  "boodschap_alg" : {
+    "type" : "String[]"
+  },
+  "overige_hs_aanduiding" : {
+    "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "soortcode" : {
+    "type" : "String[]"
+  },
+  "titel_genormaliseerd" : {
+    "type" : "Object[]"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "decorator" : {
+    "type" : "Object[]"
+  },
+  "datering" : {
+    "type" : "Object"
+  },
+  "lokalisering" : {
+    "type" : "Object[]"
+  },
+  "bezitter" : {
+    "type" : "Object[]"
+  },
+  "signalementcode" : {
+    "type" : "String[]"
+  },
+  "url" : {
+    "type" : "String[]"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "ppn" : {
+    "type" : "String"
+  },
+  "annotatie_schrift" : {
+    "type" : "String[]"
+  },
+  "annotatie_datering" : {
+    "type" : "String[]"
+  },
+  "epn" : {
+    "type" : "String[]"
+  },
+  "trefwoord" : {
+    "type" : "Object[]"
+  },
+  "kopiist" : {
+    "type" : "Object[]"
+  },
+  "binder" : {
+    "type" : "Object[]"
+  },
+  "annotatie_materiaal" : {
+    "type" : "String[]"
+  },
+  "siso_oud" : {
+    "type" : "String[]"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "annotatie_inhoud" : {
+    "type" : "String[]"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "categorie" : {
+    "type" : "Object[]"
+  },
+  "annotatie_colofon" : {
+    "type" : "String[]"
+  },
+  "corrector" : {
+    "type" : "Object[]"
+  },
+  "annotatie_incipit" : {
+    "type" : "String[]"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "layout_code" : {
+    "type" : "String[]"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "auteur" : {
+    "type" : "Object[]"
+  },
+  "annotatie_documentatie" : {
+    "type" : "Object[]"
+  },
+  "tekstdragerId" : {
+    "type" : "String"
+  },
+  "annotatie_overig" : {
+    "type" : "String[]"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "ingang" : {
+    "type" : "Object[]"
+  },
+  "regiocode" : {
+    "type" : "String[]"
+  },
+  "sleutelw_incipit" : {
+    "type" : "String[]"
+  },
+  "taalcode" : {
+    "type" : "Object[]"
+  },
+  "opdrachtgever" : {
+    "type" : "Object[]"
+  },
+  "watermerk" : {
+    "type" : "String[]"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "bewaarplaats_en_signatuur" : {
+    "type" : "Object"
+  },
+  "titel_hs_inc_form" : {
+    "type" : "String[]"
+  },
+  "soort" : {
+    "type" : "String"
+  },
+  "landcode" : {
+    "type" : "String[]"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
+  },
+  "journaalnummer" : {
+    "type" : "String[]"
+  }
+}

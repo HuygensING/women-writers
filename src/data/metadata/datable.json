@@ -7,7 +7,7 @@
   },
   "certainty" : {
     "value" : [ "HIGH", "MEDIUM", "LOW" ],
-    "type" : "Datable.Certainty"
+    "type" : "String"
   },
   "CET" : {
     "value" : "CET",

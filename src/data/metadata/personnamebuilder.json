@@ -16,18 +16,18 @@
   },
   "separators" : {
     "value" : {
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@3a25a077" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@bfe717d6" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@968844cd" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@a8bfe038" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@b930e94f" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@6a15fe1e" : ", "
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@1b65cdcd" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@d6106dcd" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@a9911242" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@5aeddc5" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@df955cd5" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@d077f8fa" : ", "
     },
     "type" : "Map of (MultiKey, String)"
   },
   "prev" : {
     "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
-    "type" : "Type"
+    "type" : "String"
   },
   "EMPTY" : {
     "value" : "",
