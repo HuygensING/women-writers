@@ -1,58 +1,58 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
+  "VARIATIONS" : {
+    "value" : "^variations",
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
     "type" : "String"
   },
   "^code" : {
     "type" : "String"
   },
-  "^created" : {
-    "type" : "Change"
-  },
-  "^deleted" : {
-    "type" : "boolean"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
   "^rev" : {
     "type" : "int"
   },
-  "^roles" : {
-    "type" : "List of (Role)"
+  "name" : {
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
   },
   "^variations" : {
     "type" : "List of (String)"
   },
-  "_id" : {
-    "type" : "String"
-  },
   "core" : {
     "type" : "boolean"
   },
-  "name" : {
+  "DELETED" : {
+    "value" : "^deleted",
     "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

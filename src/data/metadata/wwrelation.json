@@ -1,53 +1,18 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
+  "VARIATIONS" : {
+    "value" : "^variations",
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
+  "PID" : {
+    "value" : "^pid",
     "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
   },
   "^deleted" : {
     "type" : "boolean"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^sourceId" : {
-    "type" : "String"
-  },
-  "^sourceType" : {
-    "type" : "String"
-  },
-  "^targetId" : {
-    "type" : "String"
   },
   "^targetType" : {
     "type" : "String"
@@ -55,11 +20,20 @@
   "^typeId" : {
     "type" : "String"
   },
-  "^typeType" : {
+  "^created" : {
+    "type" : "Change"
+  },
+  "^targetId" : {
     "type" : "String"
   },
-  "^variations" : {
-    "type" : "List of (String)"
+  "^modified" : {
+    "type" : "Change"
+  },
+  "reception" : {
+    "type" : "boolean"
+  },
+  "^sourceId" : {
+    "type" : "String"
   },
   "_id" : {
     "type" : "String"
@@ -67,7 +41,33 @@
   "accepted" : {
     "type" : "boolean"
   },
-  "reception" : {
-    "type" : "boolean"
+  "^sourceType" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^typeType" : {
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

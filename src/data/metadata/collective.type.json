@@ -1,26 +1,26 @@
 {
-  "ACADEMY" : {
-    "value" : "ACADEMY",
+  "SHOP" : {
+    "value" : "SHOP",
     "type" : "String"
   },
-  "ASSOCIATION" : {
-    "value" : "ASSOCIATION",
+  "ACADEMY" : {
+    "value" : "ACADEMY",
     "type" : "String"
   },
   "LIBRARY" : {
     "value" : "LIBRARY",
     "type" : "String"
   },
+  "UNKNOWN" : {
+    "value" : "UNKNOWN",
+    "type" : "String"
+  },
   "PUBLISHER" : {
     "value" : "PUBLISHER",
     "type" : "String"
   },
-  "SHOP" : {
-    "value" : "SHOP",
-    "type" : "String"
-  },
-  "UNKNOWN" : {
-    "value" : "UNKNOWN",
+  "ASSOCIATION" : {
+    "value" : "ASSOCIATION",
     "type" : "String"
   }
 }

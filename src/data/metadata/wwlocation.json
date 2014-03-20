@@ -1,74 +1,74 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
-    "type" : "String"
-  },
-  "ROLES" : {
-    "value" : "^roles",
+  "tempZipcode" : {
     "type" : "String"
   },
   "VARIATIONS" : {
     "value" : "^variations",
     "type" : "String"
   },
-  "^created" : {
-    "type" : "Change"
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
   },
   "^deleted" : {
     "type" : "boolean"
   },
-  "^modified" : {
+  "tempAddress" : {
+    "type" : "String"
+  },
+  "^created" : {
     "type" : "Change"
   },
   "^names" : {
     "value" : [ ],
-    "type" : "Names"
+    "type" : "WWLocation.Names"
   },
-  "^pid" : {
+  "tempCountry" : {
+    "type" : "String"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "^urn" : {
     "type" : "String"
   },
   "^rev" : {
     "type" : "int"
   },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^urn" : {
-    "type" : "String"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "latitude" : {
-    "type" : "String"
-  },
-  "longitude" : {
-    "type" : "String"
-  },
-  "tempAddress" : {
-    "type" : "String"
-  },
-  "tempCountry" : {
+  "ID" : {
+    "value" : "_id",
     "type" : "String"
   },
   "tempSettlement" : {
     "type" : "String"
   },
-  "tempZipcode" : {
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "longitude" : {
     "type" : "String"
+  },
+  "latitude" : {
+    "type" : "String"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

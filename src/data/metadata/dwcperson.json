@@ -1,76 +1,76 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
+  "VARIATIONS" : {
+    "value" : "^variations",
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
+  "PID" : {
+    "value" : "^pid",
     "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
   },
   "^deleted" : {
     "type" : "boolean"
   },
+  "important" : {
+    "type" : "boolean"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "links" : {
+    "type" : "List of (Link)"
+  },
+  "biography" : {
+    "type" : "String"
+  },
+  "deathDate" : {
+    "type" : "Datable"
+  },
   "^modified" : {
     "type" : "Change"
   },
-  "^pid" : {
+  "_id" : {
     "type" : "String"
   },
   "^rev" : {
     "type" : "int"
   },
-  "^roles" : {
-    "type" : "List of (Role)"
+  "names" : {
+    "value" : [ ],
+    "type" : "DWCPerson.Names"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
   },
   "^variations" : {
     "type" : "List of (String)"
   },
-  "_id" : {
-    "type" : "String"
-  },
-  "biography" : {
-    "type" : "String"
-  },
-  "birthDate" : {
-    "type" : "Datable"
-  },
-  "deathDate" : {
-    "type" : "Datable"
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
   },
   "gender" : {
     "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
     "type" : "String"
   },
-  "important" : {
-    "type" : "boolean"
-  },
-  "links" : {
-    "type" : "List of (Link)"
-  },
-  "names" : {
-    "value" : [ ],
-    "type" : "Names"
+  "birthDate" : {
+    "type" : "Datable"
   },
   "types" : {
     "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
     "type" : "List of (String)"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

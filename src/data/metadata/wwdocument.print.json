@@ -5,10 +5,10 @@
   "location" : {
     "type" : "String"
   },
-  "publisher" : {
+  "year" : {
     "type" : "String"
   },
-  "year" : {
+  "publisher" : {
     "type" : "String"
   }
 }

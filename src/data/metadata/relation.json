@@ -1,4 +1,59 @@
 {
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "^targetType" : {
+    "type" : "String"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "^typeId" : {
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "^targetId" : {
+    "type" : "String"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "^sourceId" : {
+    "type" : "String"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "accepted" : {
+    "type" : "boolean"
+  },
+  "^sourceType" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^typeType" : {
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
   },
@@ -6,65 +61,10 @@
     "value" : "^deleted",
     "type" : "String"
   },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
-    "type" : "String"
-  },
-  "ROLES" : {
-    "value" : "^roles",
-    "type" : "String"
-  },
-  "VARIATIONS" : {
-    "value" : "^variations",
-    "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
-  },
-  "^deleted" : {
-    "type" : "boolean"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
   "^pid" : {
     "type" : "String"
   },
-  "^rev" : {
-    "type" : "int"
-  },
   "^roles" : {
     "type" : "List of (Role)"
-  },
-  "^sourceId" : {
-    "type" : "String"
-  },
-  "^sourceType" : {
-    "type" : "String"
-  },
-  "^targetId" : {
-    "type" : "String"
-  },
-  "^targetType" : {
-    "type" : "String"
-  },
-  "^typeId" : {
-    "type" : "String"
-  },
-  "^typeType" : {
-    "type" : "String"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "accepted" : {
-    "type" : "boolean"
   }
 }

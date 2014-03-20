@@ -1,36 +1,36 @@
 {
-  "COMMA" : {
-    "value" : ", ",
-    "type" : "String"
-  },
   "ELISIONS" : {
     "value" : "\\b([dDlL]')\\s+",
     "type" : "Pattern"
   },
-  "EMPTY" : {
-    "value" : "",
+  "builder" : {
+    "type" : "StringBuilder"
+  },
+  "COMMA" : {
+    "value" : ", ",
     "type" : "String"
   },
   "SPACE" : {
     "value" : " ",
     "type" : "String"
   },
-  "builder" : {
-    "type" : "StringBuilder"
+  "separators" : {
+    "value" : {
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@3a25a077" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@bfe717d6" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@968844cd" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@a8bfe038" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@b930e94f" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@6a15fe1e" : ", "
+    },
+    "type" : "Map of (MultiKey, String)"
   },
   "prev" : {
     "value" : [ "SURNAME", "FORENAME", "ROLE_NAME", "ADD_NAME", "NAME_LINK", "GEN_NAME" ],
     "type" : "Type"
   },
-  "separators" : {
-    "value" : {
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@7a545f10" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@4380d7fa" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@5cce44f9" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@50f58c07" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@739e3089" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@b930e94f" : ", "
-    },
-    "type" : "Map of (MultiKey, String)"
+  "EMPTY" : {
+    "value" : "",
+    "type" : "String"
   }
 }

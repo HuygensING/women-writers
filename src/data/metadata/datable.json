@@ -1,17 +1,17 @@
 {
-  "CET" : {
-    "value" : "CET",
-    "type" : "TimeZone"
-  },
-  "certainty" : {
-    "value" : [ "HIGH", "MEDIUM", "LOW" ],
-    "type" : "Certainty"
+  "fromDate" : {
+    "type" : "Date"
   },
   "edtf" : {
     "type" : "String"
   },
-  "fromDate" : {
-    "type" : "Date"
+  "certainty" : {
+    "value" : [ "HIGH", "MEDIUM", "LOW" ],
+    "type" : "Datable.Certainty"
+  },
+  "CET" : {
+    "value" : "CET",
+    "type" : "TimeZone"
   },
   "toDate" : {
     "type" : "Date"

@@ -1,62 +1,62 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
+  "VARIATIONS" : {
+    "value" : "^variations",
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
+  "PID" : {
+    "value" : "^pid",
     "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
   },
   "^deleted" : {
     "type" : "boolean"
   },
-  "^modified" : {
+  "^created" : {
     "type" : "Change"
   },
   "^names" : {
     "value" : [ ],
-    "type" : "Names"
+    "type" : "Location.Names"
   },
-  "^pid" : {
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "^urn" : {
     "type" : "String"
   },
   "^rev" : {
     "type" : "int"
   },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^urn" : {
+  "ID" : {
+    "value" : "_id",
     "type" : "String"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
   },
   "^variations" : {
     "type" : "List of (String)"
   },
-  "_id" : {
+  "longitude" : {
     "type" : "String"
   },
   "latitude" : {
     "type" : "String"
   },
-  "longitude" : {
+  "DELETED" : {
+    "value" : "^deleted",
     "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

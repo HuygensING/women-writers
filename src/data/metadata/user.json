@@ -1,46 +1,46 @@
 {
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "ID_PREFIX" : {
-    "value" : "USER",
-    "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "_id" : {
+  "lastName" : {
     "type" : "String"
   },
   "commonName" : {
     "type" : "String"
   },
-  "displayName" : {
+  "vreAuthorization" : {
+    "type" : "VREAuthorization"
+  },
+  "organisation" : {
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "ID_PREFIX" : {
+    "value" : "USER",
+    "type" : "String"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
     "type" : "String"
   },
   "email" : {
     "type" : "String"
   },
-  "firstName" : {
-    "type" : "String"
-  },
-  "lastName" : {
-    "type" : "String"
-  },
-  "organisation" : {
-    "type" : "String"
+  "^rev" : {
+    "type" : "int"
   },
   "persistentId" : {
     "type" : "String"
   },
-  "vreAuthorization" : {
-    "type" : "VREAuthorization"
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "firstName" : {
+    "type" : "String"
+  },
+  "displayName" : {
+    "type" : "String"
   }
 }

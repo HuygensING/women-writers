@@ -1,65 +1,65 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
+  "VARIATIONS" : {
+    "value" : "^variations",
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
+  "acronym" : {
     "type" : "String"
   },
-  "^created" : {
-    "type" : "Change"
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
   },
   "^deleted" : {
     "type" : "boolean"
   },
-  "^modified" : {
+  "^created" : {
     "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "acronym" : {
-    "type" : "String"
   },
   "links" : {
     "type" : "List of (Link)"
   },
-  "name" : {
+  "type" : {
+    "value" : [ "UNKNOWN", "ACADEMY", "ASSOCIATION", "LIBRARY", "PUBLISHER", "SHOP" ],
     "type" : "String"
   },
   "period" : {
     "type" : "Period"
   },
-  "type" : {
-    "value" : [ "UNKNOWN", "ACADEMY", "ASSOCIATION", "LIBRARY", "PUBLISHER", "SHOP" ],
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
     "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "name" : {
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

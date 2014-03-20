@@ -1,4 +1,19 @@
 {
+  "vreId" : {
+    "type" : "String"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "roles" : {
+    "type" : "List of (String)"
+  },
+  "userId" : {
+    "type" : "String"
+  },
   "ID" : {
     "value" : "_id",
     "type" : "String"
@@ -8,20 +23,5 @@
   },
   "^modified" : {
     "type" : "Change"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "roles" : {
-    "type" : "List of (String)"
-  },
-  "userId" : {
-    "type" : "String"
-  },
-  "vreId" : {
-    "type" : "String"
   }
 }

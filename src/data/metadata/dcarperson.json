@@ -1,60 +1,21 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
+  "VARIATIONS" : {
+    "value" : "^variations",
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
+  "PID" : {
+    "value" : "^pid",
     "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
   },
   "^deleted" : {
     "type" : "boolean"
   },
-  "^modified" : {
+  "^created" : {
     "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "birthDate" : {
-    "type" : "Datable"
-  },
-  "deathDate" : {
-    "type" : "Datable"
-  },
-  "gender" : {
-    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
-    "type" : "String"
   },
   "label" : {
     "type" : "String"
@@ -62,15 +23,54 @@
   "links" : {
     "type" : "List of (Link)"
   },
-  "names" : {
-    "value" : [ ],
-    "type" : "Names"
+  "deathDate" : {
+    "type" : "Datable"
   },
   "reference" : {
     "type" : "String"
   },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "names" : {
+    "value" : [ ],
+    "type" : "DCARPerson.Names"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "gender" : {
+    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
+    "type" : "String"
+  },
+  "birthDate" : {
+    "type" : "Datable"
+  },
   "types" : {
     "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
     "type" : "List of (String)"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "^pid" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

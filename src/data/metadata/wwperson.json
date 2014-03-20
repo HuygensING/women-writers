@@ -1,158 +1,158 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
+  "^deleted" : {
+    "type" : "boolean"
   },
-  "DELETED" : {
-    "value" : "^deleted",
+  "socialClasses" : {
+    "type" : "List of (String)"
+  },
+  "bibliography" : {
+    "type" : "String"
+  },
+  "tempSpouse" : {
+    "type" : "String"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "tempMemberships" : {
     "type" : "String"
   },
   "ID" : {
     "value" : "_id",
     "type" : "String"
   },
-  "PID" : {
-    "value" : "^pid",
+  "gender" : {
+    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
+    "type" : "String"
+  },
+  "tempLanguages" : {
+    "type" : "String"
+  },
+  "birthDate" : {
+    "type" : "Datable"
+  },
+  "educations" : {
+    "type" : "List of (String)"
+  },
+  "^pid" : {
     "type" : "String"
   },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
   },
-  "VARIATIONS" : {
-    "value" : "^variations",
-    "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
-  },
-  "^deleted" : {
-    "type" : "boolean"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "bibliography" : {
-    "type" : "String"
-  },
-  "birthDate" : {
-    "type" : "Datable"
-  },
-  "children" : {
-    "value" : [ "UNKNOWN", "NO", "YES" ],
-    "type" : "String"
-  },
-  "collaborations" : {
-    "type" : "List of (String)"
-  },
-  "deathDate" : {
-    "type" : "Datable"
-  },
-  "educations" : {
-    "type" : "List of (String)"
-  },
-  "financials" : {
-    "type" : "List of (String)"
-  },
-  "fsPseudonyms" : {
-    "type" : "List of (String)"
-  },
-  "gender" : {
-    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
+  "tempFinancialSituation" : {
     "type" : "String"
   },
   "health" : {
     "type" : "String"
   },
-  "links" : {
-    "type" : "List of (Link)"
-  },
-  "livedIn" : {
-    "type" : "String"
-  },
-  "maritalStatus" : {
-    "type" : "String"
-  },
-  "memberships" : {
+  "professions" : {
     "type" : "List of (String)"
   },
   "names" : {
     "value" : [ ],
-    "type" : "Names"
+    "type" : "WWPerson.Names"
   },
-  "nationality" : {
-    "type" : "String"
-  },
-  "notes" : {
-    "type" : "String"
+  "^rev" : {
+    "type" : "int"
   },
   "personalSituation" : {
     "type" : "String"
   },
-  "professions" : {
-    "type" : "List of (String)"
-  },
-  "religions" : {
-    "type" : "List of (String)"
-  },
-  "socialClasses" : {
-    "type" : "List of (String)"
-  },
-  "tempBirthPlace" : {
+  "tempPsChildren" : {
     "type" : "String"
   },
-  "tempChildren" : {
-    "type" : "String"
-  },
-  "tempDeath" : {
-    "type" : "String"
-  },
-  "tempDeathPlace" : {
-    "type" : "String"
-  },
-  "tempFinancialSituation" : {
-    "type" : "String"
-  },
-  "tempLanguages" : {
-    "type" : "List of (String)"
-  },
-  "tempMotherTongue" : {
+  "PID" : {
+    "value" : "^pid",
     "type" : "String"
   },
   "tempName" : {
     "type" : "String"
   },
-  "tempPlaceOfBirth" : {
-    "type" : "List of (String)"
-  },
-  "tempPsChildren" : {
+  "livedIn" : {
     "type" : "String"
   },
-  "tempPseudonyms" : {
-    "type" : "List of (String)"
+  "children" : {
+    "value" : [ "UNKNOWN", "NO", "YES" ],
+    "type" : "String"
   },
   "tempPublishingLanguages" : {
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "maritalStatus" : {
+    "type" : "String"
+  },
+  "deathDate" : {
+    "type" : "Datable"
+  },
+  "religions" : {
     "type" : "List of (String)"
   },
-  "tempSpouse" : {
+  "_id" : {
     "type" : "String"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
   },
   "types" : {
     "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
     "type" : "List of (String)"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "tempPseudonyms" : {
+    "type" : "String"
+  },
+  "tempCollaborations" : {
+    "type" : "String"
+  },
+  "links" : {
+    "type" : "List of (Link)"
+  },
+  "tempChildren" : {
+    "type" : "String"
+  },
+  "fsPseudonyms" : {
+    "type" : "List of (String)"
+  },
+  "tempDeath" : {
+    "type" : "String"
+  },
+  "tempBirthPlace" : {
+    "type" : "String"
+  },
+  "tempMotherTongue" : {
+    "type" : "String"
+  },
+  "nationality" : {
+    "type" : "String"
+  },
+  "financials" : {
+    "type" : "List of (String)"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "tempDeathPlace" : {
+    "type" : "String"
+  },
+  "tempPlaceOfBirth" : {
+    "type" : "String"
+  },
+  "notes" : {
+    "type" : "String"
+  },
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

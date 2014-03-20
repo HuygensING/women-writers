@@ -1,40 +1,40 @@
 {
+  "sourceTypeName" : {
+    "type" : "String"
+  },
+  "regularName" : {
+    "type" : "String"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "reflexive" : {
+    "type" : "boolean"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
   "ID" : {
     "value" : "_id",
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "symmetric" : {
+    "type" : "boolean"
+  },
+  "inverseName" : {
+    "type" : "String"
+  },
+  "targetTypeName" : {
     "type" : "String"
   },
   "ID_PREFIX" : {
     "value" : "RELT",
     "type" : "String"
   },
-  "^created" : {
-    "type" : "Change"
-  },
   "^modified" : {
     "type" : "Change"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "inverseName" : {
-    "type" : "String"
-  },
-  "reflexive" : {
-    "type" : "boolean"
-  },
-  "regularName" : {
-    "type" : "String"
-  },
-  "sourceTypeName" : {
-    "type" : "String"
-  },
-  "symmetric" : {
-    "type" : "boolean"
-  },
-  "targetTypeName" : {
-    "type" : "String"
   }
 }

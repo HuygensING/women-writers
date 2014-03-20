@@ -1,20 +1,20 @@
 {
-  "bloc" : {
+  "region" : {
     "type" : "String"
   },
-  "country" : {
+  "bloc" : {
     "type" : "String"
   },
   "countryCode" : {
     "type" : "String"
   },
+  "settlement" : {
+    "type" : "String"
+  },
   "district" : {
     "type" : "String"
   },
-  "region" : {
-    "type" : "String"
-  },
-  "settlement" : {
+  "country" : {
     "type" : "String"
   }
 }

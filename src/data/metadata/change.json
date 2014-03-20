@@ -1,11 +1,11 @@
 {
+  "vreId" : {
+    "type" : "String"
+  },
   "timeStamp" : {
     "type" : "long"
   },
   "userId" : {
-    "type" : "String"
-  },
-  "vreId" : {
     "type" : "String"
   }
 }

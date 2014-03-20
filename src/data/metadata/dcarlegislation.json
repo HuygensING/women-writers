@@ -1,4 +1,51 @@
 {
+  "reminders" : {
+    "type" : "String"
+  },
+  "originalArchivalSource" : {
+    "type" : "String"
+  },
+  "PID" : {
+    "value" : "^pid",
+    "type" : "String"
+  },
+  "titleEng" : {
+    "type" : "String"
+  },
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "origFilename" : {
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "remarks" : {
+    "type" : "String"
+  },
+  "partsToScan" : {
+    "type" : "String"
+  },
+  "titleNld" : {
+    "type" : "String"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "otherPublications" : {
+    "type" : "List of (String)"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "date2" : {
+    "type" : "String"
+  },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
   },
@@ -6,95 +53,48 @@
     "value" : "^deleted",
     "type" : "String"
   },
-  "ID" : {
-    "value" : "_id",
+  "date1" : {
     "type" : "String"
   },
-  "PID" : {
-    "value" : "^pid",
-    "type" : "String"
-  },
-  "ROLES" : {
-    "value" : "^roles",
+  "^pid" : {
     "type" : "String"
   },
   "VARIATIONS" : {
     "value" : "^variations",
     "type" : "String"
   },
-  "^created" : {
-    "type" : "Change"
-  },
-  "^deleted" : {
-    "type" : "boolean"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
+  "ROLES" : {
+    "value" : "^roles",
     "type" : "String"
   },
   "contents" : {
     "type" : "String"
   },
-  "date1" : {
-    "type" : "String"
-  },
-  "date2" : {
+  "pages" : {
     "type" : "String"
   },
   "linkArchivalDBase" : {
     "type" : "String"
   },
-  "madeBy" : {
-    "type" : "String"
-  },
-  "origFilename" : {
-    "type" : "String"
-  },
-  "originalArchivalSource" : {
-    "type" : "String"
-  },
-  "otherPublications" : {
-    "type" : "List of (String)"
-  },
-  "pages" : {
-    "type" : "String"
-  },
-  "partsToScan" : {
-    "type" : "String"
-  },
   "reference" : {
     "type" : "String"
   },
-  "remarks" : {
+  "^rev" : {
+    "type" : "int"
+  },
+  "madeBy" : {
     "type" : "String"
   },
-  "reminders" : {
-    "type" : "String"
-  },
-  "scan" : {
-    "type" : "String"
+  "^variations" : {
+    "type" : "List of (String)"
   },
   "seeAlso" : {
     "type" : "List of (String)"
   },
-  "titleEng" : {
+  "scan" : {
     "type" : "String"
   },
-  "titleNld" : {
-    "type" : "String"
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }

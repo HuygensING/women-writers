@@ -1,11 +1,11 @@
 {
-  "displayName" : {
-    "type" : "String"
-  },
   "id" : {
     "type" : "String"
   },
   "path" : {
+    "type" : "String"
+  },
+  "displayName" : {
     "type" : "String"
   },
   "type" : {

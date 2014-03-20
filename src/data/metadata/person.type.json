@@ -1,10 +1,10 @@
 {
-  "ARCHETYPE" : {
-    "value" : "ARCHETYPE",
-    "type" : "String"
-  },
   "AUTHOR" : {
     "value" : "AUTHOR",
+    "type" : "String"
+  },
+  "ARCHETYPE" : {
+    "value" : "ARCHETYPE",
     "type" : "String"
   },
   "PSEUDONYM" : {

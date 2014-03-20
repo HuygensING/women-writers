@@ -1,8 +1,8 @@
 {
-  "endDate" : {
+  "startDate" : {
     "type" : "Datable"
   },
-  "startDate" : {
+  "endDate" : {
     "type" : "Datable"
   }
 }

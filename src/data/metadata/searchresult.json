@@ -1,44 +1,44 @@
 {
-  "DATE_FIELD" : {
-    "value" : "date",
+  "sort" : {
     "type" : "String"
   },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
+  "ids" : {
+    "type" : "List of (String)"
   },
-  "ID_PREFIX" : {
-    "value" : "QURY",
-    "type" : "String"
+  "facets" : {
+    "type" : "List of (FacetCount)"
   },
   "^created" : {
     "type" : "Change"
   },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "_id" : {
+  "searchType" : {
     "type" : "String"
   },
   "date" : {
     "type" : "Date"
   },
-  "facets" : {
-    "type" : "List of (FacetCount)"
-  },
-  "ids" : {
-    "type" : "List of (String)"
-  },
-  "searchType" : {
+  "ID_PREFIX" : {
+    "value" : "QURY",
     "type" : "String"
   },
-  "sort" : {
+  "^modified" : {
+    "type" : "Change"
+  },
+  "_id" : {
     "type" : "String"
   },
   "term" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "DATE_FIELD" : {
+    "value" : "date",
     "type" : "String"
   }
 }

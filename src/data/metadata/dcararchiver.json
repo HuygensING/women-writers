@@ -1,88 +1,88 @@
 {
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
+  "reminders" : {
     "type" : "String"
   },
   "PID" : {
     "value" : "^pid",
     "type" : "String"
   },
-  "ROLES" : {
-    "value" : "^roles",
+  "^deleted" : {
+    "type" : "boolean"
+  },
+  "origFilename" : {
+    "type" : "String"
+  },
+  "^created" : {
+    "type" : "Change"
+  },
+  "endDate" : {
+    "type" : "String"
+  },
+  "beginDate" : {
+    "type" : "String"
+  },
+  "^modified" : {
+    "type" : "Change"
+  },
+  "related" : {
+    "type" : "XRelated[]"
+  },
+  "_id" : {
+    "type" : "String"
+  },
+  "ID" : {
+    "value" : "_id",
+    "type" : "String"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
+  "types" : {
+    "type" : "List of (String)"
+  },
+  "periodDescription" : {
+    "type" : "String"
+  },
+  "DELETED" : {
+    "value" : "^deleted",
+    "type" : "String"
+  },
+  "^pid" : {
     "type" : "String"
   },
   "VARIATIONS" : {
     "value" : "^variations",
     "type" : "String"
   },
-  "^created" : {
-    "type" : "Change"
-  },
-  "^deleted" : {
-    "type" : "boolean"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "beginDate" : {
-    "type" : "String"
-  },
-  "endDate" : {
-    "type" : "String"
-  },
-  "history" : {
-    "type" : "String"
-  },
-  "literature" : {
-    "type" : "String"
-  },
-  "madeBy" : {
+  "ROLES" : {
+    "value" : "^roles",
     "type" : "String"
   },
   "nameEng" : {
     "type" : "String"
   },
+  "literature" : {
+    "type" : "String"
+  },
+  "history" : {
+    "type" : "String"
+  },
   "nameNld" : {
     "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "madeBy" : {
+    "type" : "String"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
   },
   "notes" : {
     "type" : "String"
   },
-  "origFilename" : {
-    "type" : "String"
-  },
-  "periodDescription" : {
-    "type" : "String"
-  },
-  "related" : {
-    "type" : "XRelated[]"
-  },
-  "reminders" : {
-    "type" : "String"
-  },
-  "types" : {
-    "type" : "List of (String)"
+  "^roles" : {
+    "type" : "List of (Role)"
   }
 }
