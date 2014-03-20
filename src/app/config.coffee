@@ -16,6 +16,9 @@ class Config extends Backbone.Model
 	searchUrl: ->
 		@get('baseUrl') + @get('searchPath')
 
+	relationsUrl: ->
+		@get('baseUrl') + '/api/domain/wwrelations'
+
 	allPersonsUrl: ->
 		@get('facetedSearchBaseUrl') + @get('personsRootUrl')
 
