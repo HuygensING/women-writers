@@ -40,7 +40,6 @@ class Person extends Backbone.View
 			type: 'Relation'
 			relationTypeDescription:
 				relationTypeVariation: config.get 'relationTypeVariation'
-				sourceType: languageRelationType.sourceTypeName
 				targetType: languageRelationType.targetTypeName
 				relationTypeId: languageRelationType._id
 			title: 'Languages'
