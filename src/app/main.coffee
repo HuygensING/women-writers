@@ -25,6 +25,13 @@ bootstrap = ->
 	.then (data) ->
 		config.set allWorks: new WorksCollection data
 	.then ->
+		$.getJSON config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson'
+	.then (data) ->
+		relationTypes = {}
+		relationTypes[t.regularName] = t for t in data
+		config.set relationTypes: relationTypes
+		console.log "REL TYPES", config.get 'relationTypes'
+	.then ->
 		searchQuery
 			query:
 				term: '*'
@@ -33,7 +40,7 @@ bootstrap = ->
 				searchUrl: config.searchUrl()
 				resultRows: 1000 # or any large number
 	.then (data) ->
-		languages = (id: l._id, name: l.name for l in data.results)
+		languages = (value: l._id, label: l.name for l in data.results)
 		config.set languages: languages
 	.then ->
 		searchQuery
