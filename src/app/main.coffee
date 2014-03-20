@@ -9,12 +9,44 @@ MainRouter = require './routers/main.coffee'
 PersonsCollection = require './collections/persons.coffee'
 WorksCollection = require './collections/works.coffee'
 
+{searchQuery} = require './helpers/search'
+
 handleLinkClicks = (e) ->
 	href = $(@).attr 'href'	
 	if href?
 		e.preventDefault()
 		href = href.replace config.get('baseUrl'), '' if href.match /^https?:/
 		Backbone.history.navigate href, trigger: true
+
+bootstrap = ->
+	$.getJSON(config.allPersonsUrl() + '?start=0&rows=1000').then (data) ->
+		config.set allPersons: new PersonsCollection data
+		$.getJSON(config.allWorksUrl())
+	.then (data) ->
+		config.set allWorks: new WorksCollection data
+	.then ->
+		searchQuery
+			query:
+				term: '*'
+				typeString: 'wwlanguage'
+			options:
+				searchUrl: config.searchUrl()
+				resultRows: 1000 # or any large number
+	.then (data) ->
+		languages = (id: l._id, name: l.name for l in data.results)
+		config.set languages: languages
+	.then ->
+		searchQuery
+			query:
+				term: '*'
+				typeString: 'wwlocation'
+			options:
+				searchUrl: config.searchUrl()
+				resultRows: 1000
+	.then (data) ->
+		locations = (l for l in data.results)
+		config.set locations: locations
+
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks
@@ -26,13 +58,7 @@ $ ->
 		config.set authToken: hsid[1]
 		window.history.replaceState? {}, '', window.location.href.replace /\?.*$/, ''
 
-	$.getJSON(config.allPersonsUrl() + '?start=0&rows=1000').then (data) ->
-		config.set allPersons: new PersonsCollection data
-		
-	$.getJSON(config.allWorksUrl()).then (data) ->
-		config.set allWorks: new WorksCollection data
-			
-	.done ->
+	bootstrap().done ->
 		# All systems go!
 		app = new App el: 'body'
 
