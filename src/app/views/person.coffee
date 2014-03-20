@@ -35,6 +35,7 @@ class Person extends Backbone.View
 			readonly: [ /^temp/	]
 
 
+
 		languageRelationType = config.get('relationTypes')['language']
 
 		schema['timbuctoo-relation.language'] =
@@ -45,6 +46,7 @@ class Person extends Backbone.View
 				relationTypeId: languageRelationType._id
 			title: 'Languages'
 			options: config.get 'languages'
+
 
 		@form = new Form
 			className: 'timbuctoo-form'
