@@ -13,9 +13,12 @@ class WorkSearch extends BaseSearch
 		dynamic_s_date: 'Date'
 		dynamic_s_origin: 'Origin'
 		dynamic_s_document_type: 'Document Type'
-	sortableFieldsMap:
 		dynamic_s_creator: 'Creator'
-		dynamic_s_title: 'Title'
+		dynamic_s_language: 'Language'
+		dynamic_s_subject: 'Subject'
+	sortableFieldsMap:
+		dynamic_sort_creator: 'Creator'
+		dynamic_sort_title: 'Title'
 
 	initialize: (@options) ->
 		super
