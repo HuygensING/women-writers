@@ -10,6 +10,8 @@ Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 class Person extends Backbone.View
 	className: 'person-edit'
 	template: require '../../templates/views/person.jade'
+	languageRelationName: 'hasLanguage'
+	languageRelation: "timbuctoo-relation.hasLanguage"
 
 	events:
 		'click .save': 'savePerson'
@@ -34,9 +36,9 @@ class Person extends Backbone.View
 			]
 			readonly: [ /^temp/	]
 
-		languageRelationType = config.get('relationTypes')['hasLanguage']
-		
-		schema['timbuctoo-relation.hasLanguage'] =
+		languageRelationType = config.get('relationTypes')[@languageRelationName]
+					
+		schema[@languageRelation] =
 			type: 'Relation'
 			relationTypeDescription:
 				relationTypeVariation: config.get 'relationTypeVariation'
@@ -57,7 +59,7 @@ class Person extends Backbone.View
 				'gender'
 				'birthDate'
 				'deathDate'
-				'timbuctoo-relation.language'
+				@languageRelation
 				'types'
 				'livedIn'
 				'children'
