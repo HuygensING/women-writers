@@ -11,13 +11,14 @@ class PersonSearch extends BaseSearch
 		resultRows: 25
 	facetNameMap:
 		dynamic_s_collective: 'Collective'
+		dynamic_s_birthPlace: 'Place of Birth'
 		dynamic_s_birthDate: 'Year of Birth'
 		dynamic_s_deathDate: 'Year of Death'
 		dynamic_s_gender: 'Gender'
 	sortableFieldsMap:
-		dynamic_s_deathDate: 'Year of Death'
-		dynamic_s_birthDate: 'Year of Birth'
-		dynamic_t_name: 'Name'
+		dynamic_sort_deathDate: 'Year of Death'
+		dynamic_sort_birthDate: 'Year of Birth'
+		dynamic_sort_name: 'Name'
 
 
 	initialize: (@options) ->
