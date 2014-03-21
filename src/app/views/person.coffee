@@ -34,9 +34,9 @@ class Person extends Backbone.View
 			]
 			readonly: [ /^temp/	]
 
-		languageRelationType = config.get('relationTypes')['language']
-
-		schema['timbuctoo-relation.language'] =
+		languageRelationType = config.get('relationTypes')['hasLanguage']
+		
+		schema['timbuctoo-relation.hasLanguage'] =
 			type: 'Relation'
 			relationTypeDescription:
 				relationTypeVariation: config.get 'relationTypeVariation'
