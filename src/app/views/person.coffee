@@ -11,6 +11,10 @@ class Person extends Backbone.View
 	className: 'person-edit'
 	template: require '../../templates/views/person.jade'
 
+	relationTypes: [
+		'hasLanguage'
+	]
+
 	events:
 		'click .save': 'savePerson'
 
@@ -34,14 +38,17 @@ class Person extends Backbone.View
 			]
 			readonly: [ /^temp/	]
 
-		languageRelationType = config.get('relationTypes')['language']
+		for type in @relationTypes
+			relationType = config.get('relationTypes')[type]
 
-		schema['timbuctoo-relation.language'] =
-			type: 'Relation'
-			relationTypeDescription:
-				relationTypeVariation: config.get 'relationTypeVariation'
-				targetType: languageRelationType.targetTypeName
-				relationTypeId: languageRelationType._id
+			schema["timbuctoo-relation.#{type}"] =
+				type: 'Relation'
+				relationTypeDescription:
+					relationTypeVariation: config.get 'relationTypeVariation'
+					targetType: relationType.targetTypeName
+					relationTypeId: relationType._id
+
+		_.extend schema['timbuctoo-relation.hasLanguage'],
 			title: 'Languages'
 			options: config.get 'languages'
 
@@ -57,7 +64,7 @@ class Person extends Backbone.View
 				'gender'
 				'birthDate'
 				'deathDate'
-				'timbuctoo-relation.language'
+				'timbuctoo-relation.hasLanguage'
 				'types'
 				'livedIn'
 				'children'

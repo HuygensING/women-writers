@@ -30,7 +30,6 @@ bootstrap = ->
 		relationTypes = {}
 		relationTypes[t.regularName] = t for t in data
 		config.set relationTypes: relationTypes
-		console.log "REL TYPES", config.get 'relationTypes'
 	.then ->
 		searchQuery
 			query:
@@ -51,8 +50,7 @@ bootstrap = ->
 				searchUrl: config.searchUrl()
 				resultRows: 1000
 	.then (data) ->
-		locations = (l for l in data.results)
-		config.set locations: locations
+		config.set locations: (value: l._id, label: l.displayName for l in data.results)
 
 
 $ ->
