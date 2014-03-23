@@ -13,6 +13,7 @@ class Person extends Backbone.View
 
 	relationTypes: [
 		'hasLanguage'
+		'hasBirthPlace'
 	]
 
 	events:
@@ -52,6 +53,10 @@ class Person extends Backbone.View
 			title: 'Languages'
 			options: config.get 'languages'
 
+		_.extend schema['timbuctoo-relation.hasBirthPlace'],
+			title: 'Birth Place'
+			options: config.get 'locations'
+
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
@@ -63,6 +68,7 @@ class Person extends Backbone.View
 				'tempName'
 				'gender'
 				'birthDate'
+				'timbuctoo-relation.hasBirthPlace'
 				'deathDate'
 				'timbuctoo-relation.hasLanguage'
 				'types'
