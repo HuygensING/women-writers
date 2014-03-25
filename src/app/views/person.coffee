@@ -51,6 +51,7 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasLanguage'],
 			title: 'Languages'
 			options: config.get 'languages'
+			onlyOne: true
 
 		@form = new Form
 			className: 'timbuctoo-form'
