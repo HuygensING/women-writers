@@ -53,6 +53,7 @@ class Person extends Backbone.View
 			title: 'Languages'
 			options: config.get 'languages'
 
+		console.log "Locations", config.get 'locations'
 		_.extend schema['timbuctoo-relation.hasBirthPlace'],
 			title: 'Birth Place'
 			options: config.get 'locations'

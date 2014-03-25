@@ -39,7 +39,7 @@ bootstrap = ->
 				searchUrl: config.searchUrl()
 				resultRows: 1000 # or any large number
 	.then (data) ->
-		languages = (value: l._id, label: l.displayName for l in data.refs)
+		languages = (value: l.id, label: l.displayName for l in data.refs)
 		config.set languages: languages
 	.then ->
 		searchQuery
@@ -50,7 +50,7 @@ bootstrap = ->
 				searchUrl: config.searchUrl()
 				resultRows: 1000
 	.then (data) ->
-		config.set locations: (value: l._id, label: l.displayName for l in data.refs)
+		config.set locations: (value: l.id, label: l.displayName for l in data.refs)
 
 
 $ ->
