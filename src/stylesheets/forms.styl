@@ -1,4 +1,4 @@
-input[type=text]
+input[type=text], textarea
 	border 1px solid #eee
 	border-radius borderRadius
 
@@ -56,8 +56,12 @@ button, .btn
 	form label + div
 		display inline-block
 
-	form input[type=text]
-		width 500px
+	form
+		input[type=text], textarea
+			width 500px
+
+		textarea
+			min-height 100px
 
 	.timbuctoo-list-editor
 		display inline-block
