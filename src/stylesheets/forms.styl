@@ -1,9 +1,56 @@
 input[type=text], textarea
-	border 1px solid #eee
+	box-sizing border-box
+
+	border 1px solid borderColor
 	border-radius borderRadius
 
 	padding .4em .6em
 	color inputTextColor
+
+	outline none
+
+	&:active, &:focus
+		border 1px solid activeBorderColor
+
+.select2-container
+	background-image none
+	border none
+
+	a.select2-choice
+		box-sizing border-box
+		height 27px // height of input boxes
+
+		background-image none
+		border 1px solid borderColor
+
+		.select2-arrow
+			border-left 1px solid borderColor
+			background-image none
+			background-color borderColor
+
+	&.select2-container-active
+		border none
+		box-shadow none
+		-webkit-box-shadow none
+
+		a.select2-choice
+			border 1px solid activeBorderColor
+			box-shadow none
+			-webkit-box-shadow none
+
+.select2-drop
+	shadowStyle = 0 1px 3px rgba(0,0,0,0.1)
+	box-shadow shadowStyle
+	-webkit-box-shadow shadowStyle
+
+	&.select2-drop-active
+		border 1px solid activeBorderColor
+
+	.select2-search
+		padding 0
+		.select2-input
+			background white url('select2.png') no-repeat 100% -22px
+			font-family labelFont
 
 button, .btn
 	button-style()
@@ -57,7 +104,7 @@ button, .btn
 		display inline-block
 
 	form
-		input[type=text], textarea
+		input[type=text], textarea, .select2-container
 			width 500px
 
 		textarea

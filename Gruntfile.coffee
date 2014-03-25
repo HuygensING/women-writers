@@ -92,6 +92,12 @@ module.exports = (grunt) ->
 			'faceted-search-css-test':
 				src: ['stage/fs.css', 'stage/main.css']
 				dest: 'stage/main.css'
+			'select2-css':
+				src: [
+					'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/select2.css'
+					'build/main.css'
+				]
+				dest: 'build/main.css'
 
 
 		browserify:
@@ -117,12 +123,20 @@ module.exports = (grunt) ->
 			'static-development':
 				options:
 					args: ['-q']
-					src: ['./src/static/*']
+					src: [
+						'./src/static/*'
+						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.gif'
+						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.png'
+					]
 					dest: './build'
 			'static-test':
 				options:
 					args: ['-q']
-					src: ['./src/static/*']
+					src: [
+						'./src/static/*'
+						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.gif'
+						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.png'
+					]
 					dest: './stage'
 			'deploy-test':
 				options:
@@ -164,6 +178,7 @@ module.exports = (grunt) ->
 			"stylus:build-#{env}"
 			"stylus:build-faceted-search-#{env}"
 			"concat:faceted-search-css-#{env}"
+			"concat:select2-css"
 		]
 	
 	grunt.registerTask 'build', [

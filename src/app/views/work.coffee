@@ -4,7 +4,11 @@ config = require '../config.coffee'
 
 workDescription = require '../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
+
+{searchQuery} = require '../helpers/search'
+
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
+
 
 class Work extends Backbone.View
 	className: 'work-edit'
@@ -59,7 +63,14 @@ class Work extends Backbone.View
 			title: 'Creator'
 			options: config.get 'persons'
 			onlyOne: true
-
+			autocomplete: (value) ->
+				searchQuery
+					query:
+						term: value
+						typeString: 'wwperson'
+					options:
+						searchUrl: config.searchUrl()
+						resultRows: 500 # or any large number
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
