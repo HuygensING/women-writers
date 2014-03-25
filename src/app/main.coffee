@@ -19,17 +19,22 @@ handleLinkClicks = (e) ->
 		Backbone.history.navigate href, trigger: true
 
 bootstrap = ->
-	$.getJSON(config.allPersonsUrl() + '?start=0&rows=1000').then (data) ->
-		config.set allPersons: new PersonsCollection data
-		$.getJSON(config.allWorksUrl())
-	.then (data) ->
-		config.set allWorks: new WorksCollection data
+	# $.getJSON(config.allPersonsUrl() + '?start=0&rows=1000').then (data) ->
+	# 	config.set allPersons: new PersonsCollection data
+	# 	$.getJSON(config.allWorksUrl())
+	# .then (data) ->
+	# 	config.set allWorks: new WorksCollection data
+	# .then ->
+	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
+		relationTypes = {}
+		relationTypes[t.regularName] = t for t in data
+		config.set personRelationTypes: relationTypes
 	.then ->
-		$.getJSON config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson'
+		$.getJSON config.get('baseUrl') + '/api/system/relationtypes?iname=wwdocument'
 	.then (data) ->
 		relationTypes = {}
 		relationTypes[t.regularName] = t for t in data
-		config.set relationTypes: relationTypes
+		config.set workRelationTypes: relationTypes
 	.then ->
 		searchQuery
 			query:
@@ -39,7 +44,7 @@ bootstrap = ->
 				searchUrl: config.searchUrl()
 				resultRows: 1000 # or any large number
 	.then (data) ->
-		languages = (value: l._id, label: l.name for l in data.results)
+		languages = (value: l.id, label: l.displayName for l in data.refs)
 		config.set languages: languages
 	.then ->
 		searchQuery
@@ -50,8 +55,17 @@ bootstrap = ->
 				searchUrl: config.searchUrl()
 				resultRows: 1000
 	.then (data) ->
-		config.set locations: (value: l._id, label: l.displayName for l in data.results)
-
+		config.set locations: (value: l.id, label: l.displayName for l in data.refs)
+	.then ->
+		searchQuery
+			query:
+				term: '*'
+				typeString: 'wwperson'
+			options:
+				searchUrl: config.searchUrl()
+				resultRows: 100
+	.then (data) ->
+		config.set persons: (value: p.id, label: p.displayName for p in data.refs)
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks
