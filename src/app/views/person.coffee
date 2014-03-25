@@ -39,7 +39,7 @@ class Person extends Backbone.View
 			readonly: [ /^temp/	]
 
 		for type in @relationTypes
-			relationType = config.get('relationTypes')[type]
+			relationType = config.get('personRelationTypes')[type]
 
 			schema["timbuctoo-relation.#{type}"] =
 				type: 'Relation'
