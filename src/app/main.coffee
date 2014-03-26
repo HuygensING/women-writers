@@ -19,12 +19,6 @@ handleLinkClicks = (e) ->
 		Backbone.history.navigate href, trigger: true
 
 bootstrap = ->
-	# $.getJSON(config.allPersonsUrl() + '?start=0&rows=1000').then (data) ->
-	# 	config.set allPersons: new PersonsCollection data
-	# 	$.getJSON(config.allWorksUrl())
-	# .then (data) ->
-	# 	config.set allWorks: new WorksCollection data
-	# .then ->
 	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
 		relationTypes = {}
 		relationTypes[t.regularName] = t for t in data
