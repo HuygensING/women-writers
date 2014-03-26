@@ -144,8 +144,25 @@ button, .btn
 		display inline-block
 		width 50%
 
-	.relation-editor
+	.relation-editor // FIXME: rename to timbuctoo-?
 		display inline-block
+
+	.timbuctoo-link-editor
+		.label-field, .url-field
+			position relative
+			span
+				display inline-block
+				position absolute
+
+				line-height 3em
+				padding-left 1em
+
+				font-size 75%
+				color mediumGray
+				text-transform uppercase
+
+			input
+				padding-left 5em
 
 	button[data-action]
 		background-color transparent
@@ -207,3 +224,14 @@ button, .btn
 				border-color rgba(255,255,255,0)
 			&:active
 				background-color darken(darkRed, 20%)
+
+
+.field-links
+	.timbuctoo-list-item
+		position relative
+		padding-bottom 2em
+
+		button[data-action="remove"]
+			position absolute
+			right 0
+			margin
