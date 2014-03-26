@@ -26,7 +26,7 @@ input[type=text], textarea
 		.select2-arrow
 			border-left 1px solid borderColor
 			background-image none
-			background-color borderColor
+			background-color transparent
 
 	&.select2-container-active
 		border none
@@ -37,6 +37,9 @@ input[type=text], textarea
 			border 1px solid activeBorderColor
 			box-shadow none
 			-webkit-box-shadow none
+
+			.select2-arrow
+				background-color borderColor
 
 .select2-drop
 	shadowStyle = 0 1px 3px rgba(0,0,0,0.1)
@@ -49,8 +52,27 @@ input[type=text], textarea
 	.select2-search
 		padding 0
 		.select2-input
-			background white url('select2.png') no-repeat 100% -22px
+			// background white url('select2.png') no-repeat 100% -22px
+			border-radius 0
+			border-left none
+			border-right none
+			border-top none
 			font-family labelFont
+
+	.select2-results
+		margin 0
+		padding 0
+		color mediumGray
+
+		.select2-no-results
+			font-size 90%
+			background transparent
+			text-align center
+			padding 10px
+		.select2-result
+			color darkGray
+			&.select2-highlighted
+				color white
 
 button, .btn
 	button-style()
@@ -161,7 +183,7 @@ button, .btn
 			font-weight bold
 
 			border 1px solid transparent
-			color lightGray
+			color mediumGray
 
 	.field:hover button[data-action]
 		color darkGray
