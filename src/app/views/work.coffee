@@ -66,7 +66,7 @@ class Work extends Backbone.View
 			autocomplete: (value) ->
 				searchQuery
 					query:
-						term: value
+						term: "*#{value}*"
 						typeString: 'wwperson'
 					options:
 						searchUrl: config.searchUrl()

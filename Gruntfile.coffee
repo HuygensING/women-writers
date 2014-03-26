@@ -98,7 +98,12 @@ module.exports = (grunt) ->
 					'build/main.css'
 				]
 				dest: 'build/main.css'
-
+			'select2-css-test':
+				src: [
+					'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/select2.css'
+					'stage/main.css'
+				]
+				dest: 'stage/main.css'
 
 		browserify:
 			options:
@@ -193,6 +198,7 @@ module.exports = (grunt) ->
 		'jade:index-test'
 		'browserify:build-test'
 		'build-stylesheet-test'
+		"concat:select2-css-test"
 		'rsync:static-test'
 	]
 	grunt.registerTask 'deploy-test', ['build-test', 'rsync:deploy-test']
