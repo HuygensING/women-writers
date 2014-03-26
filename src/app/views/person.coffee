@@ -76,6 +76,7 @@ class Person extends Backbone.View
 				'health'
 				'nationality'
 				'personalSituation'
+				'links'
 			]
 
 		@$('.form').html @form.el
