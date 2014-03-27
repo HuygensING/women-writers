@@ -75,7 +75,20 @@ class Work extends Backbone.View
 						typeString: 'wwperson'
 					options:
 						searchUrl: config.searchUrl()
-						resultRows: 500 # or any large number
+						resultRows: 5000 # or any large number
+
+		receptions = {}
+		for type, v of config.get 'workRelationTypes'
+			if type of config.get 'receptionTypes'
+				receptions[type] = v
+
+		schema['timbuctoo-relation.receptions'] =
+			type: 'DynamicRelations'
+			title: 'Receptions'
+			relationTypes: receptions
+			relationTypeVariation: config.get 'relationTypeVariation'
+			relationName: 'reception'
+
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
@@ -104,7 +117,9 @@ class Work extends Backbone.View
 				}
 				{
 					legend: 'Receptions'
-					fields: []
+					fields: [
+						'timbuctoo-relation.receptions'
+					]
 				}
 			]
 
