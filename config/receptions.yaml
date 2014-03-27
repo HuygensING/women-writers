@@ -1,0 +1,111 @@
+isEditionOf:
+  label: is edition of
+  inverse: hasEdition
+  sourceType: Document
+  targetType: Document
+
+hasSequel:
+  label: has sequel
+  inverse: isSequelOf
+  sourceType: Document
+  targetType: Document
+
+isTranslationOf:
+  label: is translation of
+  inverse: hasTranslation
+  sourceType: DomainEntity
+  targetType: Document
+
+isAdaptationOf:
+  label: is adaptation of
+  inverse: hasAdaptation
+  sourceType: DomainEntity
+  targetType: Document
+
+isPlagiarismOf:
+  label: is plagiarism of
+  inverse: hasPlagiarismBy
+  sourceType: Document
+  targetType: Document
+
+'annotated in':
+  inverse: iannotated in
+  sourceType: DomainEntity
+  targetType: Document
+
+'biography of':
+  inverse: ibiography of
+  sourceType: DomainEntity
+  targetType: Document
+
+'censored by':
+  inverse: icensored by
+  sourceType: Document
+  targetType: Document
+
+'comments on':
+  inverse: icomments on
+  sourceType: DomainEntity
+  targetType: Document
+
+contains:
+  label: contains
+  inverse: icontains
+  sourceType: DomainEntity
+  targetType: Document
+
+'copied of':
+  inverse: icopied of
+  sourceType: DomainEntity
+  targetType: Document
+
+'dedicated to':
+  inverse: idedicated to
+  sourceType: DomainEntity
+  targetType: Document
+
+'granted to':
+  inverse: igranted to
+  sourceType: DomainEntity
+  targetType: Document
+
+'has preface':
+  inverse: ihas preface
+  sourceType: DomainEntity
+  targetType: Document
+
+intertextual:
+  label: intertextual
+  inverse: iintertextual
+  sourceType: DomainEntity
+  targetType: Document
+
+'listed on':
+  inverse: ilisted on
+  sourceType:  DomainEntity
+  targetType: Document
+
+'mentioned in':
+  inverse: imentioned in
+  sourceType: DomainEntity
+  targetType: Document
+
+'obituary of':
+  inverse: iobituary of
+  sourceType: DomainEntity
+  targetType: Document
+
+'parody of':
+  inverse: iparody of
+  sourceType: DomainEntity
+  targetType: Document
+
+'quoted in':
+  inverse: iquoted in
+  sourceType: DomainEntity
+  targetType: Document
+
+'referenced in':
+  inverse: ireferenced in
+  sourceType: DomainEntity
+  targetType: Document

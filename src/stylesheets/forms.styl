@@ -164,6 +164,69 @@ button, .btn
 			input
 				padding-left 5em
 
+	.dynamic-relations-editor
+		position relative
+		display inline-block
+		width 500px
+
+		ul.relations
+			margin 0
+
+		.add-new
+			display inline
+			h5
+				display none
+			ul
+				display none
+
+		.add-new.selection-box
+			border 1px solid lightGray
+			border-radius borderRadius
+
+			padding 20px
+
+			boxShadowStyle = 0px 0px 9px rgba(0, 0, 0, 0.2)
+			box-shadow boxShadowStyle
+			-webkit-box-shadow boxShadowStyle
+
+			margin-bottom -45px
+			margin-left -20px
+			margin-right -20px
+
+			display inline-block
+			position absolute
+			bottom 9px
+			left 6px
+
+			background-color white
+
+			button
+				margin-top 20px
+				margin-left -5px
+
+			h5
+				margin 0 0 1em 0
+				display block
+
+			ul
+				display inline-block
+
+				margin 0 0 10px 0
+				padding 0
+
+				list-style none
+
+				font-size 90%
+
+				li
+					display inline-block
+					width 10em
+					padding .4em 0
+
+					cursor pointer
+					&:hover
+						font-weight bold
+
 	button[data-action]
 		background-color transparent
 		color mediumGray
