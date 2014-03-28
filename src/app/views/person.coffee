@@ -34,7 +34,6 @@ class Person extends Backbone.View
 				'PID'
 				'ROLES'
 				'VARIATIONS'
-				'names'
 			]
 			readonly: [ /^temp/	]
 
@@ -61,6 +60,7 @@ class Person extends Backbone.View
 			schema: schema
 			fields: [
 				'tempName'
+				'names'
 				'gender'
 				'birthDate'
 				'deathDate'
