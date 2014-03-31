@@ -67,7 +67,7 @@ class Work extends Backbone.View
 		_.extend schema['timbuctoo-relation.isCreatedBy'],
 			title: 'Creator'
 			options: config.get 'persons'
-			onlyOne: true
+			onlyOne: false
 			autocomplete: (value) ->
 				searchQuery
 					query:
