@@ -32,6 +32,7 @@ class User extends Backbone.Model
 						type: 'hidden'
 						name: 'hsurl'
 						value: options.returnUrl
+					Backbone.$("body").append form
 					form.submit()
 				else
 					try
