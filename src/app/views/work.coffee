@@ -34,6 +34,11 @@ class Work extends Backbone.View
 				'ROLES'
 				'VARIATIONS'
 				'names'
+				'topoi'
+				'resourceFormat'
+				'resourceType'
+				'rights'
+				'description'
 			]
 			readonly: [ /^temp/	]
 
