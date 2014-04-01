@@ -19,6 +19,12 @@ class Work extends Backbone.View
 		'hasPublishLocation'
 		'isCreatedBy'
 	]
+	
+	events:
+		'click .save': 'saveWork'
+	
+	saveWork: ->
+		@form.save()
 
 	events:
 		'click .save': 'save'
