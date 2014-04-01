@@ -20,9 +20,15 @@ class Work extends Backbone.View
 		'isCreatedBy'
 	]
 
+	events:
+		'click .save': 'save'
+
 	initialize: ->
 		@render() if @model?
 		
+	save: ->
+		@form.save()
+
 	render: ->
 		@$el.html @template work: @model.attributes
 		schema = createTimbuctooSchema workDescription,
@@ -82,17 +88,33 @@ class Work extends Backbone.View
 			if type of config.get 'receptionTypes'
 				receptions[type] = v
 
+		autocompleteFactory = (targetType) ->
+			workRelationTypes = config.get 'workRelationTypes'
+			type = workRelationTypes[targetType]
+			typeString = type.targetTypeName
+			typeString = 'wwdocument' if typeString is 'document'
+			(value) ->
+				searchQuery
+					query:
+						term: "*#{value}*"
+						typeString: typeString
+					options:
+						searchUrl: config.searchUrl()
+						resultRows: 5000
+
 		schema['timbuctoo-relation.receptions'] =
 			type: 'DynamicRelations'
 			title: 'Receptions'
 			relationTypes: receptions
 			relationTypeVariation: config.get 'relationTypeVariation'
 			relationName: 'reception'
+			autocompleteFactory: autocompleteFactory
 
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
 			VRE_ID: config.get 'VRE_ID'
+			relationsUrl: config.relationsUrl()
 			model: @model
 			schema: schema
 			fieldsets: [

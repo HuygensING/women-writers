@@ -21,13 +21,15 @@ handleLinkClicks = (e) ->
 bootstrap = ->
 	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
 		relationTypes = {}
-		relationTypes[t.regularName] = t for t in data
+		for t in data
+			relationTypes[t.regularName] = t
 		config.set personRelationTypes: relationTypes
 	.then ->
 		$.getJSON config.get('baseUrl') + '/api/system/relationtypes?iname=wwdocument'
 	.then (data) ->
 		relationTypes = {}
-		relationTypes[t.regularName] = t for t in data
+		for t in data
+			relationTypes[t.regularName] = t
 		config.set workRelationTypes: relationTypes
 	.then ->
 		searchQuery
