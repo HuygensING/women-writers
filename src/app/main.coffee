@@ -62,6 +62,10 @@ bootstrap = ->
 				resultRows: 100
 	.then (data) ->
 		config.set persons: (value: p.id, label: p.displayName for p in data.refs)
+	.then ->
+		$.getJSON config.receptionsUrl()
+	.then (data) ->
+		config.set receptions: data.receptions
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks

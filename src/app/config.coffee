@@ -44,5 +44,7 @@ class Config extends Backbone.Model
 	userInfoUrl: ->
 		@get('baseUrl') + @get('userInfoPath')
 
+	receptionsUrl: ->
+		@get('baseUrl') + '/api/system/vres/' + @get('VRE_ID')
 
 module.exports = new Config
