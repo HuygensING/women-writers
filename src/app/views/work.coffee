@@ -5,7 +5,7 @@ config = require '../config.coffee'
 workDescription = require '../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
-{searchQuery} = require '../helpers/search'
+{searchQuery, simpleSearch} = require '../helpers/search'
 
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
@@ -74,38 +74,27 @@ class Work extends Backbone.View
 			title: 'Creator'
 			options: config.get 'persons'
 			onlyOne: false
-			autocomplete: (value) ->
-				searchQuery
-					query:
-						term: "*#{value}*"
-						typeString: 'wwperson'
-					options:
-						searchUrl: config.searchUrl()
-						resultRows: 5000 # or any large number
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 
-		receptions = {}
-		for type, v of config.get 'workRelationTypes'
-			if type of config.get 'receptionTypes'
-				receptions[type] = v
+		workReceptions = _.filter config.get('receptions'), (r) -> r.source is 'document'
 
 		autocompleteFactory = (targetType) ->
 			workRelationTypes = config.get 'workRelationTypes'
 			type = workRelationTypes[targetType]
 			typeString = type.targetTypeName
+			console.log "Type >#{targetType}< #{typeString}", type, workRelationTypes
+			# Only search for documents from this particular VRE
 			typeString = 'wwdocument' if typeString is 'document'
-			(value) ->
-				searchQuery
-					query:
-						term: "*#{value}*"
-						typeString: typeString
-					options:
-						searchUrl: config.searchUrl()
-						resultRows: 5000
+
+			query = (value) ->
+				simpleSearch(value, typeString, 5000)
+
+			query
 
 		schema['timbuctoo-relation.receptions'] =
 			type: 'DynamicRelations'
 			title: 'Receptions'
-			relationTypes: receptions
+			relationTypes: workReceptions
 			relationTypeVariation: config.get 'relationTypeVariation'
 			relationName: 'reception'
 			autocompleteFactory: autocompleteFactory

@@ -40,6 +40,27 @@ searchQuery = (args) ->
 
 	deferred.promise()
 
+simpleSearch = (term, type, limit=500) ->
+	escaped = escapeTerm term
+	searchQuery
+		query:
+			term: "*#{escaped}*"
+			typeString: type
+		options:
+			searchUrl: config.searchUrl()
+			resultRows: limit
+
+escapeTerm = (term) ->
+	special = '+ - & | ! ( ) { } [ ] ^ " ~ * ? : \ '.split /\s+/
+	escaped = term
+
+	for char in special
+		escaped = term.replace /#{char}/g, '\\' + char 
+
+	escaped
+
 module.exports =
 	createFacetedSearch: createFacetedSearch
 	searchQuery: searchQuery
+	simpleSearch: simpleSearch
+	escapeTerm: escapeTerm
