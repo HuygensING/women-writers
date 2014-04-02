@@ -63,6 +63,7 @@ class Work extends Backbone.View
 				type: 'Relation'
 				relationTypeDescription:
 					relationTypeVariation: config.get 'relationTypeVariation'
+					sourceType: relationType.sourceTypeName
 					targetType: relationType.targetTypeName
 					relationTypeId: relationType._id
 
@@ -82,18 +83,15 @@ class Work extends Backbone.View
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 
-		workReceptions = _.filter config.get('receptions'), (r) -> r.source is 'document'
+		workReceptions = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
 
-		autocompleteFactory = (targetType) ->
-			workRelationTypes = config.get 'workRelationTypes'
-			type = workRelationTypes[targetType]
-			typeString = type.targetTypeName
-			console.log "Type >#{targetType}< #{typeString}", type, workRelationTypes
+		autocompleteFactory = (relationType) ->
+			type = _.findWhere workReceptions, (r) -> r.regularName is relationType
+			typeString = type.derivedTargetType
 			# Only search for documents from this particular VRE
 			typeString = 'wwdocument' if typeString is 'document'
 
-			query = (value) ->
-				simpleSearch(value, typeString, 5000)
+			query = (value) -> simpleSearch value, typeString, 5000
 
 			query
 
