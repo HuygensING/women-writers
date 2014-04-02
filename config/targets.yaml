@@ -1,6 +1,6 @@
 test:
   user: wowrtest
-  host: hi14hingtest
+  host: hi14hingtest.huygens.knaw.nl
   baseDir: /data/wowrtest/public_html
 
 production:

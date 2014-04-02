@@ -16,3 +16,9 @@ So:
 	$ npm link timbuctoo-edit-forms
 	$ grunt build
 	$ grunt server:open
+
+## Deploying
+	$ ssh-copy-id {user}@{server} (should be done only once)
+	$ grunt deploy --target={target}
+ 
+	see for the user, server and target config/targets.yaml
