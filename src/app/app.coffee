@@ -9,12 +9,8 @@ user = require './models/user.coffee'
 
 UserStatusView = require './views/user-status.coffee'
 
-# personDescription = require '../../data/wwperson.json'
-# Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
-# {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
-
 Person = require './models/person.coffee'
-PersonView = require './views/person.coffee'
+PersonForm = require './views/person.coffee'
 PersonOverview = require './views/person-overview.coffee'
 PersonSearchView = require './views/person-search.coffee'	
 
@@ -37,8 +33,9 @@ class App extends Backbone.View
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
-			pv = new PersonView model: person
-			@switchView pv
+			view = new PersonForm
+				model: person
+			@switchView view
 		@$('#search').hide()
 		@$('#view').show()
 	
@@ -50,7 +47,9 @@ class App extends Backbone.View
 	showWorkForm: (id) ->
 		work = new Work _id: id
 		work.fetch().done =>
-			new WorkForm el: '#view', model: work
+			view = new WorkForm
+				model: work
+			@switchView view
 		@$('#search').hide()
 		@$('#view').show()
 
@@ -71,10 +70,8 @@ class App extends Backbone.View
 			@workSearch.$el.fadeIn 75
 
 	switchView: (view) ->
-		@currentView?.$el.fadeOut 75
-		view.$el.fadeOut 0
+		@currentView?.remove()
 		@$('#view').html view.el
-		view.$el.fadeIn 75
 		@currentView = view
 
 	render: ->
