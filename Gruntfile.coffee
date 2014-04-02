@@ -3,8 +3,14 @@
 module.exports = (grunt) ->
 	require('load-grunt-tasks') grunt
 
-	testHost = 'wowrtest'
-	testBaseDir = '/data/wowrtest/public_html'
+	target = grunt.option('target') or 'development'
+	targetConfig = grunt.file.readYAML "config/targets/#{target}.yaml"
+	targets = grunt.file.readYAML 'config/targets.yaml'
+
+	# TODO: Parametrize!
+	tgt = targets[target]
+
+	console.log "Target is #{target}", tgt
 
 	grunt.initConfig
 		pkg: grunt.file.readJSON 'package.json'
@@ -15,7 +21,7 @@ module.exports = (grunt) ->
 					port: 9000
 					hostname: '0.0.0.0'
 					server: "#{__dirname}/config/server.coffee"
-					bases: ["#{__dirname}/build"]
+					bases: ["#{__dirname}/targets/#{target}"]
 
 		open:
 			all:
@@ -29,103 +35,70 @@ module.exports = (grunt) ->
 					node: true
 				files:
 					'src/templates/.templates.js': ['src/templates/**/*.jade', '!src/templates/index.jade']
-			'index-development':
-				files:
-					'build/index.html': ['src/templates/index.jade']
+			index:
+				files: [
+					src: ['src/templates/index.jade']
+					dest: "targets/#{target}/index.html"
+				]
 				options:
 					pretty: true
-					data: grunt.file.readYAML 'config/development.yaml'
-			'index-test':
-				files:
-					'stage/index.html': ['src/templates/index.jade']
-				options:
-					pretty: true
-					data: grunt.file.readYAML 'config/test.yaml'
-
+					data: targetConfig
 
 		stylus:
 			options:
 				paths: ['src/stylesheets/import']
 				import: ['mixins.styl', 'fonts.styl', 'variables.styl']
 				compress: false
-			'build-faceted-search-development':
+			'build-faceted-search':
 				options:
 					paths: ['node_modules/faceted-search/src/stylus/', 'node_modules/faceted-search/src/stylus/import']
 					import: ['functions.styl', 'variables.styl']
 					compress: true
-				files:
-					'build/fs.css': [
+				files: [
+					src: [
 						'node_modules/faceted-search/src/stylus/**/*.styl'
 						'!node_modules/faceted-search/src/stylus/import/*.styl'
 					]
-			'build-faceted-search-test':
-				options:
-					paths: ['node_modules/faceted-search/src/stylus/', 'node_modules/faceted-search/src/stylus/import']
-					import: ['functions.styl', 'variables.styl']
-					compress: true
-				files:
-					'stage/fs.css': [
-						'node_modules/faceted-search/src/stylus/**/*.styl'
-						'!node_modules/faceted-search/src/stylus/import/*.styl'
-					]
-			'build-development':
-				files:
-					'build/main.css':  [
+					dest: "targets/#{target}/fs.css"
+				]
+			build:
+				files: [
+					src: [
 						'src/stylesheets/**/*.styl'
 						'!src/stylesheets/import/*.styl'
 					]
+					dest: "targets/#{target}/main.css"
+				]
 				options:
-					define: grunt.file.readYAML 'config/development.yaml'
-			'build-test':
-				files:
-					'stage/main.css':  [
-						'src/stylesheets/**/*.styl'
-						'!src/stylesheets/import/*.styl'
-					]
-				options:
-					define: grunt.file.readYAML 'config/test.yaml'
+					define: targetConfig
 
 		concat:
-			'faceted-search-css-development':
-				src: ['build/fs.css', 'build/main.css']
-				dest: 'build/main.css'
-			'faceted-search-css-test':
-				src: ['stage/fs.css', 'stage/main.css']
-				dest: 'stage/main.css'
-			'select2-css':
+			'faceted-search-css':
+				src: ["targets/#{target}/fs.css", "targets/#{target}/main.css"]
+				dest: "targets/#{target}/main.css"
+			select2:
 				src: [
 					'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/select2.css'
-					'build/main.css'
+					"targets/#{target}/main.css"
 				]
-				dest: 'build/main.css'
-			'select2-css-test':
-				src: [
-					'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/select2.css'
-					'stage/main.css'
-				]
-				dest: 'stage/main.css'
+				dest: "targets/#{target}/main.css"
 
 		browserify:
 			options:
 				transform: ['coffeeify', 'jadeify', 'browserify-data']
 				extensions: ['.coffee', '.js', '.yaml']
-			'build-development':
+			build:
 				src: 'src/app/main.coffee'
-				dest: 'build/main.js'
+				dest: "targets/#{target}/main.js"
 				options:
-					alias: ['./config/development.yaml:./config/config.yaml']	
-			'build-test': 
-				src: 'src/app/main.coffee'
-				dest: 'stage/main.js'
-				options:
-					alias: ['./config/test.yaml:./config/config.yaml']	
+					alias: ["./config/targets/#{target}.yaml:./config/config.yaml"]	
 
 		rsync:
 			options:
 				args: ["--verbose", "-i"]
 				exclude: [".git*"]
 				recursive: true
-			'static-development':
+			static:
 				options:
 					args: ['-q']
 					src: [
@@ -133,22 +106,13 @@ module.exports = (grunt) ->
 						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.gif'
 						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.png'
 					]
-					dest: './build'
-			'static-test':
-				options:
-					args: ['-q']
-					src: [
-						'./src/static/*'
-						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.gif'
-						'node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/*.png'
-					]
-					dest: './stage'
-			'deploy-test':
+					dest: "./targets/#{target}"
+			deploy:
 				options:
 					syncDest: true
 					syncDestIgnoreExcl: true
-					src: "./stage/"
-					dest: "#{testHost}:#{testBaseDir}"
+					src: "./targets/#{target}/"
+					dest: "#{tgt.user}@#{tgt.host}:#{tgt.baseDir}"
 
 		watch:
 			options:
@@ -156,52 +120,44 @@ module.exports = (grunt) ->
 				livereload: true
 			coffee:
 				files: ['src/app/**/*.coffee', 'src/templates/**/*']
-				tasks: ['browserify:build-development']
+				tasks: ['browserify:build']
 			templates:
 				files: ['src/templates/**/*.jade']
 				tasks: ['jade:build']
 			index:
 				files: ['src/templates/index.jade']
-				tasks: ['jade:index-development']
+				tasks: ['jade:index']
 			styles:
 				files: ['src/stylesheets/**/*.styl']
-				tasks: ['build-stylesheet-development']
+				tasks: ['build-stylesheet']
 			static:
 				files: ['src/static/**/*']
-				tasks: ['rsync:static-development']
+				tasks: ['rsync:static']
 			dependencies:
 				files: [
 					'node_modules/timbuctoo-edit-forms/src/**/*'
 					'!node_modules/timbuctoo-edit-forms/src/data/**/*'
 				]
-				tasks: ['browserify:build-development']
+				tasks: ['browserify:build']
 
 	grunt.registerTask 'default', ['watch']
 
-	for env in ['test', 'development']
-		grunt.registerTask "build-stylesheet-#{env}", [
-			"stylus:build-#{env}"
-			"stylus:build-faceted-search-#{env}"
-			"concat:faceted-search-css-#{env}"
-			"concat:select2-css"
-		]
+	grunt.registerTask "build-stylesheet", [
+		"stylus:build"
+		"stylus:build-faceted-search"
+		"concat:faceted-search-css"
+		"concat:select2"
+	]
 	
 	grunt.registerTask 'build', [
 		'jade:build'
-		'jade:index-development'
-		'browserify:build-development'
-		'build-stylesheet-development'
-		'rsync:static-development'
+		'jade:index'
+		'browserify:build'
+		'build-stylesheet'
+		'rsync:static'
 	]
-	grunt.registerTask 'build-test', [
-		'jade:build'
-		'jade:index-test'
-		'browserify:build-test'
-		'build-stylesheet-test'
-		"concat:select2-css-test"
-		'rsync:static-test'
-	]
-	grunt.registerTask 'deploy-test', ['build-test', 'rsync:deploy-test']
+
+	grunt.registerTask 'deploy', ['build', 'rsync:deploy']
 	
-	grunt.registerTask 'server', ['build', 'express', 'watch']
+	grunt.registerTask 'server',      ['build', 'express',         'watch']
 	grunt.registerTask 'server:open', ['build', 'express', 'open', 'watch']

@@ -1,5 +1,5 @@
 node_modules
 .project
-build
 stage
 src/templates/.templates.js
+targets/
