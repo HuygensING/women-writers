@@ -8,7 +8,11 @@ module.exports = (grunt) ->
 	targets = grunt.file.readYAML 'config/targets.yaml'
 
 	# TODO: Parametrize!
-	tgt = targets[target]
+	tgt  = targets[target]
+	tgt ?=
+		host: null
+		user: null
+		baseDir: null
 
 	console.log "Target is #{target}", tgt
 

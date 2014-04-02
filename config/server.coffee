@@ -6,7 +6,7 @@ express = require 'express'
 browserify = require 'browserify-middleware'
 jade = require 'jade'
 
-buildDir = "#{__dirname}/../build"
+buildDir = "#{__dirname}/../targets/development"
 
 proxy = httpProxy.createProxyServer
 	target: 'http://demo17.huygens.knaw.nl'
