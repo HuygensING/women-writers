@@ -5,6 +5,8 @@ config = require '../config.coffee'
 workDescription = require '../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
+StatusIndicator = require './status'
+
 {searchQuery, simpleSearch} = require '../helpers/search'
 
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
@@ -21,19 +23,25 @@ class Work extends Backbone.View
 	]
 	
 	events:
-		'click .save': 'saveWork'
-	
-	saveWork: ->
-		@form.save()
-
-	events:
 		'click .save': 'save'
+		'click .cancel': 'cancel'
+	
+	save: ->
+		status = new StatusIndicator
+
+		result = @form.save()
+
+		status.show().loading()
+
+		result.error => status.show().error()
+		result.done =>
+			@model.fetch().done => status.show().success()
 
 	initialize: ->
-		@render() if @model?
-		
-	save: ->
-		@form.save()
+		@render()
+		@model.on 'sync', =>
+			console.log "Synced model", @model.attributes
+			@render()
 
 	render: ->
 		@$el.html @template work: @model.attributes
