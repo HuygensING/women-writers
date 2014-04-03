@@ -6,6 +6,7 @@ config = require '../config.coffee'
 personDescription = require '../../data/metadata/wwperson.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
+{searchQuery, simpleSearch} = require '../helpers/search'
 
 class Person extends Backbone.View
 	className: 'person-edit'
@@ -13,6 +14,8 @@ class Person extends Backbone.View
 
 	relationTypes: [
 		'hasLanguage'
+		'isMemberOf'
+		'isCollaboratorOf'
 	]
 
 	events:
@@ -50,6 +53,16 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasLanguage'],
 			title: 'Languages'
 			options: config.get 'languages'
+			
+		_.extend schema['timbuctoo-relation.isMemberOf'],
+			title: 'Memberships'
+			options: config.get 'collectives'
+			autocomplete: (value) -> simpleSearch value, 'wwcollective', 200
+
+		_.extend schema['timbuctoo-relation.isCollaboratorOf'],
+			title: 'Collaborations'
+			options: config.get 'persons'
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 
 		@form = new Form
 			className: 'timbuctoo-form'
@@ -68,6 +81,8 @@ class Person extends Backbone.View
 				'types'
 				'livedIn'
 				'children'
+				'timbuctoo-relation.isMemberOf'
+				'timbuctoo-relation.isCollaboratorOf'
 				'bibliography'
 				'educations'
 				'professions'
