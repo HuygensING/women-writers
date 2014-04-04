@@ -145,5 +145,7 @@ class Work extends Backbone.View
 					]
 				}
 			]
+			
+		@$('.form').html @form.el
 
 module.exports = Work
