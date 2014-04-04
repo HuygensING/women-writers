@@ -13,7 +13,7 @@ class Person extends Backbone.View
 	template: require '../../templates/views/person.jade'
 
 	relationTypes: [
-		'hasLanguage'
+		'hasPersonLanguage'
 		'isMemberOf'
 		'isCollaboratorOf'
 	]
@@ -50,7 +50,7 @@ class Person extends Backbone.View
 					targetType: relationType.targetTypeName
 					relationTypeId: relationType._id
 
-		_.extend schema['timbuctoo-relation.hasLanguage'],
+		_.extend schema['timbuctoo-relation.hasPersonLanguage'],
 			title: 'Languages'
 			options: config.get 'languages'
 			
@@ -77,7 +77,7 @@ class Person extends Backbone.View
 				'gender'
 				'birthDate'
 				'deathDate'
-				'timbuctoo-relation.hasLanguage'
+				'timbuctoo-relation.hasPersonLanguage'
 				'types'
 				'livedIn'
 				'children'

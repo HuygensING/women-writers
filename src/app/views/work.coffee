@@ -17,7 +17,7 @@ class Work extends Backbone.View
 	template: require '../../templates/views/work.jade'
 
 	relationTypes: [
-		'hasLanguage'
+		'hasWorkLanguage'
 		'hasPublishLocation'
 		'isCreatedBy'
 	]
@@ -75,7 +75,7 @@ class Work extends Backbone.View
 					targetType: relationType.targetTypeName
 					relationTypeId: relationType._id
 
-		_.extend schema['timbuctoo-relation.hasLanguage'],
+		_.extend schema['timbuctoo-relation.hasWorkLanguage'],
 			title: 'Language'
 			options: config.get 'languages'
 			onlyOne: true
@@ -127,7 +127,7 @@ class Work extends Backbone.View
 						'tempCreator'
 						'timbuctoo-relation.isCreatedBy'
 						'tempLanguage'
-						'timbuctoo-relation.hasLanguage'
+						'timbuctoo-relation.hasWorkLanguage'
 						'tempOrigin'
 						'timbuctoo-relation.hasPublishLocation'
 						'edition'
@@ -145,7 +145,5 @@ class Work extends Backbone.View
 					]
 				}
 			]
-
-		@$('.form').html @form.el
 
 module.exports = Work
