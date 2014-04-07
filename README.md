@@ -6,18 +6,30 @@ This app allows Women's Writers participants to edit the data stored in the Timb
 
 You did this already:
 
-	$ git clone ssh://hi7.huygens.knaw.nl/data/git/neww-edit.git 
+	$ git clone ssh://hi7.huygens.knaw.nl/data/git/neww-edit.git
 
-So:
+Now:
 
-	$ cd neww-edit
-	$ npm install
-	$ cd ../edit-forms; sudo npm link; cd -
+	$ git clone ssh://hi7.huygens.knaw.nl/data/git/edit-forms.git
+
+	$ cd edit-forms
+
+	$ sudo npm install
+
+	$ sudo npm link
+
+	$ cd ../neww-edit
+
 	$ npm link timbuctoo-edit-forms
-	$ grunt build
+
+	$ npm install
+
+	$ cd node_modules/grunt-express
+
 	$ grunt server:open
 
 ## Deploying
+
 	$ ssh-copy-id {user}@{server} (should be done only once)
 	$ grunt deploy --target={target}
  
