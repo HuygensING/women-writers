@@ -40,7 +40,6 @@ class Work extends Backbone.View
 	initialize: ->
 		@render()
 		@model.on 'sync', =>
-			console.log "Synced model", @model.attributes
 			@render()
 
 	render: ->
@@ -91,13 +90,15 @@ class Work extends Backbone.View
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 
+		#reception of
 		workReceptions = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
+		#TODO: received in
 
 		autocompleteFactory = (relationType) ->
+			# TODO inverse name for received in
 			type = _.findWhere workReceptions, (r) -> r.regularName is relationType
 			typeString = type.derivedTargetType
 			# Only search for documents from this particular VRE
-			typeString = 'wwdocument' if typeString is 'document'
 
 			query = (value) -> simpleSearch value, typeString, 5000
 

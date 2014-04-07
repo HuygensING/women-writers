@@ -5,6 +5,9 @@ config = require '../config.coffee'
 
 personDescription = require '../../data/metadata/wwperson.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
+
+StatusIndicator = require './status'
+
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 {searchQuery, simpleSearch} = require '../helpers/search'
 
@@ -23,9 +26,20 @@ class Person extends Backbone.View
 
 	initialize: ->
 		@render() if @model?
+		
+		@model.on 'sync', =>
+			@render()
 
 	savePerson: ->
-		@form.save()
+		status = new StatusIndicator
+
+		result = @form.save()
+
+		status.show().loading()
+
+		result.error => status.show().error()
+		result.done =>
+			@model.fetch().done => status.show().success()
 
 	render: ->
 		@$el.html @template person: @model.attributes
