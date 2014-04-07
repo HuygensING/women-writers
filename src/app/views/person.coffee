@@ -47,8 +47,9 @@ class Person extends Backbone.View
 				type: 'Relation'
 				relationTypeDescription:
 					relationTypeVariation: config.get 'relationTypeVariation'
-					targetType: relationType.targetTypeName
 					relationTypeId: relationType._id
+					sourceType: relationType.sourceTypeName
+					targetType: relationType.targetTypeName
 
 		_.extend schema['timbuctoo-relation.hasPersonLanguage'],
 			title: 'Languages'
