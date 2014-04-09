@@ -7,7 +7,9 @@ Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
 StatusIndicator = require './status'
 
-{searchQuery, simpleSearch} = require '../helpers/search'
+{simpleSearch} = require '../helpers/search'
+DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
+DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
@@ -15,6 +17,8 @@ StatusIndicator = require './status'
 class Work extends Backbone.View
 	className: 'work-edit'
 	template: require '../../templates/views/work.jade'
+	receptionOf: 'timbuctoo-relation.receptionOf'
+	receivedIn: 'timbuctoo-relation.receivedIn'
 
 	relationTypes: [
 		'hasWorkLanguage'
@@ -90,27 +94,33 @@ class Work extends Backbone.View
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 
-		#reception of
-		workReceptions = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
-		#TODO: received in
-
-		autocompleteFactory = (relationType) ->
-			# TODO inverse name for received in
-			type = _.findWhere workReceptions, (r) -> r.regularName is relationType
-			typeString = type.derivedTargetType
+		# reception of
+		receptionOfTypes = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
+		# received in 
+		receivedInTypes = _.filter config.get('receptions'), (r) -> r.baseTargetType is 'document'
+		
+		autocompleteFactory = (relatedType) ->
 			# Only search for documents from this particular VRE
-
-			query = (value) -> simpleSearch value, typeString, 5000
-
+			query = (value) -> simpleSearch value, relatedType, 5000
+			
 			query
 
-		schema['timbuctoo-relation.receptions'] =
+		schema[@receptionOf] =
 			type: 'DynamicRelations'
-			title: 'Receptions'
-			relationTypes: workReceptions
+			title: 'Reception of'
+			relationTypes: receptionOfTypes
 			relationTypeVariation: config.get 'relationTypeVariation'
 			relationName: 'reception'
-			autocompleteFactory: autocompleteFactory
+			relationTypeHelper: new DynamicRelationTypeHelper autocompleteFactory
+			
+		
+		schema[@receivedIn] =
+			type: 'DynamicRelations'
+			title: 'Received in'
+			relationTypes: receivedInTypes
+			relationTypeVariation: config.get 'relationTypeVariation'
+			relationName: 'reception'
+			relationTypeHelper: new DynamicInverseRelationTypeHelper autocompleteFactory
 
 		@form = new Form
 			className: 'timbuctoo-form'
@@ -142,7 +152,8 @@ class Work extends Backbone.View
 				{
 					legend: 'Receptions'
 					fields: [
-						'timbuctoo-relation.receptions'
+						@receptionOf
+						@receivedIn
 					]
 				}
 			]
