@@ -3,11 +3,11 @@ BaseSearch = require './base-search.coffee'
 
 config = require '../config.coffee'
 
-class WorkSearch extends BaseSearch
-	resultsTemplate: require '../../templates/views/work-search-results.jade'
+class DocumentSearch extends BaseSearch
+	resultsTemplate: require '../../templates/views/document-search-results.jade'
 	queryOptions:
 		term: '*'
-		typeString: config.get 'workTypeString'
+		typeString: config.get 'documentTypeString'
 		resultRows: 25
 	facetNameMap:
 		dynamic_s_date: 'Date'
@@ -24,4 +24,4 @@ class WorkSearch extends BaseSearch
 		super
 		@render()
 
-module.exports = WorkSearch
+module.exports = DocumentSearch

@@ -1,0 +1,5 @@
+h3. All documents
+ul.documents
+	- each document in documents
+		li.document
+			a(href="/document/#{document.attributes._id}")= document.attributes.title

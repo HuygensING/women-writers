@@ -2,12 +2,12 @@ baseUrl: http://localhost:9000
 searchPath: /api/search
 facetedSearchBaseUrl: http://localhost:9000/api
 personsRootUrl: /domain/wwpersons
-worksRootUrl: /domain/wwdocuments
+documentsRootUrl: /domain/wwdocuments
 VRE_ID: 'WomenWriters'
 relationTypeVariation: 'wwrelation'
 
 personTypeString: 'wwperson'
-workTypeString: 'wwdocument'
+documentTypeString: 'wwdocument'
 
 userInfoPath: /api/system/users/me
 userLoginUrl: https://secure.huygens.knaw.nl/saml2/login

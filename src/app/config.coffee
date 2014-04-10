@@ -32,14 +32,14 @@ class Config extends Backbone.Model
 	personViewUrl: (id) ->
 		@get('baseUrl') + '/person/' + id
 
-	allWorksUrl: ->
-		@get('facetedSearchBaseUrl') + @get('worksRootUrl')
+	allDocumentsUrl: ->
+		@get('facetedSearchBaseUrl') + @get('documentsRootUrl')
 
-	workUrl: (id) ->
-		@allWorksUrl() + '/' + id
+	documentUrl: (id) ->
+		@allDocumentsUrl() + '/' + id
 
-	workViewUrl: (id) ->
-		@get('baseUrl') + '/work/' + id
+	documentViewUrl: (id) ->
+		@get('baseUrl') + '/document/' + id
 
 	userInfoUrl: ->
 		@get('baseUrl') + @get('userInfoPath')

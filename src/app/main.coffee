@@ -7,7 +7,7 @@ App = require './app.coffee'
 MainRouter = require './routers/main.coffee'
 
 PersonsCollection = require './collections/persons.coffee'
-WorksCollection = require './collections/works.coffee'
+DocumentsCollection = require './collections/documents.coffee'
 
 {searchQuery} = require './helpers/search'
 
@@ -30,7 +30,7 @@ bootstrap = ->
 		relationTypes = {}
 		for t in data
 			relationTypes[t.regularName] = t
-		config.set workRelationTypes: relationTypes
+		config.set documentRelationTypes: relationTypes
 	.then ->
 		searchQuery
 			query:

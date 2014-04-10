@@ -14,10 +14,10 @@ PersonForm = require './views/person.coffee'
 PersonOverview = require './views/person-overview.coffee'
 PersonSearchView = require './views/person-search.coffee'	
 
-Work = require './models/work.coffee'
-WorkForm = require './views/work.coffee'
-WorkOverview = require './views/work-overview.coffee'
-WorkSearchView = require './views/work-search.coffee'	
+Document = require './models/document.coffee'
+DocumentForm = require './views/document.coffee'
+DocumentOverview = require './views/document-overview.coffee'
+DocumentSearchView = require './views/document-search.coffee'	
 
 class App extends Backbone.View
 	template: baseTemplate
@@ -39,16 +39,16 @@ class App extends Backbone.View
 		@$('#search').hide()
 		@$('#view').show()
 	
-	showWorkOverview: ->
-		new WorkOverview el: '#view'
+	showWOverview: ->
+		new DocumentOverview el: '#view'
 		@$('#search').hide()
 		@$('#view').show()
 
-	showWorkForm: (id) ->
-		work = new Work _id: id
-		work.fetch().done =>
-			view = new WorkForm
-				model: work
+	showDocumentForm: (id) ->
+		document = new Document _id: id
+		document.fetch().done =>
+			view = new DocumentForm
+				model: document
 			@switchView view
 		@$('#search').hide()
 		@$('#view').show()
@@ -58,16 +58,16 @@ class App extends Backbone.View
 			el: '#search .persons'
 		@$('#search').show()
 		@$('#view').hide()
-		@workSearch?.$el.fadeOut 75, =>
+		@documentSearch?.$el.fadeOut 75, =>
 			@personSearch.$el.fadeIn 75
 
-	showWorkSearch: ->
-		@workSearch ?= new WorkSearchView
-			el: '#search .works'
+	showDocumentSearch: ->
+		@documentSearch ?= new DocumentSearchView
+			el: '#search .documents'
 		@$('#search').show()
 		@$('#view').hide()
 		@personSearch?.$el.fadeOut 75, =>
-			@workSearch.$el.fadeIn 75
+			@documentSearch.$el.fadeIn 75
 
 	switchView: (view) ->
 		@currentView?.remove()

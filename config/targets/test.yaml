@@ -2,12 +2,12 @@ baseUrl: http://test.resources.huygens.knaw.nl/womenwriters
 searchPath: /api/search
 facetedSearchBaseUrl: http://test.resources.huygens.knaw.nl/womenwriters/api
 personsRootUrl: /domain/wwpersons
-worksRootUrl: /domain/wwdocuments
+documentsRootUrl: /domain/wwdocuments
 VRE_ID: 'WomenWriters'
 relationTypeVariation: 'wwrelation'
 
 personTypeString: 'wwperson'
-workTypeString: 'wwdocument'
+documentTypeString: 'wwdocument'
 
 userInfoPath: /api/system/users/me
 userLoginUrl: https://secure.huygens.knaw.nl/saml2/login

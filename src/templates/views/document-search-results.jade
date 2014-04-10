@@ -1,5 +1,5 @@
 h4
-	= response.numFound + (response.numFound != 1 ? ' works' : ' work') + ' found'
+	= response.numFound + (response.numFound != 1 ? ' documents' : ' document') + ' found'
 	.order-by
 		span Order by
 		if response.sortableFields
@@ -17,6 +17,6 @@ h4
 	span.next Next &raquo;
 
 ul
-	- each work in response.results
+	- each document in response.results
 		li
-			a(href=config.workViewUrl(work._id))= work.title
+			a(href=config.documentViewUrl(document._id))= document.title

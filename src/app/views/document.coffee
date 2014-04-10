@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 
 config = require '../config.coffee'
 
-workDescription = require '../../data/metadata/wwdocument.json'
+documentDescription = require '../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
 StatusIndicator = require './status'
@@ -14,9 +14,9 @@ DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/help
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
 
-class Work extends Backbone.View
-	className: 'work-edit'
-	template: require '../../templates/views/work.jade'
+class Document extends Backbone.View
+	className: 'document-edit'
+	template: require '../../templates/views/document.jade'
 	receptionOf: 'timbuctoo-relation.receptionOf'
 	receivedIn: 'timbuctoo-relation.receivedIn'
 
@@ -47,8 +47,8 @@ class Work extends Backbone.View
 			@render()
 
 	render: ->
-		@$el.html @template work: @model.attributes
-		schema = createTimbuctooSchema workDescription,
+		@$el.html @template document: @model.attributes
+		schema = createTimbuctooSchema documentDescription,
 			exclude: [
 				/^[_@^]/
 				'DELETED'
@@ -68,7 +68,8 @@ class Work extends Backbone.View
 		schema['notes'].type = 'TextArea'
 
 		for type in @relationTypes
-			relationType = config.get('workRelationTypes')[type]
+		
+			relationType = config.get('documentRelationTypes')[type]
 
 			schema["timbuctoo-relation.#{type}"] =
 				type: 'Relation'
@@ -160,4 +161,4 @@ class Work extends Backbone.View
 			
 		@$('.form').html @form.el
 
-module.exports = Work
+module.exports = Document

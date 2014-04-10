@@ -5,8 +5,8 @@ class MainRouter extends Backbone.Router
 	routes:
 		'person(/)':		'showPersonSearch'
 		'person/:id':		'showPersonForm'
-		'work(/)':			'showWorkSearch'
-		'work/:id':			'showWorkForm'
+		'document(/)':			'showDocumentSearch'
+		'document/:id':			'showDocumentForm'
 		'':							'home'
 
 	initialize: (options) ->
