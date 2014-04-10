@@ -95,9 +95,9 @@ class Work extends Backbone.View
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 
 		# reception of
-		receptionOfTypes = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
+		receivedInTypes = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
 		# received in 
-		receivedInTypes = _.filter config.get('receptions'), (r) -> r.baseTargetType is 'document'
+		receptionOfTypes = _.filter config.get('receptions'), (r) -> r.baseTargetType is 'document'
 		
 		autocompleteFactory = (relatedType) ->
 			# Only search for documents from this particular VRE
@@ -111,7 +111,7 @@ class Work extends Backbone.View
 			relationTypes: receptionOfTypes
 			relationTypeVariation: config.get 'relationTypeVariation'
 			relationName: 'reception'
-			relationTypeHelper: new DynamicRelationTypeHelper autocompleteFactory
+			relationTypeHelper: new DynamicInverseRelationTypeHelper autocompleteFactory
 			
 		
 		schema[@receivedIn] =
@@ -120,7 +120,7 @@ class Work extends Backbone.View
 			relationTypes: receivedInTypes
 			relationTypeVariation: config.get 'relationTypeVariation'
 			relationName: 'reception'
-			relationTypeHelper: new DynamicInverseRelationTypeHelper autocompleteFactory
+			relationTypeHelper: new DynamicRelationTypeHelper autocompleteFactory
 
 		@form = new Form
 			className: 'timbuctoo-form'
