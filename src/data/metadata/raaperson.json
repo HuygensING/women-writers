@@ -43,15 +43,18 @@
   "^variations" : {
     "type" : "List of (String)"
   },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
+  },
   "gender" : {
     "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
     "type" : "String"
   },
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
   "birthDate" : {
     "type" : "Datable"
+  },
+  "@relationCount" : {
+    "type" : "int"
   },
   "types" : {
     "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],

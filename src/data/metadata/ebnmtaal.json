@@ -29,11 +29,11 @@
   "^rev" : {
     "type" : "int"
   },
-  "value" : {
-    "type" : "String"
-  },
   "ID" : {
     "value" : "_id",
+    "type" : "String"
+  },
+  "value" : {
     "type" : "String"
   },
   "@relations" : {
@@ -44,6 +44,9 @@
   },
   "taal" : {
     "type" : "String"
+  },
+  "@relationCount" : {
+    "type" : "int"
   },
   "DELETED" : {
     "value" : "^deleted",

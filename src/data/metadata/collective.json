@@ -46,11 +46,14 @@
     "value" : "_id",
     "type" : "String"
   },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
   },
-  "^variations" : {
-    "type" : "List of (String)"
+  "@relationCount" : {
+    "type" : "int"
   },
   "DELETED" : {
     "value" : "^deleted",

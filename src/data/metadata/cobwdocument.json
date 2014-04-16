@@ -1,5 +1,9 @@
 {
-  "reminders" : {
+  "edition" : {
+    "type" : "String"
+  },
+  "documentType" : {
+    "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "PERIODICAL", "PICTURE", "PUBLICITY", "WORK" ],
     "type" : "String"
   },
   "PID" : {
@@ -9,25 +13,28 @@
   "^deleted" : {
     "type" : "boolean"
   },
-  "origFilename" : {
+  "rights" : {
+    "type" : "String"
+  },
+  "tempNewwId" : {
     "type" : "String"
   },
   "^created" : {
     "type" : "Change"
   },
-  "endDate" : {
-    "type" : "String"
-  },
-  "beginDate" : {
-    "type" : "String"
+  "date" : {
+    "type" : "Datable"
   },
   "^modified" : {
     "type" : "Change"
   },
-  "related" : {
-    "type" : "XRelated[]"
+  "title" : {
+    "type" : "String"
   },
   "_id" : {
+    "type" : "String"
+  },
+  "description" : {
     "type" : "String"
   },
   "ID" : {
@@ -37,11 +44,8 @@
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
   },
-  "types" : {
+  "tempLanguages" : {
     "type" : "List of (String)"
-  },
-  "periodDescription" : {
-    "type" : "String"
   },
   "DELETED" : {
     "value" : "^deleted",
@@ -58,23 +62,21 @@
     "value" : "^roles",
     "type" : "String"
   },
-  "nameEng" : {
+  "links" : {
+    "type" : "List of (Link)"
+  },
+  "reference" : {
     "type" : "String"
   },
-  "literature" : {
+  "resourceType" : {
+    "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
     "type" : "String"
   },
-  "history" : {
-    "type" : "String"
-  },
-  "nameNld" : {
+  "resourceFormat" : {
     "type" : "String"
   },
   "^rev" : {
     "type" : "int"
-  },
-  "madeBy" : {
-    "type" : "String"
   },
   "^variations" : {
     "type" : "List of (String)"

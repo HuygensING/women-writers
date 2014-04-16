@@ -45,6 +45,9 @@
   "latitude" : {
     "type" : "String"
   },
+  "@relationCount" : {
+    "type" : "int"
+  },
   "DELETED" : {
     "value" : "^deleted",
     "type" : "String"

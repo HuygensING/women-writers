@@ -1,17 +1,9 @@
 {
-  "VARIATIONS" : {
-    "value" : "^variations",
-    "type" : "String"
-  },
   "edition" : {
     "type" : "String"
   },
   "documentType" : {
     "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "PERIODICAL", "PICTURE", "PUBLICITY", "WORK" ],
-    "type" : "String"
-  },
-  "ROLES" : {
-    "value" : "^roles",
     "type" : "String"
   },
   "PID" : {
@@ -27,33 +19,17 @@
   "^created" : {
     "type" : "Change"
   },
-  "links" : {
-    "type" : "List of (Link)"
-  },
   "date" : {
     "type" : "Datable"
-  },
-  "reference" : {
-    "type" : "String"
   },
   "^modified" : {
     "type" : "Change"
   },
-  "resourceType" : {
-    "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
-    "type" : "String"
-  },
   "title" : {
-    "type" : "String"
-  },
-  "resourceFormat" : {
     "type" : "String"
   },
   "_id" : {
     "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
   },
   "description" : {
     "type" : "String"
@@ -61,9 +37,6 @@
   "ID" : {
     "value" : "_id",
     "type" : "String"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
   },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
@@ -74,6 +47,36 @@
   },
   "^pid" : {
     "type" : "String"
+  },
+  "VARIATIONS" : {
+    "value" : "^variations",
+    "type" : "String"
+  },
+  "ROLES" : {
+    "value" : "^roles",
+    "type" : "String"
+  },
+  "links" : {
+    "type" : "List of (Link)"
+  },
+  "reference" : {
+    "type" : "String"
+  },
+  "resourceType" : {
+    "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
+    "type" : "String"
+  },
+  "resourceFormat" : {
+    "type" : "String"
+  },
+  "^rev" : {
+    "type" : "int"
+  },
+  "^variations" : {
+    "type" : "List of (String)"
+  },
+  "@relationCount" : {
+    "type" : "int"
   },
   "^roles" : {
     "type" : "List of (Role)"

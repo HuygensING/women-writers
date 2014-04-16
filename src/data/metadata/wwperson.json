@@ -8,11 +8,11 @@
   "bibliography" : {
     "type" : "String"
   },
-  "tempSpouse" : {
-    "type" : "String"
-  },
   "^modified" : {
     "type" : "Change"
+  },
+  "tempSpouse" : {
+    "type" : "String"
   },
   "tempMemberships" : {
     "type" : "String"
@@ -57,6 +57,9 @@
   "^rev" : {
     "type" : "int"
   },
+  "tempOldId" : {
+    "type" : "String"
+  },
   "personalSituation" : {
     "type" : "String"
   },
@@ -73,15 +76,15 @@
   "livedIn" : {
     "type" : "String"
   },
+  "^created" : {
+    "type" : "Change"
+  },
   "children" : {
     "value" : [ "UNKNOWN", "NO", "YES" ],
     "type" : "String"
   },
   "tempPublishingLanguages" : {
     "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
   },
   "maritalStatus" : {
     "type" : "String"
@@ -146,10 +149,13 @@
   "tempDeathPlace" : {
     "type" : "String"
   },
-  "tempPlaceOfBirth" : {
-    "type" : "String"
+  "@relationCount" : {
+    "type" : "int"
   },
   "notes" : {
+    "type" : "String"
+  },
+  "tempPlaceOfBirth" : {
     "type" : "String"
   },
   "^roles" : {

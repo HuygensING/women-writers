@@ -178,6 +178,9 @@
   "bewaarplaats_en_signatuur" : {
     "type" : "Object"
   },
+  "@relationCount" : {
+    "type" : "int"
+  },
   "titel_hs_inc_form" : {
     "type" : "String[]"
   },

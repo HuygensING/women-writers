@@ -94,6 +94,9 @@
   "scan" : {
     "type" : "String"
   },
+  "@relationCount" : {
+    "type" : "int"
+  },
   "^roles" : {
     "type" : "List of (Role)"
   }

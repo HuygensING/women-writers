@@ -1,0 +1,23 @@
+{
+  "id" : {
+    "type" : "String"
+  },
+  "rev" : {
+    "type" : "int"
+  },
+  "accepted" : {
+    "type" : "boolean"
+  },
+  "path" : {
+    "type" : "String"
+  },
+  "displayName" : {
+    "type" : "String"
+  },
+  "type" : {
+    "type" : "String"
+  },
+  "relationId" : {
+    "type" : "String"
+  }
+}

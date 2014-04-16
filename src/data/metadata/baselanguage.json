@@ -45,6 +45,9 @@
   "core" : {
     "type" : "boolean"
   },
+  "@relationCount" : {
+    "type" : "int"
+  },
   "DELETED" : {
     "value" : "^deleted",
     "type" : "String"

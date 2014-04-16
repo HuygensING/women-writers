@@ -37,17 +37,20 @@
     "value" : "_id",
     "type" : "String"
   },
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
   "^variations" : {
     "type" : "List of (String)"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
   },
   "longitude" : {
     "type" : "String"
   },
   "latitude" : {
     "type" : "String"
+  },
+  "@relationCount" : {
+    "type" : "int"
   },
   "notes" : {
     "type" : "String"

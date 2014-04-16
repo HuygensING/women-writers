@@ -56,6 +56,9 @@
   "birthDate" : {
     "type" : "Datable"
   },
+  "@relationCount" : {
+    "type" : "int"
+  },
   "types" : {
     "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
     "type" : "List of (String)"

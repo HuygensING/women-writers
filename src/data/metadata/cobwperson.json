@@ -1,7 +1,4 @@
 {
-  "reminders" : {
-    "type" : "String"
-  },
   "PID" : {
     "value" : "^pid",
     "type" : "String"
@@ -9,23 +6,20 @@
   "^deleted" : {
     "type" : "boolean"
   },
-  "origFilename" : {
+  "tempNewwId" : {
     "type" : "String"
   },
   "^created" : {
     "type" : "Change"
   },
-  "endDate" : {
-    "type" : "String"
-  },
-  "beginDate" : {
-    "type" : "String"
+  "deathDate" : {
+    "type" : "Datable"
   },
   "^modified" : {
     "type" : "Change"
   },
-  "related" : {
-    "type" : "XRelated[]"
+  "nationalities" : {
+    "type" : "List of (String)"
   },
   "_id" : {
     "type" : "String"
@@ -34,14 +28,22 @@
     "value" : "_id",
     "type" : "String"
   },
+  "gender" : {
+    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
+    "type" : "String"
+  },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
   },
+  "birthDate" : {
+    "type" : "Datable"
+  },
   "types" : {
+    "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
     "type" : "List of (String)"
   },
-  "periodDescription" : {
-    "type" : "String"
+  "tempNames" : {
+    "type" : "List of (String)"
   },
   "DELETED" : {
     "value" : "^deleted",
@@ -58,23 +60,15 @@
     "value" : "^roles",
     "type" : "String"
   },
-  "nameEng" : {
-    "type" : "String"
+  "links" : {
+    "type" : "List of (Link)"
   },
-  "literature" : {
-    "type" : "String"
-  },
-  "history" : {
-    "type" : "String"
-  },
-  "nameNld" : {
-    "type" : "String"
+  "names" : {
+    "value" : [ ],
+    "type" : "COBWPerson.Names"
   },
   "^rev" : {
     "type" : "int"
-  },
-  "madeBy" : {
-    "type" : "String"
   },
   "^variations" : {
     "type" : "List of (String)"

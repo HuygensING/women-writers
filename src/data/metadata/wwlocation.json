@@ -58,6 +58,9 @@
   "longitude" : {
     "type" : "String"
   },
+  "@relationCount" : {
+    "type" : "int"
+  },
   "latitude" : {
     "type" : "String"
   },
