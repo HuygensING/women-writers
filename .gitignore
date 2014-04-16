@@ -3,3 +3,4 @@ node_modules
 stage
 src/templates/.templates.js
 targets/
+build/
