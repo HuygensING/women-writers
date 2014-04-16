@@ -16,9 +16,14 @@ class Person extends Backbone.View
 	template: require '../../templates/views/person.jade'
 
 	relationTypes: [
+		'hasBirthPlace'
+		'hasDeathPlace'
 		'hasPersonLanguage'
-		'isMemberOf'
+		'hasPseudonym'
 		'isCollaboratorOf'
+		'isMemberOf'
+		'isSpouseOf'
+		'isPseudonymOf'
 	]
 
 	events:
@@ -64,10 +69,27 @@ class Person extends Backbone.View
 					relationTypeId: relationType._id
 					sourceType: relationType.sourceTypeName
 					targetType: relationType.targetTypeName
+					
+		_.extend schema['timbuctoo-relation.hasBirthPlace'],
+			title: 'Birth place'
+			options: config.get 'locations'
+			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
+			onlyOne: true
+			
+		_.extend schema['timbuctoo-relation.hasDeathPlace'],
+			title: 'Death place'
+			options: config.get 'locations'
+			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
+			onlyOne: true
 
 		_.extend schema['timbuctoo-relation.hasPersonLanguage'],
 			title: 'Languages'
 			options: config.get 'languages'
+			
+		_.extend schema['timbuctoo-relation.isSpouseOf'],
+			title: 'Spouses'
+			options: config.get 'persons'
+			autocomplete: (value) -> simpleSearch value, 'wwperson'
 			
 		_.extend schema['timbuctoo-relation.isMemberOf'],
 			title: 'Memberships'
@@ -78,7 +100,17 @@ class Person extends Backbone.View
 			title: 'Collaborations'
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
-
+	
+		_.extend schema['timbuctoo-relation.hasPseudonym'],
+			title: 'Has Pseudonyms'
+			options: config.get 'persons'
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
+			
+		_.extend schema['timbuctoo-relation.isPseudonymOf'],
+			title: 'Is Pseudonym of'
+			options: config.get 'persons'
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
+			
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
@@ -94,8 +126,10 @@ class Person extends Backbone.View
 				'birthDate'
 				'tempBirthPlace'
 				'tempPlaceOfBirth'
+				'timbuctoo-relation.hasBirthPlace'
 				'deathDate'
 				'tempDeathPlace'
+				'timbuctoo-relation.hasDeathPlace'
 				'tempLanguages'
 				'tempMotherTongue'
 				'tempPublishingLanguages'
@@ -106,10 +140,14 @@ class Person extends Backbone.View
 				'tempPsChildren'
 				'children'
 				'tempSpouse'
+				'timbuctoo-relation.isSpouseOf'
 				'tempMemberships'
 				'timbuctoo-relation.isMemberOf'
 				'tempCollaborations'
 				'timbuctoo-relation.isCollaboratorOf'
+				'tempPseudonyms'
+				'timbuctoo-relation.hasPseudonym'
+				'timbuctoo-relation.isPseudonymOf'
 				'bibliography'
 				'educations'
 				'professions'

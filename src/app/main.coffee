@@ -22,7 +22,11 @@ bootstrap = ->
 	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
 		relationTypes = {}
 		for t in data
-			relationTypes[t.regularName] = t
+			if t.sourceTypeName is 'person'
+				relationTypes[t.regularName] = t
+			# should not be else if, because some relations have person as source and target and should be added twice, like isPseudonymOf and hasPseudonym
+			if t.targetTypeName is 'person'
+				relationTypes[t.inverseName] = t
 		config.set personRelationTypes: relationTypes
 	.then ->
 		$.getJSON config.get('baseUrl') + '/api/system/relationtypes?iname=wwdocument'
