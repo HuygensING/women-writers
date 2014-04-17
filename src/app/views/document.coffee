@@ -75,25 +75,28 @@ class Document extends Backbone.View
 				type: 'Relation'
 				relationTypeDescription:
 					relationTypeVariation: config.get 'relationTypeVariation'
-					sourceType: relationType.sourceTypeName
-					targetType: relationType.targetTypeName
-					relationTypeId: relationType._id
+					baseSourceType: relationType.sourceTypeName
+					baseTargetType: relationType.targetTypeName
+					typeId: relationType._id
 
 		_.extend schema['timbuctoo-relation.hasWorkLanguage'],
 			title: 'Language'
 			options: config.get 'languages'
 			onlyOne: true
+			relationTypeHelper: new DynamicRelationTypeHelper()
 
 		_.extend schema['timbuctoo-relation.hasPublishLocation'],
 			title: 'Publish location'
 			options: config.get 'locations'
 			onlyOne: true
+			relationTypeHelper: new DynamicRelationTypeHelper()
 
 		_.extend schema['timbuctoo-relation.isCreatedBy'],
 			title: 'Creator'
 			options: config.get 'persons'
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
+			relationTypeHelper: new DynamicRelationTypeHelper()
 
 		# reception of
 		receivedInTypes = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
