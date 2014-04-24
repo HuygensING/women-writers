@@ -26,7 +26,6 @@ class Person extends Backbone.View
 		'isCreatorOf'
 		'isCollaboratorOf'
 		'isMemberOf'
-		'isSpouseOf'
 		'isPseudonymOf'
 	]
 
@@ -62,6 +61,8 @@ class Person extends Backbone.View
 				'VARIATIONS'
 			]
 			readonly: [ /^temp/	]
+		
+		
 
 		for type in @relationTypes
 			relationType = config.get('personRelationTypes')[type]
@@ -92,13 +93,7 @@ class Person extends Backbone.View
 			title: 'Languages'
 			options: config.get 'languages'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
-		_.extend schema['timbuctoo-relation.isSpouseOf'],
-			title: 'Spouses'
-			options: config.get 'persons'
-			autocomplete: (value) -> simpleSearch value, 'wwperson'
-			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+						
 		_.extend schema['timbuctoo-relation.isMemberOf'],
 			title: 'Memberships'
 			options: config.get 'collectives'
@@ -128,7 +123,11 @@ class Person extends Backbone.View
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+		
+		# customize field type
+		schema.notes.type = 'TextArea'
+		schema.personalSituation.type = 'TextArea'
+		
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
@@ -139,6 +138,7 @@ class Person extends Backbone.View
 			fields: [
 				'tempOldId'
 				'tempName'
+				'tempSpouse'
 				'names'
 				'gender'
 				'birthDate'
@@ -148,6 +148,7 @@ class Person extends Backbone.View
 				'deathDate'
 				'tempDeathPlace'
 				'timbuctoo-relation.hasDeathPlace'
+				'maritalStatus'
 				'tempLanguages'
 				'tempMotherTongue'
 				'tempPublishingLanguages'
@@ -157,13 +158,10 @@ class Person extends Backbone.View
 				'tempChildren'
 				'tempPsChildren'
 				'children'
-				'tempSpouse'
-				'timbuctoo-relation.isSpouseOf'
 				'tempMemberships'
 				'timbuctoo-relation.isMemberOf'
 				'tempCollaborations'
 				'timbuctoo-relation.isCollaboratorOf'
-				'timbuctoo-relation.isCreatorOf'
 				'tempPseudonyms'
 				'timbuctoo-relation.hasPseudonym'
 				'timbuctoo-relation.isPseudonymOf'
@@ -178,6 +176,7 @@ class Person extends Backbone.View
 				'personalSituation'
 				'links'
 				'notes'
+				'timbuctoo-relation.isCreatorOf'
 			]
 
 		@$('.form').html @form.el
