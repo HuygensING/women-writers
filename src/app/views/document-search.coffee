@@ -16,6 +16,7 @@ class DocumentSearch extends BaseSearch
 		dynamic_s_creator: 'Creator'
 		dynamic_s_language: 'Language'
 		dynamic_s_subject: 'Subject'
+		dynamic_s_genre: 'Genre'
 	sortableFieldsMap:
 		dynamic_sort_creator: 'Creator'
 		dynamic_sort_title: 'Title'
