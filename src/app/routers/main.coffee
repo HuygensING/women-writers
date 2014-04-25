@@ -7,6 +7,7 @@ class MainRouter extends Backbone.Router
 		'person/:id':		'showPersonForm'
 		'document(/)':			'showDocumentSearch'
 		'document/:id':			'showDocumentForm'
+		'reception(/)':			'showReceptionSearch'
 		'':							'home'
 
 	initialize: (options) ->

@@ -19,56 +19,63 @@ DocumentForm = require './views/document.coffee'
 DocumentOverview = require './views/document-overview.coffee'
 DocumentSearchView = require './views/document-search.coffee'	
 
+ReceptionSearchView = require './views/reception-searcher.coffee'
+
 class App extends Backbone.View
 	template: baseTemplate
 	initialize: ->
 		_.extend @, Backbone.Events
 		@render()
 
-	showPersonOverview: ->
-		new PersonOverview el: '#view'
-		@$('#search').hide()
-		@$('#view').show()
-		
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
 			view = new PersonForm
 				model: person
 			@switchView view
-		@$('#search').hide()
-		@$('#view').show()
+		@showView()
 	
-	showWOverview: ->
-		new DocumentOverview el: '#view'
-		@$('#search').hide()
-		@$('#view').show()
-
 	showDocumentForm: (id) ->
 		document = new Document _id: id
 		document.fetch().done =>
 			view = new DocumentForm
 				model: document
 			@switchView view
-		@$('#search').hide()
-		@$('#view').show()
+		@showView()
 
 	showPersonSearch: ->
 		@personSearch ?= new PersonSearchView
 			el: '#search .persons'
-		@$('#search').show()
-		@$('#view').hide()
+		@showSearch()
 		@documentSearch?.$el.fadeOut 75, =>
-			@personSearch.$el.fadeIn 75
+			@receptionSearch?.$el.fadeOut 75, =>
+				@personSearch.$el.fadeIn 75
 
 	showDocumentSearch: ->
 		@documentSearch ?= new DocumentSearchView
 			el: '#search .documents'
+		@showSearch()
+		@personSearch?.$el.fadeOut 75, =>
+			@receptionSearch?.$el.fadeOut 75, =>
+				@documentSearch.$el.fadeIn 75
+
+	showReceptionSearch: ->
+		@receptionSearch ?= new ReceptionSearchView
+			el: '#search .receptions'
+		@showSearch()
+		@personSearch?.$el.fadeOut 75, =>
+			@documentSearch?.$el.fadeOut 75, =>
+				@receptionSearch.$el.fadeIn 75
+			
+			
+	showSearch: ->
 		@$('#search').show()
 		@$('#view').hide()
-		@personSearch?.$el.fadeOut 75, =>
-			@documentSearch.$el.fadeIn 75
-
+		
+	showView: ->
+		@$('#search').hide()
+		@$('#view').show()
+		
 	switchView: (view) ->
 		@currentView?.remove()
 		@$('#view').html view.el
