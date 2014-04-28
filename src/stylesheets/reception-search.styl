@@ -7,11 +7,26 @@
 			width 100%
 			border-bottom 1px solid #D0E9E9
 			border-top 1px solid #D0E9E9
-			padding 1em 2em
 			display table
+			padding-top 1em
 			
-			div
+			.reception-query
 				display table-cell
+				padding 0 1em 0.5em
+				
+				.edit-link
+					display none
+			
+			.reception-query:hover
+				border-left 1px solid #D0E9E9
+				border-right 1px solid #D0E9E9
+				border-top 1px solid #D0E9E9
+				border-top-left-radius 10px
+				border-top-right-radius 10px
+				
+				.edit-link
+					display inline
+					cursor pointer
 #search
 	.receptions
 		.results
