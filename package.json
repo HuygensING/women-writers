@@ -4,7 +4,7 @@
   "description": "Women's Writers Edit Environment",
   "main": "src/app/main.coffee",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register tests/unit/"
+    "test": "mocha -w --compilers coffee:coffee-script/register,jade:jade --reporter spec tests/unit/*"
   },
   "repository": {
     "type": "git",
@@ -64,6 +64,10 @@
     "jquery": "~2.1.0",
     "jadeify": "~2.1.1",
     "browserify-data": "~0.1.1",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "sinon": "~1.9.1",
+    "chai": "~1.9.1",
+    "jsdom": "~0.10.5",
+    "require-jade": "0.0.1"
   }
 }
