@@ -47,25 +47,25 @@ class App extends Backbone.View
 		@personSearch ?= new PersonSearchView
 			el: '#search .persons'
 		@showSearch()
-		@documentSearch?.$el.fadeOut 75, =>
-			@receptionSearch?.$el.fadeOut 75, =>
-				@personSearch.$el.fadeIn 75
+		@documentSearch?.$el.fadeOut 75
+		@receptionSearch?.$el.fadeOut 75
+		@personSearch.$el.fadeIn 75
 
 	showDocumentSearch: ->
 		@documentSearch ?= new DocumentSearchView
 			el: '#search .documents'
 		@showSearch()
-		@personSearch?.$el.fadeOut 75, =>
-			@receptionSearch?.$el.fadeOut 75, =>
-				@documentSearch.$el.fadeIn 75
+		@personSearch?.$el.fadeOut 75
+		@receptionSearch?.$el.fadeOut 75
+		@documentSearch.$el.fadeIn 75
 
 	showReceptionSearch: ->
 		@receptionSearch ?= new ReceptionSearchView
 			el: '#search .receptions'
 		@showSearch()
-		@personSearch?.$el.fadeOut 75, =>
-			@documentSearch?.$el.fadeOut 75, =>
-				@receptionSearch.$el.fadeIn 75
+		@personSearch?.$el.fadeOut 75
+		@documentSearch?.$el.fadeOut 75
+		@receptionSearch.$el.fadeIn 75
 			
 			
 	showSearch: ->
