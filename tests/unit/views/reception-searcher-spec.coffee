@@ -17,7 +17,22 @@ _= require 'underscore'
 
 ReceptionSearcher = require '../../../src/app/views/reception-searcher'
 
+RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
+
 describe 'Reception searcher', ->
-	it 'test', ->
-		test = new ReceptionSearcher	
-		
+	receptionSearcher = null
+	relationTypeSelector = null
+	
+	beforeEach ->
+		relationTypeSelector = new RelationTypeSelector()
+		receptionSearcher = new ReceptionSearcher(relationTypeSelector)
+
+	describe 'Edit relation types', ->
+		it 'should display the relation type selector when it is clicked', ->
+			relationTypeSelectorShowSpy = sinon.spy relationTypeSelector, 'show'
+			
+			receptionTypeEditLink = receptionSearcher.$el.find('.reception-query.relation-type .edit-link')
+			
+			receptionTypeEditLink.click()
+
+			relationTypeSelector.show.called.should.be.ok
