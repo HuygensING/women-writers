@@ -3,6 +3,10 @@
     "value" : "^variations",
     "type" : "String"
   },
+  "URN" : {
+    "value" : "^urn",
+    "type" : "String"
+  },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
@@ -37,11 +41,11 @@
     "value" : "_id",
     "type" : "String"
   },
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
   "^variations" : {
     "type" : "List of (String)"
+  },
+  "@relations" : {
+    "type" : "Map of (String, List of (EntityRef))"
   },
   "longitude" : {
     "type" : "String"

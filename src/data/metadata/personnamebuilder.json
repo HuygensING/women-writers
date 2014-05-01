@@ -16,12 +16,12 @@
   },
   "separators" : {
     "value" : {
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@5e31fcca" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@cf9a986b" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@6ac3298a" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@7faeb184" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@c789e4fa" : ", ",
-      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@6b05c3f9" : ", "
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@5cea63f1" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@3223b6a9" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@42ffb8cb" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@d081a6c2" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@2ff87fab" : ", ",
+      "nl.knaw.huygens.timbuctoo.model.util.PersonNameBuilder$MultiKey@2627179a" : ", "
     },
     "type" : "Map of (MultiKey, String)"
   },

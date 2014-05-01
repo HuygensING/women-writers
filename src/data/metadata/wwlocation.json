@@ -6,6 +6,10 @@
     "value" : "^variations",
     "type" : "String"
   },
+  "URN" : {
+    "value" : "^urn",
+    "type" : "String"
+  },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"

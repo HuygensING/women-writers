@@ -22,7 +22,6 @@ module.exports = class AppView extends Backbone.View
 			# schema = createTimbuctooSchema personDescription
 			schema = {}
 			schema[key] = 'Text' for key, val of personDescription when not key.match /^\^/
-			console.log schema
 			form = new Form
 				model: new Backbone.Model data
 				schema: schema

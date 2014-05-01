@@ -1,0 +1,23 @@
+{
+  "typeType" : {
+    "type" : "String"
+  },
+  "sourceType" : {
+    "type" : "String"
+  },
+  "targetId" : {
+    "type" : "String"
+  },
+  "type" : {
+    "type" : "Class of ()"
+  },
+  "typeId" : {
+    "type" : "String"
+  },
+  "targetType" : {
+    "type" : "String"
+  },
+  "sourceId" : {
+    "type" : "String"
+  }
+}

@@ -138,6 +138,7 @@ class Document extends Backbone.View
 					legend: 'General'
 					fields: [
 						'title'
+						'englishTitle'
 						'description'
 						'tempCreator'
 						'timbuctoo-relation.isCreatedBy'
