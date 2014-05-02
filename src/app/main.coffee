@@ -70,6 +70,30 @@ bootstrap = ->
 		$.getJSON config.receptionsUrl()
 	.then (data) ->
 		config.set receptions: data.receptions
+	.then ->
+		$.getJSON config.educationUrl()
+	.then (data) ->
+		config.set educations: (value: e._id, label: e.value for e in data)
+	.then ->
+		$.getJSON config.financialSituationUrl()
+	.then (data) ->
+		config.set financialSituations: (value: f._id, label: f.value for f in data)	
+	.then ->
+		$.getJSON config.maritalStatusUrl()
+	.then (data) ->
+		config.set maritalStatuses: (value: m._id, label: m.value for m in data)
+	.then ->
+		$.getJSON config.professionUrl()
+	.then (data) ->
+		config.set professions: (value: p._id, label: p.value for p in data)
+	.then ->
+		$.getJSON config.religionUrl()
+	.then (data) ->
+		config.set religions: (value: r._id, label: r.value for r in data)
+	.then ->
+		$.getJSON config.socialClassUrl()
+	.then (data) ->
+		config.set socialClasses: (value: s._id, label: s.value for s in data)
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks
