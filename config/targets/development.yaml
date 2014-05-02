@@ -6,6 +6,15 @@ documentsRootUrl: /domain/wwdocuments
 VRE_ID: 'WomenWriters'
 relationTypeVariation: 'wwrelation'
 
+educationPath: '/domain/wwkeywords?type=education'
+financialSituationPath: '/domain/wwkeywords?type=financialSituation'
+maritalStatusPath: '/domain/wwkeywords?type=maritalStatus'
+professionPath: '/domain/wwkeywords?type=profession'
+religionPath: '/domain/wwkeywords?type=religion'
+socialClassPath: '/domain/wwkeywords?type=socialClass'
+
+sourceCategoryPath: '/domain/keywords?type=docSourceType'
+
 personTypeString: 'wwperson'
 documentTypeString: 'wwdocument'
 

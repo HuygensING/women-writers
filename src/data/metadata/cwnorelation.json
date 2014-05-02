@@ -3,10 +3,6 @@
     "value" : "^variations",
     "type" : "String"
   },
-  "URN" : {
-    "value" : "^urn",
-    "type" : "String"
-  },
   "ROLES" : {
     "value" : "^roles",
     "type" : "String"
@@ -15,27 +11,41 @@
     "value" : "^pid",
     "type" : "String"
   },
+  "^targetType" : {
+    "type" : "String"
+  },
   "^deleted" : {
     "type" : "boolean"
+  },
+  "^typeId" : {
+    "type" : "String"
   },
   "^created" : {
     "type" : "Change"
   },
-  "^names" : {
-    "value" : [ ],
-    "type" : "BaseLocation.Names"
+  "^targetId" : {
+    "type" : "String"
   },
   "^modified" : {
     "type" : "Change"
   },
+  "^sourceId" : {
+    "type" : "String"
+  },
   "_id" : {
     "type" : "String"
   },
-  "^urn" : {
+  "accepted" : {
+    "type" : "boolean"
+  },
+  "^sourceType" : {
     "type" : "String"
   },
   "^rev" : {
     "type" : "int"
+  },
+  "^typeType" : {
+    "type" : "String"
   },
   "ID" : {
     "value" : "_id",
@@ -47,17 +57,8 @@
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
   },
-  "longitude" : {
-    "type" : "String"
-  },
-  "latitude" : {
-    "type" : "String"
-  },
   "@relationCount" : {
     "type" : "int"
-  },
-  "notes" : {
-    "type" : "String"
   },
   "DELETED" : {
     "value" : "^deleted",

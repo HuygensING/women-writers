@@ -57,5 +57,9 @@
   },
   "^roles" : {
     "type" : "List of (Role)"
+  },
+  "CODE" : {
+    "value" : "^code",
+    "type" : "String"
   }
 }

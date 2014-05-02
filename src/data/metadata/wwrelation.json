@@ -7,6 +7,10 @@
     "value" : "^roles",
     "type" : "String"
   },
+  "certainty" : {
+    "value" : [ "UNKNOWN", "LOW", "MEDIUM", "HIGH" ],
+    "type" : "String"
+  },
   "PID" : {
     "value" : "^pid",
     "type" : "String"
@@ -29,8 +33,9 @@
   "^modified" : {
     "type" : "Change"
   },
-  "reception" : {
-    "type" : "boolean"
+  "qualification" : {
+    "value" : [ "UNKNOWN", "NEGATIVE", "NEUTRAL", "POSITIVE" ],
+    "type" : "String"
   },
   "^sourceId" : {
     "type" : "String"

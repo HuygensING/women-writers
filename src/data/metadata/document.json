@@ -3,7 +3,7 @@
     "type" : "String"
   },
   "documentType" : {
-    "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "PERIODICAL", "PICTURE", "PUBLICITY", "WORK" ],
+    "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "LIST", "MONOGRAPH", "PERIODICAL", "PICTURE", "PUBLICITY", "SHEETMUSIC", "THEATERSCRIPT", "WORK" ],
     "type" : "String"
   },
   "PID" : {

@@ -25,6 +25,10 @@ Now:
 	$ npm install
 
 	$ cd node_modules/grunt-express
+	
+	$ npm install
+	
+	$ cd ../../
 
 	$ grunt server:open
 

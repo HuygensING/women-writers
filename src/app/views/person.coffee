@@ -21,8 +21,14 @@ class Person extends Backbone.View
 	relationTypes: [
 		'hasBirthPlace'
 		'hasDeathPlace'
+		'hasEducation'
+		'hasFinancialSituation'
+		'hasMaritalStatus'
 		'hasPersonLanguage'
 		'hasPseudonym'
+		'hasProfession'
+		'hasReligion'
+		'hasSocialClass'
 		'isCreatorOf'
 		'isCollaboratorOf'
 		'isMemberOf'
@@ -93,7 +99,38 @@ class Person extends Backbone.View
 			title: 'Languages'
 			options: config.get 'languages'
 			relationTypeHelper: new DynamicRelationTypeHelper()
+			
+			
+		_.extend schema['timbuctoo-relation.hasEducation'],
+			title: 'Educations'
+			options: config.get 'educations'
+			relationTypeHelper: new DynamicRelationTypeHelper()
 						
+		_.extend schema['timbuctoo-relation.hasFinancialSituation'],
+			title: 'Financials'
+			options: config.get 'financialSituations'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+		
+		_.extend schema['timbuctoo-relation.hasMaritalStatus'],
+			title: 'Marital status'
+			options: config.get 'maritalStatuses'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			
+		_.extend schema['timbuctoo-relation.hasProfession'],
+			title: 'Professions'
+			options: config.get 'professions'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			
+		_.extend schema['timbuctoo-relation.hasReligion'],
+			title: 'Religions'
+			options: config.get 'religions'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			
+		_.extend schema['timbuctoo-relation.hasSocialClass'],
+			title: 'Social classes'
+			options: config.get 'socialClasses'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			
 		_.extend schema['timbuctoo-relation.isMemberOf'],
 			title: 'Memberships'
 			options: config.get 'collectives'
@@ -123,6 +160,7 @@ class Person extends Backbone.View
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
+			
 		
 		# customize field type
 		schema.notes.type = 'TextArea'
@@ -148,13 +186,13 @@ class Person extends Backbone.View
 				'deathDate'
 				'tempDeathPlace'
 				'timbuctoo-relation.hasDeathPlace'
-				'maritalStatus'
 				'tempLanguages'
 				'tempMotherTongue'
 				'tempPublishingLanguages'
 				'timbuctoo-relation.hasPersonLanguage'
 				'types'
 				'livedIn'
+				'timbuctoo-relation.hasMaritalStatus'
 				'tempChildren'
 				'tempPsChildren'
 				'children'
@@ -166,16 +204,17 @@ class Person extends Backbone.View
 				'timbuctoo-relation.hasPseudonym'
 				'timbuctoo-relation.isPseudonymOf'
 				'bibliography'
-				'educations'
-				'professions'
-				'religions'
+				'timbuctoo-relation.hasEducation'
+				'timbuctoo-relation.hasProfession'
+				'timbuctoo-relation.hasReligion'
+				'timbuctoo-relation.hasSocialClass'
 				'tempFinancialSituation'
-				'financials'
+				'timbuctoo-relation.hasFinancialSituation'
 				'health'
 				'nationality'
 				'personalSituation'
-				'links'
 				'notes'
+				'links'
 				'timbuctoo-relation.isCreatorOf'
 			]
 

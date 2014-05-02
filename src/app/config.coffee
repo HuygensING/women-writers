@@ -41,6 +41,27 @@ class Config extends Backbone.Model
 	documentViewUrl: (id) ->
 		@get('baseUrl') + '/document/' + id
 
+	educationUrl: ->
+		@get('facetedSearchBaseUrl') + @get('educationPath')
+
+	financialSituationUrl: ->
+		@get('facetedSearchBaseUrl') + @get('financialSituationPath')
+
+	maritalStatusUrl: ->
+		@get('facetedSearchBaseUrl') + @get('maritalStatusPath')
+	
+	professionUrl: ->
+		@get('facetedSearchBaseUrl') + @get('professionPath')
+		
+	religionUrl: ->
+		@get('facetedSearchBaseUrl') + @get('religionPath')
+		
+	socialClassUrl: ->
+		@get('facetedSearchBaseUrl') + @get('socialClassPath')
+
+	sourceCategoryUrl: ->
+		@get('facetedSearchBaseUrl') + @get('sourceCategoryPath')
+
 	userInfoUrl: ->
 		@get('baseUrl') + @get('userInfoPath')
 

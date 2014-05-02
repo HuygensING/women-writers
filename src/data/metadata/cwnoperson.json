@@ -1,17 +1,4 @@
 {
-  "edition" : {
-    "type" : "String"
-  },
-  "tempCreator" : {
-    "type" : "String"
-  },
-  "documentType" : {
-    "value" : [ "UNKNOWN", "ANTHOLOGY", "ARTICLE", "AWARD", "CATALOGUE", "COMPILATION", "DIARY", "LETTER", "LIST", "MONOGRAPH", "PERIODICAL", "PICTURE", "PUBLICITY", "SHEETMUSIC", "THEATERSCRIPT", "WORK" ],
-    "type" : "String"
-  },
-  "englishTitle" : {
-    "type" : "String"
-  },
   "PID" : {
     "value" : "^pid",
     "type" : "String"
@@ -19,39 +6,44 @@
   "^deleted" : {
     "type" : "boolean"
   },
-  "rights" : {
+  "tempNewwId" : {
     "type" : "String"
   },
   "^created" : {
     "type" : "Change"
   },
-  "tempLanguage" : {
-    "type" : "String"
-  },
-  "date" : {
+  "deathDate" : {
     "type" : "Datable"
   },
   "^modified" : {
     "type" : "Change"
   },
-  "tempOrigin" : {
-    "type" : "String"
-  },
-  "title" : {
-    "type" : "String"
+  "nationalities" : {
+    "type" : "List of (String)"
   },
   "_id" : {
-    "type" : "String"
-  },
-  "description" : {
     "type" : "String"
   },
   "ID" : {
     "value" : "_id",
     "type" : "String"
   },
+  "gender" : {
+    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
+    "type" : "String"
+  },
   "@relations" : {
     "type" : "Map of (String, List of (EntityRef))"
+  },
+  "birthDate" : {
+    "type" : "Datable"
+  },
+  "types" : {
+    "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
+    "type" : "List of (String)"
+  },
+  "tempNames" : {
+    "type" : "List of (String)"
   },
   "DELETED" : {
     "value" : "^deleted",
@@ -71,21 +63,9 @@
   "links" : {
     "type" : "List of (Link)"
   },
-  "topoi" : {
-    "type" : "List of (String)"
-  },
-  "reference" : {
-    "type" : "String"
-  },
-  "resourceType" : {
-    "value" : [ "UNKNOWN", "IMAGE", "SOUND", "TEXT" ],
-    "type" : "String"
-  },
-  "resourceFormat" : {
-    "type" : "String"
-  },
-  "source" : {
-    "type" : "boolean"
+  "names" : {
+    "value" : [ ],
+    "type" : "CWNOPerson.Names"
   },
   "^rev" : {
     "type" : "int"
@@ -95,9 +75,6 @@
   },
   "@relationCount" : {
     "type" : "int"
-  },
-  "tempOldId" : {
-    "type" : "String"
   },
   "notes" : {
     "type" : "String"
