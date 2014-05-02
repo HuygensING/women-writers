@@ -59,11 +59,13 @@ class Config extends Backbone.Model
 	socialClassUrl: ->
 		@get('facetedSearchBaseUrl') + @get('socialClassPath')
 
+	sourceCategoryUrl: ->
+		@get('facetedSearchBaseUrl') + @get('sourceCategoryPath')
+
 	userInfoUrl: ->
 		@get('baseUrl') + @get('userInfoPath')
 
 	receptionsUrl: ->
 		@get('baseUrl') + '/api/system/vres/' + @get('VRE_ID')
-		
 
 module.exports = new Config

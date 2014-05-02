@@ -13,6 +13,8 @@ professionPath: '/domain/wwkeywords?type=profession'
 religionPath: '/domain/wwkeywords?type=religion'
 socialClassPath: '/domain/wwkeywords?type=socialClass'
 
+sourceCategoryPath: '/domain/keywords?type=docSourceType'
+
 personTypeString: 'wwperson'
 documentTypeString: 'wwdocument'
 

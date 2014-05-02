@@ -94,6 +94,10 @@ bootstrap = ->
 		$.getJSON config.socialClassUrl()
 	.then (data) ->
 		config.set socialClasses: (value: s._id, label: s.value for s in data)
+	.then ->
+		$.getJSON config.sourceCategoryUrl()
+	.then (data) ->
+		config.set sourceCategories: (value: s._id, label: s.value for s in data)
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks

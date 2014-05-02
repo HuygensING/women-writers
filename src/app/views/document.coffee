@@ -21,8 +21,10 @@ class Document extends Backbone.View
 	receivedIn: 'timbuctoo-relation.receivedIn'
 
 	relationTypes: [
+		'hasDocumentSource'
 		'hasWorkLanguage'
 		'hasPublishLocation'
+		'hasSourceCategory'
 		'isCreatedBy'
 	]
 	
@@ -90,6 +92,18 @@ class Document extends Backbone.View
 			options: config.get 'locations'
 			onlyOne: true
 			relationTypeHelper: new DynamicRelationTypeHelper()
+			
+		_.extend schema['timbuctoo-relation.hasSourceCategory'],
+			title: 'Has source categories'
+			onlyOne: false
+			options: config.get 'sourceCategories'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			
+		_.extend schema['timbuctoo-relation.hasDocumentSource'],
+			title: 'Has sources'
+			onlyOne: false
+			autocomplete: (value) -> simpleSearch value, 'wwdocument', 5000
+			relationTypeHelper: new DynamicRelationTypeHelper()
 
 		_.extend schema['timbuctoo-relation.isCreatedBy'],
 			title: 'Creator'
@@ -149,6 +163,9 @@ class Document extends Backbone.View
 						'edition'
 						'date'
 						'documentType'
+						'source'
+						'timbuctoo-relation.hasSourceCategory'
+						'timbuctoo-relation.hasDocumentSource'
 						'links'
 						'reference'
 						'notes'
