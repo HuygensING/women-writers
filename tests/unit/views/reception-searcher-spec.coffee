@@ -25,7 +25,16 @@ describe 'Reception searcher', ->
 	
 	beforeEach ->
 		relationTypeSelector = new RelationTypeSelector()
-		receptionSearcher = new ReceptionSearcher(relationTypeSelector)
+		receptionSearcher = new ReceptionSearcher
+			relationTypeSelector: relationTypeSelector
+		
+	describe 'render', ->
+		it 'should render the relation type selector', ->
+			relationTypeSelectorRenderSpy = sinon.spy(relationTypeSelector, 'render')
+			
+			receptionSearcher.render()
+			
+			relationTypeSelectorRenderSpy.called.should.be.ok
 
 	describe 'Edit relation types', ->
 		it 'should display the relation type selector when it is clicked', ->

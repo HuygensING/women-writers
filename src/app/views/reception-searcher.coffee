@@ -1,5 +1,7 @@
 Backbone = require 'backbone'
 
+RelationTypeSelector = require './relation-type-selector'
+
 class ReceptionSearcher extends Backbone.View
 	template: require '../../templates/views/reception-searcher.jade'
 	className: 'receptions-search'
@@ -7,13 +9,14 @@ class ReceptionSearcher extends Backbone.View
 	events:
 		'click .reception-query.relation-type .edit-link' : 'editRelationTypes'
 	
-	initialize: (relationTypeSelector = null) ->
-		@relationTypeSelector = relationTypeSelector
-		
+	initialize: (options) ->
+		@relationTypeSelector = options.relationTypeSelector
 		@render()
 	
 	render: ->
 		@$el.html( @template(receptionSearch: "Hello world"))
+		@relationTypeSelector.render()
+		@$el.append(@relationTypeSelector.$el)
 
 	editRelationTypes: (e) ->
 		@relationTypeSelector.show()

@@ -20,6 +20,7 @@ DocumentOverview = require './views/document-overview.coffee'
 DocumentSearchView = require './views/document-search.coffee'	
 
 ReceptionSearchView = require './views/reception-searcher.coffee'
+RelationTypeSelectorView = require './views/relation-type-selector.coffee'
 
 class App extends Backbone.View
 	template: baseTemplate
@@ -62,11 +63,12 @@ class App extends Backbone.View
 	showReceptionSearch: ->
 		@receptionSearch ?= new ReceptionSearchView
 			el: '#search .receptions'
+			relationTypeSelector: new RelationTypeSelectorView()
 		@showSearch()
 		@personSearch?.$el.fadeOut 75
 		@documentSearch?.$el.fadeOut 75
 		@receptionSearch.$el.fadeIn 75
-			
+		
 			
 	showSearch: ->
 		@$('#search').show()
