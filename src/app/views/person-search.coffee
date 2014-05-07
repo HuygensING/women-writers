@@ -16,8 +16,8 @@ class PersonSearch extends BaseSearch
 		dynamic_s_deathDate: 'Year of Death'
 		dynamic_s_gender: 'Gender'
 	sortableFieldsMap:
-		dynamic_sort_deathDate: 'Year of Death'
-		dynamic_sort_birthDate: 'Year of Birth'
+		dynamic_k_deathDate: 'Year of Death'
+		dynamic_k_birthDate: 'Year of Birth'
 		dynamic_sort_name: 'Name'
 
 
