@@ -16,7 +16,7 @@ class ReceptionSearcher extends Backbone.View
 	render: ->
 		@$el.html( @template(receptionSearch: "Hello world"))
 		@relationTypeSelector.render()
-		@$el.append(@relationTypeSelector.$el)
+		@$el.find('.reception-search').after(@relationTypeSelector.$el)
 
 	editRelationTypes: (e) ->
 		@relationTypeSelector.show()

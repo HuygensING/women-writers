@@ -1,8 +1,11 @@
 Backbone = require 'backbone'
 
 class RelationTypeSelector extends Backbone.View
-	tagName: 'div'
 	template: require '../../templates/views/relation-type-selector.jade'
+	
+	events: 
+		'click .relation-type-selector .close-button':'hide'
+		
 	initialize: () ->
 	
 	show: () ->
@@ -10,6 +13,9 @@ class RelationTypeSelector extends Backbone.View
 		
 	render: () ->
 		@$el.html @template()
+		@hide()
+	
+	hide: () ->
 		@$el.hide()
 		
 module.exports = RelationTypeSelector

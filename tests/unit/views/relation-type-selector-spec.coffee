@@ -50,3 +50,15 @@ describe 'Reception type selector', ->
 			relationTypeSelector.show()
 			
 			elementShowSpy.called.should.be.ok
+			
+	describe 'close button', ->
+		it 'should hide the relation type selector when clicked', ->
+			relationTypeSelector.render()
+			element = relationTypeSelector.$el
+			
+			elementHideSpy = sinon.spy(element, 'hide')
+			
+			closeButton = element.find('.close-button')
+			closeButton.click()
+			
+			elementHideSpy.called.should.be.ok
