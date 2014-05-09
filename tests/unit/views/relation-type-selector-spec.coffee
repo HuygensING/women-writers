@@ -1,4 +1,6 @@
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
+RelationTypeMultiSelect = require '../../../src/app/views/relation-type-multi-select'
+ReceptionHelper = require '../../../src/app/helpers/reception-helper'
 
 chai = require 'chai'
 sinon = require 'sinon'
@@ -19,19 +21,16 @@ _= require 'underscore'
 
 describe 'Reception type selector', ->
 	relationTypeSelector = null
+	multiSelect = null
+	receptionHelper = null
 	beforeEach ->
-		relationTypeSelector = new RelationTypeSelector()
+		receptionHelper = new ReceptionHelper()
+		multiSelect = new RelationTypeMultiSelect()
+		relationTypeSelector = new RelationTypeSelector
+			relationTypeMultiSelect: multiSelect
+			receptionHelper: receptionHelper
 		
 	describe 'render', -> 
-		it 'should hide the root element', ->
-			element = relationTypeSelector.$el
-			
-			elementHideSpy = sinon.spy(element, 'hide')
-			
-			relationTypeSelector.render()
-			
-			elementHideSpy.called.should.be.ok
-		
 		it 'should render the template', ->
 			element = relationTypeSelector.$el
 			
@@ -40,6 +39,16 @@ describe 'Reception type selector', ->
 			relationTypeSelector.render()
 			
 			elementHideSpy.called.should.be.ok
+		
+		it 'should call render on the multi select and add it to the content element', ->
+			multiSelectRenderSpy = sinon.spy(multiSelect, 'render')
+			
+			relationTypeSelector.$el.find('select.selected-relations').length.should.equal 0
+			
+			relationTypeSelector.render()
+			
+			multiSelectRenderSpy.called.should.be.ok
+			relationTypeSelector.$el.find('select.selected-relations').length.should.equal 1
 	
 	describe 'show',->
 		it 'should make the element visible' ,->
@@ -62,3 +71,43 @@ describe 'Reception type selector', ->
 			closeButton.click()
 			
 			elementHideSpy.called.should.be.ok
+		
+	describe 'selected relation type', ->
+		beforeEach ->
+			relationTypeSelector.render()
+			
+		it 'should load a multi select with for receptions between persons and documents if persons is selected', ->
+			receptionTypeSelector = relationTypeSelector.$el.find('input#persons')
+			
+			multiSelectShowWithOptionsSpy = sinon.spy(multiSelect, 'showWithOptions')
+						
+			options =[
+				{ test: 'test1' }
+				{ test: 'test2' }
+				{ test: 'test3' }
+			]
+			
+			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
+			receptionHelperGetPersonReceptionsStub.returns(options)
+			
+			receptionTypeSelector.click()
+			
+			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
+		
+		it 'should load a multi select with for receptions between documents and documents if documents is selected', ->
+			receptionTypeSelector = relationTypeSelector.$el.find('input#documents')
+			
+			multiSelectShowWithOptionsSpy = sinon.spy(multiSelect, 'showWithOptions')
+						
+			options =[
+				{ test: 'test1' }
+				{ test: 'test2' }
+				{ test: 'test3' }
+			]
+			
+			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
+			receptionHelperGetPersonReceptionsStub.returns(options)
+			
+			receptionTypeSelector.click()
+			
+			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
