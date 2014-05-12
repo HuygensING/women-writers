@@ -24,7 +24,6 @@ class ReceptionSearcher extends Backbone.View
 		@relationTypeSelector.show()
 		
 	editReceptions: (e) ->
-		console.log 'edit receptions'
 		@receptionEditor.show()
 	
 	showUnimpelmentedMessage: ->
