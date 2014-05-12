@@ -4,8 +4,15 @@ h4
 		span Order by
 		if response.sortableFields
 			select
+				if sortedBy
+					option(disabled)
+				else
+					option(disabled, selected)
 				each field in response.sortableFields
-					option(value=field)= sortableFieldsMap[field] ? sortableFieldsMap[field] : field
+					if sortedBy == field
+						option(value=field, selected)= sortableFieldsMap[field] ? sortableFieldsMap[field] : field
+					else
+						option(value=field)= sortableFieldsMap[field] ? sortableFieldsMap[field] : field
 .cursor
 	span.prev &laquo; Previous
 	span.position

@@ -62,6 +62,7 @@ class SearchView extends Backbone.View
 			sortableFieldsMap: @sortableFieldsMap
 			objectUrl: @objectUrl
 			config: config
+			sortedBy: @sortField
 
 		@$('.cursor .loader').hide()
 		@$('.cursor .position').show()
