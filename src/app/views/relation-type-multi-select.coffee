@@ -7,6 +7,7 @@ class RelationTypeMultiSelect extends Backbone.View
 		
 	initialize: (options = {}) ->
 		@relationOptionConverter = if options.relationOptionConverter then options.relationOptionConverter else new RelationOptionConverter()
+		@$el.attr('multiple', 'multiple')
 		
 	showWithOptions: (relations = []) ->
 		@$el.empty()
