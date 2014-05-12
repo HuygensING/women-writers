@@ -34,6 +34,10 @@ describe 'Reception searcher', ->
 		it 'should render the relation type selector', ->
 			relationTypeSelectorRenderSpy = sinon.spy(relationTypeSelector, 'render')
 			
+			element = receptionSearcher.$el
+			
+			element.find('.reception-editor-content').length.should.equal 0
+			
 			receptionSearcher.render()
 			
 			queryEditorElement = receptionSearcher.$el.find('.query-editor')
@@ -41,6 +45,11 @@ describe 'Reception searcher', ->
 			relationTypeSelectorRenderSpy.calledWith(queryEditorElement).should.be.ok
 			
 		it 'should render the reception editor', ->
+			receptionEditorRenderSpy = sinon.spy(receptionEditor, 'render')
+			
+			element = receptionSearcher.$el
+			
+			element.find('.reception-editor').length.should.equal 0
 			
 			receptionSearcher.render()
 
@@ -48,6 +57,7 @@ describe 'Reception searcher', ->
 			
 			receptionEditorRenderStub.calledWith(queryEditorElement).should.be.ok
 			
+			element.find('.reception-editor').length.should.equal 1
 
 	describe 'Edit relation types', ->
 		beforeEach ->
