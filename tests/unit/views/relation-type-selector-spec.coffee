@@ -19,12 +19,12 @@ global.Backbone = Backbone = require 'backbone'
 Backbone.$ = $
 _= require 'underscore'
 
-describe 'Reception type selector', ->
+describe 'Relaction type selector', ->
 	relationTypeSelector = null
 	multiSelect = null
 	receptionHelper = null
 	beforeEach ->
-		receptionHelper = new ReceptionHelper()
+		receptionHelper = new ReceptionHelper({})
 		multiSelect = new RelationTypeMultiSelect()
 		relationTypeSelector = new RelationTypeSelector
 			relationTypeMultiSelect: multiSelect

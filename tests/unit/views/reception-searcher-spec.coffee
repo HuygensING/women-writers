@@ -24,7 +24,8 @@ describe 'Reception searcher', ->
 	relationTypeSelector = null
 	
 	beforeEach ->
-		relationTypeSelector = new RelationTypeSelector()
+		relationTypeSelector = new RelationTypeSelector
+			receptionHelper: {}
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
 		
