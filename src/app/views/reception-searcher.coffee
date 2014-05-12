@@ -23,7 +23,6 @@ class ReceptionSearcher extends Backbone.View
 		@relationTypeSelector.show()
 	
 	showUnimpelmentedMessage: ->
-		console.log 'alert'
 		alert('This part will be implemented soon.')
 
 module.exports = ReceptionSearcher
