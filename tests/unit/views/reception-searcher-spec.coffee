@@ -18,7 +18,7 @@ _= require 'underscore'
 ReceptionSearcher = require '../../../src/app/views/reception-searcher'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
-ReceptionEditor = require '../../../src/app/views/reception-editor'
+ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
 
 describe 'Reception searcher', ->
 	receptionEditor = null
@@ -26,7 +26,7 @@ describe 'Reception searcher', ->
 	relationTypeSelector = null
 	
 	beforeEach ->
-		receptionEditor = new ReceptionEditor()
+		receptionEditor = new ReceptionDocumentSearch()
 
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
