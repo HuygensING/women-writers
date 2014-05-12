@@ -34,11 +34,14 @@ describe 'Relaction type selector', ->
 		it 'should render the template', ->
 			element = relationTypeSelector.$el
 			
-			elementHideSpy = sinon.spy(element, 'html')
+			elementHtmlSpy = sinon.spy(element, 'html')
+			
+			template = relationTypeSelector.template()
 			
 			relationTypeSelector.render()
 			
-			elementHideSpy.called.should.be.ok
+			elementHtmlSpy.calledWith(template).should.be.ok
+			
 		
 		it 'should call render on the multi select and add it to the content element', ->
 			multiSelectRenderSpy = sinon.spy(multiSelect, 'render')
