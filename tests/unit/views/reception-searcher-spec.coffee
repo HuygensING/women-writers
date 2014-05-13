@@ -36,17 +36,17 @@ describe 'Reception searcher', ->
 			
 			receptionSearcher.render()
 			
-			receptionSearchElement = receptionSearcher.$el.find('.reception-search')
+			queryEditorElement = receptionSearcher.$el.find('.query-editor')
 			
-			relationTypeSelectorRenderSpy.calledWith(receptionSearchElement).should.be.ok
+			relationTypeSelectorRenderSpy.calledWith(queryEditorElement).should.be.ok
 			
 		it 'should render the reception editor', ->
 			
 			receptionSearcher.render()
 
-			receptionSearchElement = receptionSearcher.$el.find('.reception-search')
+			queryEditorElement = receptionSearcher.$el.find('.query-editor')
 			
-			receptionEditorRenderStub.calledWith(receptionSearchElement).should.be.ok
+			receptionEditorRenderStub.calledWith(queryEditorElement).should.be.ok
 			
 
 	describe 'Edit relation types', ->
