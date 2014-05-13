@@ -16,40 +16,82 @@ global.Backbone = Backbone = require 'backbone'
 Backbone.$ = $
 _= require 'underscore'
 
-ReceptionEditor = require '../../../src/app/views/reception-document-search'
+ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
+SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 
-describe 'reception editor', ->
-	receptionEditor = null
+describe 'reception document search', ->
+	receptionDocumentSearch = null
+	searchCreatorWrapper = null
+	createDocumentSearchStub = null
+	parentElementAppendSpy = sinon.spy()
+	parentElement = { append: parentElementAppendSpy }
+	
 	beforeEach ->
-		receptionEditor = new ReceptionEditor()
+		searchCreatorWrapper = new SearchCreatorWrapper
+			createFacetedSearch: sinon.stub()
 		
+		createDocumentSearchStub =  sinon.stub(searchCreatorWrapper, 'createDocumentFacetedSearch')
+		createDocumentSearchStub.returns({$el: {test: "test"}})
+	
+	describe 'initialize', -> 
+		it 'should create a faceted search', ->
+			receptionDocumentSearch = new ReceptionDocumentSearch
+				searchCreatorWrapper: searchCreatorWrapper
+				
+			createDocumentSearchStub.calledWith(receptionDocumentSearch.queryOptions, receptionDocumentSearch.facetNameMap).should.be.ok
+	
 	describe 'render', ->
+		beforeEach ->
+			receptionDocumentSearch = new ReceptionDocumentSearch
+				searchCreatorWrapper: searchCreatorWrapper
+		
+		it 'should append itself to the parent element', ->
+			element = receptionDocumentSearch.$el
+			receptionDocumentSearch.render(parentElement)
+			
+			parentElementAppendSpy.calledWith(element).should.be.ok
+		
 		it 'should render the template', ->
-			element = receptionEditor.$el
+			element = receptionDocumentSearch.$el
 			elementHtmlSpy = sinon.spy(element, 'html')
 			
-			template = receptionEditor.template()
+			template = receptionDocumentSearch.template()
 			
-			receptionEditor.render()
+			receptionDocumentSearch.render(parentElement)
 			
 			elementHtmlSpy.calledWith(template).should.be.ok
+			
+		it 'should render the faceted search', ->
+			element = receptionDocumentSearch.$el
+			elementAppendSpy = sinon.spy(element, 'append')
+			
+			searchElement = receptionDocumentSearch.search.$el
+			
+			receptionDocumentSearch.render(parentElement)
+			
+			elementAppendSpy.called.should.be.ok
 	
 	describe 'show', ->
 		beforeEach ->
-			receptionEditor.render()
+			receptionDocumentSearch = new ReceptionDocumentSearch
+				searchCreatorWrapper: searchCreatorWrapper
+			receptionDocumentSearch.render(parentElement)
+				
 		it 'should call show the editor', ->
-			element = receptionEditor.$el
+			element = receptionDocumentSearch.$el
 			elementShowSpy = sinon.spy(element, 'show')
 			
-			receptionEditor.show()
+			receptionDocumentSearch.show()
 			
 			elementShowSpy.called.should.be.ok
 	
 	describe 'close button', ->
 		beforeEach ->
-			receptionEditor.render()
+			receptionDocumentSearch = new ReceptionDocumentSearch
+				searchCreatorWrapper: searchCreatorWrapper
+			receptionDocumentSearch.render(parentElement)
 		it 'should hide the relation type selector when clicked', ->
-			element = receptionEditor.$el
+			element = receptionDocumentSearch.$el
 			
 			elementHideSpy = sinon.spy(element, 'hide')
 			

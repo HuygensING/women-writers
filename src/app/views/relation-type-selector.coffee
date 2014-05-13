@@ -18,12 +18,14 @@ class RelationTypeSelector extends Backbone.View
 	show: () ->
 		@$el.show()
 		
-	render: () ->
+	render: (parentElement) ->
 		@$el.html @template()
 		
 		@relationTypeMultiSelect.render()
 		
 		@$el.find('.relation-type-selector-content').append(@relationTypeMultiSelect.$el)
+		
+		parentElement.append(@$el)
 	
 	hide: () ->
 		@$el.hide()
