@@ -8,6 +8,9 @@ describe 'Relaction type selector', ->
 	relationTypeSelector = null
 	multiSelect = null
 	receptionHelper = null
+	parentElementAppendSpy = sinon.spy()
+	parentElement = { append: parentElementAppendSpy }
+	
 	beforeEach ->
 		receptionHelper = new ReceptionHelper({})
 		multiSelect = new RelationTypeMultiSelect()
@@ -16,6 +19,14 @@ describe 'Relaction type selector', ->
 			receptionHelper: receptionHelper
 		
 	describe 'render', -> 
+		it 'should append itself to the parent element', ->
+			
+			element = relationTypeSelector.$el
+			
+			relationTypeSelector.render(parentElement)
+			
+			parentElementAppendSpy.calledWith(element).should.be.ok
+			
 		it 'should render the template', ->
 			element = relationTypeSelector.$el
 			
@@ -23,17 +34,16 @@ describe 'Relaction type selector', ->
 			
 			template = relationTypeSelector.template()
 			
-			relationTypeSelector.render()
+			relationTypeSelector.render(parentElement)
 			
 			elementHtmlSpy.calledWith(template).should.be.ok
-			
 		
 		it 'should call render on the multi select and add it to the content element', ->
 			multiSelectRenderSpy = sinon.spy(multiSelect, 'render')
 			
 			relationTypeSelector.$el.find('select.selected-relations').length.should.equal 0
 			
-			relationTypeSelector.render()
+			relationTypeSelector.render(parentElement)
 			
 			multiSelectRenderSpy.called.should.be.ok
 			relationTypeSelector.$el.find('select.selected-relations').length.should.equal 1
@@ -50,7 +60,7 @@ describe 'Relaction type selector', ->
 			
 	describe 'close button', ->
 		it 'should hide the relation type selector when clicked', ->
-			relationTypeSelector.render()
+			relationTypeSelector.render(parentElement)
 			element = relationTypeSelector.$el
 			
 			elementHideSpy = sinon.spy(element, 'hide')
@@ -62,7 +72,7 @@ describe 'Relaction type selector', ->
 		
 	describe 'selected relation type', ->
 		beforeEach ->
-			relationTypeSelector.render()
+			relationTypeSelector.render(parentElement)
 			
 		it 'should load a multi select with for receptions between persons and documents if persons is selected', ->
 			receptionTypeSelector = relationTypeSelector.$el.find('input#persons')

@@ -4,48 +4,50 @@ ReceptionSearcher = require '../../../src/app/views/reception/searcher'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
 ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
+SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 
 describe 'Reception searcher', ->
 	receptionEditor = null
 	receptionSearcher = null
 	relationTypeSelector = null
+	receptionEditorRenderStub = null
 	
 	beforeEach ->
-		receptionEditor = new ReceptionDocumentSearch()
+		searchCreatorWrapper = new SearchCreatorWrapper
+			createFacetedSearch: sinon.stub()
+			
+		sinon.stub(searchCreatorWrapper, 'createDocumentFacetedSearch')
+			
+		receptionEditor = new ReceptionDocumentSearch
+			searchCreatorWrapper: searchCreatorWrapper
+		
+		receptionEditorRenderStub = sinon.stub(receptionEditor, 'render')
 
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
 			receptionEditor: receptionEditor
+			
 		
 	describe 'render', ->
 		it 'should render the relation type selector', ->
 			relationTypeSelectorRenderSpy = sinon.spy(relationTypeSelector, 'render')
 			
-			element = receptionSearcher.$el
-			
-			element.find('.reception-editor-content').length.should.equal 0
-			
 			receptionSearcher.render()
 			
-			relationTypeSelectorRenderSpy.called.should.be.ok
+			receptionSearchElement = receptionSearcher.$el.find('.reception-search')
 			
-			element.find('.reception-editor-content').length.should.equal 1
-			
+			relationTypeSelectorRenderSpy.calledWith(receptionSearchElement).should.be.ok
 			
 		it 'should render the reception editor', ->
-			receptionEditorRenderSpy = sinon.spy(receptionEditor, 'render')
-			
-			element = receptionSearcher.$el
-			
-			element.find('.reception-editor').length.should.equal 0
 			
 			receptionSearcher.render()
+
+			receptionSearchElement = receptionSearcher.$el.find('.reception-search')
 			
-			receptionEditorRenderSpy.called.should.be.ok
+			receptionEditorRenderStub.calledWith(receptionSearchElement).should.be.ok
 			
-			element.find('.reception-editor').length.should.equal 1
 
 	describe 'Edit relation types', ->
 		beforeEach ->
