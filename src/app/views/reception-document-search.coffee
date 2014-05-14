@@ -16,7 +16,7 @@ class ReceptionDocumentSearch extends Backbone.View
 		
 		@queryOptions =
 			term: '*'
-			resultRows: 25
+			resultRows: 0
 		@facetNameMap =
 			dynamic_s_date: 'Date'
 			dynamic_s_origin: 'Origin'
