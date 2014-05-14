@@ -7,7 +7,7 @@ class ReceptionSearcher extends Backbone.View
 	events:
 		'click .reception-query.relation-type .edit-link' : 'editRelationTypes'
 		'click .reception-query.target .edit-link' : 'editReceptions'
-		'click .unimplemented' : 'showUnimpelmentedMessage'
+		'click .unimplemented' : 'showUnimplementedMessage'
 	
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector
@@ -26,7 +26,7 @@ class ReceptionSearcher extends Backbone.View
 	editReceptions: (e) ->
 		@receptionEditor.show()
 	
-	showUnimpelmentedMessage: ->
+	showUnimplementedMessage: ->
 		alert('This part will be implemented soon.')
 
 module.exports = ReceptionSearcher
