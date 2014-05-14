@@ -9,7 +9,7 @@ class RelationTypeSelector extends Backbone.View
 	
 	events: 
 		'click.relation-type-selector .close-button':'hide'
-		'click.relation-type-selector input[name="reception-type"]':'showRelationSelector'
+		'click.relation-type-selector input[name="reception-type-source-type"]':'showRelationSelector'
 		
 	initialize: (options = {}) ->
 		@relationTypeMultiSelect = if options.relationTypeMultiSelect? then options.relationTypeMultiSelect else new RelationTypeMultiSelect()
