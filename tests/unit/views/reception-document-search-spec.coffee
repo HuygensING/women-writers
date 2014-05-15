@@ -77,7 +77,7 @@ describe 'reception document search', ->
 				searchCreatorWrapper: searchCreatorWrapper
 			receptionDocumentSearch.render(parentElement)
 				
-		it 'should call show the editor', ->
+		it 'should show the editor', ->
 			element = receptionDocumentSearch.$el
 			elementShowSpy = sinon.spy(element, 'show')
 			
