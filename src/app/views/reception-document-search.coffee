@@ -4,7 +4,7 @@ SearchCreatorWrapper = require '../helpers/search-creator-wrapper'
 
 class ReceptionDocumentSearch extends Backbone.View
 	template: require '../../templates/views/reception-faceted-search.jade'
-	className: 'reception-editor'
+	className: 'reception-document-searcher'
 		
 	
 		
