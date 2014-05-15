@@ -33,12 +33,16 @@ class RelationTypeSelector extends Backbone.View
 	showRelationSelector: (e) ->
 		receptions = null
 		
-		if e.currentTarget.value is 'documents'
+		selectedSourceType = e.currentTarget.value
+		
+		if selectedSourceType is 'documents'
 			receptions = @receptionHelper.getDocumentReceptions()
-		else if e.currentTarget.value is 'persons'
+		else if selectedSourceType is 'persons'
 			receptions = @receptionHelper.getPersonReceptions()
 			
 		@relationTypeMultiSelect.showWithOptions(receptions)
+		
+		@$el.trigger('sourceTypeSelectedEvent', selectedSourceType)
 		
 
 module.exports = RelationTypeSelector

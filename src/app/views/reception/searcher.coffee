@@ -33,6 +33,7 @@ class ReceptionSearcher extends Backbone.View
 		@receptionEditor.show()
 	
 	addSourceType: (e, value) ->
+		console.log 'addSourceType', value
 		@receptionSearchCreator.create(value).render(@findQueryEditorElement())
 		
 	findQueryEditorElement: () ->

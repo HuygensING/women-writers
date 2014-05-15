@@ -4,7 +4,7 @@ RelationTypeSelector = require basePath + 'views/relation-type-selector'
 RelationTypeMultiSelect = require basePath + 'views/relation-type-multi-select'
 ReceptionHelper = require basePath + 'helpers/reception-helper'
 
-describe 'Relaction type selector', ->
+describe 'Relation type selector', ->
 	relationTypeSelector = null
 	multiSelect = null
 	receptionHelper = null
@@ -75,7 +75,7 @@ describe 'Relaction type selector', ->
 			relationTypeSelector.render(parentElement)
 			
 		it 'should load a multi select with for receptions between persons and documents if persons is selected', ->
-			receptionTypeSelector = relationTypeSelector.$el.find('input#persons')
+			sourceTypeSelector = relationTypeSelector.$el.find('input#persons')
 			
 			multiSelectShowWithOptionsSpy = sinon.spy(multiSelect, 'showWithOptions')
 						
@@ -88,12 +88,12 @@ describe 'Relaction type selector', ->
 			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
 			receptionHelperGetPersonReceptionsStub.returns(options)
 			
-			receptionTypeSelector.click()
+			sourceTypeSelector.click()
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
 		
 		it 'should load a multi select with for receptions between documents and documents if documents is selected', ->
-			receptionTypeSelector = relationTypeSelector.$el.find('input#documents')
+			sourceTypeSelector = relationTypeSelector.$el.find('input#documents')
 			
 			multiSelectShowWithOptionsSpy = sinon.spy(multiSelect, 'showWithOptions')
 						
@@ -106,6 +106,32 @@ describe 'Relaction type selector', ->
 			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
 			receptionHelperGetPersonReceptionsStub.returns(options)
 			
-			receptionTypeSelector.click()
+			sourceTypeSelector.click()
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
+			
+		it 'should fire the event sourceTypeSelectedEvent with the value "documents" if the documents option is selected', ->
+			element = relationTypeSelector.$el
+			receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
+
+			sourceTypeSelector = element.find('input#documents')
+			
+			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
+			
+			sourceTypeSelector.click()
+			
+			receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'documents').should.ok
+			
+		it 'should fire the event sourceTypeSelectedEvent with the value "persons" if the persons option is selected', ->
+			element = relationTypeSelector.$el
+			
+			receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
+
+			sourceTypeSelector = element.find('input#persons')
+			
+			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
+			
+			sourceTypeSelector.click()
+			
+			receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'persons').should.ok
+			
