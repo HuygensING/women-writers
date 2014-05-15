@@ -10,7 +10,7 @@ class ReceptionSearcher extends Backbone.View
 	events:
 		'click .reception-query.relation-type .edit-link' : 'editRelationTypes'
 		'click .reception-query.target .edit-link' : 'editReceptions'
-		'click .unimplemented': 'showUnimplementedMessage'
+		'click a.unimplemented': 'showUnimplementedMessage'
 		'sourceTypeSelectedEvent': 'addSourceType'
 		
 	
