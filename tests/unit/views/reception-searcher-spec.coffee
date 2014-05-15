@@ -80,7 +80,7 @@ describe 'Reception searcher', ->
 	describe 'Edit receptions', -> 
 		beforeEach ->
 			receptionSearcher.render()
-		it 'should display the reception editor', ->
+		it 'should display the reception editor when it is clicked', ->
 			receptionEditorShowSpy = sinon.spy(receptionEditor, 'show')
 			
 			receptionEditLink = receptionSearcher.$el.find('.reception-query.target .edit-link')
@@ -89,11 +89,25 @@ describe 'Reception searcher', ->
 			
 			receptionEditorShowSpy.called.should.be.ok
 			
+	describe 'Edit sources', ->
+		beforeEach ->
+			receptionSearcher.render()
+		it 'should display the source editor', ->
+			editSourceLink = receptionSearcher.$el.find('.reception-query.source .edit-link')
+			# editSourceLink.removeClass('disabled')
+			
+			sourceEditorShowStub = sinon.stub()
+			receptionSearcher.sourceEditor = { show: sourceEditorShowStub }
+			
+			editSourceLink.click()
+			
+			sourceEditorShowStub.called.should.be.ok
 	describe 'source type selected event', ->
 		beforeEach ->
 			receptionSearcher.render()
 		it 'should render a newly created source editor', ->
-			queryEditorElement = receptionSearcher.$el.find('.query-editor')
+			element = receptionSearcher.$el
+			queryEditorElement = element.find('.query-editor')
 			
 			sourceEditorMockRenderStub = sinon.stub()
 			sourceEditorMock = { render: sourceEditorMockRenderStub }
@@ -102,7 +116,27 @@ describe 'Reception searcher', ->
 			relationTypeSourceType = 'test'
 			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceEditorMock)
 			
-			receptionSearcher.$el.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
 			sourceEditorMockRenderStub.calledWith(queryEditorElement).should.be.ok
 			
+			(receptionSearcher.sourceEditor isnt undefined && receptionSearcher.sourceEditor isnt null).should.be.ok 
+		
+		it 'should enable the link edit sources', ->
+			sourceEditorMock = { render: sinon.stub() }
+			receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
+			
+			relationTypeSourceType = 'test'
+			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceEditorMock)
+			
+			element = receptionSearcher.$el
+			
+			editSourcesLink = element.find('.reception-query.source .edit-link')
+			editSourcesLinkRemoveClassSpy = sinon.spy(editSourcesLink, 'removeClass')
+			
+			
+			$(editSourcesLink).hasClass('disabled').should.be.ok
+			
+			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			
+			$(editSourcesLink).hasClass('disabled').should.not.be.ok
