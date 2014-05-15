@@ -19,13 +19,16 @@ ReceptionSearcher = require '../../../src/app/views/reception-searcher'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
 ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
+ReceptionPersonSearch = require '../../../src/app/views/reception-person-search'
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
+ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
 
 describe 'Reception searcher', ->
 	receptionEditor = null
 	receptionSearcher = null
 	relationTypeSelector = null
 	receptionEditorRenderStub = null
+	receptionSearchCreator = null
 	
 	beforeEach ->
 		searchCreatorWrapper = new SearchCreatorWrapper
@@ -37,12 +40,15 @@ describe 'Reception searcher', ->
 			searchCreatorWrapper: searchCreatorWrapper
 		
 		receptionEditorRenderStub = sinon.stub(receptionEditor, 'render')
+		
+		receptionSearchCreator = new ReceptionSearchCreator()
 
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
 			receptionEditor: receptionEditor
+			receptionSearchCreator: receptionSearchCreator
 			
 		
 	describe 'render', ->
@@ -87,3 +93,21 @@ describe 'Reception searcher', ->
 			receptionEditLink.click()
 			
 			receptionEditorShowSpy.called.should.be.ok
+			
+	describe 'source type selected event', ->
+		beforeEach ->
+			receptionSearcher.render()
+		it 'should render a newly created source editor', ->
+			queryEditorElement = receptionSearcher.$el.find('.query-editor')
+			
+			sourceEditorMockRenderStub = sinon.stub()
+			sourceEditorMock = { render: sourceEditorMockRenderStub }
+			receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
+			
+			relationTypeSourceType = 'test'
+			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceEditorMock)
+			
+			receptionSearcher.$el.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			
+			sourceEditorMockRenderStub.calledWith(queryEditorElement).should.be.ok
+			

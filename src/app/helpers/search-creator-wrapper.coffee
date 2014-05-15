@@ -11,7 +11,10 @@ class SearchCreatorWrapper
 				require('./search.coffee').createFacetedSearch(queryOptions, facetNameMap)
 	
 	createDocumentFacetedSearch: (queryOptions, facetNameMap) ->
-		queryOptions.typeString = require('../config.coffee').get('documentTypeString')
+		queryOptions.typeString = @getType('documentTypeString')
 		@createFacetedSearch(queryOptions, facetNameMap)
+		
+	getType: (typeString) ->
+		require('../config.coffee').get(typeString)
 
 module.exports = SearchCreatorWrapper
