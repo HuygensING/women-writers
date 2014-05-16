@@ -17,7 +17,7 @@ class ReceptionSearcher extends Backbone.View
 	
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector
-		@receptionEditor = options.receptionEditor
+		@receptionQueryBuilder = options.receptionEditor
 		@receptionSearchCreator = options.receptionSearchCreator 
 	
 	render: ->
@@ -25,13 +25,13 @@ class ReceptionSearcher extends Backbone.View
 		receptionSearchElement = @findQueryEditorElement()
 		
 		@relationTypeSelector.render(receptionSearchElement)
-		@receptionEditor.render(receptionSearchElement)
+		@receptionQueryBuilder.render(receptionSearchElement)
 
 	editRelationTypes: (e) ->
 		@relationTypeSelector.show()
 		
 	editReceptions: (e) ->
-		@receptionEditor.show()
+		@receptionQueryBuilder.show()
 		
 	editSource: (e) ->
 		@sourceEditor.show()
