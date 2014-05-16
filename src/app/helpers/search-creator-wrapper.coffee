@@ -10,9 +10,14 @@ class SearchCreatorWrapper
 			@createFacetedSearch = (queryOptions, facetNameMap) ->
 				require('./search.coffee').createFacetedSearch(queryOptions, facetNameMap)
 	
-	createDocumentFacetedSearch: (queryOptions, facetNameMap) ->
-		queryOptions.typeString = @getType('documentTypeString')
+	createSearch: (typeStringToFind, queryOptions, facetNameMap) ->
+		queryOptions.typeString = @getType(typeStringToFind)
+		
 		@createFacetedSearch(queryOptions, facetNameMap)
+		
+	
+	createDocumentFacetedSearch: (queryOptions, facetNameMap) ->
+		@createSearch('documentTypeString', queryOptions, facetNameMap)
 		
 	getType: (typeString) ->
 		require('../config.coffee').get(typeString)

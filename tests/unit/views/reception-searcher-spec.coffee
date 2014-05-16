@@ -34,7 +34,7 @@ describe 'Reception searcher', ->
 		searchCreatorWrapper = new SearchCreatorWrapper
 			createFacetedSearch: sinon.stub()
 			
-		sinon.stub(searchCreatorWrapper, 'createDocumentFacetedSearch')
+		sinon.stub(searchCreatorWrapper, 'createSearch')
 			
 		receptionEditor = new ReceptionDocumentSearch
 			searchCreatorWrapper: searchCreatorWrapper
