@@ -94,7 +94,6 @@ describe 'Reception searcher', ->
 			receptionSearcher.render()
 		it 'should display the source editor', ->
 			editSourceLink = receptionSearcher.$el.find('.reception-query.source .edit-link')
-			# editSourceLink.removeClass('disabled')
 			
 			sourceEditorShowStub = sinon.stub()
 			receptionSearcher.sourceEditor = { show: sourceEditorShowStub }
@@ -121,6 +120,9 @@ describe 'Reception searcher', ->
 			sourceEditorMockRenderStub.calledWith(queryEditorElement).should.be.ok
 			
 			(receptionSearcher.sourceEditor isnt undefined && receptionSearcher.sourceEditor isnt null).should.be.ok 
+		
+		it 'remove the old source editor from the DOM if there is an old one', ->
+			
 		
 		it 'should enable the link edit sources', ->
 			sourceEditorMock = { render: sinon.stub() }
