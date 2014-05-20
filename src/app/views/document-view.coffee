@@ -4,8 +4,22 @@ class DocumentView extends Backbone.View
 	className: 'document view'
 	template: require '../../templates/views/document-view.jade'
 
-	initialize: ->
-		@fields = (f for f of @model.attributes)
+	initialize: (options={}) ->
+		@fields = [
+			'title'
+			'description'
+			'edition'
+			'date'
+			'documentType'
+			'links'
+			'reference'
+			'notes'
+			'topoi'
+			'^pid'
+		]
+
+		@fields.push f for f of @model.attributes when f.match /^temp/
+
 		@render()
 
 	getReceptions: ->
@@ -19,13 +33,15 @@ class DocumentView extends Backbone.View
 
 			false
 
-		results = (rel for relName, rel of relations when isReception relName)
+		results = {}
+		for relType in _.keys(relations) when isReception relType
+			results[relType] = relations[relType]
 
 		results
 
 	render: ->
-		console.log "Receptions", @getReceptions()
 		@$el.html @template
+			config: config
 			document: @model.attributes
 			fields: @fields
 			receptions: @getReceptions()

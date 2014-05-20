@@ -35,13 +35,20 @@
 		a:last-child:after
 			content ""
 
-	table.receptions
-		width 100%
-		th
-			text-align left
-			font-weight normal
-			font-style italic
+	.receptions
+		h4
 			color mediumGray
+			font-weight normal
+
+		&, & ul
+			list-style none
+			margin 0
+			padding 0
+
+		& ul
+			line-height 1.5em
+			margin-left .5em
+			font-size .9em
 
 	.revisions
 		position absolute
