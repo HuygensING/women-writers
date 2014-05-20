@@ -9,20 +9,13 @@ ul.fields
 			.value= document[field]
 
 h3 Receptions of this work
-table.receptions
-	thead
-		tr
-			//- th Author
-			//- th Title
-			//- th Gender
-			//- th Reception type
-			//- th Country
-			//- th Year
-			th Hm
-	tbody
-		each reception in receptions
-			tr
-				th= reception.displayName
+ul.receptions
+	each list, reception in receptions
+		li
+			h4= reception
+			ul
+				each r in list
+					li: a(href=config.documentViewUrl(r.id))= r.displayName
 
 if versions
 	p.versions
