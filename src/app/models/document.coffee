@@ -4,6 +4,10 @@ config = require '../config.coffee'
 
 class Document extends Backbone.Model
 	idAttribute: '_id'
-	urlRoot: config.allDocumentsUrl()
+	url: ->
+		url = config.allDocumentsUrl() + '/' + @id
+		if @get '^rev'
+			url += '?rev=' + @get '^rev'
+		url
 
 module.exports = Document

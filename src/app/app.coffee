@@ -11,11 +11,13 @@ UserStatusView = require './views/user-status.coffee'
 
 Person = require './models/person.coffee'
 PersonForm = require './views/person.coffee'
+PersonView = require './views/person-view.coffee'
 PersonOverview = require './views/person-overview.coffee'
 PersonSearchView = require './views/person-search.coffee'	
 
 Document = require './models/document.coffee'
 DocumentForm = require './views/document.coffee'
+DocumentView = require './views/document-view.coffee'
 DocumentOverview = require './views/document-overview.coffee'
 DocumentSearchView = require './views/document-search.coffee'	
 
@@ -71,7 +73,24 @@ class App extends Backbone.View
 		@personSearch?.$el.fadeOut 75
 		@documentSearch?.$el.fadeOut 75
 		@receptionSearch.$el.fadeIn 75
-		
+
+	showPersonView: (id, rev) ->
+		person = new Person _id: id
+		person.fetch().done =>
+			view = new PersonView model: person
+			@switchView view
+		@showView()
+
+	showDocumentView: (id, rev) ->
+		opts = _id: id
+		opts['^rev'] = rev if rev?
+
+		document = new Document opts
+		document.fetch().done =>
+			view = new DocumentView model: document
+			@switchView view
+		@showView()
+
 	showSearch: ->
 		@$('#search').show()
 		@$('#view').hide()
