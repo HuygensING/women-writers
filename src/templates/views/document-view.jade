@@ -1,0 +1,37 @@
+h2= document.title
+
+h4.author= document.tempCreator
+
+ul.fields
+	each field in fields
+		li
+			label= field
+			.value= document[field]
+
+h3 Receptions of this work
+table.receptions
+	thead
+		tr
+			//- th Author
+			//- th Title
+			//- th Gender
+			//- th Reception type
+			//- th Country
+			//- th Year
+			th Hm
+	tbody
+		each reception in receptions
+			tr
+				th= reception.displayName
+
+if versions
+	p.versions
+		| View other interpretations of this record:
+		each version in versions
+			a(href=version)= version
+
+.revisions
+	h5 Revisions
+	ul
+		each r in revisions
+			li(data-revision=r)= r

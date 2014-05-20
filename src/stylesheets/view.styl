@@ -1,0 +1,56 @@
+.view
+	position relative
+
+	h2
+		font-weight normal
+
+	h4.author
+		font-weight normal
+		text-align right
+		color darkGray
+
+	ul.fields
+		list-style none
+		padding 0
+		margin 0
+
+		label
+			color mediumGray
+			font-style italic
+			min-width 190px
+			display inline-block
+			line-height 1.8em
+
+		.value
+			display inline
+
+	p.versions
+		a:first-child
+			margin-left 1em
+
+		a:after
+			content " | "
+			color black
+		
+		a:last-child:after
+			content ""
+
+	table.receptions
+		width 100%
+		th
+			text-align left
+			font-weight normal
+			font-style italic
+			color mediumGray
+
+	.revisions
+		position absolute
+		top 0
+		margin-left -320px
+		width 300px
+		box-sizing border-box
+		padding 10px
+
+		h5
+			color mediumGray
+			margin 0
