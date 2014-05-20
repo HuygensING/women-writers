@@ -71,7 +71,24 @@ class App extends Backbone.View
 		@personSearch?.$el.fadeOut 75
 		@documentSearch?.$el.fadeOut 75
 		@receptionSearch.$el.fadeIn 75
-		
+
+	showPersonView: (id, rev) ->
+		person = new Person _id: id
+		person.fetch().done =>
+			view = new PersonView model: person
+			@switchView view
+		@showView()
+
+	showDocumentView: (id, rev) ->
+		opts = _id: id
+		opts['^rev'] = rev if rev?
+
+		document = new Document opts
+		document.fetch().done =>
+			view = new DocumentView model: document
+			@switchView view
+		@showView()
+
 	showSearch: ->
 		@$('#search').show()
 		@$('#view').hide()
