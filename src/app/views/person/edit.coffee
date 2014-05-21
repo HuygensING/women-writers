@@ -56,7 +56,9 @@ class Person extends Backbone.View
 			@model.fetch().done => status.show().success()
 
 	render: ->
-		@$el.html @template person: @model.attributes
+		@$el.html @template
+			config: config
+			person: @model.attributes
 		schema = createTimbuctooSchema personDescription,
 			exclude: [
 				/^[_@^]/
