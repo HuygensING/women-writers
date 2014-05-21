@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 
 class ReceptionSearcher extends Backbone.View
-	template: require '../../templates/views/reception-searcher.jade'
+	template: require '../../../templates/views/reception/reception-searcher.jade'
 	className: 'receptions-search'
 	
 	events:

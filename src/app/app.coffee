@@ -10,18 +10,18 @@ user = require './models/user.coffee'
 UserStatusView = require './views/user-status.coffee'
 
 Person = require './models/person.coffee'
-PersonForm = require './views/person.coffee'
-PersonOverview = require './views/person-overview.coffee'
-PersonSearchView = require './views/person-search.coffee'	
+PersonForm = require './views/person/person.coffee'
+PersonOverview = require './views/person/person-overview.coffee'
+PersonSearchView = require './views/person/person-search.coffee'	
 
 Document = require './models/document.coffee'
-DocumentForm = require './views/document.coffee'
-DocumentOverview = require './views/document-overview.coffee'
-DocumentSearchView = require './views/document-search.coffee'	
+DocumentForm = require './views/document/document.coffee'
+DocumentOverview = require './views/document/document-overview.coffee'
+DocumentSearchView = require './views/document/document-search.coffee'	
 
-ReceptionSearchView = require './views/reception-searcher.coffee'
+ReceptionSearchView = require './views/reception/reception-searcher.coffee'
 RelationTypeSelectorView = require './views/relation-type-selector.coffee'
-ReceptionEditorView = require './views/reception-editor.coffee'
+ReceptionEditorView = require './views/reception/reception-editor.coffee'
 
 class App extends Backbone.View
 	template: baseTemplate

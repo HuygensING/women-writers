@@ -1,9 +1,9 @@
 Backbone = require 'backbone'
 
-config = require '../config.coffee'
+config = require '../../config.coffee'
 
 class PersonOverview extends Backbone.View
-	template: require '../../templates/views/person-overview.jade'
+	template: require '../../../templates/views/person/person-overview.jade'
 	tagName: 'div'
 	className: 'person-overview'
 	initialize: ->

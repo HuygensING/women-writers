@@ -1,13 +1,13 @@
 Backbone = require 'backbone'
 
-config = require '../config.coffee'
+config = require '../../config.coffee'
 
-documentDescription = require '../../data/metadata/wwdocument.json'
+documentDescription = require '../../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
-StatusIndicator = require './status'
+StatusIndicator = require '../status'
 
-{simpleSearch} = require '../helpers/search'
+{simpleSearch} = require '../../helpers/search'
 DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
 DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
@@ -16,7 +16,7 @@ DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/help
 
 class Document extends Backbone.View
 	className: 'document-edit'
-	template: require '../../templates/views/document.jade'
+	template: require '../../../templates/views/document/document.jade'
 	receptionOf: 'timbuctoo-relation.receptionOf'
 	receivedIn: 'timbuctoo-relation.receivedIn'
 

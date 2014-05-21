@@ -1,22 +1,22 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 
-config = require '../config.coffee'
+config = require '../../config.coffee'
 
-personDescription = require '../../data/metadata/wwperson.json'
+personDescription = require '../../../data/metadata/wwperson.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
-StatusIndicator = require './status'
+StatusIndicator = require '../status'
 
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
-{searchQuery, simpleSearch} = require '../helpers/search'
+{searchQuery, simpleSearch} = require '../../helpers/search'
 
 DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
 DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
 class Person extends Backbone.View
 	className: 'person-edit'
-	template: require '../../templates/views/person.jade'
+	template: require '../../../templates/views/person/person.jade'
 
 	relationTypes: [
 		'hasBirthPlace'

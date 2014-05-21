@@ -1,10 +1,10 @@
 Backbone = require 'backbone'
-BaseSearch = require './base-search.coffee'
+BaseSearch = require '../base-search.coffee'
 
-config = require '../config.coffee'
+config = require '../../config.coffee'
 
 class PersonSearch extends BaseSearch
-	resultsTemplate: require '../../templates/views/person-search-results.jade'
+	resultsTemplate: require '../../../templates/views/person/person-search-results.jade'
 	queryOptions:
 		term: '*'
 		typeString: config.get 'personTypeString'

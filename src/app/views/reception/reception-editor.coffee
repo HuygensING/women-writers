@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 
 class ReceptionEditor extends Backbone.View
-	template: require '../../templates/views/reception-editor.jade'
+	template: require '../../../templates/views/reception/reception-editor.jade'
 	className: 'reception-editor'
 		
 	events:
