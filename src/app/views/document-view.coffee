@@ -10,7 +10,6 @@ class DocumentView extends Backbone.View
 			'description'
 			'edition'
 			'date'
-			'documentType'
 			'links'
 			'reference'
 			'notes'
@@ -46,9 +45,6 @@ class DocumentView extends Backbone.View
 			fields: @fields
 			receptions: @getReceptions()
 			revisions: []
-			versions: [
-				'foo'
-				'bar'
-			]
+			versions: []
 
 module.exports = DocumentView
