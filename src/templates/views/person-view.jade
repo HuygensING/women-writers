@@ -1,0 +1,30 @@
+h2= person.title
+
+h4.author= person.tempCreator
+
+ul.fields
+	each field in fields
+		li
+			label= field
+			.value= person[field]
+
+h3 Receptions of this work
+ul.receptions
+	each list, reception in receptions
+		li
+			h4= reception
+			ul
+				each r in list
+					li: a(href=config.personViewUrl(r.id))= r.displayName
+
+if versions
+	p.versions
+		| View other interpretations of this record:
+		each version in versions
+			a(href=version)= version
+
+.revisions
+	h5 Revisions
+	ul
+		each r in revisions
+			li(data-revision=r)= r
