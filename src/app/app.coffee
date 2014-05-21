@@ -11,11 +11,13 @@ UserStatusView = require './views/user-status.coffee'
 
 Person = require './models/person.coffee'
 PersonForm = require './views/person/edit.coffee'
+PersonView = require './views/person/view.coffee'
 PersonOverview = require './views/person/overview.coffee'
 PersonSearchView = require './views/person/search.coffee'	
 
 Document = require './models/document.coffee'
 DocumentForm = require './views/document/edit.coffee'
+DocumentView = require './views/document/view.coffee'
 DocumentOverview = require './views/document/overview.coffee'
 DocumentSearchView = require './views/document/search.coffee'	
 
@@ -77,7 +79,7 @@ class App extends Backbone.View
 		person.fetch().done =>
 			view = new PersonView model: person
 			@switchView view
-		@showView()
+			@showView()
 
 	showDocumentView: (id, rev) ->
 		opts = _id: id
@@ -87,7 +89,7 @@ class App extends Backbone.View
 		document.fetch().done =>
 			view = new DocumentView model: document
 			@switchView view
-		@showView()
+			@showView()
 
 	showSearch: ->
 		@$('#search').show()

@@ -1,8 +1,8 @@
-config = require '../config.coffee'
+config = require '../../config.coffee'
 
 class PersonView extends Backbone.View
 	className: 'person view'
-	template: require '../../templates/views/person-view.jade'
+	template: require '../../../templates/views/person/view.jade'
 
 	initialize: (options={}) ->
 		@fields = [

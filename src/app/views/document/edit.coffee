@@ -49,7 +49,9 @@ class Document extends Backbone.View
 			@render()
 
 	render: ->
-		@$el.html @template document: @model.attributes
+		@$el.html @template
+			config: config
+			document: @model.attributes
 		schema = createTimbuctooSchema documentDescription,
 			exclude: [
 				/^[_@^]/

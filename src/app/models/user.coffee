@@ -22,7 +22,7 @@ class User extends Backbone.Model
 		options.headers.VRE_ID = @VRE_ID
 		options.headers.Authorization = config.get 'authToken'
 
-		super _.extend options,
+		checkLoggedIn = _.extend options,
 			error: (me, req) =>
 				if options.login is true and req.status is 401
 					form = Backbone.$('<form>').attr
@@ -39,5 +39,8 @@ class User extends Backbone.Model
 						console.error "Login failed", req
 					catch e
 						alert "Could not log you in"
+		
+		super(checkLoggedIn).done (data) =>
+			@set loggedIn: true if data._id?
 
 module.exports = new User()

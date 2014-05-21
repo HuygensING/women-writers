@@ -1,8 +1,10 @@
-config = require '../config.coffee'
+config = require '../../config'
+
+user = require '../../models/user'
 
 class DocumentView extends Backbone.View
 	className: 'document view'
-	template: require '../../templates/views/document-view.jade'
+	template: require '../../../templates/views/document/view.jade'
 
 	initialize: (options={}) ->
 		@fields = [
@@ -18,6 +20,8 @@ class DocumentView extends Backbone.View
 		]
 
 		@fields.push f for f of @model.attributes when f.match /^temp/
+
+		@listenTo user, 'change:loggedIn', => @showControls()
 
 		@render()
 
@@ -38,6 +42,9 @@ class DocumentView extends Backbone.View
 
 		results
 
+	showControls: ->
+		@$('.controls').toggle user.get 'loggedIn'
+
 	render: ->
 		@$el.html @template
 			config: config
@@ -46,5 +53,6 @@ class DocumentView extends Backbone.View
 			receptions: @getReceptions()
 			revisions: []
 			versions: []
+		@showControls()
 
 module.exports = DocumentView
