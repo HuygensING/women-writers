@@ -1,23 +1,8 @@
-RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
-RelationTypeMultiSelect = require '../../../src/app/views/relation-type-multi-select'
-ReceptionHelper = require '../../../src/app/helpers/reception-helper'
+require '../setup'
 
-chai = require 'chai'
-sinon = require 'sinon'
-jsdom = require 'jsdom'
-
-requireJade = require 'require-jade'
-
-global.window = jsdom.jsdom().createWindow()
-global.document = window.document
-
-chai.should()
-
-$ = require 'jquery'
-
-global.Backbone = Backbone = require 'backbone'
-Backbone.$ = $
-_= require 'underscore'
+RelationTypeSelector = require basePath + 'views/relation-type-selector'
+RelationTypeMultiSelect = require basePath + 'views/relation-type-multi-select'
+ReceptionHelper = require basePath + 'helpers/reception-helper'
 
 describe 'Relaction type selector', ->
 	relationTypeSelector = null
