@@ -1,7 +1,5 @@
 Backbone = require 'backbone'
 
-receptionTypes = require '../../config/receptions.yaml'
-
 class Config extends Backbone.Model
 	# this 'file' is aliased in Gruntfile to a specific
 	# configuration, such as development, test, or production
@@ -14,8 +12,6 @@ class Config extends Backbone.Model
 			@set authToken: window.localStorage.getItem('authToken')
 			@on 'change:authToken', =>
 				window.localStorage.setItem('authToken', @get 'authToken')
-
-		@set receptionTypes: receptionTypes
 
 	searchUrl: ->
 		@get('baseUrl') + @get('searchPath')
