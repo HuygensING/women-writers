@@ -15,10 +15,10 @@ global.Backbone = Backbone = require 'backbone'
 Backbone.$ = $
 _= require 'underscore'
 
-ReceptionSearcher = require '../../../src/app/views/reception/reception-searcher'
+ReceptionSearcher = require '../../../src/app/views/reception/searcher'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
-ReceptionEditor = require '../../../src/app/views/reception/reception-editor'
+ReceptionEditor = require '../../../src/app/views/reception/editor'
 
 describe 'Reception searcher', ->
 	receptionEditor = null

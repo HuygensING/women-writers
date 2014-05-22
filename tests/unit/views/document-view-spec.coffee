@@ -15,7 +15,7 @@ global.Backbone = Backbone = require 'backbone'
 Backbone.$ = $
 _ = require 'underscore'
 
-DocumentView = require '../../../src/app/views/document-view'
+DocumentView = require '../../../src/app/views/document/view'
 
 describe 'Document view', ->
 	describe 'getReceptions', ->

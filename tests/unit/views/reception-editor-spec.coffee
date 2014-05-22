@@ -16,7 +16,7 @@ global.Backbone = Backbone = require 'backbone'
 Backbone.$ = $
 _= require 'underscore'
 
-ReceptionEditor = require '../../../src/app/views/reception/reception-editor'
+ReceptionEditor = require '../../../src/app/views/reception/editor'
 
 describe 'reception editor', ->
 	receptionEditor = null
