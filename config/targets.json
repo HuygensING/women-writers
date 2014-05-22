@@ -1,0 +1,12 @@
+{
+  "test": {
+    "user": "wowrtest",
+    "host": "hi14hingtest.huygens.knaw.nl",
+    "baseDir": "/data/wowrtest/public_html"
+  },
+  "production": {
+    "user": "wowr",
+    "host": "hi2.huygens.knaw.nl",
+    "baseDir": "/data/wowr"
+  }
+}

@@ -1,9 +1,9 @@
 Backbone = require 'backbone'
 
 class Config extends Backbone.Model
-	# this 'file' is aliased in Gruntfile to a specific
+	# this file is aliased in Gruntfile to a specific
 	# configuration, such as development, test, or production
-	defaults: require './config/config.yaml'
+	defaults: require '../../config/targets/development.json'
 
 	initialize: ->
 		hasLocalStorage = window.localStorage?

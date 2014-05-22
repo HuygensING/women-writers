@@ -4,8 +4,8 @@ module.exports = (grunt) ->
 	require('load-grunt-tasks') grunt
 
 	target = grunt.option('target') or 'development'
-	targetConfig = grunt.file.readYAML "config/targets/#{target}.yaml"
-	targets = grunt.file.readYAML 'config/targets.yaml'
+	targetConfig = grunt.file.readJSON "config/targets/#{target}.json"
+	targets = grunt.file.readJSON 'config/targets.json'
 
 	tgt  = targets[target]
 	tgt ?=
@@ -89,12 +89,12 @@ module.exports = (grunt) ->
 		browserify:
 			options:
 				transform: ['coffeeify', 'jadeify', 'browserify-data']
-				extensions: ['.coffee', '.js', '.yaml']
+				extensions: ['.coffee', '.js']
 			build:
 				src: 'src/app/main.coffee'
 				dest: "targets/#{target}/main.js"
 				options:
-					alias: ["./config/targets/#{target}.yaml:./config/config.yaml"]	
+					alias: ["./config/targets/#{target}.json:../../config/targets/development.json"]	
 
 		rsync:
 			options:
