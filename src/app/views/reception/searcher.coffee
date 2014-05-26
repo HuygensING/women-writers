@@ -12,12 +12,13 @@ class ReceptionSearcher extends Backbone.View
 		'click .reception-query.target .edit-link': 'editReceptions'
 		'click .reception-query.source .edit-link': 'editSource'
 		'click a.unimplemented': 'showUnimplementedMessage'
-		'sourceTypeSelectedEvent': 'addSourceEditor'
+		'click button.unimplemented': 'showUnimplementedMessage'
+		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
 		
 	
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector
-		@receptionQueryBuilder = options.receptionEditor
+		@receptionQueryBuilder = options.receptionQueryBuilder
 		@receptionSearchCreator = options.receptionSearchCreator 
 	
 	render: ->
@@ -34,14 +35,14 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder.show()
 		
 	editSource: (e) ->
-		@sourceEditor.show()
+		@sourceQueryBuilder.show()
 	
-	addSourceEditor: (e, value) ->
-		if(@sourceEditor isnt null and @sourceEditor isnt undefined)
-			@sourceEditor.remove()
+	addSourceQueryBuilder: (e, value) ->
+		if(@sourceQueryBuilder isnt null and @sourceQueryBuilder isnt undefined)
+			@sourceQueryBuilder.remove()
 		
-		@sourceEditor = @receptionSearchCreator.create(value)
-		@sourceEditor.render(@findQueryEditorElement())
+		@sourceQueryBuilder = @receptionSearchCreator.create(value)
+		@sourceQueryBuilder.render(@findQueryEditorElement())
 		# enable the source editor link
 		@$('.reception-query.source .edit-link').removeClass('disabled')
 		
