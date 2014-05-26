@@ -45,6 +45,9 @@ class ReceptionSearcher extends Backbone.View
 		# enable the source editor link
 		@$('.reception-query.source .edit-link').removeClass('disabled')
 		
+		# enable search button
+		@$('.search-receptions').removeClass('disabled')
+		
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')
 	
