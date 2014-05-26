@@ -122,6 +122,25 @@ describe 'Reception searcher', ->
 			(receptionSearcher.sourceEditor isnt undefined && receptionSearcher.sourceEditor isnt null).should.be.ok 
 		
 		it 'remove the old source editor from the DOM if there is an old one', ->
+			element = receptionSearcher.$el
+			queryEditorElement = element.find('.query-editor')
+			
+			oldSourceEditorRemoveStub = sinon.stub()
+			oldSourceEditor = { remove: oldSourceEditorRemoveStub}
+
+			sourceEditorMockRenderStub = sinon.stub()
+			sourceEditorMock = { render: sourceEditorMockRenderStub }
+			receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
+			
+			relationTypeSourceType = 'test'
+			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceEditorMock)
+			
+			
+			receptionSearcher.sourceEditor = oldSourceEditor
+			
+			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			
+			oldSourceEditorRemoveStub.called.should.be.ok
 			
 		
 		it 'should enable the link edit sources', ->
