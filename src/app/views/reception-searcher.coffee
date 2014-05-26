@@ -37,6 +37,9 @@ class ReceptionSearcher extends Backbone.View
 		@sourceEditor.show()
 	
 	addSourceEditor: (e, value) ->
+		if(@sourceEditor isnt null and @sourceEditor isnt undefined)
+			@sourceEditor.remove()
+		
 		@sourceEditor = @receptionSearchCreator.create(value)
 		@sourceEditor.render(@findQueryEditorElement())
 		# enable the source editor link
