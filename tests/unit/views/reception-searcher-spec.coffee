@@ -153,4 +153,11 @@ describe 'Reception searcher', ->
 			
 			$(editSourcesLink).hasClass('disabled').should.not.be.ok
 		
+		it 'should enable the search button', ->
+			searchButton = element.find('.search-receptions')
 			
+			$(searchButton).hasClass('disabled').should.be.ok
+			
+			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			
+			$(searchButton).hasClass('disabled').should.not.be.ok
