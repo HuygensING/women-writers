@@ -24,10 +24,10 @@ SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
 
 describe 'Reception searcher', ->
-	receptionEditor = null
+	receptionQueryBuilder = null
 	receptionSearcher = null
 	relationTypeSelector = null
-	receptionEditorRenderStub = null
+	receptionQueryBuilderRenderStub = null
 	receptionSearchCreator = null
 	
 	beforeEach ->
@@ -36,10 +36,10 @@ describe 'Reception searcher', ->
 			
 		sinon.stub(searchCreatorWrapper, 'createSearch')
 			
-		receptionEditor = new ReceptionDocumentSearch
+		receptionQueryBuilder = new ReceptionDocumentSearch
 			searchCreatorWrapper: searchCreatorWrapper
 		
-		receptionEditorRenderStub = sinon.stub(receptionEditor, 'render')
+		receptionQueryBuilderRenderStub = sinon.stub(receptionQueryBuilder, 'render')
 		
 		receptionSearchCreator = new ReceptionSearchCreator()
 
@@ -47,7 +47,7 @@ describe 'Reception searcher', ->
 			receptionHelper: {}
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
-			receptionEditor: receptionEditor
+			receptionQueryBuilder: receptionQueryBuilder
 			receptionSearchCreator: receptionSearchCreator
 			
 		
@@ -67,7 +67,7 @@ describe 'Reception searcher', ->
 
 			queryEditorElement = receptionSearcher.$el.find('.query-editor')
 			
-			receptionEditorRenderStub.calledWith(queryEditorElement).should.be.ok
+			receptionQueryBuilderRenderStub.calledWith(queryEditorElement).should.be.ok
 			
 
 	describe 'Edit relation types', ->
@@ -86,13 +86,13 @@ describe 'Reception searcher', ->
 		beforeEach ->
 			receptionSearcher.render()
 		it 'should display the reception editor when it is clicked', ->
-			receptionEditorShowSpy = sinon.spy(receptionEditor, 'show')
+			receptionQueryBuilderShowSpy = sinon.spy(receptionQueryBuilder, 'show')
 			
 			receptionEditLink = receptionSearcher.$el.find('.reception-query.target .edit-link')
 			
 			receptionEditLink.click()
 			
-			receptionEditorShowSpy.called.should.be.ok
+			receptionQueryBuilderShowSpy.called.should.be.ok
 			
 	describe 'Edit sources', ->
 		beforeEach ->
@@ -100,25 +100,25 @@ describe 'Reception searcher', ->
 		it 'should display the source editor', ->
 			editSourceLink = receptionSearcher.$el.find('.reception-query.source .edit-link')
 			
-			sourceEditorShowStub = sinon.stub()
-			receptionSearcher.sourceEditor = { show: sourceEditorShowStub }
+			sourceQueryBuilderShowStub = sinon.stub()
+			receptionSearcher.sourceQueryBuilder = { show: sourceQueryBuilderShowStub }
 			
 			editSourceLink.click()
 			
-			sourceEditorShowStub.called.should.be.ok
+			sourceQueryBuilderShowStub.called.should.be.ok
 			
 	describe 'source type selected event', ->
-		sourceEditorMockRenderStub = null
-		sourceEditorMock = null
+		sourceQueryBuilderMockRenderStub = null
+		sourceQueryBuilderMock = null
 		relationTypeSourceType = 'test'
 		element = null
 		queryEditorElement = null
 		
 		beforeEach ->
-			sourceEditorMockRenderStub = sinon.stub()
-			sourceEditorMock = { render: sourceEditorMockRenderStub }
+			sourceQueryBuilderMockRenderStub = sinon.stub()
+			sourceQueryBuilderMock = { render: sourceQueryBuilderMockRenderStub }
 			receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
-			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceEditorMock)
+			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceQueryBuilderMock)
 			
 			receptionSearcher.render()
 			element = receptionSearcher.$el
@@ -128,20 +128,20 @@ describe 'Reception searcher', ->
 			
 			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
-			sourceEditorMockRenderStub.calledWith(queryEditorElement).should.be.ok
+			sourceQueryBuilderMockRenderStub.calledWith(queryEditorElement).should.be.ok
 			
-			(receptionSearcher.sourceEditor isnt undefined && receptionSearcher.sourceEditor isnt null).should.be.ok 
+			(receptionSearcher.sourceQueryBuilder isnt undefined && receptionSearcher.sourceQueryBuilder isnt null).should.be.ok 
 		
 		it 'should remove the old source editor from the DOM if there is an old one', ->
-			oldSourceEditorRemoveStub = sinon.stub()
-			oldSourceEditor = { remove: oldSourceEditorRemoveStub}
+			oldsourceQueryBuilderRemoveStub = sinon.stub()
+			oldsourceQueryBuilder = { remove: oldsourceQueryBuilderRemoveStub}
 			
-			receptionSearcher.sourceEditor = oldSourceEditor
+			receptionSearcher.sourceQueryBuilder = oldsourceQueryBuilder
 			
 			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
-			oldSourceEditorRemoveStub.called.should.be.ok
-			receptionSearcher.sourceEditor.should.equal sourceEditorMock
+			oldsourceQueryBuilderRemoveStub.called.should.be.ok
+			receptionSearcher.sourceQueryBuilder.should.equal sourceQueryBuilderMock
 		
 		it 'should enable the link edit sources', ->
 			editSourcesLink = element.find('.reception-query.source .edit-link')
@@ -161,3 +161,8 @@ describe 'Reception searcher', ->
 			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
 			$(searchButton).hasClass('disabled').should.not.be.ok
+		
+
+			
+			
+			

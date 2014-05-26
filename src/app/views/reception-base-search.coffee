@@ -29,5 +29,7 @@ class ReceptionBaseSearch extends Backbone.View
 		queryOptions =
 			term: '*'
 			resultRows: 0
+			
+	getSearchId: () ->
 	
 module.exports = ReceptionBaseSearch
