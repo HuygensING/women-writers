@@ -66,7 +66,7 @@ class App extends Backbone.View
 		@receptionSearch ?= new ReceptionSearchView
 			el: '#search .receptions'
 			relationTypeSelector: new RelationTypeSelectorView()
-			receptionEditor: new ReceptionDocumentSearchView()
+			receptionQueryBuilder: new ReceptionDocumentSearchView()
 			receptionSearchCreator: new ReceptionSearchCreator()
 		@receptionSearch.render()
 		@showSearch()
