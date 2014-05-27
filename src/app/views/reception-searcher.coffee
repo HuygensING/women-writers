@@ -57,6 +57,7 @@ class ReceptionSearcher extends Backbone.View
 			sourceSearchId: @sourceQueryBuilder.getSearchId()
 			targetSearchId: @receptionQueryBuilder.getSearchId()
 			relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
+			typeString: 'wwrelation'
 		}
 		
 		result = @receptionSearchQueryExecutor.executeQuery(queryParameters)
