@@ -4,22 +4,10 @@ user = require '../models/user'
 Backbone = require 'backbone'
 
 class BaseView extends Backbone.View
-	initialize: ->
+	fieldsetTemplate: require '../../templates/views/base-fieldset.jade'
+
+	initialize: (options={}) ->
 		@listenTo user, 'change:loggedIn', => @showControls()
-		@fields = [
-			'title'
-			'description'
-			'edition'
-			'date'
-			'links'
-			'reference'
-			'notes'
-			'topoi'
-			'^pid'
-		]
-
-		@fields.push f for f of @model.attributes when f.match /^temp/
-
 		@render()
 
 	getReceptions: ->
@@ -40,18 +28,54 @@ class BaseView extends Backbone.View
 		results
 
 	showControls: (toggle) ->
-		@$controls.toggle user.get 'loggedIn'
+		@$controls?.toggle user.get 'loggedIn'
+
+	renderFieldsets: ->
+		for fs in @fieldsets
+			data = fields: []
+
+			for field in fs.fields
+				if _.isRegExp field
+					for f in _.filter(@model.keys(), (k) -> k.match field)
+						data.fields.push
+							label: f
+							value: @model.get f
+				else if field.match /^@[^.]+\./ # @relations.isCreatedBy/id=displayName
+					[key, type, link, label] = field.split /[.\/=]/
+
+					group = []
+
+					if @model.has(key) and @model.get(key)[type]?
+						for r in @model.get(key)[type]
+							group.push
+								label: r[label]
+								link: r[link]
+
+					data.fields.push
+						label: field
+						value: group
+
+				else
+					data.fields.push
+						label: field
+						value: @model.get field
+
+			data.title = fs.title if fs.title
+
+			@$('.fieldsets').append @fieldsetTemplate data
 
 	render: ->
 		@$el.html @template
 			data: @model.attributes
 			config: config
-			fields: @fields
 			versions: []
 			revisions: []
-			receptions: []
+			receptions: @getReceptions()
 
 		@$controls = @$('.controls')
 		@showControls()
+
+		@$fieldsets = @$('.fieldsets')
+		@renderFieldsets()
 
 module.exports = BaseView

@@ -1,15 +1,11 @@
 .controls
-	a.edit.btn.green(href=config.documentEditUrl(document._id)) Edit
+	a.edit.btn.green(href=config.documentEditUrl(data._id)) Edit
 
-h2= document.title
+h2= data.title
 
-h4.author= document.tempCreator
+h4.author= data.tempCreator
 
-ul.fields
-	each field in fields
-		li
-			label= field
-			.value= document[field]
+.fieldsets
 
 h3 Receptions of this work
 ul.receptions

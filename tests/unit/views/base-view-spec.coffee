@@ -2,7 +2,17 @@ setup = require '../setup'
 
 user = require basePath + 'models/user'
 
-BaseView = require basePath + 'views/base-view'
+testData = require './data/DOCU000000000418.json'
+configData = require './data/config.json'
+
+sandbox = require 'sandboxed-module'
+
+fakeConfig = new Backbone.Model configData
+
+BaseView = sandbox.require basePath + 'views/base-view',
+	requires:
+		'../config': fake: fakeConfig
+
 baseTemplate = require basePath + '../templates/views/document/view.jade'
 
 class BaseViewWithTemplate extends BaseView
@@ -12,7 +22,12 @@ describe 'Base view', ->
 	view = null
 	beforeEach ->
 		view = new BaseViewWithTemplate
-			model: new Backbone.Model
+			el: $('<div/>')
+			model: new Backbone.Model testData
+
+	# it 'getReceptions should return only the receptions in @relations', ->
+	# 	console.log "Test!", testData
+	# 	# view.getReceptions()
 
 	it 'should toggle controls depending when loggedIn status changes', ->
 		spy = sinon.spy view, 'showControls'
