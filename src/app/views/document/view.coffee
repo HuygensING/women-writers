@@ -1,7 +1,5 @@
 config = require '../../config'
 
-user = require '../../models/user'
-
 BaseView = require '../base-view'
 
 class DocumentView extends BaseView
@@ -23,7 +21,7 @@ class DocumentView extends BaseView
 			]
 		}
 		{
-			title: 'Temp Fields'
+			title: 'Temporary Fields'
 			showOnlyWhenLoggedIn: true
 			fields: [	/^temp/	]
 		}
