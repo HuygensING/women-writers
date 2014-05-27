@@ -13,6 +13,8 @@ class ReceptionBaseSearch extends Backbone.View
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
 		@search = @searchCreatorWrapper.createSearch(@getTypeString(), @getQueryOptions(), @getFacetNameMap())
 		
+		console.log('search', @search)
+		
 	render: (parentElement) ->
 		@$el.html(@template())
 		@$el.append(@search.$el)
@@ -31,5 +33,5 @@ class ReceptionBaseSearch extends Backbone.View
 			resultRows: 0
 			
 	getSearchId: () ->
-	
+		return @search.model.id
 module.exports = ReceptionBaseSearch
