@@ -2,6 +2,7 @@ Backbone = require 'backbone'
 $ = Backbone.$ = require 'jquery'
 
 config = require './config.coffee'
+user = require './models/user'
 
 App = require './app.coffee'
 MainRouter = require './routers/main.coffee'
@@ -110,12 +111,13 @@ $ ->
 		window.history.replaceState? {}, '', window.location.href.replace /\?.*$/, ''
 
 	bootstrap().done ->
-		# All systems go!
-		app = new App el: 'body'
+		user.fetch(login: false).always ->
+			# All systems go!
+			app = new App el: 'body'
 
-		base = config.get('baseUrl').replace /^https?:\/\/[^\/]+/, ''
-		mainRouter = new MainRouter
-			controller: app
-			root: base
+			base = config.get('baseUrl').replace /^https?:\/\/[^\/]+/, ''
+			mainRouter = new MainRouter
+				controller: app
+				root: base
 
-		mainRouter.start()
+			mainRouter.start()
