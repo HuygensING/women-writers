@@ -47,12 +47,13 @@ class BaseView extends Backbone.View
 
 					if @model.has(key) and @model.get(key)[type]?
 						for r in @model.get(key)[type]
+							console.log "Pushing", r, label, link
 							group.push
 								label: r[label]
 								link: r[link]
 
 					data.fields.push
-						label: field
+						label: type
 						value: group
 
 				else

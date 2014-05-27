@@ -5,4 +5,10 @@ ul.fields
 	each field in fields
 		li
 			label= field.label
-			.value= field.value
+			.value
+				if _.isArray(field.value)
+					ul
+						each v in field.value
+							li= v.label
+				else
+					= field.value
