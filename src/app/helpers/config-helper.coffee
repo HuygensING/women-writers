@@ -1,5 +1,5 @@
 # wrapper of the config to be able to test reception-helper
-class CollectionHelper
+class ConfigHelper
 	
 	constructor: (config) ->
 		@config = if config? then config else require '../config.coffee'
@@ -7,4 +7,4 @@ class CollectionHelper
 	get: (collectionToGet) ->
 		return @config.get(collectionToGet)
 	
-module.exports = CollectionHelper
+module.exports = ConfigHelper
