@@ -20,8 +20,11 @@ ReceptionSearcher = require '../../../src/app/views/reception-searcher'
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
 ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
 ReceptionPersonSearch = require '../../../src/app/views/reception-person-search'
+ReceptionSearchResult = require '../../../src/app/views/reception-search-result'
+
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
+ReceptionSearchQueryExecutor = require '../../../src/app/helpers/relation-search-query-executor'
 
 describe 'Reception searcher', ->
 	receptionQueryBuilder = null
@@ -29,8 +32,12 @@ describe 'Reception searcher', ->
 	relationTypeSelector = null
 	receptionQueryBuilderRenderStub = null
 	receptionSearchCreator = null
+	receptionSearchResult = null
+	receptionSearchQueryExecutor = null 
 	
 	beforeEach ->
+		receptionSearchQueryExecutor = new ReceptionSearchQueryExecutor()
+		receptionSearchResult = new ReceptionSearchResult()
 		searchCreatorWrapper = new SearchCreatorWrapper
 			createFacetedSearch: sinon.stub()
 			
@@ -49,6 +56,8 @@ describe 'Reception searcher', ->
 			relationTypeSelector: relationTypeSelector
 			receptionQueryBuilder: receptionQueryBuilder
 			receptionSearchCreator: receptionSearchCreator
+			receptionSearchResult: receptionSearchResult
+			receptionSearchQueryExecutor: receptionSearchQueryExecutor
 			
 		
 	describe 'render', ->
@@ -162,7 +171,41 @@ describe 'Reception searcher', ->
 			
 			$(searchButton).hasClass('disabled').should.not.be.ok
 		
-
+	describe 'search button', ->
+		it 'should update the results when it is clicked', ->
+			receptionSearcher.render()
 			
+			# setup
+			receptionQueryBuilderGetSearchIdStub = sinon.stub(receptionQueryBuilder, 'getSearchId')
+			receptionSearchId = 12
+			receptionQueryBuilderGetSearchIdStub.returns(receptionSearchId)
 			
+			sourceSearchId = 42
+			sourceQueryBuilderGetSearchIdStub = sinon.stub()
+			sourceQueryBuilderGetSearchIdStub.returns(sourceSearchId)
+			sourceQueryBuilderMock = { getSearchId: sourceQueryBuilderGetSearchIdStub }
+			receptionSearcher.sourceQueryBuilder = sourceQueryBuilderMock
 			
+			selectedRelationTypeIds = [13, 44, 91]
+			relationTypeSelectorGetSelectedRelationTypeIdsStub = sinon.stub(relationTypeSelector, 'getSelectedRelationTypeIds')
+			relationTypeSelectorGetSelectedRelationTypeIdsStub.returns(selectedRelationTypeIds)
+			
+			searchResult = {}
+			searchParameters = {
+				sourceSearchId: sourceSearchId
+				targetSearchId: receptionSearchId
+				relationTypeIds: selectedRelationTypeIds
+			}
+			
+			receptionSearchQueryExecutorExecuteQueryStub = sinon.stub(receptionSearchQueryExecutor, 'executeQuery')
+			receptionSearchQueryExecutorExecuteQueryStub.withArgs(searchParameters).returns(searchResult)
+			
+			receptionSearchResultUpdateSpy = sinon.spy(receptionSearchResult, 'update')
+			
+			searchButton = receptionSearcher.$el.find('.search-receptions')
+			
+			# action
+			searchButton.click()
+			
+			receptionSearchQueryExecutorExecuteQueryStub.calledWith(searchParameters).should.be.ok
+			receptionSearchResultUpdateSpy.calledWith(searchResult).should.be.ok

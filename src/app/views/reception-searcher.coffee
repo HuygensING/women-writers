@@ -5,12 +5,13 @@ ReceptionPersonSearch = require './reception-person-search'
 
 class ReceptionSearcher extends Backbone.View
 	template: require '../../templates/views/reception-searcher.jade'
-	className: 'receptions-search'
+	className: 'reception-search'
 	
 	events:
 		'click .reception-query.relation-type .edit-link': 'editRelationTypes'
 		'click .reception-query.target .edit-link': 'editReceptions'
 		'click .reception-query.source .edit-link': 'editSource'
+		'click .search-receptions': 'search'
 		'click a.unimplemented': 'showUnimplementedMessage'
 		'click button.unimplemented': 'showUnimplementedMessage'
 		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
@@ -19,7 +20,9 @@ class ReceptionSearcher extends Backbone.View
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector
 		@receptionQueryBuilder = options.receptionQueryBuilder
-		@receptionSearchCreator = options.receptionSearchCreator 
+		@receptionSearchCreator = options.receptionSearchCreator
+		@receptionSearchResult = options.receptionSearchResult
+		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor
 	
 	render: ->
 		@$el.html(@template())
@@ -48,6 +51,17 @@ class ReceptionSearcher extends Backbone.View
 		
 		# enable search button
 		@$('.search-receptions').removeClass('disabled')
+		
+	search: (e) ->
+		queryParameters = {
+			sourceSearchId: @sourceQueryBuilder.getSearchId()
+			targetSearchId: @receptionQueryBuilder.getSearchId()
+			relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
+		}
+		
+		result = @receptionSearchQueryExecutor.executeQuery(queryParameters)
+		
+		@receptionSearchResult.update(result)
 		
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')
