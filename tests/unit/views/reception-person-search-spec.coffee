@@ -25,13 +25,23 @@ describe 'reception person search', ->
 	createSearchStub = null
 	parentElementAppendSpy = sinon.spy()
 	parentElement = { append: parentElementAppendSpy }
+	searchId = '1234567'
 	
 	beforeEach ->
+		search = {
+			$el: {
+				test: "test"
+			}
+			model: {
+				id: searchId
+			}
+		}
+		
 		searchCreatorWrapper = new SearchCreatorWrapper
 				createFacetedSearch: sinon.stub()
 				
 		createSearchStub =  sinon.stub(searchCreatorWrapper, 'createSearch')
-		createSearchStub.returns({$el: {test: "test"}})
+		createSearchStub.returns(search)
 	
 	describe 'initialize', -> 
 		it 'should create a faceted search', ->
@@ -83,3 +93,9 @@ describe 'reception person search', ->
 			receptionPersonSearch.show()
 			
 			elementShowSpy.called.should.be.ok
+			
+	describe 'getSearchId', ->
+		it 'should delegate the request to the search' ,->
+			receptionPersonSearch = new ReceptionPersonSearch
+				searchCreatorWrapper: searchCreatorWrapper
+			receptionPersonSearch.getSearchId().should.equal searchId
