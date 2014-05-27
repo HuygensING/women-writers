@@ -11,6 +11,7 @@ class ReceptionSearcher extends Backbone.View
 		'click .reception-query.relation-type .edit-link': 'editRelationTypes'
 		'click .reception-query.target .edit-link': 'editReceptions'
 		'click .reception-query.source .edit-link': 'editSource'
+		'click .search-receptions': 'search'
 		'click a.unimplemented': 'showUnimplementedMessage'
 		'click button.unimplemented': 'showUnimplementedMessage'
 		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
@@ -48,6 +49,17 @@ class ReceptionSearcher extends Backbone.View
 		
 		# enable search button
 		@$('.search-receptions').removeClass('disabled')
+		
+	search: (e) ->
+		queryParameters = {
+			sourceSearchId: @sourceQueryBuilder.getSearchId()
+			targetSearchId: @receptionQueryBuilder.getSearchId()
+			relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
+		}
+		
+		result = @receptionSearchQueryExecutor.executeQuery(queryParameters)
+		
+		@receptionSearchResult.update(result)
 		
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')

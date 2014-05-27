@@ -44,5 +44,6 @@ class RelationTypeSelector extends Backbone.View
 		
 		@$el.trigger('sourceTypeSelectedEvent', selectedSourceType)
 		
+	getSelectedRelationTypeIds: () ->
 
 module.exports = RelationTypeSelector
