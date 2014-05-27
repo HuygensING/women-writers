@@ -190,6 +190,7 @@ describe 'Reception searcher', ->
 				sourceSearchId: sourceSearchId
 				targetSearchId: receptionSearchId
 				relationTypeIds: selectedRelationTypeIds
+				typeString: 'wwrelation'
 			}
 			
 			receptionSearchQueryExecutorExecuteQueryStub = sinon.stub(receptionSearchQueryExecutor, 'executeQuery')
