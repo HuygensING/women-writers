@@ -28,6 +28,7 @@ describe 'Relation type multi select', ->
 			relationOptionConverter: relationOptionConverter
 		
 		relations = [ {}, {}, {} ]
+		
 	describe 'show with options', ->
 		it 'should clear the current options', ->
 			element = relationTypeMultiSelect.$el
@@ -67,3 +68,13 @@ describe 'Relation type multi select', ->
 			relationTypeMultiSelect.showWithOptions(relations)
 			
 			elementShowSpy.called.should.be.ok
+	
+	describe 'getSelectedRelationTypeIds', ->
+		it 'should get the value of the multi select element', ->
+			element = relationTypeMultiSelect.$el
+			
+			elementValSpy = sinon.spy(element, 'val')
+			
+			relationTypeMultiSelect.getSelectedRelationTypeIds()
+			
+			elementValSpy.called.should.be.ok
