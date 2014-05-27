@@ -58,9 +58,7 @@ class ReceptionSearcher extends Backbone.View
 			typeString: 'wwrelation'
 		}
 		
-		result = @receptionSearchQueryExecutor.executeQuery(queryParameters)
-		
-		@receptionSearchResult.update(result)
+		result = @receptionSearchQueryExecutor.executeQuery(queryParameters, @receptionSearchResult.update)
 		
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')
