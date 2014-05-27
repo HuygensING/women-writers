@@ -7,7 +7,7 @@ class UserStatus extends Backbone.View
 
 	initialize: ->
 		@listenTo @model, 'change', => @render()
-		@model.fetch login: false
+		# @model.fetch login: false
 
 		@render()
 
