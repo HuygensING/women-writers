@@ -134,4 +134,14 @@ describe 'Relation type selector', ->
 			sourceTypeSelector.click()
 			
 			receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'persons').should.ok
+	
+	describe 'getSelectedRelationTypeIds', ->
+		it 'should delegate the request to the relation type multi select', ->
+			ids = [1,2,3,4,5]
+			multiSelectGetSelectedRelationTypeIdsStub = sinon.stub(multiSelect, 'getSelectedRelationTypeIds')
+			multiSelectGetSelectedRelationTypeIdsStub.returns(ids)
 			
+			selectedRelationTypeIds = relationTypeSelector.getSelectedRelationTypeIds()
+			
+			multiSelectGetSelectedRelationTypeIdsStub.called.should.be.ok
+			selectedRelationTypeIds.should.equal(ids)
