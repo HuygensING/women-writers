@@ -1,13 +1,13 @@
 ReceptionHelper = require '../../../src/app/helpers/reception-helper'
-CollectionHelper = require '../../../src/app/helpers/collection-helper'
+ConfigHelper = require '../../../src/app/helpers/config-helper'
 
 chai = require 'chai'
 sinon = require 'sinon'
 
 describe 'reception helper', ->
 	receptionHelper = null
-	collectionHelper = null
-	collectionHelperGetStub = null
+	configHelper = null
+	configHelperGetStub = null
 	receptions = [
 		{ typeId: '1', baseSourceType: 'person'}
 		{ typeId: '2', baseSourceType: 'person'}
@@ -23,16 +23,16 @@ describe 'reception helper', ->
 	
 		
 	beforeEach ->
-		collectionHelper = new CollectionHelper({})
-		receptionHelper = new ReceptionHelper(collectionHelper)
-		collectionHelperGetStub = sinon.stub(collectionHelper, 'get')
-		collectionHelperGetStub.returns(receptions)
+		configHelper = new ConfigHelper({})
+		receptionHelper = new ReceptionHelper(configHelper)
+		configHelperGetStub = sinon.stub(configHelper, 'get')
+		configHelperGetStub.returns(receptions)
 		
 	describe 'get person receptions', ->
 		it 'should retrieve all the receptions from config', ->
 			receptionHelper.getPersonReceptions()
 			
-			collectionHelperGetStub.calledWith('receptions').should.be.ok
+			configHelperGetStub.calledWith('receptions').should.be.ok
 			
 		it 'should filter the receptions with person as source type', ->
 			personReceptions = receptionHelper.getPersonReceptions()
@@ -43,7 +43,7 @@ describe 'reception helper', ->
 		it 'should retrieve all the receptions from config', ->
 			receptionHelper.getPersonReceptions()
 			
-			collectionHelperGetStub.calledWith('receptions').should.be.ok
+			configHelperGetStub.calledWith('receptions').should.be.ok
 			
 		it 'should filter the receptions with document as source type', ->
 			documentReceptions = receptionHelper.getDocumentReceptions()

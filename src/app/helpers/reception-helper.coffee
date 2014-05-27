@@ -1,8 +1,8 @@
-CollectionHelper = require './collection-helper'
+ConfigHelper = require './config-helper'
 
 class ReceptionHelper
-	constructor: (collectionHelper = null) ->
-		@collectionHelper = if collectionHelper? then collectionHelper else new CollectionHelper()
+	constructor: (configHelper = null) ->
+		@configHelper = if configHelper? then configHelper else new ConfigHelper()
 	getPersonReceptions: () ->
 		@getReceptionsFor('person')
 	
@@ -10,7 +10,7 @@ class ReceptionHelper
 		@getReceptionsFor('document')
 		
 	getReceptionsFor: (baseSourceType) ->
-		receptions = @collectionHelper.get('receptions')
+		receptions = @configHelper.get('receptions')
 		filteredReceptions = reception for reception in receptions when reception.baseSourceType is baseSourceType
 	
 module.exports = ReceptionHelper
