@@ -16,6 +16,8 @@ class User extends Backbone.Model
 		@clear()
 		@set loggedIn: false
 
+	isLoggedIn: -> @get 'loggedIn'
+
 	fetch: (options={}) ->
 		options.headers ?= {}
 		options.returnUrl ?= config.get 'baseUrl'
