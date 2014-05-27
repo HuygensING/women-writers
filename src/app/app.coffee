@@ -24,7 +24,9 @@ DocumentSearchView = require './views/document/search.coffee'
 ReceptionSearchView = require './views/reception/searcher.coffee'
 RelationTypeSelectorView = require './views/relation-type-selector.coffee'
 ReceptionDocumentSearchView = require './views/reception-document-search.coffee'
+ReceptionSearchResult = require './views/reception-search-result'
 ReceptionSearchCreator = require './helpers/reception-search-creator'
+RelationSearchQueryExecutor = require './helpers/relation-search-query-executor'
 
 class App extends Backbone.View
 	template: baseTemplate
@@ -70,6 +72,9 @@ class App extends Backbone.View
 			relationTypeSelector: new RelationTypeSelectorView()
 			receptionQueryBuilder: new ReceptionDocumentSearchView()
 			receptionSearchCreator: new ReceptionSearchCreator()
+			receptionSearchResult: new ReceptionSearchResult()
+			receptionSearchQueryExecutor: new RelationSearchQueryExecutor()
+			
 		@receptionSearch.render()
 		@showSearch()
 		@personSearch?.$el.fadeOut 75
