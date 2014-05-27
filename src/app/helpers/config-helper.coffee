@@ -4,7 +4,7 @@ class ConfigHelper
 	constructor: (config) ->
 		@config = if config? then config else require '../config.coffee'
 		
-	get: (collectionToGet) ->
-		return @config.get(collectionToGet)
+	get: (parameterToGet) ->
+		return @config.get(parameterToGet)
 	
 module.exports = ConfigHelper
