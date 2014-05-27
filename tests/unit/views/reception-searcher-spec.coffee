@@ -198,15 +198,12 @@ describe 'Reception searcher', ->
 				typeString: 'wwrelation'
 			}
 			
-			receptionSearchQueryExecutorExecuteQueryStub = sinon.stub(receptionSearchQueryExecutor, 'executeQuery')
-			receptionSearchQueryExecutorExecuteQueryStub.withArgs(searchParameters).returns(searchResult)
-			
-			receptionSearchResultUpdateSpy = sinon.spy(receptionSearchResult, 'update')
+			receptionSearchQueryExecutorExecuteQuerySpy = sinon.stub(receptionSearchQueryExecutor, 'executeQuery')
 			
 			searchButton = receptionSearcher.$el.find('.search-receptions')
 			
 			# action
 			searchButton.click()
 			
-			receptionSearchQueryExecutorExecuteQueryStub.calledWith(searchParameters).should.be.ok
-			receptionSearchResultUpdateSpy.calledWith(searchResult).should.be.ok
+			# verify
+			receptionSearchQueryExecutorExecuteQuerySpy.calledWith(searchParameters, receptionSearchResult.update).should.be.ok
