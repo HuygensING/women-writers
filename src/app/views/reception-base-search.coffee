@@ -12,9 +12,7 @@ class ReceptionBaseSearch extends Backbone.View
 	initialize: (options = {}) ->
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
 		@search = @searchCreatorWrapper.createSearch(@getTypeString(), @getQueryOptions(), @getFacetNameMap())
-		
-		console.log('search', @search)
-		
+	
 	render: (parentElement) ->
 		@$el.html(@template())
 		@$el.append(@search.$el)
