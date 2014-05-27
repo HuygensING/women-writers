@@ -38,8 +38,6 @@ class ReceptionBaseSearch extends Backbone.View
 	getLastPostUrlFromSearch: () ->
 		lastPostURL = @search.model.searchResults.models.pop().postURL
 		
-		console.log('lastPostURL', lastPostURL)
-		
 		return lastPostURL
 		
 module.exports = ReceptionBaseSearch
