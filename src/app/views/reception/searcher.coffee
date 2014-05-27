@@ -1,11 +1,11 @@
 Backbone = require 'backbone'
 
-ReceptionDocumentSearch = require './reception-document-search'
-ReceptionPersonSearch = require './reception-person-search'
+ReceptionDocumentSearch = require './document-search'
+ReceptionPersonSearch = require './person-search'
 
 class ReceptionSearcher extends Backbone.View
 	template: require '../../../templates/views/reception/reception-searcher.jade'
-	className: 'receptions-search'
+	className: 'reception-search'
 	
 	events:
 		'click .reception-query.relation-type .edit-link': 'editRelationTypes'
@@ -20,7 +20,9 @@ class ReceptionSearcher extends Backbone.View
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector
 		@receptionQueryBuilder = options.receptionQueryBuilder
-		@receptionSearchCreator = options.receptionSearchCreator 
+		@receptionSearchCreator = options.receptionSearchCreator
+		@receptionSearchResult = options.receptionSearchResult
+		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor
 	
 	render: ->
 		@$el.html(@template())

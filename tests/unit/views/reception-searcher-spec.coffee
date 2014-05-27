@@ -3,9 +3,9 @@ setup = require '../setup'
 ReceptionSearcher = require '../../../src/app/views/reception/searcher'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
-ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
-ReceptionPersonSearch = require '../../../src/app/views/reception-person-search'
-ReceptionSearchResult = require '../../../src/app/views/reception-search-result'
+ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
+ReceptionPersonSearch = require '../../../src/app/views/reception/person-search'
+ReceptionSearchResult = require '../../../src/app/views/reception/search-result'
 
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
@@ -49,10 +49,6 @@ describe 'Reception searcher', ->
 		it 'should render the relation type selector', ->
 			relationTypeSelectorRenderSpy = sinon.spy(relationTypeSelector, 'render')
 			
-			element = receptionSearcher.$el
-			
-			element.find('.reception-editor-content').length.should.equal 0
-			
 			receptionSearcher.render()
 			
 			queryEditorElement = receptionSearcher.$el.find('.query-editor')
@@ -60,11 +56,6 @@ describe 'Reception searcher', ->
 			relationTypeSelectorRenderSpy.calledWith(queryEditorElement).should.be.ok
 			
 		it 'should render the reception editor', ->
-			receptionEditorRenderSpy = sinon.spy(receptionEditor, 'render')
-			
-			element = receptionSearcher.$el
-			
-			element.find('.reception-editor').length.should.equal 0
 			
 			receptionSearcher.render()
 
@@ -72,7 +63,6 @@ describe 'Reception searcher', ->
 			
 			receptionQueryBuilderRenderStub.calledWith(queryEditorElement).should.be.ok
 			
-			element.find('.reception-editor').length.should.equal 1
 
 	describe 'Edit relation types', ->
 		beforeEach ->

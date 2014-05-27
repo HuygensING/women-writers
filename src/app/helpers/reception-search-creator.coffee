@@ -1,5 +1,5 @@
-ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
-ReceptionPersonSearch = require '../../../src/app/views/reception-person-search'
+ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
+ReceptionPersonSearch = require '../../../src/app/views/reception/person-search'
 
 SearchCreatorWrapper = require '../helpers/search-creator-wrapper'
 

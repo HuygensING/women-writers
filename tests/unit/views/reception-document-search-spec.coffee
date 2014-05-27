@@ -16,7 +16,7 @@ global.Backbone = Backbone = require 'backbone'
 Backbone.$ = $
 _= require 'underscore'
 
-ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
+ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 IdHelper = require '../../../src/app/helpers/id-helper'
 

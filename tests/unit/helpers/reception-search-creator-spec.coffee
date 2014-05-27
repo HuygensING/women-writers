@@ -7,8 +7,8 @@ requireJade = require 'require-jade'
 chai.should()
 
 ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
-ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
-ReceptionPersonSearch = require '../../../src/app/views/reception-person-search'
+ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
+ReceptionPersonSearch = require '../../../src/app/views/reception/person-search'
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 
 describe 'reception search creator', ->

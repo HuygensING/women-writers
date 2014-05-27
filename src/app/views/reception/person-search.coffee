@@ -1,4 +1,4 @@
-ReceptionBaseSearch = require './reception-base-search'
+ReceptionBaseSearch = require './base-search'
 
 class ReceptionPersonSearch extends ReceptionBaseSearch	
 	getTypeString: () ->

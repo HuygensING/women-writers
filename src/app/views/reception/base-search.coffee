@@ -1,10 +1,10 @@
 Backbone = require 'backbone'
 
-SearchCreatorWrapper = require '../helpers/search-creator-wrapper'
-IdHelper = require '../helpers/id-helper'
+SearchCreatorWrapper = require '../../helpers/search-creator-wrapper'
+IdHelper = require '../../helpers/id-helper'
 
 class ReceptionBaseSearch extends Backbone.View
-	template: require '../../templates/views/reception-faceted-search.jade'
+	template: require '../../../templates/views/reception-faceted-search.jade'
 	className: 'reception-searcher'
 		
 	events:
