@@ -10,19 +10,17 @@ class BaseView extends Backbone.View
 		@listenTo user, 'change:loggedIn', => @showControls()
 		@render()
 
-	getReceptions: ->
+	isReception: (r) ->
 		receptions = config.get 'receptions'
-		relations = @model.get '@relations'
-
-		isReception = (r) ->
-			for rel in receptions
-				if r is rel.regularName or r is rel.inverseName
-					return true
-
+		for rel in receptions
+			if r is rel.regularName or r is rel.inverseName
+				return true
 			false
 
+	getReceptions: ->
+		relations = @model.get '@relations'
 		results = {}
-		for relType in _.keys(relations) when isReception relType
+		for relType in _.keys(relations) when @isReception relType
 			results[relType] = relations[relType]
 
 		results
@@ -45,17 +43,31 @@ class BaseView extends Backbone.View
 				else if field.match /^@[^.]+\./ # @relations.isCreatedBy/id=displayName
 					[key, type, link, label] = field.split /[.\/=]/
 
-					group = []
 
-					if @model.has(key) and @model.get(key)[type]?
+					allNonReceptions = true if type is '*'
+
+					console.log "F", field, allNonReceptions, key, @model.get key
+
+					if allNonReceptions
+						for t, type of @model.get key
+							group = []
+							if not @isReception t
+								for r in type
+									group.push
+										label: r[label]
+										link: r[link]
+								data.fields.push
+									label: t
+									value: group
+					else if @model.has(key) and @model.get(key)[type]?
+						group = []
 						for r in @model.get(key)[type]
 							group.push
 								label: r[label]
 								link: r[link]
-
-					data.fields.push
-						label: type
-						value: group
+						data.fields.push
+							label: type
+							value: group
 
 				else
 					data.fields.push
