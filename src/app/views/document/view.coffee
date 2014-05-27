@@ -19,7 +19,7 @@ class DocumentView extends BaseView
 				'notes'
 				'topoi'
 				'^pid'
-				'@relations.isCreatedBy/id=displayName'
+				'@relations.*/id=displayName'
 			]
 		}
 		{
