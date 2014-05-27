@@ -1,21 +1,20 @@
-h2= person.title
+.controls
+	a.edit.btn.green(href=config.personEditUrl(data._id)) Edit
 
-h4.author= person.tempCreator
+h2= data.tempName
 
-ul.fields
-	each field in fields
-		li
-			label= field
-			.value= person[field]
+//- h4.author= data.tempCreator
 
-h3 Receptions of this work
-ul.receptions
-	each list, reception in receptions
-		li
-			h4= reception
-			ul
-				each r in list
-					li: a(href=config.personViewUrl(r.id))= r.displayName
+.fieldsets
+
+//- h3 Receptions of this work
+//- ul.receptions
+//- 	each list, reception in receptions
+//- 		li
+//- 			h4= reception
+//- 			ul
+//- 				each r in list
+//- 					li: a(href=config.documentViewUrl(r.id))= r.displayName
 
 if versions
 	p.versions
