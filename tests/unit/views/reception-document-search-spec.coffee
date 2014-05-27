@@ -18,6 +18,7 @@ _= require 'underscore'
 
 ReceptionDocumentSearch = require '../../../src/app/views/reception-document-search'
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
+IdHelper = require '../../../src/app/helpers/id-helper'
 
 describe 'reception document search', ->
 	receptionDocumentSearch = null
@@ -25,7 +26,8 @@ describe 'reception document search', ->
 	createSearchStub = null
 	parentElementAppendSpy = sinon.spy()
 	parentElement = { append: parentElementAppendSpy }
-	searchId = '1234567'
+	searchId = 'QURY000000001203'
+	lastPostURL = 'http://localhost:8080/timbuctoo/search/QURY000000001203'
 	
 	beforeEach ->
 		search = {
@@ -33,7 +35,15 @@ describe 'reception document search', ->
 				test: "test"
 			}
 			model: {
-				id: searchId
+				searchResults:
+					models:[
+						{
+							postURL: 'http://localhost:8080/timbuctoo/search/QURY000000001202'
+						}
+						{
+							postURL: lastPostURL
+						}
+					]
 			}
 		}
 		
@@ -111,8 +121,19 @@ describe 'reception document search', ->
 			elementHideSpy.called.should.be.ok
 			
 	describe 'getSearchId', ->
-		it 'should delegate the request to the search' ,->
+		it 'should give the last postURL to the id helper' ,->
+			idHelper = new IdHelper()
+			
 			receptionDocumentSearch = new ReceptionDocumentSearch
 				searchCreatorWrapper: searchCreatorWrapper
-			receptionDocumentSearch.getSearchId().should.equal searchId
+				idHelper: idHelper
+			
+			idHelperGetIdFromUrlStub = sinon.stub(idHelper, 'getIdFromUrl')
+			idHelperGetIdFromUrlStub.withArgs(lastPostURL).returns(searchId)
+			
+			actualSearchId = receptionDocumentSearch.getSearchId()
+			
+			idHelperGetIdFromUrlStub.calledWith(lastPostURL).should.be.ok
+			actualSearchId.should.equal(searchId)
+
 			

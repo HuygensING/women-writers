@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 
 SearchCreatorWrapper = require '../helpers/search-creator-wrapper'
+IdHelper = require '../helpers/id-helper'
 
 class ReceptionBaseSearch extends Backbone.View
 	template: require '../../templates/views/reception-faceted-search.jade'
@@ -11,6 +12,7 @@ class ReceptionBaseSearch extends Backbone.View
 		
 	initialize: (options = {}) ->
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
+		@idHelper = options.idHelper ? new IdHelper()
 		@search = @searchCreatorWrapper.createSearch(@getTypeString(), @getQueryOptions(), @getFacetNameMap())
 	
 	render: (parentElement) ->
@@ -31,5 +33,13 @@ class ReceptionBaseSearch extends Backbone.View
 			resultRows: 0
 			
 	getSearchId: () ->
-		return @search.model.id
+		return @idHelper.getIdFromUrl(@getLastPostUrlFromSearch())
+		
+	getLastPostUrlFromSearch: () ->
+		lastPostURL = @search.model.searchResults.models.pop().postURL
+		
+		console.log('lastPostURL', lastPostURL)
+		
+		return lastPostURL
+		
 module.exports = ReceptionBaseSearch
