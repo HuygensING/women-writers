@@ -7,23 +7,26 @@ h2= data.tempName
 
 .fieldsets
 
-//- h3 Receptions of this work
-//- ul.receptions
-//- 	each list, reception in receptions
-//- 		li
-//- 			h4= reception
-//- 			ul
-//- 				each r in list
-//- 					li: a(href=config.documentViewUrl(r.id))= r.displayName
+h3 Receptions of this work
+if receptions.length
+	ul.receptions
+		each list, reception in receptions
+			li
+				h4= reception
+				ul
+					each r in list
+						li: a(href=config.personViewUrl(r.id))= r.displayName
+else
+	p No receptions
 
-if versions
-	p.versions
-		| View other interpretations of this record:
-		each version in versions
-			a(href=version)= version
+//- if versions
+//- 	p.versions
+//- 		| View other interpretations of this record:
+//- 		each version in versions
+//- 			a(href=version)= version
 
-.revisions
-	h5 Revisions
-	ul
-		each r in revisions
-			li(data-revision=r)= r
+//- .revisions
+//- 	h5 Revisions
+//- 	ul
+//- 		each r in revisions
+//- 			li(data-revision=r)= r
