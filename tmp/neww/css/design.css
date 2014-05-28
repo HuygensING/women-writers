@@ -1,0 +1,68 @@
+/* CSS Document */
+body {
+	}
+
+a {
+	color:#6295BA;
+	}
+
+
+h1 {
+	font-family: 'Raleway', sans-serif;
+	text-transform:uppercase;
+	font-weight:100;
+	font-size:2em;
+
+	}
+
+
+h2 {
+	font-weight:bold;
+	font-size:1.1em;
+	line-height:1.2em;
+	}
+
+
+label {
+	color:#999;
+	}
+
+
+/* SMARTPHONE  */
+@media (max-width: 22em) {
+
+}
+
+
+
+
+
+/* TABLET PORTRAIT */
+@media (min-width: 42em) {	
+
+}
+
+
+
+@media (max-height: 350px) {
+	
+	}
+
+
+/* TABLET LANDSCAPE  / SMALL SCREEN */
+@media (min-width: 58em) {
+
+
+
+
+}
+
+/* BIG SCREEN */
+@media (min-width: 80em) {
+
+
+
+
+
+}
+
