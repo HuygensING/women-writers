@@ -32,7 +32,9 @@ class BaseView extends Backbone.View
 		for fs in @fieldsets
 			continue if fs.showOnlyWhenLoggedIn and not user.isLoggedIn()
 
-			data = fields: []
+			data =
+				config: config
+				fields: []
 
 			for field in fs.fields
 				if _.isRegExp field
@@ -45,8 +47,6 @@ class BaseView extends Backbone.View
 
 
 					allNonReceptions = true if type is '*'
-
-					console.log "F", field, allNonReceptions, key, @model.get key
 
 					if allNonReceptions
 						for t, type of @model.get key

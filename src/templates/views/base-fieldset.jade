@@ -9,6 +9,13 @@ ul.fields
 				if _.isArray(field.value)
 					ul
 						each v in field.value
-							li= v.label
+							if v.link
+								li
+									if v.link.match(/PERS/)
+										li: a(href=config.personViewUrl(v.link))= v.label
+									else if v.link.match(/DOC/)
+										li: a(href=config.documentViewUrl(v.link))= v.label
+							else
+								li= v.label
 				else
 					= field.value
