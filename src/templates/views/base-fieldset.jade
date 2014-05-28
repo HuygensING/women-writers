@@ -1,21 +1,6 @@
-if title
-	h4= title
+.fieldset
+	if title
+		h4= title
 
-ul.fields
 	each field in fields
-		li
-			label= field.label
-			.value
-				if _.isArray(field.value)
-					ul
-						each v in field.value
-							if v.link
-								li
-									if v.link.match(/PERS/)
-										li: a(href=config.personViewUrl(v.link))= v.label
-									else if v.link.match(/DOC/)
-										li: a(href=config.documentViewUrl(v.link))= v.label
-							else
-								li= v.label
-				else
-					= field.value
+		.field!= field
