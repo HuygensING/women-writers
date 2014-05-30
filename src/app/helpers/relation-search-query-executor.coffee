@@ -6,14 +6,15 @@ class RelationSearchQueryExecutor
 		@requestExecutor = requestExecutor
 		@configHelper = if configHelper? then configHelper else new ConfigHelper()
 	
-	executeQuery: (parameters = {}, updateSearchResults) ->
+	executeQuery: (parameters = {}, searchResults) ->
 		requestExecutor = @requestExecutor
 		
 		callback = (data, status, request) ->
 			requestExecutor.ajax({
 				type: 'GET'
 				url: request.getResponseHeader('Location')
-				success: updateSearchResults
+				success: (data) ->
+					searchResults.update(data)
 			})
 		
 		@requestExecutor.ajax({

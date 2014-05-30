@@ -28,9 +28,12 @@ describe 'Relation search query executor', ->
 					else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
 						settings.success({}, '', postResponse)
 			}
-		it 'should call updateSearchResults with the results as parameter', ->
+		it 'should call update of the search results object with the results as parameter', ->
 			# setup
-			updateSearchResults = sinon.spy()
+			searchResultsUpdate = sinon.spy()
+			
+			searchResults ={update: searchResultsUpdate}
+			
 			configHelper = new ConfigHelper()
 			configHelperGetStub = sinon.stub(configHelper, 'get')
 			configHelperGetStub.withArgs('baseUrl').returns('http://www.test.com')
@@ -39,7 +42,7 @@ describe 'Relation search query executor', ->
 			relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper)
 						
 			#action
-			relationSearchQueryExecutor.executeQuery(parameters, updateSearchResults)
+			relationSearchQueryExecutor.executeQuery(parameters, searchResults)
 			
 			# verify
-			updateSearchResults.calledWith(results).should.be.ok
+			searchResultsUpdate.calledWith(results).should.be.ok

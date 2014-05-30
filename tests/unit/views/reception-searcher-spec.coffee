@@ -202,4 +202,4 @@ describe 'Reception searcher', ->
 			searchButton.click()
 			
 			# verify
-			receptionSearchQueryExecutorExecuteQuerySpy.calledWith(searchParameters, receptionSearchResult.update).should.be.ok
+			receptionSearchQueryExecutorExecuteQuerySpy.calledWith(searchParameters, receptionSearchResult).should.be.ok

@@ -9,6 +9,12 @@ describe 'Reception search result', ->
 		receptionSearchResult = new ReceptionSearchResult()
 	
 	describe 'update', ->
+		beforeEach ->
+			parentElementAppendSpy = sinon.spy()
+			parentElement = { append: parentElementAppendSpy }
+			
+			receptionSearchResult.render(parentElement)
+			
 		it 'should render a table with the results, if the results not empty', ->
 			result ={
 				results: [
