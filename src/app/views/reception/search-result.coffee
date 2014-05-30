@@ -5,8 +5,11 @@ class ReceptionSearchResult extends Backbone.View
 	
 	update: (result = {}) ->
 		@$el.html(@template(results: result.results))
+		@parentElement.append(@$el)
 		
 	render: (parentElement) ->
-		parentElement.append(@$el)
+		@$el.html('<div>')
+		@parentElement = parentElement
+		@parentElement.append(@$el)
 	
 module.exports = ReceptionSearchResult
