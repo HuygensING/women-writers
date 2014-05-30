@@ -8,8 +8,8 @@ if results
 		tbody.results-body
 			each result in results
 				tr
-					td result.sourceId
-					td result.typeId
-					td result.targetId
+					td= result['^sourceId']
+					td= result['^typeId']
+					td= result['^targetId']
 else
 	p No results found
