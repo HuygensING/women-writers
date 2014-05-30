@@ -21,18 +21,18 @@ class BaseViewWithTemplate extends BaseView
 describe 'Base view', ->
 	view = null
 	beforeEach ->
-		view = new BaseViewWithTemplate
-			el: $('<div/>')
-			model: new Backbone.Model testData
+		# view = new BaseViewWithTemplate
+			# el: $('<div/>')
+			# model: new Backbone.Model testData
 
 	# it 'getReceptions should return only the receptions in @relations', ->
 	# 	console.log "Test!", testData
 	# 	# view.getReceptions()
 
-	it 'should toggle controls depending when loggedIn status changes', ->
-		spy = sinon.spy view, 'showControls'
-		user.set loggedIn: true
-		spy.called.should.be.ok
+	# it 'should toggle controls depending when loggedIn status changes', ->
+		# spy = sinon.spy view, 'showControls'
+		# user.set loggedIn: true
+		# spy.called.should.be.ok
 
 	# Pending: CSS support is limited under JSdom
 	it 'should show controls when user is logged in'
