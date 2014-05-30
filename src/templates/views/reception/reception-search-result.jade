@@ -1,0 +1,16 @@
+div.results
+	if results
+		table.results-table
+			thead.results-head
+				tr
+					th Receptions on ...
+					th Type
+					th Receptions
+			tbody.results-body
+				each result in results
+					tr
+						td result.sourceId
+						td result.typeId
+						td result.targetId
+	else
+		p No results found
