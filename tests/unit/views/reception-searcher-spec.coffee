@@ -19,8 +19,12 @@ describe 'Reception searcher', ->
 	receptionSearchCreator = null
 	receptionSearchResult = null
 	receptionSearchQueryExecutor = null 
+	parentElement = null
 	
 	beforeEach ->
+		parentElementAppendStub = sinon.stub()
+		parentElement = { append: parentElementAppendStub} 
+		
 		receptionSearchQueryExecutor = new ReceptionSearchQueryExecutor()
 		receptionSearchResult = new ReceptionSearchResult()
 		searchCreatorWrapper = new SearchCreatorWrapper
@@ -43,7 +47,6 @@ describe 'Reception searcher', ->
 			receptionSearchCreator: receptionSearchCreator
 			receptionSearchResult: receptionSearchResult
 			receptionSearchQueryExecutor: receptionSearchQueryExecutor
-			
 		
 	describe 'render', ->
 		it 'should render the relation type selector', ->
@@ -63,6 +66,14 @@ describe 'Reception searcher', ->
 			
 			receptionQueryBuilderRenderStub.calledWith(queryEditorElement).should.be.ok
 			
+		it 'should render the search results', ->
+			receptionSearchResultRenderSpy = sinon.spy(receptionSearchResult, 'render')
+			
+			receptionSearcher.render()
+			
+			resultsElement = receptionSearcher.$el.find('.results')
+			
+			receptionSearchResultRenderSpy.calledWith(resultsElement).should.be.ok
 
 	describe 'Edit relation types', ->
 		beforeEach ->

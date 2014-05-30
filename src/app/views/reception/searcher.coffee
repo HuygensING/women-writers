@@ -30,6 +30,8 @@ class ReceptionSearcher extends Backbone.View
 		
 		@relationTypeSelector.render(receptionSearchElement)
 		@receptionQueryBuilder.render(receptionSearchElement)
+		
+		@receptionSearchResult.render(@$el.find('.results'))
 
 	editRelationTypes: (e) ->
 		@relationTypeSelector.show()
