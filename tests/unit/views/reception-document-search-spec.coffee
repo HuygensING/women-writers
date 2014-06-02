@@ -95,6 +95,7 @@ describe 'reception document search', ->
 		beforeEach ->
 			receptionDocumentSearch = new ReceptionDocumentSearch
 				searchCreatorWrapper: searchCreatorWrapper
+			
 			receptionDocumentSearch.render(parentElement)
 				
 		it 'should show the editor', ->
@@ -106,19 +107,32 @@ describe 'reception document search', ->
 			elementShowSpy.called.should.be.ok
 	
 	describe 'close button', ->
+		element = null
+		closeButton = null
+		
 		beforeEach ->
+			
 			receptionDocumentSearch = new ReceptionDocumentSearch
 				searchCreatorWrapper: searchCreatorWrapper
-			receptionDocumentSearch.render(parentElement)
-		it 'should hide the relation type selector when clicked', ->
-			element = receptionDocumentSearch.$el
 			
+			receptionDocumentSearch.render(parentElement)
+			
+			element = receptionDocumentSearch.$el
+			closeButton = element.find('.close-button')
+			
+		it 'should hide the relation type selector when clicked', ->
 			elementHideSpy = sinon.spy(element, 'hide')
 			
-			closeButton = element.find('.close-button')
 			closeButton.click()
 			
 			elementHideSpy.called.should.be.ok
+		
+		it 'should fire a queryBuilderCloseEvent', ->
+			elementTriggerSpy = sinon.spy(element, 'trigger')
+			
+			closeButton.click()
+			
+			elementTriggerSpy.calledWith('queryBuilderCloseEvent').should.be.ok
 			
 	describe 'getSearchId', ->
 		it 'should give the last postURL to the id helper' ,->

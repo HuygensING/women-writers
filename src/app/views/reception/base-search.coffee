@@ -8,7 +8,7 @@ class ReceptionBaseSearch extends Backbone.View
 	className: 'reception-searcher'
 		
 	events:
-		'click .close-button' : 'hide'
+		'click .close-button' : 'closeEditor'
 		
 	initialize: (options = {}) ->
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
@@ -21,10 +21,14 @@ class ReceptionBaseSearch extends Backbone.View
 		
 		parentElement.append(@$el)
 		
-	show: ->
+	show: () ->
 		@$el.show()
-		
-	hide: ->
+	
+	closeEditor: () ->
+		@hide()
+		@$el.trigger('queryBuilderCloseEvent')
+	
+	hide: () ->
 		@$el.hide()
 		
 	getQueryOptions: () ->

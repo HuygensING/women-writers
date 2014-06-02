@@ -104,6 +104,34 @@ describe 'reception person search', ->
 			
 			elementShowSpy.called.should.be.ok
 			
+	describe 'close button', ->
+		element = null
+		closeButton = null
+		
+		beforeEach ->
+			
+			receptionPersonSearch = new ReceptionPersonSearch
+				searchCreatorWrapper: searchCreatorWrapper
+				
+			receptionPersonSearch.render(parentElement)
+			
+			element = receptionPersonSearch.$el
+			closeButton = element.find('.close-button')
+			
+		it 'should hide the relation type selector when clicked', ->
+			elementHideSpy = sinon.spy(element, 'hide')
+			
+			closeButton.click()
+			
+			elementHideSpy.called.should.be.ok
+		
+		it 'should fire a queryBuilderCloseEvent', ->
+			elementTriggerSpy = sinon.spy(element, 'trigger')
+			
+			closeButton.click()
+			
+			elementTriggerSpy.calledWith('queryBuilderCloseEvent').should.be.ok
+			
 	describe 'getSearchId', ->
 		it 'should give the last postURL to the id helper' ,->
 			idHelper = new IdHelper()

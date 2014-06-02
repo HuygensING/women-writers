@@ -59,16 +59,28 @@ describe 'Relation type selector', ->
 			elementShowSpy.called.should.be.ok
 			
 	describe 'close button', ->
-		it 'should hide the relation type selector when clicked', ->
+		closeButton = null
+		element = null
+		
+		beforeEach ->
 			relationTypeSelector.render(parentElement)
 			element = relationTypeSelector.$el
+			closeButton = element.find('.close-button')
 			
+		
+		it 'should hide the relation type selector when clicked', ->
 			elementHideSpy = sinon.spy(element, 'hide')
 			
-			closeButton = element.find('.close-button')
 			closeButton.click()
 			
 			elementHideSpy.called.should.be.ok
+			
+		it 'should fire a queryBuilderCloseEvent', ->
+			elementTriggerSpy = sinon.spy(element, 'trigger')
+			
+			closeButton.click()
+			
+			elementTriggerSpy.calledWith('queryBuilderCloseEvent').should.be.ok
 		
 	describe 'selected relation type', ->
 		beforeEach ->

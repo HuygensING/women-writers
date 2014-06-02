@@ -15,6 +15,7 @@ class ReceptionSearcher extends Backbone.View
 		'click a.unimplemented': 'showUnimplementedMessage'
 		'click button.unimplemented': 'showUnimplementedMessage'
 		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
+		'queryBuilderCloseEvent': 'deselectReceptionQuery'
 		
 	
 	initialize: (options) ->
@@ -64,7 +65,7 @@ class ReceptionSearcher extends Backbone.View
 		@$('.search-receptions').removeClass('disabled')
 		
 	selectTab: (e) ->
-		@$('.reception-query').removeClass('selected')
+		@deselectReceptionQuery()
 		@$(e.currentTarget).parent().addClass('selected')
 		
 	search: (e) ->
@@ -79,6 +80,9 @@ class ReceptionSearcher extends Backbone.View
 		
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')
+		
+	deselectReceptionQuery: () ->
+		@$('.reception-query').removeClass('selected')
 	
 	showUnimplementedMessage: ->
 		alert('This part will be implemented soon.')
