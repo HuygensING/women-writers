@@ -20,6 +20,9 @@ describe 'Reception searcher', ->
 	receptionSearchResult = null
 	receptionSearchQueryExecutor = null 
 	parentElement = null
+	sourceQueryBuilderShowStub = sinon.stub()
+	sourceQueryBuilderHideStub = sinon.stub()
+	sourceQueryBuilder = null
 	
 	beforeEach ->
 		parentElementAppendStub = sinon.stub()
@@ -47,6 +50,14 @@ describe 'Reception searcher', ->
 			receptionSearchCreator: receptionSearchCreator
 			receptionSearchResult: receptionSearchResult
 			receptionSearchQueryExecutor: receptionSearchQueryExecutor
+	
+		sourceQueryBuilder = { 
+			show: sourceQueryBuilderShowStub 
+			hide: sourceQueryBuilderHideStub
+			remove: sinon.stub()
+		}
+		
+		receptionSearcher.sourceQueryBuilder = sourceQueryBuilder
 		
 	describe 'render', ->
 		it 'should render the relation type selector', ->
@@ -76,41 +87,70 @@ describe 'Reception searcher', ->
 			receptionSearchResultRenderSpy.calledWith(resultsElement).should.be.ok
 
 	describe 'Edit relation types', ->
+		receptionTypeEditLink = null
 		beforeEach ->
 			receptionSearcher.render()
+			receptionTypeEditLink = receptionSearcher.$el.find('.reception-query.relation-type .edit-link')
+			
 		it 'should display the relation type selector when it is clicked', ->
 			relationTypeSelectorShowSpy = sinon.spy(relationTypeSelector, 'show')
 			
-			receptionTypeEditLink = receptionSearcher.$el.find('.reception-query.relation-type .edit-link')
 			
 			receptionTypeEditLink.click()
 
 			relationTypeSelector.show.called.should.be.ok
+			
+		it 'should hide reception query builder and source query builder', ->
+			receptionQueryBuilderHideSpy = sinon.spy(receptionQueryBuilder, 'hide')
+			
+			receptionTypeEditLink.click()
+			
+			receptionQueryBuilderHideSpy.called.should.be.ok
+			sourceQueryBuilderHideStub.called.should.be.ok
 
 	describe 'Edit receptions', -> 
+		receptionEditLink = null
+		
 		beforeEach ->
 			receptionSearcher.render()
+			receptionEditLink = receptionSearcher.$el.find('.reception-query.target .edit-link')
+			
 		it 'should display the reception editor when it is clicked', ->
 			receptionQueryBuilderShowSpy = sinon.spy(receptionQueryBuilder, 'show')
-			
-			receptionEditLink = receptionSearcher.$el.find('.reception-query.target .edit-link')
 			
 			receptionEditLink.click()
 			
 			receptionQueryBuilderShowSpy.called.should.be.ok
 			
+		it 'should hide source query builder and relation type selector', ->
+			relationTypeSelectorHideSpy = sinon.spy(relationTypeSelector, 'hide')
+			
+			receptionEditLink.click()
+			
+			relationTypeSelectorHideSpy.called.should.be.ok
+			sourceQueryBuilderHideStub.called.should.be.ok
+			
 	describe 'Edit sources', ->
+		editSourceLink = null
+		
 		beforeEach ->
 			receptionSearcher.render()
-		it 'should display the source editor', ->
 			editSourceLink = receptionSearcher.$el.find('.reception-query.source .edit-link')
-			
-			sourceQueryBuilderShowStub = sinon.stub()
-			receptionSearcher.sourceQueryBuilder = { show: sourceQueryBuilderShowStub }
+		
+		it 'should display the source editor', ->
 			
 			editSourceLink.click()
 			
 			sourceQueryBuilderShowStub.called.should.be.ok
+		
+		it 'should hide the relationType selector and the reception query builder', ->
+			receptionQueryBuilderHideSpy = sinon.spy(receptionQueryBuilder, 'hide')
+			relationTypeSelectorHideSpy = sinon.spy(relationTypeSelector, 'hide')
+			
+			editSourceLink.click()
+			
+			receptionQueryBuilderHideSpy.called.should.be.ok
+			relationTypeSelectorHideSpy.called.should.be.ok
 			
 	describe 'source type selected event', ->
 		sourceQueryBuilderMockRenderStub = null
