@@ -107,6 +107,11 @@ describe 'Reception searcher', ->
 			
 			receptionQueryBuilderHideSpy.called.should.be.ok
 			sourceQueryBuilderHideStub.called.should.be.ok
+		
+		it 'should add the class selected to it\'s parent', ->
+			receptionTypeEditLink.click()
+			
+			receptionTypeEditLink.parent().hasClass('selected').should.be.ok
 
 	describe 'Edit receptions', -> 
 		receptionEditLink = null
@@ -130,6 +135,11 @@ describe 'Reception searcher', ->
 			relationTypeSelectorHideSpy.called.should.be.ok
 			sourceQueryBuilderHideStub.called.should.be.ok
 			
+		it 'should add the class selected to it\'s parent', ->
+			receptionEditLink.click()
+			
+			receptionEditLink.parent().hasClass('selected').should.be.ok
+			
 	describe 'Edit sources', ->
 		editSourceLink = null
 		
@@ -151,6 +161,11 @@ describe 'Reception searcher', ->
 			
 			receptionQueryBuilderHideSpy.called.should.be.ok
 			relationTypeSelectorHideSpy.called.should.be.ok
+			
+		it 'should add the class selected to it\'s parent', ->
+			editSourceLink.click()
+			
+			editSourceLink.parent().hasClass('selected').should.be.ok
 			
 	describe 'source type selected event', ->
 		sourceQueryBuilderMockRenderStub = null

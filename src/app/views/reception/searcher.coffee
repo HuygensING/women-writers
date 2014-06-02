@@ -34,16 +34,19 @@ class ReceptionSearcher extends Backbone.View
 		@receptionSearchResult.render(@$el.find('.results'))
 
 	editRelationTypes: (e) ->
+		@selectTab(e)
 		@relationTypeSelector.show()
 		@receptionQueryBuilder.hide()
 		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
 		
 	editReceptions: (e) ->
+		@selectTab(e)
 		@receptionQueryBuilder.show()
 		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
 		@relationTypeSelector.hide()
 				
 	editSource: (e) ->
+		@selectTab(e)
 		@sourceQueryBuilder.show()
 		@relationTypeSelector.hide()
 		@receptionQueryBuilder.hide()
@@ -59,6 +62,10 @@ class ReceptionSearcher extends Backbone.View
 		
 		# enable search button
 		@$('.search-receptions').removeClass('disabled')
+		
+	selectTab: (e) ->
+		@$('.reception-query').removeClass('selected')
+		@$(e.currentTarget).parent().addClass('selected')
 		
 	search: (e) ->
 		queryParameters = {
