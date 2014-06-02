@@ -35,12 +35,18 @@ class ReceptionSearcher extends Backbone.View
 
 	editRelationTypes: (e) ->
 		@relationTypeSelector.show()
+		@receptionQueryBuilder.hide()
+		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
 		
 	editReceptions: (e) ->
 		@receptionQueryBuilder.show()
-		
+		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
+		@relationTypeSelector.hide()
+				
 	editSource: (e) ->
 		@sourceQueryBuilder.show()
+		@relationTypeSelector.hide()
+		@receptionQueryBuilder.hide()
 	
 	addSourceQueryBuilder: (e, value) ->
 		if(@sourceQueryBuilder isnt null and @sourceQueryBuilder isnt undefined)
