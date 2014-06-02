@@ -133,7 +133,9 @@ describe 'reception person search', ->
 			elementTriggerSpy.calledWith('queryBuilderCloseEvent').should.be.ok
 			
 	describe 'getSearchId', ->
-		it 'should give the last postURL to the id helper' ,->
+		idHelperGetIdFromUrlStub = null
+		receptionPersonSearch = null
+		beforeEach ->
 			idHelper = new IdHelper()
 			
 			receptionPersonSearch = new ReceptionPersonSearch
@@ -142,8 +144,17 @@ describe 'reception person search', ->
 			
 			idHelperGetIdFromUrlStub = sinon.stub(idHelper, 'getIdFromUrl')
 			idHelperGetIdFromUrlStub.withArgs(lastPostURL).returns(searchId)
+		
+		it 'should give the last postURL to the id helper' ,->
 			
 			actualSearchId = receptionPersonSearch.getSearchId()
 			
 			idHelperGetIdFromUrlStub.calledWith(lastPostURL).should.be.ok
 			actualSearchId.should.equal(searchId)
+			
+		it 'should return the same id, when called multiple times' , ->
+			firstSearchId = receptionPersonSearch.getSearchId()
+			secondSearchId = receptionPersonSearch.getSearchId()
+			
+			idHelperGetIdFromUrlStub.calledWith(lastPostURL).should.be.ok
+			firstSearchId.should.equal(secondSearchId)
