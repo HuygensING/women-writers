@@ -40,7 +40,8 @@ class ReceptionBaseSearch extends Backbone.View
 		return @idHelper.getIdFromUrl(@getLastPostUrlFromSearch())
 		
 	getLastPostUrlFromSearch: () ->
-		lastPostURL = @search.model.searchResults.models.pop().postURL
+		models = @search.model.searchResults.models
+		lastPostURL = models[(models.length - 1)].postURL
 		
 		return lastPostURL
 		
