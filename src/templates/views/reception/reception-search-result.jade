@@ -1,15 +1,20 @@
-if results
-	table.results-table
-		thead.results-head
-			tr
-				th Receptions on ...
-				th Type
-				th Receptions
-		tbody.results-body
-			each result in results
+if response
+	if response['_prev']
+		p.prev(href=response['_prev']) « Previous
+	if response['_next']
+		p.next(href=response['_next']) Next »
+	if response.results
+		table.results-table
+			thead.results-head
 				tr
-					td= result['^sourceId']
-					td= result['^typeId']
-					td= result['^targetId']
-else
-	p No results found
+					th Receptions on ...
+					th Type
+					th Receptions
+			tbody.results-body
+				each result in response.results
+					tr
+						td= result['^sourceId']
+						td= result['^typeId']
+						td= result['^targetId']
+	else
+		p No results found
