@@ -67,7 +67,7 @@ class App extends Backbone.View
 		@documentSearch.$el.fadeIn 75
 
 	showReceptionSearch: ->
-		@receptionSearch ?= new ReceptionSearchView
+		@receptionSearch = new ReceptionSearchView
 			el: '#search .receptions'
 			relationTypeSelector: new RelationTypeSelectorView()
 			receptionQueryBuilder: new ReceptionDocumentSearchView()
