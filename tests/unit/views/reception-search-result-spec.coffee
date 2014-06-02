@@ -16,23 +16,21 @@ describe 'Reception search result', ->
 			
 		it 'should render a table with the results, if the results not empty', ->
 			result ={
-				results: [
+				refs: [
 					{
-						"^sourceType": "document"
-						"^sourceId": "DOCU000000045258"
-						"^typeType": "relationtype"
-						"^typeId": "RELT000000000031"
-						"^targetType": "document"
-						"^targetId": "DOCU000000055316"
+						"type": "wwrelation"
+						"id": "RELA000000266317"
+						"path": "domain/wwrelations/RELA000000266317"
+						"relationName": "isPersonMentionedIn"
+						"sourceName": "[TEMP] François de la Rochefoucauld"
 					},
 					{
-						"^sourceType": "document"
-						"^sourceId": "DOCU000000045260"
-						"^typeType": "relationtype",
-						"^typeId": "RELT000000000031"
-						"^targetType": "document"
-						"^targetId": "DOCU000000051951"
-					}
+						"type": "wwrelation",
+						"id": "RELA000000268781",
+						"path": "domain/wwrelations/RELA000000268781",
+						"relationName": "isPersonCommentedOnIn",
+						"sourceName": "[TEMP] François de la Rochefoucauld"
+					},
 				]
 			}
 			

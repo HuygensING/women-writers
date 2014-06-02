@@ -3,7 +3,7 @@ if response
 		p.prev(href=response['_prev']) « Previous
 	if response['_next']
 		p.next(href=response['_next']) Next »
-	if response.results
+	if response.refs
 		table.results-table
 			thead.results-head
 				tr
@@ -11,10 +11,10 @@ if response
 					th Type
 					th Receptions
 			tbody.results-body
-				each result in response.results
+				each ref in response.refs
 					tr
-						td= result['^sourceId']
-						td= result['^typeId']
-						td= result['^targetId']
+						td= ref.sourceName
+						td= ref.relationName
+						td= ref.targetName
 	else
 		p No results found
