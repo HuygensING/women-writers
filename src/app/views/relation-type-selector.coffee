@@ -8,7 +8,7 @@ class RelationTypeSelector extends Backbone.View
 	tagName: 'div'
 	
 	events: 
-		'click.relation-type-selector .close-button':'hide'
+		'click.relation-type-selector .close-button':'closeEditor'
 		'click.relation-type-selector input[name="reception-type-source-type"]':'showRelationSelector'
 		
 	initialize: (options = {}) ->
@@ -26,6 +26,10 @@ class RelationTypeSelector extends Backbone.View
 		@$el.find('.relation-type-selector-content').append(@relationTypeMultiSelect.$el)
 		
 		parentElement.append(@$el)
+	
+	closeEditor: () ->
+		@hide()
+		@$el.trigger('queryBuilderCloseEvent')
 	
 	hide: () ->
 		@$el.hide()

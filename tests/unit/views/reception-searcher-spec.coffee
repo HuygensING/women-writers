@@ -135,7 +135,7 @@ describe 'Reception searcher', ->
 			relationTypeSelectorHideSpy.called.should.be.ok
 			sourceQueryBuilderHideStub.called.should.be.ok
 			
-		it 'should add the class selected to it\'s parent', ->
+		it 'should add the class "selected" to it\'s parent', ->
 			receptionEditLink.click()
 			
 			receptionEditLink.parent().hasClass('selected').should.be.ok
@@ -162,7 +162,7 @@ describe 'Reception searcher', ->
 			receptionQueryBuilderHideSpy.called.should.be.ok
 			relationTypeSelectorHideSpy.called.should.be.ok
 			
-		it 'should add the class selected to it\'s parent', ->
+		it 'should add the class "selected" to it\'s parent', ->
 			editSourceLink.click()
 			
 			editSourceLink.parent().hasClass('selected').should.be.ok
@@ -258,3 +258,15 @@ describe 'Reception searcher', ->
 			
 			# verify
 			receptionSearchQueryExecutorExecuteQuerySpy.calledWith(searchParameters, receptionSearchResult).should.be.ok
+		
+	describe 'query-builder-close-event', ->
+		it 'should deselect the selected reception-query, when it is triggered', ->
+			receptionSearcher.render()
+			element = receptionSearcher.$el
+			element.find('.reception-query').first().addClass('selected')
+			
+			element.find('.reception-query.selected').length.should.equal(1)
+			
+			element.trigger('queryBuilderCloseEvent')
+			
+			element.find('.reception-query.selected').length.should.equal(0)
