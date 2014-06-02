@@ -20,8 +20,6 @@ class ReceptionSearchResult extends Backbone.View
 	updateResults: (e) ->
 		url = $(e.currentTarget).attr('href')
 		
-		console.log('url', url)
-		
 		instance = @
 		
 		$.ajax({
