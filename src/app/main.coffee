@@ -20,6 +20,7 @@ handleLinkClicks = (e) ->
 		Backbone.history.navigate href, trigger: true
 
 bootstrap = ->
+	loadedRelationTypesPerson = new $.Deferred()
 	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
 		relationTypes = {}
 		for t in data
@@ -29,76 +30,111 @@ bootstrap = ->
 			if t.targetTypeName is 'person'
 				relationTypes[t.inverseName] = t
 		config.set personRelationTypes: relationTypes
-	.then ->
-		$.getJSON config.get('baseUrl') + '/api/system/relationtypes?iname=wwdocument'
-	.then (data) ->
+		
+		loadedRelationTypesPerson.resolve()
+
+
+	loadedRelationTypesDocument = new $.Deferred()
+	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwdocument').then (data) ->
 		relationTypes = {}
 		for t in data
 			relationTypes[t.regularName] = t
 		config.set documentRelationTypes: relationTypes
-	.then ->
-		searchQuery
-			query:
-				term: '*'
-				typeString: 'wwlanguage'
-			options:
-				searchUrl: config.searchUrl()
-				resultRows: 1000 # or any large number
+
+		loadedRelationTypesDocument.resolve()
+
+	loadedLanguages = new $.Deferred()
+	searchQuery
+		query:
+			term: '*'
+			typeString: 'wwlanguage'
+		options:
+			searchUrl: config.searchUrl()
+			resultRows: 1000 # or any large number
 	.then (data) ->
 		languages = (value: l.id, label: l.displayName for l in data.refs)
 		config.set languages: languages
-	.then ->
-		searchQuery
-			query:
-				term: '*'
-				typeString: 'wwlocation'
-			options:
-				searchUrl: config.searchUrl()
-				resultRows: 1000
+		loadedLanguages.resolve()
+
+	loadedLocations = new $.Deferred()
+	searchQuery
+		query:
+			term: '*'
+			typeString: 'wwlocation'
+		options:
+			searchUrl: config.searchUrl()
+			resultRows: 1000
 	.then (data) ->
 		config.set locations: (value: l.id, label: l.displayName for l in data.refs)
-	.then ->
-		searchQuery
-			query:
-				term: '*'
-				typeString: 'wwperson'
-			options:
-				searchUrl: config.searchUrl()
-				resultRows: 100
+		loadedLocations.resolve()
+
+	loadedPersons = new $.Deferred()
+	searchQuery
+		query:
+			term: '*'
+			typeString: 'wwperson'
+		options:
+			searchUrl: config.searchUrl()
+			resultRows: 100
 	.then (data) ->
 		config.set persons: (value: p.id, label: p.displayName for p in data.refs)
-	.then ->
-		$.getJSON config.receptionsUrl()
-	.then (data) ->
+		loadedPersons.resolve()
+
+	loadedReceptions = new $.Deferred()
+	$.getJSON(config.receptionsUrl()).then (data) ->
 		config.set receptions: data.receptions
-	.then ->
-		$.getJSON config.educationUrl()
-	.then (data) ->
+		loadedReceptions.resolve()
+
+	loadedEducations = new $.Deferred()
+	$.getJSON(config.educationUrl()).then (data) ->
 		config.set educations: (value: e._id, label: e.value for e in data)
-	.then ->
-		$.getJSON config.financialSituationUrl()
-	.then (data) ->
-		config.set financialSituations: (value: f._id, label: f.value for f in data)	
-	.then ->
-		$.getJSON config.maritalStatusUrl()
-	.then (data) ->
+		loadedEducations.resolve()
+
+	loadedFinancialSituations = new $.Deferred()
+	$.getJSON(config.financialSituationUrl()).then (data) ->
+		config.set financialSituations: (value: f._id, label: f.value for f in data)
+		loadedFinancialSituations.resolve()
+
+	loadedMaritalStatuses = new $.Deferred()
+	$.getJSON(config.maritalStatusUrl()).then (data) ->
 		config.set maritalStatuses: (value: m._id, label: m.value for m in data)
-	.then ->
-		$.getJSON config.professionUrl()
-	.then (data) ->
+		loadedMaritalStatuses.resolve()
+
+	loadedProfessions = new $.Deferred()
+	$.getJSON(config.professionUrl()).then (data) ->
 		config.set professions: (value: p._id, label: p.value for p in data)
-	.then ->
-		$.getJSON config.religionUrl()
-	.then (data) ->
+		loadedProfessions.resolve()
+
+	loadedReligions = new $.Deferred()
+	$.getJSON(config.religionUrl()).then (data) ->
 		config.set religions: (value: r._id, label: r.value for r in data)
-	.then ->
-		$.getJSON config.socialClassUrl()
-	.then (data) ->
+		loadedReligions.resolve()
+
+	loadedSocialClasses = new $.Deferred()
+	$.getJSON(config.socialClassUrl()).then (data) ->
 		config.set socialClasses: (value: s._id, label: s.value for s in data)
-	.then ->
-		$.getJSON config.sourceCategoryUrl()
-	.then (data) ->
+		loadedSocialClasses.resolve()
+
+	loadedSourceCategories = new $.Deferred()
+	$.getJSON(config.sourceCategoryUrl()).then (data) ->
 		config.set sourceCategories: (value: s._id, label: s.value for s in data)
+		loadedSourceCategories.resolve()
+
+	$.when(
+		loadedRelationTypesPerson,
+		loadedRelationTypesDocument,
+		loadedLanguages,
+		loadedLocations,
+		loadedPersons,
+		loadedReceptions,
+		loadedEducations,
+		loadedFinancialSituations,
+		loadedMaritalStatuses,
+		loadedProfessions,
+		loadedReligions,
+		loadedSocialClasses,
+		loadedSourceCategories
+	)
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks
