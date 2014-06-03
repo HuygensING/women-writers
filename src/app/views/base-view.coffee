@@ -40,11 +40,15 @@ class BaseView extends Backbone.View
 				field: field
 				type: 'Text'
 
+		data = _.clone field
+
 		if _.isRegExp field.field # multiple fields, so go through each one
 			for f in @model.keys() when f.match field.field
-				html += @_fieldHtml
+				html += @_fieldHtml _.extend data,
 					field: f
+					title: f
 					type: field.type
+					large: field.large
 		else if field.field.match /^@[^.]+\./ # @relations.isCreatedBy
 			[key, relationType, link, label] = field.field.split /[.\/=]/
 
@@ -55,14 +59,14 @@ class BaseView extends Backbone.View
 					group = []
 					if not @isReception typeName
 						for r in relationType
-							html += @_fieldHtml
+							html += @_fieldHtml _.extend _.pick(data, ['newLine', 'large']),
 								title: typeName
 								field: typeName
 								value: field.options.map r
 			else if @model.has(key) and @model.get(key)[relationType]?
 				group = []
 				for r in @model.get(key)[relationType]
-					html += @fieldTemplate
+					html += @fieldTemplate _.extend data,
 						title: relationType
 						value: r[label]
 		else
@@ -71,7 +75,7 @@ class BaseView extends Backbone.View
 			if field.type is 'Array'
 				value = (field.options.map el for el in value)
 
-			html = @fieldTemplate
+			html = @fieldTemplate _.extend data,
 				title: field.title ? field.field
 				value: value 
 

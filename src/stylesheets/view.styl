@@ -1,6 +1,9 @@
 .view
 	position relative
 
+	.margin-row
+		margin-bottom 1em
+
 	// To be shown programmatically, once user is logged in
 	.controls
 		display none
@@ -23,18 +26,39 @@
 
 		label
 			color mediumGray
-			min-width 190px
+			// min-width 190px
 			display inline-block
-			line-height 1.8em
-			vertical-align top
+			margin-right .5em
+			// line-height 1.8em
+			// vertical-align top
 
-		.value
-			display inline
-			ul
-				display inline-block
-				list-style none
-				margin 0
-				padding 0
+		.field
+			line-height 150%
+			&.large label, &.new-line label
+				display block
+
+			&.large, &.new-line
+				margin 1em 0 1em 0
+
+			.value
+				display inline
+				ul
+					display inline-block
+					list-style none
+					margin 0
+					padding 0
+
+				.name
+					.component
+						margin-right 1em
+						.type
+							font-size 0.6em
+							margin-left 1em
+							color mediumGray
+							&:before
+								content "("
+							&:after
+								content ")"
 
 	p.versions
 		text-align right

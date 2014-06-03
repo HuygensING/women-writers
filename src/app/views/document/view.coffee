@@ -18,7 +18,11 @@ class DocumentView extends BaseView
 				'reference'
 				'notes'
 				'topoi'
-				'^pid'
+				{
+					field: '^pid'
+					title: 'Persistent ID'
+					newLine: true
+				}
 			]
 		}
 		{
@@ -26,6 +30,7 @@ class DocumentView extends BaseView
 			fields: [
 				field: '@relations.*'
 				type: 'Array'
+				newLine: true
 				options:
 					map: (el) ->
 						if el.id.match /PERS|DOC/

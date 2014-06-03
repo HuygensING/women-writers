@@ -17,6 +17,7 @@ class PersonView extends BaseView
 				{
 					title: 'Names'
 					field: 'names'
+					large: true
 					type: 'Array'
 					options:
 						map: (el) -> nameTemplate
@@ -27,8 +28,16 @@ class PersonView extends BaseView
 				'deathDate'
 				'children'
 				'livedIn'
-				'notes'
-				'bibliography'
+				{
+					title: 'Notes'
+					field: 'notes'
+					large: true
+				}
+				{
+					title: 'Bibliography'
+					field: 'bibliography'
+					large: true
+				}
 				'health'
 				{
 					title: 'Links'
@@ -41,7 +50,7 @@ class PersonView extends BaseView
 				'personalSituation'
 				{
 					field: '^pid'
-					title: 'PID'
+					title: 'Persistent ID'
 				}
 			]
 		}

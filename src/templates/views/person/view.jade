@@ -7,17 +7,18 @@ h2= data.tempName
 
 .fieldsets
 
-h3 Receptions of this work
-if receptions.length
-	ul.receptions
-		each list, reception in receptions
-			li
-				h4= reception
-				ul
-					each r in list
-						li: a(href=config.personViewUrl(r.id))= r.displayName
-else
-	p No receptions
+.c4_4
+	h3 Receptions by this person
+	if receptions.length
+		ul.receptions
+			each list, reception in receptions
+				li
+					h4= reception
+					ul
+						each r in list
+							li: a(href=config.documentViewUrl(r.id))= r.displayName
+	else
+		p None
 
 //- if versions
 //- 	p.versions
