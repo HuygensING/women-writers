@@ -1,6 +1,7 @@
 setup = require '../setup'
 
 ReceptionSearcher = require '../../../src/app/views/reception/searcher'
+BusyOverlay = require '../../../src/app/views/busy-overlay'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
 ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
@@ -23,8 +24,12 @@ describe 'Reception searcher', ->
 	sourceQueryBuilderShowStub = sinon.stub()
 	sourceQueryBuilderHideStub = sinon.stub()
 	sourceQueryBuilder = null
+	busyOverlay = null
 	
 	beforeEach ->
+		
+		busyOverlay = new BusyOverlay()
+		
 		parentElementAppendStub = sinon.stub()
 		parentElement = { append: parentElementAppendStub} 
 		
@@ -50,6 +55,7 @@ describe 'Reception searcher', ->
 			receptionSearchCreator: receptionSearchCreator
 			receptionSearchResult: receptionSearchResult
 			receptionSearchQueryExecutor: receptionSearchQueryExecutor
+			busyOverlay: busyOverlay
 	
 		sourceQueryBuilder = { 
 			show: sourceQueryBuilderShowStub 
@@ -85,6 +91,13 @@ describe 'Reception searcher', ->
 			resultsElement = receptionSearcher.$el.find('.results')
 			
 			receptionSearchResultRenderSpy.calledWith(resultsElement).should.be.ok
+		
+		it 'should render the busyOverlay', ->
+			busyOverlayRenderSpy = sinon.spy(busyOverlay, 'render')
+			
+			receptionSearcher.render()
+			
+			busyOverlayRenderSpy.calledWith(receptionSearcher.$el).should.be.ok
 
 	describe 'Edit relation types', ->
 		receptionTypeEditLink = null
@@ -223,10 +236,15 @@ describe 'Reception searcher', ->
 			$(searchButton).hasClass('disabled').should.not.be.ok
 		
 	describe 'search button', ->
-		it 'should update the results when it is clicked', ->
+		searchParameters = null
+		element = null
+		receptionSearchQueryExecutorExecuteQueryStub = null
+		
+		beforeEach ->
 			receptionSearcher.render()
 			
-			# setup
+			element = receptionSearcher.$el
+			
 			receptionQueryBuilderGetSearchIdStub = sinon.stub(receptionQueryBuilder, 'getSearchId')
 			receptionSearchId = 12
 			receptionQueryBuilderGetSearchIdStub.returns(receptionSearchId)
@@ -241,7 +259,6 @@ describe 'Reception searcher', ->
 			relationTypeSelectorGetSelectedRelationTypeIdsStub = sinon.stub(relationTypeSelector, 'getSelectedRelationTypeIds')
 			relationTypeSelectorGetSelectedRelationTypeIdsStub.returns(selectedRelationTypeIds)
 			
-			searchResult = {}
 			searchParameters = {
 				sourceSearchId: sourceSearchId
 				targetSearchId: receptionSearchId
@@ -249,17 +266,29 @@ describe 'Reception searcher', ->
 				typeString: 'wwrelation'
 			}
 			
-			receptionSearchQueryExecutorExecuteQuerySpy = sinon.stub(receptionSearchQueryExecutor, 'executeQuery')
+			receptionSearchQueryExecutorExecuteQueryStub = sinon.stub(receptionSearchQueryExecutor, 'executeQuery')
 			
-			searchButton = receptionSearcher.$el.find('.search-receptions')
+		it 'should update the results when it is clicked', ->
+			searchButton = element.find('.search-receptions')
 			
 			# action
 			searchButton.click()
 			
 			# verify
-			receptionSearchQueryExecutorExecuteQuerySpy.calledWith(searchParameters, receptionSearchResult).should.be.ok
+			receptionSearchQueryExecutorExecuteQueryStub.calledWith(searchParameters, receptionSearchResult).should.be.ok
+			
+		it 'should display the overlay', ->
+			#setup
+			busyOverlayShowSpy = sinon.spy(busyOverlay, 'show')
+			searchButton = element.find('.search-receptions')
+			
+			# action
+			searchButton.click()
+			
+			#	verify
+			busyOverlayShowSpy.called.should.be.ok
 		
-	describe 'query-builder-close-event', ->
+	describe 'query builder close event', ->
 		it 'should deselect the selected reception-query, when it is triggered', ->
 			receptionSearcher.render()
 			element = receptionSearcher.$el
@@ -270,3 +299,17 @@ describe 'Reception searcher', ->
 			element.trigger('queryBuilderCloseEvent')
 			
 			element.find('.reception-query.selected').length.should.equal(0)
+			
+	describe 'search done event', ->
+		it 'should hide the busy overlay, when it is triggered', ->
+			receptionSearcher.render()
+			element = receptionSearcher.$el
+			
+			#setup
+			busyOverlayHideSpy = sinon.spy(busyOverlay, 'hide')
+			
+			# action
+			element.trigger('searchDoneEvent')
+			
+			#	verify
+			busyOverlayHideSpy.called.should.be.ok

@@ -2,6 +2,7 @@ Backbone = require 'backbone'
 
 ReceptionDocumentSearch = require './document-search'
 ReceptionPersonSearch = require './person-search'
+BusyOverlay = require '../busy-overlay'
 
 class ReceptionSearcher extends Backbone.View
 	template: require '../../../templates/views/reception/reception-searcher.jade'
@@ -16,6 +17,7 @@ class ReceptionSearcher extends Backbone.View
 		'click button.unimplemented': 'showUnimplementedMessage'
 		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
 		'queryBuilderCloseEvent': 'deselectReceptionQuery'
+		'searchDoneEvent': 'hideBusyOverlay'
 		
 	
 	initialize: (options) ->
@@ -24,6 +26,7 @@ class ReceptionSearcher extends Backbone.View
 		@receptionSearchCreator = options.receptionSearchCreator
 		@receptionSearchResult = options.receptionSearchResult
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor
+		@busyOverlay = if(options.busyOverlay?) then options.busyOverlay else new BusyOverlay()
 	
 	render: ->
 		@$el.html(@template())
@@ -33,6 +36,8 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder.render(receptionSearchElement)
 		
 		@receptionSearchResult.render(@$el.find('.results'))
+		
+		@busyOverlay.render(@$el)
 
 	editRelationTypes: (e) ->
 		@selectTab(e)
@@ -69,6 +74,8 @@ class ReceptionSearcher extends Backbone.View
 		@$(e.currentTarget).parent().addClass('selected')
 		
 	search: (e) ->
+		@displayBusyOverlay()
+		
 		queryParameters = {
 			sourceSearchId: @sourceQueryBuilder.getSearchId()
 			targetSearchId: @receptionQueryBuilder.getSearchId()
@@ -77,6 +84,13 @@ class ReceptionSearcher extends Backbone.View
 		}
 		
 		result = @receptionSearchQueryExecutor.executeQuery(queryParameters, @receptionSearchResult)
+		
+	displayBusyOverlay: () ->
+		@busyOverlay.show()
+	
+	hideBusyOverlay: () ->
+		console.log('hide')
+		@busyOverlay.hide()
 		
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')
