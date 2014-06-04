@@ -34,6 +34,11 @@
 
 		.field
 			line-height 150%
+
+			label
+				vertical-align top
+				min-width 190px
+
 			&.large label, &.new-line label
 				display block
 
@@ -41,7 +46,12 @@
 				margin 1em 0 1em 0
 
 			.value
-				display inline
+				display inline-block
+
+				p
+					margin 0
+					display block
+
 				ul
 					display inline-block
 					list-style none
@@ -86,7 +96,7 @@
 
 		& ul
 			line-height 1.5em
-			margin-left .5em
+			margin-left 0em
 			font-size .9em
 
 	.revisions

@@ -9,7 +9,7 @@ h2= data.tempName
 
 .c4_4
 	h3 Receptions by this person
-	if receptions
+	if receptions && _.keys(receptions).length
 		ul.receptions
 			each list, reception in receptions
 				li

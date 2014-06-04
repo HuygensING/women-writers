@@ -9,7 +9,7 @@ h4.author= data.tempCreator
 
 .c4_4
 	h3 Receptions of this work
-	if receptions
+	if receptions && _.keys(receptions).length
 		ul.receptions
 			each list, reception in receptions
 				li

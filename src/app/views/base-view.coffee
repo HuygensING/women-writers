@@ -32,6 +32,10 @@ class BaseView extends Backbone.View
 	_fieldHtml: (field) ->
 		html = ""
 
+		niceify = (str) ->
+			str.replace(/([A-Z](?![A-Z]))/g, ' $1')
+					.replace /^./, (s) -> s.toUpperCase()
+
 		# Optionally allow just plain strings as field definitions,
 		# but rework into object for further processing
 		unless _.isObject(field) and field.field?
@@ -64,19 +68,35 @@ class BaseView extends Backbone.View
 								field: typeName
 								value: field.options.map r
 			else if @model.has(key) and @model.get(key)[relationType]?
-				group = []
-				for r in @model.get(key)[relationType]
+				if field.group
+					if field.options?.map?
+						values = (field.options.map(r) for r in @model.get(key)[relationType])
+					else
+						values = (r[label] for r in @model.get(key)[relationType])
+
 					html += @fieldTemplate _.extend data,
-						title: relationType
-						value: r[label]
+						title: if field.title? then niceify(field.title) else relationType
+						value: values
+				else
+					for r in @model.get(key)[relationType]
+						html += @fieldTemplate _.extend data,
+							title: if field.title? then niceify(field.title) else relationType
+							value: r[label]
 		else
+			# value = if field.value?
+			# 	field.value
+			# else if field.field.match /\./
+			# 	[key, subkey] = field.field.split /\./
+			# 	@model.get(key)?[subkey]
+			# else
+			# 	 @model.get field.field
 			value = field.value ? @model.get field.field
 
 			if field.type is 'Array'
 				value = (field.options.map el for el in value)
 
 			html = @fieldTemplate _.extend data,
-				title: field.title ? field.field
+				title: if field.title? then niceify(field.title) else field.field
 				value: value 
 
 		html
