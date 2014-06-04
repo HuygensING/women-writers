@@ -14,13 +14,16 @@ class RelationSearchQueryExecutor
 		eventBus = @eventBus
 		
 		# todo => gebruiken
-		callback = (data, status, request) ->
+		callback = (data, status, request) =>
 			requestExecutor.ajax({
 				type: 'GET'
 				url: request.getResponseHeader('Location')
-				success: (data) ->
-					eventBus.trigger('searchDoneEvent')
+				success: (data) =>
 					searchResults.update(data)
+					eventBus.trigger('searchDoneEvent')
+				error: () =>
+					eventBus.trigger('searchDoneEvent')
+					@reportError()
 			})
 		
 		@requestExecutor.ajax({
@@ -30,7 +33,13 @@ class RelationSearchQueryExecutor
 			data: JSON.stringify(parameters)
 			contentType: 'application/json'
 			success: callback
+			error: (jqXHR, textStatus, errorThrown) =>
+				eventBus.trigger('searchDoneEvent')
+				@reportError()
 		})
+		
+	reportError: () ->
+		alert('An error has occurred.')
 	
 	getUrl: () ->
 		return (@configHelper.get('baseUrl') + @configHelper.get('relationSearchPath'))

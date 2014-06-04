@@ -19,6 +19,7 @@ describe 'Relation search query executor', ->
 		relationSearchQueryExecutor = null
 		eventBus = null
 		eventBusTriggerSpy = null
+		postResponse = null
 		
 		beforeEach ->
 			
@@ -40,25 +41,73 @@ describe 'Relation search query executor', ->
 						return getUrl
 			}
 			
-			jQueryMock = {
-				ajax: (settings) ->
-					if(settings.type is 'GET' and settings.url is getUrl)
-						settings.success(results, '', {})
-					else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
-						settings.success({}, '', postResponse)
-			}
+		describe 'success', ->
+			beforeEach ->
+				jQueryMock = {
+					ajax: (settings) ->
+						if(settings.type is 'GET' and settings.url is getUrl)
+							settings.success(results, '', {})
+						else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
+							settings.success({}, '', postResponse)
+				}
+				relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
 			
-			relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+			it 'should call update of the search results object with the results as parameter', ->
+				#action
+				relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+				
+				# verify
+				searchResultsUpdateSpy.calledWith(results).should.be.ok
+				
+			it 'should trigger an search done event', ->
+				relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+				
+				eventBusTriggerSpy.calledWith('searchDoneEvent').should.be.ok
+		
+		describe 'post error has occurred', -> 
+			reportErrorStub = null
 			
+			beforeEach ->
+				jQueryMock = {
+					ajax: (settings) ->
+						if(settings.type is 'GET' and settings.url is getUrl)
+							settings.success(results, '', {})
+						else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
+							settings.error(postResponse, '', '')
+				}
+				relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+				reportErrorStub = sinon.stub(relationSearchQueryExecutor, 'reportError')
 			
-		it 'should call update of the search results object with the results as parameter', ->
-			#action
-			relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+			it 'should trigger an search done event', ->
+				relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+				
+				eventBusTriggerSpy.calledWith('searchDoneEvent').should.be.ok
 			
-			# verify
-			searchResultsUpdateSpy.calledWith(results).should.be.ok
+			it 'should call report error', ->
+				relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+				
+				reportErrorStub.called.should.be.ok
+		
+		describe 'get error has occurred', ->
+			reportErrorStub = null
+			beforeEach ->
+				jQueryMock = {
+					ajax: (settings) ->
+						if(settings.type is 'GET' and settings.url is getUrl)
+							settings.error({}, '', '')
+						else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
+							settings.success({}, '', postResponse)
+				}
+				
+				relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+				reportErrorStub = sinon.stub(relationSearchQueryExecutor, 'reportError')
+				
+			it 'should trigger an search done event', ->
+				relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+				
+				eventBusTriggerSpy.calledWith('searchDoneEvent').should.be.ok
 			
-		it 'should trigger an search done event', ->
-			relationSearchQueryExecutor.executeQuery(parameters, searchResults)
-			
-			eventBusTriggerSpy.calledWith('searchDoneEvent').should.be.ok
+			it 'should call report error', ->
+				relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+				
+				reportErrorStub.called.should.be.ok
