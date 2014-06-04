@@ -17,7 +17,7 @@ class ReceptionSearcher extends Backbone.View
 		'click button.unimplemented': 'showUnimplementedMessage'
 		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
 		'queryBuilderCloseEvent': 'deselectReceptionQuery'
-		'searchDoneEvent': 'hideBusyOverlay'
+		
 		
 	
 	initialize: (options) ->
@@ -27,6 +27,13 @@ class ReceptionSearcher extends Backbone.View
 		@receptionSearchResult = options.receptionSearchResult
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor
 		@busyOverlay = if(options.busyOverlay?) then options.busyOverlay else new BusyOverlay()
+		
+		eventBus = @receptionSearchQueryExecutor.eventBus
+		
+		eventBus.on('searchDoneEvent', () =>
+			@hideBusyOverlay()
+		)
+		
 	
 	render: ->
 		@$el.html(@template())

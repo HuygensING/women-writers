@@ -302,14 +302,14 @@ describe 'Reception searcher', ->
 			
 	describe 'search done event', ->
 		it 'should hide the busy overlay, when it is triggered', ->
+			#setup
 			receptionSearcher.render()
 			element = receptionSearcher.$el
 			
-			#setup
 			busyOverlayHideSpy = sinon.spy(busyOverlay, 'hide')
 			
 			# action
-			element.trigger('searchDoneEvent')
+			receptionSearcher.receptionSearchQueryExecutor.eventBus.trigger('searchDoneEvent')
 			
 			#	verify
 			busyOverlayHideSpy.called.should.be.ok

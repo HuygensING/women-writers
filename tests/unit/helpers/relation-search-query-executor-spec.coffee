@@ -13,8 +13,27 @@ describe 'Relation search query executor', ->
 		parameters = {blah: 'test'}
 		postUrl = 'http://www.test.com/post'
 		configHelper = null
+		searchResults = null
+		searchResultsUpdateSpy = null
+		configHelper = null
+		relationSearchQueryExecutor = null
+		eventBus = null
+		eventBusTriggerSpy = null
 		
 		beforeEach ->
+			
+			configHelper = new ConfigHelper()
+			configHelperGetStub = sinon.stub(configHelper, 'get')
+			configHelperGetStub.withArgs('baseUrl').returns('http://www.test.com')
+			configHelperGetStub.withArgs('relationSearchPath').returns('/post')
+			
+			eventBusTriggerSpy = sinon.spy()
+			eventBus = {trigger: eventBusTriggerSpy}
+			
+			searchResultsUpdateSpy = sinon.spy()
+			
+			searchResults ={update: searchResultsUpdateSpy}	
+			
 			postResponse = {
 				getResponseHeader: (headerName) ->
 					if(headerName is 'Location')
@@ -28,21 +47,18 @@ describe 'Relation search query executor', ->
 					else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
 						settings.success({}, '', postResponse)
 			}
+			
+			relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+			
+			
 		it 'should call update of the search results object with the results as parameter', ->
-			# setup
-			searchResultsUpdate = sinon.spy()
-			
-			searchResults ={update: searchResultsUpdate}
-			
-			configHelper = new ConfigHelper()
-			configHelperGetStub = sinon.stub(configHelper, 'get')
-			configHelperGetStub.withArgs('baseUrl').returns('http://www.test.com')
-			configHelperGetStub.withArgs('relationSearchPath').returns('/post')
-			
-			relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper)
-						
 			#action
 			relationSearchQueryExecutor.executeQuery(parameters, searchResults)
 			
 			# verify
-			searchResultsUpdate.calledWith(results).should.be.ok
+			searchResultsUpdateSpy.calledWith(results).should.be.ok
+			
+		it 'should trigger an search done event', ->
+			relationSearchQueryExecutor.executeQuery(parameters, searchResults)
+			
+			eventBusTriggerSpy.calledWith('searchDoneEvent').should.be.ok
