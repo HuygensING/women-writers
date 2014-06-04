@@ -2,7 +2,7 @@
 class RelationTypeOptionConverter
 	
 	convert: (relationType) ->
-		option = "<option value=\"#{relationType.typeId}\">#{relationType.inverseName}</option>"
+		option = "<option value=\"#{relationType.typeId}\">#{relationType.regularName}</option>"
 		return option
 		
 module.exports = RelationTypeOptionConverter
