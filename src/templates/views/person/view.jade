@@ -16,7 +16,7 @@ h2= data.tempName
 					h4= reception
 					ul
 						each r in list
-							li: a(href=config.documentViewUrl(r.id))= r.displayName
+							li: a(href=config.viewUrl(r.id))= r.displayName
 	else
 		p None
 

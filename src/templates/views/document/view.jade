@@ -16,9 +16,9 @@ h4.author= data.tempCreator
 					h4= reception
 					ul
 						each r in list
-							li: a(href=config.documentViewUrl(r.id))= r.displayName
+							li: a(href=config.viewUrl(r.id))= r.displayName
 	else
-		p No receptions
+		p None
 
 
 //- if versions

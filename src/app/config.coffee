@@ -43,6 +43,13 @@ class Config extends Backbone.Model
 	documentEditUrl: (id) ->
 		@documentViewUrl(id) + '/edit'
 
+	# Returns view url inferred from ID (PERS/DOC)
+	viewUrl: (id) ->
+		if id.match /^DOC/
+			@documentViewUrl id
+		else if id.match /^PERS/
+			@personViewUrl id
+
 	educationUrl: ->
 		@get('facetedSearchBaseUrl') + @get('educationPath')
 
