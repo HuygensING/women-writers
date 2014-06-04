@@ -3,7 +3,7 @@ if response
 		p.prev(href=response['_prev']) « Previous
 	if response['_next']
 		p.next(href=response['_next']) Next »
-	if response.refs
+	if response.numFound > 0
 		table.results-table
 			thead.results-head
 				tr

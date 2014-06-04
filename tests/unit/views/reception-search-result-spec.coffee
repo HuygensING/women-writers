@@ -31,7 +31,8 @@ describe 'Reception search result', ->
 						"relationName": "isPersonCommentedOnIn",
 						"sourceName": "[TEMP] François de la Rochefoucauld"
 					},
-				]
+				],
+				numFound: 2
 			}
 			
 			receptionSearchResult.$el.find('.results-body tr').length.should.equal(0)
