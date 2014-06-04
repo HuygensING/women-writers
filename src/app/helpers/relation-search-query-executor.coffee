@@ -10,19 +10,15 @@ class RelationSearchQueryExecutor
 		@eventBus = @getEventBus(eventBus)
 	
 	executeQuery: (parameters = {}, searchResults) ->
-		requestExecutor = @requestExecutor
-		eventBus = @eventBus
-		
-		# todo => gebruiken
 		callback = (data, status, request) =>
-			requestExecutor.ajax({
+			@requestExecutor.ajax({
 				type: 'GET'
 				url: request.getResponseHeader('Location')
 				success: (data) =>
 					searchResults.update(data)
-					eventBus.trigger('searchDoneEvent')
+					@eventBus.trigger('searchDoneEvent')
 				error: () =>
-					eventBus.trigger('searchDoneEvent')
+					@eventBus.trigger('searchDoneEvent')
 					@reportError()
 			})
 		
@@ -34,7 +30,7 @@ class RelationSearchQueryExecutor
 			contentType: 'application/json'
 			success: callback
 			error: (jqXHR, textStatus, errorThrown) =>
-				eventBus.trigger('searchDoneEvent')
+				@eventBus.trigger('searchDoneEvent')
 				@reportError()
 		})
 		
