@@ -3,6 +3,7 @@ Backbone = require 'backbone'
 ReceptionDocumentSearch = require './document-search'
 ReceptionPersonSearch = require './person-search'
 BusyOverlay = require '../busy-overlay'
+SourceSearchTemplate = require '../../../templates/views/reception/source-search.jade'
 
 class ReceptionSearcher extends Backbone.View
 	template: require '../../../templates/views/reception/reception-searcher.jade'
