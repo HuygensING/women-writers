@@ -3,6 +3,15 @@ setup = require '../setup'
 config = require basePath + 'config'
 
 describe 'Config', ->
+	# TODO: Pending
+	it 'searchUrl'
+	it 'relationsUrl'
+	it 'personUrl'
+	it 'personViewUrl'
+	it 'documentUrl'
+	it 'documentViewUrl'
+	it 'receptionsUrl'
+
 	describe 'viewUrl', ->
 		it 'should return a proper person view URL for PERS000000001', ->
 			config.viewUrl('PERS000000001').should.match /http:\/\/localhost:9000\/person\/PERS000000001/
