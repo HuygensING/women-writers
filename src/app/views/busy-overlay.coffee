@@ -5,16 +5,12 @@ class BusyOverlay extends Backbone.View
 	className: 'busy-overlay'
 	
 	show: () ->
-		console.log 'show', @$el
 		@$el.show()
 		
 	hide: () ->
 		@$el.hide()
 		
 	render: (parentElement) ->
-		
-		console.log('parentElement', parentElement)
-		
 		@$el.html(@template())
 		
 		parentElement.append(@$el)

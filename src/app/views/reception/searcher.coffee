@@ -89,7 +89,6 @@ class ReceptionSearcher extends Backbone.View
 		@busyOverlay.show()
 	
 	hideBusyOverlay: () ->
-		console.log('hide')
 		@busyOverlay.hide()
 		
 	findQueryEditorElement: () ->
