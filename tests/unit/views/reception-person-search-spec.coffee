@@ -71,16 +71,6 @@ describe 'reception person search', ->
 			
 			parentElementAppendSpy.calledWith(element).should.be.ok
 		
-		it 'should render the template', ->
-			element = receptionPersonSearch.$el
-			elementHtmlSpy = sinon.spy(element, 'html')
-			
-			template = receptionPersonSearch.template()
-			
-			receptionPersonSearch.render(parentElement)
-			
-			elementHtmlSpy.calledWith(template).should.be.ok
-			
 		it 'should render the faceted search', ->
 			element = receptionPersonSearch.$el
 			elementAppendSpy = sinon.spy(element, 'append')
@@ -103,34 +93,6 @@ describe 'reception person search', ->
 			receptionPersonSearch.show()
 			
 			elementShowSpy.called.should.be.ok
-			
-	describe 'close button', ->
-		element = null
-		closeButton = null
-		
-		beforeEach ->
-			
-			receptionPersonSearch = new ReceptionPersonSearch
-				searchCreatorWrapper: searchCreatorWrapper
-				
-			receptionPersonSearch.render(parentElement)
-			
-			element = receptionPersonSearch.$el
-			closeButton = element.find('.close-button')
-			
-		it 'should hide the relation type selector when clicked', ->
-			elementHideSpy = sinon.spy(element, 'hide')
-			
-			closeButton.click()
-			
-			elementHideSpy.called.should.be.ok
-		
-		it 'should fire a queryBuilderCloseEvent', ->
-			elementTriggerSpy = sinon.spy(element, 'trigger')
-			
-			closeButton.click()
-			
-			elementTriggerSpy.calledWith('queryBuilderCloseEvent').should.be.ok
 			
 	describe 'getSearchId', ->
 		idHelperGetIdFromUrlStub = null

@@ -16,6 +16,7 @@ class ReceptionSearchCreator
 		else if type is 'persons'
 			receptionSearch = new ReceptionPersonSearch
 				searchCreatorWrapper: @searchCreatorWrapper
+		
 		return receptionSearch
 		
 module.exports = ReceptionSearchCreator

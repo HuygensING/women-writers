@@ -4,7 +4,6 @@ SearchCreatorWrapper = require '../../helpers/search-creator-wrapper'
 IdHelper = require '../../helpers/id-helper'
 
 class ReceptionBaseSearch extends Backbone.View
-	template: require '../../../templates/views/reception-faceted-search.jade'
 	className: 'reception-searcher'
 		
 	events:
@@ -16,7 +15,6 @@ class ReceptionBaseSearch extends Backbone.View
 		@search = @searchCreatorWrapper.createSearch(@getTypeString(), @getQueryOptions(), @getFacetNameMap())
 	
 	render: (parentElement) ->
-		@$el.html(@template())
 		@$el.append(@search.$el)
 		
 		parentElement.append(@$el)
