@@ -3,13 +3,14 @@ Backbone = require 'backbone'
 ReceptionDocumentSearch = require './document-search'
 ReceptionPersonSearch = require './person-search'
 BusyOverlay = require '../busy-overlay'
-SourceSearchTemplate = require '../../../templates/views/reception/source-search.jade'
 
 RelationTypeSelector = require '../relation-type-selector'
 ReceptionDocumentSearch = require './document-search'
 ReceptionSearchResult = require './search-result'
 ReceptionSearchCreator = require '../../helpers/reception-search-creator'
 RelationSearchQueryExecutor = require '../../helpers/relation-search-query-executor'
+
+SourceQueryBuilder = require './source-query-builder'
 
 class ReceptionSearcher extends Backbone.View
 	template: require '../../../templates/views/reception/reception-searcher.jade'
@@ -28,6 +29,7 @@ class ReceptionSearcher extends Backbone.View
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector()
 		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionDocumentSearch()
+		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder()
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor() 
@@ -45,6 +47,7 @@ class ReceptionSearcher extends Backbone.View
 		
 		@relationTypeSelector.render(receptionSearchElement)
 		@receptionQueryBuilder.render(receptionSearchElement)
+		@sourceQueryBuilder.render(receptionSearchElement)
 		
 		@receptionSearchResult.render(@$el.find('.results'))
 		
@@ -69,8 +72,7 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder.hide()
 	
 		
-	handleSourceTypeSelected: (e, value) ->
-		@addSourceQueryBuilder(value)
+	handleSourceTypeSelected: (e) ->
 		@enableSourceEditorLink()
 		@enableSearchButton()
 	

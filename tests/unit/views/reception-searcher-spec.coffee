@@ -7,6 +7,7 @@ RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
 ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
 ReceptionPersonSearch = require '../../../src/app/views/reception/person-search'
 ReceptionSearchResult = require '../../../src/app/views/reception/search-result'
+SourceQueryBuilder = require '../../../src/app/views/reception/source-query-builder'
 
 SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
@@ -21,8 +22,9 @@ describe 'Reception searcher', ->
 	receptionSearchResult = null
 	receptionSearchQueryExecutor = null 
 	parentElement = null
-	sourceQueryBuilderShowStub = sinon.stub()
-	sourceQueryBuilderHideStub = sinon.stub()
+	sourceQueryBuilderShowStub = null
+	sourceQueryBuilderHideStub = null
+	sourceQueryBuilderRenderStub = null
 	sourceQueryBuilder = null
 	busyOverlay = null
 	
@@ -46,25 +48,39 @@ describe 'Reception searcher', ->
 		
 		receptionSearchCreator = new ReceptionSearchCreator()
 
+		sourceQueryBuilder = new SourceQueryBuilder()
+		sourceQueryBuilderShowStub = sinon.stub(sourceQueryBuilder, 'show')
+		sourceQueryBuilderHideStub = sinon.stub(sourceQueryBuilder, 'hide')
+		sourceQueryBuilderRenderStub = sinon.stub(sourceQueryBuilder, 'render')
+
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
+			
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
 			receptionQueryBuilder: receptionQueryBuilder
+			sourceQueryBuilder: sourceQueryBuilder
 			receptionSearchCreator: receptionSearchCreator
 			receptionSearchResult: receptionSearchResult
 			receptionSearchQueryExecutor: receptionSearchQueryExecutor
 			busyOverlay: busyOverlay
-	
-		sourceQueryBuilder = { 
-			show: sourceQueryBuilderShowStub 
-			hide: sourceQueryBuilderHideStub
-			remove: sinon.stub()
-		}
-		
-		receptionSearcher.sourceQueryBuilder = sourceQueryBuilder
+			
 		
 	describe 'render', ->
+		it 'should render the source query builder', ->
+			receptionSearcher.render()
+			
+			queryEditorElement = receptionSearcher.$el.find('.query-editor')
+			
+			sourceQueryBuilderRenderStub.calledWith(queryEditorElement).should.be.ok
+			
+		it 'should render the reception query builder', ->
+			receptionSearcher.render()
+
+			queryEditorElement = receptionSearcher.$el.find('.query-editor')
+			
+			receptionQueryBuilderRenderStub.calledWith(queryEditorElement).should.be.ok
+			
 		it 'should render the relation type selector', ->
 			relationTypeSelectorRenderSpy = sinon.spy(relationTypeSelector, 'render')
 			
@@ -73,14 +89,6 @@ describe 'Reception searcher', ->
 			queryEditorElement = receptionSearcher.$el.find('.query-editor')
 			
 			relationTypeSelectorRenderSpy.calledWith(queryEditorElement).should.be.ok
-			
-		it 'should render the reception editor', ->
-			
-			receptionSearcher.render()
-
-			queryEditorElement = receptionSearcher.$el.find('.query-editor')
-			
-			receptionQueryBuilderRenderStub.calledWith(queryEditorElement).should.be.ok
 			
 		it 'should render the search results', ->
 			receptionSearchResultRenderSpy = sinon.spy(receptionSearchResult, 'render')
@@ -196,24 +204,24 @@ describe 'Reception searcher', ->
 			element = receptionSearcher.$el
 			queryEditorElement = element.find('.query-editor')
 			
-		it 'should render a newly created source editor', ->
-			
-			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
-			
-			sourceQueryBuilderMockRenderStub.calledWith(queryEditorElement).should.be.ok
-			
-			(receptionSearcher.sourceQueryBuilder isnt undefined && receptionSearcher.sourceQueryBuilder isnt null).should.be.ok 
-		
-		it 'should remove the old source editor from the DOM if there is an old one', ->
-			oldsourceQueryBuilderRemoveStub = sinon.stub()
-			oldsourceQueryBuilder = { remove: oldsourceQueryBuilderRemoveStub}
-			
-			receptionSearcher.sourceQueryBuilder = oldsourceQueryBuilder
-			
-			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
-			
-			oldsourceQueryBuilderRemoveStub.called.should.be.ok
-			receptionSearcher.sourceQueryBuilder.should.equal sourceQueryBuilderMock
+		# it 'should render a newly created source editor', ->
+# 			
+			# element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+# 			
+			# sourceQueryBuilderMockRenderStub.calledWith(queryEditorElement).should.be.ok
+# 			
+			# (receptionSearcher.sourceQueryBuilder isnt undefined && receptionSearcher.sourceQueryBuilder isnt null).should.be.ok 
+# 		
+		# it 'should remove the old source editor from the DOM if there is an old one', ->
+			# oldsourceQueryBuilderRemoveStub = sinon.stub()
+			# oldsourceQueryBuilder = { remove: oldsourceQueryBuilderRemoveStub}
+# 			
+			# receptionSearcher.sourceQueryBuilder = oldsourceQueryBuilder
+# 			
+			# element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+# 			
+			# oldsourceQueryBuilderRemoveStub.called.should.be.ok
+			# receptionSearcher.sourceQueryBuilder.should.equal sourceQueryBuilderMock
 		
 		it 'should enable the link edit relation types', ->
 			editRelationTypeLink = element.find('.reception-query.relation-type .edit-link')
