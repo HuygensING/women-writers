@@ -9,7 +9,7 @@ class RelationTypeSelector extends Backbone.View
 	
 	events: 
 		'click.relation-type-selector .close-button':'closeEditor'
-		'click.relation-type-selector input[name="reception-type-source-type"]':'showRelationSelector'
+		'sourceTypeSelectedEvent': 'showRelationSelector'
 		
 	initialize: (options = {}) ->
 		@relationTypeMultiSelect = if options.relationTypeMultiSelect? then options.relationTypeMultiSelect else new RelationTypeMultiSelect()
@@ -34,10 +34,8 @@ class RelationTypeSelector extends Backbone.View
 	hide: () ->
 		@$el.hide()
 		
-	showRelationSelector: (e) ->
+	showRelationSelector: (e, selectedSourceType) ->
 		receptions = null
-		
-		selectedSourceType = e.currentTarget.value
 		
 		if selectedSourceType is 'documents'
 			receptions = @receptionHelper.getDocumentReceptions()
@@ -46,8 +44,7 @@ class RelationTypeSelector extends Backbone.View
 			
 		@relationTypeMultiSelect.showWithOptions(receptions)
 		
-		@$el.trigger('sourceTypeSelectedEvent', selectedSourceType)
-		
+
 	getSelectedRelationTypeIds: () ->
 		return @relationTypeMultiSelect.getSelectedRelationTypeIds()
 

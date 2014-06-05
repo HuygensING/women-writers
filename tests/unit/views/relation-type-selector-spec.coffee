@@ -82,13 +82,11 @@ describe 'Relation type selector', ->
 			
 			elementTriggerSpy.calledWith('queryBuilderCloseEvent').should.be.ok
 		
-	describe 'selected relation type', ->
+	describe 'source type selected event', ->
 		beforeEach ->
 			relationTypeSelector.render(parentElement)
 			
 		it 'should load a multi select with for receptions between persons and documents if persons is selected', ->
-			sourceTypeSelector = relationTypeSelector.$el.find('input#persons')
-			
 			multiSelectShowWithOptionsSpy = sinon.spy(multiSelect, 'showWithOptions')
 						
 			options =[
@@ -100,15 +98,14 @@ describe 'Relation type selector', ->
 			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
 			receptionHelperGetPersonReceptionsStub.returns(options)
 			
-			sourceTypeSelector.click()
+			relationTypeSelector.$el.trigger('sourceTypeSelectedEvent', 'persons')
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
 		
-		it 'should load a multi select with for receptions between documents and documents if documents is selected', ->
-			sourceTypeSelector = relationTypeSelector.$el.find('input#documents')
+		it 'should load a multi select with for documents if the value is documents', ->
 			
 			multiSelectShowWithOptionsSpy = sinon.spy(multiSelect, 'showWithOptions')
-						
+			
 			options =[
 				{ test: 'test1' }
 				{ test: 'test2' }
@@ -118,34 +115,34 @@ describe 'Relation type selector', ->
 			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
 			receptionHelperGetPersonReceptionsStub.returns(options)
 			
-			sourceTypeSelector.click()
+			relationTypeSelector.$el.trigger('sourceTypeSelectedEvent', 'documents')
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
 			
-		it 'should fire the event sourceTypeSelectedEvent with the value "documents" if the documents option is selected', ->
-			element = relationTypeSelector.$el
-			receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
-
-			sourceTypeSelector = element.find('input#documents')
-			
-			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
-			
-			sourceTypeSelector.click()
-			
-			receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'documents').should.ok
-			
-		it 'should fire the event sourceTypeSelectedEvent with the value "persons" if the persons option is selected', ->
-			element = relationTypeSelector.$el
-			
-			receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
-
-			sourceTypeSelector = element.find('input#persons')
-			
-			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
-			
-			sourceTypeSelector.click()
-			
-			receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'persons').should.ok
+		# it 'should fire the event sourceTypeSelectedEvent with the value "documents" if the documents option is selected', ->
+			# element = relationTypeSelector.$el
+			# receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
+# 
+			# sourceTypeSelector = element.find('input#documents')
+# 			
+			# receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
+# 			
+			# sourceTypeSelector.click()
+# 			
+			# receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'documents').should.ok
+# 			
+		# it 'should fire the event sourceTypeSelectedEvent with the value "persons" if the persons option is selected', ->
+			# element = relationTypeSelector.$el
+# 			
+			# receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
+# 
+			# sourceTypeSelector = element.find('input#persons')
+# 			
+			# receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
+# 			
+			# sourceTypeSelector.click()
+# 			
+			# receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'persons').should.ok
 	
 	describe 'getSelectedRelationTypeIds', ->
 		it 'should delegate the request to the relation type multi select', ->
