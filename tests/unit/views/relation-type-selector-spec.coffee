@@ -119,31 +119,6 @@ describe 'Relation type selector', ->
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
 			
-		# it 'should fire the event sourceTypeSelectedEvent with the value "documents" if the documents option is selected', ->
-			# element = relationTypeSelector.$el
-			# receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
-# 
-			# sourceTypeSelector = element.find('input#documents')
-# 			
-			# receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
-# 			
-			# sourceTypeSelector.click()
-# 			
-			# receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'documents').should.ok
-# 			
-		# it 'should fire the event sourceTypeSelectedEvent with the value "persons" if the persons option is selected', ->
-			# element = relationTypeSelector.$el
-# 			
-			# receptionTypeSelectorTriggerSpy = sinon.spy(element, 'trigger')
-# 
-			# sourceTypeSelector = element.find('input#persons')
-# 			
-			# receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
-# 			
-			# sourceTypeSelector.click()
-# 			
-			# receptionTypeSelectorTriggerSpy.calledWith('sourceTypeSelectedEvent', 'persons').should.ok
-	
 	describe 'getSelectedRelationTypeIds', ->
 		it 'should delegate the request to the relation type multi select', ->
 			ids = [1,2,3,4,5]
