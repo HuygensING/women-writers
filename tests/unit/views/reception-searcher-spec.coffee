@@ -216,15 +216,15 @@ describe 'Reception searcher', ->
 			oldsourceQueryBuilderRemoveStub.called.should.be.ok
 			receptionSearcher.sourceQueryBuilder.should.equal sourceQueryBuilderMock
 		
-		it 'should enable the link edit sources', ->
-			editSourcesLink = element.find('.reception-query.source .edit-link')
-			editSourcesLinkRemoveClassSpy = sinon.spy(editSourcesLink, 'removeClass')
+		it 'should enable the link edit relation types', ->
+			editRelationTypeLink = element.find('.reception-query.relation-type .edit-link')
+			editRelationTypeLinkRemoveClassSpy = sinon.spy(editRelationTypeLink, 'removeClass')
 			
-			$(editSourcesLink).hasClass('disabled').should.be.ok
+			$(editRelationTypeLink).hasClass('disabled').should.be.ok
 			
 			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
-			$(editSourcesLink).hasClass('disabled').should.not.be.ok
+			$(editRelationTypeLink).hasClass('disabled').should.not.be.ok
 		
 		it 'should enable the search button', ->
 			searchButton = element.find('.search-receptions')
