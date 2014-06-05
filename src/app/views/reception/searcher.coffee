@@ -25,8 +25,6 @@ class ReceptionSearcher extends Backbone.View
 		'sourceTypeSelectedEvent': 'handleSourceTypeSelected'
 		'queryBuilderCloseEvent': 'deselectReceptionQuery'
 		
-		
-	
 	initialize: (options) ->
 		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector()
 		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionDocumentSearch()
@@ -41,7 +39,6 @@ class ReceptionSearcher extends Backbone.View
 			@hideBusyOverlay()
 		)
 		
-	
 	render: ->
 		@$el.html(@template())
 		receptionSearchElement = @findQueryEditorElement()

@@ -27,7 +27,6 @@ describe 'Reception searcher', ->
 	busyOverlay = null
 	
 	beforeEach ->
-		
 		busyOverlay = new BusyOverlay()
 		
 		parentElementAppendStub = sinon.stub()
