@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+_ = require 'underscore'
 
 ReceptionDocumentSearch = require './document-search'
 ReceptionPersonSearch = require './person-search'
@@ -27,17 +28,16 @@ class ReceptionSearcher extends Backbone.View
 		'queryBuilderCloseEvent': 'deselectReceptionQuery'
 		
 	initialize: (options) ->
+		@eventBus = options.eventBus ? @createEventBus()
 		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector()
 		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionDocumentSearch()
 		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder()
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
-		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor() 
+		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor(@eventBus) 
 		@busyOverlay = if(options.busyOverlay?) then options.busyOverlay else new BusyOverlay()
 		
-		eventBus = @receptionSearchQueryExecutor.eventBus
-		
-		eventBus.on('searchDoneEvent', () =>
+		@eventBus.on('searchDoneEvent', () =>
 			@hideBusyOverlay()
 		)
 		
@@ -120,5 +120,8 @@ class ReceptionSearcher extends Backbone.View
 	showUnimplementedMessage: ->
 		alert('This part will be implemented soon.')
 		
+	createEventBus: () ->
+		eventBus = {}
+		_.extend(eventBus, Backbone.Events)
 
 module.exports = ReceptionSearcher

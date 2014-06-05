@@ -27,6 +27,7 @@ describe 'Reception searcher', ->
 	sourceQueryBuilderRenderStub = null
 	sourceQueryBuilder = null
 	busyOverlay = null
+	eventBus = null
 	
 	beforeEach ->
 		busyOverlay = new BusyOverlay()
@@ -56,6 +57,10 @@ describe 'Reception searcher', ->
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
 			
+			
+		eventBus = {}
+		_.extend(eventBus, Backbone.Events)
+			
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
 			receptionQueryBuilder: receptionQueryBuilder
@@ -64,6 +69,7 @@ describe 'Reception searcher', ->
 			receptionSearchResult: receptionSearchResult
 			receptionSearchQueryExecutor: receptionSearchQueryExecutor
 			busyOverlay: busyOverlay
+			eventBus: eventBus
 			
 		
 	describe 'render', ->
@@ -203,26 +209,6 @@ describe 'Reception searcher', ->
 			receptionSearcher.render()
 			element = receptionSearcher.$el
 			queryEditorElement = element.find('.query-editor')
-			
-		# it 'should render a newly created source editor', ->
-# 			
-			# element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
-# 			
-			# sourceQueryBuilderMockRenderStub.calledWith(queryEditorElement).should.be.ok
-# 			
-			# (receptionSearcher.sourceQueryBuilder isnt undefined && receptionSearcher.sourceQueryBuilder isnt null).should.be.ok 
-# 		
-		# it 'should remove the old source editor from the DOM if there is an old one', ->
-			# oldsourceQueryBuilderRemoveStub = sinon.stub()
-			# oldsourceQueryBuilder = { remove: oldsourceQueryBuilderRemoveStub}
-# 			
-			# receptionSearcher.sourceQueryBuilder = oldsourceQueryBuilder
-# 			
-			# element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
-# 			
-			# oldsourceQueryBuilderRemoveStub.called.should.be.ok
-			# receptionSearcher.sourceQueryBuilder.should.equal sourceQueryBuilderMock
-		
 		it 'should enable the link edit relation types', ->
 			editRelationTypeLink = element.find('.reception-query.relation-type .edit-link')
 			editRelationTypeLinkRemoveClassSpy = sinon.spy(editRelationTypeLink, 'removeClass')
@@ -316,7 +302,7 @@ describe 'Reception searcher', ->
 			busyOverlayHideSpy = sinon.spy(busyOverlay, 'hide')
 			
 			# action
-			receptionSearcher.receptionSearchQueryExecutor.eventBus.trigger('searchDoneEvent')
+			eventBus.trigger('searchDoneEvent')
 			
 			#	verify
 			busyOverlayHideSpy.called.should.be.ok
