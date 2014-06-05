@@ -22,7 +22,7 @@ class ReceptionSearcher extends Backbone.View
 		'click .search-receptions': 'search'
 		'click a.unimplemented': 'showUnimplementedMessage'
 		'click button.unimplemented': 'showUnimplementedMessage'
-		'sourceTypeSelectedEvent': 'addSourceQueryBuilder'
+		'sourceTypeSelectedEvent': 'handleSourceTypeSelected'
 		'queryBuilderCloseEvent': 'deselectReceptionQuery'
 		
 		
@@ -71,16 +71,23 @@ class ReceptionSearcher extends Backbone.View
 		@relationTypeSelector.hide()
 		@receptionQueryBuilder.hide()
 	
-	addSourceQueryBuilder: (e, value) ->
+		
+	handleSourceTypeSelected: (e, value) ->
+		@addSourceQueryBuilder(value)
+		@enableSourceEditorLink()
+		@enableSearchButton()
+	
+	addSourceQueryBuilder: (value) ->
 		if(@sourceQueryBuilder isnt null and @sourceQueryBuilder isnt undefined)
 			@sourceQueryBuilder.remove()
 		
 		@sourceQueryBuilder = @receptionSearchCreator.create(value)
 		@sourceQueryBuilder.render(@findQueryEditorElement())
-		# enable the source editor link
+		
+	enableSourceEditorLink: () ->
 		@$('.reception-query.relation-type .edit-link').removeClass('disabled')
 		
-		# enable search button
+	enableSearchButton: () ->
 		@$('.search-receptions').removeClass('disabled')
 		
 	selectTab: (e) ->
@@ -113,5 +120,6 @@ class ReceptionSearcher extends Backbone.View
 	
 	showUnimplementedMessage: ->
 		alert('This part will be implemented soon.')
+		
 
 module.exports = ReceptionSearcher
