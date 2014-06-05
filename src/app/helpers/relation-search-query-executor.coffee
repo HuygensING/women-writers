@@ -41,14 +41,13 @@ class RelationSearchQueryExecutor
 		return (@configHelper.get('baseUrl') + @configHelper.get('relationSearchPath'))
 		
 	getEventBus: (eventBus) ->
-		triggerer = null
+		bus = {}
 		if(eventBus? )
-			triggerer = eventBus
+			bus = eventBus
 		else
-			triggerer = {}
-			_.extend(triggerer, Backbone.Events)
+			_.extend(bus, Backbone.Events)
 			
-		return triggerer
+		return bus
 		
 	
 module.exports = RelationSearchQueryExecutor
