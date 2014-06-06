@@ -10,13 +10,18 @@ describe 'source query builder', ->
 	parentElementAppendStub = null
 	receptionSearchCreator = null
 	receptionSearchCreatorCreateStub = null
+	eventBus = null
 	
 	beforeEach ->
 		receptionSearchCreator = new ReceptionSearchCreator()
 		receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
 		
+		eventBus = {}
+		_.extend(eventBus, Backbone.Events)
+		
 		sourceQueryBuilder = new SourceQueryBuilder
 			receptionSearchCreator: receptionSearchCreator
+			eventBus: eventBus
 			
 		parentElementAppendStub = sinon.stub()
 		parentElementMock = {append: parentElementAppendStub}
@@ -116,15 +121,18 @@ describe 'source query builder', ->
 			it 'should fire the event sourceTypeSelectedEvent with the value "documents"', ->
 				sourceTypeSelector = element.find('input#documents')
 				
-				elementTriggerSpy = sinon.spy(element, 'trigger')
+				eventBusTriggerSpy = sinon.spy(eventBus, 'trigger')
 				
 				sourceTypeSelector.click()
 				
-				elementTriggerSpy.calledWith('sourceTypeSelectedEvent', type).should.be.ok
+				eventBusTriggerSpy.calledWith('sourceTypeSelectedEvent', type).should.be.ok
 				
 			it 'should render and show a document search', ->
+				#setup
+				sourceTypeSelector = element.find('input#documents')
+				
 				# action
-				element.trigger('sourceTypeSelectedEvent', type)
+				sourceTypeSelector.click()
 				
 				# verify
 				searchRenderStub.should.have.been.calledWith(element)
@@ -139,15 +147,18 @@ describe 'source query builder', ->
 			it 'should fire the event sourceTypeSelectedEvent with the value "persons"', ->
 				sourceTypeSelector = element.find('input#persons')
 				
-				elementTriggerSpy = sinon.spy(element, 'trigger')
+				eventBusTriggerSpy = sinon.spy(eventBus, 'trigger')
 				
 				sourceTypeSelector.click()
 				
-				elementTriggerSpy.calledWith('sourceTypeSelectedEvent', type).should.be.ok
+				eventBusTriggerSpy.calledWith('sourceTypeSelectedEvent', type).should.be.ok
 		
 			it 'should render and show a person search', ->
+				#setup
+				sourceTypeSelector = element.find('input#persons')
+				
 				# action
-				element.trigger('sourceTypeSelectedEvent', type)
+				sourceTypeSelector.click()
 				
 				# verify
 				searchRenderStub.should.have.been.calledWith(element)

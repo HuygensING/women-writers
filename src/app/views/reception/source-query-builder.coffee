@@ -8,12 +8,16 @@ class SourceQueryBuilder extends Backbone.View
 		
 	initialize: (options= {}) ->
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
+		@eventBus = options.eventBus ? @createEventBus()
+		
+		@eventBus.on('sourceTypeSelectedEvent', (data) =>
+			@renderSearch(data)
+		)
 		
 	events:
 		'click .close-button': 'handleCloseButtonClick'
 		'click [name="source-type"]': 'sourceTypeSelected'
-		'sourceTypeSelectedEvent': 'renderSearch'
-	
+		
 	render: (parentElement) ->
 		@$el.html(@template())
 		
@@ -32,9 +36,9 @@ class SourceQueryBuilder extends Backbone.View
 	sourceTypeSelected: (e) ->
 		value = e.currentTarget.value
 		
-		@$el.trigger('sourceTypeSelectedEvent', value)
+		@eventBus.trigger('sourceTypeSelectedEvent', value)
 		
-	renderSearch: (e, value) ->
+	renderSearch: (value) ->
 		@receptionSearch = @receptionSearchCreator.create(value)
 				
 		@receptionSearch.render(@$el)
@@ -42,5 +46,9 @@ class SourceQueryBuilder extends Backbone.View
 		
 	getSearchId: () ->
 		return @receptionSearch.getSearchId()
+		
+	createEventBus: () ->
+		eventBus = {}
+		_.extend(eventBus, Backbone.Events)
 	
 module.exports = SourceQueryBuilder
