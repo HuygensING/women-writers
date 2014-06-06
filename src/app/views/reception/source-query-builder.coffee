@@ -39,6 +39,9 @@ class SourceQueryBuilder extends Backbone.View
 		@eventBus.trigger('sourceTypeSelectedEvent', value)
 		
 	renderSearch: (value) ->
+		if @receptionSearch?
+			@receptionSearch.remove()
+		
 		@receptionSearch = @receptionSearchCreator.create(value)
 				
 		@receptionSearch.render(@$el)

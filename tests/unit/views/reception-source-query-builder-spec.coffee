@@ -137,6 +137,21 @@ describe 'source query builder', ->
 				# verify
 				searchRenderStub.should.have.been.calledWith(element)
 				searchShowStub.should.have.been.calledAfter(searchRenderStub)
+			
+			it 'should remove the old search when there is one.', ->
+				#setup
+				oldSearchRemoveStub = sinon.stub()
+				oldSearch = {remove: oldSearchRemoveStub}
+				sourceQueryBuilder.receptionSearch = oldSearch
+				
+				sourceTypeSelector = element.find('input#documents')
+				
+				# action
+				sourceTypeSelector.click()
+				
+				# verify
+				oldSearchRemoveStub.should.have.been.called
+			
 		
 		describe 'persons selected', ->
 			type = 'persons'
@@ -163,6 +178,20 @@ describe 'source query builder', ->
 				# verify
 				searchRenderStub.should.have.been.calledWith(element)
 				searchShowStub.should.have.been.calledAfter(searchRenderStub)
+				
+			it 'should remove the old search when there is one.', ->
+				#setup
+				oldSearchRemoveStub = sinon.stub()
+				oldSearch = {remove: oldSearchRemoveStub}
+				sourceQueryBuilder.receptionSearch = oldSearch
+				
+				sourceTypeSelector = element.find('input#persons')
+				
+				# action
+				sourceTypeSelector.click()
+				
+				# verify
+				oldSearchRemoveStub.should.have.been.called
 	
 	describe 'getSearchId', ->
 		it 'should return the id of the search', ->
