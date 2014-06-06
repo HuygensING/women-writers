@@ -4,10 +4,10 @@ ConfigHelper =  require './config-helper'
 
 class RelationSearchQueryExecutor
 	
-	constructor: (requestExecutor, configHelper, eventBus) ->
-		@requestExecutor = requestExecutor ? require('jquery')
-		@configHelper = configHelper ? new ConfigHelper()
-		@eventBus = @getEventBus(eventBus)
+	constructor: (options = {}) ->
+		@requestExecutor = options.requestExecutor ? require('jquery')
+		@configHelper = options.configHelper ? new ConfigHelper()
+		@eventBus = options.eventBus
 	
 	executeQuery: (parameters = {}, searchResults) ->
 		callback = (data, status, request) =>

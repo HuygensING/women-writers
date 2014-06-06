@@ -12,8 +12,13 @@ class RelationTypeSelector extends Backbone.View
 		'sourceTypeSelectedEvent': 'showRelationSelector'
 		
 	initialize: (options = {}) ->
-		@relationTypeMultiSelect = if options.relationTypeMultiSelect? then options.relationTypeMultiSelect else new RelationTypeMultiSelect()
-		@receptionHelper = if options.receptionHelper then options.receptionHelper else new ReceptionHelper()
+		@relationTypeMultiSelect = options.relationTypeMultiSelect ? new RelationTypeMultiSelect()
+		@receptionHelper = options.receptionHelper ? new ReceptionHelper()
+		@eventBus = options.eventBus
+		
+		@eventBus.on('sourceTypeSelectedEvent', (data) =>
+			@showRelationSelector(data)
+		)
 	
 	show: () ->
 		@$el.show()
@@ -34,7 +39,7 @@ class RelationTypeSelector extends Backbone.View
 	hide: () ->
 		@$el.hide()
 		
-	showRelationSelector: (e, selectedSourceType) ->
+	showRelationSelector: (selectedSourceType) ->
 		receptions = null
 		
 		if selectedSourceType is 'documents'

@@ -10,13 +10,18 @@ describe 'Relation type selector', ->
 	receptionHelper = null
 	parentElementAppendSpy = sinon.spy()
 	parentElement = { append: parentElementAppendSpy }
+	eventBus = null
 	
 	beforeEach ->
+		eventBus = {}
+		_.extend(eventBus, Backbone.Events)
+		
 		receptionHelper = new ReceptionHelper({})
 		multiSelect = new RelationTypeMultiSelect()
 		relationTypeSelector = new RelationTypeSelector
 			relationTypeMultiSelect: multiSelect
 			receptionHelper: receptionHelper
+			eventBus: eventBus
 		
 	describe 'render', -> 
 		it 'should append itself to the parent element', ->
@@ -98,7 +103,7 @@ describe 'Relation type selector', ->
 			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getPersonReceptions')
 			receptionHelperGetPersonReceptionsStub.returns(options)
 			
-			relationTypeSelector.$el.trigger('sourceTypeSelectedEvent', 'persons')
+			eventBus.trigger('sourceTypeSelectedEvent', 'persons')
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
 		
@@ -115,7 +120,7 @@ describe 'Relation type selector', ->
 			receptionHelperGetPersonReceptionsStub = sinon.stub(receptionHelper, 'getDocumentReceptions')
 			receptionHelperGetPersonReceptionsStub.returns(options)
 			
-			relationTypeSelector.$el.trigger('sourceTypeSelectedEvent', 'documents')
+			eventBus.trigger('sourceTypeSelectedEvent', 'documents')
 			
 			multiSelectShowWithOptionsSpy.calledWith(options).should.be.ok
 			

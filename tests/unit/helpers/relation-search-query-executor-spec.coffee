@@ -50,7 +50,10 @@ describe 'Relation search query executor', ->
 						else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
 							settings.success({}, '', postResponse)
 				}
-				relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+				relationSearchQueryExecutor = new RelationSearchQueryExecutor
+					requestExecutor: jQueryMock
+					configHelper: configHelper 
+					eventBus: eventBus
 			
 			it 'should call update of the search results object with the results as parameter', ->
 				#action
@@ -75,7 +78,11 @@ describe 'Relation search query executor', ->
 						else if(settings.type is 'POST' and settings.url is postUrl and settings.data = parameters and settings.headers.VRE_ID is 'WomenWriters' and settings.contentType is 'application/json')
 							settings.error(postResponse, '', '')
 				}
-				relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+				relationSearchQueryExecutor = new RelationSearchQueryExecutor
+					requestExecutor: jQueryMock
+					configHelper: configHelper 
+					eventBus: eventBus
+					
 				reportErrorStub = sinon.stub(relationSearchQueryExecutor, 'reportError')
 			
 			it 'should trigger an search done event', ->
@@ -99,7 +106,11 @@ describe 'Relation search query executor', ->
 							settings.success({}, '', postResponse)
 				}
 				
-				relationSearchQueryExecutor = new RelationSearchQueryExecutor(jQueryMock, configHelper, eventBus)
+				relationSearchQueryExecutor = new RelationSearchQueryExecutor
+					requestExecutor: jQueryMock
+					configHelper: configHelper 
+					eventBus: eventBus
+					
 				reportErrorStub = sinon.stub(relationSearchQueryExecutor, 'reportError')
 				
 			it 'should trigger an search done event', ->

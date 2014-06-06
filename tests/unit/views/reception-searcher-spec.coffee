@@ -61,6 +61,8 @@ describe 'Reception searcher', ->
 
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
+			eventBus: eventBus
+		sinon.stub(relationTypeSelector, 'showRelationSelector')
 			
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector

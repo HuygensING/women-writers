@@ -28,13 +28,15 @@ class ReceptionSearcher extends Backbone.View
 		
 	initialize: (options) ->
 		@eventBus = options.eventBus ? @createEventBus()
-		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector(@eventBus)
+		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector
+			eventBus: @eventBus
 		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionDocumentSearch()
 		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder
 			eventBus: @eventBus
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
-		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor(@eventBus) 
+		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor
+			eventBus: @eventBus 
 		@busyOverlay = if(options.busyOverlay?) then options.busyOverlay else new BusyOverlay()
 		
 		@eventBus.on('searchDoneEvent', () =>
