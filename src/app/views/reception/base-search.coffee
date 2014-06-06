@@ -4,7 +4,7 @@ SearchCreatorWrapper = require '../../helpers/search-creator-wrapper'
 IdHelper = require '../../helpers/id-helper'
 
 class ReceptionBaseSearch extends Backbone.View
-	className: 'reception-searcher'
+	className: 'query-builder'
 		
 	events:
 		'click .close-button' : 'closeEditor'
