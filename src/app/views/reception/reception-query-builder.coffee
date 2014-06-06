@@ -1,14 +1,39 @@
 Backbone = require 'backbone'
 
+ReceptionSearchCreator = require '../../helpers/reception-search-creator'
+
 class ReceptionQueryBuilder extends Backbone.View
-	template: '../../../templates/views/reception/faceted-search.jade'
+	template: require '../../../templates/views/reception/faceted-search.jade'
+	className: 'reception-searcher'
+		
+	events: 
+		'click .close-button': 'handleCloseButtonClick'
+		
+	initialize: (options = {}) ->
+		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
+		
+		@search = @receptionSearchCreator.create('documents')
 	
-	render: () ->
+	render: (parentElement) ->
+		@$el.html(@template())
+		
+		parentElement.append(@$el)
+		
+		@search.render(@$el)
+		@search.show()
+	
+	handleCloseButtonClick: () ->
+		@hide()
+		
+		@$el.trigger('queryBuilderCloseEvent')
 	
 	hide: () ->
+		@$el.hide()
 		
 	show: () ->
+		@$el.show()
 		
 	getSearchId: () ->
+		return @search.getSearchId()
 	
 module.exports = ReceptionQueryBuilder

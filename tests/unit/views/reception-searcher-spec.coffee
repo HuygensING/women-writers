@@ -9,7 +9,6 @@ ReceptionPersonSearch = require '../../../src/app/views/reception/person-search'
 ReceptionSearchResult = require '../../../src/app/views/reception/search-result'
 SourceQueryBuilder = require '../../../src/app/views/reception/source-query-builder'
 
-SearchCreatorWrapper = require '../../../src/app/helpers/search-creator-wrapper'
 ReceptionSearchCreator = require '../../../src/app/helpers/reception-search-creator'
 ReceptionSearchQueryExecutor = require '../../../src/app/helpers/relation-search-query-executor'
 
@@ -19,6 +18,7 @@ describe 'Reception searcher', ->
 	relationTypeSelector = null
 	receptionQueryBuilderRenderStub = null
 	receptionSearchCreator = null
+	receptionSearchCreatorCreateStub = null
 	receptionSearchResult = null
 	receptionSearchQueryExecutor = null 
 	parentElement = null
@@ -40,17 +40,13 @@ describe 'Reception searcher', ->
 		
 		receptionSearchQueryExecutor = new ReceptionSearchQueryExecutor()
 		receptionSearchResult = new ReceptionSearchResult()
-		searchCreatorWrapper = new SearchCreatorWrapper
-			createFacetedSearch: sinon.stub()
-			
-		sinon.stub(searchCreatorWrapper, 'createSearch')
-			
-		receptionQueryBuilder = new ReceptionQueryBuilder
-			searchCreatorWrapper: searchCreatorWrapper
-		
-		receptionQueryBuilderRenderStub = sinon.stub(receptionQueryBuilder, 'render')
 		
 		receptionSearchCreator = new ReceptionSearchCreator()
+		receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
+
+		receptionQueryBuilder = new ReceptionQueryBuilder
+			receptionSearchCreator: receptionSearchCreator
+		receptionQueryBuilderRenderStub = sinon.stub(receptionQueryBuilder, 'render')
 
 		sourceQueryBuilder = new SourceQueryBuilder
 			eventBus: eventBus
@@ -206,7 +202,6 @@ describe 'Reception searcher', ->
 		beforeEach ->
 			sourceQueryBuilderMockRenderStub = sinon.stub()
 			sourceQueryBuilderMock = { render: sourceQueryBuilderMockRenderStub }
-			receptionSearchCreatorCreateStub = sinon.stub(receptionSearchCreator, 'create')
 			receptionSearchCreatorCreateStub.withArgs(relationTypeSourceType).returns(sourceQueryBuilderMock)
 			
 			receptionSearcher.render()

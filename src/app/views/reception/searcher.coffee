@@ -9,7 +9,6 @@ RelationTypeSelector = require '../relation-type-selector'
 ReceptionQueryBuilder = require './reception-query-builder'
 SourceQueryBuilder = require './source-query-builder'
 ReceptionSearchResult = require './search-result'
-ReceptionSearchCreator = require '../../helpers/reception-search-creator'
 RelationSearchQueryExecutor = require '../../helpers/relation-search-query-executor'
 
 class ReceptionSearcher extends Backbone.View
@@ -32,7 +31,6 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionQueryBuilder()
 		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder
 			eventBus: @eventBus
-		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor
 			eventBus: @eventBus 
@@ -80,13 +78,6 @@ class ReceptionSearcher extends Backbone.View
 	handleSourceTypeSelected: () ->
 		@enableSourceEditorLink()
 		@enableSearchButton()
-	
-	addSourceQueryBuilder: (value) ->
-		if(@sourceQueryBuilder isnt null and @sourceQueryBuilder isnt undefined)
-			@sourceQueryBuilder.remove()
-		
-		@sourceQueryBuilder = @receptionSearchCreator.create(value)
-		@sourceQueryBuilder.render(@findQueryEditorElement())
 		
 	enableSourceEditorLink: () ->
 		@$('.reception-query.relation-type .edit-link').removeClass('disabled')
