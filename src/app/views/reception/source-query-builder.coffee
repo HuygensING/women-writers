@@ -8,7 +8,7 @@ class SourceQueryBuilder extends Backbone.View
 		
 	initialize: (options= {}) ->
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
-		@eventBus = options.eventBus ? @createEventBus()
+		@eventBus = options.eventBus
 		
 		@eventBus.on('sourceTypeSelectedEvent', (data) =>
 			@renderSearch(data)
@@ -46,9 +46,4 @@ class SourceQueryBuilder extends Backbone.View
 		
 	getSearchId: () ->
 		return @receptionSearch.getSearchId()
-		
-	createEventBus: () ->
-		eventBus = {}
-		_.extend(eventBus, Backbone.Events)
-	
 module.exports = SourceQueryBuilder

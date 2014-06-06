@@ -30,6 +30,9 @@ describe 'Reception searcher', ->
 	eventBus = null
 	
 	beforeEach ->
+		eventBus = {}
+		_.extend(eventBus, Backbone.Events)
+		
 		busyOverlay = new BusyOverlay()
 		
 		parentElementAppendStub = sinon.stub()
@@ -49,17 +52,15 @@ describe 'Reception searcher', ->
 		
 		receptionSearchCreator = new ReceptionSearchCreator()
 
-		sourceQueryBuilder = new SourceQueryBuilder()
+		sourceQueryBuilder = new SourceQueryBuilder
+			eventBus: eventBus
 		sourceQueryBuilderShowStub = sinon.stub(sourceQueryBuilder, 'show')
 		sourceQueryBuilderHideStub = sinon.stub(sourceQueryBuilder, 'hide')
 		sourceQueryBuilderRenderStub = sinon.stub(sourceQueryBuilder, 'render')
+		sinon.stub(sourceQueryBuilder, 'renderSearch')
 
 		relationTypeSelector = new RelationTypeSelector
 			receptionHelper: {}
-			
-			
-		eventBus = {}
-		_.extend(eventBus, Backbone.Events)
 			
 		receptionSearcher = new ReceptionSearcher
 			relationTypeSelector: relationTypeSelector
