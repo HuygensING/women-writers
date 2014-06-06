@@ -215,7 +215,7 @@ describe 'Reception searcher', ->
 			
 			$(editRelationTypeLink).hasClass('disabled').should.be.ok
 			
-			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			eventBus.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
 			$(editRelationTypeLink).hasClass('disabled').should.not.be.ok
 		
@@ -224,7 +224,7 @@ describe 'Reception searcher', ->
 			
 			$(searchButton).hasClass('disabled').should.be.ok
 			
-			element.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
+			eventBus.trigger('sourceTypeSelectedEvent', relationTypeSourceType)
 			
 			$(searchButton).hasClass('disabled').should.not.be.ok
 		

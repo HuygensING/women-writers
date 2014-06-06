@@ -24,7 +24,6 @@ class ReceptionSearcher extends Backbone.View
 		'click .search-receptions': 'search'
 		'click a.unimplemented': 'showUnimplementedMessage'
 		'click button.unimplemented': 'showUnimplementedMessage'
-		'sourceTypeSelectedEvent': 'handleSourceTypeSelected'
 		'queryBuilderCloseEvent': 'deselectReceptionQuery'
 		
 	initialize: (options) ->
@@ -39,6 +38,10 @@ class ReceptionSearcher extends Backbone.View
 		
 		@eventBus.on('searchDoneEvent', () =>
 			@hideBusyOverlay()
+		)
+		
+		@eventBus.on('sourceTypeSelectedEvent', ()  =>
+			@handleSourceTypeSelected()
 		)
 		
 	render: ->
@@ -72,7 +75,7 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder.hide()
 	
 		
-	handleSourceTypeSelected: (e) ->
+	handleSourceTypeSelected: () ->
 		@enableSourceEditorLink()
 		@enableSearchButton()
 	
