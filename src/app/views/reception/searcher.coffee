@@ -30,7 +30,8 @@ class ReceptionSearcher extends Backbone.View
 		@eventBus = options.eventBus ? @createEventBus()
 		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector(@eventBus)
 		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionDocumentSearch()
-		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder(@eventBus)
+		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder
+			eventBus: @eventBus
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor(@eventBus) 
@@ -40,7 +41,7 @@ class ReceptionSearcher extends Backbone.View
 			@hideBusyOverlay()
 		)
 		
-		@eventBus.on('sourceTypeSelectedEvent', ()  =>
+		@eventBus.on('sourceTypeSelectedEvent', () =>
 			@handleSourceTypeSelected()
 		)
 		
