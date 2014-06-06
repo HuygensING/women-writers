@@ -4,7 +4,7 @@ ReceptionSearcher = require '../../../src/app/views/reception/searcher'
 BusyOverlay = require '../../../src/app/views/busy-overlay'
 
 RelationTypeSelector = require '../../../src/app/views/relation-type-selector'
-ReceptionDocumentSearch = require '../../../src/app/views/reception/document-search'
+ReceptionQueryBuilder = require '../../../src/app/views/reception/reception-query-builder'
 ReceptionPersonSearch = require '../../../src/app/views/reception/person-search'
 ReceptionSearchResult = require '../../../src/app/views/reception/search-result'
 SourceQueryBuilder = require '../../../src/app/views/reception/source-query-builder'
@@ -45,7 +45,7 @@ describe 'Reception searcher', ->
 			
 		sinon.stub(searchCreatorWrapper, 'createSearch')
 			
-		receptionQueryBuilder = new ReceptionDocumentSearch
+		receptionQueryBuilder = new ReceptionQueryBuilder
 			searchCreatorWrapper: searchCreatorWrapper
 		
 		receptionQueryBuilderRenderStub = sinon.stub(receptionQueryBuilder, 'render')

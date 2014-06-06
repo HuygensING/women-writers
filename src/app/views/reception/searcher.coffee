@@ -6,12 +6,11 @@ ReceptionPersonSearch = require './person-search'
 BusyOverlay = require '../busy-overlay'
 
 RelationTypeSelector = require '../relation-type-selector'
-ReceptionDocumentSearch = require './document-search'
+ReceptionQueryBuilder = require './reception-query-builder'
+SourceQueryBuilder = require './source-query-builder'
 ReceptionSearchResult = require './search-result'
 ReceptionSearchCreator = require '../../helpers/reception-search-creator'
 RelationSearchQueryExecutor = require '../../helpers/relation-search-query-executor'
-
-SourceQueryBuilder = require './source-query-builder'
 
 class ReceptionSearcher extends Backbone.View
 	template: require '../../../templates/views/reception/reception-searcher.jade'
@@ -30,7 +29,7 @@ class ReceptionSearcher extends Backbone.View
 		@eventBus = options.eventBus ? @createEventBus()
 		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector
 			eventBus: @eventBus
-		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionDocumentSearch()
+		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionQueryBuilder()
 		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder
 			eventBus: @eventBus
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
