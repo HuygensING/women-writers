@@ -18,5 +18,5 @@ class RelationTypeMultiSelect extends Backbone.View
 		@$el.show()
 		
 	getSelectedRelationTypeIds: () ->
-		return @$el.val()
+		return @$el.val() ? []
 module.exports = RelationTypeMultiSelect

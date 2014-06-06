@@ -72,9 +72,26 @@ describe 'Relation type multi select', ->
 	describe 'getSelectedRelationTypeIds', ->
 		it 'should get the value of the multi select element', ->
 			element = relationTypeMultiSelect.$el
+			expectedSelectionCollection = ['ID1', 'ID2', 'ID3']
 			
-			elementValSpy = sinon.spy(element, 'val')
+			elementValStub = sinon.stub(element, 'val')
+			elementValStub.returns(expectedSelectionCollection)
 			
-			relationTypeMultiSelect.getSelectedRelationTypeIds()
+			selectedRelationTypes = relationTypeMultiSelect.getSelectedRelationTypeIds()
 			
-			elementValSpy.called.should.be.ok
+			elementValStub.called.should.be.ok
+			selectedRelationTypes.should.equal(expectedSelectionCollection)
+		
+		it 'should return an empty collection when no selection is made', ->
+			element = relationTypeMultiSelect.$el
+			expectedSelectionCollection = []
+			
+			elementValStub = sinon.stub(element, 'val')
+			elementValStub.returns(null)
+			
+			selectedRelationTypes = relationTypeMultiSelect.getSelectedRelationTypeIds()
+			
+			elementValStub.called.should.be.ok
+			#should be a deep equal to compare the values of the arrays
+			selectedRelationTypes.should.deep.equal(expectedSelectionCollection)
+		
