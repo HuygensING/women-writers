@@ -4,3 +4,4 @@ stage
 src/templates/.templates.js
 targets/
 build/
+tests/acceptance/reports
