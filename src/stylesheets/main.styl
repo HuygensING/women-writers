@@ -63,21 +63,28 @@ a
 		float left
 		width 400px
 
-	a
-		color black
-		font-family sans-serif
-		margin-right 1em
-		padding 1em .5em
-		padding-bottom calc(1em - 5px)
-		font-size 90%
+		a
+			color black
+			font-family sans-serif
+			margin-right 1em
+			padding 1em .5em
+			padding-bottom calc(1em - 5px)
+			font-size 90%
 
-		display inline-block
+			display inline-block
 
-		border-bottom none
+			border-bottom none
 
-		&.active
-			border-bottom 5px solid baseColor
+			transition border-color .15s ease 0s
+			border-bottom 5px solid transparent
 
+			&.active
+				border-bottom 5px solid baseColor
+
+			&:hover:not(.active)
+				border-bottom 5px solid lightBackgroundEdgeColor
+				transition border-color .1s ease 0s
+				
 	.user-status
 		& *, & *:hover, & *:active
 			transition all .15s ease 0s
