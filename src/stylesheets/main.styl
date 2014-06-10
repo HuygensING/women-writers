@@ -55,6 +55,14 @@ a
 	border-top 1px solid lightBackgroundEdgeColor
 	border-bottom 1px solid lightBackgroundEdgeColor
 
+	.centered
+		display table
+		overflow auto
+
+	.links
+		float left
+		width 400px
+
 	a
 		color black
 		font-family sans-serif
@@ -74,19 +82,27 @@ a
 		& *, & *:hover, & *:active
 			transition all .15s ease 0s
 	
-		display inline-block
-		float right
+		display table-cell !important
+		vertical-align middle
 
 		button.login
 			button-light-style()
 			color mediumGray
 			border-color lightGray
+
+			display block
+			vertical-align middle
+
 			&:hover
 				color darkGray
 				border-color darkGray
 
 		& > span
 			display none
+		
+		& > span, button
+			float right
+
 		&.logged-in
 			& > span
 				display inline
