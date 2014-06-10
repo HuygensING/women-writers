@@ -48,8 +48,6 @@ a
 		background-image url(baseUrl + '/images/huygens-ing-small.png')
 
 .navigation
-	height 50px
-	line-height 50px
 	margin 35px 0 0 0
 	box-sizing border-box
 
@@ -60,8 +58,17 @@ a
 	a
 		color black
 		font-family sans-serif
-		display inline
 		margin-right 1em
+		padding 1em .5em
+		padding-bottom calc(1em - 5px)
+		font-size 90%
+
+		display inline-block
+
+		border-bottom none
+
+		&.active
+			border-bottom 5px solid baseColor
 
 	.user-status
 		& *, & *:hover, & *:active

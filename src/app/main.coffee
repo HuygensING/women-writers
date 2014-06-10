@@ -156,4 +156,6 @@ $ ->
 				controller: app
 				root: base
 
+			mainRouter.on 'route', (route) => app.updateNavBar route
+
 			mainRouter.start()

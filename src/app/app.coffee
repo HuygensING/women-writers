@@ -30,6 +30,13 @@ class App extends Backbone.View
 		_.extend @, Backbone.Events
 		@render()
 
+	updateNavBar: (route) ->
+		match = route.match /show([A-Z][a-z]+)/
+		if match
+			category = match[1].toLowerCase()
+			@$('.navigation a').removeClass 'active'
+			@$(".navigation a.#{category}").addClass 'active'
+
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
