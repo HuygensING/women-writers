@@ -163,4 +163,5 @@ module.exports = (grunt) ->
 	grunt.registerTask 'deploy', ['build', 'rsync:deploy']
 	
 	grunt.registerTask 'server',      ['build', 'express',         'watch']
+	grunt.registerTask 'server:only',	['express', 'watch']
 	grunt.registerTask 'server:open', ['build', 'express', 'open', 'watch']
