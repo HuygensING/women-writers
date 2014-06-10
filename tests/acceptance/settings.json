@@ -1,0 +1,40 @@
+{
+	"src_folders": ["."],
+	"output_folder": "./reports",
+
+	"test_settings": {
+		"default": {
+			"selenium_host": "127.0.0.1",
+			"selenium_port": 4444,
+			"silent": true,
+			"output": true,
+			"firefox_profile": false,
+			"screenshots": {
+				"enabled": false,
+				"path": ""
+			},
+			"desiredCapabilities": {
+				"browserName": "firefox",
+				"javascriptEnabled": true,
+				"acceptSslCerts": true
+			}
+		},
+		"browserstack" : {
+			"selenium_host": "hub.browserstack.com",
+			"selenium_port": 80,
+			"silent": true,
+			"output": true,
+			"screenshots": {
+				"enabled": true,
+				"path": "./reports/screenshots"
+			},
+			"desiredCapabilities": {
+				"name": "Women Writers",
+				"browserName": "internet explorer",
+				"version": "9.0",
+				"browserstack.user": "jonaandersen1",
+				"browserstack.key": "hUekxaVKYy6ygeaBTn5z"
+			}
+		}
+	}
+}
