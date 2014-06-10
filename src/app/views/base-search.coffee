@@ -71,6 +71,8 @@ class SearchView extends Backbone.View
 		@$('.cursor .next').toggle @search.hasNext()
 		@$('.cursor .prev').toggle @search.hasPrev()
 
+		@$('.results').css 'counter-reset', "li-result #{rsp.attributes.start}"
+
 	render: ->
 		@$el.html @template()
 		@$('.search').html @search.el
