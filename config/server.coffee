@@ -1,5 +1,6 @@
 path = require 'path'
 http = require 'http'
+url  = require 'url'
 httpProxy = require 'http-proxy'
 
 express = require 'express'
@@ -8,17 +9,26 @@ jade = require 'jade'
 
 buildDir = "#{__dirname}/../targets/development"
 
+app = express()
+
+origin = null # http://localhost:9000
+
 proxy = httpProxy.createProxyServer
 	target: 'http://demo17.huygens.knaw.nl'
 	# target: 'http://localhost:8080'
 
+proxy.on 'proxyRes', (res) ->
+	if 'location' of res.headers
+		res.headers['location'] = res.headers['location'].replace 'http://demo17.huygens.knaw.nl/timbuctoo', "#{origin}/api"
+
 timbuctooProxy = (req, res) ->
+	if not origin?
+		origin = req.headers['origin']
+
 	req.url = req.url.replace '/api', '/timbuctoo'
 	req.headers['host'] = 'demo17.huygens.knaw.nl'
 	# req.headers['host'] = 'localhost:8080'
 	proxy.web req, res
-
-app = express()
 
 allowCrossDomain = (req, res, next) ->
 	res.header 'Access-Control-Allow-Origin', '*'
