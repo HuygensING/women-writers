@@ -6,6 +6,8 @@
 	float left
 	margin 20px 0 0 resultsLeftPadding
 
+	counter-reset li-result
+
 	h4
 		.order-by
 			span
@@ -53,18 +55,41 @@
 			margin 0 auto
 			display none
 
-	ul
+	ol
 		list-style none
 		padding 0
 		margin 0
-		a
-			display block
-			height 100%
-			border-top 1px solid lightBackgroundEdgeColor
-			padding .5em 0
 
-			color black
-			
-		li:last-child
+		color mediumGray
+
+		li
+			position relative
+			counter-increment li-result
+
+			line-height 2em
+			border-top 1px solid lightBackgroundEdgeColor
+
 			a
-				border-bottom 1px solid lightBackgroundEdgeColor
+				display block
+				height 100%
+
+				border-bottom none
+
+				color black
+
+				&:before
+					content counter(li-result)
+					position absolute
+					font-size .8em
+					width 3em
+					left -3.5em
+					text-align right
+
+					color mediumGray
+
+				&:hover
+					color linkColor
+
+			&:last-child
+				a
+					border-bottom 1px solid lightBackgroundEdgeColor
