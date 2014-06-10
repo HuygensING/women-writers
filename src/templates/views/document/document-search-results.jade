@@ -24,6 +24,6 @@ h4
 	span.next Next &raquo;
 
 ol(start=response.start + 1)
-	- each document in response.results
+	- each document in response.refs
 		li
-			a(href=config.documentViewUrl(document._id))= document.title
+			a(href=config.documentViewUrl(document.id))= document.displayName

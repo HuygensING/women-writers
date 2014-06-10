@@ -24,15 +24,16 @@ h4
 	span.next Next &raquo;
 
 ol.persons
-	- each person in response.results
+	- var personsById = _.object(_.map(response.results, function (p) { return [p._id, p] }));
+	- each person in response.refs
 		li
-			a(href=config.personViewUrl(person._id))
-				if person.tempName
-					.name= person.tempName
+			a(href=config.personViewUrl(person.id))
+				if person.displayName
+					.name= person.displayName
 				else
 					.name
 						span.empty-name No name provided
 				.alive
-					span.from= person.birthDate ? person.birthDate : 'unknown'
+					span.from= personsById[person.id] ? (personsById[person.id].birthDate || 'unknown') : 'unknown'
 					| &nbsp;&ndash;&nbsp;
-					span.to= person.deathDate ? person.deathDate : 'unknown'
+					span.to= personsById[person.id] ? (personsById[person.id].deathDate || 'unknown') : 'unknown'
