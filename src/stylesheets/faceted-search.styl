@@ -24,9 +24,20 @@
 	form .search-placeholder .facet.search button
 		button-style()
 		font-weight normal
+		box-shadow none
+		background-color transparent
+		border 1px solid mediumGray
+		color mediumGray
+		text-transform uppercase
+		font-size .7em
+		letter-spacing .06em
+
+		&:hover
+			background-color lightBackgroundEdgeColor
+			border none
 
 	form .facet
-		background-color lightBackgroundColor
+		background-color lightBackgroundColor		
 		padding 1em 0
 
 		header h3
@@ -38,6 +49,29 @@
 
 		.placeholder
 			padding 0 13px
+
+		.options
+			background-color transparent
+			border-top 1px solid lightBackgroundEdgeColor
+			border-bottom 1px solid lightBackgroundEdgeColor
+			border-radius 0
+			box-shadow none
+
+			padding 0
+
+			label
+				margin-left .5em
+				text-transform uppercase
+				font-size .8em
+				color darkGray
+
+				cursor pointer
+
+			input[name="all"]
+				display none
+
+			input[name="filter"]
+				margin 4px 0
 
 		&.list
 			ul
@@ -55,3 +89,6 @@
 						margin-right 50px
 					.count
 						width:50px; // support more digits than 4
+
+					&:hover label
+						text-decoration underline
