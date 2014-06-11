@@ -94,6 +94,8 @@ class BaseView extends Backbone.View
 
 			if field.type is 'Array'
 				value = (field.options.map el for el in value)
+			else if field.formatNewlines is true
+				value = value.replace /\n/g, '<br>'
 
 			html = @fieldTemplate _.extend data,
 				title: if field.title? then niceify(field.title) else field.field

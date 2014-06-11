@@ -38,6 +38,7 @@ class DocumentView extends BaseView
 					title: 'Notes'
 					field: 'notes'
 					large: true
+					formatNewlines: true
 				}
 				'topoi'
 				{
