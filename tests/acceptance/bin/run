@@ -1,30 +1,39 @@
 #!/bin/bash
 
+
+SCRIPT=$(readlink -f "$0")
+BIN=$(dirname $SCRIPT)
+
+TEST_DIR="$BIN/../"
+SETTINGS=$TEST_DIR/settings.json
+TEST_ENVIRONMENT=browserstack
+
+OPEN_TUNNEL=$1
+
+### BROWSERSTACK SETTINGS
+
+BROWSERSTACK=$BIN/BrowserStackLocal
 AUTH_KEY=hUekxaVKYy6ygeaBTn5z
 
 HOST=localhost
 PORT=9000
 
-SCRIPT=$(readlink -f "$0")
-BIN=$(dirname $SCRIPT)
-TEST_DIR="$BIN/../"
-SETTINGS=$TEST_DIR/settings.json
-
-BROWSERSTACK=$BIN/BrowserStackLocal
-
-TEST_ENVIRONMENT=browserstack
-
 WAIT_FILE="/tmp/ww-nightwatch-$$-bs-status"
+
+### ====
 
 npm install
 
 cd $TEST_DIR
 
-$BROWSERSTACK $AUTH_KEY $HOST,$PORT,0 &> $WAIT_FILE &
-touch $WAIT_FILE
+if [ "$OPEN_TUNNEL" = true ]; then
+	echo "Opening tunnel..."
+	$BROWSERSTACK $AUTH_KEY $HOST,$PORT,0 &> $WAIT_FILE &
+	touch $WAIT_FILE
 
-# Wait for BrowserStack tunnel to start before running tests
-while grep "Press Ctrl-C" $WAIT_FILE; do sleep 0.2; done
+	# Wait for BrowserStack tunnel to start before running tests
+	while grep "Press Ctrl-C" $WAIT_FILE; do sleep 0.2; done
+fi
 
 # Run tests!
 $BIN/nightwatch --config $SETTINGS -e $TEST_ENVIRONMENT $TEST_DIR

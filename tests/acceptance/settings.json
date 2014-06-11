@@ -30,8 +30,9 @@
 			},
 			"desiredCapabilities": {
 				"name": "Women Writers",
-				"browserName": "internet explorer",
-				"version": "9.0",
+				"platform": "win8",
+				"browserName": "firefox",
+				"version": "29",
 				"browserstack.user": "jonaandersen1",
 				"browserstack.key": "hUekxaVKYy6ygeaBTn5z",
 				"browserstack.local": "true"

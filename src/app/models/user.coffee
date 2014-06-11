@@ -37,10 +37,7 @@ class User extends Backbone.Model
 					Backbone.$("body").append form
 					form.submit()
 				else
-					try
-						console.error "Login failed", req
-					catch e
-						alert "Could not log you in"
+					console?.error "Not logged in", req
 		
 		super(checkLoggedIn).done (data) =>
 			@set loggedIn: true if data._id?
