@@ -1,8 +1,8 @@
 .fieldset.gridHolder
-	if title
+	if fieldset.title
 		.c4_4
-			h4= title
+			h4.title=fieldset.title
 
-	each field in fields
+	each field in fieldset.fields
 		!= field
 	.clear

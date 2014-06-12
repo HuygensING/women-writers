@@ -1,8 +1,8 @@
-.field(class = ((newLine ? "new-line" : "") + (large ? " large" : "")) )
-	label= title
-	if group
+.field(class=field.classes)
+	label= field.title
+	if field.group
 		.value
-			each v in value
+			each v in field.value
 				p!= v
 	else
-		.value!= value
+		.value!= field.value
