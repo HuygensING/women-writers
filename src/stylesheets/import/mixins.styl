@@ -28,3 +28,10 @@ no-user-select()
 	-webkit-user-select none
 	-ms-user-select none
 	-moz-user-select none
+
+small-loader-style(type='')
+	width 16px
+	height 16px
+	background-image url('images/small' + (type ? '-' + type + '-' : '-') + 'loader.gif')
+	background-repeat no-repeat
+	background-position center center

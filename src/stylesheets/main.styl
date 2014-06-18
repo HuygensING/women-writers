@@ -60,15 +60,13 @@ a
 		overflow auto
 
 	.links
-		float left
-		width 400px
+		font-size 90%
 
 		a
 			color black
 			font-family sans-serif
 			padding 1em .5em
 			padding-bottom calc(1em - 5px)
-			font-size 90%
 
 			display inline-block
 
@@ -85,23 +83,11 @@ a
 				transition border-color .1s ease 0s
 				
 	.user-status
+		display inline-block
+		float right
+
 		& *, & *:hover, & *:active
 			transition all .15s ease 0s
-	
-		display table-cell !important
-		vertical-align middle
-
-		button.login
-			button-light-style()
-			color mediumGray
-			border-color lightGray
-
-			display block
-			vertical-align middle
-
-			&:hover
-				color darkGray
-				border-color darkGray
 
 		& > span
 			display none
@@ -111,13 +97,21 @@ a
 
 		&.logged-in
 			& > span
-				display inline
-				font-size .8em
+				padding 1em 0
+				display inline-block
+				// font-size .8em
 				color darkGray
 				.user-name
 					font-weight bold
-			button.login
+			a.login
 				display none
+
+		.loader
+			small-loader-style('rect')
+			background-position center left
+			width auto
+			display none
+			padding 1em 32px
 
 ul.persons
 	margin 0
