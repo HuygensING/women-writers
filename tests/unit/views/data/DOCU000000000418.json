@@ -88,7 +88,21 @@
     "documentType": "WORK",
     "edition": "1",
     "englishTitle": null,
-    "links": [],
+    "links": ["http://foo.com/", "http://bar.com/"],
+    "names": [
+        {
+            "components": [
+                {
+                    "type": "FORENAME",
+                    "value": "Margeret Wilson"
+                },
+                {
+                    "type": "SURNAME",
+                    "value": "Oliphant"
+                }
+            ]
+        }
+    ],
     "notes": "* Print\nLocation: London\nYear: 1876",
     "reference": null,
     "resourceFormat": null,

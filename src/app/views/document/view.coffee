@@ -4,7 +4,7 @@ BaseView = require '../base-view'
 
 linkTemplate = require '../../../templates/views/base-link.jade'
 
-relationField = require '../../helpers/base-view-helper'
+{relationField, namesMap} = require '../../helpers/base-view-helper'
 
 class DocumentView extends BaseView
 	className: 'document view'

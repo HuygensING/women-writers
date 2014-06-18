@@ -1,6 +1,6 @@
-.field(class=field.classes)
+.field(class=field.classes.join(" "))
 	label= field.title
-	if field.group
+	if field.type == 'Array'
 		.value
 			each v in field.value
 				p!= v

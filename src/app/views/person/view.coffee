@@ -2,12 +2,7 @@ config = require '../../config.coffee'
 
 BaseView = require '../base-view'
 
-nameComponentTemplate = require '../../../templates/views/person/name-component.jade'
-nameTemplate = require	'../../../templates/views/person/name.jade'
-
-linkTemplate = require '../../../templates/views/base-link.jade'
-
-relationField = require '../../helpers/base-view-helper'
+{relationField, namesMap, linksMap} = require '../../helpers/base-view-helper'
 
 class PersonView extends BaseView
 	className: 'person view'
@@ -19,11 +14,9 @@ class PersonView extends BaseView
 				{
 					title: 'Names'
 					field: 'names'
-					large: true
+					newLine: true
 					type: 'Array'
-					options:
-						map: (el) -> nameTemplate
-							components: (nameComponentTemplate component for component in el.components)
+					map: namesMap
 				}
 				'gender'
 				relationField 'hasPseudonym', 'Pseudonyms'
@@ -66,8 +59,7 @@ class PersonView extends BaseView
 					type: 'Array'
 					large: true
 					group: true
-					options:
-						map: (link) -> linkTemplate link
+					map: linksMap
 				}
 				{
 					title: 'Bibliography'

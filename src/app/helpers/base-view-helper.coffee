@@ -2,18 +2,35 @@ config = require '../config'
 
 linkTemplate = require '../../templates/views/base-link.jade'
 
-module.exports = (name, title, map={}) ->
-	{
-		title: title
-		field: "@relations.#{name}/id=displayName"
-		type: 'Array'
-		group: true
-		options:
-			map: (el) ->
-				if config.viewUrl el.id
-					linkTemplate
-						url: config.viewUrl el.id
-						label: el.displayName
-				else
-					el.displayName
-	}
+nameComponentTemplate = require '../../templates/views/person/name-component.jade'
+nameTemplate = require	'../../templates/views/person/name.jade'
+
+helpers = 
+	relationField: (name, title, map={}) ->
+		{
+			title: title
+			field: name
+			in: '@relations'
+			type: 'Array'
+			group: true
+			map: (value) ->
+				all = for el in (value || [])
+					if config.viewUrl el.id
+						linkTemplate
+							url: config.viewUrl el.id
+							label: el.displayName
+					else
+						el.displayName
+				all
+		}
+	namesMap: (value) ->
+		names = []
+		for name in value
+			components = (nameComponentTemplate c for c in name.components)
+			names.push nameTemplate components: components
+		
+		names
+
+	linksMap: (value) -> linkTemplate link for link in value
+
+module.exports = helpers
