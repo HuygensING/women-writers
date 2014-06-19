@@ -5,7 +5,8 @@
   "main": "src/app/main.coffee",
   "scripts": {
     "test": "mocha -w --compilers coffee:coffee-script/register,jade:jade --reporter spec tests/unit/*",
-    "test-acceptance": "tests/acceptance/bin/run"
+    "test-acceptance": "tests/acceptance/bin/run default",
+    "test-acceptance-browserstack": "tests/acceptance/bin/run browserstack"
   },
   "repository": {
     "type": "git",

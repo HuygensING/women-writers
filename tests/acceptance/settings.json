@@ -1,6 +1,16 @@
 {
 	"src_folders": ["."],
 	"output_folder": "./reports",
+	"selenium": {
+		"start_process": true,
+		"server_path": "/usr/local/lib/node_modules/nightwatch/bin/selenium-server-standalone-2.39.0.jar",
+		"host": "127.0.0.1",
+		"port": 4444,
+		"cli_args": {
+			"webdriver.chrome.driver": "",
+			"webdriver.ie.driver": ""
+		}
+	},
 
 	"test_settings": {
 		"default": {
