@@ -60,6 +60,23 @@ class BaseView extends Backbone.View
 			else # if matcher of store
 				values[matcher] = maybeMap store[matcher]
 
+		# Expand regex into separate fields
+		for field, idx in fieldset.fields
+			matcher = if _.isRegExp field
+				field
+			else if _.isRegExp field.field
+				field.field
+			
+			continue if not matcher
+
+			matchingFields = for m in _.keys(values) when m.match matcher
+				newField = if field.field? then _.clone field else {}
+				newField.field = m
+				newField.value = values[m]
+				newField
+
+			fieldset.fields.splice idx, 1, matchingFields...
+
 		values
 
 	_fieldHtml: (field) ->

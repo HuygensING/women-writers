@@ -87,6 +87,19 @@ describe 'Base view', ->
 				]
 			"#{_.keys(data).sort()}".should.equal "#{expected.sort()}"
 
+		it 'should add matched regex fields to fieldset, replacing regex', ->
+			fieldset = 
+				title: 'Temp fieldset'
+				fields: [ /^temp/	]
+			expected = [
+				'tempCreator'
+				'tempLanguage'
+				'tempOldId'
+				'tempOrigin'
+			]
+			data = view._processFieldset fieldset
+			"#{(f.field for f in fieldset.fields)}".should.equal "#{expected}"
+
 	describe '_fieldHtml', ->
 		it 'should use field name as label if title is not specified', ->
 			html = $ view._fieldHtml
