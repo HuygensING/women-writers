@@ -1,0 +1,7 @@
+if canEdit
+	a.edit.btn.green(href=config.editUrl(data._id)) Edit
+else
+	button.btn.disabled
+		i.fa.fa-ban
+		| Edit
+	span This record is being processed and can not be edited right now.
