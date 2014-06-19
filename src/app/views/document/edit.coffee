@@ -16,7 +16,7 @@ DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/help
 
 class Document extends Backbone.View
 	className: 'document-edit'
-	template: require '../../../templates/views/document/document.jade'
+	template: require '../../../templates/views/document/edit.jade'
 	receptionOf: 'timbuctoo-relation.receptionOf'
 	receivedIn: 'timbuctoo-relation.receivedIn'
 

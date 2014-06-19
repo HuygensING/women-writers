@@ -16,7 +16,7 @@ DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/help
 
 class Person extends Backbone.View
 	className: 'person-edit'
-	template: require '../../../templates/views/person/person.jade'
+	template: require '../../../templates/views/person/edit.jade'
 
 	relationTypes: [
 		'hasBirthPlace'
