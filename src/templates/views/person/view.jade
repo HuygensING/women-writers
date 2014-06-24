@@ -7,21 +7,6 @@ h2= data.tempName
 
 .fieldsets
 
-.c4_4
-	h3 Receptions by this person
-	if receptions && _.keys(receptions).length
-		ul.receptions
-			each list, reception in receptions
-				li
-					h4= reception
-					ul
-						each r in list
-							li: a(href=config.viewUrl(r.id))= r.displayName
-	else
-		p None
+include ../view-receptions.jade
 
-.last-modified
-	| Last modified by user
-	span.user-id= modified.userId.replace(/USER0+/g, ' ')
-	| &nbsp;on&nbsp;
-	span.time= new Date(modified.timeStamp)
+include ../view-footer.jade
