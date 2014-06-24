@@ -10,7 +10,7 @@ class PersonSearch extends BaseSearch
 		typeString: config.get 'personTypeString'
 		resultRows: 25
 	facetNameMap:
-		dynamic_s_collective: 'Collective'
+		dynamic_s_collective: 'Memberships'
 		dynamic_s_birthplace: 'Place of Birth'
 		dynamic_s_birthDate: 'Year of Birth'
 		dynamic_s_deathDate: 'Year of Death'
