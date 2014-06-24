@@ -14,7 +14,6 @@ class PersonView extends BaseView
 				{
 					title: 'Names'
 					field: 'names'
-					newLine: true
 					type: 'Array'
 					map: namesMap
 				}
