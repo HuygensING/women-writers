@@ -6,16 +6,38 @@
 	input[type=text]
 		width auto
 
-	i.fa-compress, i.fa-refresh
-		position absolute
-		left -23px
-		top 5px
-		color lightGray
+	.control-panel
+		padding 13px 13px 0 13px
 
-		&:hover
+		text-align center
+
+		&:after
+			display block
+			content ""
+			clear both
+
+		.btn
+			display inline-block
+
+			&:first-child
+				margin-right 33%
+
+			text-align center
+
+			font-size .7em
+			font-weight 100
+
+			background-color transparent
 			color darkGray
-	i.fa-refresh
-		top 25px
+
+			transition all .15s ease 0s
+			border 1px solid transparent
+
+			&:hover
+				border 1px solid darkGray
+
+			i
+				margin-right .5em
 
 	form
 		border-radius 0
