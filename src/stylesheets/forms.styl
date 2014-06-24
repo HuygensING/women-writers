@@ -84,12 +84,14 @@ button, .btn
 	&:hover
 		background-color baseColor
 
-	&.gray
+	&.gray, &.disabled
 		background-color lightGray
 		color darkGray
-		&:hover
+		&:not(.disabled):hover
 			background-color darkGray
 			color white
+		&.disabled:hover
+			cursor default
 
 .controls
 	margin 35px 0

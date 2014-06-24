@@ -138,8 +138,12 @@ class BaseView extends Backbone.View
 			@$fieldsets.append html
 
 	render: ->
+		hasPid = @model.get('^pid')?
+
 		@$el.html @template
 			data: @model.attributes
+			modified: @model.get '^modified'
+			canEdit: hasPid
 			config: @config
 			versions: []
 			revisions: []

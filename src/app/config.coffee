@@ -50,6 +50,12 @@ class Config extends Backbone.Model
 		else if id.match /^PERS/
 			@personViewUrl id
 
+	editUrl: (id) ->
+		if id.match /^DOC/
+			@documentEditUrl id
+		else if id.match /^PERS/
+			@personEditUrl id
+
 	educationUrl: ->
 		@get('facetedSearchBaseUrl') + @get('educationPath')
 

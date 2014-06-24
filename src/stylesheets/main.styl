@@ -70,18 +70,17 @@ a
 
 			display inline-block
 
-			border-bottom none
-
 			transition border-color .15s ease 0s
 			border-bottom 5px solid transparent
 
 			&.active
 				border-bottom 5px solid baseColor
+				transition border-color .1s ease 0s
 
 			&:hover:not(.active)
 				border-bottom 5px solid lightBackgroundEdgeColor
 				transition border-color .1s ease 0s
-				
+
 	.user-status
 		display inline-block
 		float right

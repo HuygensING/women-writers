@@ -1,5 +1,5 @@
 .controls
-	a.edit.btn.green(href=config.documentEditUrl(data._id)) Edit
+	include ../view-controls.jade
 
 h2= data.title
 
@@ -20,15 +20,8 @@ h4.author= data.tempCreator
 	else
 		p None
 
-
-//- if versions
-//- 	p.versions
-//- 		| View other interpretations of this record:
-//- 		each version in versions
-//- 			a(href=version)= version
-
-//- .revisions
-//- 	h5 Revisions
-//- 	ul
-//- 		each r in revisions
-//- 			li(data-revision=r)= r
+.last-modified
+	| Last modified by user&nbsp;
+	span.user-id= modified.userId.replace(/USER0+/g, '')
+	| &nbsp;on&nbsp;
+	span.time= new Date(modified.timeStamp)
