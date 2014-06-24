@@ -23,11 +23,12 @@ class SearchView extends Backbone.View
 	initialize: (@options={}) ->
 		_.extend @, Backbone.Events
 
+		@textSearchTitle = @options.textSearchTitle ? @textSearchTitle
 		@queryOptions = @options.queryOptions ? @queryOptions
 		@facetNameMap = @options.facetNameMap ? @facetNameMap
 		@sortableFieldsMap = (@options.sortableFieldsMap ? @sortableFieldsMap) ? {}
 
-		@search = createFacetedSearch @queryOptions, @facetNameMap
+		@search = createFacetedSearch @queryOptions, @facetNameMap, @textSearchTitle
 
 		@listenTo @search, 'results:change', (results) => @renderResults results
 
