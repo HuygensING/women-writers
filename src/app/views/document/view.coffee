@@ -4,7 +4,7 @@ BaseView = require '../base-view'
 
 linkTemplate = require '../../../templates/views/base-link.jade'
 
-{relationField, namesMap} = require '../../helpers/base-view-helper'
+{relationField, namesMap, linksMap} = require '../../helpers/base-view-helper'
 
 class DocumentView extends BaseView
 	className: 'document view'
@@ -30,8 +30,7 @@ class DocumentView extends BaseView
 					type: 'Array'
 					large: true
 					group: true
-					options:
-						map: (link) -> linkTemplate link
+					map: linksMap
 				}
 				'reference'
 				{

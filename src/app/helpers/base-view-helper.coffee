@@ -26,11 +26,11 @@ helpers =
 	namesMap: (value) ->
 		names = []
 		for name in value
-			components = (nameComponentTemplate c for c in name.components)
-			names.push nameTemplate components: components
+			components = (nameComponentTemplate c for c in name.components when c.type?)
+			names.push nameTemplate components: components if components.length
 		
 		names
 
-	linksMap: (value) -> linkTemplate link for link in value
+	linksMap: (links) -> linkTemplate link for link in links when link.url?
 
 module.exports = helpers
