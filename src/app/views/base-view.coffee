@@ -136,6 +136,7 @@ class BaseView extends Backbone.View
 	_fieldsetHtml: (fieldset) ->
 		data = @_processFieldset fieldset
 
+		noValues = 0
 		for field, idx in fieldset.fields
 			# Optionally allow just plain strings as field definitions,
 			# but rework into object for further processing
@@ -151,6 +152,9 @@ class BaseView extends Backbone.View
 			field.html = @_fieldHtml field
 			fieldset.fields[idx] = field
 
+			noValues++ if field.html.match /no-value/
+
+		fieldset.empty = true if noValues is fieldset.fields.length
 		@fieldsetTemplate fieldset: fieldset
 
 	renderFieldsets: ->
