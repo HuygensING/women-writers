@@ -93,17 +93,37 @@ button, .btn
 		&.disabled:hover
 			cursor default
 
+	&.red
+		background-color redHue
+		color white
+		&:hover
+			background-color darken(redHue, 10%)
+
+	&.alert
+		shake(1, 0.15s)
+
 .controls
 	margin 35px 0
 	width 100%
+	position relative
 
 	&.bottom
 		padding-top 1em
 		border-top 1px solid lightGray
 
-	button, a.btn
+	&:after
+		clear both
+		content ""
+		display block
+
+	button, .btn
 		font-size 16px
-		margin-right 1em
+		// margin-right 1em
+		float left
+
+		&.right
+			float right
+
 		i
 			margin-right .3em
 

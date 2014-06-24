@@ -4,9 +4,29 @@
 	.margin-row
 		margin-bottom 1em
 
-	// To be shown programmatically, once user is logged in
 	.controls
+		// To be shown programmatically, once user is logged in
 		display none
+
+		i
+			margin-right .5em
+
+		.is-deleted
+			text-align center
+			padding 1em
+			color mediumGray
+			border 5px solid lightGray
+
+		.delete
+			display none
+			.confirm
+				display none
+			&.confirm
+				.confirm
+					display inline-block
+					width auto
+				.default
+					display none
 
 	h2
 		font-family 'Raleway', sans-serif

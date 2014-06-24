@@ -1,5 +1,15 @@
-if canEdit
-	a.edit.btn.green(href=config.editUrl(data._id)) Edit
+if isDeleted
+	.is-deleted
+		i.fa.fa-warning
+		span This record has been deleted.
+else if canEdit
+	a.edit.btn.green(href=config.editUrl(data._id))
+		i.fa.fa-pencil
+		| Edit
+	button.delete.btn.gray.right
+		i.fa.fa-trash-o
+		span.default Delete
+		span.confirm Confirm deletion
 else
 	button.btn.disabled
 		i.fa.fa-ban

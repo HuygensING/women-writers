@@ -13,6 +13,9 @@ class BaseView extends Backbone.View
 	fieldsetTemplate: require '../../templates/views/base-fieldset.jade'
 	fieldTemplate: require '../../templates/views/base-field.jade'
 
+	events:
+		'click .controls .delete': 'deleteRecord'
+
 	initialize: (options={}) ->
 		{@config, @user} = options
 
@@ -36,6 +39,29 @@ class BaseView extends Backbone.View
 			results[relType] = relations[relType]
 
 		results
+
+	deleteRecord: ->
+		btn = @$('.controls .delete')
+
+		if btn.hasClass 'confirm'
+			@model.destroy
+				beforeSend: (xhr) =>
+					xhr.setRequestHeader 'Authorization', @config.get 'authToken'
+					xhr.setRequestHeader 'VRE_ID', @config.get 'VRE_ID'
+			.success =>
+				console.log "OMG"
+				# TODO: Do something here, like refetch model.
+			.fail =>
+				alert "Could not delete record"
+				btn.removeClass 'confirm'
+				btn.removeClass 'red'
+				btn.addClass 'gray'
+				btn.removeClass 'alert'
+		else
+			btn.toggleClass 'confirm'
+			btn.toggleClass 'red'
+			btn.toggleClass 'gray'
+			btn.addClass 'alert'
 
 	showControls: (toggle) ->
 		@$controls?.toggle @user.get 'loggedIn'
@@ -139,11 +165,14 @@ class BaseView extends Backbone.View
 
 	render: ->
 		hasPid = @model.get('^pid')?
+		isDeleted = @model.get '^deleted'
+		canEdit = hasPid and not isDeleted
 
 		@$el.html @template
 			data: @model.attributes
 			modified: @model.get '^modified'
 			canEdit: hasPid
+			isDeleted: isDeleted
 			config: @config
 			versions: []
 			revisions: []
