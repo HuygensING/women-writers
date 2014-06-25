@@ -1,13 +1,35 @@
+// Dimensions
+
+maxWidth = 960px
+facetedSearchWidth = 31%
+resultsLeftPadding = 5%
+resultsWidth = 64%
+
 .container
 	padding 0
 	margin 0
 
 .centered
 	margin 0 auto
-	width 960px
+	width 100%
+
+#search > div > .search
+	float left
+	width 30%
 
 .faceted-search
-	width facetedSearchWidth
+	width 100%
 
 .results
-	width mainWidth - facetedSearchWidth - resultsLeftPadding
+	float left
+	margin 20px 0 0 resultsLeftPadding
+	width resultsWidth
+
+@media (min-width: 960px)
+	.centered
+		max-width maxWidth
+
+
+@media (max-width: 720px)
+	#search
+		min-width 720px
