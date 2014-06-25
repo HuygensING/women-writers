@@ -105,6 +105,8 @@ class App extends Backbone.View
 	showView: ->
 		@$('#search').hide()
 		@$('#view').show()
+
+		@$el.scrollTop 0
 		
 	switchView: (view) ->
 		@currentView?.remove()
