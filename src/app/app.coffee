@@ -37,6 +37,8 @@ class App extends Backbone.View
 			@$('.navigation a').removeClass 'active'
 			@$(".navigation a.#{category}").addClass 'active'
 
+	home: -> # TODO: Define what's displayed in home
+
 	showPersonForm: (id) ->
 		person = new Person _id: id
 		person.fetch().done =>
@@ -111,7 +113,7 @@ class App extends Backbone.View
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
-		html = $ @template()
+		html = $ @template config: config
 
 		new UserStatusView
 			el: html.find '.user-status'
