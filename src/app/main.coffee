@@ -85,40 +85,21 @@ bootstrap = ->
 		config.set receptions: data.receptions
 		loadedReceptions.resolve()
 
-	loadedEducations = new $.Deferred()
-	$.getJSON(config.educationUrl()).then (data) ->
-		config.set educations: (value: e._id, label: e.value for e in data)
-		loadedEducations.resolve()
+	# Fetch a resource, set the given config key with the data (id, label)
+	loadPromise = (url, key) ->
+		promise = new $.Deferred()
+		$.getJSON(url).then (data) ->
+			config.set key, (value: el._id, label: el.value for el in data)
+			promise.resolve()
+		promise
 
-	loadedFinancialSituations = new $.Deferred()
-	$.getJSON(config.financialSituationUrl()).then (data) ->
-		config.set financialSituations: (value: f._id, label: f.value for f in data)
-		loadedFinancialSituations.resolve()
-
-	loadedMaritalStatuses = new $.Deferred()
-	$.getJSON(config.maritalStatusUrl()).then (data) ->
-		config.set maritalStatuses: (value: m._id, label: m.value for m in data)
-		loadedMaritalStatuses.resolve()
-
-	loadedProfessions = new $.Deferred()
-	$.getJSON(config.professionUrl()).then (data) ->
-		config.set professions: (value: p._id, label: p.value for p in data)
-		loadedProfessions.resolve()
-
-	loadedReligions = new $.Deferred()
-	$.getJSON(config.religionUrl()).then (data) ->
-		config.set religions: (value: r._id, label: r.value for r in data)
-		loadedReligions.resolve()
-
-	loadedSocialClasses = new $.Deferred()
-	$.getJSON(config.socialClassUrl()).then (data) ->
-		config.set socialClasses: (value: s._id, label: s.value for s in data)
-		loadedSocialClasses.resolve()
-
-	loadedSourceCategories = new $.Deferred()
-	$.getJSON(config.sourceCategoryUrl()).then (data) ->
-		config.set sourceCategories: (value: s._id, label: s.value for s in data)
-		loadedSourceCategories.resolve()
+	loadedEducations = loadPromise config.educationUrl(), 'educations'
+	loadedFinancialSituations = loadPromise config.financialSituationUrl(), 'financialSituations'
+	loadedMaritalStatuses = loadPromise config.maritalStatusUrl(), 'maritalStatuses'
+	loadedProfessions = loadPromise config.professionUrl(), 'professions'
+	loadedReligions = loadPromise config.religionUrl(), 'religions'
+	loadedSocialClasses = loadPromise config.socialClassUrl(), 'socialClasses'
+	loadedSourceCategories = loadPromise config.sourceCategoryUrl(), 'sourceCategories'
 
 	$.when(
 		loadedRelationTypesPerson,
