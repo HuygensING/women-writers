@@ -1,80 +1,25 @@
-formWidth = 740px
+formWidth = 100% // TODO: formWidth
+borderWidth = 1px
+
+border-style()
+	border borderWidth solid borderColor
+	border-radius borderRadius
 
 input[type=text], textarea
 	box-sizing border-box
+	border-style()
 
-	border 1px solid borderColor
-	border-radius borderRadius
-
-	padding .4em .6em
+	padding inputVerticalPadding inputHorizontalPadding
 	color inputTextColor
+
+	font-size baseFontSize
 
 	outline none
 
 	&:active, &:focus
 		border 1px solid activeBorderColor
 
-.select2-container
-	background-image none
-	border none
-
-	a.select2-choice
-		box-sizing border-box
-		height 27px // height of input boxes
-
-		background-image none
-		border 1px solid borderColor
-
-		.select2-arrow
-			border-left 1px solid borderColor
-			background-image none
-			background-color transparent
-
-	&.select2-container-active
-		border none
-		box-shadow none
-		-webkit-box-shadow none
-
-		a.select2-choice
-			border 1px solid activeBorderColor
-			box-shadow none
-			-webkit-box-shadow none
-
-			.select2-arrow
-				background-color borderColor
-
-.select2-drop
-	shadowStyle = 0 1px 3px rgba(0,0,0,0.1)
-	box-shadow shadowStyle
-	-webkit-box-shadow shadowStyle
-
-	&.select2-drop-active
-		border 1px solid activeBorderColor
-
-	.select2-search
-		padding 0
-		.select2-input
-			// background white url('select2.png') no-repeat 100% -22px
-			border-radius 0
-			border-left none
-			border-right none
-			border-top none
-			font-family labelFont
-
-	.select2-results
-		margin 0
-		padding 0
-		color mediumGray
-
-		.select2-no-results
-			font-size 90%
-			background transparent
-			text-align center
-			padding 10px
-		.select2-result
-			color darkGray
-			&.select2-highlighted
-				color white
+//============================== General form styling
 
 button, .btn
 	button-style()
@@ -84,13 +29,17 @@ button, .btn
 	&:hover
 		background-color baseColor
 
-	&.gray, &.disabled
+	&.gray
 		background-color lightGray
 		color darkGray
-		&:not(.disabled):hover
+		&:hover
 			background-color darkGray
 			color white
-		&.disabled:hover
+	
+	&.disabled, &[disabled]
+		background-color lightGray
+		color mediumGray
+		&:hover
 			cursor default
 
 	&.red
@@ -127,6 +76,9 @@ button, .btn
 		i
 			margin-right .3em
 
+
+//========================================= Timbuctoo form styling
+
 .timbuctoo-form
 	& *, & *:hover, & *:active
 		transition all .15s ease 0s
@@ -143,38 +95,87 @@ button, .btn
 		margin-bottom 1em
 		width 100%
 
-	form label
-		font-family labelFont
-		color labelColor
-		display inline-block
-		width 190px
-		vertical-align top
-		font-size 14px
-
-	form label + div
-		display inline-block
-
 	form
 		input[type=text], textarea, .select2-container
-			width formWidth
+			width formWidth // TODO: formWidth
+			font-size baseFontSize
+			margin 0
 
 		textarea
-			min-height 100px
+			min-height 7em
 
-	.timbuctoo-list-editor
-		display inline-block
+		label
+			font-family labelFont
+			color labelColor
+			display inline-block
+			width 15%
+			padding-right 3%
 
-	.field
-		margin-bottom 1em
+		label + div
+			display inline-block
 
-	.readonly-editor
-		font-size .8em
-		line-height 150%
-		display inline-block
-		width 50%
+		select
+			background-color transparent
+			border-style()
+			
+			font-size baseFontSize
 
-	.relation-editor // FIXME: rename to timbuctoo-?
-		display inline-block
+			padding inputVerticalPadding inputHorizontalPadding
+			margin 0 inherit
+			width 100%
+
+			cursor pointer
+			outline none
+			&:hover, &:active
+				border 1px solid activeBorderColor
+
+		span[data-editor='data-editor']
+			display inline-block
+			box-sizing border-box
+			width 82%
+			min-height 1px
+
+		span[data-editor='data-editor'] span[data-editor='data-editor']
+			width 100% // for sub fields, reset
+
+		button[data-action="remove"]
+			margin-left 1em
+
+		.timbuctoo-list-item
+			position relative
+
+			margin-bottom 1em
+
+			button[data-action="remove"]
+				position absolute // right align top
+				margin-top inputHorizontalPadding
+
+
+		button[data-action="add"]
+			margin-left inputHorizontalPadding
+
+		button[data-action="add"], button[data-action="remove"]
+			border-radius 1em
+			background-color lightGray
+			color mediumGray
+			span
+				opacity 0
+				display inline-block
+				width 0
+				height 0
+			&:hover
+				border-radius borderRadius
+				span
+					display inline-block
+					margin-left .5em
+					width auto
+					height auto
+					opacity 1
+
+
+
+	// .timbuctoo-list-editor
+	// display inline-block
 
 	.timbuctoo-link-editor
 		.label-field, .url-field
@@ -193,10 +194,46 @@ button, .btn
 			input
 				padding-left 5em
 
+	.field
+		margin-bottom 1em
+
+	// .field-links
+	// 	.timbuctoo-list-item
+	// 		position relative
+	// 		padding-bottom 2em
+
+	// 		button[data-action="remove"]
+	// 			position absolute
+	// 			right 0
+	// 			margin
+				
+	// .field-names
+	// 	.person-name-editor
+	// 		padding: 2em
+	// 	.name-component-editor
+	// 		display inline-flex
+
+	.person-names-editor
+		.name-component-editor
+			display inline
+			select // Name component
+				width 25%
+				margin-right 1%
+			input
+				width 65%
+
+	.readonly-editor
+		display block
+		margin-left borderWidth
+		padding-left inputHorizontalPadding  // line up with text in form elements
+
+	// .relation-editor // FIXME: rename to timbuctoo-?
+	// 	display inline-block
+
 	.dynamic-relations-editor
 		position relative
 		display inline-block
-		width formWidth
+		// width formWidth // TODO: formWidth
 
 		ul.relations
 			margin 0
@@ -220,8 +257,7 @@ button, .btn
 				display none
 
 		.add-new.selection-box
-			border 1px solid lightGray
-			border-radius borderRadius
+			border-style()
 
 			padding 20px
 
@@ -269,81 +305,65 @@ button, .btn
 					&:hover
 						font-weight bold
 
-	button[data-action]
-		background-color transparent
-		color mediumGray
-		font-weight normal
+	// button[data-action]
+	// 	background-color transparent
+	// 	color mediumGray
+	// 	font-weight normal
 
-		&[data-action="remove"]
-			box-sizing border-box
-			size = 1.35em
+	// LEAVE THIS COMMENTEDD ===============================
+	// &[data-action="remove"]
+	// 	box-sizing border-box
+	// 	size = 1.35em
 
-			display flex
+	// 	display flex
 
-			height size
-			width size
+	// 	height size
+	// 	width size
 
-			padding 0
-			margin-left -(size + .35em)
+	// 	padding 0
+	// 	margin-left -(size + .35em)
 
-			border-radius size
-			background-color transparent
+	// 	border-radius size
+	// 	background-color transparent
 
-			&:hover
-				background-color darkRed
-				color white
+	// 	&:hover
+	// 		background-color darkRed
+	// 		color white
 
-		&[data-action="add"]
-			box-sizing border-box
-			float right
+	// &[data-action="add"]
+	// 	box-sizing border-box
+	// 	float right
 
-			margin-right 0
-			padding .1em .2em
+	// 	margin-right 0
+	// 	padding .1em .2em
 
-			text-transform uppercase
-			font-size 80%
-			font-weight bold
+	// 	text-transform uppercase
+	// 	font-size 80%
+	// 	font-weight bold
 
-			border 1px solid transparent
-			color mediumGray
+	// 	border 1px solid transparent
+	// 	color mediumGray
+	// ===========================================
 
-	.field:hover button[data-action]
-		color darkGray
+	// .field:hover button[data-action]
+	// 	color darkGray
 
-		&[data-action="add"]
-			border 1px solid lightGray
-			color darkGray
-			&:hover
-				color white
-				background-color buttonColor
+	// 	&[data-action="add"]
+	// 		border 1px solid lightGray
+	// 		color darkGray
+	// 		&:hover
+	// 			color white
+	// 			background-color buttonColor
 
-		&[data-action="remove"]
-			// color white
-			// background-color lightRed
-			border-width 1px
-			border-color lightRed
-			border-style solid
-			&:hover
-				background-color darkRed
-				color white
-				border-color rgba(255,255,255,0)
-			&:active
-				background-color darken(darkRed, 20%)
-
-
-.field-links
-	.timbuctoo-list-item
-		position relative
-		padding-bottom 2em
-
-		button[data-action="remove"]
-			position absolute
-			right 0
-			margin
-			
-.field-names
-	.person-name-editor
-		padding: 2em
-	.name-component-editor
-		display inline-flex
-			
+	// 	&[data-action="remove"]
+	// 		// color white
+	// 		// background-color lightRed
+	// 		border-width 1px
+	// 		border-color lightRed
+	// 		border-style solid
+	// 		&:hover
+	// 			background-color darkRed
+	// 			color white
+	// 			border-color rgba(255,255,255,0)
+	// 		&:active
+	// 			background-color darken(darkRed, 20%)

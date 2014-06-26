@@ -1,0 +1,53 @@
+doctype
+html
+	head
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet", href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css", type="text/css")
+		link(rel="stylesheet", href="/main.css", type="text/css")
+	body
+		.style-guide
+			section
+				h1 Header 1
+				h2 Header 2
+				h3 Header 3
+				h4 Header 4
+
+			section
+				h1 Timbuctoo Form
+				.timbuctoo-form
+					form
+						p
+							legend Legend
+						p
+							input(type='text', placeholder='Text input...') 
+						p
+							select
+								option Option One
+								option Option Two
+								option Option Three
+						p
+							button Button
+						p
+							button(disabled=true) Disabled
+						p
+							button.gray Gray Button
+
+				section
+					.gridHolder.marginRow
+						.c4_4.grid
+							| Full-width asasddfasdfs
+					.gridHolder.marginRow
+						.c4_2.grid
+							| Half-width
+						.c4_2.grid
+							| Half-width
+					.gridHolder.marginRow
+						.c4_1.grid
+							| One
+						.c4_3.grid
+							| Three
+
+
+		script(type='text/javascript').
+			document.write("<script async src='//HOST:3003/browser-sync-client.1.1.1.js'><\/script>".replace(/HOST/g, location.hostname));
+

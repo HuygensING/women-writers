@@ -46,6 +46,13 @@ module.exports = (grunt) ->
 				options:
 					pretty: true
 					data: targetConfig
+			styleguide:
+				files: [
+					src:  ['src/templates/styleguide.jade']
+					dest: "targets/#{target}/styleguide.html"
+				]
+				options:
+					pretty: true
 
 		stylus:
 			options:
@@ -131,8 +138,8 @@ module.exports = (grunt) ->
 				files: ['src/templates/index.jade']
 				tasks: ['jade:index']
 			styles:
-				files: ['src/stylesheets/**/*.styl']
-				tasks: ['build-stylesheet']
+				files: ['src/stylesheets/**/*.styl', 'src/templates/styleguide.jade']
+				tasks: ['build-stylesheet', 'build-styleguide']
 			static:
 				files: ['src/static/**/*']
 				tasks: ['rsync:static']
@@ -144,6 +151,8 @@ module.exports = (grunt) ->
 				tasks: ['browserify:build']
 
 	grunt.registerTask 'default', ['watch']
+
+	grunt.registerTask 'build-styleguide', ['jade:styleguide']
 
 	grunt.registerTask "build-stylesheet", [
 		"stylus:build"
