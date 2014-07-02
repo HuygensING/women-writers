@@ -107,9 +107,14 @@ button, .btn
 		label
 			font-family labelFont
 			color labelColor
+
 			display inline-block
+			box-sizing content-box
 			width 15%
 			padding-right 3%
+			padding-top inputVerticalPadding
+
+			vertical-align top
 
 		label + div
 			display inline-block
@@ -158,6 +163,8 @@ button, .btn
 			border-radius 1em
 			background-color lightGray
 			color mediumGray
+			i
+				display inline
 			span
 				opacity 0
 				display inline-block
@@ -214,8 +221,26 @@ button, .btn
 	// 		display inline-flex
 
 	.person-names-editor
+		display block
+		.person-name-editor
+			display block
+			position relative
+
+			.remove-name
+				position absolute
+				right 0
+
+			.add-name-component-editor
+				&:hover
+					span
+						margin-left 0
+						margin-right 1em
 		.name-component-editor
 			display inline
+
+			.timbuctoo-list-item
+				margin-bottom .5em
+
 			select // Name component
 				width 25%
 				margin-right 1%
@@ -226,6 +251,7 @@ button, .btn
 		display block
 		margin-left borderWidth
 		padding-left inputHorizontalPadding  // line up with text in form elements
+		padding-top inputVerticalPadding
 
 	// .relation-editor // FIXME: rename to timbuctoo-?
 	// 	display inline-block
