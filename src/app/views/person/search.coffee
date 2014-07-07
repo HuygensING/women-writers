@@ -12,6 +12,7 @@ class PersonSearch extends BaseSearch
 	facetNameMap:
 		dynamic_s_collective: 'Memberships'
 		dynamic_s_birthplace: 'Place of Birth'
+		dynamic_s_residence: 'Country'
 		dynamic_s_birthDate: 'Year of Birth'
 		dynamic_s_deathDate: 'Year of Death'
 		dynamic_s_deathplace: 'Place of Death'
