@@ -57,8 +57,7 @@ button, .btn
 	position relative
 
 	&.bottom
-		padding-top 1em
-		border-top 1px solid lightGray
+		padding-top 4em
 
 	&:after
 		clear both
@@ -67,7 +66,6 @@ button, .btn
 
 	button, .btn
 		font-size 16px
-		// margin-right 1em
 		float left
 
 		&.right
@@ -75,6 +73,10 @@ button, .btn
 
 		i
 			margin-right .3em
+	a.btn
+		margin 2px
+		&:hover
+			border-bottom none
 
 
 //========================================= Timbuctoo form styling
@@ -178,7 +180,15 @@ button, .btn
 					width auto
 					height auto
 					opacity 1
+			&.right
+				&:hover
+					span
+						margin-left 0
+						margin-right .5em
 
+		.removable
+			input, select
+				box-shadow 0 0 10px rgba(0,0,0,0.1)
 
 
 	// .timbuctoo-list-editor
@@ -222,19 +232,22 @@ button, .btn
 
 	.person-names-editor
 		display block
+
+		.add-name-editor
+			float right
+
 		.person-name-editor
 			display block
 			position relative
 
 			.remove-name
-				position absolute
-				right 0
+				position static
+				margin-left inputHorizontalPadding
+				margin-top 0
 
 			.add-name-component-editor
-				&:hover
-					span
-						margin-left 0
-						margin-right 1em
+				float right
+
 		.name-component-editor
 			display inline
 
@@ -245,7 +258,7 @@ button, .btn
 				width 25%
 				margin-right 1%
 			input
-				width 65%
+				width 74%
 
 	.readonly-editor
 		display block
