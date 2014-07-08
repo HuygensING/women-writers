@@ -24,7 +24,6 @@ class Person extends Backbone.View
 		'hasEducation'
 		'hasFinancialSituation'
 		'hasMaritalStatus'
-		'hasPersonLanguage'
 		'hasPseudonym'
 		'hasProfession'
 		'hasReligion'
@@ -47,13 +46,18 @@ class Person extends Backbone.View
 	savePerson: ->
 		status = new StatusIndicator
 
-		result = @form.save()
+		{result, errors} = @form.save()
 
-		status.show().loading()
-
-		result.error => status.show().error()
-		result.done =>
-			@model.fetch().done => status.show().success()
+		if not errors?
+			status.show().loading()
+			result.error =>
+				status.show().error()
+			result.done =>
+				@model.fetch().done => status.show().success()
+		else
+			margin = 100
+			{top} = @$('.field.error').first().offset()
+			Backbone.$('html, body').animate scrollTop: top - margin
 
 	render: ->
 		@$el.html @template
@@ -69,8 +73,6 @@ class Person extends Backbone.View
 				'VARIATIONS'
 			]
 			readonly: [ /^temp/	]
-		
-		
 
 		for type in @relationTypes
 			relationType = config.get('personRelationTypes')[type]
@@ -96,12 +98,6 @@ class Person extends Backbone.View
 			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
-
-		_.extend schema['timbuctoo-relation.hasPersonLanguage'],
-			title: 'Languages'
-			options: config.get 'languages'
-			relationTypeHelper: new DynamicRelationTypeHelper()
-			
 			
 		_.extend schema['timbuctoo-relation.hasEducation'],
 			title: 'Educations'
@@ -167,6 +163,8 @@ class Person extends Backbone.View
 		# customize field type
 		schema.notes.type = 'TextArea'
 		schema.personalSituation.type = 'TextArea'
+
+		schema['birthDate'].validators = ['number']
 		
 		@form = new Form
 			className: 'timbuctoo-form'
@@ -188,10 +186,7 @@ class Person extends Backbone.View
 				'deathDate'
 				'tempDeathPlace'
 				'timbuctoo-relation.hasDeathPlace'
-				'tempLanguages'
 				'tempMotherTongue'
-				'tempPublishingLanguages'
-				'timbuctoo-relation.hasPersonLanguage'
 				'types'
 				'livedIn'
 				'timbuctoo-relation.hasMaritalStatus'
