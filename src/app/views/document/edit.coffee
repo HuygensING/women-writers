@@ -111,6 +111,7 @@ class Document extends Backbone.View
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwdocument', 5000
 			relationTypeHelper: new DynamicRelationTypeHelper()
+			placeholderString: 'Sources'
 
 		_.extend schema['timbuctoo-relation.isCreatedBy'],
 			title: 'Creator'
@@ -118,6 +119,7 @@ class Document extends Backbone.View
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 			relationTypeHelper: new DynamicRelationTypeHelper()
+			placeholderString: 'Persons'
 
 		# reception of
 		receivedInTypes = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'

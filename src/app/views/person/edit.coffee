@@ -91,6 +91,7 @@ class Person extends Backbone.View
 			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
+			placeholderString: 'Location'
 			
 		_.extend schema['timbuctoo-relation.hasDeathPlace'],
 			title: 'Death place'
@@ -98,6 +99,7 @@ class Person extends Backbone.View
 			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
+			placeholderString: 'Location'
 			
 		_.extend schema['timbuctoo-relation.hasEducation'],
 			title: 'Educations'
@@ -134,31 +136,35 @@ class Person extends Backbone.View
 			options: config.get 'collectives'
 			autocomplete: (value) -> simpleSearch value, 'wwcollective', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
+			placeholderString: 'Collective'
 
 		_.extend schema['timbuctoo-relation.isCollaboratorOf'],
 			title: 'Collaborations'
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+			placeholderString: 'Person'
+
 		_.extend schema['timbuctoo-relation.isCreatorOf'],
 			title: 'Is Creator of'
 			options: config.get 'documents'
 			autocomplete: (value) -> simpleSearch value, 'wwdocument', 200
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
-	
+			placeholderString: 'Work'
+
 		_.extend schema['timbuctoo-relation.hasPseudonym'],
 			title: 'Has Pseudonyms'
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
-			
+			placeholderString: 'Pseudonym'
+
 		_.extend schema['timbuctoo-relation.isPseudonymOf'],
 			title: 'Is Pseudonym of'
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+			placeholderString: 'Person'
 		
 		# customize field type
 		schema.notes.type = 'TextArea'
