@@ -165,7 +165,8 @@ class Person extends Backbone.View
 		schema.personalSituation.type = 'TextArea'
 
 		schema['birthDate'].validators = ['datable']
-		
+		schema['deathDate'].validators = ['datable']
+
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'

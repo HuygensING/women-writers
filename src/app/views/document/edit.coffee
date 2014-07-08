@@ -147,6 +147,8 @@ class Document extends Backbone.View
 			relationName: 'reception'
 			relationTypeHelper: new DynamicRelationTypeHelper autocompleteFactory
 
+		schema['date'].validators = ['datable']
+
 		@form = new Form
 			className: 'timbuctoo-form'
 			authToken: config.get 'authToken'
