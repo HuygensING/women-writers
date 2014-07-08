@@ -1,6 +1,11 @@
 formWidth = 100% // TODO: formWidth
 borderWidth = 1px
 
+bigBorderWidth = 5px
+
+labelPadding = 3%
+labelWidth = 15%
+
 border-style()
 	border borderWidth solid borderColor
 	border-radius borderRadius
@@ -27,7 +32,7 @@ button, .btn
 	color white
 	outline none
 	&:hover
-		background-color baseColor
+		background-color buttonActiveColor
 
 	&.gray
 		background-color lightGray
@@ -78,6 +83,11 @@ button, .btn
 		&:hover
 			border-bottom none
 
+	.processing
+		display block
+		margin-left 5em
+		padding .5em
+
 
 //========================================= Timbuctoo form styling
 
@@ -112,8 +122,8 @@ button, .btn
 
 			display inline-block
 			box-sizing content-box
-			width 15%
-			padding-right 3%
+			width labelWidth
+			padding-right labelPadding
 			padding-top inputVerticalPadding
 
 			vertical-align top
@@ -188,7 +198,9 @@ button, .btn
 
 		.removable
 			input, select
-				box-shadow 0 0 10px rgba(0,0,0,0.1)
+				shadow = baseColor
+				alpha(shadow, 0.5)
+				box-shadow 0 0 3px shadow
 
 
 	// .timbuctoo-list-editor
@@ -213,6 +225,26 @@ button, .btn
 
 	.field
 		margin-bottom 1em
+
+		.error
+			display none
+		&.error
+			margin-left -1em
+			padding-left unquote('calc(1em - ' + bigBorderWidth + ')')
+
+			border-left bigBorderWidth solid fieldErrorColor
+
+			.error
+				display block
+				position relative
+				left 18% // labelPadding + labelWidth
+
+				padding inputVerticalPadding inputHorizontalPadding
+				color fieldErrorColor
+				span, i
+					font-size .8em
+				i
+					margin-right .5em
 
 	// .field-links
 	// 	.timbuctoo-list-item
