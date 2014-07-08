@@ -35,7 +35,7 @@ class Person extends Backbone.View
 	]
 
 	events:
-		'click .save': 'savePerson'
+		'click .save': 'save'
 
 	initialize: ->
 		@render() if @model?
@@ -164,7 +164,7 @@ class Person extends Backbone.View
 		schema.notes.type = 'TextArea'
 		schema.personalSituation.type = 'TextArea'
 
-		schema['birthDate'].validators = ['number']
+		schema['birthDate'].validators = ['datable']
 		
 		@form = new Form
 			className: 'timbuctoo-form'

@@ -35,13 +35,18 @@ class Document extends Backbone.View
 	save: ->
 		status = new StatusIndicator
 
-		result = @form.save()
+		{result, errors} = @form.save()
 
-		status.show().loading()
-
-		result.error => status.show().error()
-		result.done =>
-			@model.fetch().done => status.show().success()
+		if not errors?
+			status.show().loading()
+			result.error =>
+				status.show().error()
+			result.done =>
+				@model.fetch().done => status.show().success()
+		else
+			margin = 100
+			{top} = @$('.field.error').first().offset()
+			Backbone.$('html, body').animate scrollTop: top - margin
 
 	initialize: ->
 		@render()
