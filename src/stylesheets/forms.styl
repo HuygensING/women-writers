@@ -285,19 +285,23 @@ button, .btn
 	.dynamic-relations-editor
 		position relative
 		display inline-block
-		// width formWidth // TODO: formWidth
+		width 100%
 
 		ul.relations
 			margin 0
 
 		label.timbuctoo-relation-type
-			color darkGray
+			color mediumGray
 			font-size 80%
-			font-weight bold
+			width 100%
 			padding-left .7em
+			padding-bottom .4em
 
 		.timbuctoo-list-item
 			margin-bottom 1em
+
+		button[data-action=remove]
+			bottom .4em
 
 		.add-new
 			display inline
