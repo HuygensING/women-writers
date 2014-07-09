@@ -6,9 +6,6 @@ IdHelper = require '../../helpers/id-helper'
 class ReceptionBaseSearch extends Backbone.View
 	className: 'query-builder'
 		
-	events:
-		'click .close-button' : 'closeEditor'
-		
 	initialize: (options = {}) ->
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
 		@idHelper = options.idHelper ? new IdHelper()
@@ -21,10 +18,6 @@ class ReceptionBaseSearch extends Backbone.View
 		
 	show: () ->
 		@$el.show()
-	
-	closeEditor: () ->
-		@hide()
-		@$el.trigger('queryBuilderCloseEvent')
 	
 	hide: () ->
 		@$el.hide()
