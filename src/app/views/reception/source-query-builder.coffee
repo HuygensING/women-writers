@@ -16,7 +16,7 @@ class SourceQueryBuilder extends Backbone.View
 		
 	events:
 		'click .close-button': 'handleCloseButtonClick'
-		'click [name="source-type"]': 'sourceTypeSelected'
+		'click button': 'sourceTypeSelected'
 		
 	render: (parentElement) ->
 		@$el.html(@template())
@@ -34,8 +34,8 @@ class SourceQueryBuilder extends Backbone.View
 		@$el.show()
 	
 	sourceTypeSelected: (e) ->
-		value = e.currentTarget.value
-		
+		value = e.currentTarget.getAttribute 'data-type'
+		console.log value
 		@eventBus.trigger('sourceTypeSelectedEvent', value)
 		
 	renderSearch: (value) ->
