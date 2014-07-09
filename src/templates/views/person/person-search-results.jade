@@ -26,7 +26,7 @@ h4
 ol.persons
 	- var personsById = _.object(_.map(response.results, function (p) { return [p._id, p] }));
 	- each person in response.refs
-		li
+		li(class=isCurated(person) ? 'is-curated' : '')
 			a(href=config.personViewUrl(person.id))
 				if person.displayName
 					.name= person.displayName

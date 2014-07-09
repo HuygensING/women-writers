@@ -79,6 +79,23 @@
 				&:hover
 					color linkColor
 
+			&.is-curated:after
+				size = 6px
+				display block
+				content ''
+				width size
+				height size
+				border-radius size
+
+				position absolute
+
+				top 50%
+				margin-top -1 * (size / 2)
+				right -1.5em
+
+				background-color baseColor
+				
+
 			&:last-child
 				a
 					border-bottom 1px solid lightBackgroundEdgeColor

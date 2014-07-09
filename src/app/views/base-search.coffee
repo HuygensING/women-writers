@@ -58,12 +58,16 @@ class SearchView extends Backbone.View
 		_.delay doIt, 200
 
 	renderResults: (rsp) ->
+		byId = {}
+		byId[r._id] = r for r in rsp.get('results')
+
 		@$('.results').html @resultsTemplate
 			response: rsp.attributes
 			sortableFieldsMap: @sortableFieldsMap
 			objectUrl: @objectUrl
 			config: config
 			sortedBy: @sortField
+			isCurated: (o) -> byId[o.id]['^modified'].userId isnt 'importer'
 
 		@$('.cursor .loader').hide()
 		@$('.cursor .position').show()
