@@ -70,6 +70,11 @@ bottomBorder(clr)
 				margin-right 0.5em
 
 		.relation-type-selector
+			background-color #fafafa
+			border-bottom 1px solid #D0E9E9
+			border-top 1px solid #D0E9E9
+			float left
+			width 100%
 			display none
 
 		.query-builder
@@ -90,6 +95,8 @@ bottomBorder(clr)
 					display inline-block
 					float left
 				.facets
+					display table
+					
 					.facet
 						display inline-block
 						width 33%
@@ -103,6 +110,7 @@ bottomBorder(clr)
 
 		.reception-results
 			.results-table
+				float left
 				width 100%
 
 				.results-body
@@ -129,3 +137,22 @@ bottomBorder(clr)
 				cursor pointer
 				float left
 				font-weight bold
+		
+		.busy-overlay
+			display none
+			position fixed
+			top 0
+			left 0
+			height 100%
+			width 100%
+			border-radius 0px
+			background-color rgba(0, 0, 0, 0.7)
+			
+			.center-spinner
+				position relative
+				margin 25em auto
+				width 5em
+				text-align center
+				background-color #FFFFFF
+				border-radius 10px
+				opacity 1
