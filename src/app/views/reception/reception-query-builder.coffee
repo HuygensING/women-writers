@@ -6,9 +6,6 @@ class ReceptionQueryBuilder extends Backbone.View
 	template: require '../../../templates/views/reception/faceted-search.jade'
 	className: 'query-builder'
 		
-	events: 
-		'click .close-button': 'handleCloseButtonClick'
-		
 	initialize: (options = {}) ->
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()
 		
