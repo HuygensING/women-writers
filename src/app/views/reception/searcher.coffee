@@ -3,7 +3,6 @@ _ = require 'underscore'
 
 ReceptionDocumentSearch = require './document-search'
 ReceptionPersonSearch = require './person-search'
-BusyOverlay = require '../busy-overlay'
 
 RelationTypeSelector = require '../relation-type-selector'
 ReceptionQueryBuilder = require './reception-query-builder'
@@ -16,13 +15,10 @@ class ReceptionSearcher extends Backbone.View
 	className: 'reception-search'
 	
 	events:
-		'click .reception-query.relation-type .edit-link': 'editRelationTypes'
-		'click .reception-query.target .edit-link': 'editReceptions'
-		'click .reception-query.source .edit-link': 'editSource'
-		'click .search-receptions': 'search'
-		'click a.unimplemented': 'showUnimplementedMessage'
-		'click button.unimplemented': 'showUnimplementedMessage'
-		'queryBuilderCloseEvent': 'deselectReceptionQuery'
+		'click .tab.relation-type': 'editRelationTypes'
+		'click .tab.target': 'editReceptions'
+		'click .tab.source': 'editSource'
+		'click .tab.search .search-receptions': 'search'
 		
 	initialize: (options) ->
 		@eventBus = options.eventBus ? @createEventBus()
@@ -34,11 +30,10 @@ class ReceptionSearcher extends Backbone.View
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor
 			eventBus: @eventBus 
-		@busyOverlay = if(options.busyOverlay?) then options.busyOverlay else new BusyOverlay()
 		
-		@eventBus.on('searchDoneEvent', () =>
-			@hideBusyOverlay()
-		)
+		@eventBus.on 'searchDoneEvent', =>
+			@$el.removeClass 'searching'
+			@$('.query-editor').slideUp()
 		
 		@eventBus.on('sourceTypeSelectedEvent', () =>
 			@handleSourceTypeSelected()
@@ -52,7 +47,7 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder.render(receptionSearchElement)
 		@sourceQueryBuilder.render(receptionSearchElement)
 		
-		@receptionSearchResult.render(@$el.find('.results'))
+		@receptionSearchResult.render @$el.find('.results')
 		
 		@busyOverlay.render(@$el)
 
@@ -80,42 +75,30 @@ class ReceptionSearcher extends Backbone.View
 		@enableSearchButton()
 		
 	enableSourceEditorLink: () ->
-		@$('.reception-query.relation-type .edit-link').removeClass('disabled')
+		@$('.reception-query.relation-type').removeClass('disabled')
 		
 	enableSearchButton: () ->
 		@$('.search-receptions').removeClass('disabled')
-		
+
 	selectTab: (e) ->
-		@deselectReceptionQuery()
-		@$(e.currentTarget).parent().addClass('selected')
-		
+		@$('.selected').removeClass 'selected'
+		@$(e.currentTarget).addClass 'selected'
+
 	search: (e) ->
-		@displayBusyOverlay()
-		
+		@$el.addClass 'searching'
+
 		queryParameters = {
 			sourceSearchId: @sourceQueryBuilder.getSearchId()
 			targetSearchId: @receptionQueryBuilder.getSearchId()
 			relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
 			typeString: 'wwrelation'
 		}
-		
+
 		result = @receptionSearchQueryExecutor.executeQuery(queryParameters, @receptionSearchResult)
-		
-	displayBusyOverlay: () ->
-		@busyOverlay.show()
-	
-	hideBusyOverlay: () ->
-		@busyOverlay.hide()
-		
+
 	findQueryEditorElement: () ->
 		@$el.find('.query-editor')
-		
-	deselectReceptionQuery: () ->
-		@$('.reception-query').removeClass('selected')
-	
-	showUnimplementedMessage: ->
-		alert('This part will be implemented soon.')
-		
+
 	createEventBus: () ->
 		eventBus = {}
 		_.extend(eventBus, Backbone.Events)
