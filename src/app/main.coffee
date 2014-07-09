@@ -19,6 +19,18 @@ handleLinkClicks = (e) ->
 		href = href.replace config.get('baseUrl'), '' if href.match /^https?:/
 		Backbone.history.navigate href, trigger: true
 
+
+initialY = null
+displayHeader = (e) ->
+	posY = $(window).scrollTop()
+	nav = $('.navigation')
+	initialY ?= nav.offset().top
+
+	isFloating = $('body').hasClass 'float-menu'
+	shouldFloat = posY > initialY
+	$('body').toggleClass 'float-menu', shouldFloat
+	# $('body').css 'padding-top': if isFloating then 2*nav.outerHeight() + 'px' else 0
+
 bootstrap = ->
 	loadedRelationTypesPerson = new $.Deferred()
 	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
@@ -119,6 +131,7 @@ bootstrap = ->
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks
+	$(window).on 'scroll', _.throttle(displayHeader, 100)
 
 	# Check/set security token
 	hasHsId = new RegExp /(?:\?|&)hsid=([^&]+)(?:&.+)?$/

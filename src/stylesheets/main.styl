@@ -1,8 +1,16 @@
+logoUrl = baseUrl + '/images/nwwlogo.png'
+
 body, html
 	background-color backgroundColor
 	font-family bodyFont
 	padding 0 0 50px 0
 	margin 0
+
+	transition padding .2s ease 0s
+
+	&.float-menu
+		transition padding .2s ease 0s
+		// transition none
 
 h1
 	font-family 'Raleway'
@@ -25,7 +33,7 @@ a
 	h1
 		margin 1em 0 1em 0
 		line-height logoHeight
-		background-image url(baseUrl + '/images/nwwlogo.png')
+		background-image url(logoUrl)
 		background-size  auto 100%
 		background-repeat no-repeat
 		background-position-x 10px
@@ -111,6 +119,35 @@ a
 			width auto
 			display none
 			padding 1em 32px
+
+
+.float-menu .navigation
+	box-shadow 0 0 10px rgba(0,0,0,0.3)
+	position fixed
+	top 0
+	width 100%
+	z-index 9999
+	margin-top 0
+
+	// .float-logo
+	// 	position absolute
+	// 	display inline-block
+	// 	width 2em
+	// 	height 2em
+	// 	margin .4em 0 0 -2.5em
+	// 	background-color white
+	// 	border-radius 2em
+	// 	background-image url(logoUrl)
+	// 	background-size auto 100%
+	// 	background-repeat no-repeat
+	// 	background-position center center
+
+	// 	opacity 0
+	// 	transition opacity .15s ease-out 0s
+
+	// &.float .float-logo
+	// 	opacity 1
+	// 	transition opacity .15s ease-out 0s
 
 ul.persons
 	margin 0
