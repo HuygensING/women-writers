@@ -21,6 +21,7 @@ class DocumentView extends BaseView
 				relationField 'hasGenre', 'Genre'
 				relationField 'hasSourceCategory', 'Source Category'
 				relationField 'hasDocumentSource', 'Document Source'
+				relationField 'isDocumentSourceOf', 'Source for'
 				'description'
 				'edition'
 				'date'
@@ -47,24 +48,6 @@ class DocumentView extends BaseView
 				}
 			]
 		}
-		# {
-		# 	title: 'Relations'
-		# 	fields: [
-		# 		field: '@relations.*'
-		# 		type: 'Array'
-		# 		options:
-		# 			map: (el) ->
-		# 				if el.id.match /PERS|DOC/
-		# 					linkTemplate
-		# 						url: if el.id.match /DOC/
-		# 								config.documentViewUrl el.id
-		# 							else
-		# 								config.personViewUrl el.id
-		# 						label: el.displayName
-		# 				else
-		# 					el.displayName
-		# 	]
-		# }
 		{
 			title: 'Temporary Fields'
 			showOnlyWhenLoggedIn: true
