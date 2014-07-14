@@ -48,8 +48,6 @@ class ReceptionSearcher extends Backbone.View
 		@sourceQueryBuilder.render(receptionSearchElement)
 		
 		@receptionSearchResult.render @$el.find('.results')
-		
-		@busyOverlay.render(@$el)
 
 	editRelationTypes: (e) ->
 		@selectTab(e)
