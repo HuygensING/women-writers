@@ -1,6 +1,8 @@
 Backbone = require  'backbone'
 $ = require 'jquery'
 
+config = require '../../config'
+
 class ReceptionSearchResult extends Backbone.View
 	template: require '../../../templates/views/reception/reception-search-result.jade'
 	
@@ -9,11 +11,16 @@ class ReceptionSearchResult extends Backbone.View
 		'click .prev': 'updateResults'
 	
 	update: (result = {}) ->
-		@$el.html(@template(response: result))
+		relIds = {}
+		relIds[relation._id] = relation for relation in result.results
+
+		@$el.html @template
+			response: result
+			relIds: relIds
+			config: config
 		@parentElement.append(@$el)
 		
 	render: (parentElement) ->
-		@$el.html('<div>')
 		@parentElement = parentElement
 		@parentElement.append(@$el)
 	
