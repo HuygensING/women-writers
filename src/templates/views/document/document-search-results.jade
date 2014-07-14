@@ -25,5 +25,5 @@ h4
 
 ol(start=response.start + 1)
 	- each document in response.refs
-		li(class=isCurated(document) ? 'is-curated' : '')
+		li(class=showCurated(document) ? 'is-curated' : '')
 			a(href=config.documentViewUrl(document.id))= document.displayName
