@@ -1,4 +1,6 @@
 if response
+	span.found= response.numFound + ' receptions found'
+
 	if response['_prev']
 		p.prev(href=response['_prev']) « Previous
 	if response['_next']
@@ -7,10 +9,10 @@ if response
 		table.results-table
 			thead.results-head
 				tr
-					th Receptions on ...
+					th
 					th Type
 					th Receptions
-			tbody.results-body
+			tbody.results-body(style="counter-reset: reception-counter " + response.start)
 				each ref in response.refs
 					tr
 						td= ref.sourceName
