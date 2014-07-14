@@ -47,7 +47,7 @@ class ReceptionSearcher extends Backbone.View
 		@receptionQueryBuilder.render(receptionSearchElement)
 		@sourceQueryBuilder.render(receptionSearchElement)
 		
-		@receptionSearchResult.render @$el.find('.results')
+		@receptionSearchResult.render @$('.reception-results')
 
 	editRelationTypes: (e) ->
 		@selectTab(e)

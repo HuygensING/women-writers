@@ -67,14 +67,10 @@
 				color black
 
 				&:before
-					content counter(li-result)
 					position absolute
-					font-size .8em
+					results-counter-style(li-result)
 					width 3em
 					left -3.5em
-					text-align right
-
-					color mediumGray
 
 				&:hover
 					color linkColor
