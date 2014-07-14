@@ -3,7 +3,6 @@ _ = require 'underscore'
 
 ReceptionDocumentSearch = require './document-search'
 ReceptionPersonSearch = require './person-search'
-BusyOverlay = require '../busy-overlay'
 
 RelationTypeSelector = require '../relation-type-selector'
 ReceptionQueryBuilder = require './reception-query-builder'
@@ -31,7 +30,6 @@ class ReceptionSearcher extends Backbone.View
 		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
 		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor
 			eventBus: @eventBus 
-		@busyOverlay = if(options.busyOverlay?) then options.busyOverlay else new BusyOverlay()
 		
 		@eventBus.on 'searchDoneEvent', =>
 			@$el.removeClass 'searching'
