@@ -58,7 +58,7 @@ bottomBorder(clr)
 						display inline-block
 						vertical-align middle
 						margin-top -2px
-						width 5em
+						width 6em
 
 					i
 						margin-right .5em
@@ -101,29 +101,25 @@ bottomBorder(clr)
 			.query-editor
 				opacity 0.3
 
-		.results
-			padding-top: 2em
-			width 100%
-			float left
-			margin 0px
+		.reception-results
 			.results-table
-				float left
 				width 100%
-				border-collapse collapse
 
-				.results-head
-					tr
-						th
-							border-bottom 1.5px solid lightBackgroundEdgeColor
-							text-align justify
-							padding 0 1em
-							
 				.results-body
+					counter-reset reception-counter 0
+
 					tr
-						td
-							padding 1em
-							border-bottom 1px dashed lightBackgroundEdgeColor
-							
+						counter-increment reception-counter
+
+					td
+						vertical-align top
+
+						&:first-child:before
+							results-counter-style(reception-counter)
+							float left
+							margin-left -4em
+							width 3em
+
 			.next
 				cursor pointer
 				float right
