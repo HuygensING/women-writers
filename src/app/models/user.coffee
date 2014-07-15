@@ -18,6 +18,13 @@ class User extends Backbone.Model
 
 	isLoggedIn: -> @get 'loggedIn'
 
+	isVerified: ->
+		roles = @get('vreAuthorization')?.roles
+		if roles?.length
+			roles.indexOf('UNVERIFIED_USER') is -1
+		else
+			false
+
 	fetch: (options={}) ->
 		options.headers ?= {}
 		options.returnUrl ?= config.get 'baseUrl'
