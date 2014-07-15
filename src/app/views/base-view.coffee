@@ -64,7 +64,8 @@ class BaseView extends Backbone.View
 			btn.addClass 'alert'
 
 	showControls: (toggle) ->
-		@$controls?.toggle @user.get 'loggedIn'
+		show = @user.get('loggedIn') and @user.isVerified()
+		@$controls?.toggle show
 
 	_processField: (field) ->
 		field.html = @_fieldHtml field
