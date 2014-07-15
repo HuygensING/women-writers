@@ -4,9 +4,11 @@ _ = require 'underscore'
 class MainRouter extends Backbone.Router
 	routes:
 		'person(/)':					'showPersonSearch'
+		'person/add(/)':			'showPersonAddForm'
 		'person/:id(/)':			'showPersonView'
 		'person/:id/edit':		'showPersonForm'
 		'document(/)':				'showDocumentSearch'
+		'document/add(/)':		'showDocumentAddForm'
 		'document/:id(/)':		'showDocumentView'
 		'document/:id/edit':	'showDocumentForm'
 		'reception(/)':				'showReceptionSearch'

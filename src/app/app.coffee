@@ -46,6 +46,13 @@ class App extends Backbone.View
 				model: person
 			@switchView view
 		@showView()
+
+	showPersonAddForm: (id) ->
+		person = new Person _id: id
+		view = new PersonForm model: person
+
+		@switchView view
+		@showView()
 	
 	showDocumentForm: (id) ->
 		document = new Document _id: id
@@ -53,6 +60,13 @@ class App extends Backbone.View
 			view = new DocumentForm
 				model: document
 			@switchView view
+		@showView()
+
+	showDocumentAddForm: (id) ->
+		document = new Document
+		view = new DocumentForm model: document
+
+		@switchView view
 		@showView()
 
 	showPersonSearch: ->
