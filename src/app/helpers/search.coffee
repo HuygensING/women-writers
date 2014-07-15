@@ -3,8 +3,8 @@ FacetedSearch = require 'faceted-search'
 
 config = require '../config.coffee'
 
-createFacetedSearch = (queryOptions, facetNameMap={}, textSearchTitle) ->
-	new FacetedSearch
+createFacetedSearch = (queryOptions, facetNameMap={}, facetOrder=[], textSearchTitle) ->
+	options =
 		baseUrl: config.get 'baseUrl'
 		searchPath: config.get 'searchPath'
 		requestOptions:
@@ -13,6 +13,11 @@ createFacetedSearch = (queryOptions, facetNameMap={}, textSearchTitle) ->
 		queryOptions: queryOptions
 		facetNameMap: facetNameMap
 		textSearchTitle: textSearchTitle
+
+	options.facetOrder = facetOrder if facetOrder?.length
+
+	new FacetedSearch options
+
 
 searchQuery = (args) ->
 	{query, options} = args

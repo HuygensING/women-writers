@@ -23,6 +23,13 @@ class PersonSearch extends BaseSearch
 		dynamic_k_deathDate: 'Year of Death'
 		dynamic_k_birthDate: 'Year of Birth'
 		dynamic_sort_name: 'Name'
+	facetOrder: [
+		'dynamic_s_gender'
+		'dynamic_s_birthDate'
+		'dynamic_s_residence'
+		'dynamic_s_language'
+	]
+
 	textSearchTitle: 'Name'
 
 
