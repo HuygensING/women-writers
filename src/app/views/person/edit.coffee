@@ -43,7 +43,7 @@ class Person extends Backbone.View
 		@model.on 'sync', =>
 			@render()
 
-	savePerson: ->
+	save: ->
 		status = new StatusIndicator
 
 		{result, errors} = @form.save()
