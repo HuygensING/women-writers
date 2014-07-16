@@ -39,6 +39,8 @@ class ReceptionSearcher extends Backbone.View
 			@handleSourceTypeSelected()
 		)
 		
+		@render()
+
 	render: ->
 		@$el.html(@template())
 		receptionSearchElement = @findQueryEditorElement()
