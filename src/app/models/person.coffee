@@ -6,4 +6,9 @@ class Person extends Backbone.Model
 	idAttribute: '_id'
 	urlRoot: config.allPersonsUrl()
 
+	defaults: ->
+		'@relations': {}
+		'@type': 'wwperson'
+		names: []
+
 module.exports = Person
