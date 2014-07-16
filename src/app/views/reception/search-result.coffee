@@ -4,7 +4,7 @@ $ = require 'jquery'
 config = require '../../config'
 
 class ReceptionSearchResult extends Backbone.View
-	template: require '../../../templates/views/reception/reception-search-result.jade'
+	template: require '../../../templates/views/reception/search-result.jade'
 	
 	events:
 		'click .next': 'updateResults'

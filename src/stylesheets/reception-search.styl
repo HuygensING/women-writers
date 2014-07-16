@@ -3,7 +3,6 @@ bottomBorder(clr)
 
 #search
 	.receptions
-		
 		.close-button
 			text-align right
 			padding-right: 0.5em
@@ -19,58 +18,93 @@ bottomBorder(clr)
 			background-color lightGray
 			border-bottom 1px solid lightBackgroundEdgeColor
 
-			.centered
+			queryBuilderHeight = 3em
+			queryBuilderMarginTop = -3em
+
+			.centered.query
+				position relative
 				line-height 3em
+				max-height queryBuilderHeight // which is the .tabs height (3em lh + 2*5px vpad)
+				overflow-y hidden
 
-			.tab
-				display inline-block
-				padding 5px 0.5em
+				.tabs, .select-type
+					transition margin-top .15s ease-out .1s
 
-				cursor pointer
+				&.reception-on-selected
+					min-height queryBuilderHeight
+					max-height none
+					height auto
+					.select-type // move out of the way
+						margin-top queryBuilderMarginTop
 
-				&:hover
-					padding-bottom 0
-					bottomBorder(mediumGray)
+			.select-type
+				line-height queryBuilderHeight
+				.link
+					margin 0 .5em
 
-				&.selected
-					padding-bottom 0
-					bottomBorder(lightBackgroundEdgeColor)
+			.tabs
+				position relative
 
-				&.type .on
-					margin-left .3em
+				.on
+					display inline-block
+					vertical-align top
 					color mediumGray
+					margin 0 0.2em
 
-				&.search
-					float right
-					vertical-align middle
-					&, &:hover
-						border none
+				.tab
+					display inline-block
+					vertical-align top
+					padding 0 0.3em
+					max-height 0
+					transition max-height .25s ease-out
 
-					// to vertically center button
-					&:before
-						display inline-block
-						content ''
-						height 100%
+					cursor pointer
+
+					&:hover
+						background-color darken(lightGray, 5%)
+						max-height 200px
+
+					&.selected
+						padding-bottom 0
+						bottomBorder(lightBackgroundEdgeColor)
+
+					.options
+						width 0
+						height 0
+						overflow hidden
+					&:hover .options
+						width auto
+						height auto
+
+					&.search
+						float right
 						vertical-align middle
-						margin-right -0.25em
+						&, &:hover
+							border none
+							background-color transparent
 
-					button
-						display inline-block
-						vertical-align middle
-						margin-top -2px
-						width 6em
+						// to vertically center button
+						&:before
+							display inline-block
+							content ''
+							height 100%
+							vertical-align middle
+							margin-right -0.25em
 
-					i
-						margin-right .5em
+						button
+							display inline-block
+							vertical-align middle
+							margin-top -2px
+							width 6em
+
+						i
+							margin-right .5em
 
 		.reception-source-search
 			padding 1em
 			text-align center
 			i
 				margin-right 0.5em
-
-		.relation-type-selector
-			display none
 
 		.query-builder
 			background-color lightGray

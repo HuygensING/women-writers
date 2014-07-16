@@ -31,6 +31,6 @@ helpers =
 		
 		names
 
-	linksMap: (links) -> linkTemplate link for link in links when link.url?
+	linksMap: (links) -> linkTemplate _.extend(link, target: true) for link in links when link.url?
 
 module.exports = helpers

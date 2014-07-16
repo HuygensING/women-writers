@@ -1,0 +1,24 @@
+if response
+	span.found= response.numFound + ' receptions found'
+
+	if response['_prev']
+		p.prev(href=response['_prev']) « Previous
+	if response['_next']
+		p.next(href=response['_next']) Next »
+	if response.numFound > 0
+		table.results-table
+			thead.results-head
+				tr
+					th
+					th Type
+					th Receptions
+			tbody.results-body(style="counter-reset: reception-counter " + response.start)
+				each ref in response.refs
+					tr
+						td
+							a(href=config.viewUrl(relIds[ref.id]['^sourceId']))= ref.sourceName
+						td= ref.relationName
+						td
+							a(href=config.viewUrl(relIds[ref.id]['^targetId']))= ref.targetName
+	else
+		p No results found
