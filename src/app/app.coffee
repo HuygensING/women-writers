@@ -21,7 +21,7 @@ DocumentView = require './views/document/view.coffee'
 DocumentOverview = require './views/document/overview.coffee'
 DocumentSearchView = require './views/document/search.coffee'	
 
-ReceptionSearchView = require './views/reception/searcher.coffee'
+ReceptionSearchView = require './views/reception/search.coffee'
 
 
 class App extends Backbone.View
@@ -72,10 +72,9 @@ class App extends Backbone.View
 		@documentSearch.$el.fadeIn 75
 
 	showReceptionSearch: ->
-		@receptionSearch = new ReceptionSearchView
+		@receptionSearch ?= new ReceptionSearchView
 			el: '#search .receptions'
-			
-		@receptionSearch.render()
+
 		@showSearch()
 		@personSearch?.$el.fadeOut 75
 		@documentSearch?.$el.fadeOut 75
