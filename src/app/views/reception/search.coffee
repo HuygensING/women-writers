@@ -10,26 +10,26 @@ SourceQueryBuilder = require './source-query-builder'
 ReceptionSearchResult = require './search-result'
 RelationSearchQueryExecutor = require '../../helpers/relation-search-query-executor'
 
-class ReceptionSearcher extends Backbone.View
-	template: require '../../../templates/views/reception/reception-searcher.jade'
+class ReceptionSearch extends Backbone.View
+	template: require '../../../templates/views/reception/search.jade'
 	className: 'reception-search'
 	
 	events:
+		'click .select-type .link': 'selectReceptionOn'
 		'click .tab.relation-type': 'editRelationTypes'
 		'click .tab.target': 'editReceptions'
 		'click .tab.source': 'editSource'
 		'click .tab.search .search-receptions': 'search'
-		
+
 	initialize: (options) ->
-		@eventBus = options.eventBus ? @createEventBus()
-		@relationTypeSelector = options.relationTypeSelector ? new RelationTypeSelector
-			eventBus: @eventBus
-		@receptionQueryBuilder = options.receptionQueryBuilder ? new ReceptionQueryBuilder()
-		@sourceQueryBuilder = options.sourceQueryBuilder ? new SourceQueryBuilder
-			eventBus: @eventBus
-		@receptionSearchResult = options.receptionSearchResult ? new ReceptionSearchResult()
-		@receptionSearchQueryExecutor = options.receptionSearchQueryExecutor ? new RelationSearchQueryExecutor
-			eventBus: @eventBus 
+		@eventBus = @createEventBus()
+
+		@model = new Backbone.Model
+
+		@receptionQueryBuilder = new ReceptionQueryBuilder
+		@sourceQueryBuilder = new SourceQueryBuilder eventBus: @eventBus
+		@receptionSearchResult = new ReceptionSearchResult
+		@receptionSearchQueryExecutor = new RelationSearchQueryExecutor eventBus: @eventBus 
 		
 		@eventBus.on 'searchDoneEvent', =>
 			@$el.removeClass 'searching'
@@ -41,66 +41,67 @@ class ReceptionSearcher extends Backbone.View
 		
 		@render()
 
-	render: ->
-		@$el.html(@template())
-		receptionSearchElement = @findQueryEditorElement()
-		
-		@relationTypeSelector.render(receptionSearchElement)
-		@receptionQueryBuilder.render(receptionSearchElement)
-		@sourceQueryBuilder.render(receptionSearchElement)
-		
-		@receptionSearchResult.render @$('.reception-results')
+	selectReceptionOn: (e) ->
+		searchType = e.currentTarget.getAttribute 'data-type'
+		@$('.source .link').text searchType
+		@$('.query').addClass 'reception-on-selected'
 
-	editRelationTypes: (e) ->
-		@selectTab(e)
-		@relationTypeSelector.show()
-		@receptionQueryBuilder.hide()
-		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
+
+	# editRelationTypes: (e) ->
+	# 	@selectTab(e)
+	# 	@relationTypeSelector.show()
+	# 	@receptionQueryBuilder.hide()
+	# 	if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
 		
-	editReceptions: (e) ->
-		@selectTab(e)
-		@receptionQueryBuilder.show()
-		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
-		@relationTypeSelector.hide()
+	# editReceptions: (e) ->
+	# 	@selectTab(e)
+	# 	@receptionQueryBuilder.show()
+	# 	if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
+	# 	@relationTypeSelector.hide()
 				
-	editSource: (e) ->
-		@selectTab(e)
-		@sourceQueryBuilder.show()
-		@relationTypeSelector.hide()
-		@receptionQueryBuilder.hide()
+	# editSource: (e) ->
+	# 	@selectTab(e)
+	# 	@sourceQueryBuilder.show()
+	# 	@relationTypeSelector.hide()
+	# 	@receptionQueryBuilder.hide()
 	
 		
-	handleSourceTypeSelected: () ->
-		@enableSourceEditorLink()
-		@enableSearchButton()
+	# handleSourceTypeSelected: () ->
+	# 	@enableSourceEditorLink()
+	# 	@enableSearchButton()
 		
-	enableSourceEditorLink: () ->
-		@$('.reception-query.relation-type').removeClass('disabled')
+	# enableSourceEditorLink: () ->
+	# 	@$('.reception-query.relation-type').removeClass('disabled')
 		
-	enableSearchButton: () ->
-		@$('.search-receptions').removeClass('disabled')
+	# enableSearchButton: () ->
+	# 	@$('.search-receptions').removeClass('disabled')
 
-	selectTab: (e) ->
-		@$('.selected').removeClass 'selected'
-		@$(e.currentTarget).addClass 'selected'
+	# selectTab: (e) ->
+	# 	@$('.selected').removeClass 'selected'
+	# 	@$(e.currentTarget).addClass 'selected'
 
-	search: (e) ->
-		@$el.addClass 'searching'
+	# search: (e) ->
+	# 	@$el.addClass 'searching'
 
-		queryParameters = {
-			sourceSearchId: @sourceQueryBuilder.getSearchId()
-			targetSearchId: @receptionQueryBuilder.getSearchId()
-			relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
-			typeString: 'wwrelation'
-		}
+	# 	queryParameters =
+	# 		sourceSearchId: @sourceQueryBuilder.getSearchId()
+	# 		targetSearchId: @receptionQueryBuilder.getSearchId()
+	# 		relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
+	# 		typeString: 'wwrelation'
 
-		result = @receptionSearchQueryExecutor.executeQuery(queryParameters, @receptionSearchResult)
-
-	findQueryEditorElement: () ->
-		@$el.find('.query-editor')
+	# 	result = @receptionSearchQueryExecutor.executeQuery(queryParameters, @receptionSearchResult)
 
 	createEventBus: () ->
 		eventBus = {}
 		_.extend(eventBus, Backbone.Events)
 
-module.exports = ReceptionSearcher
+	render: ->
+		@$el.html @template()
+		$queryEditor = @$('.query-editor')
+		
+		@receptionQueryBuilder.render $queryEditor
+		@sourceQueryBuilder.render $queryEditor
+		
+		@receptionSearchResult.render @$('.reception-results')
+
+module.exports = ReceptionSearch
