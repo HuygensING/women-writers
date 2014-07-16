@@ -47,8 +47,9 @@ class App extends Backbone.View
 			@switchView view
 		@showView()
 
-	showPersonAddForm: (id) ->
-		person = new Person _id: id
+	showPersonAddForm: ->
+		person = new Person
+		console.log person
 		view = new PersonForm model: person
 
 		@switchView view
