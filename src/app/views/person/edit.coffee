@@ -180,46 +180,61 @@ class Person extends Backbone.View
 			relationsUrl: config.relationsUrl()
 			model: @model
 			schema: schema
-			fields: [
-				'tempOldId'
-				'tempName'
-				'tempSpouse'
-				'names'
-				'gender'
-				'birthDate'
-				'tempBirthPlace'
-				'tempPlaceOfBirth'
-				'timbuctoo-relation.hasBirthPlace'
-				'deathDate'
-				'tempDeathPlace'
-				'timbuctoo-relation.hasDeathPlace'
-				'tempMotherTongue'
-				'types'
-				'livedIn'
-				'timbuctoo-relation.hasMaritalStatus'
-				'tempChildren'
-				'tempPsChildren'
-				'children'
-				'tempMemberships'
-				'timbuctoo-relation.isMemberOf'
-				'tempCollaborations'
-				'timbuctoo-relation.isCollaboratorOf'
-				'tempPseudonyms'
-				'timbuctoo-relation.hasPseudonym'
-				'timbuctoo-relation.isPseudonymOf'
-				'bibliography'
-				'timbuctoo-relation.hasEducation'
-				'timbuctoo-relation.hasProfession'
-				'timbuctoo-relation.hasReligion'
-				'timbuctoo-relation.hasSocialClass'
-				'tempFinancialSituation'
-				'timbuctoo-relation.hasFinancialSituation'
-				'health'
-				'nationality'
-				'personalSituation'
-				'notes'
-				'links'
-				'timbuctoo-relation.isCreatorOf'
+			fieldsets: [
+				{
+					fields: [
+						'tempOldId'
+						'tempName'
+						'tempSpouse'
+						'names'
+						'gender'
+						'birthDate'
+						'tempBirthPlace'
+						'tempPlaceOfBirth'
+						'timbuctoo-relation.hasBirthPlace'
+						'deathDate'
+						'tempDeathPlace'
+						'timbuctoo-relation.hasDeathPlace'
+						'notes'
+					]
+				}
+				{
+					legend: 'Works'
+					collapsed: true
+					fields: [
+						'timbuctoo-relation.isCreatorOf'
+					]
+				}
+				{
+					legend: 'Secondary biographical information'
+					collapsed: true
+					fields: [
+						'types'
+						'livedIn'
+						'timbuctoo-relation.hasMaritalStatus'
+						'tempChildren'
+						'tempPsChildren'
+						'children'
+						'tempMemberships'
+						'timbuctoo-relation.isMemberOf'
+						'tempCollaborations'
+						'timbuctoo-relation.isCollaboratorOf'
+						'tempPseudonyms'
+						'timbuctoo-relation.hasPseudonym'
+						'timbuctoo-relation.isPseudonymOf'
+						'bibliography'
+						'timbuctoo-relation.hasEducation'
+						'timbuctoo-relation.hasProfession'
+						'timbuctoo-relation.hasReligion'
+						'timbuctoo-relation.hasSocialClass'
+						'tempFinancialSituation'
+						'timbuctoo-relation.hasFinancialSituation'
+						'health'
+						'nationality'
+						'personalSituation'
+						'links'
+					]
+				}
 			]
 
 		@$('.form').html @form.el

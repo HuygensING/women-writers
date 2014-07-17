@@ -160,13 +160,19 @@ class Document extends Backbone.View
 			schema: schema
 			fieldsets: [
 				{
-					legend: 'General'
 					fields: [
 						'title'
 						'englishTitle'
 						'description'
 						'tempCreator'
 						'timbuctoo-relation.isCreatedBy'
+						'notes'
+					]
+				}
+				{
+					legend: 'Secondary information'
+					collapsed: true
+					fields: [
 						'tempLanguage'
 						'timbuctoo-relation.hasWorkLanguage'
 						'tempOrigin'
@@ -179,11 +185,11 @@ class Document extends Backbone.View
 						'timbuctoo-relation.hasDocumentSource'
 						'links'
 						'reference'
-						'notes'
 					]
 				}
 				{
 					legend: 'Receptions'
+					collapsed: true
 					fields: [
 						@receptionOf
 						@receivedIn
