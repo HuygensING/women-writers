@@ -4,7 +4,6 @@ ReceptionSearchCreator = require '../../helpers/reception-search-creator'
 
 class ReceptionQueryBuilder extends Backbone.View
 	template: require '../../../templates/views/reception/faceted-search.jade'
-	className: 'query-builder'
 		
 	initialize: (options = {}) ->
 		@receptionSearchCreator = options.receptionSearchCreator ? new ReceptionSearchCreator()

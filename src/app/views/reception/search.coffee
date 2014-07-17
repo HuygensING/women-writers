@@ -17,7 +17,7 @@ class ReceptionSearch extends Backbone.View
 	events:
 		'click .select-type .link': 'selectReceptionOn'
 		'click .tab.relation-type': 'editRelationTypes'
-		'click .tab.target': 'editReceptions'
+		'click .tab.receptions': 'editReceptions'
 		'click .tab.source': 'editSource'
 		'click .tab.search .search-receptions': 'search'
 
@@ -53,11 +53,10 @@ class ReceptionSearch extends Backbone.View
 	# 	@receptionQueryBuilder.hide()
 	# 	if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
 		
-	# editReceptions: (e) ->
-	# 	@selectTab(e)
-	# 	@receptionQueryBuilder.show()
-	# 	if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
-	# 	@relationTypeSelector.hide()
+	editReceptions: (e) ->
+		@receptionQueryBuilder.show()
+		if @sourceQueryBuilder? then	@sourceQueryBuilder.hide()
+		@relationTypeSelector.hide()
 				
 	# editSource: (e) ->
 	# 	@selectTab(e)
