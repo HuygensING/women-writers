@@ -22,9 +22,6 @@
     "value" : [ "UNKNOWN", "NO", "YES" ],
     "type" : "String"
   },
-  "tempPublishingLanguages" : {
-    "type" : "String"
-  },
   "deathDate" : {
     "type" : "Datable"
   },
@@ -56,9 +53,6 @@
   },
   "birthDate" : {
     "type" : "Datable"
-  },
-  "tempLanguages" : {
-    "type" : "String"
   },
   "types" : {
     "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
