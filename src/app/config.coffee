@@ -31,6 +31,9 @@ class Config extends Backbone.Model
 	personEditUrl: (id) ->
 		@personViewUrl(id) + '/edit'
 
+	personAddUrl: ->
+		@personViewUrl 'add'
+
 	allDocumentsUrl: ->
 		@get('facetedSearchBaseUrl') + @get('documentsRootUrl')
 
@@ -42,6 +45,9 @@ class Config extends Backbone.Model
 
 	documentEditUrl: (id) ->
 		@documentViewUrl(id) + '/edit'
+
+	documentAddUrl: ->
+		@documentViewUrl 'add'
 
 	# Returns view url inferred from ID (PERS/DOC)
 	viewUrl: (id) ->

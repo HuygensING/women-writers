@@ -60,9 +60,10 @@ a
 		overflow auto
 
 	.links
+		position relative
 		font-size 90%
 
-		a
+		a.link
 			color black
 			font-family sans-serif
 			padding 1em .5em
@@ -73,9 +74,21 @@ a
 			transition border-color .15s ease 0s
 			border-bottom 5px solid transparent
 
+			.btn
+				display none
+
+			&.search .btn
+				position absolute
+				left 35%
+				top 50%
+				margin-top -1em
+
 			&.active
 				border-bottom 5px solid baseColor
 				transition border-color .1s ease 0s
+
+				&.search .btn
+					display inline-block
 
 			&:hover:not(.active)
 				border-bottom 5px solid lightBackgroundEdgeColor

@@ -50,7 +50,8 @@ class Person extends Backbone.View
 
 		if not errors?
 			status.show().loading()
-			result.error =>
+			result.fail =>
+				console.log result, errors
 				status.show().error()
 			result.done =>
 				@model.fetch().done => status.show().success()

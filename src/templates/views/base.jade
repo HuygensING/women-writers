@@ -6,9 +6,17 @@
 	.navigation
 		.centered
 			.links
-				a.person(href="/person/") Persons
-				a.document(href="/document/") Documents
-				a.reception(href="/reception/") Receptions
+				a.link.person(href="/person/")
+					span Persons
+					a.btn(href=config.personAddUrl())
+						i.fa.fa-plus
+						| New person
+				a.link.document(href="/document/")
+					span Documents
+					a.btn(href=config.documentAddUrl())
+						i.fa.fa-plus
+						| New document
+				a.link.reception(href="/reception/") Receptions
 				.user-status
 	#search.centered
 		.persons

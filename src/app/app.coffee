@@ -31,11 +31,17 @@ class App extends Backbone.View
 		@render()
 
 	updateNavBar: (route) ->
-		match = route.match /show([A-Z][a-z]+)/
+		match = route.match /show([A-Z][a-z]+)(Search)?/
 		if match
 			category = match[1].toLowerCase()
-			@$('.navigation a').removeClass 'active'
-			@$(".navigation a.#{category}").addClass 'active'
+			console.log match, category
+			links = @$('.navigation a.link')
+			links.removeClass 'active'
+			links.removeClass 'search'
+
+			current = @$(".navigation a.link.#{category}")
+			current.addClass 'active'
+			current.addClass 'search' if match[2]
 
 	home: -> # TODO: Define what's displayed in home
 
@@ -130,7 +136,10 @@ class App extends Backbone.View
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
-		html = $ @template config: config
+		templ = @template config: config
+		html = $ templ
+
+		console.log "BASE", templ
 
 		new UserStatusView
 			el: html.find '.user-status'
