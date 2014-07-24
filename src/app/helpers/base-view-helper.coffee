@@ -17,8 +17,9 @@ helpers =
 				all = for el in (value || [])
 					if config.viewUrl el.id
 						linkTemplate
-							url: config.viewUrl el.id
-							label: el.displayName
+							link:
+								url: config.viewUrl el.id
+								label: el.displayName
 					else
 						el.displayName
 				all
@@ -31,6 +32,14 @@ helpers =
 		
 		names
 
-	linksMap: (links) -> linkTemplate link for link in links when link.url?
+	linksMap: (links) -> linkTemplate(link: link) for link in links when link.url?
+
+	externalLinksMap: (links) ->
+		links = for link in links when link.url?
+			link.external = true
+			linkTemplate(link: link) 
+
+		links
+
 
 module.exports = helpers

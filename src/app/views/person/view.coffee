@@ -2,7 +2,7 @@ config = require '../../config.coffee'
 
 BaseView = require '../base-view'
 
-{relationField, namesMap, linksMap} = require '../../helpers/base-view-helper'
+{relationField, namesMap, externalLinksMap} = require '../../helpers/base-view-helper'
 
 class PersonView extends BaseView
 	className: 'person view'
@@ -58,7 +58,7 @@ class PersonView extends BaseView
 					type: 'Array'
 					large: true
 					group: true
-					map: linksMap
+					map: externalLinksMap
 				}
 				{
 					title: 'Bibliography'
@@ -81,24 +81,6 @@ class PersonView extends BaseView
 				}
 			]
 		}
-		# {
-		# 	title: 'Relations'
-		# 	fields: [
-		# 		field: '@relations.*/id=displayName'
-		# 		type: 'Array'
-		# 		options:
-		# 			map: (el) ->
-		# 				if el.id.match /PERS|DOC/
-		# 					linkTemplate
-		# 						url: if el.id.match /DOC/
-		# 								config.documentViewUrl el.id
-		# 							else
-		# 								config.personViewUrl el.id
-		# 						label: el.displayName
-		# 				else
-		# 					el.displayName
-		# 	]
-		# }
 		{
 			title: 'Temporary Fields'
 			showOnlyWhenLoggedIn: true
