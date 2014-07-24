@@ -102,7 +102,7 @@ class Person extends Backbone.View
 			placeholderString: 'Location'
 			
 		_.extend schema['timbuctoo-relation.hasEducation'],
-			title: 'Educations'
+			title: 'Education'
 			options: config.get 'educations'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 						
@@ -117,17 +117,17 @@ class Person extends Backbone.View
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			
 		_.extend schema['timbuctoo-relation.hasProfession'],
-			title: 'Professions'
+			title: 'Profession'
 			options: config.get 'professions'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			
 		_.extend schema['timbuctoo-relation.hasReligion'],
-			title: 'Religions'
+			title: 'Religion'
 			options: config.get 'religions'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			
 		_.extend schema['timbuctoo-relation.hasSocialClass'],
-			title: 'Social classes'
+			title: 'Social class'
 			options: config.get 'socialClasses'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			
@@ -146,21 +146,21 @@ class Person extends Backbone.View
 			placeholderString: 'Person'
 
 		_.extend schema['timbuctoo-relation.isCreatorOf'],
-			title: 'Is Creator of'
+			title: 'Is creator of'
 			options: config.get 'documents'
 			autocomplete: (value) -> simpleSearch value, 'wwdocument', 200
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
 			placeholderString: 'Work'
 
 		_.extend schema['timbuctoo-relation.hasPseudonym'],
-			title: 'Has Pseudonyms'
+			title: 'Has pseudonym'
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
 			placeholderString: 'Pseudonym'
 
 		_.extend schema['timbuctoo-relation.isPseudonymOf'],
-			title: 'Is Pseudonym of'
+			title: 'Is pseudonym of'
 			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
 			relationTypeHelper: new DynamicRelationTypeHelper()
