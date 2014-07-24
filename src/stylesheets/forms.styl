@@ -10,7 +10,7 @@ border-style()
 	border borderWidth solid borderColor
 	border-radius borderRadius
 
-input[type=text], textarea
+input[type=text], textarea, .input-field
 	box-sizing border-box
 	border-style()
 
@@ -23,6 +23,8 @@ input[type=text], textarea
 
 	&:active, &:focus
 		border 1px solid activeBorderColor
+	&:hover
+		border-color darken(activeBorderColor, 5%)
 
 //============================== General form styling
 
@@ -55,6 +57,46 @@ button, .btn
 
 	&.alert
 		shake(1, 0.15s)
+
+	&.dropdown
+		position relative
+		overflow hidden
+
+		transition max-height .1s ease-out
+
+		&:hover
+			overflow visible
+
+		ul
+			list-style none
+			padding 0
+			margin 0
+
+			height 0
+			max-height 0
+			opacity 0
+
+		&:hover ul
+			display inline-block
+
+			position absolute
+			top 100%
+			width 100%
+			left 0
+
+			height auto
+			max-height 999px
+			opacity 1
+
+			background-color lightGray
+			box-shadow 0 0 10px rgba(0,0,0,0.1)
+
+			li
+				padding inputVerticalPadding inputHorizontalPadding
+
+			li:hover
+				background-color darken(lightGray, 5%)
+				color darkGray
 
 .controls
 	margin 35px 0
@@ -199,7 +241,7 @@ button, .btn
 				display inline-block
 				width 0
 				height 0
-			&:hover
+			&:hover, &.static
 				border-radius borderRadius
 				span
 					display inline-block
@@ -263,20 +305,60 @@ button, .btn
 		display block
 
 		.add-name-editor
-			margin 0 auto
 			display block
 
 		.person-name-editor
 			display block
 			position relative
 
-			.remove-name
-				position static
-				margin-left inputHorizontalPadding
-				margin-top 0
+			.components-title
+				color darkGray
+				padding 0 0 inputVerticalPadding inputHorizontalPadding
+				span
+					font-size .8em
+					font-weight bold
+			.name
+				display inline-block
+				width: 100%
+				padding inputVerticalPadding inputHorizontalPadding
+				cursor pointer
+
+				i
+					color mediumGray
+
+			.timbuctoo-list-editor
+				max-height 0
+				overflow hidden
+				opacity 0
+				transition opacity .05s ease-out
+
+			&.editing
+				.name
+					border-color transparent
+					&.removable
+						border-color activeBorderColor
+					&:hover
+						border-color activeBorderColor
+				.timbuctoo-list-editor
+					max-height 9999px
+					overflow visible
+
+					opacity 1
+					transition opacity .05s ease-out
+
+					margin-top inputVerticalPadding
+					margin-left inputHorizontalPadding
+					border-left 5px solid lightGray
+					padding-left inputHorizontalPadding
+
+					.timbuctoo-list-item
+						margin-bottom 0
 
 			.add-name-component-editor
-				float right
+				padding inputVerticalPadding inputHorizontalPadding
+				margin inputVerticalPadding 1% 0 0
+				&:hover
+					width 25%
 
 		.name-component-editor
 			display inline
@@ -284,11 +366,14 @@ button, .btn
 			.timbuctoo-list-item
 				margin-bottom .5em
 
-			select // Name component
-				width 25%
-				margin-right 1%
-			input
-				width 74%
+			.type
+				display block
+				box-sizing border-box
+
+				padding-left inputHorizontalPadding
+
+				span
+					font-size 12px
 
 	.readonly-editor
 		display block
