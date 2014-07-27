@@ -1,16 +1,10 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 
+routes = require '../../../config/routes.json'
+
 class MainRouter extends Backbone.Router
-	routes:
-		'person(/)':					'showPersonSearch'
-		'person/:id(/)':			'showPersonView'
-		'person/:id/edit':		'showPersonForm'
-		'document(/)':				'showDocumentSearch'
-		'document/:id(/)':		'showDocumentView'
-		'document/:id/edit':	'showDocumentForm'
-		'reception(/)':				'showReceptionSearch'
-		'':										'home'
+	routes: routes
 
 	initialize: (options) ->
 		super

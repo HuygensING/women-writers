@@ -23,6 +23,14 @@ DocumentSearchView = require './views/document/search.coffee'
 
 ReceptionSearchView = require './views/reception/searcher.coffee'
 
+PersonSection = require './views/person/section.coffee'
+DocumentSection = require './views/document/section.coffee'
+ReceptionSection = require './views/reception/section.coffee'
+
+sectionViews =
+	person: PersonSection
+	document: DocumentSection
+	reception: ReceptionSection
 
 class App extends Backbone.View
 	template: baseTemplate
@@ -38,6 +46,10 @@ class App extends Backbone.View
 			@$(".navigation a.#{category}").addClass 'active'
 
 	home: -> # TODO: Define what's displayed in home
+
+	showSection: (section) ->
+		section = new sectionViews[section]
+		@$('#section').html section.el
 
 	showPersonForm: (id) ->
 		person = new Person _id: id
