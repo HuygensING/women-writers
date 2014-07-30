@@ -6,7 +6,10 @@ class Config extends Backbone.Model
 	defaults: require '../../config/targets/development.json'
 
 	initialize: ->
-		hasLocalStorage = window.localStorage?
+		try
+			hasLocalStorage = window.localStorage?
+		catch
+			hasLocalStorage = false
 
 		if hasLocalStorage and not @get('authToken')?
 			@set authToken: window.localStorage.getItem('authToken')
