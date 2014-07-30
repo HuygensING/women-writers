@@ -96,16 +96,17 @@
 
 		header
 			position relative // because .menu is absolutely positioned
+			margin-bottom 0
+			background-color lightBackgroundColor
+
 			h3, .menu
 				padding padSize
 				margin 0
 			.menu i
 				color darken(lightBackgroundEdgeColor, 6%)
-
-		header
-			background-color lightBackgroundColor
 		
 			h3
+				display block
 				font-size 1em
 
 				cursor pointer
@@ -129,10 +130,11 @@
 				&.filter:before
 					content "\f002" // search is better icon for filter than filter
 
-		.options
+		.options,	&.list .options
 			display none
 
 			padding padSize
+			margin 0
 		
 			background-color transparent
 			border-top 1px solid lightBackgroundEdgeColor
