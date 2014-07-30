@@ -1,3 +1,5 @@
+@import 'nib'
+
 .overlay
 	position absolute
 	background-color rgba(0,0,0,0.2)
@@ -171,17 +173,16 @@
 			max-height 9999px
 			overflow-y auto
 
-			-webkit-transition max-height bodyTransition
-			-webkit-transition padding bodyTransition
+			transition max-height bodyTransition
+			transition padding bodyTransition
 
 		&.collapsed
 			header
 				.menu
 					display none
 			.body
-				-webkit-transition max-height bodyTransition
-				-webkit-transition padding bodyTransition
-				// -webkit-transition .15s
+				transition max-height bodyTransition
+				transition padding bodyTransition
 
 				overflow-y hidden
 				padding 0 padSize
