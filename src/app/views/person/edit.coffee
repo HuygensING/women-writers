@@ -188,14 +188,73 @@ class Person extends Backbone.View
 						'tempSpouse'
 						'names'
 						'gender'
+						'types'
+						'tempPseudonyms'
+						'timbuctoo-relation.hasPseudonym'
+						'timbuctoo-relation.isPseudonymOf'
+					]
+				}
+				{
+					legend: 'Notes'
+					fields:  ['notes']
+				}
+				{
+					legend: 'Personal situation'
+					collapsed: true
+					fields: [
+						'personalSituation'
+					]
+				}
+				{
+					legend: 'Birth/death'
+					collapsed: true
+					fields: [
 						'birthDate'
+						'deathDate'
 						'tempBirthPlace'
 						'tempPlaceOfBirth'
 						'timbuctoo-relation.hasBirthPlace'
-						'deathDate'
+						'livedIn'
 						'tempDeathPlace'
 						'timbuctoo-relation.hasDeathPlace'
-						'notes'
+						'nationality'
+					]
+
+				}
+				{
+					legend: 'Family'
+					collapsed: true
+					fields: [
+						'timbuctoo-relation.hasMaritalStatus'
+						'tempChildren'
+						'tempPsChildren'
+						'children'
+						'timbuctoo-relation.hasSocialClass'
+						'timbuctoo-relation.hasEducation'
+						'timbuctoo-relation.hasReligion'
+						'health'
+					]
+				}
+
+				{
+					legend: 'Secondary biographical information'
+					collapsed: true
+					fields: [
+						'tempFinancialSituation'
+						'timbuctoo-relation.hasProfession'
+						'tempCollaborations'
+						'timbuctoo-relation.isCollaboratorOf'
+						'timbuctoo-relation.hasFinancialSituation'
+						'tempMemberships'
+						'timbuctoo-relation.isMemberOf'
+					]
+				}
+				{
+					legend: 'Other'
+					collapsed: true
+					fields: [
+						'bibliography'
+						'links'
 					]
 				}
 				{
@@ -203,36 +262,6 @@ class Person extends Backbone.View
 					collapsed: true
 					fields: [
 						'timbuctoo-relation.isCreatorOf'
-					]
-				}
-				{
-					legend: 'Secondary biographical information'
-					collapsed: true
-					fields: [
-						'types'
-						'livedIn'
-						'timbuctoo-relation.hasMaritalStatus'
-						'tempChildren'
-						'tempPsChildren'
-						'children'
-						'tempMemberships'
-						'timbuctoo-relation.isMemberOf'
-						'tempCollaborations'
-						'timbuctoo-relation.isCollaboratorOf'
-						'tempPseudonyms'
-						'timbuctoo-relation.hasPseudonym'
-						'timbuctoo-relation.isPseudonymOf'
-						'bibliography'
-						'timbuctoo-relation.hasEducation'
-						'timbuctoo-relation.hasProfession'
-						'timbuctoo-relation.hasReligion'
-						'timbuctoo-relation.hasSocialClass'
-						'tempFinancialSituation'
-						'timbuctoo-relation.hasFinancialSituation'
-						'health'
-						'nationality'
-						'personalSituation'
-						'links'
 					]
 				}
 			]
