@@ -27,8 +27,9 @@ class SearchView extends Backbone.View
 		@facets = @options.facets ? @facets
 		@facetTitleMap = @options.facetTitleMap ? @facetTitleMap
 		@sortableFieldsMap = (@options.sortableFieldsMap ? @sortableFieldsMap) ? {}
+		@startCollapsed = @options.startCollapsed ? @startCollapsed
 
-		@search = createFacetedSearch @queryOptions, @facets, @facetTitleMap, @textSearchTitle
+		@search = createFacetedSearch @queryOptions, @facets, @facetTitleMap, @textSearchTitle, @startCollapsed
 
 		console.log @search
 		@listenTo @search, 'change:results', (results) =>

@@ -7,7 +7,7 @@ config = require '../config.coffee'
 
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
-createFacetedSearch = (queryOptions, facets, facetTitleMap, textSearchTitle) ->
+createFacetedSearch = (queryOptions, facets, facetTitleMap, textSearchTitle, collapsed=true) ->
 	options =
 		baseUrl: config.get 'baseUrl'
 		searchPath: config.get 'searchPath'
@@ -18,6 +18,7 @@ createFacetedSearch = (queryOptions, facets, facetTitleMap, textSearchTitle) ->
 		resultRows: queryOptions.resultRows
 		facetTitleMap: facetTitleMap
 		facets: facets
+		startCollapsed: collapsed
 		textSearchTitle: textSearchTitle
 		templates:
 			main: ->
