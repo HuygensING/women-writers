@@ -58,7 +58,7 @@
     "http-proxy": "~1.0.2",
     "simple-http-proxy": "~0.5.10",
     "underscore": "~1.6.0",
-    "faceted-search": "git://github.com/HuygensING/faceted-search.git#fix-neww",
+    "faceted-search": "git://github.com/HuygensING/faceted-search.git#women-writers",
     "concat": "^0.2.4",
     "sinon-chai": "~2.5.0",
     "sandboxed-module": "~0.3.0",

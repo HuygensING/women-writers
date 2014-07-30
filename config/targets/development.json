@@ -1,6 +1,6 @@
 {
   "baseUrl": "http://localhost:9000",
-  "searchPath": "/api/search",
+  "searchPath": "/api/v1/search",
   "relationSearchPath": "/api/search/relations",
   "facetedSearchBaseUrl": "http://localhost:9000/api",
   "personsRootUrl": "/domain/wwpersons",

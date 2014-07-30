@@ -9,26 +9,31 @@ class PersonSearch extends BaseSearch
 		term: '*'
 		typeString: config.get 'personTypeString'
 		resultRows: 25
-	facetNameMap:
-		dynamic_s_collective: 'Memberships'
-		dynamic_s_birthplace: 'Place of Birth'
-		dynamic_s_residence: 'Country'
-		dynamic_s_birthDate: 'Year of Birth'
-		dynamic_s_deathDate: 'Year of Death'
-		dynamic_s_deathplace: 'Place of Death'
-		dynamic_s_religion: 'Religion'
-		dynamic_s_gender: 'Gender'
-		dynamic_s_language: 'Language'
-	sortableFieldsMap:
-		dynamic_k_deathDate: 'Year of Death'
-		dynamic_k_birthDate: 'Year of Birth'
-		dynamic_sort_name: 'Name'
-	facetOrder: [
+	facets: [ # Determines which facets get shown and in what order
 		'dynamic_s_gender'
 		'dynamic_s_birthDate'
 		'dynamic_s_residence'
 		'dynamic_s_language'
+		'dynamic_s_birthplace'
+		'dynamic_s_deathDate'
+		'dynamic_s_deathplace'
+		'dynamic_s_collective'
+		'dynamic_s_religion'
 	]
+	facetTitleMap:
+		dynamic_s_gender: 'Gender'
+		dynamic_s_birthDate: 'Year of Birth'
+		dynamic_s_residence: 'Country'
+		dynamic_s_language: 'Language'
+		dynamic_s_birthplace: 'Place of Birth'
+		dynamic_s_deathDate: 'Year of Death'
+		dynamic_s_deathplace: 'Place of Death'
+		dynamic_s_collective: 'Memberships'
+		dynamic_s_religion: 'Religion'
+	sortableFieldsMap:
+		dynamic_k_deathDate: 'Year of Death'
+		dynamic_k_birthDate: 'Year of Birth'
+		dynamic_sort_name: 'Name'
 
 	textSearchTitle: 'Name'
 

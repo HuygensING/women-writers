@@ -9,7 +9,16 @@ class DocumentSearch extends BaseSearch
 		term: '*'
 		typeString: config.get 'documentTypeString'
 		resultRows: 25
-	facetNameMap:
+	facets: [
+		'dynamic_s_date'
+		'dynamic_s_origin'
+		'dynamic_s_document_type'
+		'dynamic_s_creator'
+		'dynamic_s_language'
+		'dynamic_s_subject'
+		'dynamic_s_genre'
+	]
+	facetTitleMap:
 		dynamic_s_date: 'Year of first publication'
 		dynamic_s_origin: 'Origin'
 		dynamic_s_document_type: 'Document Type'

@@ -2,8 +2,6 @@ Backbone = require 'backbone'
 _ = require 'underscore'
 $ = Backbone.$
 
-FacetedSearch = require 'faceted-search'
-
 searchTemplate = require '../../templates/views/search.jade'
 resultsTemplate = require '../../templates/views/search-results.jade'
 
@@ -26,13 +24,16 @@ class SearchView extends Backbone.View
 
 		@textSearchTitle = @options.textSearchTitle ? @textSearchTitle
 		@queryOptions = @options.queryOptions ? @queryOptions
-		@facetOrder = @options.facetOrder ? @facetOrder
-		@facetNameMap = @options.facetNameMap ? @facetNameMap
+		@facets = @options.facets ? @facets
+		@facetTitleMap = @options.facetTitleMap ? @facetTitleMap
 		@sortableFieldsMap = (@options.sortableFieldsMap ? @sortableFieldsMap) ? {}
 
-		@search = createFacetedSearch @queryOptions, @facetNameMap, @facetOrder, @textSearchTitle
+		@search = createFacetedSearch @queryOptions, @facets, @facetTitleMap, @textSearchTitle
 
-		@listenTo @search, 'results:change', (results) => @renderResults results
+		console.log @search
+		@listenTo @search, 'change:results', (results) =>
+			console.log "RESP",results
+			@renderResults results
 
 	nextResults: ->
 		@showLoader()
@@ -86,5 +87,7 @@ class SearchView extends Backbone.View
 		@$el.html @template()
 		@$('.search').html @search.el
 		@$('.results').text 'No results'
+
+		@search.search()
 
 module.exports = SearchView

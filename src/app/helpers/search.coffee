@@ -1,9 +1,13 @@
 Backbone = require 'backbone'
-FacetedSearch = require 'faceted-search'
+FacetedSearch = require 'huygens-faceted-search/src/coffee/main'
+
+facetedSearchMainTemplate = require '../../templates/faceted-search/main.jade'
 
 config = require '../config.coffee'
 
-createFacetedSearch = (queryOptions, facetNameMap={}, facetOrder=[], textSearchTitle) ->
+facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
+
+createFacetedSearch = (queryOptions, facets, facetTitleMap, textSearchTitle) ->
 	options =
 		baseUrl: config.get 'baseUrl'
 		searchPath: config.get 'searchPath'
@@ -11,10 +15,17 @@ createFacetedSearch = (queryOptions, facetNameMap={}, facetOrder=[], textSearchT
 			headers:
 				VRE_ID: config.get 'VRE_ID'
 		queryOptions: queryOptions
-		facetNameMap: facetNameMap
+		resultRows: queryOptions.resultRows
+		facetTitleMap: facetTitleMap
+		facets: facets
 		textSearchTitle: textSearchTitle
-
-	options.facetOrder = facetOrder if facetOrder?.length
+		templates:
+			main: ->
+				fcts = 
+				tmpl = facetedSearchMainTemplate()
+				fcts = facetPlaceholderList facets
+				tmpl = tmpl.replace '<div class="facet-list-placeholder"></div>', fcts.join ""
+				return tmpl
 
 	new FacetedSearch options
 
