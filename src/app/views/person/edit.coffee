@@ -206,7 +206,7 @@ class Person extends Backbone.View
 					]
 				}
 				{
-					legend: 'Birth/death'
+					legend: 'Dates and Places'
 					collapsed: true
 					fields: [
 						'birthDate'
@@ -222,7 +222,7 @@ class Person extends Backbone.View
 
 				}
 				{
-					legend: 'Family'
+					legend: 'Personal'
 					collapsed: true
 					fields: [
 						'timbuctoo-relation.hasMaritalStatus'
@@ -237,7 +237,7 @@ class Person extends Backbone.View
 				}
 
 				{
-					legend: 'Secondary biographical information'
+					legend: 'Public'
 					collapsed: true
 					fields: [
 						'tempFinancialSituation'
