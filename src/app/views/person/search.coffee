@@ -5,6 +5,7 @@ config = require '../../config.coffee'
 
 class PersonSearch extends BaseSearch
 	resultsTemplate: require '../../../templates/views/person/person-search-results.jade'
+	type: 'wwpersons'
 	queryOptions:
 		term: '*'
 		typeString: config.get 'personTypeString'

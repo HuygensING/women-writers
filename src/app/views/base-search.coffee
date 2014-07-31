@@ -22,6 +22,7 @@ class SearchView extends Backbone.View
 	initialize: (@options={}) ->
 		_.extend @, Backbone.Events
 
+		@type = @options.type ? @type
 		@textSearchTitle = @options.textSearchTitle ? @textSearchTitle
 		@queryOptions = @options.queryOptions ? @queryOptions
 		@facets = @options.facets ? @facets
@@ -29,7 +30,13 @@ class SearchView extends Backbone.View
 		@sortableFieldsMap = (@options.sortableFieldsMap ? @sortableFieldsMap) ? {}
 		@startCollapsed = @options.startCollapsed ? @startCollapsed
 
-		@search = createFacetedSearch @queryOptions, @facets, @facetTitleMap, @textSearchTitle, @startCollapsed
+		@search = createFacetedSearch
+			type: @type
+			queryOptions: @queryOptions
+			facets: @facets
+			facetTitleMap: @facetTitleMap
+			textSearchTitle: @textSearchTitle
+			collapsed: @startCollapsed
 
 		console.log @search
 		@listenTo @search, 'change:results', (results) =>

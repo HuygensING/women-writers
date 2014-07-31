@@ -5,6 +5,7 @@ config = require '../../config.coffee'
 
 class DocumentSearch extends BaseSearch
 	resultsTemplate: require '../../../templates/views/document/document-search-results.jade'
+	type: 'wwdocuments'
 	queryOptions:
 		term: '*'
 		typeString: config.get 'documentTypeString'

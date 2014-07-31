@@ -7,10 +7,16 @@ config = require '../config.coffee'
 
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
-createFacetedSearch = (queryOptions, facets, facetTitleMap, textSearchTitle, collapsed=true) ->
+createFacetedSearch = (searchCfg={}) ->
+	{queryOptions, facets, facetTitleMap, textSearchTitle, collapsed} = searchCfg
+
+	collapsed ?= true
+
+	console.log "searchPath", config.get('searchPath') + searchCfg.type
+
 	options =
 		baseUrl: config.get 'baseUrl'
-		searchPath: config.get 'searchPath'
+		searchPath: config.searchPath(searchCfg.type)
 		requestOptions:
 			headers:
 				VRE_ID: config.get 'VRE_ID'
@@ -20,6 +26,8 @@ createFacetedSearch = (queryOptions, facets, facetTitleMap, textSearchTitle, col
 		facets: facets
 		startCollapsed: collapsed
 		textSearchTitle: textSearchTitle
+		
+		# We need to override the template (for now) to add facet placeholders
 		templates:
 			main: ->
 				fcts = 

@@ -47,9 +47,8 @@ bootstrap = ->
 	searchQuery
 		query:
 			term: '*'
-			typeString: 'wwlanguage'
 		options:
-			searchUrl: config.searchUrl()
+			searchUrl: config.searchUrl('wwlanguages')
 			resultRows: 1000 # or any large number
 	.then (data) ->
 		languages = (value: l.id, label: l.displayName for l in data.refs)
@@ -60,9 +59,8 @@ bootstrap = ->
 	searchQuery
 		query:
 			term: '*'
-			typeString: 'wwlocation'
 		options:
-			searchUrl: config.searchUrl()
+			searchUrl: config.searchUrl('wwlocations')
 			resultRows: 1000
 	.then (data) ->
 		config.set locations: (value: l.id, label: l.displayName for l in data.refs)
@@ -72,9 +70,8 @@ bootstrap = ->
 	searchQuery
 		query:
 			term: '*'
-			typeString: 'wwperson'
 		options:
-			searchUrl: config.searchUrl()
+			searchUrl: config.searchUrl('wwpersons')
 			resultRows: 100
 	.then (data) ->
 		config.set persons: (value: p.id, label: p.displayName for p in data.refs)

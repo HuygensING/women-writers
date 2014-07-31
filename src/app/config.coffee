@@ -16,8 +16,14 @@ class Config extends Backbone.Model
 			@on 'change:authToken', =>
 				window.localStorage.setItem('authToken', @get 'authToken')
 
-	searchUrl: ->
-		@get('baseUrl') + @get('searchPath')
+	searchUrl: (type) ->
+		@get('baseUrl') + @searchPath(type)
+
+	searchPath: (type) ->
+		if type
+			@get('searchPath') + '/' + type
+		else
+			@get('searchPath')
 
 	relationsUrl: ->
 		@get('baseUrl') + '/api/domain/wwrelations'
