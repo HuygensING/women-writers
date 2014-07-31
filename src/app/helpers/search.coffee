@@ -8,11 +8,14 @@ config = require '../config.coffee'
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
 createFacetedSearch = (searchCfg={}) ->
-	{queryOptions, facets, facetTitleMap, textSearchTitle, collapsed} = searchCfg
+	{queryOptions,
+	facets,
+	facetTitleMap,
+	textSearchTitle,
+	collapsed,
+	fromCache} = searchCfg
 
 	collapsed ?= true
-
-	console.log "searchPath", config.get('searchPath') + searchCfg.type
 
 	options =
 		baseUrl: config.get 'baseUrl'

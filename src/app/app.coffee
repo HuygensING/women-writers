@@ -23,9 +23,10 @@ DocumentSearchView = require './views/document/search.coffee'
 
 ReceptionSearchView = require './views/reception/searcher.coffee'
 
-
 class App extends Backbone.View
+	currentView: null
 	template: baseTemplate
+
 	initialize: ->
 		_.extend @, Backbone.Events
 		@render()
@@ -39,79 +40,99 @@ class App extends Backbone.View
 
 	home: -> # TODO: Define what's displayed in home
 
-	showPersonForm: (id) ->
-		person = new Person _id: id
-		person.fetch().done =>
-			view = new PersonForm
-				model: person
-			@switchView view
-		@showView()
-	
-	showDocumentForm: (id) ->
-		document = new Document _id: id
-		document.fetch().done =>
-			view = new DocumentForm
-				model: document
-			@switchView view
-		@showView()
-
 	showPersonSearch: ->
-		@personSearch ?= new PersonSearchView
-			el: '#search .persons'
-		@showSearch()
-		@documentSearch?.$el.fadeOut 75
-		@receptionSearch?.$el.fadeOut 75
-		@personSearch.$el.fadeIn 75
+		@currentView?.remove()
+		@currentView = new PersonSearchView
+		@$el.append @currentView.el
+
+		# @$('#app').html '<h1 class="centered">Person<h1>'
 
 	showDocumentSearch: ->
-		@documentSearch ?= new DocumentSearchView
-			el: '#search .documents'
-		@showSearch()
-		@personSearch?.$el.fadeOut 75
-		@receptionSearch?.$el.fadeOut 75
-		@documentSearch.$el.fadeIn 75
+		@currentView?.remove()
+		@currentView = new DocumentSearchView
+		@$el.append @currentView.el
+		# @$('#app').html '<h1 class="centered">Document<h1>'
+
+	showSourceSearch: ->
+		# new PersonSearchView el: '#search .persons'
+		@$('#app').html '<h1 class="centered">Source<h1>'
 
 	showReceptionSearch: ->
-		@receptionSearch = new ReceptionSearchView
-			el: '#search .receptions'
+		@$('#app').html '<h1 class="centered">Reception<h1>'
+
+	# showPersonForm: (id) ->
+	# 	person = new Person _id: id
+	# 	person.fetch().done =>
+	# 		view = new PersonForm
+	# 			model: person
+	# 		@switchView view
+	# 	@showView()
+	
+	# showDocumentForm: (id) ->
+	# 	document = new Document _id: id
+	# 	document.fetch().done =>
+	# 		view = new DocumentForm
+	# 			model: document
+	# 		@switchView view
+	# 	@showView()
+
+	# showPersonSearch: ->
+	# 	@personSearch ?= new PersonSearchView
+	# 		el: '#search .persons'
+	# 	@showSearch()
+	# 	@documentSearch?.$el.fadeOut 75
+	# 	@receptionSearch?.$el.fadeOut 75
+	# 	@personSearch.$el.fadeIn 75
+
+	# showDocumentSearch: ->
+	# 	@documentSearch ?= new DocumentSearchView
+	# 		el: '#search .documents'
+	# 	@showSearch()
+	# 	@personSearch?.$el.fadeOut 75
+	# 	@receptionSearch?.$el.fadeOut 75
+	# 	@documentSearch.$el.fadeIn 75
+
+	# showReceptionSearch: ->
+	# 	@receptionSearch = new ReceptionSearchView
+	# 		el: '#search .receptions'
 			
-		@receptionSearch.render()
-		@showSearch()
-		@personSearch?.$el.fadeOut 75
-		@documentSearch?.$el.fadeOut 75
-		@receptionSearch.$el.fadeIn 75
+	# 	@receptionSearch.render()
+	# 	@showSearch()
+	# 	@personSearch?.$el.fadeOut 75
+	# 	@documentSearch?.$el.fadeOut 75
+	# 	@receptionSearch.$el.fadeIn 75
 
-	showPersonView: (id, rev) ->
-		person = new Person _id: id
-		person.fetch().done =>
-			view = new PersonView model: person
-			@switchView view
-			@showView()
+	# showPersonView: (id, rev) ->
+	# 	person = new Person _id: id
+	# 	person.fetch().done =>
+	# 		view = new PersonView model: person
+	# 		@switchView view
+	# 		@showView()
 
-	showDocumentView: (id, rev) ->
-		opts = _id: id
-		opts['^rev'] = rev if rev?
+	# showDocumentView: (id, rev) ->
+	# 	opts = _id: id
+	# 	opts['^rev'] = rev if rev?
 
-		document = new Document opts
-		document.fetch().done =>
-			view = new DocumentView model: document
-			@switchView view
-			@showView()
+	# 	document = new Document opts
+	# 	document.fetch().done =>
+	# 		view = new DocumentView model: document
+	# 		@switchView view
+	# 		@showView()
 
-	showSearch: ->
-		@$('#search').show()
-		@$('#view').hide()
+	# showSearch: ->
+	# 	@$('#search').show()
+	# 	@$('#view').hide()
 		
-	showView: ->
-		@$('#search').hide()
-		@$('#view').show()
+	# showView: ->
+	# 	@$('#search').hide()
+	# 	@$('#view').show()
 
-		@$el.scrollTop 0
+	# 	@$el.scrollTop 0
 		
-	switchView: (view) ->
-		@currentView?.remove()
-		@$('#view').html view.el
-		@currentView = view
+	# switchView: (view) ->
+	# 	@currentView?.remove()
+	# 	@$('#view').html view.el
+	# 	@currentView = view
 
 	render: ->
 		wrapper = $('<div/>').attr(class: 'body-wrap').append @$el.html()
