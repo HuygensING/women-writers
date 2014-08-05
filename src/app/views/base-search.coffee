@@ -29,6 +29,7 @@ class SearchView extends Backbone.View
 		@facetTitleMap = @options.facetTitleMap ? @facetTitleMap
 		@sortableFieldsMap = (@options.sortableFieldsMap ? @sortableFieldsMap) ? {}
 		@startCollapsed = @options.startCollapsed ? @startCollapsed
+		@fsTemplates = @options.templates ? @fsTemplates
 
 		@search = createFacetedSearch
 			type: @type
@@ -37,8 +38,8 @@ class SearchView extends Backbone.View
 			facetTitleMap: @facetTitleMap
 			textSearchTitle: @textSearchTitle
 			collapsed: @startCollapsed
+			templates: @fsTemplates
 
-		console.log @search
 		@listenTo @search, 'change:results', (results) =>
 			console.log "RESP",results
 			@renderResults results

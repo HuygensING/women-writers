@@ -9,18 +9,7 @@ class PersonSearch extends BaseSearch
 	queryOptions:
 		term: '*'
 		typeString: config.get 'personTypeString'
-		resultRows: 25
-	facets: [ # Determines which facets get shown and in what order
-		'dynamic_s_gender'
-		'dynamic_s_birthDate'
-		'dynamic_s_residence'
-		'dynamic_s_language'
-		'dynamic_s_birthplace'
-		'dynamic_s_deathDate'
-		'dynamic_s_deathplace'
-		'dynamic_s_collective'
-		'dynamic_s_religion'
-	]
+	resultRows: 25
 	facetTitleMap:
 		dynamic_s_gender: 'Gender'
 		dynamic_s_birthDate: 'Year of Birth'
@@ -35,8 +24,9 @@ class PersonSearch extends BaseSearch
 		dynamic_k_deathDate: 'Year of Death'
 		dynamic_k_birthDate: 'Year of Birth'
 		dynamic_sort_name: 'Name'
-
 	textSearchTitle: 'Name'
+	fsTemplates:
+		facets: require '../../../templates/faceted-search/person.jade'
 
 
 	initialize: (@options) ->

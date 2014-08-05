@@ -8,7 +8,7 @@ config = require '../config.coffee'
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
 createFacetedSearch = (searchCfg={}) ->
-	{queryOptions, facets, facetTitleMap, textSearchTitle, collapsed} = searchCfg
+	{queryOptions, facetTitleMap, textSearchTitle, collapsed, templates} = searchCfg
 
 	collapsed ?= true
 
@@ -23,18 +23,13 @@ createFacetedSearch = (searchCfg={}) ->
 		queryOptions: queryOptions
 		resultRows: queryOptions.resultRows
 		facetTitleMap: facetTitleMap
-		facets: facets
 		startCollapsed: collapsed
 		textSearchTitle: textSearchTitle
-		
-		# We need to override the template (for now) to add facet placeholders
+		autoSearch: true
 		templates:
-			main: ->
-				fcts = 
-				tmpl = facetedSearchMainTemplate()
-				fcts = facetPlaceholderList facets
-				tmpl = tmpl.replace '<div class="facet-list-placeholder"></div>', fcts.join ""
-				return tmpl
+			main: facetedSearchMainTemplate
+
+	_.extend options.templates, templates if templates?
 
 	new FacetedSearch options
 

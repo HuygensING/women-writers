@@ -9,16 +9,7 @@ class DocumentSearch extends BaseSearch
 	queryOptions:
 		term: '*'
 		typeString: config.get 'documentTypeString'
-		resultRows: 25
-	facets: [
-		'dynamic_s_date'
-		'dynamic_s_origin'
-		'dynamic_s_document_type'
-		'dynamic_s_creator'
-		'dynamic_s_language'
-		'dynamic_s_subject'
-		'dynamic_s_genre'
-	]
+	resultRows: 25
 	facetTitleMap:
 		dynamic_s_date: 'Year of first publication'
 		dynamic_s_origin: 'Origin'
@@ -31,6 +22,8 @@ class DocumentSearch extends BaseSearch
 		dynamic_sort_creator: 'Creator'
 		dynamic_sort_title: 'Title'
 	textSearchTitle: 'Title'
+	fsTemplates:
+		facets: require '../../../templates/faceted-search/document.jade'
 
 	initialize: (@options) ->
 		super
