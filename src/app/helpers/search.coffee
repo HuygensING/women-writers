@@ -8,7 +8,7 @@ config = require '../config.coffee'
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
 createFacetedSearch = (searchCfg={}) ->
-	{queryOptions, facetTitleMap, textSearchTitle, collapsed, templates} = searchCfg
+	{queryOptions, facetTitleMap, textSearchTitle, resultRows, collapsed, templates} = searchCfg
 
 	collapsed ?= true
 
@@ -21,7 +21,7 @@ createFacetedSearch = (searchCfg={}) ->
 			headers:
 				VRE_ID: config.get 'VRE_ID'
 		queryOptions: queryOptions
-		resultRows: queryOptions.resultRows
+		resultRows: resultRows ? config.get 'resultRows'
 		facetTitleMap: facetTitleMap
 		startCollapsed: collapsed
 		textSearchTitle: textSearchTitle
