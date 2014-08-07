@@ -115,10 +115,6 @@
 				&:hover
 					background-color lightBackgroundEdgeColor
 
-		.container
-			max-height maxFacetHeight
-			overflow-y auto
-
 		.menu
 			position absolute
 			right 0
@@ -167,14 +163,44 @@
 		bodyTransition = .15s
 
 		.body
+			position relative
+
 			background-color lightBackgroundColor
 
 			padding padSize
+			padding-top 0
 			max-height 9999px
-			overflow-y auto
+			overflow hidden
 
 			transition max-height bodyTransition
 			transition padding bodyTransition
+
+			.container
+				max-height maxFacetHeight
+				overflow-y auto
+
+				&:before, &:after
+					display block
+					content ""
+					pointer-events none
+					width 85%
+					height 20px
+					box-shadow 0 10px 10px -5px rgba(0, 0, 0, 0.1)
+					margin -20px 3%
+					position absolute
+					opacity 0
+					transition opacity .15s ease-out
+
+				&:after
+					position absolute
+					margin 0 3%
+					bottom -12px
+					margin-bottom 0
+					box-shadow 0 -10px 10px -5px rgba(0, 0, 0, 0.1)
+
+				&.more-above:before, &.more-below:after
+					opacity 1
+					transition opacity .15s ease-out
 
 		&.collapsed
 			header
