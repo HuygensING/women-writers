@@ -3,7 +3,7 @@ FacetedSearch = require 'huygens-faceted-search/src/coffee/main'
 
 facetedSearchMainTemplate = require '../../templates/faceted-search/main.jade'
 
-config = require '../config.coffee'
+config = require '../config'
 
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
@@ -11,8 +11,6 @@ createFacetedSearch = (searchCfg={}) ->
 	{queryOptions, facetTitleMap, textSearchTitle, resultRows, collapsed, templates} = searchCfg
 
 	collapsed ?= true
-
-	console.log "searchPath", config.get('searchPath') + searchCfg.type
 
 	options =
 		baseUrl: config.get 'baseUrl'

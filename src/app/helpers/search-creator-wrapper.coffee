@@ -1,25 +1,32 @@
 # A class needed to test reception-document-searcher
-	
+
+_ = require 'underscore'
+
+{createFacetedSearch} = require './search.coffee'
+
+config = require '../config'
+
 class SearchCreatorWrapper
-	
+	createFacetedSearch: (options={}) ->
+		_.extend options,
+			collapsed: false
+			templates:
+				main: require '../../templates/faceted-search/reception-main.jade'
+
+		createFacetedSearch options
+
 	constructor: (options = {}) ->
 		if options.createFacetedSearch?
-			@createFacetedSearch = (queryOptions, facetNameMap) ->
-				options.createFacetedSearch(queryOptions, facetNameMap)
-		else
-			@createFacetedSearch = (queryOptions, facetNameMap) ->
-				require('./search.coffee').createFacetedSearch(queryOptions, facetNameMap)
+			@createFacetedSearch = (queryOptions, facetTitleMap) ->
+				options.createFacetedSearch(queryOptions, facetTitleMap)
+				
+	createSearch: (typeStringToFind, queryOptions, facetTitleMap) ->
+		@createFacetedSearch
+			type: @getType(typeStringToFind) + 's'
+			queryOptions: queryOptions
+			facetTitleMap: facetTitleMap
 	
-	createSearch: (typeStringToFind, queryOptions, facetNameMap) ->
-		queryOptions.typeString = @getType(typeStringToFind)
-		
-		@createFacetedSearch(queryOptions, facetNameMap)
-		
-	
-	createDocumentFacetedSearch: (queryOptions, facetNameMap) ->
-		@createSearch('documentTypeString', queryOptions, facetNameMap)
-		
 	getType: (typeString) ->
-		require('../config.coffee').get(typeString)
+		config.get typeString
 
 module.exports = SearchCreatorWrapper

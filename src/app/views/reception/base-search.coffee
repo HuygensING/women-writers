@@ -1,35 +1,46 @@
 Backbone = require 'backbone'
 
 SearchCreatorWrapper = require '../../helpers/search-creator-wrapper'
-IdHelper = require '../../helpers/id-helper'
 
 class ReceptionBaseSearch extends Backbone.View
 	className: 'query-builder'
 		
 	initialize: (options = {}) ->
+
+		_.extend @, Backbone.Events
+
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
-		@idHelper = options.idHelper ? new IdHelper()
 		@search = @searchCreatorWrapper.createSearch(@getTypeString(), @getQueryOptions(), @getFacetNameMap())
-	
+
+		@search.search()
+
+		@listenTo @search, 'change:results', (result) =>
+			console.log "OMF", @extractValues(result)
+
+	extractValues: (result) ->
+		selected = {}
+		selected[f.name] = f.options for f in result.get('facets')
+
+		selected
+
 	render: (parentElement) ->
 		@$el.append(@search.$el)
-		
 		parentElement.append(@$el)
-		
-	show: () ->
+
+	show: ->
 		@$el.show()
-	
-	hide: () ->
+
+	hide: ->
 		@$el.hide()
-		
-	getQueryOptions: () ->
+
+	getQueryOptions: ->
 		queryOptions =
 			term: '*'
-			resultRows: 0
+			resultRows: 100
 			
 	getSearchId: () ->
-		return @idHelper.getIdFromUrl(@getLastPostUrlFromSearch())
-		
+		id = @getLastPostUrlFromSearch().split('/').reverse()[0]
+
 	getLastPostUrlFromSearch: () ->
 		models = @search.model.searchResults.models
 		lastPostURL = models[(models.length - 1)].postURL

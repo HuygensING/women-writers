@@ -1,5 +1,59 @@
+@import 'nib'
+
 bottomBorder(clr)
 	border-bottom 5px solid clr
+
+.receptions .faceted-search
+	.facets-menu
+		reset-box-model()
+		background-color transparent
+
+	.facets-menu .reset
+		position absolute
+		right 0.5em
+
+		button
+			background-color transparent
+			border 1px solid mediumGray
+			color mediumGray
+			font-weight normal
+
+			&:hover
+				background-color transparent
+				border 1px solid darkGray
+
+	.facets
+		.facet
+			position relative
+			display inline-block
+			width 33%
+
+			header
+				background-color transparent
+
+			.body
+				// position absolute
+				box-sizing border-box
+				// z-index 999
+				width 100%
+
+				background-color transparent
+
+				// max-height 0
+
+				// opacity 0
+				// transition opacity .15s ease-out
+				// transition all .15s ease-out 0
+
+				.container
+					max-height 250px
+
+			// &:hover
+			// 	.body
+			// 		max-height 9999px
+			// 		overflow-y auto
+			// 		// opacity 1
+			// 		transition all .15s ease-out 0
 
 #search
 	.receptions
@@ -14,54 +68,104 @@ bottomBorder(clr)
 			pointer-events none
 			color gray
 
-		.reception-search
+		.reception-search, .views
 			color darkGray
 			background-color lightGray
 			border-bottom 1px solid lightBackgroundEdgeColor
 
-			.centered
+		.reception-search
+			.query
+				position relative
+
 				line-height 3em
+				// max-height 3em
+				// overflow hidden
 
-			.tab
-				display inline-block
-				padding 5px 0.5em
+				transition max-height .3ss ease-out 0s
 
-				cursor pointer
+				// &.reception-on-selected
+				// 	max-height calc(3em + 10px)
+				// 	transition max-height .15s ease-out 0s
 
-				&:hover
-					padding-bottom 0
-					bottomBorder(mediumGray)
+				// 	.select-type
+				// 		position relative
+				// 		margin-top -3em
+				// 		transition margin-top .15s ease-out 0s
 
-				&.selected
-					padding-bottom 0
-					bottomBorder(lightBackgroundEdgeColor)
+			// .select-type
+			// 	transition margin-top .15s ease-out 0s
+			// 	transition max-height 1s ease-out 0s
 
-				&.type .on
-					margin-left .3em
-					color mediumGray
+			// 	.link
+			// 		margin .3em
 
-				&.search
-					float right
-					vertical-align middle
-					&, &:hover
-						border none
+			.tabs
+				overflow hidden
+				.on
+					display inline
 
-					// to vertically center button
-					&:before
-						display inline-block
-						content ''
-						height 100%
+				// users must select reception type
+				// before selecting the rest, so hide
+				// these options for now, and slide in
+				.tab.reception, .tab.receptee
+					transform translateY(10em)
+					transition transform .15s ease-out
+
+				&.type-selected
+					.reception, .receptee
+						transform translateY(0em)
+						transition transform .15s ease-out
+					.tab.type
+						.text // see below
+							display inline-block
+							font-size .8em
+							line-height 1.5em
+						.link
+							display none
+
+				.tab
+					display inline-block
+					padding 5px 0.5em
+
+					cursor pointer
+
+					max-width 25%
+
+					&:hover
+						padding-bottom 0
+						bottomBorder(mediumGray)
+
+					&.selected
+						padding-bottom 0
+						bottomBorder(lightBackgroundEdgeColor)
+
+					// by default all text parts are hidden until a user
+					// makes a selection
+					.text
+						display none
+
+					&.search
+						float right
 						vertical-align middle
-						margin-right -0.25em
+						&, &:hover
+							border none
 
-					button
-						display inline-block
-						vertical-align middle
-						margin-top -2px
-						width 6em
+						// to vertically center button
+						&:before
+							display inline-block
+							content ''
+							height 100%
+							vertical-align middle
+							margin-right -0.25em
 
-					i
-						margin-right .5em
+						button
+							display inline-block
+							vertical-align middle
+							margin-top -2px
+							width 6em
+
+						i
+							margin-right .5em
 
 		.reception-source-search
 			padding 1em
@@ -73,14 +177,12 @@ bottomBorder(clr)
 			background-color #fafafa
 			border-bottom 1px solid #D0E9E9
 			border-top 1px solid #D0E9E9
-			float left
 			width 100%
 			display none
 
 		.query-builder
 			background-color lightGray
 			border-bottom 1px solid lightBackgroundEdgeColor
-			float left
 			width 100%
 			display none
 
@@ -102,8 +204,70 @@ bottomBorder(clr)
 						width 33%
 						float left
 
-		.query-editor
-			transition all 0.1s ease-out 0s
+		.views
+			overflow hidden
+			box-shadow 0px 5px 10px -5px rgba(0, 0, 0, 0.2) inset
+
+			position relative
+
+			padding-bottom 1em
+
+			// General styles
+			.help-text
+				width 20%
+				margin-left -22%
+				float left
+
+				font-size .75em
+
+			h3
+				margin 0
+				font-size .8em
+				font-family Raleway, 'Helvetica', sans-serif
+				color darkGray
+
+			.select-type, .select-reception, .select-receptee
+				transition opacity .2s ease-out 0s, transform 0.15s ease-out 0s, max-height 0.15s ease-out 0s
+				max-height 9999px
+				opacity 1
+
+				&.hidden
+					transition opacity .2s ease-out 0s, transform 0.15s ease-out 0s, max-height 0.15s ease-out 0s
+					transform translateY(-100%)
+					opacity 0
+					pointer-events none
+					max-height 0
+
+					.help-text
+						opacity 0
+
+					.work, .person
+						transition max-height .15s ease-out 1s
+						float none
+						max-height 0
+
+			.select-type
+				padding 1em 0
+
+				ul
+					reset-box-model()
+					list-style none
+					li
+						display inline-block
+						margin .2em 0
+
+				.work, .person
+					float left
+					transition max-height .15s ease-out
+					max-height 9999px
+
+				.work
+					width 65%
+					li
+						width 50%
+				.person
+					width 30%
+
 		&.searching
 			.query-editor
 				opacity 0.3
@@ -137,22 +301,3 @@ bottomBorder(clr)
 				cursor pointer
 				float left
 				font-weight bold
-		
-		.busy-overlay
-			display none
-			position fixed
-			top 0
-			left 0
-			height 100%
-			width 100%
-			border-radius 0px
-			background-color rgba(0, 0, 0, 0.7)
-			
-			.center-spinner
-				position relative
-				margin 25em auto
-				width 5em
-				text-align center
-				background-color #FFFFFF
-				border-radius 10px
-				opacity 1

@@ -8,15 +8,7 @@ class ReceptionSearchCreator
 		@searchCreatorWrapper = options.searchCreatorWrapper ? new SearchCreatorWrapper()
 	
 	create: (type) ->
-		receptionSearch = null
-		
-		if type is 'documents'
-			receptionSearch = new ReceptionDocumentSearch
-				searchCreatorWrapper: @searchCreatorWrapper
-		else if type is 'persons'
-			receptionSearch = new ReceptionPersonSearch
-				searchCreatorWrapper: @searchCreatorWrapper
-		
-		return receptionSearch
+		new ReceptionPersonSearch
+			searchCreatorWrapper: @searchCreatorWrapper
 		
 module.exports = ReceptionSearchCreator

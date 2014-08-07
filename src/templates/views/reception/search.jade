@@ -1,27 +1,27 @@
 .reception-search
 	.centered.query
-		.select-type
-			span Search for receptions on
-			span.link(data-type="works") works
-			span.or or
-			span.link(data-type="persons") persons
+		//- .select-type
+		//- 	span Search for receptions on
+		//- 	span.link(data-type="works") works
+		//- 	span.or or
+		//- 	span.link(data-type="persons") persons
 		.tabs
-			.tab.receptions
+			.tab.type
+				span.text All receptions
 				span.link All receptions
-				.options
-					.reception-types
-					.faceted-search
-			.on on
-			.tab.source
-				span.link Works / Persons
-				.options
-					.faceted-search
+			.tab.reception
+				span.link All receptions
+			.tab.receptee
+				span.link All persons/works
 			.tab.search
 				button.btn.search-receptions
 					i.fa.fa-search
 					| Search
 
-.centered
-	.query-editor
 
-	.reception-results
+.views
+	.select-type.centered
+	.select-reception.centered.hidden
+	.select-receptee.centered.hidden
+
+.reception-results.centered

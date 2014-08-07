@@ -92,4 +92,11 @@ class Config extends Backbone.Model
 	receptionsUrl: ->
 		@get('baseUrl') + '/api/system/vres/' + @get('VRE_ID')
 
+	receptionsFor: (type) ->
+		receptions = @get('receptions')
+		r for r in receptions when r.baseSourceType is type
+
+	personReceptions: -> @receptionsFor 'person'
+	documentReceptions: -> @receptionsFor 'document'
+
 module.exports = new Config
