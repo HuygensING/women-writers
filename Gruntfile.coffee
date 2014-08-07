@@ -129,7 +129,7 @@ module.exports = (grunt) ->
 				nospawn: true
 				livereload: true
 			coffee:
-				files: ['src/app/**/*.coffee', 'src/templates/**/*']
+				files: ['src/app/**/*.coffee', 'src/templates/**/*', 'node_modules/huygens-faceted-search/src/coffee/**/*']
 				tasks: ['browserify:build']
 			templates:
 				files: ['src/templates/**/*.jade']
