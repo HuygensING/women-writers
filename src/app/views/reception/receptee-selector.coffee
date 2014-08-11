@@ -1,8 +1,8 @@
 Backbone = require 'backbone'
 
-ReceptionSearchCreator = require '../../helpers/reception-search-creator'
+# ReceptionSearchCreator = require '../../helpers/reception-search-creator'
 
-class SourceQueryBuilder extends Backbone.View
+class RecepteeSelector extends Backbone.View
 	template: require '../../../templates/views/reception/source-query-builder.jade'
 	className: 'query-builder'
 		
@@ -34,7 +34,7 @@ class SourceQueryBuilder extends Backbone.View
 	# 	@receptionSearch.render(@$el)
 	# 	@receptionSearch.show()
 		
-	getSearchId: () ->
-		return @receptionSearch.getSearchId()
+	# getSearchId: () ->
+	# 	return @receptionSearch.getSearchId()
 
-module.exports = SourceQueryBuilder
+module.exports = RecepteeSelector

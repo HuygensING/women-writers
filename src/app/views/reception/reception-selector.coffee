@@ -19,10 +19,19 @@ class ReceptionSelector extends Backbone.View
 				main: mainReceptionSearchTemplate
 				facets: documentFacetsSearchTemplate
 
+		@facetValues = {}
+
+		@listenTo @search, 'change:queryoptions', (queryOptions) =>
+			@setValues queryOptions.get 'facetValues'
+			console.log queryOptions
+			@trigger 'change', queryOptions
 
 		@search.search()
 
 		@render()
+
+	setValues: (values) -> @facetValues = values
+	getValues: -> @facetValues
 
 	render: ->
 		@$el.html @template()

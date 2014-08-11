@@ -1,13 +1,14 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 
+config = require '../../config'
+
 # ReceptionDocumentSearch = require './document-search'
 # ReceptionPersonSearch = require './person-search'
 
 ReceptionTypeSelector = require './type-selector'
 ReceptionSelector = require './reception-selector'
 RecepteeSelector = require './receptee-selector'
-
 
 ReceptionSearchResult = require './search-result'
 RelationSearchQueryExecutor = require '../../helpers/relation-search-query-executor'
@@ -29,7 +30,7 @@ RelationSearchQueryExecutor = require '../../helpers/relation-search-query-execu
 class ReceptionSearch extends Backbone.View
 	template: require '../../../templates/views/reception/search.jade'
 	className: 'reception-search'
-	
+
 	events:
 		'click .tab.type': -> @selectTab 'type'
 		'click .tab.reception': -> @selectTab 'reception'
@@ -45,7 +46,7 @@ class ReceptionSearch extends Backbone.View
 		# @eventBus.on 'searchDoneEvent', =>
 		# 	@$el.removeClass 'searching'
 		# 	@$('.query-editor').slideUp()
-		
+
 		# @eventBus.on('sourceTypeSelectedEvent', () =>
 		# 	@handleSourceTypeSelected()
 		# )
@@ -93,10 +94,7 @@ class ReceptionSearch extends Backbone.View
 		@$(".tabs .tab.#{tab}").addClass 'selected'
 
 		for name, view of @tabs when name isnt tab
-			console.log name, view, tab
 			view.hide()
-
-		console.log "Showing #{tab}", @tabs[tab]
 
 		@tabs[tab].show()
 
@@ -127,9 +125,36 @@ class ReceptionSearch extends Backbone.View
 		
 		$typeText.show()
 
+	renderReceptionTab: ->
+		$receptionText = @$('.tabs .tab.reception .text')
+		$receptionLink = @$('.tabs .tab.reception .link')
+		values = @receptionSelector.getValues()
+
+		facetTitles = config.get 'documentFacetTitles'
+
+		text = "with "
+
+		for facet in values
+			name = facetTitles[facet.name] ? facet.name
+			console.log name, facet.values, facet.values.join ', '
+			text += name.toLowerCase()
+			text += 's' if facet.values.length > 1
+			text += ' ' + facet.values.join ', '
+			text += '; '
+
+		text = text.replace /; $/, ''
+		$receptionText.text(text).show()
+		$receptionLink.hide()
+
+	renderRecepteeTab: ->
+		$recepteeText = @$('.tabs .tab.receptee .text')
+		$recepteeLink = @$('.tabs .tab.receptee .link')
+
 	render: ->
 		@$el.html @template()
 		$queryEditor = @$('.query-editor')
+
+		# Type
 
 		@tabs['type'] = @receptionTypeSelector = new ReceptionTypeSelector
 			el: @$('.select-type')
@@ -137,14 +162,18 @@ class ReceptionSearch extends Backbone.View
 		@listenTo @receptionTypeSelector, 'select', (type) => @selectType type
 		@listenTo @receptionTypeSelector, 'deselect', (type) => @deselectType type
 
+		# Reception (always works)
+
 		@tabs['reception'] = @receptionSelector = new ReceptionSelector
 			el: @$('.select-reception')
 
-		# @sourceQueryBuilder = new SourceQueryBuilder
-		# 	el: @$('.source-query')
-		# 	eventBus: @eventBus
+		@listenTo @receptionSelector, 'change', => @renderReceptionTab()
 
-		# @receptionSelector.render()
-		# @sourceQueryBuilder.render()
-		
+		# Receptee (either work or person, depends on reception types selected)
+
+		@tabs['receptee'] = @recepteeSelector = new RecepteeSelector
+			el: @$('.select-receptee')
+
+		@listenTo @recepteeSelector, 'change', => @renderRecepteeTab()
+
 module.exports = ReceptionSearch
