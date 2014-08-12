@@ -8,6 +8,9 @@ class DocumentSearch extends BaseSearch
 	type: 'wwdocuments'
 	queryOptions:
 		term: '*'
+		facetValues: [
+			{ name: 'dynamic_b_is_source', values: ['false'] }
+		]
 		typeString: config.get 'documentTypeString'
 	resultRows: 25
 	facetTitleMap: config.get 'documentFacetTitles'

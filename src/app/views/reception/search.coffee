@@ -1,7 +1,11 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 
+SearchResults = require 'huygens-faceted-search/src/coffee/collections/searchresults'
+
 config = require '../../config'
+
+receptionNames = require '../../../../config/reception-names.json'
 
 # ReceptionDocumentSearch = require './document-search'
 # ReceptionPersonSearch = require './person-search'
@@ -10,8 +14,9 @@ ReceptionTypeSelector = require './type-selector'
 ReceptionSelector = require './reception-selector'
 RecepteeSelector = require './receptee-selector'
 
-ReceptionSearchResult = require './search-result'
-RelationSearchQueryExecutor = require '../../helpers/relation-search-query-executor'
+ReceptionResultsView = require './results'
+
+ReceptionService = require '../../helpers/reception-service'
 
 # User starts by selecting a reception type, e.g. "biography"
 # doing so, he implicitly determines the type of the receptee:
@@ -42,52 +47,53 @@ class ReceptionSearch extends Backbone.View
 
 		@model = new Backbone.Model
 
-		# @receptionSearchQueryExecutor = new RelationSearchQueryExecutor eventBus: @eventBus 
-		# @eventBus.on 'searchDoneEvent', =>
-		# 	@$el.removeClass 'searching'
-		# 	@$('.query-editor').slideUp()
+		@receptionService = new ReceptionService
 
-		# @eventBus.on('sourceTypeSelectedEvent', () =>
-		# 	@handleSourceTypeSelected()
-		# )
-
-		@tabs = []
+		@tabs = {}
 		@types = []
+		@recepteeType = null
+
+		# Cache/collection for storing our results
+		@searchResults = new SearchResults
+			config:
+				resultRows: 100
+				baseUrl: config.get 'baseUrl'
+				searchPath: config.get 'relationSearchPath'
 
 		# These will contain the search query result ID
 		@receptionSearchId = null
 		@recepteeSearchId = null
 
-		@render()
+		# Type
+		@tabs['type'] = @receptionTypeSelector = new ReceptionTypeSelector
+			
+		# Reception (always a 'work')
+		@tabs['reception'] = @receptionSelector = new ReceptionSelector
+		@listenTo @receptionSelector, 'change', => @renderReceptionTab()
 
-	# selectReceptionOn: (e) ->
-	# 	searchType = e.currentTarget.getAttribute 'data-type'
-	# 	@$('.source .link').text searchType
-	# 	@$('.query').addClass 'reception-on-selected'
-	# editSource: (e) ->
-	# 	@selectTab e
-	# 	@sourceQueryBuilder.show()
-	# 	@receptionQueryBuilder.hide()
-	# handleSourceTypeSelected: () ->
-	# 	@enableSourceEditorLink()
-	# 	@enableSearchButton()
-	# enableSourceEditorLink: () ->
-	# 	@$('.reception-query.relation-type').removeClass('disabled')
-	# enableSearchButton: () ->
-	# 	@$('.search-receptions').removeClass('disabled')
+		# Receptee (either work or person, depends on reception types selected)
+		@tabs['receptee'] = @recepteeSelector = new RecepteeSelector
+		@listenTo @recepteeSelector, 'change', => @renderRecepteeTab()
+
+		@listenTo @receptionTypeSelector, 'change', (selection) =>
+			@changeType selection
+			@recepteeSelector.setType selection.category
+			@renderRecepteeTab()
+
+		@render()
 
 	setTypeSelected: -> @$('.tabs').addClass 'type-selected'
 
-	selectType: (type) ->
-		if @types.indexOf(type) is -1
-			@types.push type
-			@setTypeSelected()
-			@renderTypeTab()
-
-	deselectType: (type) ->
-		idx = @types.indexOf type
-		@types.splice idx, 1
+	changeType: (selection) ->
+		@types = selection.types
+		@setRecepteeType selection.category
+		@setTypeSelected()
 		@renderTypeTab()
+
+	setRecepteeType: (type) ->
+		@recepteeType = type
+		# @recepteeSelector
+		@renderRecepteeTab()
 
 	selectTab: (tab) ->
 		@$('.tabs .tab.selected').removeClass 'selected'
@@ -96,32 +102,39 @@ class ReceptionSearch extends Backbone.View
 		for name, view of @tabs when name isnt tab
 			view.hide()
 
+		@$('.views').removeClass 'slide-up'
 		@tabs[tab].show()
 
-	# search: (e) ->
-	# 	@$el.addClass 'searching'
+	search: (e) ->
+		@$el.addClass 'searching'
+		@$('.views').addClass 'slide-up'
 
-	# 	queryParameters =
-	# 		sourceSearchId: @sourceQueryBuilder.getSearchId()
-	# 		targetSearchId: @receptionQueryBuilder.getSearchId()
-	# 		relationTypeIds: @relationTypeSelector.getSelectedRelationTypeIds()
-	# 		typeString: 'wwrelation'
+		recepteeId = @recepteeSelector.getQueryId()
+		receptionId = @receptionSelector.getQueryId()
+		typeIds = (t.id for t in @types)
+		console.log "Searching", receptionId, recepteeId, typeIds
 
-	# 	result = @receptionSearchQueryExecutor.executeQuery(queryParameters, @receptionSearchResult)
+		query =
+			sourceSearchId: recepteeId
+			targetSearchId: receptionId
+			relationTypeIds: typeIds
+			typeString: 'wwrelation'
 
-	# createEventBus: () ->
-	# 	eventBus = {}
-	# 	_.extend(eventBus, Backbone.Events)
+		@receptionService.search(query).done (data) =>
+			@searchResults.addModel data, JSON.stringify query
+		.fail -> console?.error "Failed searching receptions", arguments
 
 	renderTypeTab: ->
 		$typeText = @$('.tabs .tab.type .text')
 
+		toNiceName = (r) -> receptionNames[r.name]
+
 		if @types.length > 3
-			text = @types[0..2].join ', '
+			text = @types[0..2].map(toNiceName).join ', '
 			text += " <span class=more>and #{@types.length - 3} more</span>"
 			$typeText.html text
 		else
-			$typeText.text @types.join ', '
+			$typeText.text @types.map(toNiceName).join ', '
 		
 		$typeText.show()
 
@@ -136,7 +149,6 @@ class ReceptionSearch extends Backbone.View
 
 		for facet in values
 			name = facetTitles[facet.name] ? facet.name
-			console.log name, facet.values, facet.values.join ', '
 			text += name.toLowerCase()
 			text += 's' if facet.values.length > 1
 			text += ' ' + facet.values.join ', '
@@ -150,30 +162,43 @@ class ReceptionSearch extends Backbone.View
 		$recepteeText = @$('.tabs .tab.receptee .text')
 		$recepteeLink = @$('.tabs .tab.receptee .link')
 
+		if @recepteeType is 'work'
+			facetTitles = config.get 'documentFacetTitles'
+		else
+			facetTitles = config.get 'personFacetTitles'
+
+		values = @recepteeSelector.getValues()
+
+		text  = 'on '
+		text += 'all ' if values.length is 0
+		text += @recepteeType + 's'
+
+		if values.length
+			text += ' with '
+			for facet in values
+				name = facetTitles[facet.name] ? facet.name
+				text += name.toLowerCase()
+				text += ' ' + facet.values.join ', '
+				text += '; '
+
+		$recepteeText.text text
+
+		$recepteeText.text(text).show()
+		$recepteeLink.hide()
+
 	render: ->
 		@$el.html @template()
 		$queryEditor = @$('.query-editor')
 
-		# Type
+		@receptionTypeSelector.setElement @$('.select-type')
+		@receptionTypeSelector.render()
+		@receptionSelector.setElement @$('.select-reception')
+		@receptionSelector.render()
+		@recepteeSelector.setElement @$('.select-receptee')
+		@recepteeSelector.render()
 
-		@tabs['type'] = @receptionTypeSelector = new ReceptionTypeSelector
-			el: @$('.select-type')
-
-		@listenTo @receptionTypeSelector, 'select', (type) => @selectType type
-		@listenTo @receptionTypeSelector, 'deselect', (type) => @deselectType type
-
-		# Reception (always works)
-
-		@tabs['reception'] = @receptionSelector = new ReceptionSelector
-			el: @$('.select-reception')
-
-		@listenTo @receptionSelector, 'change', => @renderReceptionTab()
-
-		# Receptee (either work or person, depends on reception types selected)
-
-		@tabs['receptee'] = @recepteeSelector = new RecepteeSelector
-			el: @$('.select-receptee')
-
-		@listenTo @recepteeSelector, 'change', => @renderRecepteeTab()
+		@resultsView = new ReceptionResultsView
+			collection: @searchResults
+			el: @$('.reception-results')
 
 module.exports = ReceptionSearch

@@ -9,19 +9,42 @@ receptionTypes = {}
 class ReceptionTypeSelector extends Backbone.View
 	template: require '../../../templates/views/reception/type-selector.jade'
 
+	selection:
+		category: null # reception type: work or person
+		types: []
+
 	events:
 		'click li': 'clickType'
 
 	clickType: (e) ->
-		target = $ e.currentTarget
-		type  = target.attr 'data-type'
+		$target = $ e.currentTarget
+		type  = $target.attr 'data-type'
+		
+		$category = $target.closest('.category')
+		category = $category.attr 'data-category'
 
-		target.toggleClass 'selected'
+		if category isnt @selection.category
+			# We've switched categories, so reset all selections
+			@selection.types = []
 
-		if target.hasClass 'selected'
-			@trigger 'select', type
-		else
-			@trigger 'deselect', type
+			# Toggle the active state, to show which reception
+			# type we've selected
+			$category.siblings('.category').removeClass 'active'
+			$category.addClass 'active'
+
+			# clear all selections
+			@$('li').removeClass 'selected'
+			@selection.category = category
+
+		$target.toggleClass 'selected'
+
+		selectedTypes = $category.find('li.selected')
+		@selection.types = selectedTypes.map(->
+			name: @getAttribute 'data-type'
+			id: @getAttribute 'data-type-id'
+		).get()
+
+		@trigger 'change', @selection
 
 	initialize: (@options={}) ->
 		_.extend @, Backbone.Events

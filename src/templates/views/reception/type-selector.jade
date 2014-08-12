@@ -2,18 +2,18 @@
 	| Select the type of reception you wish to search for
 	| by selecting one or more of the options in the list to right
 
-.work
+.category.work(data-category='work')
 	h3 Receptions on works
 
 	ul
 		each type in documentReceptions
-			li(data-type=type.regularName)
+			li(data-type=type.regularName, data-type-id=type.typeId)
 				span.link= type.regularName
 
-.person
+.category.person(data-category='person')
 	h3 Receptions on persons
 
 	ul
 		each type in personReceptions
-			li(data-type=type.regularName)
+			li(data-type=type.regularName, data-type-id=type.typeId)
 				span.link= type.regularName

@@ -19,7 +19,7 @@ class ReceptionSelector extends Backbone.View
 				main: mainReceptionSearchTemplate
 				facets: documentFacetsSearchTemplate
 
-		@facetValues = {}
+		@facetValues = []
 
 		@listenTo @search, 'change:queryoptions', (queryOptions) =>
 			@setValues queryOptions.get 'facetValues'
@@ -28,22 +28,15 @@ class ReceptionSelector extends Backbone.View
 
 		@search.search()
 
-		@render()
-
 	setValues: (values) -> @facetValues = values
 	getValues: -> @facetValues
+
+	getQueryId: ->
+		@search.getSearchResultURL().split('/').pop()
 
 	render: ->
 		@$el.html @template()
 		@$('.search-container').html @search.el
-
-		# @search.render(@$el)
-		# @search.show()
-
-	handleCloseButtonClick: () ->
-		@hide()
-		
-		@$el.trigger('queryBuilderCloseEvent')
 
 	hide: -> @$el.addClass 'hidden'
 	show: -> @$el.removeClass 'hidden'
