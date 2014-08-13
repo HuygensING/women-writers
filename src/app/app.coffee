@@ -23,6 +23,7 @@ DocumentSearchView = require './views/document/search.coffee'
 
 ReceptionSearchView = require './views/reception/search.coffee'
 
+SourceList = require './views/sources/view'
 
 class App extends Backbone.View
 	template: baseTemplate
@@ -96,6 +97,11 @@ class App extends Backbone.View
 			view = new DocumentView model: document
 			@switchView view
 			@showView()
+
+	showSourceList: ->
+		view = new SourceList
+		@switchView view
+		@showView()
 
 	showSearch: ->
 		@$('#search').show()

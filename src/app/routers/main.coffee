@@ -9,6 +9,7 @@ class MainRouter extends Backbone.Router
 		'document(/)':				'showDocumentSearch'
 		'document/:id(/)':		'showDocumentView'
 		'document/:id/edit':	'showDocumentForm'
+		'sources(/)':					'showSourceList'
 		'reception(/)':				'showReceptionSearch'
 		'':										'home'
 
@@ -23,7 +24,7 @@ class MainRouter extends Backbone.Router
 			root: @root
 			pushState: true 
 
-	processRoutes: ->
+	processRoutes: -> # delegate all routes to the controller (app.coffee, in our case)
 		for route, methodName of @routes when methodName of @controller
 			method = _.bind @controller[methodName], @controller
 			@route route, methodName, method
