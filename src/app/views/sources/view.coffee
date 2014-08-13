@@ -19,7 +19,7 @@ class SourceList extends Backbone.View
 
 	scrollToLetter: (letter) ->
 		margin = 100
-		{top} = @$("h2[data-letter=#{letter}]").offset()
+		{top} = @$(".letter[data-letter=#{letter}]").offset()
 		Backbone.$('html, body').animate scrollTop: top - margin
 
 	render: ->
