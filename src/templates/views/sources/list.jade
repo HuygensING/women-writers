@@ -1,0 +1,14 @@
+ul.index
+	each letter in letters
+		li(data-letter=letter)= letter
+
+h1 Source Index
+
+each letter in letters
+	h2(data-letter=letter)= letter
+	ul
+		each source in sources[letter]
+			li
+				a(href=config.documentViewUrl(source.id))= source.title
+				if source.notes
+					.notes= source.notes

@@ -1,0 +1,30 @@
+#view
+	.sources
+		position relative
+		ul
+			list-style none
+			padding 0
+			margin 0
+
+			li
+				margin-bottom 1em
+				.notes
+					font-size .8em
+
+			&.index
+				font-size .8em
+				color mediumGray
+				position absolute
+				left -14em
+				width 14em
+				li
+					float left
+					margin .25em
+					width 2em
+					line-height 2em
+					text-align center
+					&:hover 
+						cursor pointer
+						background-color lightGray
+						border-radius borderRadius
+
