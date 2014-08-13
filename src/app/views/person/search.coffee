@@ -15,7 +15,7 @@ class PersonSearch extends BaseSearch
 		dynamic_k_deathDate: 'Year of Death'
 		dynamic_k_birthDate: 'Year of Birth'
 		dynamic_sort_name: 'Name'
-	textSearchTitle: 'Name'
+	textSearchTitle: 'Search by name'
 	fsTemplates:
 		facets: require '../../../templates/faceted-search/person.jade'
 

@@ -40,21 +40,23 @@
 		.fa-times // for hiding the options menu, but redundant, imho
 			display none
 
-		.cell-1 // match case -- nobody's going to use that
+		.cell-1, // match case -- nobody's going to use that
+		.cell-2 // fuzzy -- likewise? hide until peep
 			display none
-		.row-1 .cell-2
-				display inline-block
-				label
-					cursor pointer
-					border 1px solid transparent
-					border-radius 3px
-					padding .3em
-					font-size .8em
 
-					&:hover
-						border 1px solid rgba(0,0,0,0.1)
-				input
-					display none
+		// .row-1 .cell-2
+		// 		display inline-block
+		// 		label
+		// 			cursor pointer
+		// 			border 1px solid transparent
+		// 			border-radius 3px
+		// 			padding .3em
+		// 			font-size .8em
+
+		// 			&:hover
+		// 				border 1px solid rgba(0,0,0,0.1)
+		// 		input
+		// 			display none
 
 	.facets-menu
 		background-color lightBackgroundColor

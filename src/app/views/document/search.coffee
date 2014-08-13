@@ -20,7 +20,7 @@ class DocumentSearch extends BaseSearch
 	sortableFieldsMap:
 		dynamic_sort_creator: 'Creator'
 		dynamic_sort_title: 'Title'
-	textSearchTitle: 'Title'
+	textSearchTitle: 'Search by title'
 	fsTemplates:
 		facets: require '../../../templates/faceted-search/document.jade'
 
