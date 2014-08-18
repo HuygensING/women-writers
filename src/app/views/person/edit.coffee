@@ -196,11 +196,12 @@ class Person extends Backbone.View
 				}
 				{
 					legend: 'Notes'
+					collapsed: false
 					fields:  ['notes']
 				}
 				{
 					legend: 'Personal situation'
-					collapsed: true
+					collapsed: false
 					fields: [
 						'personalSituation'
 					]
