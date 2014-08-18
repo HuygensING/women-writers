@@ -113,7 +113,7 @@ bootstrap = ->
 	loadedSocialClasses = loadPromise config.socialClassUrl(), 'socialClasses'
 	loadedSourceCategories = loadPromise config.sourceCategoryUrl(), 'sourceCategories'
 
-	$.when(
+	return $.when(
 		loadedRelationTypesPerson,
 		loadedRelationTypesDocument,
 		loadedLanguages,
@@ -128,7 +128,7 @@ bootstrap = ->
 		loadedSocialClasses,
 		loadedSourceCategories,
 		loadedSources
-	)
+	) # so we can call bootstrap().done(...)
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks

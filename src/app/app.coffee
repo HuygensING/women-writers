@@ -84,9 +84,33 @@ class App extends Backbone.View
 	showPersonView: (id, rev) ->
 		person = new Person _id: id
 		person.fetch().done =>
-			view = new PersonView model: person
-			@switchView view
-			@showView()
+			if 'hasPseudonym' of person.get('@relations')
+				# We want to display all the pseudonym-linked
+				# works on the 'real' author page, so we need
+				# to load those, and insert them into the model
+				# before rendering the view. It's a bit of a
+				# hack, but this really should have been done
+				# server-side within the context of the VRE, because
+				# now we have to fetch entire objects, when all we
+				# really want is a list of works linked to each pseudonym
+				person.set pseudonyms: {}
+
+				pseudonymsLoaded = for p in person.get('@relations').hasPseudonym
+					pseudonym = new Person _id: p.id
+					pseudonym.fetch()
+
+				Backbone.$.when(pseudonymsLoaded...).done (results...) =>
+					for r in results
+						[pseudonym] = r
+						pseudonym
+						person.get('pseudonyms')[pseudonym._id] = pseudonym
+					view = new PersonView model: person
+					@switchView view
+					@showView()
+			else
+				view = new PersonView model: person
+				@switchView view
+				@showView()
 
 	showDocumentView: (id, rev) ->
 		opts = _id: id

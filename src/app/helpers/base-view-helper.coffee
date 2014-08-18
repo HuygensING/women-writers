@@ -15,7 +15,7 @@ helpers =
 			group: true
 			map: (value) ->
 				all = for el in (value || [])
-					if config.viewUrl el.id
+					if config.viewUrl el.id # use link if it's a linkable object (PERS/DOCU)
 						linkTemplate
 							link:
 								url: config.viewUrl el.id

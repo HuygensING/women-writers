@@ -4,6 +4,8 @@ BaseView = require '../base-view'
 
 {relationField, namesMap, externalLinksMap} = require '../../helpers/base-view-helper'
 
+linkTemplate = require '../../../templates/views/base-link.jade'
+
 class PersonView extends BaseView
 	className: 'person view'
 	template: require '../../../templates/views/person/view.jade'
@@ -46,7 +48,26 @@ class PersonView extends BaseView
 				'livedIn'
 
 				relationField 'isCreatorOf', 'Created'
+				{
+					title: 'Created by Pseudonyms'
+					field: 'pseudonyms'
+					type: 'Array'
+					group: true
+					map: (value, model) ->
+						pseudoDisplayName = (id) ->
+							all = model.get('@relations')['hasPseudonym']
+							p = _.find all, (ps) -> ps.id is id
+							p.displayName
 
+						for id, pseudonym of value
+							workLinks = for work in (pseudonym['@relations']?['isCreatorOf'] ? [])
+								linkTemplate
+									link:
+										url: config.viewUrl work.id
+										label: work.displayName
+							if workLinks.length
+								'<h5>' + pseudoDisplayName(id) + '</h5>' + workLinks.join("<br>")
+				}
 				{
 					title: 'Notes'
 					field: 'notes'

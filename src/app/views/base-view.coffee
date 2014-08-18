@@ -78,7 +78,7 @@ class BaseView extends Backbone.View
 			matcher = if field.field? then field.field else field
 			store = if field.in? then @model.get(field.in) else @model.attributes
 
-			maybeMap = (v) -> if field.map? then field.map(v) else v
+			maybeMap = (v) => if field.map? then field.map(v, @model) else v
 
 			if _.isRegExp matcher # multiple fields, so go through each one
 				for subfield, val of store
@@ -117,14 +117,14 @@ class BaseView extends Backbone.View
 
 		# if _.isArray(value)
 		# 	value = (field.options.map el for el in value)
-		
+
 		if field.formatNewlines is true
 			value = String(value ? '').replace /\n/g, '<br>'
 
 		data.classes = [ "field-" + slugify data.field ]
 		data.classes.push 'new-line' if data.newLine
 		data.classes.push 'large' if data.large
-		
+
 		noValue = data.value is '' or
 			data.value is undefined or
 			(_.isArray(data.value) and data.value.length is 0) or
@@ -149,6 +149,7 @@ class BaseView extends Backbone.View
 					value: data[field]
 			else
 				field.value = data[field.field]
+				console.log field if field.field.match 'pseudo'
 
 			field.html = @_fieldHtml field
 			fieldset.fields[idx] = field
@@ -190,89 +191,3 @@ class BaseView extends Backbone.View
 		@renderFieldsets()
 
 module.exports = BaseView
-
-
-# else if field.field? and field.field.match /^@[^.]+\./ # @relations.isCreatedBy
-# 	console.log "KEY", key
-# 	if @model.has key
-# 		console.log "HOLA", @model.get key
-		# matching = (f for f in @model.keys() when f.match field )
-# 	[key, relationType, link, label] = field.field.split /[.\/=]/
-
-# 	allNonReceptions = true if relationType is '*'
-
-# 	if allNonReceptions
-# 		for typeName, relationType of @model.get key
-# 			group = []
-# 			if not @isReception typeName
-# 				for r in relationType
-# 					data.fields.push @_fieldHtml _.extend _.pick(data, ['newLine', 'large']),
-# 						title: typeName
-# 						field: typeName
-# 						value: field.options.map r
-# 	else if @model.has(key) and @model.get(key)[relationType]?
-# 		if field.group
-# 			if field.options?.map?
-# 				values = (field.options.map(r) for r in @model.get(key)[relationType])
-# 			else
-# 				values = (r[label] for r in @model.get(key)[relationType])
-
-# 			data.fields.push @fieldTemplate _.extend data,
-# 				title: if field.title? then niceify(field.title) else relationType
-# 				value: values
-# 		else
-# 			for r in @model.get(key)[relationType]
-# 				data.fields.push @fieldTemplate _.extend data,
-# 					title: if field.title? then niceify(field.title) else relationType
-# 					value: r[label]
-
-
-
-	# renderFieldsets: ->
-		# for fieldset in (@fieldsets || [])
-		# 	continue if fieldset.showOnlyWhenLoggedIn and not @user.isLoggedIn()
-		# 	data =
-		# 		config: @config
-		# 		fields: []
-
-		# 	for field in fieldset.fields
-		# 		if _.isRegExp field # multiple fields, so go through each one
-		# 			for f in @model.keys() when f.match field
-		# 				data.fields.push @_fieldHtml _.extend _.clone(field),
-		# 					field: f
-		# 					title: f
-		# 		else if field.field? and field.field.match /^@[^.]+\./ # @relations.isCreatedBy
-		# 			[key, relationType, link, label] = field.field.split /[.\/=]/
-
-		# 			allNonReceptions = true if relationType is '*'
-
-		# 			if allNonReceptions
-		# 				for typeName, relationType of @model.get key
-		# 					group = []
-		# 					if not @isReception typeName
-		# 						for r in relationType
-		# 							data.fields.push @_fieldHtml _.extend _.pick(data, ['newLine', 'large']),
-		# 								title: typeName
-		# 								field: typeName
-		# 								value: field.options.map r
-
-		# 			else if @model.has(key) and @model.get(key)[relationType]?
-		# 				if field.group
-		# 					if field.options?.map?
-		# 						values = (field.options.map(r) for r in @model.get(key)[relationType])
-		# 					else
-		# 						values = (r[label] for r in @model.get(key)[relationType])
-
-		# 					data.fields.push @fieldTemplate _.extend data,
-		# 						title: if field.title? then niceify(field.title) else relationType
-		# 						value: values
-		# 				else
-		# 					for r in @model.get(key)[relationType]
-		# 						data.fields.push @fieldTemplate _.extend data,
-		# 							title: if field.title? then niceify(field.title) else relationType
-		# 							value: r[label]
-		# 		else
-		# 			data.fields.push @_fieldHtml field
-
-		# 	data.title = fieldset.title if fieldset.title
-		# 	@$('.fieldsets').append @fieldsetTemplate data
