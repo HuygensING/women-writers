@@ -102,8 +102,8 @@ class App extends Backbone.View
 				Backbone.$.when(pseudonymsLoaded...).done (results...) =>
 					for r in results
 						[pseudonym] = r
-						pseudonym
-						person.get('pseudonyms')[pseudonym._id] = pseudonym
+						if pseudonym?['@relations']?['isCreatorOf']?.length
+							person.get('pseudonyms')[pseudonym._id] = pseudonym
 					view = new PersonView model: person
 					@switchView view
 					@showView()
