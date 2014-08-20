@@ -16,20 +16,18 @@ class ReceptionSearchResult extends Backbone.View
 	events:
 		'click .next': 'clickNext'
 		'click .prev': 'clickPrev'
+		'click .num-rows li': 'clickNumberOfResultRows'
 	
 	clickNext: -> @collection.moveCursor '_next'
 	clickPrev: -> @collection.moveCursor '_prev'
 
-	# update: (result = {}) ->
-	# 	relIds = {}
-	# 	relIds[relation._id] = relation for relation in result.results
+	# triggers a change listened to by the search service,
+	# which triggers a 'change:results' on the collection,
+	# causing a re-render
+	clickNumberOfResultRows: (e) ->
+		numResults = $(e.currentTarget).attr 'data-result-rows'
+		@trigger 'change:number-of-result-rows', numResults
 
-	# 	@$el.html @template
-	# 		response: result
-	# 		relIds: relIds
-	# 		config: config
-	# 	@parentElement.append(@$el)
-		
 	render: ->
 		response = @collection.current
 		if response?

@@ -1,6 +1,10 @@
 if response
 	span.found= response.numFound + ' receptions found'
 
+	ul.num-rows
+		each num in [50, 100, 250, 500]
+			li(data-result-rows=num)= num
+
 	if response['_prev']
 		p.prev(href=response['_prev']) « Previous
 	if response['_next']

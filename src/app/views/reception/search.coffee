@@ -36,6 +36,8 @@ class ReceptionSearch extends Backbone.View
 	template: require '../../../templates/views/reception/search.jade'
 	className: 'reception-search'
 
+	numRows: 100 # default number of result rows to display
+
 	events:
 		'click .tab.type': -> @selectTab 'type'
 		'click .tab.reception': -> @selectTab 'reception'
@@ -49,6 +51,7 @@ class ReceptionSearch extends Backbone.View
 
 		@receptionService = new ReceptionService
 
+		@query = null
 		@tabs = {}
 		@types = []
 		@recepteeType = null
@@ -114,14 +117,14 @@ class ReceptionSearch extends Backbone.View
 		typeIds = (t.id for t in @types)
 		console.log "Searching", receptionId, recepteeId, typeIds
 
-		query =
+		@query =
 			sourceSearchId: recepteeId
 			targetSearchId: receptionId
 			relationTypeIds: typeIds
 			typeString: 'wwrelation'
 
-		@receptionService.search(query).done (data) =>
-			@searchResults.addModel data, JSON.stringify query
+		@receptionService.search(@query, @numRows).done (data) =>
+			@searchResults.addModel data, JSON.stringify @query
 		.fail -> console?.error "Failed searching receptions", arguments
 
 	renderTypeTab: ->
@@ -200,5 +203,8 @@ class ReceptionSearch extends Backbone.View
 		@resultsView = new ReceptionResultsView
 			collection: @searchResults
 			el: @$('.reception-results')
+		@listenTo @resultsView, 'change:number-of-result-rows', (numRows) =>
+			@receptionService.setResultRows(numRows).done (data) =>
+				@searchResults.addModel data, JSON.stringify @query
 
 module.exports = ReceptionSearch
