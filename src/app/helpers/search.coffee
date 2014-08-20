@@ -59,14 +59,16 @@ searchQuery = (args) ->
 
 	deferred.promise()
 
-simpleSearch = (term, type, limit=500) ->
+simpleSearch = (term, type, limit=500, queryOptions={}) ->
 	escaped = escapeTerm term
+	_.defaults queryOptions,
+		term: "*#{escaped}*"
+		typeString: type
+
 	searchQuery
-		query:
-			term: "*#{escaped}*"
-			typeString: type
+		query: queryOptions
 		options:
-			searchUrl: config.searchUrl()
+			searchUrl: config.searchPath(type + 's')
 			resultRows: limit
 
 escapeTerm = (term) ->

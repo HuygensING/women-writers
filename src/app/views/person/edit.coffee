@@ -14,6 +14,8 @@ StatusIndicator = require '../status'
 DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
 DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
+onlyRealPeople = ['AUTHOR', 'ARCHETYPE', '(empty)']
+
 class Person extends Backbone.View
 	className: 'person-edit'
 	template: require '../../../templates/views/person/edit.jade'
@@ -88,7 +90,7 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasBirthPlace'],
 			title: 'Birth place'
 			options: config.get 'locations'
-			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
+			autocomplete: (value) -> simpleSearch value, 'wwlocation'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
 			placeholderString: 'Location'
@@ -96,7 +98,7 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasDeathPlace'],
 			title: 'Death place'
 			options: config.get 'locations'
-			autocomplete: (value) -> simpleSearch value, 'wwlocation', 200
+			autocomplete: (value) -> simpleSearch value, 'wwlocation'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
 			placeholderString: 'Location'
@@ -134,35 +136,47 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.isMemberOf'],
 			title: 'Memberships'
 			options: config.get 'collectives'
-			autocomplete: (value) -> simpleSearch value, 'wwcollective', 200
+			autocomplete: (value) -> simpleSearch value, 'wwcollective'
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Collective'
 
+		# Assuming collaborations can only be with real people
 		_.extend schema['timbuctoo-relation.isCollaboratorOf'],
 			title: 'Collaborations'
 			options: config.get 'persons'
-			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
+			autocomplete: (value) ->
+				simpleSearch value, 'wwperson', 500,
+					facetValues: [
+						{ name: 'dynamic_s_types', values: onlyRealPeople }
+					]
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Person'
 
 		_.extend schema['timbuctoo-relation.isCreatorOf'],
 			title: 'Is creator of'
 			options: config.get 'documents'
-			autocomplete: (value) -> simpleSearch value, 'wwdocument', 200
+			autocomplete: (value) -> simpleSearch value, 'wwdocument'
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
 			placeholderString: 'Work'
 
 		_.extend schema['timbuctoo-relation.hasPseudonym'],
 			title: 'Has pseudonym'
 			options: config.get 'persons'
-			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
+			autocomplete: (value) ->
+				simpleSearch value, 'wwperson', 500,
+					facetValues: [
+						{ name: 'dynamic_s_types', values: ['PSEUDONYM'] }
+					]
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
 			placeholderString: 'Pseudonym'
 
 		_.extend schema['timbuctoo-relation.isPseudonymOf'],
 			title: 'Is pseudonym of'
 			options: config.get 'persons'
-			autocomplete: (value) -> simpleSearch value, 'wwperson', 200
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 500,
+				facetValues: [
+					{ name: 'dynamic_s_types', values: onlyRealPeople }
+				]
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Person'
 		
