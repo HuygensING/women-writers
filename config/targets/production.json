@@ -28,7 +28,8 @@
     "dynamic_s_deathDate": "Year of Death",
     "dynamic_s_deathplace": "Place of Death",
     "dynamic_s_collective": "Memberships",
-    "dynamic_s_religion": "Religion"
+    "dynamic_s_religion": "Religion",
+    "dynamic_s_types": "Type"
   },
   "documentFacetTitles": {
     "dynamic_s_date": "Year of first publication",
