@@ -16,41 +16,26 @@ class Config extends Backbone.Model
 			@on 'change:authToken', =>
 				window.localStorage.setItem('authToken', @get 'authToken')
 
-	searchUrl: (type) ->
-		@get('baseUrl') + @searchPath(type)
-
+	searchUrl: (type) -> @get('baseUrl') + @searchPath(type)
 	searchPath: (type) ->
 		if type
 			@get('searchPath') + '/' + type
 		else
 			@get('searchPath')
 
-	relationsUrl: ->
-		@get('baseUrl') + '/api/domain/wwrelations'
+	relationsUrl: -> @get('baseUrl') + '/api/domain/wwrelations'
 
-	allPersonsUrl: ->
-		@get('facetedSearchBaseUrl') + @get('personsRootUrl')
+	allPersonsUrl: -> @get('facetedSearchBaseUrl') + @get('personsRootUrl')
+	personUrl: (id) -> @allPersonsUrl() + '/' + id
+	personViewUrl: (id) -> @get('baseUrl') + '/persons/' + id
+	personEditUrl: (id) -> @personViewUrl(id) + '/edit'
 
-	personUrl: (id) ->
-		@allPersonsUrl() + '/' + id
+	allDocumentsUrl: -> @get('facetedSearchBaseUrl') + @get('documentsRootUrl')
+	documentUrl: (id) -> @allDocumentsUrl() + '/' + id
+	documentViewUrl: (id) -> @get('baseUrl') + '/documents/' + id
+	documentEditUrl: (id) -> @documentViewUrl(id) + '/edit'
 
-	personViewUrl: (id) ->
-		@get('baseUrl') + '/person/' + id
-
-	personEditUrl: (id) ->
-		@personViewUrl(id) + '/edit'
-
-	allDocumentsUrl: ->
-		@get('facetedSearchBaseUrl') + @get('documentsRootUrl')
-
-	documentUrl: (id) ->
-		@allDocumentsUrl() + '/' + id
-
-	documentViewUrl: (id) ->
-		@get('baseUrl') + '/document/' + id
-
-	documentEditUrl: (id) ->
-		@documentViewUrl(id) + '/edit'
+	sourceViewUrl: (id) -> @get('baseUrl') + '/sources/' + id
 
 	# Returns view url inferred from ID (PERS/DOC)
 	viewUrl: (id) ->

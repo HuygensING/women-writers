@@ -122,6 +122,8 @@ class App extends Backbone.View
 			@switchView view
 			@showView()
 
+	showSourceView: -> @showDocumentView arguments...
+
 	showSourceList: ->
 		view = new SourceList
 		@switchView view
