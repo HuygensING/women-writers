@@ -27,11 +27,11 @@ class Document extends Backbone.View
 		'hasSourceCategory'
 		'isCreatedBy'
 	]
-	
+
 	events:
 		'click .save': 'save'
 		'click .cancel': 'cancel'
-	
+
 	save: ->
 		status = new StatusIndicator
 
@@ -42,7 +42,9 @@ class Document extends Backbone.View
 			result.error =>
 				status.show().error()
 			result.done =>
-				@model.fetch().done => status.show().success()
+				@model.fetch().done =>
+					status.show().success =>
+						config.router().navigate config.documentViewPath(@model.id), trigger: true
 		else
 			margin = 100
 			{top} = @$('.field.error').first().offset()

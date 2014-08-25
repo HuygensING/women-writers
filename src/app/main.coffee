@@ -152,4 +152,6 @@ $ ->
 
 			mainRouter.on 'route', (route) => app.updateNavBar route
 
+			config.set 'router', mainRouter
+
 			mainRouter.start()

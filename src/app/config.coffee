@@ -27,12 +27,14 @@ class Config extends Backbone.Model
 
 	allPersonsUrl: -> @get('facetedSearchBaseUrl') + @get('personsRootUrl')
 	personUrl: (id) -> @allPersonsUrl() + '/' + id
-	personViewUrl: (id) -> @get('baseUrl') + '/persons/' + id
+	personViewPath: (id) -> '/persons/' + id
+	personViewUrl: (id) -> @get('baseUrl') + @personViewPath id 
 	personEditUrl: (id) -> @personViewUrl(id) + '/edit'
 
 	allDocumentsUrl: -> @get('facetedSearchBaseUrl') + @get('documentsRootUrl')
 	documentUrl: (id) -> @allDocumentsUrl() + '/' + id
-	documentViewUrl: (id) -> @get('baseUrl') + '/documents/' + id
+	documentViewPath: (id) -> '/documents/' + id
+	documentViewUrl: (id) -> @get('baseUrl') + @documentViewPath id
 	documentEditUrl: (id) -> @documentViewUrl(id) + '/edit'
 
 	sourceViewUrl: (id) -> @get('baseUrl') + '/sources/' + id
@@ -83,5 +85,7 @@ class Config extends Backbone.Model
 
 	personReceptions: -> @receptionsFor 'person'
 	documentReceptions: -> @receptionsFor 'document'
+
+	router: -> @get 'router'
 
 module.exports = new Config

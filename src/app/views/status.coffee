@@ -8,12 +8,15 @@ class Status extends Backbone.View
 	template: statusTemplate
 	className: 'status-indicator'
 
+	waitBeforeClose: 500
+
 	events:
 		'click button.btn': 'done'
 
 	initialize: (@options={}) ->
 
 		{@template} = @options if @options.template?
+		{@waitBeforeClose} = @options if @options.waitBeforeClose?
 
 		@render()
 
@@ -26,19 +29,22 @@ class Status extends Backbone.View
 		@setStatus 'error'
 		@show()
 
-	success: (message, wait=500) ->
+	success: (callback) ->
 		@setStatus 'success'
 
 		showStatusWindow = => @show()
 		_.delay showStatusWindow, 250
-		closeStatusWindow = => @done()
-		_.delay closeStatusWindow, 250 + wait
+
+		closeStatusWindow = => @done callback
+		_.delay closeStatusWindow, 250 + @waitBeforeClose
 
 	loading: ->
 		@setStatus 'loading'
 
-	done: (e) ->
-		@$el.fadeOut 150, => @$el.remove()
+	done: (callback) ->
+		@$el.fadeOut 150, =>
+			@$el.remove()
+			callback?()
 
 	show: ->
 		@$el.fadeIn 150
