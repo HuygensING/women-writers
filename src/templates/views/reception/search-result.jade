@@ -21,7 +21,7 @@ if response
 					tr
 						td
 							a(href=config.viewUrl(relIds[ref.id]['^sourceId']))= ref.sourceName
-						td= ref.relationName
+						td= config.receptionTypeLabel(ref.relationName)
 						td
 							a(href=config.viewUrl(relIds[ref.id]['^targetId']))= ref.targetName
 	else

@@ -1,5 +1,7 @@
 Backbone = require 'backbone'
 
+receptionTypeLabels = require '../../config/reception-names.json'
+
 class Config extends Backbone.Model
 	# this file is aliased in Gruntfile to a specific
 	# configuration, such as development, test, or production
@@ -85,6 +87,8 @@ class Config extends Backbone.Model
 
 	personReceptions: -> @receptionsFor 'person'
 	documentReceptions: -> @receptionsFor 'document'
+
+	receptionTypeLabel: (type) -> receptionTypeLabels[type]
 
 	mapGenderOption: (o) ->
 		options =

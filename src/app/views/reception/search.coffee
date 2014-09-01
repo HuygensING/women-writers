@@ -5,8 +5,6 @@ SearchResults = require 'huygens-faceted-search/src/coffee/collections/searchres
 
 config = require '../../config'
 
-receptionNames = require '../../../../config/reception-names.json'
-
 # ReceptionDocumentSearch = require './document-search'
 # ReceptionPersonSearch = require './person-search'
 
@@ -130,7 +128,7 @@ class ReceptionSearch extends Backbone.View
 	renderTypeTab: ->
 		$typeText = @$('.tabs .tab.type .text')
 
-		toNiceName = (r) -> receptionNames[r.name]
+		toNiceName = (r) -> config.receptionTypeLabel r.name
 
 		if @types.length > 3
 			text = @types[0..2].map(toNiceName).join ', '

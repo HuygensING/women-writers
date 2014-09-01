@@ -55,6 +55,7 @@ class ReceptionTypeSelector extends Backbone.View
 
 	render: ->
 		@$el.html @template
+			config: config
 			documentReceptions: config.documentReceptions()
 			personReceptions: config.personReceptions()
 

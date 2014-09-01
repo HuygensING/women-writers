@@ -8,7 +8,7 @@
 	ul
 		each type in documentReceptions
 			li(data-type=type.regularName, data-type-id=type.typeId)
-				span.link= type.regularName
+				span.link= config.receptionTypeLabel(type.regularName)
 
 .category.person(data-category='person')
 	h3 Receptions on persons
@@ -16,4 +16,4 @@
 	ul
 		each type in personReceptions
 			li(data-type=type.regularName, data-type-id=type.typeId)
-				span.link= type.regularName
+				span.link= config.receptionTypeLabel(type.regularName)
