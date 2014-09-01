@@ -86,6 +86,14 @@ class Config extends Backbone.Model
 	personReceptions: -> @receptionsFor 'person'
 	documentReceptions: -> @receptionsFor 'document'
 
+	mapGenderOption: (o) ->
+		options =
+			MALE: 'Male'
+			FEMALE: 'Female'
+			NOT_APPLICABLE: 'Neutral'
+			UNKNOWN: 'Unknown'
+		options[o]
+
 	router: -> @get 'router'
 
 module.exports = new Config

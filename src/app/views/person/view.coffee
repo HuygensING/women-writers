@@ -19,7 +19,11 @@ class PersonView extends BaseView
 					type: 'Array'
 					map: namesMap
 				}
-				'gender'
+				{
+					field: 'gender'
+					title: 'Gender'
+					map: (v) -> config.mapGenderOption v
+				}
 				relationField 'hasPseudonym', 'Pseudonyms'
 				relationField 'isPseudonymOf', 'Is pseudonym of'
 				{

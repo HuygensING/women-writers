@@ -78,6 +78,10 @@ class Person extends Backbone.View
 			]
 			readonly: [ /^temp/	]
 
+		_.extend schema['gender'],
+			options: schema['gender'].options.map (o) -> 
+				val: o, label: config.mapGenderOption o
+
 		for type in @relationTypes
 			relationType = config.get('personRelationTypes')[type]
 
