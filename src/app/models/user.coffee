@@ -25,6 +25,8 @@ class User extends Backbone.Model
 		else
 			false
 
+	checkLoggedIn: -> @fetch login: false
+
 	fetch: (options={}) ->
 		options.headers ?= {}
 		options.returnUrl ?= config.get 'baseUrl'

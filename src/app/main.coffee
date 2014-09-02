@@ -33,7 +33,7 @@ $ ->
 		window.history.replaceState? {}, '', window.location.href.replace /\?.*$/, ''
 
 	loadAppData().done ->
-		user.fetch(login: false).always ->
+		user.checkLoggedIn().always ->
 			startApp = ->
 				# All systems go!
 				app = new App el: 'body'
