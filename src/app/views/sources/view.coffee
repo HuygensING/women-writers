@@ -2,6 +2,8 @@ Backbone = require 'backbone'
 
 config = require '../../config'
 
+{loadSources}  = require '../../helpers/load-app-data'
+
 class SourceList extends Backbone.View
 	template: require '../../../templates/views/sources/list.jade'
 	className: 'sources'
@@ -10,7 +12,11 @@ class SourceList extends Backbone.View
 		'click ul.index li': 'clickLetter'
 
 	initialize: (options={}) ->
-		@render()
+		if not config.get 'sources'
+			@renderWaiting()
+			loadSources().done => @render()
+		else
+			@render()
 
 	clickLetter: (e) ->
 		letter = e.currentTarget.getAttribute 'data-letter'
@@ -21,6 +27,9 @@ class SourceList extends Backbone.View
 		margin = 100
 		{top} = @$(".letter[data-letter=#{letter}]").offset()
 		Backbone.$('html, body').animate scrollTop: top - margin
+
+	renderWaiting: ->
+		@$el.html 'Waiting for sources to load, please stand by'
 
 	render: ->
 		sources = config.get 'sources'
