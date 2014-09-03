@@ -10,13 +10,16 @@ user = require '../models/user'
 
 {searchQuery} = require './search'
 
-module.exports = ->
-	loadedReceptions = new $.Deferred()
+loadedReceptions = ->
+	deferred = new $.Deferred()
 	$.getJSON(config.receptionsUrl()).then (data) ->
 		config.set receptions: data.receptions
-		loadedReceptions.resolve()
+		deferred.resolve()
 
-	loadedSources = new $.Deferred()
+	return deferred
+
+loadedSources = ->
+	deferred = new $.Deferred()
 	searchQuery
 		query:
 			term: '*'
@@ -29,20 +32,26 @@ module.exports = ->
 	.then (data) ->
 		byId = _.groupBy data.results, (r) -> r._id
 		config.set sources: (id: s.id, title: s.displayName, notes: byId[s.id][0].notes for s in data.refs)
-		loadedSources.resolve()
+		deferred.resolve()
 
+	return deferred
 
-	# Fetch a resource, set the given config key with the data (id, label)
-	loadPromise = (url, key) ->
-		promise = new $.Deferred()
-		$.getJSON(url).then (data) ->
-			config.set key, (value: el._id, label: el.value for el in data)
-			promise.resolve()
-		promise
-	loadedSourceCategories = loadPromise config.sourceCategoryUrl(), 'sourceCategories'
+# Fetch a resource, set the given config key with the data (id, label)
+loadPromise = (url, key) ->
+	promise = new $.Deferred()
+	$.getJSON(url).then (data) ->
+		config.set key, (value: el._id, label: el.value for el in data)
+		promise.resolve()
+	promise
 
-	return $.when(
-		loadedReceptions,
-		loadedSources,
-		loadedSourceCategories
-	)
+loadedSourceCategories = ->
+	loadPromise config.sourceCategoryUrl(), 'sourceCategories'
+
+module.exports =
+	loadSources: -> loadedSources()
+	loadAll: ->
+		return $.when(
+			loadedReceptions(),
+			# loadedSources(),
+			loadedSourceCategories()
+		)

@@ -11,7 +11,7 @@ PersonsCollection = require './collections/persons.coffee'
 DocumentsCollection = require './collections/documents.coffee'
 
 loadEditData = require './helpers/load-edit-data'
-loadAppData  = require './helpers/load-app-data'
+loadAppData  = require('./helpers/load-app-data').loadAll
 
 {searchQuery} = require './helpers/search'
 
