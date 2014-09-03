@@ -82,6 +82,7 @@ module.exports = ->
 	loadedProfessions = loadPromise config.professionUrl(), 'professions'
 	loadedReligions = loadPromise config.religionUrl(), 'religions'
 	loadedSocialClasses = loadPromise config.socialClassUrl(), 'socialClasses'
+	loadedGenres = loadPromise config.genreUrl(), 'genres'
 
 	return $.when(
 		loadedRelationTypesPerson,
@@ -94,5 +95,6 @@ module.exports = ->
 		loadedMaritalStatuses,
 		loadedProfessions,
 		loadedReligions,
-		loadedSocialClasses
+		loadedSocialClasses,
+		loadedGenres
 	) # so we can call bootstrap().done(...)

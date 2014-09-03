@@ -23,6 +23,7 @@ class Document extends Backbone.View
 	relationTypes: [
 		'hasDocumentSource'
 		'hasWorkLanguage'
+		'hasGenre'
 		'hasPublishLocation'
 		'hasSourceCategory'
 		'isCreatedBy'
@@ -79,7 +80,6 @@ class Document extends Backbone.View
 		schema['notes'].type = 'TextArea'
 
 		for type in @relationTypes
-		
 			relationType = config.get('documentRelationTypes')[type]
 
 			schema["timbuctoo-relation.#{type}"] =
@@ -93,6 +93,12 @@ class Document extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasWorkLanguage'],
 			title: 'Language'
 			options: config.get 'languages'
+			onlyOne: true
+			relationTypeHelper: new DynamicRelationTypeHelper()
+
+		_.extend schema['timbuctoo-relation.hasGenre'],
+			title: 'Genre'
+			options: config.get('genres') || ['One', 'Two', 'Trhee']
 			onlyOne: true
 			relationTypeHelper: new DynamicRelationTypeHelper()
 
@@ -177,6 +183,7 @@ class Document extends Backbone.View
 					fields: [
 						'tempLanguage'
 						'timbuctoo-relation.hasWorkLanguage'
+						'timbuctoo-relation.hasGenre'
 						'tempOrigin'
 						'timbuctoo-relation.hasPublishLocation'
 						'edition'
