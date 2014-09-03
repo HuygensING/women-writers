@@ -75,6 +75,9 @@ class Config extends Backbone.Model
 	sourceCategoryUrl: ->
 		@get('facetedSearchBaseUrl') + @get('sourceCategoryPath')
 
+	genreUrl: ->
+		@get('facetedSearchBaseUrl') + @get('genrePath')
+
 	userInfoUrl: ->
 		@get('baseUrl') + @get('userInfoPath')
 
