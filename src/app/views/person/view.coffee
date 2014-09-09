@@ -6,6 +6,9 @@ BaseView = require '../base-view'
 
 linkTemplate = require '../../../templates/views/base-link.jade'
 
+ucFirst = (str) ->
+	str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+
 class PersonView extends BaseView
 	className: 'person view'
 	template: require '../../../templates/views/person/view.jade'
@@ -16,6 +19,7 @@ class PersonView extends BaseView
 				{
 					title: 'Type'
 					field: 'types'
+					map: (types) -> types.map (t) -> ucFirst t
 				}
 				{
 					title: 'Names'
@@ -54,7 +58,11 @@ class PersonView extends BaseView
 				relationField 'hasProfession', 'Profession'
 				relationField 'hasReligion', 'Religion'
 				relationField 'hasSocialClass', 'Social class'
-				'children'
+				{
+					field: 'children'
+					title: 'Children'
+					map: (c) -> ucFirst c
+				}
 				'livedIn'
 
 				relationField 'isCreatorOf', 'Created'
