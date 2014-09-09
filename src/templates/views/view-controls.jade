@@ -1,8 +1,13 @@
+if showingRevision
+	p
+		| Showing revision 
+		= data['^rev']
+
 if isDeleted
 	.is-deleted
 		i.fa.fa-warning
 		span This record has been deleted.
-else if canEdit
+else if canEdit && !showingRevision
 	a.edit.btn.green(href=config.editUrl(data._id))
 		i.fa.fa-pencil
 		| Edit
@@ -10,8 +15,10 @@ else if canEdit
 		i.fa.fa-trash-o
 		span.default Delete
 		span.confirm Confirm deletion
-else
+else if data['^rev'] && !data['^pid']
 	button.btn.disabled
 		i.fa.fa-ban
 		| Edit
 	span.processing This record is being processed and can not be edited right now.
+else
+	// Something weird is going on.

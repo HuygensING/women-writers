@@ -1,9 +1,8 @@
-Backbone = require 'backbone'
+BaseModel = require './base'
 
 config = require '../config.coffee'
 
-class Document extends Backbone.Model
-	idAttribute: '_id'
+class Document extends BaseModel
 	urlRoot: config.allDocumentsUrl()
 
 module.exports = Document

@@ -17,7 +17,7 @@ class BaseView extends Backbone.View
 		'click .controls .delete': 'deleteRecord'
 
 	initialize: (options={}) ->
-		{@config, @user} = options
+		{@config, @user, @showingRevision} = options
 
 		@config ?= require '../config'
 		@user ?= require '../models/user'
@@ -179,6 +179,7 @@ class BaseView extends Backbone.View
 			modified: @model.get '^modified'
 			canEdit: hasPid
 			isDeleted: isDeleted
+			showingRevision: @showingRevision
 			config: @config
 			versions: []
 			revisions: []

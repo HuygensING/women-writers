@@ -81,9 +81,9 @@ class App extends Backbone.View
 		@documentSearch?.$el.fadeOut 75
 		@receptionSearch.$el.fadeIn 75
 
-	showPersonView: (id, rev) ->
+	showPersonView: (id, version) ->
 		person = new Person _id: id
-		person.fetch().done =>
+		showPerson = =>
 			if 'hasPseudonym' of person.get('@relations')
 				# We want to display all the pseudonym-linked
 				# works on the 'real' author page, so we need
@@ -104,23 +104,37 @@ class App extends Backbone.View
 						[pseudonym] = r
 						if pseudonym?['@relations']?['isCreatorOf']?.length
 							person.get('pseudonyms')[pseudonym._id] = pseudonym
-					view = new PersonView model: person
+					view = new PersonView
+						model: person
+						showingRevision: version?
 					@switchView view
 					@showView()
 			else
-				view = new PersonView model: person
+				view = new PersonView
+					model: person
+					showingRevision: version?
 				@switchView view
 				@showView()
 
-	showDocumentView: (id, rev) ->
-		opts = _id: id
-		opts['^rev'] = rev if rev?
+		fetchPerson = if version?
+			person.fetchVersion(version)
+		else
+			person.fetch()
+		fetchPerson.done => showPerson()
 
-		document = new Document opts
-		document.fetch().done =>
-			view = new DocumentView model: document
+	showDocumentView: (id, version) ->
+		document = new Document _id: id
+		showDocument = =>
+			view = new DocumentView
+				model: document
+				showingRevision: version?
 			@switchView view
-			@showView()
+
+		fetchDocument = if version?
+			document.fetchVersion(version)
+		else
+			document.fetch()
+		fetchDocument.done => showDocument()
 
 	showSourceView: -> @showDocumentView arguments...
 
