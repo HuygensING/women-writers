@@ -34,6 +34,9 @@ ol.persons
 					.name
 						span.empty-name No name provided
 				.alive
-					span.from= personsById[person.id] ? (personsById[person.id].birthDate || 'unknown') : 'unknown'
+					span.from= person.data.birthDate || 'unknown'
 					| &nbsp;&ndash;&nbsp;
-					span.to= personsById[person.id] ? (personsById[person.id].deathDate || 'unknown') : 'unknown'
+					span.to= person.data.deathDate || 'unknown'
+				// TODO: is this the correct fieldname?
+				if person.data.country
+					.country= person.data.country

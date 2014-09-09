@@ -19,7 +19,7 @@ createFacetedSearch = (searchCfg={}) ->
 			headers:
 				VRE_ID: config.get 'VRE_ID'
 		queryOptions: queryOptions
-		resultRows: resultRows ? config.get 'resultRows'
+		resultRows: config.get 'resultRows'
 		facetTitleMap: facetTitleMap
 		startCollapsed: collapsed
 		textSearchTitle: textSearchTitle
@@ -68,7 +68,7 @@ simpleSearch = (term, type, limit=500, queryOptions={}) ->
 	searchQuery
 		query: queryOptions
 		options:
-			searchUrl: config.searchPath(type + 's')
+			searchUrl: config.searchUrl(type + 's')
 			resultRows: limit
 
 escapeTerm = (term) ->
