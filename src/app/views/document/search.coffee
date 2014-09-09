@@ -15,7 +15,6 @@ class DocumentSearch extends BaseSearch
 			}
 		]
 		typeString: config.get 'documentTypeString'
-	resultRows: 25
 	facetTitleMap: config.get 'documentFacetTitles'
 	sortableFieldsMap:
 		dynamic_sort_creator: 'Creator'
