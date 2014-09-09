@@ -14,10 +14,16 @@ class PersonView extends BaseView
 		{
 			fields: [
 				{
+					title: 'Type'
+					field: 'types'
+				}
+				{
 					title: 'Names'
 					field: 'names'
 					type: 'Array'
-					map: namesMap
+					map: (names) ->
+						names.shift() # remove the first
+						namesMap names
 				}
 				{
 					field: 'gender'
