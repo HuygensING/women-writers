@@ -65,7 +65,7 @@ class PersonView extends BaseView
 				}
 				'livedIn'
 
-				relationField 'isCreatorOf', 'Created'
+				relationField 'isCreatorOf', 'Author of'
 				{
 					title: 'Created by Pseudonyms'
 					field: 'pseudonyms'
