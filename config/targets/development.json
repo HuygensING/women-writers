@@ -20,6 +20,7 @@
   "userInfoPath": "/api/system/users/me",
   "userLoginUrl": "https://secure.huygens.knaw.nl/saml2/login",
   "resultRows": 100,
+  "isProduction": true,
   "personFacetTitles": {
     "dynamic_s_gender": "Gender",
     "dynamic_s_birthDate": "Year of Birth",
