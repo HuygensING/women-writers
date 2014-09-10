@@ -1,5 +1,8 @@
-.container(class=config.get('isProduction') ? 'is-production' : '')
-	span.is-production-text Production
+.container
+	if config.get('isProduction')
+		.is-production-text Production
+	else
+		.is-test-text Test
 	.header.centered
 		a.home(href=config.get('baseUrl'))
 			h1 NEWW Women Writers
