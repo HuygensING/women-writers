@@ -1,4 +1,5 @@
-.container
+.container(class=config.get('isProduction') ? 'is-production' : '')
+	span.is-production-text Production
 	.header.centered
 		a.home(href=config.get('baseUrl'))
 			h1 NEWW Women Writers
