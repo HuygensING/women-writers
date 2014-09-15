@@ -129,12 +129,14 @@ class App extends Backbone.View
 				model: document
 				showingRevision: version?
 			@switchView view
+			@showView()
 
 		fetchDocument = if version?
 			document.fetchVersion(version)
 		else
 			document.fetch()
-		fetchDocument.done => showDocument()
+		fetchDocument.done =>
+			showDocument()
 
 	showSourceView: -> @showDocumentView arguments...
 
