@@ -98,7 +98,7 @@ class Document extends Backbone.View
 
 		_.extend schema['timbuctoo-relation.hasGenre'],
 			title: 'Genre'
-			options: config.get('genres') || ['One', 'Two', 'Trhee']
+			options: config.get 'genres'
 			onlyOne: true
 			relationTypeHelper: new DynamicRelationTypeHelper()
 
@@ -178,7 +178,7 @@ class Document extends Backbone.View
 					]
 				}
 				{
-					legend: 'Secondary information'
+					legend: 'Additional information'
 					collapsed: true
 					fields: [
 						'tempLanguage'
