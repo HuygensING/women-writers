@@ -26,6 +26,7 @@ class Person extends Backbone.View
 		'hasEducation'
 		'hasFinancialSituation'
 		'hasMaritalStatus'
+		'isSpouseOf'
 		'hasPseudonym'
 		'hasProfession'
 		'hasReligion'
@@ -185,7 +186,13 @@ class Person extends Backbone.View
 				]
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Person'
-		
+
+		_.extend schema['timbuctoo-relation.isSpouseOf'],
+			title: 'Is spouse of'
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 500
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			placeholderString: 'Person'
+
 		# customize field type
 		schema.notes.type = 'TextArea'
 		schema.personalSituation.type = 'TextArea'
@@ -247,6 +254,8 @@ class Person extends Backbone.View
 					collapsed: true
 					fields: [
 						'timbuctoo-relation.hasMaritalStatus'
+						'tempSpouse'
+						'timbuctoo-relation.isSpouseOf'
 						'tempChildren'
 						'tempPsChildren'
 						'children'
