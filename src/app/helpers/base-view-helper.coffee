@@ -14,7 +14,7 @@ helpers =
 			type: 'Array'
 			group: true
 			map: (value) ->
-				all = for el in (value || [])
+				all = for el in (value || []) when el.accepted
 					if config.viewUrl el.id # use link if it's a linkable object (PERS/DOCU)
 						linkTemplate
 							link:
