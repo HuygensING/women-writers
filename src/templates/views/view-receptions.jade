@@ -4,7 +4,7 @@
 			ul.receptions
 				each list, reception in receptions
 					li
-						h4= reception
+						h4= config.receptionTypeLabel(reception)
 						ul
 							each r in list
 								li: a(href=config.viewUrl(r.id))= r.displayName
