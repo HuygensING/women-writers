@@ -90,8 +90,7 @@ bottomBorder(clr)
 
 			.query
 				position relative
-
-				line-height 3em
+				// line-height 3em
 				// max-height 3em
 				// overflow hidden
 
@@ -130,25 +129,24 @@ bottomBorder(clr)
 					.tab
 						.text // see below
 							display inline-block
-
 							line-height 1.5em
 						.link
 							display none
 
 				.tab
 					display inline-block
-					padding 5px 0.5em
+					padding 1em 0.5em
 
 					cursor pointer
 
 					max-width 25%
 
 					&:hover
-						padding-bottom 0
+						padding-bottom calc(1em - 5px)
 						bottomBorder(mediumGray)
 
 					&.selected
-						padding-bottom 0
+						padding-bottom calc(1em - 5px)
 						bottomBorder(lightBackgroundEdgeColor)
 
 					// by default all text parts are hidden until a user
@@ -215,17 +213,19 @@ bottomBorder(clr)
 			// General styles
 			.help-text
 				width 20%
-				margin-left -22%
+				margin-left -23%
 				float left
 
 
-			h3
+			.reception-type-header,
+			.reception-criteria-header,
+			.search-criteria-header
 				margin 0
-
-				font-family Raleway, 'Helvetica', sans-serif
 				color darkGray
 
-			.select-type, .select-reception, .select-receptee
+			.select-type,
+			.select-reception,
+			.select-receptee
 				transition opacity .2s ease-out 0s, transform 0.15s ease-out 0s, max-height 0.15s ease-out 0s
 				max-height 9999px
 				opacity 1
@@ -252,16 +252,37 @@ bottomBorder(clr)
 					reset-box-model()
 					li
 						display inline-block
-						margin .2em 0
+						&.selected
+							font-weight bold
+
+						&:before
+							font-family fontAwesome
+							content fontAwesomeCheckmark
+							display inline-block
+							width 1em
+							height 1em
+							position absolute
+							margin-left -1.5em
+							color transparent
+
+						&.selected:before
+							color linkColor
+						&:hover:before
+							color mediumGray
+						&.selected:hover:before
+							content fontAwesomeClose
+
 
 				.category
 					float left
 					transition max-height .15s ease-out, opacity .15s ease-out
 					max-height 9999px
 
-					opacity .4
+					ul
+						opacity .4
 
-					&.active, &:hover
+					&.active ul,
+					&:hover ul
 						opacity 1
 						transition opacity .15s ease-out
 
@@ -279,9 +300,39 @@ bottomBorder(clr)
 				opacity 0.3
 
 		.reception-results
+			position relative
+			.found, .num-rows
+				margin-top 1em
+				display inline-block
+
+			.num-rows
+				absolute right top
+				display inline-block
+
+				span:first-child,
+				li
+					margin-right .4em
+
+				ul
+					display inline-block
+					list-style none
+					margin 0
+					padding 0
+				li
+					display inline-block
+
 			.results-table
 				width 100%
 				border-collapse collapse
+
+				th
+					text-align left
+				.results-type-header
+					width 20%
+
+				.results-title-header,
+				.results-reception-header
+					width 40%
 
 				.results-body
 					counter-reset reception-counter 0
@@ -291,7 +342,6 @@ bottomBorder(clr)
 
 					td
 						vertical-align top
-						padding .6em 1em
 						&:first-child:before
 							results-counter-style(reception-counter)
 							float left

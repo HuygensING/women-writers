@@ -1,19 +1,19 @@
-.help-text
+.help-text.smallest-text
 	| Select the type of reception you wish to search for
 	| by selecting one or more of the options in the list to right
 
 .category.work(data-category='work')
-	h3 Receptions on works
+	h5.reception-type-header.reception-type-header-work Receptions on works
 
-	ul
+	ul.smallest-text
 		each type in documentReceptions
 			li(data-type=type.regularName, data-type-id=type.typeId)
 				span.link= config.receptionTypeLabel(type.regularName)
 
 .category.person(data-category='person')
-	h3 Receptions on persons
+	h5.reception-type-header.reception-type-header-person Receptions on persons
 
-	ul
+	ul.smallest-text
 		each type in personReceptions
 			li(data-type=type.regularName, data-type-id=type.typeId)
 				span.link= config.receptionTypeLabel(type.regularName)

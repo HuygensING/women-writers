@@ -9,15 +9,15 @@ ul, ol
 	padding 0
 	margin 0
 
-h1
-	font-family 'Raleway'
+.header-logo
+	font-family 'Open Sans'
 	font-weight normal
 	color baseColor
 
 a, .link
 	cursor pointer
 	color linkColor
-	font-family bodyFont, sans-serif
+	font-family bodyFont
 	text-decoration none
 	border-bottom 1px dotted linkUnderlineColor
 
@@ -28,7 +28,7 @@ a, .link
 	position	relative
 	logoHeight = 56px
 	logoWidth = 80px
-	h1
+	.header-logo
 		margin 1em 0 1em 0
 		line-height logoHeight
 		background-image url(baseUrl + '/images/nwwlogo.png')
@@ -69,8 +69,8 @@ a, .link
 
 
 		a
-			color black
-			font-family sans-serif
+			color darkGray
+			font-family bodyFont
 			padding 1em .5em
 			padding-bottom calc(1em - 5px)
 
