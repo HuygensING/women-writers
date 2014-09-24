@@ -1,11 +1,15 @@
 Backbone = require 'backbone'
-
-receptionTypeLabels = require '../../config/reception-names.json'
+_ = require 'underscore'
 
 class Config extends Backbone.Model
-	# this file is aliased in Gruntfile to a specific
-	# configuration, such as development, test, or production
-	defaults: require '../../config/targets/development.json'
+	defaults: ->
+		baseConfig = require '../../config/config.json'
+
+		# this file is aliased in Gruntfile to a specific
+		# configuration, such as development, test, or production
+		targetConfig = require '../../config/targets/<target>.json'
+
+		_.extend baseConfig, targetConfig
 
 	initialize: ->
 		try
@@ -91,7 +95,7 @@ class Config extends Backbone.Model
 	personReceptions: -> @receptionsFor 'person'
 	documentReceptions: -> @receptionsFor 'document'
 
-	receptionTypeLabel: (type) -> receptionTypeLabels[type]
+	receptionTypeLabel: (type) -> @get('receptionTypeLabels')[type]
 
 	mapGenderOption: (o) ->
 		options =

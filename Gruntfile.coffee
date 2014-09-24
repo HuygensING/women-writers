@@ -101,7 +101,7 @@ module.exports = (grunt) ->
 				src: 'src/app/main.coffee'
 				dest: "targets/#{target}/main.js"
 				options:
-					alias: ["./config/targets/#{target}.json:../../config/targets/development.json"]	
+					alias: ["./config/targets/#{target}.json:../../config/targets/<target>.json"]	
 
 		rsync:
 			options:
