@@ -73,6 +73,27 @@
 				&:hover
 					color linkColor
 
+				// Some titles are very, very long,
+				// so show an ellipsis instead of
+				// wrapping
+				.title
+					width 100%
+					text-overflow ellipsis
+					white-space nowrap
+					overflow hidden
+
+				.secondary-information
+					.date,
+					.publish-location,
+					.language
+						float right
+
+					.publish-location:after,
+					.language:after
+						content "/"
+						display inline-block
+						margin 0 .4em
+
 			&.is-curated:after
 				size = 6px
 				display block
