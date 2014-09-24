@@ -82,7 +82,7 @@ class Config extends Backbone.Model
 		@get('baseUrl') + @get('userInfoPath')
 
 	receptionsUrl: ->
-		@get('baseUrl') + '/api/system/vres/' + @get('VRE_ID')
+		@get('baseUrl') + @get('receptionsPath') + @get('VRE_ID')
 
 	receptionsFor: (type) ->
 		receptions = @get('receptions')

@@ -15,6 +15,7 @@
   "socialClassPath": "/domain/wwkeywords?type=socialClass",
   "sourceCategoryPath": "/domain/keywords?type=docSourceType",
   "genrePath": "/domain/wwkeywords?type=genre",
+  "receptionsPath": "/api/system/vres/",
   "personTypeString": "wwperson",
   "documentTypeString": "wwdocument",
   "userInfoPath": "/api/system/users/me",
