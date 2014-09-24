@@ -34,8 +34,10 @@ button, .btn
 	color white
 	outline none
 
-	i
-		margin-right .3em
+	i + span
+		margin-left .3em
+	&[data-action] > i + span
+		margin-left 0
 
 	&:hover
 		background-color buttonActiveColor
@@ -65,6 +67,8 @@ button, .btn
 	&.dropdown
 		position relative
 		overflow hidden
+
+		z-index 100
 
 		transition max-height .1s ease-out
 
@@ -309,12 +313,6 @@ button, .btn
 			display block
 			position relative
 
-			.components-title
-				color darkGray
-				padding 0 0 inputVerticalPadding inputHorizontalPadding
-				span
-					font-size .8em
-					font-weight bold
 			.name
 				display inline-block
 				width: 100%
@@ -332,7 +330,9 @@ button, .btn
 
 			&.editing
 				.name
-					border-color transparent
+					border-bottom-left-radius 0
+					border-bottom-right-radius 0
+					border-bottom 1px dotted borderColor
 					&.removable
 						border-color activeBorderColor
 					&:hover
@@ -344,34 +344,64 @@ button, .btn
 					opacity 1
 					transition opacity .05s ease-out
 
-					margin-top inputVerticalPadding
-					margin-left inputHorizontalPadding
-					border-left 5px solid lightGray
-					padding-left inputHorizontalPadding
+					padding inputVerticalPadding inputHorizontalPadding
+
+					border 1px dotted borderColor
+					border-top none
+					border-bottom-left-radius borderRadius
+					border-bottom-right-radius borderRadius
 
 					.timbuctoo-list-item
-						margin-bottom 0
+						margin 0 .5em .5em 0
+						display inline-block
+						max-width 100%
+
+			.person-name-component-editor.removing
+				duration = 5s
+				.component-header
+					.remove-name-component
+						display none
+					opacity 0
+					max-width 0
+					transition opacity .10s ease-out, max-width duration ease-out
+				input
+					padding 0
+					opacity 0
+					transition padding .5s ease-out calc(duration - .05s), opacity .5s ease-out calc(duration - .05s)
+
+				.timbuctoo-list-item
+					max-width 0
+					margin 0
+					transition max-width duration ease-out, margin duration ease-out calc(duration - 0.05s)
 
 			.add-name-component-editor
+				font-size 1em
 				padding inputVerticalPadding inputHorizontalPadding
 				margin inputVerticalPadding 1% 0 0
-				&:hover
-					width 25%
+				width 25%
+
+				span
+					width auto
+					height auto
+					opacity 1
+					margin-left inputHorizontalPadding
 
 		.name-component-editor
 			display inline
-
-			.timbuctoo-list-item
-				margin-bottom .5em
-
-			.type
-				display block
-				box-sizing border-box
-
+			.component-header
+				position relative
+				max-width 100%
 				padding-left inputHorizontalPadding
+				box-sizing border-box
+				font-size 12px
 
-				span
-					font-size 12px
+				.type
+					float left
+				.remove-name-component.link
+					float right
+					border none
+
+				clear both
 
 	.readonly-editor
 		display block
