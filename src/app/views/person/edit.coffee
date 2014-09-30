@@ -152,10 +152,13 @@ class Person extends Backbone.View
 			title: 'Collaborations'
 			options: config.get 'persons'
 			autocomplete: (value) ->
-				simpleSearch value, 'wwperson', 500,
-					facetValues: [
-						{ name: 'dynamic_s_types', values: onlyRealPeople }
-					]
+				simpleSearch value, 'wwperson', 500
+				# TODO: Awaiting bugfix, so temporarily disabled filtering
+				# on real people:
+				#
+				# , facetValues: [
+				# 	{ name: 'dynamic_s_types', values: onlyRealPeople }
+				# ]
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Person'
 
@@ -170,20 +173,24 @@ class Person extends Backbone.View
 			title: 'Has pseudonym'
 			options: config.get 'persons'
 			autocomplete: (value) ->
-				simpleSearch value, 'wwperson', 500,
-					facetValues: [
-						{ name: 'dynamic_s_types', values: ['PSEUDONYM'] }
-					]
+				simpleSearch value, 'wwperson', 500
+				# TODO: Awaiting bugfix 
+				# ,
+				# facetValues: [
+				# 	{ name: 'dynamic_s_types', values: ['PSEUDONYM'] }
+				# ]
 			relationTypeHelper: new DynamicInverseRelationTypeHelper()
 			placeholderString: 'Pseudonym'
 
 		_.extend schema['timbuctoo-relation.isPseudonymOf'],
 			title: 'Is pseudonym of'
 			options: config.get 'persons'
-			autocomplete: (value) -> simpleSearch value, 'wwperson', 500,
-				facetValues: [
-					{ name: 'dynamic_s_types', values: onlyRealPeople }
-				]
+			autocomplete: (value) -> simpleSearch value, 'wwperson', 500
+			# TODO: Awaiting bugfix
+			# ,
+			# facetValues: [
+			# 	{ name: 'dynamic_s_types', values: onlyRealPeople }
+			# ]
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Person'
 
