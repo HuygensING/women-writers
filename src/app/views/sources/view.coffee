@@ -6,7 +6,7 @@ config = require '../../config'
 
 class SourceList extends Backbone.View
 	template: require '../../../templates/views/sources/list.jade'
-	className: 'sources'
+	className: 'sources centered'
 
 	events:
 		'click ul.index li': 'clickLetter'

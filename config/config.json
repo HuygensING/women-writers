@@ -7,6 +7,7 @@
   "documentsRootUrl": "/domain/wwdocuments",
   "VRE_ID": "WomenWriters",
   "relationTypeVariation": "wwrelation",
+  "receptionGraphPath": "/receptiongraph",
   "educationPath": "/domain/wwkeywords?type=education",
   "financialSituationPath": "/domain/wwkeywords?type=financialSituation",
   "maritalStatusPath": "/domain/wwkeywords?type=maritalStatus",

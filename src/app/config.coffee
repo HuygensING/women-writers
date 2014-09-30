@@ -35,6 +35,13 @@ class Config extends Backbone.Model
 	personUrl: (id) -> @allPersonsUrl() + '/' + id
 	personViewPath: (id) -> '/persons/' + id
 	personViewUrl: (id) -> @get('baseUrl') + @personViewPath id 
+
+	personGraphPath: (id) -> "/persons/#{id}/graph"
+	personGraphUrl: (id) -> @get('baseUrl') + @personGraphPath id
+	personGraphDataUrl: (id) ->
+		vreId = @get 'VRE_ID'
+		@get('facetedSearchBaseUrl') + @get('receptionGraphPath') + "?vreId=#{vreId}&personId=#{id}"
+
 	personEditUrl: (id) -> @personViewUrl(id) + '/edit'
 
 	allDocumentsUrl: -> @get('facetedSearchBaseUrl') + @get('documentsRootUrl')

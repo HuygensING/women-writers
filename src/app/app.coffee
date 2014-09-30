@@ -3,25 +3,26 @@ $ = require 'jquery'
 _ = require 'underscore'
 
 baseTemplate = require '../templates/views/base.jade'
-config = require './config.coffee'
+config = require './config'
 
-user = require './models/user.coffee'
+user = require './models/user'
 
-UserStatusView = require './views/user-status.coffee'
+UserStatusView = require './views/user-status'
 
-Person = require './models/person.coffee'
-PersonForm = require './views/person/edit.coffee'
-PersonView = require './views/person/view.coffee'
-PersonOverview = require './views/person/overview.coffee'
-PersonSearchView = require './views/person/search.coffee'	
+Person = require './models/person'
+PersonForm = require './views/person/edit'
+PersonView = require './views/person/view'
+PersonGraphView = require './views/person/graph'
+PersonOverview = require './views/person/overview'
+PersonSearchView = require './views/person/search'	
 
-Document = require './models/document.coffee'
-DocumentForm = require './views/document/edit.coffee'
-DocumentView = require './views/document/view.coffee'
-DocumentOverview = require './views/document/overview.coffee'
-DocumentSearchView = require './views/document/search.coffee'	
+Document = require './models/document'
+DocumentForm = require './views/document/edit'
+DocumentView = require './views/document/view'
+DocumentOverview = require './views/document/overview'
+DocumentSearchView = require './views/document/search'	
 
-ReceptionSearchView = require './views/reception/search.coffee'
+ReceptionSearchView = require './views/reception/search'
 
 SourceList = require './views/sources/view'
 
@@ -121,6 +122,16 @@ class App extends Backbone.View
 		else
 			person.fetch()
 		fetchPerson.done => showPerson()
+
+	showPersonGraph: (id) ->
+		person = new Person _id: id
+		showGraph = =>
+			view = new PersonGraphView
+				model: person
+			@switchView view
+			@showView()
+
+		person.fetch().done => showGraph()
 
 	showDocumentView: (id, version) ->
 		document = new Document _id: id

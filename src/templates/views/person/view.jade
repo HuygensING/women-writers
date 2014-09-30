@@ -1,12 +1,17 @@
-.controls
-	include ../view-controls.jade
+.centered
+	.controls
+		include ../view-controls.jade
 
-h2= data.tempName
+	h2
+		span=data.tempName
+		a.network-popup-link.smaller-text(href=config.personGraphPath(data._id))
+			i.fa.fa-share-alt
+			| Network
 
-//- h4.author= data.tempCreator
+	//- h4.author= data.tempCreator
 
-.fieldsets
+	.fieldsets
 
-include ../view-receptions.jade
+	include ../view-receptions.jade
 
-include ../view-footer.jade
+	include ../view-footer.jade

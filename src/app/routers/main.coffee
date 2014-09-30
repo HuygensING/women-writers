@@ -7,6 +7,7 @@ class MainRouter extends Backbone.Router
 		'persons/:id(/)':           'showPersonView'
 		'persons/:id/:version':     'showPersonView'
 		'persons/:id/edit':         'showPersonForm'
+		'persons/:id/graph':        'showPersonGraph'
 		'documents(/)':             'showDocumentSearch'
 		'documents/:id(/)':         'showDocumentView'
 		'documents/:id/:version':   'showDocumentView'
