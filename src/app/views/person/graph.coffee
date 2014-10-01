@@ -135,7 +135,7 @@ class PersonNetworkGraph extends Backbone.View
 			# .filter((d) -> d.data.gender is 'FEMALE')
 			.attr("r", 6)
 			.attr("class", (d) ->
-				"node " + d.type
+				"node #{d.data.gender.toLowerCase()}"
 			).on('click', (d) ->
 				console.log "Clicking #{d.key}"
 			).call(force.drag)
