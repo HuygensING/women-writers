@@ -1,18 +1,19 @@
-.controls
-	button.btn.save
-		i.fa.fa-check
-		| Save
-	a.btn.gray.cancel(href=config.personViewUrl(person._id))
-		i.fa.fa-times
-		| Cancel
+.centered
+	.controls
+		button.btn.save
+			i.fa.fa-check
+			| Save
+		a.btn.gray.cancel(href=config.personViewUrl(person._id))
+			i.fa.fa-times
+			| Cancel
 
-h1= person.tempName
-.form
+	h1= person.tempName
+	.form
 
-.controls.bottom
-	button.btn.save
-		i.fa.fa-check
-		| Save
-	a.btn.gray.cancel(href=config.personViewUrl(person._id))
-		i.fa.fa-times
-		| Cancel
+	.controls.bottom
+		button.btn.save
+			i.fa.fa-check
+			| Save
+		a.btn.gray.cancel(href=config.personViewUrl(person._id))
+			i.fa.fa-times
+			| Cancel
