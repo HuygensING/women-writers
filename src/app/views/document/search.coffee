@@ -14,6 +14,10 @@ class DocumentSearch extends BaseSearch
 				values: ['false']
 			}
 		]
+		sortParameters: [
+			fieldname: 'dynamic_sort_creator'
+			direction: 'asc'
+		]
 		typeString: config.get 'documentTypeString'
 	facetTitleMap: config.get 'documentFacetTitles'
 	sortableFieldsMap:

@@ -15,6 +15,10 @@ class PersonSearch extends BaseSearch
 				direction: 'asc'
 			}
 		]
+		sortParameters: [
+			fieldname: 'dynamic_sort_name'
+			direction: 'asc'
+		]
 	facetTitleMap: config.get 'personFacetTitles'
 	sortableFieldsMap:
 		dynamic_k_deathDate: 'Year of Death'
