@@ -3,7 +3,10 @@
 		include ../view-controls.jade
 
 	h2
-		span=data.tempName
+		if data.names.length
+			span=componentsToName(data.names[0].components)
+		else
+			span: i= Unnamed
 		a.network-popup-link.smaller-text(href=config.personGraphPath(data._id))
 			i.fa.fa-share-alt
 			| Network

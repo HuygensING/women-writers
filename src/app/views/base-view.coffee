@@ -180,6 +180,7 @@ class BaseView extends Backbone.View
 			canEdit: hasPid
 			isDeleted: isDeleted
 			showingRevision: @showingRevision
+			componentsToName: config.componentsToName
 			config: @config
 			versions: []
 			revisions: []

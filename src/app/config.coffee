@@ -112,6 +112,16 @@ class Config extends Backbone.Model
 			UNKNOWN: 'Unknown'
 		options[o]
 
+	componentsToName: (nameComponents) ->
+		surnames = (c.value for c in nameComponents when c.type is 'SURNAME')
+		rest = (c.value for c in nameComponents when c.type isnt 'SURNAME')
+
+		name = surnames.join " "
+		if rest.length
+			name += ", " + rest.join " "
+
+		name
+
 	router: -> @get 'router'
 
 module.exports = new Config
