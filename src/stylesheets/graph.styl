@@ -2,6 +2,8 @@
 	.title
 		position absolute
 		margin 2em
+		span.name
+			font-weight bold
 
 svg
 	.link
@@ -20,12 +22,25 @@ svg
 	text
 		baseSize = 10px
 		font-size baseSize
-		text-anch
+		pointer-events none
+
 
 		&:hover
-			font-size baseSize * 1.5
-			cursor pointer
+			// font-size baseSize * 1.5
 			transition font-size .2s ease-out
+			cursor pointer
+
+	.text rect
+		fill lightGray
+		stroke mediumGray
+		stroke-width .2px
+		cursor pointer
+	.text:hover
+		rect
+			fill mediumGray
+			stroke darkGray
+		text
+			fill white
 
 	circle
 		cursor pointer

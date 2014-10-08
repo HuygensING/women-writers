@@ -13,6 +13,8 @@ class PersonNetworkGraph extends Backbone.View
 	initialize: (options) ->
 		{@attachTo} = options
 
+		@navigation = []
+
 		@fetchData(@model.id).done (data) => 
 			console.log "DATA", data
 			@render()
@@ -25,14 +27,32 @@ class PersonNetworkGraph extends Backbone.View
 	navigateGraphToPerson: (key) ->
 		[type, id] = key.split '/'
 
-		@fetchData(id).done => @renderGraph()
+		@fetchData(id).done =>
+			person = _.find @graph.nodes(), (n) -> n.key is key
+			@renderTitle person.label
 
-	renderTitle: -> @$('.title').text 'Graph for ' + @model.id
+			unless _.find(@navigation, (n) -> n.key is key)
+				@navigation.push key: key, label: person.label
+				@updateNavigation()
+
+			@renderGraph()
+
+	updateNavigation: ->
+		@$('ul').empty()
+		for n in @navigation
+			li = Backbone.$('li').text(n.label)
+			@$('ul').append(li)
+
+	renderTitle: (name) ->
+		if name?
+			@$('.title .name').text name
+		else
+			@$('.title .name').text config.componentsToName @model.get('names')?[0]?.components
 
 	renderGraph: ->
 		depth = Backbone.$("#depth").val() or "1"
 		width = @$el.outerWidth()
-		height = 600
+		height = 700
 		
 		svg = d3.select('svg')
 			.attr("width", width)
@@ -44,6 +64,9 @@ class PersonNetworkGraph extends Backbone.View
 		# First clear existing content
 		# Per-type markers, as they don't inherit styles.
 		# Use elliptical arc path segments to doubly-encode directionality.
+
+		transform = (d) ->
+			"translate(" + d.x + "," + d.y + ")"
 
 		tick = ->
 			path.attr "d", linkArc
@@ -60,9 +83,6 @@ class PersonNetworkGraph extends Backbone.View
 			dy = d.target.y - d.source.y
 			dr = Math.sqrt(dx * dx + dy * dy) * 2
 			"M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y
-
-		transform = (d) ->
-			"translate(" + d.x + "," + d.y + ")"
 
 		force = d3.layout.force()
 			.nodes(nodes)
@@ -138,39 +158,26 @@ class PersonNetworkGraph extends Backbone.View
 				"node #{d.data.gender.toLowerCase()}"
 			).on('click', (d) ->
 				console.log "Clicking #{d.key}"
-			).call(force.drag)
-
-		# male = svg.append("g")
-		# 	.selectAll("rect")
-		# 	.data(force.nodes())
-		# 	.enter()
-		# 	.append("rect")
-		# 	.filter((d) -> d.data.gender is 'MALE')
-		# 	.attr('width', 12)
-		# 	.attr('height', 12)
-		# 	.attr("class", (d) ->
-		# 		"node " + d.type
-		# 	).on('click', (d) ->
-		# 		console.log "Clicking #{d.key}"
-		# 	).call(force.drag)
-
-		# unknownGender = svg.append('g')
-		# 	.selectAll()
-		# 	.data(force.nodes())
-		# 	.enter()
-		# 	.append()
-		# 	.filter((d) -> d.data.gender not in ['MALE', 'FEMALE'])
-		# 	.attr()
-		# 	.attr('class', 'node')
-		# 	.on('click', (d) -> console.log "Clicking #{d.key}")
-		# 	.call(force.drag)
-
+			) # ).call(force.drag)
 
 		text = svg.append("g")
-			.selectAll("text")
+			.attr('class', 'labels')
+			.selectAll("g.text")
 			.data(force.nodes())
 			.enter()
-			.append("text")
+			.append('g').attr('class', 'text')
+		text.append('rect')
+			.attr('x', 0)
+			.attr('y', -10)
+			.attr('rx', 3).attr('ry', 3)
+			.attr('width', 200)
+			.attr('height', 20)
+			.on('click', (d) =>
+				@navigateGraphToPerson d.key
+			)
+			.call(force.drag)
+			.on("mousedown", -> d3.event.stopPropagation())
+		text.append("text")
 			.attr("x", 8)
 			.attr("y", ".31em")
 			.text((d) ->
@@ -180,6 +187,10 @@ class PersonNetworkGraph extends Backbone.View
 				@navigateGraphToPerson d.key
 				console.log "CLicked", d
 			)
+		text.each (n) ->
+			w = Backbone.$('text', @).outerWidth()
+			Backbone.$('rect', @).attr width: w + 15
+
 
 	render: ->
 		@$el.html @template()
