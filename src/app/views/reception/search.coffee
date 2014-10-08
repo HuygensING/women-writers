@@ -70,18 +70,33 @@ class ReceptionSearch extends Backbone.View
 			
 		# Reception (always a 'work')
 		@tabs['reception'] = @receptionSelector = new ReceptionSelector
-		@listenTo @receptionSelector, 'change', => @renderReceptionTab()
+		@listenTo @receptionSelector, 'change', =>
+			@enableSearchButton()
+			@renderReceptionTab()
 
 		# Receptee (either work or person, depends on reception types selected)
 		@tabs['receptee'] = @recepteeSelector = new RecepteeSelector
-		@listenTo @recepteeSelector, 'change', => @renderRecepteeTab()
+		@listenTo @recepteeSelector, 'change', =>
+			@enableSearchButton()
+			@renderRecepteeTab()
 
 		@listenTo @receptionTypeSelector, 'change', (selection) =>
 			@changeType selection
 			@recepteeSelector.setType selection.category
 			@renderRecepteeTab()
 
+		# TODO: this needs to be a promise; it should only enable
+		# once both have returned results.
+		@listenTo @recepteeSelector, 'change:results', =>
+			@enableSearchButton()
+		@listenTo @receptionSelector, 'change:results', =>
+			@enableSearchButton()
+
 		@render()
+
+	enableSearchButton: ->
+		console.log "Enabling"
+		@$('.btn.search-receptions').attr('disabled', false)
 
 	setTypeSelected: -> @$('.tabs').addClass 'type-selected'
 
@@ -107,13 +122,13 @@ class ReceptionSearch extends Backbone.View
 		@tabs[tab].show()
 
 	search: (e) ->
-		@$el.addClass 'searching'
+		@$el.removeClass 'failed' # if it existed
+		@$el.addClass 'searching' # toggles state change on button
 		@$('.views').addClass 'slide-up'
 
 		recepteeId = @recepteeSelector.getQueryId()
 		receptionId = @receptionSelector.getQueryId()
 		typeIds = (t.id for t in @types)
-		console.log "Searching", receptionId, recepteeId, typeIds
 
 		@query =
 			sourceSearchId: recepteeId
@@ -123,7 +138,12 @@ class ReceptionSearch extends Backbone.View
 
 		@receptionService.search(@query, @numRows).done (data) =>
 			@searchResults.addModel data, JSON.stringify @query
-		.fail -> console?.error "Failed searching receptions", arguments
+			@$el.removeClass 'searching'
+		.fail ->
+			# Need some way to inform users search failed, to try again.
+			@$el.removeClass 'searching'
+			@$el.addClass 'failed'
+			console?.error "Failed searching receptions", arguments
 
 	renderTypeTab: ->
 		$typeText = @$('.tabs .tab.type .text')

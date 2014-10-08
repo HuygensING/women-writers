@@ -168,14 +168,30 @@ bottomBorder(clr)
 							vertical-align middle
 							margin-right -0.25em
 
-						button
-							display inline-block
-							vertical-align middle
-							margin-top -2px
-							width 6em
+		.btn.search-receptions
+			display inline-block
+			vertical-align middle
+			margin-top -2px
+			width 8em
+			transition background-color .15s ease-out, width .15s ease-out
+			.ing
+				display none
+			i
+				margin-right .5em
+			.fa.fa-clock-o
+				opacity 0
+				transition opacity .15s ease-out
 
-						i
-							margin-right .5em
+		&.searching
+			.btn.search-receptions
+				width 9em
+				background-color darkRed
+				transition background-color .15s ease-out, width .15s ease-out
+				.ing
+					display inline
+				.fa.fa-clock-o
+					opacity 1
+					transition opacity .15s ease-out
 
 		// .query-builder
 		// 	background-color lightGray

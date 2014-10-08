@@ -44,6 +44,8 @@ class RecepteeSelector extends Backbone.View
 		@listenTo @search, 'change:queryoptions', (queryOptions) =>
 			@setValues queryOptions.get 'facetValues'
 			@trigger 'change', queryOptions
+		@listenTo @search, 'change:results', =>
+			@trigger 'change:results'
 
 		@search.search()
 	

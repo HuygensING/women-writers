@@ -25,6 +25,8 @@ class ReceptionSelector extends Backbone.View
 			@setValues queryOptions.get 'facetValues'
 			console.log queryOptions
 			@trigger 'change', queryOptions
+		@listenTo @search, 'change:results', =>
+			@trigger 'change:results'
 
 		@search.search()
 
