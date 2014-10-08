@@ -33,7 +33,11 @@
 				right inputTextPadding
 				top 0
 				line-height 2em
-				padding 1em
+				padding .8em
+				cursor pointer
+				color mediumGray
+				&:hover
+					color darkGray
 
 		.fa-times // for hiding the options menu, but redundant, imho
 			display none
@@ -169,7 +173,7 @@
 			background-color lightBackgroundColor
 
 			padding padSize
-			max-height 9999px
+			max-height 300px
 			overflow-y auto
 
 			transition max-height bodyTransition
