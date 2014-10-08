@@ -27,10 +27,10 @@ ol(start=response.start + 1)
 	- each document in response.refs
 		li(class=showCurated(document) ? 'is-curated' : '')
 			a(href=config.documentViewUrl(document.id), title=document.data.title)
-				// if the title is too long for a single line, it will be cut off with an ellipsis
-				.title= document.data.title
 				.secondary-information.smallest-text
 					span.created-by= document.data.createdBy
 					span.date= document.data.date ? document.data.date : 'unknown'
 					span.language= document.data.language
 					span.publish-location= document.data.publishLocation
+				// if the title is too long for a single line, it will be cut off with an ellipsis
+				.title= document.data.title
