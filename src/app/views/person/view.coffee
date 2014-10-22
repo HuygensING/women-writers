@@ -46,6 +46,7 @@ class PersonView extends BaseView
 					field: 'deathDate'
 				}
 				relationField 'hasDeathPlace', 'Place of death'
+				relationField 'hasResidenceLocation', 'Lived in'
 				'nationality'		
 				relationField 'hasPersonLanguage', 'Languages'
 				relationField 'isCollaboratorOf', 'Collaborators'

@@ -23,6 +23,7 @@ class Person extends Backbone.View
 	relationTypes: [
 		'hasBirthPlace'
 		'hasDeathPlace'
+		'hasResidenceLocation'
 		'hasEducation'
 		'hasFinancialSituation'
 		'hasMaritalStatus'
@@ -102,6 +103,13 @@ class Person extends Backbone.View
 			onlyOne: true
 			placeholderString: 'Location'
 			
+		_.extend schema['timbuctoo-relation.hasResidenceLocation'],
+			title: 'Lived in'
+			options: config.get 'locations'
+			autocomplete: (value) -> simpleSearch value, 'wwlocation'
+			relationTypeHelper: new DynamicRelationTypeHelper()
+			placeholderString: 'Location'
+
 		_.extend schema['timbuctoo-relation.hasDeathPlace'],
 			title: 'Death place'
 			options: config.get 'locations'
@@ -249,7 +257,7 @@ class Person extends Backbone.View
 						'tempBirthPlace'
 						'tempPlaceOfBirth'
 						'timbuctoo-relation.hasBirthPlace'
-						'livedIn'
+						'timbuctoo-relation.hasResidenceLocation'
 						'tempDeathPlace'
 						'timbuctoo-relation.hasDeathPlace'
 						'nationality'
