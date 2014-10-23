@@ -50,8 +50,12 @@ Deployment-specific variables are contained in the `config/target/{target}.json`
 
 ### Deploying to production
 
+Releasing to production should only ever be done from the master branch, for easy rolling back.
+
+	$ git checkout master
 	$ grunt deploy --target=production
 
 ### Deploying to test
-
+	
+	$ git checkout test
 	$ grunt deploy --target=test
