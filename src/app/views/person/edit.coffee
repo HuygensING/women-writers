@@ -9,7 +9,7 @@ Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 StatusIndicator = require '../status'
 
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
-{searchQuery, simpleSearch} = require '../../helpers/search'
+{searchQuery, simpleSearch, searchLocation} = require '../../helpers/search'
 
 DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
 DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
@@ -98,7 +98,7 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasBirthPlace'],
 			title: 'Birth place'
 			options: config.get 'locations'
-			autocomplete: (value) -> simpleSearch value, 'wwlocation'
+			autocomplete: (value) -> searchLocation value
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
 			placeholderString: 'Location'
@@ -106,14 +106,14 @@ class Person extends Backbone.View
 		_.extend schema['timbuctoo-relation.hasResidenceLocation'],
 			title: 'Lived in'
 			options: config.get 'locations'
-			autocomplete: (value) -> simpleSearch value, 'wwlocation'
+			autocomplete: (value) -> searchLocation value
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			placeholderString: 'Location'
 
 		_.extend schema['timbuctoo-relation.hasDeathPlace'],
 			title: 'Death place'
 			options: config.get 'locations'
-			autocomplete: (value) -> simpleSearch value, 'wwlocation'
+			autocomplete: (value) -> searchLocation value
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
 			placeholderString: 'Location'

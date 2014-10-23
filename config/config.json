@@ -6,6 +6,7 @@
   "personsRootUrl": "/domain/wwpersons",
   "documentsRootUrl": "/domain/wwdocuments",
   "VRE_ID": "WomenWriters",
+  "adminVreId": "Admin",
   "relationTypeVariation": "wwrelation",
   "receptionGraphPath": "/receptiongraph",
   "educationPath": "/domain/wwkeywords?type=education",

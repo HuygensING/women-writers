@@ -36,7 +36,7 @@ searchQuery = (args) ->
 	{query, options} = args
 
 	deferred = Backbone.$.Deferred()
-
+	console.log "VRE", options.vreId
 	req = Backbone.$.ajax
 		type: 'POST'
 		url: options.searchUrl
@@ -44,7 +44,7 @@ searchQuery = (args) ->
 		dataType: 'text'
 		contentType: 'application/json; charset=utf-8'
 		headers:
-			VRE_ID: config.get 'VRE_ID'
+			VRE_ID: options.vreId || config.get 'VRE_ID'
 
 	req.done (data, textStatus, jqXHR) =>
 		if jqXHR.status is 201
@@ -71,6 +71,19 @@ simpleSearch = (term, type, limit=500, queryOptions={}) ->
 			searchUrl: config.searchUrl(type + 's')
 			resultRows: limit
 
+searchLocation = (term, type='location', limit=500, vreId=config.get 'adminVreId') ->
+	escaped = escapeTerm term
+	queryOptions =
+		term: "*#{escaped}*"
+		typeString: type
+
+	searchQuery
+		query: queryOptions
+		options:
+			searchUrl: config.searchUrl(type + 's')
+			resultRows: limit
+			vreId: vreId
+
 escapeTerm = (term) ->
 	special = '+ - & | ! ( ) { } [ ] ^ " ~ * ? : \ '.split /\s+/
 	escaped = term
@@ -83,5 +96,6 @@ escapeTerm = (term) ->
 module.exports =
 	createFacetedSearch: createFacetedSearch
 	searchQuery: searchQuery
+	searchLocation: searchLocation
 	simpleSearch: simpleSearch
 	escapeTerm: escapeTerm
