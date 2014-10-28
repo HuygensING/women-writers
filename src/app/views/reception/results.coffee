@@ -21,6 +21,10 @@ class ReceptionSearchResult extends Backbone.View
 	clickNext: -> @collection.moveCursor '_next'
 	clickPrev: -> @collection.moveCursor '_prev'
 
+	queryId: ->
+		[..., id] = @collection.postURL?.split '/'
+		id
+
 	# triggers a change listened to by the search service,
 	# which triggers a 'change:results' on the collection,
 	# causing a re-render
@@ -34,8 +38,10 @@ class ReceptionSearchResult extends Backbone.View
 			relIds = {}
 			relIds[relation._id] = relation for relation in response.attributes.results
 
+			# TODO: No longer use response.results
 			@$el.html @template
 				response: response.attributes
+				excelUrl: config.excelResultsUrl(@queryId())
 				config: config
 				relIds: relIds
 	

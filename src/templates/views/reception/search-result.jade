@@ -1,5 +1,8 @@
 if response
 	span.found.smallest-text= response.numFound + ' receptions found'
+	a.link.export-to-excel.smallest-text(href=excelUrl, target="_new")
+		i.fa.fa-table
+		| Export to Excel
 
 	.num-rows.smallest-text
 		span Show
@@ -15,8 +18,9 @@ if response
 	if response.numFound > 0
 		table.results-table.smallest-text
 			thead.results-head
+				// TODO: Fix to no longer use 'results' (relIds)
 				tr
-					th.results-title-header= response.results[0]['^sourceType'] == 'person' ? 'Person' : 'Title'
+					th.results-title-header= response.refs[0]['^sourceType'] ? (response.refs[0]['^sourceType'] == 'person' ? 'Person' : 'Title') : 'FIXME: need source type'
 					th.results-type-header Type
 					th.results-reception-header Reception
 			tbody.results-body(style="counter-reset: reception-counter " + response.start)

@@ -137,6 +137,7 @@ class ReceptionSearch extends Backbone.View
 			typeString: 'wwrelation'
 
 		@receptionService.search(@query, @numRows).done (data) =>
+			@searchResults.postURL = @receptionService.lastSearchUrl
 			@searchResults.addModel data, JSON.stringify @query
 			@$el.removeClass 'searching'
 		.fail ->

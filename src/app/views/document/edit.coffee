@@ -7,7 +7,7 @@ Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
 StatusIndicator = require '../status'
 
-{simpleSearch} = require '../../helpers/search'
+{simpleSearch, searchLocation} = require '../../helpers/search'
 DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
 DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
