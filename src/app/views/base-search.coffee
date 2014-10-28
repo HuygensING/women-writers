@@ -23,7 +23,7 @@ class SearchView extends Backbone.View
 		_.extend @, Backbone.Events
 
 		@type = @options.type ? @type
-		@textSearchTitle = @options.textSearchTitle ? @textSearchTitle
+		@textSearchTitleMap = @options.textSearchTitleMap ? @textSearchTitleMap
 		@queryOptions = @options.queryOptions ? @queryOptions
 		@facets = @options.facets ? @facets
 		@facetTitleMap = @options.facetTitleMap ? @facetTitleMap
@@ -36,7 +36,7 @@ class SearchView extends Backbone.View
 			queryOptions: @queryOptions
 			facets: @facets
 			facetTitleMap: @facetTitleMap
-			textSearchTitle: @textSearchTitle
+			textSearchTitleMap: @textSearchTitleMap
 			collapsed: @startCollapsed
 			templates: @fsTemplates
 

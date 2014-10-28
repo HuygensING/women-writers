@@ -24,6 +24,12 @@
   "userLoginUrl": "https://secure.huygens.knaw.nl/saml2/login",
   "resultRows": 100,
   "isProduction": false,
+  "textSearchTitles": {
+    "dynamic_t_tempspouse": "Spouse",
+    "dynamic_t_name": "Name",
+    "dynamic_t_title": "Title",
+    "dynamic_t_notes": "Notes"
+  },
   "personFacetTitles": {
     "dynamic_s_gender": "Gender",
     "dynamic_s_birthDate": "Year of Birth",

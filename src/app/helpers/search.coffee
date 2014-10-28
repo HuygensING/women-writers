@@ -8,7 +8,7 @@ config = require '../config'
 facetPlaceholderList = (facets) -> ("<div class='#{f}-placeholder'></div>" for f in facets)
 
 createFacetedSearch = (searchCfg={}) ->
-	{queryOptions, facetTitleMap, textSearchTitle, resultRows, collapsed, templates} = searchCfg
+	{queryOptions, facetTitleMap, textSearchTitleMap, resultRows, collapsed, templates} = searchCfg
 
 	collapsed ?= true
 
@@ -22,7 +22,7 @@ createFacetedSearch = (searchCfg={}) ->
 		resultRows: config.get 'resultRows'
 		facetTitleMap: facetTitleMap
 		startCollapsed: collapsed
-		textSearchTitle: textSearchTitle
+		textSearchTitleMap: textSearchTitleMap
 		autoSearch: true
 		templates:
 			main: facetedSearchMainTemplate

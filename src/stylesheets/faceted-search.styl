@@ -23,6 +23,30 @@
 
 		position relative
 		padding padSize
+
+		h3
+			margin 0
+			padding 3%
+
+		h4
+			margin 0
+			padding 0 3%
+
+		button.search
+			// a bit of a hackish way of positioning,
+			// but in a rush, sorry Gijs :<
+			display inline-block
+			float right
+			margin-top: -2.5em
+
+			background-color transparent
+			color darkGray
+			border-color lightGray
+
+			&:hover, &.changed
+				background-color baseColor
+				color white
+
 		.search-input
 			input
 				width 100%
