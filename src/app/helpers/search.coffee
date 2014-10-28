@@ -36,7 +36,6 @@ searchQuery = (args) ->
 	{query, options} = args
 
 	deferred = Backbone.$.Deferred()
-	console.log "VRE", options.vreId
 	req = Backbone.$.ajax
 		type: 'POST'
 		url: options.searchUrl

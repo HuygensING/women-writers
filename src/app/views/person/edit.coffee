@@ -158,7 +158,6 @@ class Person extends Backbone.View
 		# Assuming collaborations can only be with real people
 		_.extend schema['timbuctoo-relation.isCollaboratorOf'],
 			title: 'Collaborations'
-			options: config.get 'persons'
 			autocomplete: (value) ->
 				simpleSearch value, 'wwperson', 500
 				# TODO: Awaiting bugfix, so temporarily disabled filtering
@@ -179,7 +178,6 @@ class Person extends Backbone.View
 
 		_.extend schema['timbuctoo-relation.hasPseudonym'],
 			title: 'Has pseudonym'
-			options: config.get 'persons'
 			autocomplete: (value) ->
 				simpleSearch value, 'wwperson', 500
 				# TODO: Awaiting bugfix 
@@ -192,7 +190,6 @@ class Person extends Backbone.View
 
 		_.extend schema['timbuctoo-relation.isPseudonymOf'],
 			title: 'Is pseudonym of'
-			options: config.get 'persons'
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 500
 			# TODO: Awaiting bugfix
 			# ,

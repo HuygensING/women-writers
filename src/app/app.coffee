@@ -13,13 +13,11 @@ Person = require './models/person'
 PersonForm = require './views/person/edit'
 PersonView = require './views/person/view'
 PersonGraphView = require './views/person/graph'
-PersonOverview = require './views/person/overview'
 PersonSearchView = require './views/person/search'	
 
 Document = require './models/document'
 DocumentForm = require './views/document/edit'
 DocumentView = require './views/document/view'
-DocumentOverview = require './views/document/overview'
 DocumentSearchView = require './views/document/search'	
 
 ReceptionSearchView = require './views/reception/search'

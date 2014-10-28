@@ -104,7 +104,7 @@ class Document extends Backbone.View
 
 		_.extend schema['timbuctoo-relation.hasPublishLocation'],
 			title: 'Publish location'
-			options: config.get 'locations'
+			autocomplete: (value) -> searchLocation value
 			onlyOne: true
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			
@@ -123,7 +123,6 @@ class Document extends Backbone.View
 
 		_.extend schema['timbuctoo-relation.isCreatedBy'],
 			title: 'Creator'
-			options: config.get 'persons'
 			onlyOne: false
 			autocomplete: (value) -> simpleSearch value, 'wwperson', 5000
 			relationTypeHelper: new DynamicRelationTypeHelper()

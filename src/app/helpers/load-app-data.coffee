@@ -30,6 +30,7 @@ loadedSources = ->
 			searchUrl: config.searchUrl('wwdocuments')
 			resultRows: 5000 # 311 sources at time of writing, not likely to grow substantially
 	.then (data) ->
+		# TODO: .results will be removed (October 28 2014), we needs id in refs to group
 		byId = _.groupBy data.results, (r) -> r._id
 		config.set sources: (id: s.id, title: s.displayName, notes: byId[s.id][0].notes for s in data.refs)
 		deferred.resolve()

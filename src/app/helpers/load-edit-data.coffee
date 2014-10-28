@@ -46,28 +46,6 @@ module.exports = ->
 		config.set languages: languages
 		loadedLanguages.resolve()
 
-	loadedLocations = new $.Deferred()
-	searchQuery
-		query:
-			term: '*'
-		options:
-			searchUrl: config.searchUrl('wwlocations')
-			resultRows: 1000
-	.then (data) ->
-		config.set locations: (value: l.id, label: l.displayName for l in data.refs)
-		loadedLocations.resolve()
-
-	loadedPersons = new $.Deferred()
-	searchQuery
-		query:
-			term: '*'
-		options:
-			searchUrl: config.searchUrl('wwpersons')
-			resultRows: 100
-	.then (data) ->
-		config.set persons: (value: p.id, label: p.displayName for p in data.refs)
-		loadedPersons.resolve()
-
 	# Fetch a resource, set the given config key with the data (id, label)
 	loadPromise = (url, key) ->
 		promise = new $.Deferred()
@@ -88,8 +66,6 @@ module.exports = ->
 		loadedRelationTypesPerson,
 		loadedRelationTypesDocument,
 		loadedLanguages,
-		loadedLocations,
-		loadedPersons,
 		loadedEducations,
 		loadedFinancialSituations,
 		loadedMaritalStatuses,
