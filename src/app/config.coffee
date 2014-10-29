@@ -56,7 +56,7 @@ class Config extends Backbone.Model
 	sourceViewUrl: (id) -> @get('baseUrl') + '/sources/' + id
 
 	# Returns view url inferred from ID (PERS/DOC)
-	viewUrl: (id) ->
+	viewUrl: (id='') ->
 		if id.match /^DOC/
 			@documentViewUrl id
 		else if id.match /^PERS/

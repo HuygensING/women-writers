@@ -2,6 +2,9 @@
 	.controls
 		include ../view-controls.jade
 
+	.results-paging
+		include ../view-paging.jade
+
 	h2
 		if data.names.length
 			span=componentsToName(data.names[0].components)

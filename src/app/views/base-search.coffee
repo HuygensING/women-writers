@@ -41,6 +41,7 @@ class SearchView extends Backbone.View
 			templates: @fsTemplates
 
 		@listenTo @search, 'change:results', (results) =>
+			config.set currentResultIds: results.get 'ids'
 			@renderResults results
 
 	nextResults: ->

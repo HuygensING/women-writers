@@ -174,6 +174,15 @@ class BaseView extends Backbone.View
 		isDeleted = @model.get '^deleted'
 		canEdit = hasPid and not isDeleted
 
+		# Show current position of document/person in result set
+		resultIds = @config.get('currentResultIds') or []
+		resultIndex = resultIds.indexOf @model.id
+		if resultIndex > -1
+			prevIdx = resultIndex - 1 if resultIndex - 1 >= 0
+			prevId  = resultIds[prevIdx] if prevIdx > -1
+			nextIdx = resultIndex + 1 if resultIndex + 1 < resultIds.length
+			nextId  = resultIds[nextIdx] if nextIdx
+
 		@$el.html @template
 			data: @model.attributes
 			modified: @model.get '^modified'
@@ -182,6 +191,10 @@ class BaseView extends Backbone.View
 			showingRevision: @showingRevision
 			componentsToName: @config.componentsToName
 			config: @config
+			nextId: nextId
+			prevId: prevId
+			resultIndex: resultIndex + 1 # only for display purposes
+			resultTotal: resultIds.length
 			versions: []
 			revisions: []
 			receptions: @getReceptions()
