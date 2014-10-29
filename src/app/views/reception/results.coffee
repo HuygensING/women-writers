@@ -42,6 +42,11 @@ class ReceptionSearchResult extends Backbone.View
 			@$el.html @template
 				response: response.attributes
 				excelUrl: config.excelResultsUrl(@queryId())
+				shortenTitle: (title, len) ->
+					if String(title).length > len
+						String(title).substring(0, len) + "…"
+					else 
+						title
 				config: config
 				relIds: relIds
 	

@@ -18,18 +18,42 @@ if response
 	if response.numFound > 0
 		table.results-table.smallest-text
 			thead.results-head
-				// TODO: Fix to no longer use 'results' (relIds)
+				// TODO: Fix to no longer use 'results' (relIds), but for that to happen,
+				// refs needs to include the source and target ids
+				- var isPerson = response.refs[0].sourceData.hasOwnProperty('birthDate');
 				tr
-					th.results-title-header= response.refs[0]['^sourceType'] ? (response.refs[0]['^sourceType'] == 'person' ? 'Person' : 'Title') : 'FIXME: need source type'
+					th.results-title-header= isPerson ? 'Person' : 'Document'
 					th.results-type-header Type
 					th.results-reception-header Reception
 			tbody.results-body(style="counter-reset: reception-counter " + response.start)
 				each ref in response.refs
 					tr
-						td
-							a(href=config.viewUrl(relIds[ref.id]['^sourceId']))= ref.sourceName
+						td.source
+							a(href=config.viewUrl(relIds[ref.id]['^sourceId']))
+								// this should be easier to check in future when source and target data have id
+								if isPerson
+									=shortenTitle(ref.sourceData.name, 55)
+								else
+									=shortenTitle(ref.sourceData.title, 55)
+							.secondary-information.smallest-text
+								if isPerson
+									span.lived= ref.sourceData.birthDate
+									span.death-date= ref.sourceData.deathDate
+									span.gender= ref.sourceData.gender
+									span.location=ref.sourceData.residenceLocation
+								else
+									.created-by= ref.sourceData.createdBy
+									span.publish-location= ref.sourceData.publishLocation
+									span.language= ref.sourceData.language
+
 						td= config.receptionTypeLabel(ref.relationName)
-						td
-							a(href=config.viewUrl(relIds[ref.id]['^targetId']))= ref.targetName
+						td.reception
+							a.reception-title(href=config.viewUrl(relIds[ref.id]['^targetId']), title=ref.targetData.title)= shortenTitle(ref.targetData.title, 55)
+							.secondary-information.smallest-text
+								// on its own line, because often too long
+								.created-by(title=ref.targetData.createdBy)= ref.targetData.createdBy
+								span.date= ref.targetData.date
+								span.gender= ref.targetData.gender
+								span.published-in(title=ref.targetData.publishLocation)= ref.targetData.publishLocation
 	else
 		p No results found
