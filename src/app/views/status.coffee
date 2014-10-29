@@ -20,13 +20,18 @@ class Status extends Backbone.View
 
 		@render()
 
-	setStatus: (status) ->
+	setStatus: (status, errorMessage='') ->
+		if status is 'error'
+			@$('.error-message').text(errorMessage).show()
+		else
+			@$('.error-message').hide()
+
 		for cls in @$el.attr('class').split /\s+/ when cls.match /^status-(?!indicator)/
 			@$el.removeClass cls
 		@$el.addClass "status-#{status}"
 
 	error: (message) ->
-		@setStatus 'error'
+		@setStatus 'error', message
 		@show()
 
 	success: (callback) ->
@@ -55,7 +60,8 @@ class Status extends Backbone.View
 		@
 
 	render: ->
-		@$el.html @template()
+		@$el.html @template
+			error: @error
 		@$el.hide()
 		$('body').append @el
 

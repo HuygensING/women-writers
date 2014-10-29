@@ -149,7 +149,6 @@ class BaseView extends Backbone.View
 					value: data[field]
 			else
 				field.value = data[field.field]
-				console.log field if field.field.match 'pseudo'
 
 			field.html = @_fieldHtml field
 			fieldset.fields[idx] = field

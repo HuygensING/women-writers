@@ -92,10 +92,20 @@ class ReceptionSearch extends Backbone.View
 		@listenTo @receptionSelector, 'change:results', =>
 			@enableSearchButton()
 
+		# recepteeLoaded = new Backbone.$.Deferred()
+		# receptionLoaded = new Backbone.$.Deferred()
+
+		# Backbone.$.when(recepteeLoaded, receptionLoaded).done =>
+		# 	@enableSearchButton
+
+		# @listenTo @recepteeSelector, 'change:results', =>
+		# 	recepteeLoaded.resolve()
+		# @listenTo @receptionSelector, 'change:results', =>
+		# 	receptionLoaded.resolve()
+
 		@render()
 
 	enableSearchButton: ->
-		console.log "Enabling"
 		@$('.btn.search-receptions').attr('disabled', false)
 
 	setTypeSelected: -> @$('.tabs').addClass 'type-selected'

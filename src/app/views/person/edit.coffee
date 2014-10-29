@@ -54,8 +54,13 @@ class Person extends Backbone.View
 
 		if not errors?
 			status.show().loading()
-			result.error =>
-				status.show().error()
+			result.error (rsp, data) =>
+				try
+					errorMessage = JSON.parse(rsp.responseText).message
+				catch e
+					errorMessage = rsp.status
+				console.log errorMessage
+				status.show().error(errorMessage)
 			result.done =>
 				@model.fetch().done =>
 					status.show().success =>
