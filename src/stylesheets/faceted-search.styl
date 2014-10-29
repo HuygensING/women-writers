@@ -8,6 +8,12 @@
 	// width 100%
 	// height 100%
 
+body.logged-in
+	.faceted-search
+		.text-search
+			.search-input[data-name=dynamic_t_notes]
+				display block // only shown when logged in, see below for override
+
 .faceted-search
 	position relative
 
@@ -31,6 +37,9 @@
 		h4
 			margin 0
 			padding 0 3%
+
+		.search-input[data-name=dynamic_t_notes]
+			display none
 
 		button.search
 			// a bit of a hackish way of positioning,

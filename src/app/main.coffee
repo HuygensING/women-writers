@@ -57,5 +57,6 @@ $ ->
 			# forms with. See helpers/loadEditData.coffee
 			if user.isLoggedIn() and user.isVerified()
 				loadEditData().done -> startApp()
+				$('body').addClass 'logged-in'
 			else # if not, we don't need to load any of the extra data
 				startApp()
