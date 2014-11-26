@@ -93,6 +93,7 @@ module.exports = (grunt) ->
 				]
 				dest: "targets/#{target}/main.css"
 
+
 		browserify:
 			options:
 				transform: ['coffeeify', 'jadeify', 'browserify-data']
@@ -101,7 +102,30 @@ module.exports = (grunt) ->
 				src: 'src/app/main.coffee'
 				dest: "targets/#{target}/main.js"
 				options:
-					alias: ["./config/targets/#{target}.json:../../config/targets/development.json"]	
+					external: [
+						'./node_modules/jquery/dist/jquery'
+						'./node_modules/backbone/backbone'
+						'./node_modules/underscore/underscore'
+					]
+					alias: [
+						"./config/targets/#{target}.json:../../config/targets/development.json"
+						'jquery:./node_modules/jquery/dist/jquery'
+						'backbone:./node_modules/backbone/backbone'
+						'underscore:./node_modules/underscore/underscore'
+					]	
+			libs:
+				src: [
+					'./node_modules/jquery/dist/jquery'
+					'./node_modules/backbone/backbone'
+					'./node_modules/underscore/underscore'
+				],
+				dest: "targets/#{target}/libs.js"
+				options:
+					require:[
+						'./node_modules/jquery/dist/jquery'
+						'./node_modules/backbone/backbone'
+						'./node_modules/underscore/underscore'
+					]
 
 		rsync:
 			options:
@@ -171,6 +195,6 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'deploy', ['build', 'rsync:deploy']
 	
-	grunt.registerTask 'server',      ['build', 'express',         'watch']
-	grunt.registerTask 'server:only',	['express', 'watch']
+	grunt.registerTask 'server',      ['build', 'express', 'watch']
 	grunt.registerTask 'server:open', ['build', 'express', 'open', 'watch']
+	grunt.registerTask 'server:only',	['express', 'watch']

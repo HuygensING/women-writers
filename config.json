@@ -1,0 +1,14 @@
+{
+	"remote-destination": "",
+	"local-modules": [
+		"huygens-faceted-search",
+		"timbuctoo-forms",
+		"hibb-modal"
+	],
+	"css-files": [
+		"./compiled/css/src.css",
+		"./node_modules/huygens-faceted-search/dist/main.css",
+		"./node_modules/hi-backbone-login/dist/main.css",
+		"./node_modules/huygens-backbone-pagination/dist/main.css"
+	]
+}
