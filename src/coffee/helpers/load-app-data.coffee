@@ -42,6 +42,7 @@ loadPromise = (url, key) ->
 	$.getJSON(url).then (data) ->
 		config.set key, (value: el._id, label: el.value for el in data)
 		promise.resolve()
+
 	promise
 
 loadedSourceCategories = ->

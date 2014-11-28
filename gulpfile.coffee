@@ -1,13 +1,14 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 rename = require 'gulp-rename'
+uglify = require 'gulp-uglify'
+stylus = require 'gulp-stylus'
+jade = require 'gulp-jade'
+concat = require 'gulp-concat'
 streamify = require 'streamify'
 browserify = require 'browserify'
 watchify = require 'watchify'
 source = require 'vinyl-source-stream'
-uglify = require 'gulp-uglify'
-stylus = require 'gulp-stylus'
-jade = require 'gulp-jade'
 extend = require 'extend'
 nib = require 'nib'
 async = require 'async'
@@ -21,10 +22,12 @@ modRewrite = require 'connect-modrewrite'
 proxy = require 'proxy-middleware'
 url = require 'url'
 
+link = require('gulp-task-link')(gulp, cfg['local-modules'])
+
 devDir = './compiled'
 prodDir = './dist'
 
-gulp.task 'server', ['watch', 'watchify', 'stylus', 'jade', 'copy-static'], ->
+gulp.task 'server', ['watch', 'watchify', 'stylus', 'concat-libs-css', 'jade', 'copy-static'], ->
 	# proxyOptions = url.parse('http://localhost:3000')
 	# proxyOptions.route = '/api'
 
@@ -38,31 +41,6 @@ gulp.task 'server', ['watch', 'watchify', 'stylus', 'jade', 'copy-static'], ->
 				])
 			]
 
-gulp.task 'link', (done) ->
-	removeModules = (cb) ->
-		modulePaths = cfg['local-modules'].map (module) -> "./node_modules/#{module}"
-		async.each modulePaths , rimraf, (err) -> cb()
-
-	linkModules = (cb) ->
-		moduleCommands = cfg['local-modules'].map (module) -> "npm link #{module}"
-		async.each moduleCommands, exec, (err) -> cb()
-
-	async.series [removeModules, linkModules], (err) ->
-		return gutil.log err if err?
-		done()
-
-gulp.task 'unlink', (done) ->
-	unlinkModules = (cb) ->
-		moduleCommands = cfg['local-modules'].map (module) -> "npm unlink #{module}"
-		async.each moduleCommands, exec, (err) -> cb()
-
-	installModules = (cb) ->
-		exec 'npm i', cb
-
-	async.series [unlinkModules, installModules], (err) ->
-		return gutil.log err if err?
-		done()
-
 gulp.task 'stylus', ->
 	gulp.src('./src/stylus/main.styl')
 		.pipe(stylus(
@@ -70,7 +48,20 @@ gulp.task 'stylus', ->
 			errors: true
 		))
 		.pipe(gulp.dest("#{devDir}/css"))
-		# .pipe(gutil.log('Created CSS'))
+
+gulp.task 'concat-libs-css', ->
+	gulp.src(cfg['css-files'])
+		.pipe(concat("libs.css"))
+		.pipe(gulp.dest("#{devDir}/css"))
+		.pipe(reload(stream: true))
+# 		.pipe(minifyCss())
+# 		.pipe(rename(extname:'.min.css'))
+# 		.pipe(gulp.dest(prodDir))
+
+# gulp.task 'minify-css', ->
+# 	gulp.src(devDir+'/css/main.css')
+# 		.pipe(minifyCss())
+# 		.pipe(gulp.dest(prodDir+'/css'))
 
 gulp.task 'jade', ->
 	gulp.src('./src/index.jade')
@@ -101,6 +92,7 @@ createBundle = (watch=false) ->
 			.on('error', ((err) -> gutil.log("Bundling error ::: "+err)))
 			.pipe(source("src.js"))
 			.pipe(gulp.dest("#{devDir}/js"))
+			.pipe(reload(stream: true, once: true))
 
 	bundler = browserify args
 	if watch
@@ -138,6 +130,7 @@ gulp.task 'browserify-libs', ->
 		.pipe(gulp.dest("#{devDir}/js"))
 
 gulp.task 'watch', ['watchify'], ->
+	gulp.watch cfg['css-files'], ['concat-libs-css']
 	gulp.watch ['./src/stylus/main.styl'], ['stylus']
 	gulp.watch ['./src/index.jade'], ['jade']
 

@@ -26,6 +26,7 @@ ReceptionSearchView = require './views/reception/search.coffee'
 SourceList = require './views/sources/view'
 
 class App extends Backbone.View
+	className: 'container'
 	template: baseTemplate
 	initialize: ->
 		_.extend @, Backbone.Events
@@ -155,8 +156,10 @@ class App extends Backbone.View
 		@$el.html(wrapper)
 			.append(html.hide())
 			.find('.body-wrap')
-			.fadeOut 150, => 
+			.fadeOut 150, =>
 				@$('.body-wrap').remove()
 				html.fadeIn 100
+
+		@
 
 module.exports = App

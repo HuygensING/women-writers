@@ -1,8 +1,11 @@
 Backbone = require 'backbone'
+$ = require 'jquery'
 Modal = require 'hibb-modal'
+LoginComponent = require 'hibb-login'
+
+tpl = require '../../jade/views/user-status.jade'
 
 class UserStatus extends Backbone.View
-	template: require '../../jade/views/user-status.jade'
 	events:
 		'click a.login': 'login'
 
@@ -11,19 +14,21 @@ class UserStatus extends Backbone.View
 		@render()
 
 	login: ->
-		modal = new Modal
-			title: "My title!"
-			html: $('<div />').html('lalala')
-			submitValue: 'OK'
-		return
+		LoginComponent.getLoginView
+			title: "Login"
+			modal: true
+			federatedLogin: true
+			localLogin: true
+			
 		@showLoader()
-		@model.login window.location.href
 
 	showLoader: ->
 		@$('.login').fadeOut 150, => @$('.loader').fadeIn 150
 
 	render: ->
-		@$el.html(@template @model.attributes)
-		.toggleClass 'logged-in', @model.get('_id')?
+		user = LoginComponent.getUser()
+
+		@$el.html tpl()
+		@$el.toggleClass 'logged-in', user.isLoggedIn()
 
 module.exports = UserStatus

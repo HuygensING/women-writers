@@ -12,7 +12,7 @@ user = require '../models/user'
 
 module.exports = ->
 	loadedRelationTypesPerson = new $.Deferred()
-	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwperson').then (data) ->
+	$.getJSON(config.get('baseUrl') + '/system/relationtypes?iname=wwperson').then (data) ->
 		relationTypes = {}
 		for t in data
 			if t.sourceTypeName is 'person'
@@ -26,7 +26,7 @@ module.exports = ->
 
 
 	loadedRelationTypesDocument = new $.Deferred()
-	$.getJSON(config.get('baseUrl') + '/api/system/relationtypes?iname=wwdocument').then (data) ->
+	$.getJSON(config.get('baseUrl') + '/system/relationtypes?iname=wwdocument').then (data) ->
 		relationTypes = {}
 		for t in data
 			relationTypes[t.regularName] = t

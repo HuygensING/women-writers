@@ -28,6 +28,7 @@ timbuctooProxy = (req, res) ->
 	req.url = req.url.replace '/api', '/timbuctoo'
 	req.headers['host'] = 'demo17.huygens.knaw.nl'
 	# req.headers['host'] = 'localhost:8080'
+	console.log(req.headers, req.url)
 	proxy.web req, res
 
 allowCrossDomain = (req, res, next) ->
@@ -49,4 +50,6 @@ app.all '/api/*', timbuctooProxy
 app.get '*', (req, res) -> # HTML pushState routing
 	res.sendfile path.resolve "#{buildDir}/index.html"
 
-module.exports = app
+# module.exports = app
+
+app.listen(9000)

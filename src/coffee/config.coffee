@@ -25,7 +25,7 @@ class Config extends Backbone.Model
 		else
 			@get('searchPath')
 
-	relationsUrl: -> @get('baseUrl') + '/api/domain/wwrelations'
+	relationsUrl: -> @get('baseUrl') + '/domain/wwrelations'
 
 	allPersonsUrl: -> @get('facetedSearchBaseUrl') + @get('personsRootUrl')
 	personUrl: (id) -> @allPersonsUrl() + '/' + id
@@ -82,7 +82,7 @@ class Config extends Backbone.Model
 		@get('baseUrl') + @get('userInfoPath')
 
 	receptionsUrl: ->
-		@get('baseUrl') + '/api/system/vres/' + @get('VRE_ID')
+		@get('baseUrl') + '/system/vres/' + @get('VRE_ID')
 
 	receptionsFor: (type) ->
 		receptions = @get('receptions')

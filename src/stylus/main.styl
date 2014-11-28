@@ -1,3 +1,23 @@
+@import 'nib'
+@import './import/variables'
+@import './import/mixins'
+@import './import/fonts'
+
+@import './faceted-search'
+@import './forms'
+@import './grid'
+@import './layout'
+@import './loader'
+@import './person-search'
+@import './reception-search'
+@import './search'
+@import './select2'
+@import './sources'
+@import './status'
+@import './style-guide'
+@import './unimplemented'
+@import './view'
+
 body, html
 	background-color backgroundColor
 	font-family bodyFont
@@ -26,7 +46,7 @@ a, .link
 	h1
 		margin 1em 0 1em 0
 		line-height logoHeight
-		background-image url(baseUrl + '/images/nwwlogo.png')
+		background-image url('/images/nwwlogo.png')
 		background-size  auto 100%
 		background-repeat no-repeat
 		background-position-x 10px
@@ -46,7 +66,7 @@ a, .link
 
 		width logoWidth
 		height logoHeight
-		background-image url(baseUrl + '/images/huygens-ing-small.png')
+		background-image url('/images/huygens-ing-small.png')
 
 .navigation
 	margin 35px 0 0 0

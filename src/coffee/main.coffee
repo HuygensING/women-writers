@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 $ = Backbone.$ = require 'jquery'
 
 config = require './config.coffee'
-user = require './models/user'
+# user = require './models/user'
 
 App = require './app.coffee'
 MainRouter = require './routers/main.coffee'
@@ -13,6 +13,10 @@ DocumentsCollection = require './collections/documents.coffee'
 loadEditData = require './helpers/load-edit-data'
 loadAppData  = require('./helpers/load-app-data').loadAll
 
+LoginComponent = require 'hibb-login'
+user = LoginComponent.createUser
+	tokenPrefix: config.get('tokenPrefix')
+	
 {searchQuery} = require './helpers/search'
 
 handleLinkClicks = (e) ->
@@ -22,16 +26,17 @@ handleLinkClicks = (e) ->
 		href = href.replace config.get('baseUrl'), '' if href.match /^https?:/
 		Backbone.history.navigate href, trigger: true
 
-checkAuthToken = ->
-	# Check/set security token
-	hasHsId = new RegExp /(?:\?|&)hsid=([^&]+)(?:&.+)?$/
-	hsid = hasHsId.exec window.location.href
-	if hsid
-		config.set authToken: hsid[1]
-		window.history.replaceState? {}, '', window.location.href.replace /\?.*$/, ''
+# checkAuthToken = ->
+# 	# Check/set security token
+# 	hasHsId = new RegExp /(?:\?|&)hsid=([^&]+)(?:&.+)?$/
+# 	hsid = hasHsId.exec window.location.href
+# 	if hsid
+# 		config.set authToken: hsid[1]
+# 		window.history.replaceState? {}, '', window.location.href.replace /\?.*$/, ''
 
 startApp = ->
-	app = new App el: 'body'
+	app = new App()
+	$('body').append app.el
 
 	base = config.get('baseUrl').replace /^https?:\/\/[^\/]+/, ''
 	mainRouter = new MainRouter
@@ -43,19 +48,24 @@ startApp = ->
 	mainRouter.start()
 
 
+
 # Main start -- whoo!
 
 $ ->
 	$(document).on 'click', 'a:not([target])', handleLinkClicks
 
-	checkAuthToken()
-
 	loadAppData().done ->
-		user.checkLoggedIn().always ->
-			# If user is logged in, chances are they will want to edit stuff,
-			# so we need to load a bunch of data used to populate and manage
-			# forms with. See helpers/loadEditData.coffee
-			if user.isLoggedIn() and user.isVerified()
-				loadEditData().done -> startApp()
-			else # if not, we don't need to load any of the extra data
-				startApp()
+		if user.isLoggedIn()
+			loadEditData().done ->
+
+		startApp()
+
+		# user.checkLoggedIn().always ->
+
+		# 	# If user is logged in, chances are they will want to edit stuff,
+		# 	# so we need to load a bunch of data used to populate and manage
+		# 	# forms with. See helpers/loadEditData.coffee
+		# 	if user.isLoggedIn() and user.isVerified()
+		# 		loadEditData().done -> startApp()
+		# 	else # if not, we don't need to load any of the extra data
+		# 		startApp()

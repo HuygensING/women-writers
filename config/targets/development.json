@@ -1,8 +1,9 @@
 {
-  "baseUrl": "http://localhost:9000",
-  "searchPath": "/api/v1/search",
-  "relationSearchPath": "/api/search/relations",
-  "facetedSearchBaseUrl": "http://localhost:9000/api",
+  "baseUrl": "http://demo17.huygens.knaw.nl/timbuctoo",
+  "searchPath": "/v1/search",
+  "relationSearchPath": "/search/relations",
+  // "facetedSearchBaseUrl": "http://localhost:9000/api",
+  "facetedSearchBaseUrl": "http://test.resources.huygens.knaw.nl/womenwriters/api",
   "personsRootUrl": "/domain/wwpersons",
   "documentsRootUrl": "/domain/wwdocuments",
   "VRE_ID": "WomenWriters",
@@ -17,7 +18,7 @@
   "genrePath": "/domain/wwkeywords?type=genre",
   "personTypeString": "wwperson",
   "documentTypeString": "wwdocument",
-  "userInfoPath": "/api/system/users/me",
+  "userInfoPath": "/system/users/me",
   "userLoginUrl": "https://secure.huygens.knaw.nl/saml2/login",
   "resultRows": 25,
   "personFacetTitles": {
@@ -40,5 +41,7 @@
     "dynamic_s_language": "Language",
     "dynamic_s_subject": "Subject",
     "dynamic_s_genre": "Genre"
-  }
+  },
+  "tokenPrefix": "womenwriters"
+
 }
