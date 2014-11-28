@@ -10,22 +10,132 @@
   }
 }
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 100;
-  src: local('Raleway Thin'), local('Raleway-Thin'), url("http://themes.googleusercontent.com/static/fonts/raleway/v7/RJMlAoFXXQEzZoMSUteGWD8E0i7KZn-EPnyo3HZu7kw.woff") format('woff');
+  font-weight: 300;
+  src: local('Open Sans Light'), local('Open Sans-Light'), url("/fonts/OpenSans-Light.ttf");
 }
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Raleway'), url("http://themes.googleusercontent.com/static/fonts/raleway/v7/IczWvq5y_Cwwv_rBjOtT0w.woff") format('woff');
+  src: local('Open Sans'), url("/fonts/OpenSans-Regular.ttf");
 }
 @font-face {
-  font-family: 'Raleway';
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Raleway Bold'), local('Raleway-Bold'), url("http://themes.googleusercontent.com/static/fonts/raleway/v7/JbtMzqLaYbbbCL9X6EvaIxsxEYwM7FgeyaSgU71cLG0.woff") format('woff');
+  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/fonts/OpenSans-Semibold.ttf");
+}
+body {
+  font-size: 100%;
+  line-height: 1.375em;
+  font-size: 16px;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Open Sans';
+}
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+}
+h2,
+.largest-text {
+  font-size: 2.25rem;
+}
+h3,
+.larger-text {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.125rem;
+}
+h5 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+p,
+.smaller-text,
+.faceted-search h3 {
+  font-size: 0.875rem;
+}
+.smallest-text,
+.faceted-search h4,
+.faceted-search .facet {
+  font-size: 0.75rem;
+}
+.small-caps {
+  font-size: 0.875em;
+  text-transform: uppercase;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('Open Sans-Light'), url("/fonts/OpenSans-Light.ttf");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), url("/fonts/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/fonts/OpenSans-Semibold.ttf");
+}
+body {
+  font-size: 100%;
+  line-height: 1.375em;
+  font-size: 16px;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Open Sans';
+}
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+}
+h2,
+.largest-text {
+  font-size: 2.25rem;
+}
+h3,
+.larger-text {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.125rem;
+}
+h5 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+p,
+.smaller-text,
+.faceted-search h3 {
+  font-size: 0.875rem;
+}
+.smallest-text,
+.faceted-search h4,
+.faceted-search .facet {
+  font-size: 0.75rem;
+}
+.small-caps {
+  font-size: 0.875em;
+  text-transform: uppercase;
 }
 .overlay {
   position: absolute;
@@ -850,6 +960,65 @@ rgba(18,146,117,0.5)
 .timbuctoo-form .dynamic-relations-editor .add-new.selection-box ul li:hover {
   font-weight: bold;
 }
+.person-network-graph .title {
+  position: absolute;
+  margin: 2em;
+}
+.person-network-graph .title span.name {
+  font-weight: bold;
+}
+svg .link {
+  stroke-width: 1px;
+  fill: none;
+  stroke: #9f9f9f;
+}
+svg .link.light-stroke {
+  stroke-width: 1px;
+}
+svg .link.medium-stroke {
+  stroke-width: 4px;
+}
+svg .link.heavy-stroke {
+  stroke-width: 9px;
+}
+svg text {
+  font-size: 10px;
+  pointer-events: none;
+}
+svg text:hover {
+  -webkit-transition: font-size 0.2s ease-out;
+  -moz-transition: font-size 0.2s ease-out;
+  -o-transition: font-size 0.2s ease-out;
+  -ms-transition: font-size 0.2s ease-out;
+  transition: font-size 0.2s ease-out;
+  cursor: pointer;
+}
+svg .text rect {
+  fill: #fafafa;
+  stroke: #9f9f9f;
+  stroke-width: 0.2px;
+  cursor: pointer;
+}
+svg .text:hover rect {
+  fill: #9f9f9f;
+  stroke: #444;
+}
+svg .text:hover text {
+  fill: #fff;
+}
+svg circle {
+  cursor: pointer;
+  color: #444;
+}
+svg circle.male {
+  fill: #6b8eff;
+}
+svg circle.female {
+  fill: #35bd00;
+}
+svg circle.unknown {
+  fill: #9f9f9f;
+}
 .marginRow {
   margin-bottom: 2em;
 }
@@ -1048,6 +1217,18 @@ rgba(18,146,117,0.5)
     -webkit-transform: rotateX(360deg);
   }
 }
+.person.view .field-is-creator-of {
+  margin-top: 1em;
+}
+.person.view .field-is-creator-of .value {
+  width: calc(100% - 190px - 0.5em);
+}
+.person.view .network-popup-link {
+  float: right;
+}
+.person.view .network-popup-link i {
+  margin-right: 0.5em;
+}
 .results ol.persons a .name {
   display: inline;
 }
@@ -1059,6 +1240,70 @@ rgba(18,146,117,0.5)
   display: inline;
   float: right;
   color: #9f9f9f;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('Open Sans-Light'), url("/fonts/OpenSans-Light.ttf");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), url("/fonts/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/fonts/OpenSans-Semibold.ttf");
+}
+body {
+  font-size: 100%;
+  line-height: 1.375em;
+  font-size: 16px;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Open Sans';
+}
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+}
+h2,
+.largest-text {
+  font-size: 2.25rem;
+}
+h3,
+.larger-text {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.125rem;
+}
+h5 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+p,
+.smaller-text,
+.faceted-search h3 {
+  font-size: 0.875rem;
+}
+.smallest-text,
+.faceted-search h4,
+.faceted-search .facet {
+  font-size: 0.75rem;
+}
+.small-caps {
+  font-size: 0.875em;
+  text-transform: uppercase;
 }
 .receptions .faceted-search .facets-menu {
   margin: 0;
@@ -1578,10 +1823,11 @@ rgba(18,146,117,0.5)
   color: #6295ba;
 }
 .results ol li a .title {
-  white-space: nowrap;
-  overflow: hidden;
+  width: 100%;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .results ol li a .secondary-information .date,
 .results ol li a .secondary-information .publish-location,

@@ -1,8 +1,8 @@
 {
   // "baseUrl": "http://localhost:9000",
   "baseUrl": "http://demo17.huygens.knaw.nl/timbuctoo",
-  "searchPath": "/api/v1/search",
-  "relationSearchPath": "/api/search/relations",
+  "searchPath": "/v1/search",
+  "relationSearchPath": "/search/relations",
   "facetedSearchBaseUrl": "http://test.resources.huygens.knaw.nl/womenwriters/api",
   // "facetedSearchBaseUrl": "http://localhost:9000/api",
   "isProduction": true,

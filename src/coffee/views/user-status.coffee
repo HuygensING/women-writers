@@ -7,23 +7,18 @@ tpl = require '../../jade/views/user-status.jade'
 
 class UserStatus extends Backbone.View
 	events:
-		'click a.login': 'login'
+		'click a.login': '_showLoginModal'
 
 	initialize: ->
 		@listenTo @model, 'change', => @render()
 		@render()
 
-	login: ->
+	_showLoginModal: ->
 		LoginComponent.getLoginView
 			title: "Login"
 			modal: true
 			federatedLogin: true
-			localLogin: true
-			
-		@showLoader()
-
-	showLoader: ->
-		@$('.login').fadeOut 150, => @$('.loader').fadeIn 150
+			basicLogin: true
 
 	render: ->
 		user = LoginComponent.getUser()

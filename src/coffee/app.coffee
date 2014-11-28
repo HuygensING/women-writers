@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 $ = require 'jquery'
 _ = require 'underscore'
 
-baseTemplate = require '../templates/views/base.jade'
+baseTemplate = require '../jade/views/base.jade'
 config = require './config'
 
 user = require './models/user'

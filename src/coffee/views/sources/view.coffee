@@ -5,7 +5,7 @@ config = require '../../config'
 {loadSources}  = require '../../helpers/load-app-data'
 
 class SourceList extends Backbone.View
-	template: require '../../../templates/views/sources/list.jade'
+	template: require '../../../jade/views/sources/list.jade'
 	className: 'sources centered'
 
 	events:

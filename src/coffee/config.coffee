@@ -7,7 +7,7 @@ class Config extends Backbone.Model
 
 		# this file is aliased in Gruntfile to a specific
 		# configuration, such as development, test, or production
-		targetConfig = require '../../config/targets/<target>.json'
+		targetConfig = require '../../config/targets/development.json'
 
 		_.extend baseConfig, targetConfig
 

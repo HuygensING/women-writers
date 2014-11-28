@@ -8,7 +8,7 @@ Graph = require '../../models/graph'
 class PersonNetworkGraph extends Backbone.View
 	className: 'person-network-graph'
 
-	template: require '../../../templates/views/person/graph.jade'
+	template: require '../../../jade/views/person/graph.jade'
 
 	initialize: (options) ->
 		{@attachTo} = options
