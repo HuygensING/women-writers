@@ -1,0 +1,13 @@
+{
+	"remote-destination": "",
+	"local-modules": [
+		"huygens-faceted-search",
+		"timbuctoo-forms",
+		"hibb-login",
+		"gulp-task-link"
+	],
+	"css-files": [
+		"./node_modules/huygens-faceted-search/dist/main.css",
+		"./node_modules/hibb-login/dist/main.css"
+	]
+}
