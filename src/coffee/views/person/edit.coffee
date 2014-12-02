@@ -16,6 +16,8 @@ DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/help
 
 onlyRealPeople = ['AUTHOR', 'ARCHETYPE', '(empty)']
 
+LoginComponent = require 'hibb-login'
+
 class Person extends Backbone.View
 	className: 'person-edit'
 	template: require '../../../jade/views/person/edit.jade'
@@ -219,7 +221,7 @@ class Person extends Backbone.View
 
 		@form = new Form
 			className: 'timbuctoo-form'
-			authToken: config.get 'authToken'
+			authToken: LoginComponent.getUser().getToken()
 			VRE_ID: config.get 'VRE_ID'
 			relationsUrl: config.relationsUrl()
 			model: @model

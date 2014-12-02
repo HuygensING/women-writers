@@ -19,6 +19,7 @@ class UserStatus extends Backbone.View
 			modal: true
 			federatedLogin: true
 			basicLogin: true
+			success: -> document.location.reload()
 
 	render: ->
 		user = LoginComponent.getUser()

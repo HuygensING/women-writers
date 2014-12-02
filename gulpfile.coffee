@@ -15,6 +15,7 @@ async = require 'async'
 exec = require('child_process').exec
 rimraf = require 'rimraf'
 cfg = require './config.json'
+rsync = require('rsyncwrapper').rsync
 
 browserSync = require 'browser-sync'
 reload = browserSync.reload
@@ -136,3 +137,16 @@ gulp.task 'watch', ['watchify'], ->
 	gulp.watch ['./src/index.jade'], ['jade']
 
 gulp.task 'default', ['server']
+
+# First run `gulp compile`. Can't be a dep because of async gulp.start. :(
+gulp.task 'deploy-test', (done) ->
+	rsync
+		src: 'compiled/',
+		dest: cfg['remote-destination'],
+		recursive: true,
+	,
+		(error,stdout,stderr,cmd) ->
+			if error
+				new gutil.PluginError('test', 'something broke', showStack: true)
+			else
+				done()

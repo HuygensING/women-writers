@@ -7,3 +7,4 @@ build/
 tests/acceptance/reports
 npm-debug.log
 selenium-debug.log
+config.json

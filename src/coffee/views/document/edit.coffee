@@ -13,6 +13,7 @@ DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/help
 
 {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
+LoginComponent = require 'hibb-login'
 
 class Document extends Backbone.View
 	className: 'document-edit'
@@ -165,7 +166,7 @@ class Document extends Backbone.View
 
 		@form = new Form
 			className: 'timbuctoo-form'
-			authToken: config.get 'authToken'
+			authToken: LoginComponent.getUser().getToken()
 			VRE_ID: config.get 'VRE_ID'
 			relationsUrl: config.relationsUrl()
 			model: @model

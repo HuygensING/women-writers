@@ -72,7 +72,7 @@ $(function() {
 
 
 },{"./app.coffee":"/home/gijs/Projects/women-writers/src/coffee/app.coffee","./collections/documents.coffee":"/home/gijs/Projects/women-writers/src/coffee/collections/documents.coffee","./collections/persons.coffee":"/home/gijs/Projects/women-writers/src/coffee/collections/persons.coffee","./config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","./helpers/load-app-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-app-data.coffee","./helpers/load-edit-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-edit-data.coffee","./helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","./routers/main.coffee":"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/config/config.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "baseUrl": "-",
   "searchPath": "-",
   "relationSearchPath": "-",
@@ -183,7 +183,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/config/targets/development.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   // "baseUrl": "http://localhost:9000",
   "baseUrl": "http://demo17.huygens.knaw.nl/timbuctoo",
   "searchPath": "/v1/search",
@@ -10188,9 +10188,11 @@ Main = (function() {
     if (options == null) {
       options = {};
     }
+    options.user = this.getUser();
     if (this._views.login != null) {
       this._views.login.destroy();
     }
+    console.log(options);
     return this._views.login = new Login(options);
   };
 
@@ -10249,7 +10251,7 @@ User = (function(_super) {
       param = parameters[_i];
       _ref = param.split('='), key = _ref[0], value = _ref[1];
       if (key === 'hsid') {
-        this._setAuthToken(value);
+        this.setToken(value);
         _results.push(typeof history.replaceState === "function" ? history.replaceState({}, '', window.location.pathname) : void 0);
       } else {
         _results.push(void 0);
@@ -10258,7 +10260,7 @@ User = (function(_super) {
     return _results;
   };
 
-  User.prototype._setAuthToken = function(token) {
+  User.prototype.setToken = function(token) {
     return localStorage.setItem(this.tokenPropertyName, token);
   };
 
@@ -10347,10 +10349,12 @@ Basic = (function(_super) {
       }
     };
     req = funcky.post('http://demo17.huygens.knaw.nl/timbuctoo/authenticate', options);
-    req.done(function(res) {
-      var token;
-      return token = res.getResponseHeader('X_AUTH_TOKEN');
-    });
+    req.done((function(_this) {
+      return function(res) {
+        _this.options.user.setToken(res.getResponseHeader('X_AUTH_TOKEN'));
+        return _this.trigger('login:success');
+      };
+    })(this));
     return req.fail((function(_this) {
       return function(res) {
         var response;
@@ -10517,6 +10521,9 @@ Login = (function(_super) {
 
   /*
   	@constructs
+  	@param {object} this.options
+  	@param {object} this.options.user
+  	@param {function} this.options.success - Callback after succesful login.
   	@param {boolean} [this.options.modal=false] - Render login form in a modal.
   	@param {boolean} [this.options.basicLogin=false] - Render Basic Authentication login form.
    */
@@ -10534,18 +10541,29 @@ Login = (function(_super) {
       _base2.basicLogin = false;
     }
     if (!this.options.federatedLogin && !this.options.basicLogin) {
-      throw new Error("HIBB Login: There must either be a federated or a basic login!");
+      throw new Error("HIBB Login: There must either be a federated or a basic login! Set federatedLogin or basicLogin to true.");
     }
     return this.render();
   };
 
   Login.prototype.render = function() {
-    var modal;
+    var basic, modal;
     if (this.options.federatedLogin) {
       this.$el.append(new Federated().el);
     }
     if (this.options.basicLogin) {
-      this.$el.append(new Basic().el);
+      basic = new Basic({
+        user: this.options.user
+      });
+      this.$el.append(basic.el);
+      this.listenTo(basic, 'login:success', (function(_this) {
+        return function() {
+          modal.messageAndFade('success', "Access granted!");
+          return _this.listenToOnce(modal, 'close', function() {
+            return _this.options.success();
+          });
+        };
+      })(this));
     }
     if (this.options.modal) {
       modal = new Modal({
@@ -15436,13 +15454,15 @@ module.exports = Person;
 
 
 },{"../config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","./base":"/home/gijs/Projects/women-writers/src/coffee/models/base.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/models/user.coffee":[function(require,module,exports){
-var Backbone, User, config,
+var Backbone, LoginComponent, User, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 Backbone = require('backbone');
 
 config = require('../config');
+
+LoginComponent = require('hibb-login');
 
 User = (function(_super) {
   __extends(User, _super);
@@ -15513,7 +15533,7 @@ User = (function(_super) {
       options.returnUrl = config.get('baseUrl');
     }
     options.headers.VRE_ID = this.VRE_ID;
-    options.headers.Authorization = config.get('authToken');
+    options.headers.Authorization = LoginComponent.getUser().getToken();
     checkLoggedIn = _.extend(options, {
       error: (function(_this) {
         return function(me, req) {
@@ -15555,7 +15575,7 @@ module.exports = new User();
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee":[function(require,module,exports){
+},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js"}],"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee":[function(require,module,exports){
 var Backbone, MainRouter, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -15862,7 +15882,7 @@ BaseView = (function(_super) {
       return this.model.destroy({
         beforeSend: (function(_this) {
           return function(xhr) {
-            xhr.setRequestHeader('Authorization', _this.config.get('authToken'));
+            xhr.setRequestHeader('Authorization', LoginComponent.getUser().getToken());
             return xhr.setRequestHeader('VRE_ID', _this.config.get('VRE_ID'));
           };
         })(this)
@@ -16080,7 +16100,7 @@ module.exports = BaseView;
 
 
 },{"../../jade/views/base-field.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-field.jade","../../jade/views/base-fieldset.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-fieldset.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js"}],"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee":[function(require,module,exports){
-var Backbone, Document, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, StatusIndicator, config, createTimbuctooSchema, documentDescription, searchLocation, simpleSearch, _ref,
+var Backbone, Document, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, LoginComponent, StatusIndicator, config, createTimbuctooSchema, documentDescription, searchLocation, simpleSearch, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -16101,6 +16121,8 @@ DynamicRelationTypeHelper = require('timbuctoo-edit-forms/src/coffee/helpers/dyn
 DynamicInverseRelationTypeHelper = require('timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper');
 
 createTimbuctooSchema = require('timbuctoo-edit-forms/src/coffee/helpers.coffee').createTimbuctooSchema;
+
+LoginComponent = require('hibb-login');
 
 Document = (function(_super) {
   __extends(Document, _super);
@@ -16273,7 +16295,7 @@ Document = (function(_super) {
     schema['date'].validators = ['datable'];
     this.form = new Form({
       className: 'timbuctoo-form',
-      authToken: config.get('authToken'),
+      authToken: LoginComponent.getUser().getToken(),
       VRE_ID: config.get('VRE_ID'),
       relationsUrl: config.relationsUrl(),
       model: this.model,
@@ -16303,7 +16325,7 @@ module.exports = Document;
 
 
 
-},{"../../../data/metadata/wwdocument.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json","../../../jade/views/document/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/edit.jade","../../config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee":[function(require,module,exports){
+},{"../../../data/metadata/wwdocument.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json","../../../jade/views/document/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/edit.jade","../../config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee":[function(require,module,exports){
 var Backbone, BaseSearch, DocumentSearch, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -16428,7 +16450,7 @@ module.exports = DocumentView;
 
 
 },{"../../../jade/views/document/view.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/view.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../../helpers/base-view-helper":"/home/gijs/Projects/women-writers/src/coffee/helpers/base-view-helper.coffee","../base-view":"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee":[function(require,module,exports){
-var Backbone, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, Person, StatusIndicator, config, createTimbuctooSchema, onlyRealPeople, personDescription, searchLocation, searchQuery, simpleSearch, _, _ref,
+var Backbone, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, LoginComponent, Person, StatusIndicator, config, createTimbuctooSchema, onlyRealPeople, personDescription, searchLocation, searchQuery, simpleSearch, _, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -16453,6 +16475,8 @@ DynamicRelationTypeHelper = require('timbuctoo-edit-forms/src/coffee/helpers/dyn
 DynamicInverseRelationTypeHelper = require('timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper');
 
 onlyRealPeople = ['AUTHOR', 'ARCHETYPE', '(empty)'];
+
+LoginComponent = require('hibb-login');
 
 Person = (function(_super) {
   __extends(Person, _super);
@@ -16668,7 +16692,7 @@ Person = (function(_super) {
     schema['deathDate'].validators = ['datable'];
     this.form = new Form({
       className: 'timbuctoo-form',
-      authToken: config.get('authToken'),
+      authToken: LoginComponent.getUser().getToken(),
       VRE_ID: config.get('VRE_ID'),
       relationsUrl: config.relationsUrl(),
       model: this.model,
@@ -16718,7 +16742,7 @@ module.exports = Person;
 
 
 
-},{"../../../data/metadata/wwperson.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json","../../../jade/views/person/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/edit.jade","../../config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee","underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee":[function(require,module,exports){
+},{"../../../data/metadata/wwperson.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json","../../../jade/views/person/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/edit.jade","../../config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee","underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee":[function(require,module,exports){
 var Backbone, Graph, PersonNetworkGraph, config, d3,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -18045,7 +18069,10 @@ UserStatus = (function(_super) {
       title: "Login",
       modal: true,
       federatedLogin: true,
-      basicLogin: true
+      basicLogin: true,
+      success: function() {
+        return document.location.reload();
+      }
     });
   };
 
@@ -18065,7 +18092,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","hibb-modal":"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -18174,7 +18201,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "tempPsChildren" : {
     "type" : "String"
   },
@@ -27996,7 +28023,7 @@ module.exports = RelationItem;
 
 
 },{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "value" : {
     "type" : "String"
   },

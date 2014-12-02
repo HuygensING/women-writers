@@ -47,7 +47,7 @@ class BaseView extends Backbone.View
 		if btn.hasClass 'confirm'
 			@model.destroy
 				beforeSend: (xhr) =>
-					xhr.setRequestHeader 'Authorization', @config.get 'authToken'
+					xhr.setRequestHeader 'Authorization', LoginComponent.getUser().getToken()
 					xhr.setRequestHeader 'VRE_ID', @config.get 'VRE_ID'
 			.success =>
 				console.log "OMG"

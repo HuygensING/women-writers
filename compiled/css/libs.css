@@ -705,9 +705,24 @@
   background: #888;
   color: #fff;
 }
+.hibb-modal .modalbody header h2,
+.hibb-modal .modalbody header p.message {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+}
 .hibb-modal .modalbody header h2 {
   font-size: 1.2em;
   font-weight: normal;
+  margin-right: 55px;
+}
+.hibb-modal .modalbody header p.message.success {
+  margin: 0;
+  padding: 4px 12px;
+  background: #fff;
+  font-weight: bold;
 }
 .hibb-modal .modalbody .body {
   padding: 30px;

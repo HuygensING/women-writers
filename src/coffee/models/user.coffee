@@ -1,6 +1,8 @@
 Backbone = require 'backbone'
 config = require '../config'
 
+LoginComponent = require 'hibb-login'
+
 class User extends Backbone.Model
 	defaults:
 		loggedIn: false
@@ -31,7 +33,7 @@ class User extends Backbone.Model
 		options.headers ?= {}
 		options.returnUrl ?= config.get 'baseUrl'
 		options.headers.VRE_ID = @VRE_ID
-		options.headers.Authorization = config.get 'authToken'
+		options.headers.Authorization = LoginComponent.getUser().getToken()
 
 		checkLoggedIn = _.extend options,
 			error: (me, req) =>
