@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+LoginComponent = require 'hibb-login'
 
 niceify = (str) ->
 	String(str).replace(/([A-Z](?![A-Z]))/g, ' $1')
@@ -17,12 +18,12 @@ class BaseView extends Backbone.View
 		'click .controls .delete': 'deleteRecord'
 
 	initialize: (options={}) ->
-		{@config, @user, @showingRevision} = options
+		{@config, @showingRevision} = options
 
 		@config ?= require '../config'
-		@user ?= require '../models/user'
+		# @user ?= require '../models/user'
 
-		@listenTo @user, 'change:loggedIn', => @showControls()
+		# @listenTo @user, 'change:loggedIn', => @showControls()
 		@render()
 
 	isReception: (r) ->
@@ -64,8 +65,8 @@ class BaseView extends Backbone.View
 			btn.addClass 'alert'
 
 	showControls: (toggle) ->
-		show = @user.get('loggedIn') and @user.isVerified()
-		@$controls?.toggle show
+		# show = @user.get('loggedIn') and @user.isVerified()
+		@$controls?.toggle LoginComponent.getUser().isLoggedIn()
 
 	_processField: (field) ->
 		field.html = @_fieldHtml field
@@ -162,7 +163,7 @@ class BaseView extends Backbone.View
 		@$fieldsets.empty()
 
 		for fieldset in (@fieldsets ? [])
-			if  fieldset.showOnlyWhenLoggedIn and not @user.isLoggedIn()
+			if  fieldset.showOnlyWhenLoggedIn and not LoginComponent.getUser().isLoggedIn()
 				continue
 
 			html = @_fieldsetHtml fieldset

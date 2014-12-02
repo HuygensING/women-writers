@@ -1,0 +1,204 @@
+body.high-contrast
+	.timbuctoo-form
+		fieldset
+			.field-label
+				color #666
+				font-size 0.9em
+				
+			legend
+				border-bottom 2px solid #999
+				
+				&:hover:after
+					font-size 2em
+
+	.navigation
+		background-color baseColor
+		
+		a, i.fa.fa-adjust
+			color white
+			font-size 1.2em
+			
+		.user-status
+			span
+				color #EEE
+				font-size 0.95em
+				
+	#view
+		.sources, .document
+			max-width 96%
+			margin 0 2%
+			
+		.person-edit, .document-edit
+			max-width 85%
+			margin-left 4%
+			.input-field, select, textarea, input
+				border 1px solid #CCC
+			
+		.sources	
+			.letter
+				border-bottom 1px solid black
+				padding-top 10px
+				padding-bottom 20px
+					
+				ul
+					li
+						padding 2px 6px
+						margin-bottom 0.75em
+							
+						&:nth-child(even)
+							background-color darken(lightBackgroundColor, 10%)
+						
+						&:hover
+							background-color darken(lightBackgroundColor, 20%)
+						
+						a
+							color darken(linkColor, 50%)
+							border none
+			
+	#search
+		.receptions
+			.views
+				.select-type
+					.work
+						margin-left 2.5%
+			
+			.reception-results
+				max-width 96%
+				// margin 0 0 0 2.5%
+				margin 0 2%
+				
+				table
+					tr
+						td
+							padding 2px
+							
+							&:first-child
+								padding-left 8px
+
+						&:nth-child(even)
+							background-color darken(lightBackgroundColor, 10%)
+				
+		.search
+			inline-block()
+			margin-left 2%
+			width 33%
+			
+		.overlay
+			position static
+			background none
+			
+			& > div
+				position absolute
+				
+				&:before
+					content "Loading search..."
+					margin-right 10px
+
+		.faceted-search
+			min-height 100px
+			min-width 300px
+			
+			ul.facets-menu, .text-search
+				background none
+				
+			ul.facets-menu
+				border none
+			
+			.text-search
+				border-top 2px solid baseColor
+				border-bottom 2px solid baseColor
+				padding-bottom 30px
+				
+				header
+					h3
+						padding-left 3px
+					
+					button
+						color white
+						background baseColor
+
+						&:before
+							content "Search "
+							margin-right 6px
+						
+						&:hover
+							// color baseColor
+							background darken(lightBackgroundColor, 40%)
+							
+				
+				.search-input
+					margin-top 8px
+					
+					h4
+						line-height 1.5em
+						padding 0 3px
+					
+					input
+						border 1px solid #999
+				
+			.facets
+				.facet
+					&.collapsed
+						header
+							background none
+							border-bottom 1px solid baseColor
+							
+					header
+						background darken(lightBackgroundColor, 10%)
+
+					.body
+						background none
+						padding-left 0
+						padding-right 0
+						
+						ul
+							li
+								label
+									font-size 1.2em
+
+		.results
+			inline-block()
+			margin 20px 2% 0 8%
+			width 55%
+			
+			h4
+				margin-bottom 0.5em
+				padding-bottom 0.5em
+				border-bottom 1px solid darken(lightBackgroundColor, 10%)
+				
+				.order-by
+					span
+						font-size 0.8em
+						color #999
+
+					select
+						background none
+						outline none
+						border 1px solid #999
+						border-radius 3px
+					
+			
+			.cursor
+				margin 0
+
+				.prev, .position, .next
+					padding 0
+					
+				.loader
+					top 6px
+
+			& > ol
+				li
+					padding 8px
+					border none
+					
+					&:nth-child(even)
+						background-color darken(lightBackgroundColor, 10%)
+
+					a:before
+						font-size 1em
+
+@media (min-width: 960px)
+	body.high-contrast
+		.centered
+			max-width initial

@@ -5,8 +5,6 @@ _ = require 'underscore'
 baseTemplate = require '../jade/views/base.jade'
 config = require './config'
 
-user = require './models/user'
-
 UserStatusView = require './views/user-status'
 
 Person = require './models/person'
@@ -27,6 +25,7 @@ SourceList = require './views/sources/view'
 class App extends Backbone.View
 	className: 'container'
 	template: baseTemplate
+
 	initialize: ->
 		_.extend @, Backbone.Events
 		@render()
@@ -37,6 +36,12 @@ class App extends Backbone.View
 			category = match[1].toLowerCase()
 			@$('.navigation a').removeClass 'active'
 			@$(".navigation a.#{category}").addClass 'active'
+
+	events:
+		'click i.fa.fa-adjust': 'toggleHighContrast'
+
+	toggleHighContrast: (ev) ->
+		$('body').toggleClass 'high-contrast'
 
 	home: -> # TODO: Define what's displayed in home
 
@@ -176,7 +181,6 @@ class App extends Backbone.View
 
 		new UserStatusView
 			el: html.find '.user-status'
-			model: user
 
 		@$el.html(wrapper)
 			.append(html.hide())

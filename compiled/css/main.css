@@ -73,70 +73,6 @@ p,
   font-size: 0.875em;
   text-transform: uppercase;
 }
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('Open Sans-Light'), url("/fonts/OpenSans-Light.ttf");
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), url("/fonts/OpenSans-Regular.ttf");
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/fonts/OpenSans-Semibold.ttf");
-}
-body {
-  font-size: 100%;
-  line-height: 1.375em;
-  font-size: 16px;
-}
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: 'Open Sans';
-}
-h1 {
-  font-size: 3em;
-  font-weight: 300;
-}
-h2,
-.largest-text {
-  font-size: 2.25rem;
-}
-h3,
-.larger-text {
-  font-size: 1.5rem;
-}
-h4 {
-  font-size: 1.125rem;
-}
-h5 {
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  font-weight: lighter;
-}
-p,
-.smaller-text,
-.faceted-search h3 {
-  font-size: 0.875rem;
-}
-.smallest-text,
-.faceted-search h4,
-.faceted-search .facet {
-  font-size: 0.75rem;
-}
-.small-caps {
-  font-size: 0.875em;
-  text-transform: uppercase;
-}
 .overlay {
   position: absolute;
   background-color: rgba(0,0,0,0.2);
@@ -149,6 +85,9 @@ body.logged-in .faceted-search .text-search .search-input[data-name=dynamic_t_no
 }
 .faceted-search input[type=text] {
   width: auto;
+}
+.faceted-search.search-type-advanced .text-search {
+  background-color: #f2f9f9;
 }
 .faceted-search .text-search {
   background-color: #f2f9f9;
@@ -184,6 +123,8 @@ body.logged-in .faceted-search .text-search .search-input[data-name=dynamic_t_no
   width: 100%;
   padding: 0 0.4em;
   line-height: 2em;
+  height: auto;
+  font-size: 16px;
 }
 .faceted-search .text-search .search-input i {
   position: absolute;
@@ -242,6 +183,7 @@ body.logged-in .faceted-search .text-search .search-input[data-name=dynamic_t_no
 .faceted-search .facet header h3 {
   display: block;
   cursor: pointer;
+  width: auto;
 }
 .faceted-search .facet header h3:hover {
   background-color: #d0e9e9;
@@ -306,6 +248,7 @@ body.logged-in .faceted-search .text-search .search-input[data-name=dynamic_t_no
 .faceted-search .facet .body {
   background-color: #f2f9f9;
   padding: 3%;
+  margin: 0;
   max-height: 300px;
   overflow-y: auto;
   -webkit-transition: max-height 0.15s;
@@ -1241,70 +1184,6 @@ svg circle.unknown {
   float: right;
   color: #9f9f9f;
 }
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('Open Sans-Light'), url("/fonts/OpenSans-Light.ttf");
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), url("/fonts/OpenSans-Regular.ttf");
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/fonts/OpenSans-Semibold.ttf");
-}
-body {
-  font-size: 100%;
-  line-height: 1.375em;
-  font-size: 16px;
-}
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: 'Open Sans';
-}
-h1 {
-  font-size: 3em;
-  font-weight: 300;
-}
-h2,
-.largest-text {
-  font-size: 2.25rem;
-}
-h3,
-.larger-text {
-  font-size: 1.5rem;
-}
-h4 {
-  font-size: 1.125rem;
-}
-h5 {
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  font-weight: lighter;
-}
-p,
-.smaller-text,
-.faceted-search h3 {
-  font-size: 0.875rem;
-}
-.smallest-text,
-.faceted-search h4,
-.faceted-search .facet {
-  font-size: 0.75rem;
-}
-.small-caps {
-  font-size: 0.875em;
-  text-transform: uppercase;
-}
 .receptions .faceted-search .facets-menu {
   margin: 0;
   padding: 0;
@@ -1938,6 +1817,9 @@ p,
 .select2-drop .select2-results .select2-result.select2-highlighted {
   color: #fff;
 }
+#view h1 {
+  line-height: 40px;
+}
 #view .sources {
   position: relative;
 }
@@ -2096,7 +1978,8 @@ p.unimplemented {
 }
 .view .results-paging .paging-controls {
   position: absolute;
-  right: -7em;
+  right: 0;
+  top: -80px;
   text-align: center;
 }
 .view .results-paging .paging-controls span {
@@ -2192,6 +2075,209 @@ p.unimplemented {
 .view .last-modified span.user-id {
   font-weight: bold;
 }
+body.high-contrast .timbuctoo-form fieldset .field-label {
+  color: #666;
+  font-size: 0.9em;
+}
+body.high-contrast .timbuctoo-form fieldset legend {
+  border-bottom: 2px solid #999;
+}
+body.high-contrast .timbuctoo-form fieldset legend:hover:after {
+  font-size: 2em;
+}
+body.high-contrast .navigation {
+  background-color: #129275;
+}
+body.high-contrast .navigation a,
+body.high-contrast .navigation i.fa.fa-adjust {
+  color: #fff;
+  font-size: 1.2em;
+}
+body.high-contrast .navigation .user-status span {
+  color: #eee;
+  font-size: 0.95em;
+}
+body.high-contrast #view .sources,
+body.high-contrast #view .document {
+  max-width: 96%;
+  margin: 0 2%;
+}
+body.high-contrast #view .person-edit,
+body.high-contrast #view .document-edit {
+  max-width: 85%;
+  margin-left: 4%;
+}
+body.high-contrast #view .person-edit .input-field,
+body.high-contrast #view .document-edit .input-field,
+body.high-contrast #view .person-edit select,
+body.high-contrast #view .document-edit select,
+body.high-contrast #view .person-edit textarea,
+body.high-contrast #view .document-edit textarea,
+body.high-contrast #view .person-edit input,
+body.high-contrast #view .document-edit input {
+  border: 1px solid #ccc;
+}
+body.high-contrast #view .sources .letter {
+  border-bottom: 1px solid #000;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+body.high-contrast #view .sources .letter ul li {
+  padding: 2px 6px;
+  margin-bottom: 0.75em;
+}
+body.high-contrast #view .sources .letter ul li:nth-child(even) {
+  background-color: #d0e9e9;
+}
+body.high-contrast #view .sources .letter ul li:hover {
+  background-color: #afdada;
+}
+body.high-contrast #view .sources .letter ul li a {
+  color: #2b4b63;
+  border: none;
+}
+body.high-contrast #search .receptions .views .select-type .work {
+  margin-left: 2.5%;
+}
+body.high-contrast #search .receptions .reception-results {
+  max-width: 96%;
+  margin: 0 2%;
+}
+body.high-contrast #search .receptions .reception-results table tr td {
+  padding: 2px;
+}
+body.high-contrast #search .receptions .reception-results table tr td:first-child {
+  padding-left: 8px;
+}
+body.high-contrast #search .receptions .reception-results table tr:nth-child(even) {
+  background-color: #d0e9e9;
+}
+body.high-contrast #search .search {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-left: 2%;
+  width: 33%;
+}
+body.high-contrast #search .overlay {
+  position: static;
+  background: none;
+}
+body.high-contrast #search .overlay > div {
+  position: absolute;
+}
+body.high-contrast #search .overlay > div:before {
+  content: "Loading search...";
+  margin-right: 10px;
+}
+body.high-contrast #search .faceted-search {
+  min-height: 100px;
+  min-width: 300px;
+}
+body.high-contrast #search .faceted-search ul.facets-menu,
+body.high-contrast #search .faceted-search .text-search {
+  background: none;
+}
+body.high-contrast #search .faceted-search ul.facets-menu {
+  border: none;
+}
+body.high-contrast #search .faceted-search .text-search {
+  border-top: 2px solid #129275;
+  border-bottom: 2px solid #129275;
+  padding-bottom: 30px;
+}
+body.high-contrast #search .faceted-search .text-search header h3 {
+  padding-left: 3px;
+}
+body.high-contrast #search .faceted-search .text-search header button {
+  color: #fff;
+  background: #129275;
+}
+body.high-contrast #search .faceted-search .text-search header button:before {
+  content: "Search ";
+  margin-right: 6px;
+}
+body.high-contrast #search .faceted-search .text-search header button:hover {
+  background: #6cbbbb;
+}
+body.high-contrast #search .faceted-search .text-search .search-input {
+  margin-top: 8px;
+}
+body.high-contrast #search .faceted-search .text-search .search-input h4 {
+  line-height: 1.5em;
+  padding: 0 3px;
+}
+body.high-contrast #search .faceted-search .text-search .search-input input {
+  border: 1px solid #999;
+}
+body.high-contrast #search .faceted-search .facets .facet.collapsed header {
+  background: none;
+  border-bottom: 1px solid #129275;
+}
+body.high-contrast #search .faceted-search .facets .facet header {
+  background: #d0e9e9;
+}
+body.high-contrast #search .faceted-search .facets .facet .body {
+  background: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+body.high-contrast #search .faceted-search .facets .facet .body ul li label {
+  font-size: 1.2em;
+}
+body.high-contrast #search .results {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin: 20px 2% 0 8%;
+  width: 55%;
+}
+body.high-contrast #search .results h4 {
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #d0e9e9;
+}
+body.high-contrast #search .results h4 .order-by span {
+  font-size: 0.8em;
+  color: #999;
+}
+body.high-contrast #search .results h4 .order-by select {
+  background: none;
+  outline: none;
+  border: 1px solid #999;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+body.high-contrast #search .results .cursor {
+  margin: 0;
+}
+body.high-contrast #search .results .cursor .prev,
+body.high-contrast #search .results .cursor .position,
+body.high-contrast #search .results .cursor .next {
+  padding: 0;
+}
+body.high-contrast #search .results .cursor .loader {
+  top: 6px;
+}
+body.high-contrast #search .results > ol li {
+  padding: 8px;
+  border: none;
+}
+body.high-contrast #search .results > ol li:nth-child(even) {
+  background-color: #d0e9e9;
+}
+body.high-contrast #search .results > ol li a:before {
+  font-size: 1em;
+}
+@media (min-width: 960px) {
+  body.high-contrast .centered {
+    max-width: initial;
+  }
+}
 body,
 html {
   background-color: #fff;
@@ -2262,6 +2348,11 @@ a:hover,
   border-top: 1px solid #d0e9e9;
   border-bottom: 1px solid #d0e9e9;
 }
+.navigation i.fa.fa-adjust {
+  color: #888;
+  margin-left: 10px;
+  cursor: pointer;
+}
 .navigation .centered {
   display: table;
   overflow: auto;
@@ -2298,6 +2389,7 @@ a:hover,
 .navigation .user-status {
   display: inline-block;
   float: right;
+  margin-right: 2%;
 }
 .navigation .user-status *,
 .navigation .user-status *:hover,

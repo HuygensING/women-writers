@@ -10,7 +10,7 @@ class UserStatus extends Backbone.View
 		'click a.login': '_showLoginModal'
 
 	initialize: ->
-		@listenTo @model, 'change', => @render()
+		# @listenTo @model, 'change', => @render()
 		@render()
 
 	_showLoginModal: ->

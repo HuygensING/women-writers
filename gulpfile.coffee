@@ -48,6 +48,7 @@ gulp.task 'stylus', ->
 			errors: true
 		))
 		.pipe(gulp.dest("#{devDir}/css"))
+		.pipe(reload(stream: true))
 
 gulp.task 'concat-libs-css', ->
 	gulp.src(cfg['css-files'])
@@ -131,7 +132,7 @@ gulp.task 'browserify-libs', ->
 
 gulp.task 'watch', ['watchify'], ->
 	gulp.watch cfg['css-files'], ['concat-libs-css']
-	gulp.watch ['./src/stylus/main.styl'], ['stylus']
+	gulp.watch ['./src/stylus/**/*.styl'], ['stylus']
 	gulp.watch ['./src/index.jade'], ['jade']
 
 gulp.task 'default', ['server']

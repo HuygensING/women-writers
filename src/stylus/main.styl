@@ -2,6 +2,7 @@
 @import './import/variables'
 @import './import/mixins'
 @import './import/text'
+@import './import/functions'
 
 @import './faceted-search'
 @import './forms'
@@ -19,6 +20,7 @@
 @import './style-guide'
 @import './unimplemented'
 @import './view'
+@import './high-contrast'
 
 body, html
 	background-color backgroundColor
@@ -84,6 +86,12 @@ a, .link
 	background-color lightBackgroundColor
 	border-top 1px solid lightBackgroundEdgeColor
 	border-bottom 1px solid lightBackgroundEdgeColor
+	
+	i.fa.fa-adjust
+		color #888
+		margin-left 10px
+		cursor pointer
+	
 
 	.centered
 		display table
@@ -114,6 +122,7 @@ a, .link
 	.user-status
 		display inline-block
 		float right
+		margin-right 2%
 
 		& *, & *:hover, & *:active
 			transition all .15s ease 0s

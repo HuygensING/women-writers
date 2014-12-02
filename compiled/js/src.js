@@ -72,7 +72,7 @@ $(function() {
 
 
 },{"./app.coffee":"/home/gijs/Projects/women-writers/src/coffee/app.coffee","./collections/documents.coffee":"/home/gijs/Projects/women-writers/src/coffee/collections/documents.coffee","./collections/persons.coffee":"/home/gijs/Projects/women-writers/src/coffee/collections/persons.coffee","./config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","./helpers/load-app-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-app-data.coffee","./helpers/load-edit-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-edit-data.coffee","./helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","./routers/main.coffee":"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/config/config.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "baseUrl": "-",
   "searchPath": "-",
   "relationSearchPath": "-",
@@ -183,7 +183,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/config/targets/development.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   // "baseUrl": "http://localhost:9000",
   "baseUrl": "http://demo17.huygens.knaw.nl/timbuctoo",
   "searchPath": "/v1/search",
@@ -9414,7 +9414,86 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 },{}],"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js":[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.hibbLogin=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-(function(){var e={}.hasOwnProperty;module.exports={get:function(e,l){return null==l&&(l={}),this._sendRequest("GET",e,l)},post:function(e,l){return null==l&&(l={}),this._sendRequest("POST",e,l)},put:function(e,l){return null==l&&(l={}),this._sendRequest("PUT",e,l)},_promise:function(){return{done:function(e){return this.callDone=e},callDone:null,fail:function(e){return this.callFail=e},callFail:null,always:function(e){return this.callAlways=e},callAlways:null}},_sendRequest:function(l,n,t){var a,u,s,r,i;null==t&&(t={}),u=this._promise(),null==t.data&&(t.data={}),null==t.headers&&(t.headers={}),r=new XMLHttpRequest,r.onreadystatechange=function(){var e;if(r.readyState===XMLHttpRequest.DONE)if(null!=u.callAlways&&u.callAlways(r),200<=(e=r.status)&&206>=e){if(null!=u.callDone)return u.callDone(r)}else if(null!=u.callFail)return u.callFail(r)},r.open(l,n,!0),r.setRequestHeader("Content-type","application/json"),i=t.headers;for(a in i)e.call(i,a)&&(s=i[a],r.setRequestHeader(a,s));return r.send(t.data),u}}}).call(this);
+(function() {
+  var __hasProp = {}.hasOwnProperty;
+
+  module.exports = {
+    get: function(url, options) {
+      if (options == null) {
+        options = {};
+      }
+      return this._sendRequest('GET', url, options);
+    },
+    post: function(url, options) {
+      if (options == null) {
+        options = {};
+      }
+      return this._sendRequest('POST', url, options);
+    },
+    put: function(url, options) {
+      if (options == null) {
+        options = {};
+      }
+      return this._sendRequest('PUT', url, options);
+    },
+    _promise: function() {
+      return {
+        done: function(fn) {
+          return this.callDone = fn;
+        },
+        callDone: null,
+        fail: function(fn) {
+          return this.callFail = fn;
+        },
+        callFail: null,
+        always: function(fn) {
+          return this.callAlways = fn;
+        },
+        callAlways: null
+      };
+    },
+    _sendRequest: function(method, url, options) {
+      var header, promise, value, xhr, _ref;
+      if (options == null) {
+        options = {};
+      }
+      promise = this._promise();
+      if (options.headers == null) {
+        options.headers = {};
+      }
+      xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        var _ref;
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (promise.callAlways != null) {
+            promise.callAlways(xhr);
+          }
+          if ((200 <= (_ref = xhr.status) && _ref <= 206)) {
+            if (promise.callDone != null) {
+              return promise.callDone(xhr);
+            }
+          } else {
+            if (promise.callFail != null) {
+              return promise.callFail(xhr);
+            }
+          }
+        }
+      };
+      xhr.open(method, url, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      _ref = options.headers;
+      for (header in _ref) {
+        if (!__hasProp.call(_ref, header)) continue;
+        value = _ref[header];
+        xhr.setRequestHeader(header, value);
+      }
+      xhr.send(options.data);
+      return promise;
+    }
+  };
+
+}).call(this);
+
 },{}],2:[function(_dereq_,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.Pagination=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -10238,13 +10317,22 @@ Basic = (function(_super) {
 
   Basic.prototype.events = function() {
     return {
-      'click button': '_handleLogin'
+      'click button': '_handleLogin',
+      'keyup input[type="password"]': '_handlePasswordInputKeyup'
     };
+  };
+
+  Basic.prototype._handlePasswordInputKeyup = function(ev) {
+    if (ev.keyCode === 13) {
+      return this._handleLogin();
+    }
   };
 
   Basic.prototype._handleLogin = function(ev) {
     var options, pass, req, user;
-    ev.preventDefault();
+    if (ev != null) {
+      ev.preventDefault();
+    }
     if (this.$el.hasClass('has-error')) {
       return;
     }
@@ -11044,445 +11132,89 @@ module.exports = new ModalManager();
 
 }).call(this);
 
-},{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.req/dist/latest/index.min.js":[function(require,module,exports){
-(function(){var e={}.hasOwnProperty;module.exports={get:function(e,l){return null==l&&(l={}),this._sendRequest("GET",e,l)},post:function(e,l){return null==l&&(l={}),this._sendRequest("POST",e,l)},put:function(e,l){return null==l&&(l={}),this._sendRequest("PUT",e,l)},_promise:function(){return{done:function(e){return this.callDone=e},callDone:null,fail:function(e){return this.callFail=e},callFail:null,always:function(e){return this.callAlways=e},callAlways:null}},_sendRequest:function(l,n,t){var a,u,s,r,i;null==t&&(t={}),u=this._promise(),null==t.data&&(t.data={}),null==t.headers&&(t.headers={}),r=new XMLHttpRequest,r.onreadystatechange=function(){var e;if(r.readyState===XMLHttpRequest.DONE)if(null!=u.callAlways&&u.callAlways(r),200<=(e=r.status)&&206>=e){if(null!=u.callDone)return u.callDone(r)}else if(null!=u.callFail)return u.callFail(r)},r.open(l,n,!0),r.setRequestHeader("Content-type","application/json"),i=t.headers;for(a in i)e.call(i,a)&&(s=i[a],r.setRequestHeader(a,s));return r.send(t.data),u}}}).call(this);
+},{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.req/dist/main.js":[function(require,module,exports){
+(function() {
+  var __hasProp = {}.hasOwnProperty;
+
+  module.exports = {
+    get: function(url, options) {
+      if (options == null) {
+        options = {};
+      }
+      return this._sendRequest('GET', url, options);
+    },
+    post: function(url, options) {
+      if (options == null) {
+        options = {};
+      }
+      return this._sendRequest('POST', url, options);
+    },
+    put: function(url, options) {
+      if (options == null) {
+        options = {};
+      }
+      return this._sendRequest('PUT', url, options);
+    },
+    _promise: function() {
+      return {
+        done: function(fn) {
+          return this.callDone = fn;
+        },
+        callDone: null,
+        fail: function(fn) {
+          return this.callFail = fn;
+        },
+        callFail: null,
+        always: function(fn) {
+          return this.callAlways = fn;
+        },
+        callAlways: null
+      };
+    },
+    _sendRequest: function(method, url, options) {
+      var header, promise, value, xhr, _ref;
+      if (options == null) {
+        options = {};
+      }
+      promise = this._promise();
+      if (options.headers == null) {
+        options.headers = {};
+      }
+      xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        var _ref;
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (promise.callAlways != null) {
+            promise.callAlways(xhr);
+          }
+          if ((200 <= (_ref = xhr.status) && _ref <= 206)) {
+            if (promise.callDone != null) {
+              return promise.callDone(xhr);
+            }
+          } else {
+            if (promise.callFail != null) {
+              return promise.callFail(xhr);
+            }
+          }
+        }
+      };
+      xhr.open(method, url, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      _ref = options.headers;
+      for (header in _ref) {
+        if (!__hasProp.call(_ref, header)) continue;
+        value = _ref[header];
+        xhr.setRequestHeader(header, value);
+      }
+      xhr.send(options.data);
+      return promise;
+    }
+  };
+
+}).call(this);
+
 },{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.util/dist/latest/index.min.js":[function(require,module,exports){
 (function(){module.exports={generateID:function(t){var n,r;for(t=null!=t&&t>0?t-1:7,n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",r=n.charAt(Math.floor(52*Math.random()));t--;)r+=n.charAt(Math.floor(Math.random()*n.length));return r},setResetTimeout:function(){var t;return t=null,function(n,r,e){return null!=t&&(null!=e&&e(),clearTimeout(t)),t=setTimeout(function(){return t=null,r()},n)}}()}}).call(this);
-},{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/huygens-backbone-pagination/dist/index.js":[function(require,module,exports){
-(function (global){
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.Pagination=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-(function(){module.exports={generateID:function(t){var n,r;for(t=null!=t&&t>0?t-1:7,n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",r=n.charAt(Math.floor(52*Math.random()));t--;)r+=n.charAt(Math.floor(Math.random()*n.length));return r},setResetTimeout:function(){var t;return t=null,function(n,r,e){return null!=t&&(null!=e&&e(),clearTimeout(t)),t=setTimeout(function(){return t=null,r()},n)}}()}}).call(this);
-},{}],2:[function(_dereq_,module,exports){
-(function (global){
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-'use strict';
-
-/**
- * Merge two attribute objects giving precedence
- * to values in object `b`. Classes are special-cased
- * allowing for arrays and merging/joining appropriately
- * resulting in a string.
- *
- * @param {Object} a
- * @param {Object} b
- * @return {Object} a
- * @api private
- */
-
-exports.merge = function merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i < a.length; i++) {
-      attrs = merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-  var ac = a['class'];
-  var bc = b['class'];
-
-  if (ac || bc) {
-    ac = ac || [];
-    bc = bc || [];
-    if (!Array.isArray(ac)) ac = [ac];
-    if (!Array.isArray(bc)) bc = [bc];
-    a['class'] = ac.concat(bc).filter(nulls);
-  }
-
-  for (var key in b) {
-    if (key != 'class') {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-};
-
-/**
- * Filter null `val`s.
- *
- * @param {*} val
- * @return {Boolean}
- * @api private
- */
-
-function nulls(val) {
-  return val != null && val !== '';
-}
-
-/**
- * join array as classes.
- *
- * @param {*} val
- * @return {String}
- */
-exports.joinClasses = joinClasses;
-function joinClasses(val) {
-  return Array.isArray(val) ? val.map(joinClasses).filter(nulls).join(' ') : val;
-}
-
-/**
- * Render the given classes.
- *
- * @param {Array} classes
- * @param {Array.<Boolean>} escaped
- * @return {String}
- */
-exports.cls = function cls(classes, escaped) {
-  var buf = [];
-  for (var i = 0; i < classes.length; i++) {
-    if (escaped && escaped[i]) {
-      buf.push(exports.escape(joinClasses([classes[i]])));
-    } else {
-      buf.push(joinClasses(classes[i]));
-    }
-  }
-  var text = joinClasses(buf);
-  if (text.length) {
-    return ' class="' + text + '"';
-  } else {
-    return '';
-  }
-};
-
-/**
- * Render the given attribute.
- *
- * @param {String} key
- * @param {String} val
- * @param {Boolean} escaped
- * @param {Boolean} terse
- * @return {String}
- */
-exports.attr = function attr(key, val, escaped, terse) {
-  if ('boolean' == typeof val || null == val) {
-    if (val) {
-      return ' ' + (terse ? key : key + '="' + key + '"');
-    } else {
-      return '';
-    }
-  } else if (0 == key.indexOf('data') && 'string' != typeof val) {
-    return ' ' + key + "='" + JSON.stringify(val).replace(/'/g, '&apos;') + "'";
-  } else if (escaped) {
-    return ' ' + key + '="' + exports.escape(val) + '"';
-  } else {
-    return ' ' + key + '="' + val + '"';
-  }
-};
-
-/**
- * Render the given attributes object.
- *
- * @param {Object} obj
- * @param {Object} escaped
- * @return {String}
- */
-exports.attrs = function attrs(obj, terse){
-  var buf = [];
-
-  var keys = Object.keys(obj);
-
-  if (keys.length) {
-    for (var i = 0; i < keys.length; ++i) {
-      var key = keys[i]
-        , val = obj[key];
-
-      if ('class' == key) {
-        if (val = joinClasses(val)) {
-          buf.push(' ' + key + '="' + val + '"');
-        }
-      } else {
-        buf.push(exports.attr(key, val, false, terse));
-      }
-    }
-  }
-
-  return buf.join('');
-};
-
-/**
- * Escape the given string of `html`.
- *
- * @param {String} html
- * @return {String}
- * @api private
- */
-
-exports.escape = function escape(html){
-  var result = String(html)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-  if (result === '' + html) return html;
-  else return result;
-};
-
-/**
- * Re-throw the given `err` in context to the
- * the jade in `filename` at the given `lineno`.
- *
- * @param {Error} err
- * @param {String} filename
- * @param {String} lineno
- * @api private
- */
-
-exports.rethrow = function rethrow(err, filename, lineno, str){
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != 'undefined' || !filename) && !str) {
-    err.message += ' on line ' + lineno;
-    throw err;
-  }
-  try {
-    str = str || _dereq_('fs').readFileSync(filename, 'utf8')
-  } catch (ex) {
-    rethrow(err, null, lineno)
-  }
-  var context = 3
-    , lines = str.split('\n')
-    , start = Math.max(lineno - context, 0)
-    , end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines.slice(start, end).map(function(line, i){
-    var curr = i + start + 1;
-    return (curr == lineno ? '  > ' : '    ')
-      + curr
-      + '| '
-      + line;
-  }).join('\n');
-
-  // Alter exception message
-  err.path = filename;
-  err.message = (filename || 'Jade') + ':' + lineno
-    + '\n' + context + '\n\n' + err.message;
-  throw err;
-};
-
-},{"fs":2}],2:[function(_dereq_,module,exports){
-
-},{}]},{},[1])
-(1)
-});
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],3:[function(_dereq_,module,exports){
-var $, Backbone, Pagination, tpl, util,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-Backbone = _dereq_('backbone');
-
-$ = _dereq_('jquery');
-
-util = _dereq_('funcky.util');
-
-tpl = _dereq_('./main.jade');
-
-
-/*
-Create a pagination view.
-@class
-@extends Backbone.View
- */
-
-Pagination = (function(_super) {
-  __extends(Pagination, _super);
-
-  function Pagination() {
-    return Pagination.__super__.constructor.apply(this, arguments);
-  }
-
-  Pagination.prototype.tagName = 'ul';
-
-  Pagination.prototype.className = 'pagination';
-
-
-  /*
-  	@constructs
-  	@param {object} this.options
-  	@prop {number} options.resultsTotal - Total number of results.
-  	@prop {number} options.resultsPerPage - Number of results per page.
-  	@prop {number} [options.resultsStart=0] - The result item to start at. Not the start page!
-  	@prop {boolean} [options.step10=true] - Render (<< and >>) for steps of 10.
-  	@prop {boolean} [options.triggerPageNumber=true] - Trigger the new pageNumber (true) or prev/next (false).
-   */
-
-  Pagination.prototype.initialize = function(options) {
-    var _base, _base1;
-    this.options = options;
-    if ((_base = this.options).step10 == null) {
-      _base.step10 = true;
-    }
-    if ((_base1 = this.options).triggerPageNumber == null) {
-      _base1.triggerPageNumber = true;
-    }
-    this._currentPageNumber = (this.options.resultsStart != null) && this.options.resultsStart > 0 ? (this.options.resultsStart / this.options.resultsPerPage) + 1 : 1;
-    return this.setPageNumber(this._currentPageNumber, true);
-  };
-
-  Pagination.prototype.render = function() {
-    var attrs;
-    this._pageCount = Math.ceil(this.options.resultsTotal / this.options.resultsPerPage);
-    attrs = $.extend(this.options, {
-      currentPageNumber: this._currentPageNumber,
-      pageCount: this._pageCount
-    });
-    this.el.innerHTML = tpl(attrs);
-    if (this._pageCount <= 1) {
-      this.$el.hide();
-    }
-    return this;
-  };
-
-  Pagination.prototype.events = function() {
-    return {
-      'click li.prev10.active': '_handlePrev10',
-      'click li.prev.active': '_handlePrev',
-      'click li.next.active': '_handleNext',
-      'click li.next10.active': '_handleNext10',
-      'click li.current:not(.active)': '_handleCurrentClick',
-      'blur li.current.active input': '_handleBlur',
-      'keyup li.current.active input': '_handleKeyup'
-    };
-  };
-
-  Pagination.prototype._handlePrev10 = function() {
-    return this.setPageNumber(this._currentPageNumber - 10);
-  };
-
-  Pagination.prototype._handlePrev = function() {
-    return this.setPageNumber(this._currentPageNumber - 1);
-  };
-
-  Pagination.prototype._handleNext = function() {
-    return this.setPageNumber(this._currentPageNumber + 1);
-  };
-
-  Pagination.prototype._handleNext10 = function() {
-    return this.setPageNumber(this._currentPageNumber + 10);
-  };
-
-  Pagination.prototype._handleCurrentClick = function(ev) {
-    var input, span, target;
-    target = this.$(ev.currentTarget);
-    span = target.find('span');
-    input = target.find('input');
-    input.width(span.width());
-    target.addClass('active');
-    input.animate({
-      width: 40
-    }, 'fast');
-    input.focus();
-    return input.val(this._currentPageNumber);
-  };
-
-  Pagination.prototype._handleKeyup = function(ev) {
-    var input, newPageNumber;
-    input = this.$(ev.currentTarget);
-    newPageNumber = +input.val();
-    if (ev.keyCode === 13) {
-      if ((1 <= newPageNumber && newPageNumber <= this._pageCount)) {
-        this.setPageNumber(newPageNumber);
-      }
-      return this._deactivateCurrentLi(input);
-    }
-  };
-
-  Pagination.prototype._handleBlur = function(ev) {
-    return this._deactivateCurrentLi(this.$(ev.currentTarget));
-  };
-
-  Pagination.prototype._deactivateCurrentLi = function(input) {
-    return input.animate({
-      width: 0
-    }, 'fast', function() {
-      var li;
-      li = input.parent();
-      return li.removeClass('active');
-    });
-  };
-
-
-  /*
-  	@method getCurrentPageNumber
-  	@returns {number}
-   */
-
-  Pagination.prototype.getCurrentPageNumber = function() {
-    return this._currentPageNumber;
-  };
-
-
-  /*
-  	@method setPageNumber
-  	@param {number} pageNumber
-  	@param {boolean} [silent=false]
-   */
-
-  Pagination.prototype.setPageNumber = function(pageNumber, silent) {
-    var direction;
-    if (silent == null) {
-      silent = false;
-    }
-    if (!this.triggerPageNumber) {
-      direction = pageNumber < this._currentPageNumber ? 'prev' : 'next';
-      this.trigger(direction);
-    }
-    this._currentPageNumber = pageNumber;
-    this.render();
-    if (!silent) {
-      return util.setResetTimeout(500, (function(_this) {
-        return function() {
-          return _this.trigger('change:pagenumber', pageNumber);
-        };
-      })(this));
-    }
-  };
-
-  Pagination.prototype.destroy = function() {
-    return this.remove();
-  };
-
-  return Pagination;
-
-})(Backbone.View);
-
-module.exports = Pagination;
-
-
-
-},{"./main.jade":4,"funcky.util":1}],4:[function(_dereq_,module,exports){
-var jade = _dereq_("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-;var locals_for_with = (locals || {});(function (step10, pageCount, currentPageNumber, showPageNames) {
-if ( (step10 && pageCount >= 10))
-{
-buf.push("<li" + (jade.cls(['prev10',currentPageNumber>10?'active':''], [null,true])) + ">&laquo;</li>");
-}
-buf.push("<li" + (jade.cls(['prev',currentPageNumber>1?'active':''], [null,true])) + ">&lsaquo;</li>");
-if ( (showPageNames != null))
-{
-buf.push("<li class=\"pageNameSingular\">" + (jade.escape(null == (jade_interp = showPageNames[0]) ? "" : jade_interp)) + "</li>");
-}
-buf.push("<li class=\"current\"><input type=\"text\"" + (jade.attr("value", currentPageNumber, true, false)) + "/><span>" + (jade.escape(null == (jade_interp = currentPageNumber) ? "" : jade_interp)) + "</span></li><li class=\"text\">of</li><li class=\"pagecount\">" + (jade.escape(null == (jade_interp = pageCount) ? "" : jade_interp)) + "</li>");
-if ( (showPageNames != null))
-{
-buf.push("<li class=\"pageNamePlural\">" + (jade.escape(null == (jade_interp = showPageNames[1]) ? "" : jade_interp)) + "</li>");
-}
-buf.push("<li" + (jade.cls(['next',currentPageNumber<pageCount?'active':''], [null,true])) + ">&rsaquo;</li>");
-if ( (step10 && pageCount >= 10))
-{
-buf.push("<li" + (jade.cls(['next10',currentPageNumber<=pageCount-10?'active':''], [null,true])) + ">&raquo;</li>");
-}}.call(this,"step10" in locals_for_with?locals_for_with.step10:typeof step10!=="undefined"?step10:undefined,"pageCount" in locals_for_with?locals_for_with.pageCount:typeof pageCount!=="undefined"?pageCount:undefined,"currentPageNumber" in locals_for_with?locals_for_with.currentPageNumber:typeof currentPageNumber!=="undefined"?currentPageNumber:undefined,"showPageNames" in locals_for_with?locals_for_with.showPageNames:typeof showPageNames!=="undefined"?showPageNames:undefined));;return buf.join("");
-};
-},{"jade/runtime":2}]},{},[3])
-(3)
-});
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js":[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -11788,14 +11520,9 @@ ListOptions = (function(_super) {
     }
   };
 
-  ListOptions.prototype.orderBy = function(strategy, silent) {
-    if (silent == null) {
-      silent = false;
-    }
+  ListOptions.prototype.orderBy = function(strategy) {
     this.comparator = this.strategies[strategy];
-    return this.sort({
-      silent: silent
-    });
+    return this.sort();
   };
 
   ListOptions.prototype.setAllVisible = function() {
@@ -11854,7 +11581,7 @@ SearchResults = (function(_super) {
   };
 
   SearchResults.prototype.runQuery = function(queryOptions, options) {
-    var queryOptionsString;
+    var queryOptionsString, resultRows;
     if (options == null) {
       options = {};
     }
@@ -11862,6 +11589,10 @@ SearchResults = (function(_super) {
       options.cache = true;
     }
     this.queryAmount = this.queryAmount + 1;
+    if (queryOptions.hasOwnProperty('resultRows')) {
+      resultRows = queryOptions.resultRows;
+      delete queryOptions.resultRows;
+    }
     queryOptionsString = JSON.stringify(queryOptions);
     if (options.cache && this.cachedModels.hasOwnProperty(queryOptionsString)) {
       return this.setCurrent(this.cachedModels[queryOptionsString]);
@@ -11905,9 +11636,8 @@ SearchResults = (function(_super) {
       url += "&database=" + database;
     }
     return this.getResults(url, (function(_this) {
-      return function(response) {
-        _this.addModel(response, url);
-        return _this.trigger('change:page', new _this.model(response), database);
+      return function(attrs) {
+        return _this.trigger('change:page', new _this.model(attrs), database);
       };
     })(this));
   };
@@ -11918,11 +11648,6 @@ SearchResults = (function(_super) {
     ajaxOptions = {
       data: JSON.stringify(queryOptions)
     };
-    if (this.config.has('authorizationHeaderToken')) {
-      ajaxOptions.headers = {
-        Authorization: this.config.get('authorizationHeaderToken')
-      };
-    }
     if (this.config.has('requestOptions')) {
       _.extend(ajaxOptions, this.config.get('requestOptions'));
     }
@@ -11950,16 +11675,9 @@ SearchResults = (function(_super) {
   };
 
   SearchResults.prototype.getResults = function(url, done) {
-    var options, req;
+    var req;
     this.trigger('request');
-    if (this.config.has('authorizationHeaderToken')) {
-      options = {
-        headers: {
-          Authorization: this.config.get('authorizationHeaderToken')
-        }
-      };
-    }
-    req = funcky.get(url, options);
+    req = funcky.get(url);
     req.done((function(_this) {
       return function(res) {
         done(JSON.parse(res.responseText));
@@ -11986,7 +11704,7 @@ module.exports = SearchResults;
 
 
 
-},{"../models/searchresult":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/searchresult.coffee","backbone":false,"funcky.req":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.req/dist/latest/index.min.js","underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee":[function(require,module,exports){
+},{"../models/searchresult":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/searchresult.coffee","backbone":false,"funcky.req":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.req/dist/main.js","underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee":[function(require,module,exports){
 var Backbone, Config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12002,21 +11720,15 @@ Config = (function(_super) {
 
   Config.prototype.defaults = function() {
     return {
-      resultRows: 10,
+      resultRows: null,
       baseUrl: '',
       searchPath: '',
       textSearch: 'advanced',
-      authorizationHeaderToken: null,
+      token: null,
       queryOptions: {},
       facetTitleMap: {},
       templates: {},
-      autoSearch: true,
-      requestOptions: {},
-      results: false,
-      entryTermSingular: 'entry',
-      entryTermPlural: 'entries',
-      entryMetadataFields: [],
-      levels: []
+      autoSearch: true
     };
   };
 
@@ -12051,8 +11763,7 @@ SearchResults = require('./collections/searchresults');
 
 Views = {
   TextSearch: require('./views/text-search'),
-  Facets: require('./views/facets'),
-  Results: require('./views/results')
+  Facets: require('./views/facets')
 };
 
 tpl = require('../jade/main.jade');
@@ -12092,24 +11803,21 @@ MainView = (function(_super) {
       tpl = this.config.get('templates').main;
     }
     this.el.innerHTML = tpl();
-    this.initFacets(this.facetViewMap);
     this.$('.faceted-search').addClass("search-type-" + (this.config.get('textSearch')));
-    if (this.config.get('textSearch') === 'simple' || this.config.get('textSearch') === 'advanced') {
-      this.renderTextSearch();
-    }
-    if (this.config.get('results')) {
-      this.renderResults();
-    }
+    this.initFacets(this.facetViewMap);
     return this;
   };
 
   MainView.prototype.renderTextSearch = function() {
     var textSearchPlaceholder;
     this.textSearch = new Views.TextSearch({
-      config: this.config
+      config: this.config,
+      fields: this.searchResults.current.get('fullTextSearchFields')
     });
     textSearchPlaceholder = this.el.querySelector('.text-search-placeholder');
-    textSearchPlaceholder.parentNode.replaceChild(this.textSearch.el, textSearchPlaceholder);
+    if (textSearchPlaceholder != null) {
+      textSearchPlaceholder.parentNode.replaceChild(this.textSearch.el, textSearchPlaceholder);
+    }
     this.listenTo(this.textSearch, 'change', (function(_this) {
       return function(queryOptions) {
         return _this.queryOptions.set(queryOptions, {
@@ -12122,24 +11830,6 @@ MainView = (function(_super) {
         return _this.search();
       };
     })(this));
-  };
-
-  MainView.prototype.renderResults = function() {
-    this.$el.addClass('with-results');
-    this.results = new Views.Results({
-      el: this.$('.results'),
-      config: this.config,
-      searchResults: this.searchResults
-    });
-    this.listenTo(this.results, 'result:click', function(data) {
-      return this.trigger('result:click', data);
-    });
-    this.listenTo(this.results, 'result:layer-click', function(layer, data) {
-      return this.trigger('result:layer-click', layer, data);
-    });
-    return this.listenTo(this.results, 'change:sort-levels', function(sortParameters) {
-      return this.sortResultsBy(sortParameters);
-    });
   };
 
   MainView.prototype.events = function() {
@@ -12180,9 +11870,6 @@ MainView = (function(_super) {
     if (this.textSearch != null) {
       this.textSearch.destroy();
     }
-    if (this.results != null) {
-      this.results.destroy();
-    }
     return this.remove();
   };
 
@@ -12195,21 +11882,21 @@ MainView = (function(_super) {
       facetTitleMap: _.extend(this.config.get('facetTitleMap'), ftm)
     });
     if (['none', 'simple', 'advanced'].indexOf(this.config.get('textSearch')) === -1) {
-      this.config.set({
+      return this.config.set({
         textSearch: 'advanced'
       });
     }
-    return this.listenTo(this.config, 'change:resultRows', (function(_this) {
-      return function() {
-        return _this.refresh();
-      };
-    })(this));
   };
 
   MainView.prototype.initQueryOptions = function() {
     var attrs;
     attrs = _.extend(this.config.get('queryOptions'), this.config.get('textSearchOptions'));
     this.queryOptions = new QueryOptions(attrs);
+    this.listenTo(this.queryOptions, 'change', (function(_this) {
+      return function() {
+        return _this.trigger('change:queryoptions', _this.queryOptions);
+      };
+    })(this));
     if (this.config.get('autoSearch')) {
       return this.listenTo(this.queryOptions, 'change', (function(_this) {
         return function() {
@@ -12282,30 +11969,30 @@ MainView = (function(_super) {
   };
 
   MainView.prototype.showLoader = function() {
-    var calc, overlay;
+    var facetedSearch, fsBox, left, loader, overlay, top;
     overlay = this.el.querySelector('.overlay');
     if (overlay.style.display === 'block') {
       return false;
     }
-    calc = (function(_this) {
-      return function() {
-        var facetedSearch, fsBox, left, loader, top;
-        facetedSearch = _this.el.querySelector('.faceted-search');
-        fsBox = funcky(facetedSearch).boundingBox();
-        left = (fsBox.left + fsBox.width / 2 - 12) + 'px';
-        top = (fsBox.top + fsBox.height / 2 - 12) + 'px';
-        if (fsBox.height > window.innerHeight) {
-          top = '50vh';
-        }
-        loader = overlay.children[0];
-        loader.style.left = left;
-        loader.style.top = top;
-        overlay.style.width = fsBox.width + 'px';
-        overlay.style.height = fsBox.height + 'px';
-        return overlay.style.display = 'block';
-      };
-    })(this);
-    return setTimeout(calc, 0);
+    loader = overlay.children[0];
+    facetedSearch = this.el.querySelector('.faceted-search');
+    fsBox = funcky(facetedSearch).boundingBox();
+    if (fsBox.width === 0) {
+      fsBox.width = 300;
+    }
+    if (fsBox.height === 0) {
+      fsBox.height = 100;
+    }
+    overlay.style.width = fsBox.width + 'px';
+    overlay.style.height = fsBox.height + 'px';
+    overlay.style.display = 'block';
+    left = fsBox.left + fsBox.width / 2 - 12;
+    loader.style.left = left + 'px';
+    top = fsBox.top + fsBox.height / 2 - 12;
+    if (fsBox.height > window.innerHeight) {
+      top = '50vh';
+    }
+    return loader.style.top = top + 'px';
   };
 
   MainView.prototype.hideLoader = function() {
@@ -12316,6 +12003,7 @@ MainView = (function(_super) {
     var facets;
     facets = this.searchResults.current.get('facets');
     if (this.searchResults.queryAmount === 1) {
+      this.renderTextSearch();
       return this.facets.renderFacets(facets);
     } else if (this.searchResults.queryAmount > 1) {
       return this.facets.update(facets);
@@ -12342,10 +12030,14 @@ MainView = (function(_super) {
     return this.searchResults.current.has('_prev');
   };
 
-  MainView.prototype.sortResultsBy = function(sortParameters) {
+  MainView.prototype.sortResultsBy = function(field) {
     return this.queryOptions.set({
-      sortParameters: sortParameters,
-      resultFields: _.pluck(sortParameters, 'fieldname')
+      sortParameters: [
+        {
+          fieldname: field,
+          direction: 'asc'
+        }
+      ]
     });
   };
 
@@ -12355,9 +12047,6 @@ MainView = (function(_super) {
     }
     if (this.textSearch != null) {
       this.textSearch.reset();
-    }
-    if (this.results != null) {
-      this.results.reset();
     }
     this.facets.reset();
     this.queryOptions.reset();
@@ -12369,22 +12058,20 @@ MainView = (function(_super) {
     });
   };
 
-  MainView.prototype.refresh = function(newQueryOptions) {
-    if (newQueryOptions == null) {
-      newQueryOptions = {};
-    }
-    if (Object.keys(newQueryOptions).length > 0) {
-      this.set(newQueryOptions, {
-        silent: true
-      });
-    }
-    return this.search({
-      cache: false
-    });
+  MainView.prototype.getSearchResultURL = function() {
+    return this.searchResults.postURL;
   };
 
-  MainView.prototype.search = function(options) {
-    return this.searchResults.runQuery(this.queryOptions.attributes, options);
+  MainView.prototype.xlsUrl = function() {
+    return this.getSearchResultURL() + "/xls";
+  };
+
+  MainView.prototype.csvUrl = function() {
+    return this.getSearchResultURL() + "/csv";
+  };
+
+  MainView.prototype.search = function() {
+    return this.searchResults.runQuery(this.queryOptions.attributes);
   };
 
   return MainView;
@@ -12395,7 +12082,7 @@ module.exports = MainView;
 
 
 
-},{"../jade/main.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/main.jade","./collections/searchresults":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/searchresults.coffee","./config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","./models/query-options":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/query-options.coffee","./views/facets":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets.coffee","./views/results":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/index.coffee","./views/text-search":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/text-search.coffee","backbone":false,"funcky.el":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.el/dist/index.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/boolean.coffee":[function(require,module,exports){
+},{"../jade/main.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/main.jade","./collections/searchresults":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/searchresults.coffee","./config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","./models/query-options":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/query-options.coffee","./views/facets":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets.coffee","./views/text-search":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/text-search.coffee","backbone":false,"funcky.el":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.el/dist/index.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/boolean.coffee":[function(require,module,exports){
 var BooleanFacet, Models,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12545,7 +12232,6 @@ module.exports = Facet;
 
 },{"../../config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","backbone":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/range.coffee":[function(require,module,exports){
 var FacetModel, RangeFacet, _,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -12557,8 +12243,6 @@ RangeFacet = (function(_super) {
   __extends(RangeFacet, _super);
 
   function RangeFacet() {
-    this.dragMax = __bind(this.dragMax, this);
-    this.dragMin = __bind(this.dragMin, this);
     return RangeFacet.__super__.constructor.apply(this, arguments);
   }
 
@@ -12567,43 +12251,8 @@ RangeFacet = (function(_super) {
       min: null,
       max: null,
       currentMin: null,
-      currentMax: null,
-      handleMinLeft: null,
-      handleMaxLeft: null,
-      sliderWidth: null,
-      options: {}
+      currentMax: null
     });
-  };
-
-  RangeFacet.prototype.initialize = function() {
-    this.on('change:currentMin', (function(_this) {
-      return function(model, value) {
-        return _this.set({
-          handleMinLeft: _this.getLeftFromYear(value)
-        });
-      };
-    })(this));
-    this.on('change:currentMax', (function(_this) {
-      return function(model, value) {
-        return _this.set({
-          handleMaxLeft: _this.getLeftFromYear(value)
-        });
-      };
-    })(this));
-    this.on('change:handleMinLeft', (function(_this) {
-      return function(model, value) {
-        return _this.set({
-          currentMin: _this.getYearFromLeft(value)
-        });
-      };
-    })(this));
-    return this.on('change:handleMaxLeft', (function(_this) {
-      return function(model, value) {
-        return _this.set({
-          currentMax: _this.getYearFromLeft(value)
-        });
-      };
-    })(this));
   };
 
   RangeFacet.prototype.set = function(attrs, options) {
@@ -12629,57 +12278,14 @@ RangeFacet = (function(_super) {
   };
 
   RangeFacet.prototype.parse = function(attrs) {
-    var getYear, ll, ul;
     RangeFacet.__super__.parse.apply(this, arguments);
-    getYear = function(str) {
-      if (str.length === 8) {
-        str = str.substr(0, 4);
-      } else if (str.length === 7) {
-        str = str.substr(0, 3);
-      } else {
-        throw new Error("RangeFacet: lower or upper limit string is not 7 or 8 chars!");
-      }
-      return +str;
+    attrs.options = {
+      lowerLimit: +((attrs.options[0].lowerLimit + '').substr(0, 4)),
+      upperLimit: +((attrs.options[0].upperLimit + '').substr(0, 4))
     };
-    ll = attrs.options[0].lowerLimit + '';
-    ul = attrs.options[0].upperLimit + '';
-    attrs.min = attrs.currentMin = attrs.options.lowerLimit = getYear(ll);
-    attrs.max = attrs.currentMax = attrs.options.upperLimit = getYear(ul);
+    attrs.min = attrs.currentMin = attrs.options.lowerLimit;
+    attrs.max = attrs.currentMax = attrs.options.upperLimit;
     return attrs;
-  };
-
-  RangeFacet.prototype.getLeftFromYear = function(year) {
-    var hhw, ll, sw, ul;
-    ll = this.get('options').lowerLimit;
-    ul = this.get('options').upperLimit;
-    sw = this.get('sliderWidth');
-    hhw = this.get('handleWidth') / 2;
-    return (((year - ll) / (ul - ll)) * sw) - hhw;
-  };
-
-  RangeFacet.prototype.getYearFromLeft = function(left) {
-    var hhw, ll, sw, ul;
-    ll = this.get('options').lowerLimit;
-    ul = this.get('options').upperLimit;
-    hhw = this.get('handleWidth') / 2;
-    sw = this.get('sliderWidth');
-    return (((left + hhw) / sw) * (ul - ll)) + ll;
-  };
-
-  RangeFacet.prototype.dragMin = function(pos) {
-    if ((-1 < pos && pos <= this.get('handleMaxLeft'))) {
-      return this.set({
-        handleMinLeft: pos
-      });
-    }
-  };
-
-  RangeFacet.prototype.dragMax = function(pos) {
-    if ((this.get('handleMinLeft') < pos && pos <= this.get('sliderWidth'))) {
-      return this.set({
-        handleMaxLeft: pos
-      });
-    }
   };
 
   return RangeFacet;
@@ -12708,12 +12314,6 @@ QueryOptions = (function(_super) {
     return QueryOptions.__super__.constructor.apply(this, arguments);
   }
 
-
-  /*
-  	@prop {array} facetValues=[] - Array of objects containing a facet name and values: {name: 'facet_s_writers', values: ['pietje', 'pukje']}
-  	@prop {array} sortParameters=[] - Array of objects containing fieldname and direction: {fieldname: 'language', direction: 'desc'}
-   */
-
   QueryOptions.prototype.defaults = function() {
     return {
       facetValues: [],
@@ -12721,13 +12321,7 @@ QueryOptions = (function(_super) {
     };
   };
 
-
-  /*
-  	@constructs
-  	@param {object} this.initialAttributes - The initial attributes are stored and not mutated, because on reset the original data is needed.
-   */
-
-  QueryOptions.prototype.initialize = function(initialAttributes) {
+  QueryOptions.prototype.initialize = function(initialAttributes, options) {
     this.initialAttributes = initialAttributes;
   };
 
@@ -12771,13 +12365,30 @@ module.exports = QueryOptions;
 
 
 },{"../config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/search.coffee":[function(require,module,exports){
-var Backbone, Search, _,
+var Backbone, Search, escapeTerm, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 Backbone = require('backbone');
 
 _ = require('underscore');
+
+escapeTerm = function(term) {
+  var char, escaped, regex, special, _i, _len;
+  special = '\\ + - & | ! ( ) { } [ ] ^ " ~ * ? :'.split(/\s+/);
+  escaped = term;
+  for (_i = 0, _len = special.length; _i < _len; _i++) {
+    char = special[_i];
+    if (!(char)) {
+      continue;
+    }
+    regex = '\\' + char;
+    console.log("Replacing " + char, RegExp("" + regex, "g"));
+    escaped = escaped.replace(RegExp("" + regex, "g"), '\\' + char);
+  }
+  console.log(escaped);
+  return escaped;
+};
 
 Search = (function(_super) {
   __extends(Search, _super);
@@ -12787,21 +12398,27 @@ Search = (function(_super) {
   }
 
   Search.prototype.defaults = function() {
-    return {
-      term: '*',
-      caseSensitive: false,
-      fuzzy: false,
-      title: 'Text Search',
-      name: 'text_search'
-    };
+    return {};
   };
 
   Search.prototype.queryData = function() {
-    var attrs;
+    var attrs, data, key, value;
     attrs = _.extend({}, this.attributes);
-    delete attrs.name;
-    delete attrs.title;
-    return attrs;
+    data = (function() {
+      var _results;
+      _results = [];
+      for (key in attrs) {
+        value = attrs[key];
+        _results.push({
+          name: key,
+          term: "*" + (escapeTerm(value)) + "*"
+        });
+      }
+      return _results;
+    })();
+    return {
+      fullTextSearchParameters: data
+    };
   };
 
   return Search;
@@ -12841,8 +12458,7 @@ SearchResult = (function(_super) {
       solrquery: '',
       sortableFields: [],
       start: null,
-      term: '',
-      facets: []
+      term: ''
     };
   };
 
@@ -12855,7 +12471,7 @@ module.exports = SearchResult;
 
 
 },{"../config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets.coffee":[function(require,module,exports){
-var $, Backbone, Facets, _,
+var Backbone, Facets, _,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12863,8 +12479,6 @@ var $, Backbone, Facets, _,
 Backbone = require('backbone');
 
 _ = require('underscore');
-
-$ = require('jquery');
 
 Facets = (function(_super) {
   __extends(Facets, _super);
@@ -12891,10 +12505,8 @@ Facets = (function(_super) {
   };
 
   Facets.prototype.render = function() {
-    var tpl;
     if (this.config.get('templates').hasOwnProperty('facets')) {
-      tpl = this.config.get('templates').facets;
-      this.el.innerHTML = tpl();
+      this.el.innerHTML = this.config.get('templates').facets();
     }
     return this;
   };
@@ -12907,6 +12519,9 @@ Facets = (function(_super) {
         facetData = data[index];
         if (this.viewMap.hasOwnProperty(facetData.type)) {
           placeholder = this.el.querySelector("." + facetData.name + "-placeholder");
+          if (placeholder == null) {
+            placeholder = this.el.querySelector("[data-name=" + facetData.name + "]");
+          }
           if (placeholder != null) {
             placeholder.parentNode.replaceChild(this.renderFacet(facetData).el, placeholder);
           }
@@ -12931,11 +12546,17 @@ Facets = (function(_super) {
   };
 
   Facets.prototype.renderFacet = function(facetData) {
-    var View;
+    var View, _ref;
     if (_.isString(facetData)) {
       facetData = _.findWhere(this.searchResults.first().get('facets'), {
         name: facetData
       });
+    }
+    if (((_ref = this.config.facetTitleMap) != null ? _ref[facetData.name] : void 0) != null) {
+      facetData.title = this.config.facetTitleMap[facetData.name];
+    }
+    if (this.config.get('startCollapsed')) {
+      facetData.collapsed = true;
     }
     View = this.viewMap[facetData.type];
     this.views[facetData.name] = new View({
@@ -12986,17 +12607,16 @@ Facets = (function(_super) {
   };
 
   Facets.prototype.destroyFacets = function() {
-    var view, viewName, _ref, _results;
+    var view, viewName, _ref;
     this.stopListening();
     _ref = this.views;
-    _results = [];
     for (viewName in _ref) {
       if (!__hasProp.call(_ref, viewName)) continue;
       view = _ref[viewName];
       view.destroy();
-      _results.push(delete this.views[viewName]);
+      delete this.views[viewName];
     }
-    return _results;
+    return this.render();
   };
 
   Facets.prototype.destroy = function() {
@@ -13005,16 +12625,17 @@ Facets = (function(_super) {
   };
 
   Facets.prototype.toggle = function(ev) {
-    var facetNames, icon, index, open, slideFacet, span, text;
+    var $, facetNames, icon, index, open, slideFacet, span, text, _ref;
     ev.preventDefault();
+    $ = Backbone.$;
     icon = $(ev.currentTarget).find('i.fa');
     span = $(ev.currentTarget).find('span');
     open = icon.hasClass('fa-expand');
     icon.toggleClass('fa-compress');
     icon.toggleClass('fa-expand');
     text = open ? 'Collapse' : 'Expand';
-    span.text("" + text + " filters");
-    facetNames = _.keys(this.views);
+    span.text("" + text + " facets");
+    facetNames = (_ref = this.config.facets) != null ? _ref : _.keys(this.views);
     index = 0;
     slideFacet = (function(_this) {
       return function() {
@@ -13045,7 +12666,7 @@ module.exports = Facets;
 
 
 
-},{"./facets/boolean":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/boolean.coffee","./facets/date":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/date.coffee","./facets/list":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/list.coffee","./facets/range":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/range.coffee","backbone":false,"jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/boolean.coffee":[function(require,module,exports){
+},{"./facets/boolean":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/boolean.coffee","./facets/date":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/date.coffee","./facets/list":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/list.coffee","./facets/range":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/range.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/boolean.coffee":[function(require,module,exports){
 var $, BooleanFacet, Models, Views, bodyTpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -13233,7 +12854,6 @@ ListFacet = (function(_super) {
 
   ListFacet.prototype.initialize = function(options) {
     ListFacet.__super__.initialize.apply(this, arguments);
-    this.resetActive = false;
     this.config = options.config;
     this.model = new Models.List(options.attrs, {
       parse: true
@@ -13330,10 +12950,7 @@ ListFacet = (function(_super) {
 
   ListFacet.prototype.changeOrder = function(ev) {
     var $target, order, type;
-    if (!this.$('i.filter').hasClass('active')) {
-      this.optionsView.renderAll();
-    }
-    $target = $(ev.currentTarget);
+    $target = Backbone.$(ev.currentTarget);
     if ($target.hasClass('active')) {
       if ($target.hasClass('alpha')) {
         $target.toggleClass('fa-sort-alpha-desc');
@@ -13343,8 +12960,7 @@ ListFacet = (function(_super) {
         $target.toggleClass('fa-sort-amount-asc');
       }
     } else {
-      this.$('i.amount.active').removeClass('active');
-      this.$('i.alpha.active').removeClass('active');
+      this.$('.active').removeClass('active');
       $target.addClass('active');
     }
     type = $target.hasClass('alpha') ? 'alpha' : 'amount';
@@ -13353,21 +12969,11 @@ ListFacet = (function(_super) {
   };
 
   ListFacet.prototype.update = function(newOptions) {
-    if (this.resetActive) {
-      this.collection.reset(newOptions, {
-        parse: true
-      });
-      return this.resetActive = false;
-    } else {
-      return this.collection.updateOptions(newOptions);
-    }
+    return this.collection.updateOptions(newOptions);
   };
 
   ListFacet.prototype.reset = function() {
-    this.resetActive = true;
-    if (this.$('i.filter').hasClass('active')) {
-      return this.toggleFilterMenu();
-    }
+    return this.collection.revert();
   };
 
   return ListFacet;
@@ -13413,15 +13019,11 @@ ListFacetOptions = (function(_super) {
   ListFacetOptions.prototype.initialize = function(options) {
     this.config = options.config;
     this.facetName = options.facetName;
+    this.showingCursor = 0;
+    this.showingIncrement = 50;
     this.listenTo(this.collection, 'sort', (function(_this) {
       return function() {
         return _this.rerender();
-      };
-    })(this));
-    this.listenTo(this.collection, 'reset', (function(_this) {
-      return function() {
-        _this.collection.orderBy('amount_desc', true);
-        return _this.render();
       };
     })(this));
     if (this.config.get('templates').hasOwnProperty('list.option')) {
@@ -13431,8 +13033,6 @@ ListFacetOptions = (function(_super) {
   };
 
   ListFacetOptions.prototype.render = function() {
-    this.showingCursor = 0;
-    this.showingIncrement = 50;
     if (this.config.get('templates').hasOwnProperty('list.body')) {
       bodyTpl = this.config.get('templates')['list.body'];
     }
@@ -13448,7 +13048,7 @@ ListFacetOptions = (function(_super) {
     tpl = '';
     i = 0;
     model = this.collection.at(i);
-    visible = model.get('visible');
+    visible = model != null ? model.get('visible') : void 0;
     while (visible) {
       tpl += optionTpl({
         option: model
@@ -13504,20 +13104,14 @@ ListFacetOptions = (function(_super) {
   };
 
   ListFacetOptions.prototype.checkChanged = function(ev) {
-    var $target, checked, id, unchecked;
+    var $target, id, isChecked;
     $target = $(ev.currentTarget);
     id = $target.attr('data-value');
-    checked = $target.find("i.checked");
-    unchecked = $target.find("i.unchecked");
-    if (checked.is(':visible')) {
-      checked.hide();
-      unchecked.css('display', 'inline-block');
-    } else {
-      checked.css('display', 'inline-block');
-      unchecked.hide();
-    }
-    this.collection.get(id).set('checked', $target.find("i.checked").is(':visible'));
-    if (this.$('i.checked').length === 0 || !this.config.get('autoSearch')) {
+    isChecked = $target.attr('data-state') === 'checked';
+    $target.attr('data-state', isChecked ? 'unchecked' : 'checked');
+    isChecked = $target.attr('data-state') === 'checked';
+    this.collection.get(id).set('checked', isChecked);
+    if (($target.attr('data-state') === 'unchecked') || !this.config.get('autoSearch')) {
       return this.triggerChange();
     } else {
       return funcky.setResetTimeout(1000, (function(_this) {
@@ -13548,7 +13142,7 @@ ListFacetOptions = (function(_super) {
 
 
   /*
-  	Called by parent (ListFacet) when user types in the search input
+  Called by parent (ListFacet) when user types in the search input
    */
 
   ListFacetOptions.prototype.filterOptions = function(value) {
@@ -13608,6 +13202,8 @@ Facet = (function(_super) {
     return Facet.__super__.constructor.apply(this, arguments);
   }
 
+  Facet.prototype.renderedBefore = false;
+
   Facet.prototype.initialize = function(options) {
     this.config = options.config;
     if (this.config.get('facetTitleMap').hasOwnProperty(options.attrs.name)) {
@@ -13620,6 +13216,10 @@ Facet = (function(_super) {
       tpl = this.config.get('templates')['facets.main'];
     }
     this.$el.html(tpl(this.model.attributes));
+    if (this.model.get('collapsed') && !this.renderedBefore) {
+      this.hideBody();
+    }
+    this.renderedBefore = true;
     this.$el.attr('data-name', this.model.get('name'));
     return this;
   };
@@ -13632,7 +13232,7 @@ Facet = (function(_super) {
 
   Facet.prototype.toggleBody = function(ev) {
     var func;
-    func = this.$('.body').is(':visible') ? this.hideBody : this.showBody;
+    func = this.$el.hasClass('collapsed') ? this.showBody : this.hideBody;
     if (_.isFunction(ev)) {
       return func.call(this, ev);
     } else {
@@ -13650,25 +13250,21 @@ Facet = (function(_super) {
 
   Facet.prototype.hideBody = function(done) {
     this.hideMenu();
-    return this.$('.body').slideUp(100, (function(_this) {
-      return function() {
-        if (done != null) {
-          done();
-        }
-        return _this.$('header i.fa').fadeOut(100);
-      };
-    })(this));
+    this.$('.body').one('transitionend', function() {
+      if (done != null) {
+        return done();
+      }
+    });
+    return this.$el.addClass('collapsed');
   };
 
   Facet.prototype.showBody = function(done) {
-    return this.$('.body').slideDown(100, (function(_this) {
-      return function() {
-        if (done != null) {
-          done();
-        }
-        return _this.$('header i.fa').fadeIn(100);
-      };
-    })(this));
+    this.$el.removeClass('collapsed');
+    return this.$('.body').one('transitionend', function() {
+      if (done != null) {
+        return done();
+      }
+    });
   };
 
   Facet.prototype.destroy = function() {
@@ -13731,34 +13327,12 @@ RangeFacet = (function(_super) {
     this.listenTo(this.model, 'change', (function(_this) {
       return function(model) {
         if (model.changed.hasOwnProperty('currentMin') || model.changed.hasOwnProperty('currentMax')) {
-          if ((_this.button != null) && _this.config.get('autoSearch')) {
-            return _this.button.style.display = 'block';
-          }
+          return _this.checkInputOverlap();
         }
       };
     })(this));
-    this.listenTo(this.model, 'change:handleMinLeft', (function(_this) {
-      return function(model, value) {
-        _this.handleMin.css('left', value);
-        return _this.bar.css('left', value);
-      };
-    })(this));
-    this.listenTo(this.model, 'change:handleMaxLeft', (function(_this) {
-      return function(model, value) {
-        _this.handleMax.css('left', value);
-        return _this.bar.css('right', model.get('sliderWidth') - value);
-      };
-    })(this));
-    this.listenTo(this.model, 'change:currentMin', (function(_this) {
-      return function(model, value) {
-        return _this.inputMin.val(Math.ceil(value));
-      };
-    })(this));
-    this.listenTo(this.model, 'change:currentMax', (function(_this) {
-      return function(model, value) {
-        return _this.inputMax.val(Math.ceil(value));
-      };
-    })(this));
+    this.listenTo(this.model, 'change:currentMin', this.updateMinHandle);
+    this.listenTo(this.model, 'change:currentMax', this.updateMaxHandle);
     return this.render();
   };
 
@@ -13784,21 +13358,18 @@ RangeFacet = (function(_super) {
   };
 
   RangeFacet.prototype.postRender = function() {
-    var slider;
+    this.slider = this.$('.slider');
+    this.sliderWidth = this.slider.width();
+    this.sliderLeft = this.slider.offset().left;
     this.handleMin = this.$('.handle-min');
     this.handleMax = this.$('.handle-max');
+    this.handleWidth = this.handleMin.width();
+    this.handleMinLeft = this.handleMin.position().left;
+    this.handleMaxLeft = this.handleMax.position().left;
     this.inputMin = this.$('input.min');
     this.inputMax = this.$('input.max');
     this.bar = this.$('.bar');
-    this.button = this.el.querySelector('button');
-    slider = this.$('.slider');
-    return this.model.set({
-      sliderWidth: slider.width(),
-      sliderLeft: slider.offset().left,
-      handleMinLeft: this.handleMin.position().left,
-      handleMaxLeft: this.handleMax.position().left,
-      handleWidth: this.handleMin.width()
-    });
+    return this.button = this.el.querySelector('button');
   };
 
   RangeFacet.prototype.events = function() {
@@ -13809,13 +13380,7 @@ RangeFacet = (function(_super) {
       'mousemove': 'drag',
       'blur input': 'setYear',
       'keyup input': 'setYear',
-      'click button': 'doSearch',
-      'dblclick input.min': function(ev) {
-        return this.enableInputEditable(this.inputMin);
-      },
-      'dblclick input.max': function(ev) {
-        return this.enableInputEditable(this.inputMax);
-      }
+      'click button': 'doSearch'
     });
   };
 
@@ -13859,34 +13424,81 @@ RangeFacet = (function(_super) {
       return target.css('z-index', 11);
     } else if (target.hasClass('bar')) {
       return this.draggingBar = {
-        offsetLeft: (ev.clientX - this.model.get('sliderLeft')) - this.model.get('handleMinLeft'),
+        offsetLeft: (ev.clientX - this.sliderLeft) - this.handleMinLeft,
         barWidth: this.bar.width()
       };
     }
   };
 
   RangeFacet.prototype.drag = function(ev) {
-    var left, mousePosLeft, right;
-    mousePosLeft = ev.clientX - this.model.get('sliderLeft');
+    var dragMax, dragMin, mousePosLeft;
+    mousePosLeft = ev.clientX - this.sliderLeft;
     if (this.draggingMin || this.draggingMax) {
       this.disableInputOverlap();
-      this.checkInputOverlap();
     }
+    dragMin = (function(_this) {
+      return function(newPos) {
+        if ((-1 < newPos && newPos <= _this.handleMaxLeft)) {
+          _this.handleMinLeft = newPos;
+          _this.handleMin.css('left', newPos);
+          _this.bar.css('left', newPos);
+          _this.updateDash();
+          return _this.updateHandleLabel('min', newPos);
+        }
+      };
+    })(this);
+    dragMax = (function(_this) {
+      return function(newPos) {
+        if ((_this.handleMinLeft < newPos && newPos <= _this.sliderWidth)) {
+          _this.handleMaxLeft = newPos;
+          _this.handleMax.css('left', newPos);
+          _this.bar.css('right', _this.sliderWidth - newPos);
+          return _this.updateHandleLabel('max', newPos);
+        }
+      };
+    })(this);
     if (this.draggingBar != null) {
-      this.updateDash();
-      left = mousePosLeft - this.draggingBar.offsetLeft;
-      right = left + this.draggingBar.barWidth;
-      if (-1 < left && right <= this.model.get('sliderWidth')) {
-        this.model.dragMin(left);
-        this.model.dragMax(right);
+      if (this.handleMinLeft + this.draggingBar.barWidth <= this.sliderWidth) {
+        dragMin(mousePosLeft - this.draggingBar.offsetLeft);
+        dragMax(this.handleMinLeft + this.draggingBar.barWidth);
       }
     }
     if (this.draggingMin) {
-      this.model.dragMin(mousePosLeft - (this.model.get('handleWidth') / 2));
+      dragMin(mousePosLeft - (this.handleWidth / 2));
     }
     if (this.draggingMax) {
-      return this.model.dragMax(mousePosLeft - (this.model.get('handleWidth') / 2));
+      return dragMax(mousePosLeft - (this.handleWidth / 2));
     }
+  };
+
+  RangeFacet.prototype.enableInputEditable = function(input) {
+    input.attr('disabled', null);
+    return input.focus();
+  };
+
+  RangeFacet.prototype.disableInputEditable = function(input) {
+    return input.attr('disabled', true);
+  };
+
+  RangeFacet.prototype.enableInputOverlap = function(diff) {
+    this.inputMin.css('left', -20 - diff / 2);
+    this.inputMax.css('right', -20 - diff / 2);
+    this.updateDash();
+    this.$('.dash').show();
+    this.inputMin.addClass('overlap');
+    return this.inputMax.addClass('overlap');
+  };
+
+  RangeFacet.prototype.updateDash = function() {
+    return this.$('.dash').css('left', this.handleMinLeft + ((this.handleMaxLeft - this.handleMinLeft) / 2) + 3);
+  };
+
+  RangeFacet.prototype.disableInputOverlap = function() {
+    this.inputMin.css('left', -20);
+    this.inputMax.css('right', -20);
+    this.$('.dash').hide();
+    this.inputMin.removeClass('overlap');
+    return this.inputMax.removeClass('overlap');
   };
 
   RangeFacet.prototype.stopDragging = function() {
@@ -13896,6 +13508,8 @@ RangeFacet = (function(_super) {
           this.model.set({
             currentMin: +this.inputMin.val()
           });
+        } else {
+          this.enableInputEditable(this.inputMin);
         }
       }
       if (this.draggingMax) {
@@ -13903,6 +13517,8 @@ RangeFacet = (function(_super) {
           this.model.set({
             currentMax: +this.inputMax.val()
           });
+        } else {
+          this.enableInputEditable(this.inputMax);
         }
       }
       this.draggingMin = false;
@@ -13914,15 +13530,6 @@ RangeFacet = (function(_super) {
         });
       }
     }
-  };
-
-  RangeFacet.prototype.enableInputEditable = function(input) {
-    input.attr('disabled', null);
-    return input.focus();
-  };
-
-  RangeFacet.prototype.disableInputEditable = function(input) {
-    return input.attr('disabled', true);
   };
 
   RangeFacet.prototype.destroy = function() {
@@ -13967,25 +13574,28 @@ RangeFacet = (function(_super) {
     }
   };
 
-  RangeFacet.prototype.enableInputOverlap = function(diff) {
-    this.inputMin.css('left', -20 - diff / 2);
-    this.inputMax.css('right', -20 - diff / 2);
-    this.updateDash();
-    this.$('.dash').show();
-    this.inputMin.addClass('overlap');
-    return this.inputMax.addClass('overlap');
+  RangeFacet.prototype.updateHandleLabel = function(handle, leftPos) {
+    var input;
+    if ((this.button != null) && this.config.get('autoSearch')) {
+      this.button.style.display = 'block';
+    }
+    input = handle === 'min' ? this.inputMin : this.inputMax;
+    return input.val(this.getYearFromLeftPos(leftPos));
   };
 
-  RangeFacet.prototype.disableInputOverlap = function() {
-    this.inputMin.css('left', -20);
-    this.inputMax.css('right', -20);
-    this.$('.dash').hide();
-    this.inputMin.removeClass('overlap');
-    return this.inputMax.removeClass('overlap');
+  RangeFacet.prototype.getYearFromLeftPos = function(leftPos) {
+    var ll, ul;
+    ll = this.model.get('options').lowerLimit;
+    ul = this.model.get('options').upperLimit;
+    return Math.floor(ll + leftPos / this.sliderWidth * (ul - ll));
   };
 
-  RangeFacet.prototype.updateDash = function() {
-    return this.$('.dash').css('left', this.model.get('handleMinLeft') + ((this.model.get('handleMaxLeft') - this.model.get('handleMinLeft')) / 2) + 3);
+  RangeFacet.prototype.getLeftPosFromYear = function(year) {
+    var left, ll, ul;
+    ll = this.model.get('options').lowerLimit;
+    ul = this.model.get('options').upperLimit;
+    left = ((year - ll) / (ul - ll)) * this.sliderWidth;
+    return Math.floor(left);
   };
 
   RangeFacet.prototype.update = function(newOptions) {
@@ -14008,6 +13618,26 @@ RangeFacet = (function(_super) {
     }
   };
 
+  RangeFacet.prototype.updateMaxHandle = function(model) {
+    var leftMax, year;
+    year = model.get('currentMax');
+    this.inputMax.val(year);
+    leftMax = this.getLeftPosFromYear(year);
+    this.handleMax.css('left', leftMax - (this.handleWidth / 2));
+    this.bar.css('right', this.sliderWidth - leftMax);
+    return this.handleMaxLeft = leftMax - (this.handleWidth / 2);
+  };
+
+  RangeFacet.prototype.updateMinHandle = function(model) {
+    var leftMin, year;
+    year = model.get('currentMin');
+    this.inputMin.val(year);
+    leftMin = this.getLeftPosFromYear(year);
+    this.handleMin.css('left', leftMin - (this.handleWidth / 2));
+    this.bar.css('left', leftMin);
+    return this.handleMinLeft = leftMin - (this.handleWidth / 2);
+  };
+
   return RangeFacet;
 
 })(Views.Facet);
@@ -14016,712 +13646,7 @@ module.exports = RangeFacet;
 
 
 
-},{"../../../jade/facets/range.body.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/range.body.jade","../../models/facets/range":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/range.coffee","./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/index.coffee":[function(require,module,exports){
-var $, Backbone, Results, Views, listItems, tpl, _,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-Backbone = require('backbone');
-
-$ = require('jquery');
-
-_ = require('underscore');
-
-Views = {
-  Result: require('./result'),
-  SortLevels: require('./sort'),
-  Pagination: require('huygens-backbone-pagination')
-};
-
-tpl = require('./index.jade');
-
-listItems = [];
-
-Results = (function(_super) {
-  __extends(Results, _super);
-
-  function Results() {
-    return Results.__super__.constructor.apply(this, arguments);
-  }
-
-
-  /* options
-  	@constructs
-  	@param {object} this.options={}
-  	@prop {object} options.config
-  	@prop {Backbone.Collection} options.searchResults
-   */
-
-  Results.prototype.initialize = function(options) {
-    this.options = options != null ? options : {};
-
-    /*
-    		@prop resultItems
-     */
-    this.resultItems = [];
-    this.isMetadataVisible = true;
-    this.listenTo(this.options.searchResults, 'change:page', this.renderResultsPage);
-    this.listenTo(this.options.searchResults, 'change:results', (function(_this) {
-      return function(responseModel) {
-        _this.$('header h3.numfound').html("Found " + (responseModel.get('numFound')) + " " + (_this.options.config.get('entryTermPlural')));
-        _this.renderPagination(responseModel);
-        return _this.renderResultsPage(responseModel, true);
-      };
-    })(this));
-    this.subviews = {};
-    return this.render();
-  };
-
-  Results.prototype.render = function() {
-    this.$el.html(tpl({
-      resultsPerPage: this.options.config.get('resultRows')
-    }));
-    this.renderLevels();
-    $(window).resize((function(_this) {
-      return function() {
-        var pages;
-        pages = _this.$('div.pages');
-        return pages.height($(window).height() - pages.offset().top);
-      };
-    })(this));
-    return this;
-  };
-
-  Results.prototype.renderLevels = function() {
-    if (this.subviews.sortLevels != null) {
-      this.subviews.sortLevels.destroy();
-    }
-    this.subviews.sortLevels = new Views.SortLevels({
-      levels: this.options.config.get('levels'),
-      entryMetadataFields: this.options.config.get('entryMetadataFields')
-    });
-    this.$('header nav ul').prepend(this.subviews.sortLevels.$el);
-    return this.listenTo(this.subviews.sortLevels, 'change', (function(_this) {
-      return function(sortParameters) {
-        return _this.trigger('change:sort-levels', sortParameters);
-      };
-    })(this));
-  };
-
-
-  /*
-  	@method renderResultsPage
-  	@param {object} responseModel - The model returned by the server.
-  	@param {boolean} [removeCache=false] - Remove the rendered pages? This occurs when the results change, but not when the page changes.
-   */
-
-  Results.prototype.renderResultsPage = function(responseModel, removeCache) {
-    var frag, fulltext, pageNumber, result, ul, _i, _len, _ref;
-    if (removeCache == null) {
-      removeCache = false;
-    }
-    if (removeCache) {
-      this.destroyResultItems();
-      this.$("div.pages").html('');
-    }
-    fulltext = responseModel.has('term') && responseModel.get('term').indexOf('*:*') === -1 && responseModel.get('term').indexOf('*') === -1;
-    frag = document.createDocumentFragment();
-    _ref = responseModel.get('results');
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      result = _ref[_i];
-      result = new Views.Result({
-        data: result,
-        fulltext: fulltext,
-        config: this.options.config
-      });
-      this.resultItems.push(result);
-      this.listenTo(result, 'click', function(resultData) {
-        return this.trigger('result:click', resultData);
-      });
-      this.listenTo(result, 'layer:click', function(layer, resultData) {
-        return this.trigger('result:layer-click', layer, resultData);
-      });
-      frag.appendChild(result.el);
-    }
-    pageNumber = this.subviews.pagination.getCurrentPageNumber();
-    ul = $("<ul class=\"page\" data-page-number=\"" + pageNumber + "\" />");
-    ul.html(frag);
-    return this.$("div.pages").append(ul);
-  };
-
-  Results.prototype.renderPagination = function(responseModel) {
-    if (this.subviews.pagination != null) {
-      this.stopListening(this.subviews.pagination);
-      this.subviews.pagination.destroy();
-    }
-    this.subviews.pagination = new Views.Pagination({
-      resultsStart: responseModel.get('start'),
-      resultsPerPage: this.options.config.get('resultRows'),
-      resultsTotal: responseModel.get('numFound')
-    });
-    this.listenTo(this.subviews.pagination, 'change:pagenumber', this.changePage);
-    return this.$('header .pagination').html(this.subviews.pagination.el);
-  };
-
-  Results.prototype.changePage = function(pageNumber) {
-    var page, pages;
-    pages = this.$('div.pages');
-    pages.find('ul.page').hide();
-    page = pages.find("ul.page[data-page-number=\"" + pageNumber + "\"]");
-    if (page.length > 0) {
-      return page.show();
-    } else {
-      return this.options.searchResults.page(pageNumber);
-    }
-  };
-
-  Results.prototype.events = function() {
-    return {
-      'change li.show-metadata input': 'showMetadata',
-      'change li.results-per-page select': 'onChangeResultsPerPage'
-    };
-  };
-
-  Results.prototype.onChangeResultsPerPage = function(ev) {
-    var t;
-    t = ev.currentTarget;
-    return this.options.config.set('resultRows', t.options[t.selectedIndex].value);
-  };
-
-  Results.prototype.showMetadata = function(ev) {
-    this.isMetadataVisible = ev.currentTarget.checked;
-    return this.$('.metadata').toggle(this.isMetadataVisible);
-  };
-
-  Results.prototype.reset = function() {
-    return this.renderLevels();
-  };
-
-  Results.prototype.destroy = function() {
-    this.destroyResultItems();
-    return this.subviews.sortLevels.destroy();
-  };
-
-  Results.prototype.destroyResultItems = function() {
-    var item, _i, _len, _ref, _results;
-    _ref = this.resultItems;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      item = _ref[_i];
-      _results.push(item.destroy());
-    }
-    return _results;
-  };
-
-  return Results;
-
-})(Backbone.View);
-
-module.exports = Results;
-
-
-
-},{"./index.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/index.jade","./result":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/result.coffee","./sort":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/sort.coffee","backbone":false,"huygens-backbone-pagination":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/huygens-backbone-pagination/dist/index.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/index.jade":[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-;var locals_for_with = (locals || {});(function (resultsPerPage) {
-buf.push("<header><h3 class=\"numfound\"></h3><nav><ul><li class=\"results-per-page\"><select name=\"results-per-page\">");
-// iterate [10, 25, 50, 100, 250, 500, 1000]
-;(function(){
-  var $$obj = [10, 25, 50, 100, 250, 500, 1000];
-  if ('number' == typeof $$obj.length) {
-
-    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var count = $$obj[$index];
-
-buf.push("<option" + (jade.attr("value", count, true, false)) + (jade.attr("selected", count===resultsPerPage, true, false)) + ">" + (jade.escape(null == (jade_interp = count + " results") ? "" : jade_interp)) + "</option>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var $index in $$obj) {
-      $$l++;      var count = $$obj[$index];
-
-buf.push("<option" + (jade.attr("value", count, true, false)) + (jade.attr("selected", count===resultsPerPage, true, false)) + ">" + (jade.escape(null == (jade_interp = count + " results") ? "" : jade_interp)) + "</option>");
-    }
-
-  }
-}).call(this);
-
-buf.push("</select></li><li class=\"select-all\"><input id=\"i9d8sdf\" type=\"checkbox\"/><label for=\"i9d8sdf\">Select all</label></li><li class=\"show-metadata\"><input id=\"o45hes3\" type=\"checkbox\" checked=\"checked\"/><label for=\"o45hes3\">Show metadata</label></li></ul></nav><div class=\"pagination\"></div></header><div class=\"pages\"></div>");}("resultsPerPage" in locals_for_with?locals_for_with.resultsPerPage:typeof resultsPerPage!=="undefined"?resultsPerPage:undefined));;return buf.join("");
-};
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/result.coffee":[function(require,module,exports){
-var Backbone, Result, tpl,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-Backbone = require('backbone');
-
-tpl = require('./result.jade');
-
-
-/*
-@class Result
-@extends Backbone.View
- */
-
-Result = (function(_super) {
-  __extends(Result, _super);
-
-  function Result() {
-    return Result.__super__.constructor.apply(this, arguments);
-  }
-
-  Result.prototype.className = 'result';
-
-  Result.prototype.tagName = 'li';
-
-
-  /*
-  	@param {object} [options={}]
-  	@prop {object} options.data - The data of the result.
-  	@prop {boolean} [options.fulltext=false] - Is the result coming from a full text search?
-  	@constructs
-   */
-
-  Result.prototype.initialize = function(options) {
-    var _base;
-    this.options = options != null ? options : {};
-    if ((_base = this.options).fulltext == null) {
-      _base.fulltext = false;
-    }
-    if (this.options.fulltext) {
-      this.$el.addClass('fulltext');
-    } else {
-      this.$el.addClass('no-fulltext');
-    }
-    return this.render();
-  };
-
-  Result.prototype.render = function() {
-    var count, found, rtpl, term, _ref;
-    found = [];
-    _ref = this.options.data.terms;
-    for (term in _ref) {
-      if (!__hasProp.call(_ref, term)) continue;
-      count = _ref[term];
-      found.push("" + count + "x " + term);
-    }
-    if (this.options.config.get('templates').hasOwnProperty('result')) {
-      tpl = this.options.config.get('templates').result;
-    }
-    rtpl = tpl({
-      data: this.options.data,
-      fulltext: this.options.fulltext,
-      found: found.join(', ')
-    });
-    this.$el.html(rtpl);
-    return this;
-  };
-
-  Result.prototype.events = function() {
-    return {
-      'click': '_handleClick',
-      'click li[data-layer]': '_handleLayerClick'
-    };
-  };
-
-  Result.prototype._handleClick = function(ev) {
-    return this.trigger('click', this.options.data);
-  };
-
-  Result.prototype._handleLayerClick = function(ev) {
-    var layer;
-    ev.stopPropagation();
-    layer = ev.currentTarget.getAttribute('data-layer');
-    return this.trigger('layer:click', layer, this.options.data);
-  };
-
-  Result.prototype.destroy = function() {
-    return this.remove();
-  };
-
-  return Result;
-
-})(Backbone.View);
-
-module.exports = Result;
-
-
-/* TEMPLATE FOR CUSTOM RESULT
-
-class Result extends Backbone.View
-
-	className: 'result'
-
-	tagName: 'li'
-
-	initialize: (@options={}) ->
-		@options.fulltext ?= false
-		if @options.fulltext then @$el.addClass 'fulltext' else @$el.addClass 'no-fulltext'
-
-		@render()
-
-	render: ->
-		found = []
-		found.push "#{count}x #{term}" for own term, count of @options.data.terms
-
-		data = _.extend @options,
-			data: @options.data
-			found: found.join(', ')
-
-		rtpl = tpl data
-		@$el.html rtpl
-
-		@
-
-	events: ->
-		'click': '_handleClick'
-
-	_handleClick: (ev) ->
-		@trigger 'click', @options.data
-
-	destroy: ->
-		@remove()
-
-/TEMPLATE
- */
-
-
-
-},{"./result.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/result.jade","backbone":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/result.jade":[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-;var locals_for_with = (locals || {});(function (data, fulltext, found) {
-data.metadata = typeof data.metadata !== 'undefined' ? data.metadata : [];
-buf.push("<div class=\"title\">" + (jade.escape(null == (jade_interp = data.name) ? "" : jade_interp)) + "</div><div class=\"metadata\"><ul>");
-// iterate data.metadata
-;(function(){
-  var $$obj = data.metadata;
-  if ('number' == typeof $$obj.length) {
-
-    for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
-      var value = $$obj[key];
-
-buf.push("<li><span class=\"key\">" + (jade.escape(null == (jade_interp = key+': ') ? "" : jade_interp)) + "</span><span class=\"value\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</span></li>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var key in $$obj) {
-      $$l++;      var value = $$obj[key];
-
-buf.push("<li><span class=\"key\">" + (jade.escape(null == (jade_interp = key+': ') ? "" : jade_interp)) + "</span><span class=\"value\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</span></li>");
-    }
-
-  }
-}).call(this);
-
-buf.push("</ul></div>");
-if ( fulltext)
-{
-buf.push("<div class=\"found\">" + (jade.escape(null == (jade_interp = found) ? "" : jade_interp)) + "</div><div class=\"keywords\"><ul>");
-if ( data._kwic != null)
-{
-// iterate data._kwic
-;(function(){
-  var $$obj = data._kwic;
-  if ('number' == typeof $$obj.length) {
-
-    for (var layer = 0, $$l = $$obj.length; layer < $$l; layer++) {
-      var kwic = $$obj[layer];
-
-buf.push("<li" + (jade.attr("data-layer", layer, true, false)) + "><label>" + (jade.escape(null == (jade_interp = layer) ? "" : jade_interp)) + "</label><ul class=\"kwic\">");
-// iterate kwic
-;(function(){
-  var $$obj = kwic;
-  if ('number' == typeof $$obj.length) {
-
-    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var row = $$obj[$index];
-
-buf.push("<li>" + (null == (jade_interp = row						) ? "" : jade_interp) + "</li>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var $index in $$obj) {
-      $$l++;      var row = $$obj[$index];
-
-buf.push("<li>" + (null == (jade_interp = row						) ? "" : jade_interp) + "</li>");
-    }
-
-  }
-}).call(this);
-
-buf.push("</ul></li>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var layer in $$obj) {
-      $$l++;      var kwic = $$obj[layer];
-
-buf.push("<li" + (jade.attr("data-layer", layer, true, false)) + "><label>" + (jade.escape(null == (jade_interp = layer) ? "" : jade_interp)) + "</label><ul class=\"kwic\">");
-// iterate kwic
-;(function(){
-  var $$obj = kwic;
-  if ('number' == typeof $$obj.length) {
-
-    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var row = $$obj[$index];
-
-buf.push("<li>" + (null == (jade_interp = row						) ? "" : jade_interp) + "</li>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var $index in $$obj) {
-      $$l++;      var row = $$obj[$index];
-
-buf.push("<li>" + (null == (jade_interp = row						) ? "" : jade_interp) + "</li>");
-    }
-
-  }
-}).call(this);
-
-buf.push("</ul></li>");
-    }
-
-  }
-}).call(this);
-
-}
-buf.push("</ul></div>");
-}}("data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined,"fulltext" in locals_for_with?locals_for_with.fulltext:typeof fulltext!=="undefined"?fulltext:undefined,"found" in locals_for_with?locals_for_with.found:typeof found!=="undefined"?found:undefined));;return buf.join("");
-};
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/sort.coffee":[function(require,module,exports){
-var $, Backbone, SortLevels, el, tpl,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-Backbone = require('backbone');
-
-$ = require('jquery');
-
-el = require('funcky.el').el;
-
-tpl = require('./sort.jade');
-
-SortLevels = (function(_super) {
-  __extends(SortLevels, _super);
-
-  function SortLevels() {
-    return SortLevels.__super__.constructor.apply(this, arguments);
-  }
-
-  SortLevels.prototype.tagName = 'li';
-
-  SortLevels.prototype.className = 'sort-levels';
-
-  SortLevels.prototype.initialize = function(options) {
-    this.options = options != null ? options : {};
-    return this.render();
-  };
-
-  SortLevels.prototype.render = function() {
-    var leave, levels, rtpl;
-    rtpl = tpl({
-      levels: this.options.levels,
-      entryMetadataFields: this.options.entryMetadataFields
-    });
-    this.$el.html(rtpl);
-    this.listenTo(Backbone, 'sortlevels:update', (function(_this) {
-      return function(sortLevels) {
-        var level, sortParameters, _i, _len;
-        _this.options.levels = sortLevels;
-        sortParameters = [];
-        for (_i = 0, _len = sortLevels.length; _i < _len; _i++) {
-          level = sortLevels[_i];
-          sortParameters.push({
-            fieldname: level,
-            direction: 'asc'
-          });
-        }
-        _this.trigger('change', sortParameters);
-        return _this.render();
-      };
-    })(this));
-    this.listenTo(Backbone, 'entrymetadatafields:update', (function(_this) {
-      return function(fields) {
-        _this.options.entryMetadataFields = fields;
-        return _this.render();
-      };
-    })(this));
-    levels = this.$('div.levels');
-    leave = function(ev) {
-      if (!(el(levels[0]).hasDescendant(ev.target) || levels[0] === ev.target)) {
-        return levels.hide();
-      }
-    };
-    this.onMouseleave = leave.bind(this);
-    return levels.on('mouseleave', this.onMouseleave);
-  };
-
-  SortLevels.prototype.events = function() {
-    return {
-      'click button.toggle': 'toggleLevels',
-      'click li.search button': 'saveLevels',
-      'change div.levels select': 'changeLevels',
-      'click div.levels i.fa': 'changeAlphaSort'
-    };
-  };
-
-  SortLevels.prototype.toggleLevels = function(ev) {
-    return this.$('div.levels').toggle();
-  };
-
-  SortLevels.prototype.hideLevels = function() {
-    return this.$('div.levels').hide();
-  };
-
-  SortLevels.prototype.changeLevels = function(ev) {
-    var $target, i, select, target, _i, _j, _len, _len1, _ref, _ref1, _results;
-    this.$('div.levels').addClass('show-save-button');
-    target = ev.currentTarget;
-    _ref = this.el.querySelectorAll('div.levels select');
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      select = _ref[_i];
-      if (select.name !== target.name && select.value === target.value) {
-        select.selectedIndex = 0;
-      }
-    }
-    _ref1 = this.el.querySelectorAll('div.levels i.fa');
-    _results = [];
-    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-      i = _ref1[_j];
-      $target = this.$(i);
-      $target.addClass('fa-sort-alpha-asc');
-      _results.push($target.removeClass('fa-sort-alpha-desc'));
-    }
-    return _results;
-  };
-
-  SortLevels.prototype.changeAlphaSort = function(ev) {
-    var $target;
-    this.$('div.levels').addClass('show-save-button');
-    $target = this.$(ev.currentTarget);
-    $target.toggleClass('fa-sort-alpha-asc');
-    return $target.toggleClass('fa-sort-alpha-desc');
-  };
-
-  SortLevels.prototype.saveLevels = function() {
-    var li, select, sortParameter, sortParameters, _i, _len, _ref;
-    sortParameters = [];
-    _ref = this.el.querySelectorAll('div.levels li[name]');
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      li = _ref[_i];
-      select = li.querySelector('select');
-      sortParameter = {};
-      sortParameter.fieldname = select.options[select.selectedIndex].value;
-      sortParameter.direction = $(li).find('i.fa').hasClass('fa-sort-alpha-asc') ? 'asc' : 'desc';
-      sortParameters.push(sortParameter);
-    }
-    this.hideLevels();
-    return this.trigger('change', sortParameters);
-  };
-
-  SortLevels.prototype.destroy = function() {
-    this.$('div.levels').off('mouseleave', this.onMouseleave);
-    return this.remove();
-  };
-
-  return SortLevels;
-
-})(Backbone.View);
-
-module.exports = SortLevels;
-
-
-
-},{"./sort.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/sort.jade","backbone":false,"funcky.el":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.el/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/results/sort.jade":[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-;var locals_for_with = (locals || {});(function (entryMetadataFields, levels) {
-buf.push("<button class=\"toggle\">Sort<i class=\"fa fa-caret-down\"></i></button><div class=\"levels\"><ul>");
-// iterate [1, 2, 3]
-;(function(){
-  var $$obj = [1, 2, 3];
-  if ('number' == typeof $$obj.length) {
-
-    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var i = $$obj[$index];
-
-buf.push("<li" + (jade.attr("name", 'level'+i, true, false)) + "><label>" + (jade.escape(null == (jade_interp = 'Level '+i) ? "" : jade_interp)) + "</label><select" + (jade.attr("name", 'level'+i, true, false)) + "><option></option>");
-// iterate entryMetadataFields
-;(function(){
-  var $$obj = entryMetadataFields;
-  if ('number' == typeof $$obj.length) {
-
-    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var field = $$obj[$index];
-
-buf.push("<option" + (jade.attr("value", field, true, false)) + (jade.attr("selected", field==levels[i-1], true, false)) + ">" + (jade.escape(null == (jade_interp = field) ? "" : jade_interp)) + "</option>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var $index in $$obj) {
-      $$l++;      var field = $$obj[$index];
-
-buf.push("<option" + (jade.attr("value", field, true, false)) + (jade.attr("selected", field==levels[i-1], true, false)) + ">" + (jade.escape(null == (jade_interp = field) ? "" : jade_interp)) + "</option>");
-    }
-
-  }
-}).call(this);
-
-buf.push("</select><i class=\"fa fa-sort-alpha-asc\"></i></li>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var $index in $$obj) {
-      $$l++;      var i = $$obj[$index];
-
-buf.push("<li" + (jade.attr("name", 'level'+i, true, false)) + "><label>" + (jade.escape(null == (jade_interp = 'Level '+i) ? "" : jade_interp)) + "</label><select" + (jade.attr("name", 'level'+i, true, false)) + "><option></option>");
-// iterate entryMetadataFields
-;(function(){
-  var $$obj = entryMetadataFields;
-  if ('number' == typeof $$obj.length) {
-
-    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var field = $$obj[$index];
-
-buf.push("<option" + (jade.attr("value", field, true, false)) + (jade.attr("selected", field==levels[i-1], true, false)) + ">" + (jade.escape(null == (jade_interp = field) ? "" : jade_interp)) + "</option>");
-    }
-
-  } else {
-    var $$l = 0;
-    for (var $index in $$obj) {
-      $$l++;      var field = $$obj[$index];
-
-buf.push("<option" + (jade.attr("value", field, true, false)) + (jade.attr("selected", field==levels[i-1], true, false)) + ">" + (jade.escape(null == (jade_interp = field) ? "" : jade_interp)) + "</option>");
-    }
-
-  }
-}).call(this);
-
-buf.push("</select><i class=\"fa fa-sort-alpha-asc\"></i></li>");
-    }
-
-  }
-}).call(this);
-
-buf.push("<li class=\"search\">&nbsp;<button>Change levels</button></li></ul></div>");}("entryMetadataFields" in locals_for_with?locals_for_with.entryMetadataFields:typeof entryMetadataFields!=="undefined"?entryMetadataFields:undefined,"levels" in locals_for_with?locals_for_with.levels:typeof levels!=="undefined"?levels:undefined));;return buf.join("");
-};
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/text-search.coffee":[function(require,module,exports){
+},{"../../../jade/facets/range.body.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/range.body.jade","../../models/facets/range":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/range.coffee","./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/text-search.coffee":[function(require,module,exports){
 var Backbone, Models, TextSearch, tpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -14747,6 +13672,7 @@ TextSearch = (function(_super) {
 
   TextSearch.prototype.initialize = function(options) {
     this.config = options.config;
+    this.fields = options.fields;
     return this.reset();
   };
 
@@ -14758,11 +13684,13 @@ TextSearch = (function(_super) {
   };
 
   TextSearch.prototype.render = function() {
-    if (this.config.get('templates').hasOwnProperty('text-search')) {
+    if (this.config.has('templates').hasOwnProperty('text-search')) {
       tpl = this.config.get('templates')['text-search'];
     }
     this.$el.html(tpl({
-      model: this.model
+      model: this.model,
+      fields: this.fields,
+      textSearchTitles: this.config.get('textSearchTitleMap') || {}
     }));
     return this;
   };
@@ -14782,37 +13710,18 @@ TextSearch = (function(_super) {
   };
 
   TextSearch.prototype.onKeyUp = function(ev) {
+    var changed, field;
     if (ev.keyCode === 13) {
       ev.preventDefault();
       return this.search(ev);
     }
-    if (this.model.get('term') !== ev.currentTarget.value) {
-      this.model.set({
-        term: ev.currentTarget.value
-      });
-      return this.updateQueryModel();
+    field = ev.currentTarget.getAttribute('data-field');
+    changed = this.model.get(field) !== ev.currentTarget.value;
+    if (changed) {
+      this.model.set(field, ev.currentTarget.value);
     }
-  };
-
-  TextSearch.prototype.checkboxChanged = function(ev) {
-    var attr, cb, checkedArray, _i, _len, _ref;
-    if (attr = ev.currentTarget.getAttribute('data-attr')) {
-      if (attr === 'searchInTranscriptions') {
-        this.$('ul.textlayers').toggle(ev.currentTarget.checked);
-      }
-      this.model.set(attr, ev.currentTarget.checked);
-    } else if (attr = ev.currentTarget.getAttribute('data-attr-array')) {
-      checkedArray = [];
-      _ref = this.el.querySelectorAll('[data-attr-array="' + attr + '"]');
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        cb = _ref[_i];
-        if (cb.checked) {
-          checkedArray.push(cb.getAttribute('data-value'));
-        }
-      }
-      this.model.set(attr, checkedArray);
-    }
-    return this.updateQueryModel();
+    this.updateQueryModel();
+    return this.$('button.search').toggleClass('changed', changed);
   };
 
   TextSearch.prototype.search = function(ev) {
@@ -14948,7 +13857,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<input type=\"checkbox\" name=\"all\"/><input type=\"text\" name=\"filter\"/><small class=\"optioncount\"></small>");;return buf.join("");
+buf.push("<input type=\"checkbox\" name=\"all\"/><input type=\"text\" name=\"filter\" placeholder=\"Filter options...\"/><small class=\"optioncount\"></small>");;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.option.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -14958,7 +13867,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (option) {
-buf.push("<li" + (jade.attr("data-count", option.get('count'), true, false)) + (jade.attr("data-value", option.id, true, false)) + "><i" + (jade.attr("data-value", option.id, true, false)) + (jade.cls(['unchecked','fa','fa-square-o',option.get('checked')?'hidden':'visible'], [null,null,null,true])) + "></i><i" + (jade.attr("data-value", option.id, true, false)) + (jade.cls(['checked','fa','fa-check-square-o',option.get('checked')?'visible':'hidden'], [null,null,null,true])) + "></i><label" + (jade.attr("data-value", option.id, true, false)) + ">" + (null == (jade_interp = option.id === ':empty' ? '<em>(empty)</em>' : option.id) ? "" : jade_interp) + "</label><div class=\"count\">" + (jade.escape(null == (jade_interp = option.get('count') === 0 ? option.get('total') : option.get('count')) ? "" : jade_interp)) + "</div></li>");}("option" in locals_for_with?locals_for_with.option:typeof option!=="undefined"?option:undefined));;return buf.join("");
+buf.push("<li" + (jade.attr("data-count", option.get('count'), true, false)) + (jade.attr("data-value", option.id, true, false)) + (jade.attr("data-state", option.get('checked') ? 'checked' : 'unchecked', true, false)) + "><i" + (jade.attr("data-value", option.id, true, false)) + (jade.cls(['unchecked','fa','fa-square-o',option.get('checked')?'hidden':'visible'], [null,null,null,true])) + "></i><i" + (jade.attr("data-value", option.id, true, false)) + (jade.cls(['checked','fa','fa-check-square-o',option.get('checked')?'visible':'hidden'], [null,null,null,true])) + "></i><label" + (jade.attr("data-value", option.id, true, false)) + ">" + (null == (jade_interp = option.id === ':empty' ? '<em>(empty)</em>' : option.id) ? "" : jade_interp) + "</label><div class=\"count\">" + (jade.escape(null == (jade_interp = option.get('count') === 0 ? option.get('total') : option.get('count')) ? "" : jade_interp)) + "</div></li>");}("option" in locals_for_with?locals_for_with.option:typeof option!=="undefined"?option:undefined));;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/main.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -14968,7 +13877,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (title) {
-buf.push("<div class=\"placeholder\"><header><h3>" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</h3><div class=\"menu\"><i title=\"Filter options\" class=\"filter fa fa-filter\"></i><i title=\"Sort alphabetically\" class=\"alpha fa fa-sort-alpha-asc\"></i><i title=\"Sort numerically\" class=\"amount active fa fa-sort-amount-desc\"></i></div><div class=\"options\"></div></header><div class=\"body\"></div></div>");}("title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
+buf.push("<header><h3>" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</h3><div class=\"menu\"><i title=\"Filter options\" class=\"filter fa fa-filter\"></i><i title=\"Sort alphabetically\" class=\"alpha fa fa-sort-alpha-asc\"></i><i title=\"Sort numerically\" class=\"amount active fa fa-sort-amount-desc\"></i></div><div class=\"options\"></div></header><div class=\"body\"></div>");}("title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/range.body.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -14988,7 +13897,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div class=\"overlay\"><div><i class=\"fa fa-spinner fa-spin fa-2x\"></i></div></div><div class=\"faceted-search\"><div class=\"text-search-placeholder\"></div><ul class=\"facets-menu\"><li class=\"reset\"><button><i class=\"fa fa-refresh\"></i><span>New search</span></button></li><li class=\"switch\"><button><i class=\"fa fa-angle-double-up\"></i><i class=\"fa fa-angle-double-down\"></i><span class=\"simple\">Simple search</span><span class=\"advanced\">Advanced search</span></button></li><li class=\"collapse-expand\"><button><i class=\"fa fa-compress\"></i><span>Collapse filters</span></button></li></ul><div class=\"facets-placeholder\"></div></div><div class=\"results\"></div>");;return buf.join("");
+buf.push("<div class=\"overlay\"><div><i class=\"fa fa-spinner fa-spin fa-2x\"></i></div></div><div class=\"faceted-search\"><div class=\"text-search-placeholder\"></div><ul class=\"facets-menu\"><li class=\"reset\"><button><i class=\"fa fa-refresh\"></i><span>Reset search</span></button></li><li class=\"switch\"><button><i class=\"fa fa-angle-double-down\"></i><span>Switch to</span></button></li><li class=\"collapse-expand\"><button><i class=\"fa fa-compress\"></i><span>Collapse facets</span></button></li></ul><div class=\"facets-placeholder\"></div></div>");;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/text-search.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -14997,49 +13906,31 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (model) {
-buf.push("<div class=\"placeholder\"><div class=\"body\"><div class=\"search-input\"><input type=\"text\" name=\"search\"/><i class=\"fa fa-search\"></i></div><div class=\"menu\"><i class=\"fa fa-times\"></i><div class=\"row-1\"><div class=\"cell-1\"><input id=\"cb_casesensitive\" type=\"checkbox\" name=\"cb_casesensitive\" data-attr=\"caseSensitive\"/><label for=\"cb_casesensitive\">Match case</label></div><div class=\"cell-2\"><input id=\"cb_fuzzy\" type=\"checkbox\" name=\"cb_fuzzy\" data-attr=\"fuzzy\"/><label for=\"cb_fuzzy\">Fuzzy</label></div></div><div class=\"row-2\">");
-if ( model.has('searchInAnnotations') || model.has('searchInTranscriptions'))
-{
-buf.push("<div class=\"cell-1\"><h4>Search in:</h4><ul class=\"searchins\">");
-if ( model.has('searchInTranscriptions'))
-{
-buf.push("<li class=\"searchin\"><input id=\"cb_searchin_transcriptions\" type=\"checkbox\" data-attr=\"searchInTranscriptions\"" + (jade.attr("checked", model.get('searchInTranscriptions'), true, false)) + "/><label for=\"cb_searchin_transcriptions\">Transcriptions</label></li>");
-}
-if ( model.has('searchInAnnotations'))
-{
-buf.push("<li class=\"searchin\"><input id=\"cb_searchin_annotations\" type=\"checkbox\" data-attr=\"searchInAnnotations\"" + (jade.attr("checked", model.get('searchInAnnotations'), true, false)) + "/><label for=\"cb_searchin_annotations\">Annotations</label></li>");
-}
-buf.push("</ul></div>");
-}
-if ( model.has('textLayers') && model.get('textLayers').length > 1)
-{
-buf.push("<div class=\"cell-1\"><h4>Textlayers:</h4><ul class=\"textlayers\">");
-// iterate model.get('textLayers')
+;var locals_for_with = (locals || {});(function (fields, textSearchTitles) {
+buf.push("<div class=\"placeholder\"><header><h3>Text search</h3><button class=\"search\"><i class=\"fa fa-search\"></i></button></header>");
+// iterate fields
 ;(function(){
-  var $$obj = model.get('textLayers');
+  var $$obj = fields;
   if ('number' == typeof $$obj.length) {
 
     for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
-      var textLayer = $$obj[$index];
+      var field = $$obj[$index];
 
-buf.push("<li class=\"textlayer\"><input" + (jade.attr("id", 'cb_textlayer'+textLayer, true, false)) + " type=\"checkbox\" data-attr-array=\"textLayers\"" + (jade.attr("data-value", textLayer, true, false)) + " checked=\"checked\"/><label" + (jade.attr("for", 'cb_textlayer'+textLayer, true, false)) + ">" + (jade.escape(null == (jade_interp = textLayer) ? "" : jade_interp)) + "</label></li>");
+buf.push("<div" + (jade.attr("data-name", field, true, false)) + " class=\"search-input\"><h4>" + (jade.escape(null == (jade_interp = textSearchTitles[field]) ? "" : jade_interp)) + "</h4><input type=\"text\" name=\"search\"" + (jade.attr("data-field", field, true, false)) + "/></div>");
     }
 
   } else {
     var $$l = 0;
     for (var $index in $$obj) {
-      $$l++;      var textLayer = $$obj[$index];
+      $$l++;      var field = $$obj[$index];
 
-buf.push("<li class=\"textlayer\"><input" + (jade.attr("id", 'cb_textlayer'+textLayer, true, false)) + " type=\"checkbox\" data-attr-array=\"textLayers\"" + (jade.attr("data-value", textLayer, true, false)) + " checked=\"checked\"/><label" + (jade.attr("for", 'cb_textlayer'+textLayer, true, false)) + ">" + (jade.escape(null == (jade_interp = textLayer) ? "" : jade_interp)) + "</label></li>");
+buf.push("<div" + (jade.attr("data-name", field, true, false)) + " class=\"search-input\"><h4>" + (jade.escape(null == (jade_interp = textSearchTitles[field]) ? "" : jade_interp)) + "</h4><input type=\"text\" name=\"search\"" + (jade.attr("data-field", field, true, false)) + "/></div>");
     }
 
   }
 }).call(this);
 
-buf.push("</ul></div>");
-}
-buf.push("</div></div></div></div>");}("model" in locals_for_with?locals_for_with.model:typeof model!=="undefined"?model:undefined));;return buf.join("");
+buf.push("</div>");}("fields" in locals_for_with?locals_for_with.fields:typeof fields!=="undefined"?fields:undefined,"textSearchTitles" in locals_for_with?locals_for_with.textSearchTitles:typeof textSearchTitles!=="undefined"?textSearchTitles:undefined));;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js":[function(require,module,exports){
 (function (global){
@@ -15255,7 +14146,7 @@ exports.rethrow = function rethrow(err, filename, lineno, str){
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"/home/gijs/Projects/women-writers/src/coffee/app.coffee":[function(require,module,exports){
-var $, App, Backbone, Document, DocumentForm, DocumentSearchView, DocumentView, Person, PersonForm, PersonGraphView, PersonSearchView, PersonView, ReceptionSearchView, SourceList, UserStatusView, baseTemplate, config, user, _,
+var $, App, Backbone, Document, DocumentForm, DocumentSearchView, DocumentView, Person, PersonForm, PersonGraphView, PersonSearchView, PersonView, ReceptionSearchView, SourceList, UserStatusView, baseTemplate, config, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   __slice = [].slice;
@@ -15269,8 +14160,6 @@ _ = require('underscore');
 baseTemplate = require('../jade/views/base.jade');
 
 config = require('./config');
-
-user = require('./models/user');
 
 UserStatusView = require('./views/user-status');
 
@@ -15320,6 +14209,14 @@ App = (function(_super) {
       this.$('.navigation a').removeClass('active');
       return this.$(".navigation a." + category).addClass('active');
     }
+  };
+
+  App.prototype.events = {
+    'click i.fa.fa-adjust': 'toggleHighContrast'
+  };
+
+  App.prototype.toggleHighContrast = function(ev) {
+    return $('body').toggleClass('high-contrast');
   };
 
   App.prototype.home = function() {};
@@ -15555,8 +14452,7 @@ App = (function(_super) {
       config: config
     }));
     new UserStatusView({
-      el: html.find('.user-status'),
-      model: user
+      el: html.find('.user-status')
     });
     this.$el.html(wrapper).append(html.hide()).find('.body-wrap').fadeOut(150, (function(_this) {
       return function() {
@@ -15575,7 +14471,7 @@ module.exports = App;
 
 
 
-},{"../jade/views/base.jade":"/home/gijs/Projects/women-writers/src/jade/views/base.jade","./config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","./models/document":"/home/gijs/Projects/women-writers/src/coffee/models/document.coffee","./models/person":"/home/gijs/Projects/women-writers/src/coffee/models/person.coffee","./models/user":"/home/gijs/Projects/women-writers/src/coffee/models/user.coffee","./views/document/edit":"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee","./views/document/search":"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee","./views/document/view":"/home/gijs/Projects/women-writers/src/coffee/views/document/view.coffee","./views/person/edit":"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee","./views/person/graph":"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee","./views/person/search":"/home/gijs/Projects/women-writers/src/coffee/views/person/search.coffee","./views/person/view":"/home/gijs/Projects/women-writers/src/coffee/views/person/view.coffee","./views/reception/search":"/home/gijs/Projects/women-writers/src/coffee/views/reception/search.coffee","./views/sources/view":"/home/gijs/Projects/women-writers/src/coffee/views/sources/view.coffee","./views/user-status":"/home/gijs/Projects/women-writers/src/coffee/views/user-status.coffee","backbone":false,"jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/collections/documents.coffee":[function(require,module,exports){
+},{"../jade/views/base.jade":"/home/gijs/Projects/women-writers/src/jade/views/base.jade","./config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","./models/document":"/home/gijs/Projects/women-writers/src/coffee/models/document.coffee","./models/person":"/home/gijs/Projects/women-writers/src/coffee/models/person.coffee","./views/document/edit":"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee","./views/document/search":"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee","./views/document/view":"/home/gijs/Projects/women-writers/src/coffee/views/document/view.coffee","./views/person/edit":"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee","./views/person/graph":"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee","./views/person/search":"/home/gijs/Projects/women-writers/src/coffee/views/person/search.coffee","./views/person/view":"/home/gijs/Projects/women-writers/src/coffee/views/person/view.coffee","./views/reception/search":"/home/gijs/Projects/women-writers/src/coffee/views/reception/search.coffee","./views/sources/view":"/home/gijs/Projects/women-writers/src/coffee/views/sources/view.coffee","./views/user-status":"/home/gijs/Projects/women-writers/src/coffee/views/user-status.coffee","backbone":false,"jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/collections/documents.coffee":[function(require,module,exports){
 var Backbone, Document, Documents,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -16786,6 +15682,12 @@ SearchView = (function(_super) {
       collapsed: this.startCollapsed,
       templates: this.fsTemplates
     });
+    this.search.$el.find('.facets-menu').hide();
+    this.listenToOnce(this.search, 'change:results', (function(_this) {
+      return function(results) {
+        return _this.search.$el.find('.facets-menu').show();
+      };
+    })(this));
     return this.listenTo(this.search, 'change:results', (function(_this) {
       return function(results) {
         config.set({
@@ -16864,7 +15766,6 @@ SearchView = (function(_super) {
   SearchView.prototype.render = function() {
     this.$el.html(this.template());
     this.$('.search').html(this.search.el);
-    this.$('.results').text('No results');
     return this.search.search();
   };
 
@@ -16877,12 +15778,14 @@ module.exports = SearchView;
 
 
 },{"../../jade/views/search-results.jade":"/home/gijs/Projects/women-writers/src/jade/views/search-results.jade","../../jade/views/search.jade":"/home/gijs/Projects/women-writers/src/jade/views/search.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../helpers/search.coffee":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../models/user":"/home/gijs/Projects/women-writers/src/coffee/models/user.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee":[function(require,module,exports){
-var Backbone, BaseView, niceify, slugify,
+var Backbone, BaseView, LoginComponent, niceify, slugify,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   __slice = [].slice;
 
 Backbone = require('backbone');
+
+LoginComponent = require('hibb-login');
 
 niceify = function(str) {
   return String(str).replace(/([A-Z](?![A-Z]))/g, ' $1').replace(/^./, function(s) {
@@ -16918,18 +15821,10 @@ BaseView = (function(_super) {
     if (options == null) {
       options = {};
     }
-    this.config = options.config, this.user = options.user, this.showingRevision = options.showingRevision;
+    this.config = options.config, this.showingRevision = options.showingRevision;
     if (this.config == null) {
       this.config = require('../config');
     }
-    if (this.user == null) {
-      this.user = require('../models/user');
-    }
-    this.listenTo(this.user, 'change:loggedIn', (function(_this) {
-      return function() {
-        return _this.showControls();
-      };
-    })(this));
     return this.render();
   };
 
@@ -16993,9 +15888,8 @@ BaseView = (function(_super) {
   };
 
   BaseView.prototype.showControls = function(toggle) {
-    var show, _ref;
-    show = this.user.get('loggedIn') && this.user.isVerified();
-    return (_ref = this.$controls) != null ? _ref.toggle(show) : void 0;
+    var _ref;
+    return (_ref = this.$controls) != null ? _ref.toggle(LoginComponent.getUser().isLoggedIn()) : void 0;
   };
 
   BaseView.prototype._processField = function(field) {
@@ -17125,7 +16019,7 @@ BaseView = (function(_super) {
     _results = [];
     for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
       fieldset = _ref1[_i];
-      if (fieldset.showOnlyWhenLoggedIn && !this.user.isLoggedIn()) {
+      if (fieldset.showOnlyWhenLoggedIn && !LoginComponent.getUser().isLoggedIn()) {
         continue;
       }
       html = this._fieldsetHtml(fieldset);
@@ -17185,7 +16079,7 @@ module.exports = BaseView;
 
 
 
-},{"../../jade/views/base-field.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-field.jade","../../jade/views/base-fieldset.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-fieldset.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","../models/user":"/home/gijs/Projects/women-writers/src/coffee/models/user.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee":[function(require,module,exports){
+},{"../../jade/views/base-field.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-field.jade","../../jade/views/base-fieldset.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-fieldset.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js"}],"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee":[function(require,module,exports){
 var Backbone, Document, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, StatusIndicator, config, createTimbuctooSchema, documentDescription, searchLocation, simpleSearch, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -19143,11 +18037,6 @@ UserStatus = (function(_super) {
   };
 
   UserStatus.prototype.initialize = function() {
-    this.listenTo(this.model, 'change', (function(_this) {
-      return function() {
-        return _this.render();
-      };
-    })(this));
     return this.render();
   };
 
@@ -19176,7 +18065,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","hibb-modal":"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -19285,7 +18174,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "tempPsChildren" : {
     "type" : "String"
   },
@@ -19578,7 +18467,7 @@ else
 {
 buf.push("<div class=\"is-test-text\">Test</div>");
 }
-buf.push("<div class=\"header centered\"><a" + (jade.attr("href", config.get('baseUrl'), true, false)) + " class=\"home\"><div class=\"header-logo largest-text\"><span class=\"small-caps\">NEWW</span>Women Writers</div></a><a href=\"http://www.huygens.knaw.nl/\" target=\"_self\" class=\"huygens-ing\"></a></div><div class=\"navigation\"><div class=\"centered\"><div class=\"links\"><a" + (jade.attr("href", config.get('baseUrl') + "/persons/", true, false)) + " class=\"person\">Persons</a><a" + (jade.attr("href", config.get('baseUrl') + "/documents/", true, false)) + " class=\"document\">Documents</a><a" + (jade.attr("href", config.get('baseUrl') + "/receptions/", true, false)) + " class=\"reception\">Receptions</a><a" + (jade.attr("href", config.get('baseUrl') + "/sources/", true, false)) + " class=\"source\">Sources</a><div class=\"user-status\"></div></div></div></div><div id=\"search\"><div class=\"persons centered\"></div><div class=\"documents centered\"></div><div class=\"receptions\"></div></div><div id=\"view\"></div></div>");}.call(this,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined));;return buf.join("");
+buf.push("<div class=\"header centered\"><a" + (jade.attr("href", config.get('baseUrl'), true, false)) + " class=\"home\"><div class=\"header-logo largest-text\"><span class=\"small-caps\">NEWW</span>Women Writers</div></a><a href=\"http://www.huygens.knaw.nl/\" target=\"_self\" class=\"huygens-ing\"></a></div><div class=\"navigation\"><div class=\"centered\"><div class=\"links\"><a" + (jade.attr("href", config.get('baseUrl') + "/persons/", true, false)) + " class=\"person\">Persons</a><a" + (jade.attr("href", config.get('baseUrl') + "/documents/", true, false)) + " class=\"document\">Documents</a><a" + (jade.attr("href", config.get('baseUrl') + "/receptions/", true, false)) + " class=\"reception\">Receptions</a><a" + (jade.attr("href", config.get('baseUrl') + "/sources/", true, false)) + " class=\"source\">Sources</a><i class=\"fa fa-adjust\"></i><div class=\"user-status\"></div></div></div></div><div id=\"search\"><div class=\"persons centered\"></div><div class=\"documents centered\"></div><div class=\"receptions\"></div></div><div id=\"view\"></div></div>");}.call(this,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined));;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/document/document-search-results.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -20326,7 +19215,7 @@ var buf = [];
 var jade_mixins = {};
 var jade_interp;
 
-buf.push("<div class=\"search\"></div><div class=\"results\"><h1>Hey there</h1></div>");;return buf.join("");
+buf.push("<div class=\"search\"></div><div class=\"results\"></div>");;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/sources/list.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -29107,7 +27996,7 @@ module.exports = RelationItem;
 
 
 },{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "value" : {
     "type" : "String"
   },

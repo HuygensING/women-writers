@@ -40,6 +40,12 @@ class SearchView extends Backbone.View
 			collapsed: @startCollapsed
 			templates: @fsTemplates
 
+		# Hide facets menu and show when results are loaded for the first time.
+		@search.$el.find('.facets-menu').hide()
+		@listenToOnce @search, 'change:results', (results) =>
+			@search.$el.find('.facets-menu').show()
+		# /Hide facets menu
+
 		@listenTo @search, 'change:results', (results) =>
 			config.set currentResultIds: results.get 'ids'
 			@renderResults results
@@ -95,7 +101,7 @@ class SearchView extends Backbone.View
 	render: ->
 		@$el.html @template()
 		@$('.search').html @search.el
-		@$('.results').text 'No results'
+		# @$('.results').text 'No results'
 
 		@search.search()
 
