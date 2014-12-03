@@ -26,8 +26,8 @@ url = require 'url'
 
 link = require('gulp-task-link')(gulp, cfg['local-modules'])
 
-devDir = './compiled'
-prodDir = './dist'
+devDir = './envs/development'
+prodDir = './envs/production'
 
 ENV = if process.env.NODE_ENV? then process.env.NODE_ENV else 'development'
 
