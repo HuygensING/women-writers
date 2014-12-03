@@ -3,10 +3,10 @@ html
 	head
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", type="text/css")
-		link(rel="stylesheet", href="/css/libs.css", type="text/css")
-		link(rel="stylesheet", href="/css/main.css", type="text/css")
-		script(src="/js/libs.js")
-		script(src="/js/src.js")
+		link(rel="stylesheet", href!="<!-- @echo ABSOLUTE_PATH -->/css/libs.css", type="text/css")
+		link(rel="stylesheet", href!="<!-- @echo ABSOLUTE_PATH -->/css/main.css", type="text/css")
+		script(src!="<!-- @echo ABSOLUTE_PATH -->/js/libs.js")
+		script(src!="<!-- @echo ABSOLUTE_PATH -->/js/src.js")
 	body
 		.huygens-loader
 			.loader-huygens-logo

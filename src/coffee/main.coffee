@@ -16,6 +16,7 @@ loadAppData  = require('./helpers/load-app-data').loadAll
 LoginComponent = require 'hibb-login'
 user = LoginComponent.createUser
 	tokenPrefix: config.get('tokenPrefix')
+	url: -> "#{config.get('baseUrl')}/api/system/users/me"
 	
 {searchQuery} = require './helpers/search'
 
@@ -38,10 +39,9 @@ startApp = ->
 	app = new App()
 	$('body').append app.el
 
-	base = config.get('baseUrl').replace /^https?:\/\/[^\/]+/, ''
 	mainRouter = new MainRouter
 		controller: app
-		root: base
+		root: 'womenwriters'
 
 	mainRouter.on 'route', (route) => app.updateNavBar route
 	config.set 'router', mainRouter

@@ -16,6 +16,7 @@ exec = require('child_process').exec
 rimraf = require 'rimraf'
 cfg = require './config.json'
 rsync = require('rsyncwrapper').rsync
+preprocess = require 'gulp-preprocess'
 
 browserSync = require 'browser-sync'
 reload = browserSync.reload
@@ -27,6 +28,8 @@ link = require('gulp-task-link')(gulp, cfg['local-modules'])
 
 devDir = './compiled'
 prodDir = './dist'
+
+ENV = if process.env.NODE_ENV? then process.env.NODE_ENV else 'development'
 
 gulp.task 'server', ['watch', 'watchify', 'stylus', 'concat-libs-css', 'jade', 'copy-static'], ->
 	# proxyOptions = url.parse('http://localhost:3000')
@@ -47,6 +50,7 @@ gulp.task 'stylus', ->
 		.pipe(stylus(
 			use: [nib()]
 			errors: true
+			define: cfg[ENV]
 		))
 		.pipe(gulp.dest("#{devDir}/css"))
 		.pipe(reload(stream: true))
@@ -68,18 +72,26 @@ gulp.task 'concat-libs-css', ->
 gulp.task 'jade', ->
 	gulp.src('./src/index.jade')
 		.pipe(jade())
+		.pipe(preprocess(context: cfg[ENV]))
 		.pipe(gulp.dest(devDir))
 
 gulp.task 'copy-static', ->
 	gulp.src('./static/**/*').pipe(gulp.dest(devDir))
 	gulp.src('./static/**/*').pipe(gulp.dest(prodDir))
 
+###
+@function
+###
 minify = ->
 	gulp.src("#{prodDir}/index.js")
 		.pipe(uglify())
 		.pipe(rename(extname: '.min.js'))
 		.pipe(gulp.dest(prodDir))
 
+###
+@function
+@param {boolean} [watch=false] - Flag to use browserify or watchify.
+###
 createBundle = (watch=false) ->
 	args =
 		entries: './src/coffee/main.coffee'
@@ -138,14 +150,17 @@ gulp.task 'watch', ['watchify'], ->
 
 gulp.task 'default', ['server']
 
-# First run `gulp compile`. Can't be a dep because of async gulp.start. :(
-gulp.task 'deploy-test', (done) ->
+gulp.task 'deploy', ['jade', 'stylus'], (done) ->
+	console.log ENV
+	return gutil.log("Cannot deploy in '#{ENV}'") if ENV isnt 'test' and ENV isnt 'production'
+
 	rsync
-		src: 'compiled/',
-		dest: cfg['remote-destination'],
+		src: cfg[ENV]['SOURCE'],
+		dest: cfg[ENV]['REMOTE_DESTINATION'],
 		recursive: true,
 	,
 		(error,stdout,stderr,cmd) ->
+			console.log cmd
 			if error
 				new gutil.PluginError('test', 'something broke', showStack: true)
 			else

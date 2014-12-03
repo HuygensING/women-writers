@@ -22,7 +22,10 @@ loadAppData = require('./helpers/load-app-data').loadAll;
 LoginComponent = require('hibb-login');
 
 user = LoginComponent.createUser({
-  tokenPrefix: config.get('tokenPrefix')
+  tokenPrefix: config.get('tokenPrefix'),
+  url: function() {
+    return "" + (config.get('baseUrl')) + "/api/system/users/me";
+  }
 });
 
 searchQuery = require('./helpers/search').searchQuery;
@@ -42,13 +45,12 @@ handleLinkClicks = function(e) {
 };
 
 startApp = function() {
-  var app, base, mainRouter;
+  var app, mainRouter;
   app = new App();
   $('body').append(app.el);
-  base = config.get('baseUrl').replace(/^https?:\/\/[^\/]+/, '');
   mainRouter = new MainRouter({
     controller: app,
-    root: base
+    root: 'womenwriters'
   });
   mainRouter.on('route', (function(_this) {
     return function(route) {
@@ -72,7 +74,7 @@ $(function() {
 
 
 },{"./app.coffee":"/home/gijs/Projects/women-writers/src/coffee/app.coffee","./collections/documents.coffee":"/home/gijs/Projects/women-writers/src/coffee/collections/documents.coffee","./collections/persons.coffee":"/home/gijs/Projects/women-writers/src/coffee/collections/persons.coffee","./config.coffee":"/home/gijs/Projects/women-writers/src/coffee/config.coffee","./helpers/load-app-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-app-data.coffee","./helpers/load-edit-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-edit-data.coffee","./helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","./routers/main.coffee":"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/config/config.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
   "baseUrl": "-",
   "searchPath": "-",
   "relationSearchPath": "-",
@@ -183,7 +185,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/config/targets/development.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
   // "baseUrl": "http://localhost:9000",
   "baseUrl": "http://demo17.huygens.knaw.nl/timbuctoo",
   "searchPath": "/v1/search",
@@ -18092,7 +18094,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","hibb-modal":"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -18201,7 +18203,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
   "tempPsChildren" : {
     "type" : "String"
   },
@@ -28023,7 +28025,7 @@ module.exports = RelationItem;
 
 
 },{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
   "value" : {
     "type" : "String"
   },
