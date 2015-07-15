@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 BaseSearch = require '../base-search.coffee'
 
-config = require '../../config.coffee'
+config = require '../../config'
 
 class PersonSearch extends BaseSearch
 	resultsTemplate: require '../../../jade/views/person/person-search-results.jade'

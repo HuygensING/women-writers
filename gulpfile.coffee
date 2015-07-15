@@ -17,27 +17,47 @@ rimraf = require 'rimraf'
 cfg = require './config.json'
 rsync = require('rsyncwrapper').rsync
 preprocess = require 'gulp-preprocess'
+minifyCss = require 'gulp-minify-css'
+vinylPaths = require 'vinyl-paths'
+del = require 'del'
 
 browserSync = require 'browser-sync'
 reload = browserSync.reload
 modRewrite = require 'connect-modrewrite'
 proxy = require 'proxy-middleware'
 url = require 'url'
+rename = require 'gulp-rename'
 
 link = require('gulp-task-link')(gulp, cfg['local-modules'])
 
-devDir = './envs/development'
-prodDir = './envs/production'
 
-ENV = if process.env.NODE_ENV? then process.env.NODE_ENV else 'development'
+unless ENV?
+	ENV = if process.env.NODE_ENV? then process.env.NODE_ENV else 'development'
 
-gulp.task 'server', ['watch', 'watchify', 'stylus', 'concat-libs-css', 'jade', 'copy-static'], ->
+cfg[ENV].ENV = ENV
+
+cfg.devDir = "./" + cfg['development']['SOURCE'] 
+cfg.testDir = "./" + cfg['test']['SOURCE']
+cfg.prodDir = "./" + cfg['production']['SOURCE']
+cfg.outputDir = switch ENV
+	when 'development' then cfg.devDir
+	when 'test' then cfg.testDir
+	when 'production' then cfg.prodDir
+
+gulp.task 'copy-env-config', ->
+	configDir = "./src/coffee/config/"
+
+	gulp.src("#{configDir}#{ENV}.coffee")
+		.pipe(rename("env.coffee"))
+		.pipe(gulp.dest(configDir))
+
+gulp.task 'server', ['watch'], ->
 	# proxyOptions = url.parse('http://localhost:3000')
 	# proxyOptions.route = '/api'
 
 	browserSync.init null,
 		server:
-			baseDir: devDir
+			baseDir: cfg.outputDir
 			middleware: [
 				# proxy(proxyOptions),
 				modRewrite([
@@ -52,41 +72,27 @@ gulp.task 'stylus', ->
 			errors: true
 			define: cfg[ENV]
 		))
-		.pipe(gulp.dest("#{devDir}/css"))
+		.pipe(gulp.dest("#{cfg.outputDir}/css"))
 		.pipe(reload(stream: true))
 
 gulp.task 'concat-libs-css', ->
 	gulp.src(cfg['css-files'])
 		.pipe(concat("libs.css"))
-		.pipe(gulp.dest("#{devDir}/css"))
+		.pipe(gulp.dest("#{cfg.outputDir}/css"))
 		.pipe(reload(stream: true))
 # 		.pipe(minifyCss())
 # 		.pipe(rename(extname:'.min.css'))
 # 		.pipe(gulp.dest(prodDir))
 
-# gulp.task 'minify-css', ->
-# 	gulp.src(devDir+'/css/main.css')
-# 		.pipe(minifyCss())
-# 		.pipe(gulp.dest(prodDir+'/css'))
-
 gulp.task 'jade', ->
 	gulp.src('./src/index.jade')
 		.pipe(jade())
 		.pipe(preprocess(context: cfg[ENV]))
-		.pipe(gulp.dest(devDir))
+		.pipe(gulp.dest(cfg.outputDir))
 
 gulp.task 'copy-static', ->
-	gulp.src('./static/**/*').pipe(gulp.dest(devDir))
-	gulp.src('./static/**/*').pipe(gulp.dest(prodDir))
+	gulp.src('./static/**/*').pipe(gulp.dest(cfg.outputDir))
 
-###
-@function
-###
-minify = ->
-	gulp.src("#{prodDir}/index.js")
-		.pipe(uglify())
-		.pipe(rename(extname: '.min.js'))
-		.pipe(gulp.dest(prodDir))
 
 ###
 @function
@@ -100,12 +106,11 @@ createBundle = (watch=false) ->
 	args = extend args, watchify.args if watch
 
 	bundle = ->
-		# Create bundle
 		gutil.log('Browserify: bundling')
 		bundler.bundle()
 			.on('error', ((err) -> gutil.log("Bundling error ::: "+err)))
 			.pipe(source("src.js"))
-			.pipe(gulp.dest("#{devDir}/js"))
+			.pipe(gulp.dest("#{cfg.outputDir}/js"))
 			.pipe(reload(stream: true, once: true))
 
 	bundler = browserify args
@@ -113,23 +118,29 @@ createBundle = (watch=false) ->
 		bundler = watchify(bundler)
 		bundler.on 'update', bundle
 
-	bundler.exclude 'jquery'
-	bundler.exclude 'backbone'
-	bundler.exclude 'underscore'
+	if ENV isnt 'production'
+		for own id, path of cfg['external-libs']
+			bundler.exclude id
+
+	if ENV is 'production'
+		# Make external libs available to external modules (fs, hibb-login)
+		for own id, path of cfg['external-libs']
+			bundler.require path, expose: id
 
 	bundler.transform 'coffeeify'
 	bundler.transform 'jadeify'
 
 	bundle()
 
-gulp.task 'browserify', -> createBundle false
-gulp.task 'watchify', -> createBundle true
+gulp.task 'browserify', ['copy-env-config'], -> createBundle false
+gulp.task 'watchify', ['copy-env-config'], -> createBundle true
 
 gulp.task 'browserify-libs', ->
 	libs =
 		jquery: './node_modules/jquery/dist/jquery'
 		backbone: './node_modules/backbone/backbone.js'
 		underscore: './node_modules/underscore/underscore.js'
+		d3: './node_modules/d3/d3.js'
 
 	bundler = browserify './libs.coffee'
 
@@ -141,7 +152,7 @@ gulp.task 'browserify-libs', ->
 	gutil.log('Browserify: bundling libs')
 	bundler.bundle()
 		.pipe(source("libs.js"))
-		.pipe(gulp.dest("#{devDir}/js"))
+		.pipe(gulp.dest("#{cfg.outputDir}/js"))
 
 gulp.task 'watch', ['watchify'], ->
 	gulp.watch cfg['css-files'], ['concat-libs-css']
@@ -150,10 +161,47 @@ gulp.task 'watch', ['watchify'], ->
 
 gulp.task 'default', ['server']
 
-gulp.task 'deploy', ['jade', 'stylus'], (done) ->
-	console.log ENV
-	return gutil.log("Cannot deploy in '#{ENV}'") if ENV isnt 'test' and ENV isnt 'production'
+gulp.task 'compile', ['copy-static', 'browserify', 'browserify-libs', 'jade', 'stylus', 'concat-libs-css']
 
+
+### PRODUCTION ###
+
+gulp.task 'minify-css', ['stylus', 'concat-libs-css'], ->
+	return gutil.log(gutil.colors.red("Cannot minify-css in '#{ENV}'")) if ENV isnt 'production'
+
+	gulp.src(["#{cfg.outputDir}/css/main.css", "#{cfg.outputDir}/css/libs.css"])
+		.pipe(vinylPaths(del))
+		.pipe(concat("main.min.css"))
+		.pipe(minifyCss())
+		.pipe(gulp.dest("#{cfg.outputDir}/css"))
+
+gulp.task 'uglify', ['browserify'], ->
+	return gutil.log(gutil.colors.red("Cannot uglify in '#{ENV}'")) if ENV isnt 'production'
+
+	gulp.src("#{cfg.outputDir}/js/src.js")
+		.pipe(uglify())
+		.pipe(vinylPaths(del)) # Remove src file before renaming, otherwise the renamed file will be removed.
+		.pipe(rename("main.min.js"))
+		.pipe(gulp.dest("#{cfg.outputDir}/js"))
+
+gulp.task 'build', ['copy-static', 'jade', 'minify-css', 'uglify'], (done) ->
+	return gutil.log(gutil.colors.red("Cannot build in '#{ENV}'")) if ENV isnt 'production'
+
+	done()
+
+gulp.task 'deploy-production', ['build'], (done) ->
+	return gutil.log(gutil.colors.red("Cannot deploy-production in '#{ENV}'")) if ENV isnt 'production'
+
+	deploy()
+
+### /PRODUCTION ###
+
+gulp.task 'deploy-test', ['compile'], (done) ->
+	return gutil.log("Cannot deploy-test in '#{ENV}'") if ENV isnt 'test'
+
+	deploy()
+
+deploy = ->
 	rsync
 		src: cfg[ENV]['SOURCE'],
 		dest: cfg[ENV]['REMOTE_DESTINATION'],
@@ -163,5 +211,3 @@ gulp.task 'deploy', ['jade', 'stylus'], (done) ->
 			console.log cmd
 			if error
 				new gutil.PluginError('test', 'something broke', showStack: true)
-			else
-				done()

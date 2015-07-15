@@ -6,13 +6,12 @@ Backbone = require 'backbone'
 $ = Backbone.$ = require 'jquery'
 
 config = require '../config'
-user = require '../models/user'
 
 {searchQuery} = require './search'
 
 module.exports = ->
 	loadedRelationTypesPerson = new $.Deferred()
-	$.getJSON(config.get('baseUrl') + '/system/relationtypes?iname=wwperson').then (data) ->
+	$.getJSON(config.get('facetedSearchBaseUrl') + '/system/relationtypes?iname=wwperson').then (data) ->
 		relationTypes = {}
 		for t in data
 			if t.sourceTypeName is 'person'
@@ -21,12 +20,12 @@ module.exports = ->
 			if t.targetTypeName is 'person'
 				relationTypes[t.inverseName] = t
 		config.set personRelationTypes: relationTypes
-		
+
 		loadedRelationTypesPerson.resolve()
 
 
 	loadedRelationTypesDocument = new $.Deferred()
-	$.getJSON(config.get('baseUrl') + '/system/relationtypes?iname=wwdocument').then (data) ->
+	$.getJSON(config.get('facetedSearchBaseUrl') + '/system/relationtypes?iname=wwdocument').then (data) ->
 		relationTypes = {}
 		for t in data
 			relationTypes[t.regularName] = t

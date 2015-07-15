@@ -1,0 +1,34 @@
+form
+	ul
+		li
+			label Title
+			input(type="text", name="title")
+		li
+			label Creator
+			select(name="isCreatedBy")
+				option
+				each person in persons
+					option(value=person.id)= person.displayName
+		li
+			label Language
+			select(name="hasWorkLanguage")
+				option
+				each language in languages
+					option(value=language.value)= language.label
+		li
+			label Genre
+			select(name="hasGenre")
+				option
+				each genre in genres
+					option(value=genre.value)= genre.label
+
+		li
+			label Publish location
+			select(name="hasPublishLocation")
+				option
+				each location in locations
+					option(value=location.id)= location.displayName
+
+		li
+			label Date
+			input(type="text", name="date")

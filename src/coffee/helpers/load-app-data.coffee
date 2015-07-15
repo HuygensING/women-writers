@@ -6,7 +6,6 @@ Backbone = require 'backbone'
 $ = Backbone.$ = require 'jquery'
 
 config = require '../config'
-user = require '../models/user'
 
 {searchQuery} = require './search'
 

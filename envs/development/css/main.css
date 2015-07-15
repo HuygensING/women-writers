@@ -1167,10 +1167,60 @@ svg circle.unknown {
   width: calc(100% - 190px - 0.5em);
 }
 .person.view .network-popup-link {
-  float: right;
+  margin-left: 20px;
 }
 .person.view .network-popup-link i {
   margin-right: 0.5em;
+}
+.add-person-modal p.message.error,
+.add-document-modal p.message.error {
+  font-weight: bold;
+  background-color: #ddd;
+  padding: 0 6px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 10px #666;
+  box-shadow: 1px 1px 10px #666;
+}
+.add-person-modal form,
+.add-document-modal form {
+  margin-bottom: 60px;
+}
+.add-person-modal form ul li,
+.add-document-modal form ul li {
+  height: 50px;
+}
+.add-person-modal form ul li select,
+.add-document-modal form ul li select {
+  border: 1px solid #eee;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 0.6em 0.4em;
+  color: #555;
+  font-size: 16px;
+  outline: none;
+  background-color: #fff;
+}
+.add-person-modal form ul li select,
+.add-document-modal form ul li select,
+.add-person-modal form ul li input,
+.add-document-modal form ul li input {
+  width: 300px;
+}
+.add-person-modal form ul li label,
+.add-document-modal form ul li label,
+.add-person-modal form ul li input,
+.add-document-modal form ul li input,
+.add-person-modal form ul li select,
+.add-document-modal form ul li select {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.add-person-modal form ul li label,
+.add-document-modal form ul li label {
+  width: 140px;
 }
 .results ol.persons a .name {
   display: inline;
@@ -1973,14 +2023,18 @@ p.unimplemented {
 .view .controls .delete.confirm .default {
   display: none;
 }
+.view h2,
 .view .results-paging {
-  position: relative;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-top: 30px;
 }
-.view .results-paging .paging-controls {
-  position: absolute;
-  right: 0;
-  top: -80px;
-  text-align: center;
+.view .results-paging {
+  width: 20%;
+  text-align: right;
 }
 .view .results-paging .paging-controls span {
   display: block;
@@ -1992,6 +2046,7 @@ p.unimplemented {
   margin-left: 0.5em;
 }
 .view h2 {
+  width: 80%;
   text-transform: uppercase;
   font-weight: 100;
   line-height: 110%;
@@ -2385,6 +2440,18 @@ a:hover,
   -o-transition: border-color 0.1s ease 0s;
   -ms-transition: border-color 0.1s ease 0s;
   transition: border-color 0.1s ease 0s;
+}
+.navigation .links span.add-person,
+.navigation .links span.add-document {
+  background-color: #f2f9f9;
+  color: #129275;
+  padding: 1px 6px;
+  cursor: pointer;
+}
+.navigation .links span.add-person:hover,
+.navigation .links span.add-document:hover {
+  color: #fff;
+  background-color: #129275;
 }
 .navigation .user-status {
   display: inline-block;

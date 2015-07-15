@@ -1,4 +1,4 @@
-config = require '../../config.coffee'
+config = require '../../config'
 
 BaseView = require '../base-view'
 

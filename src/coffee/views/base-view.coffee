@@ -21,9 +21,7 @@ class BaseView extends Backbone.View
 		{@config, @showingRevision} = options
 
 		@config ?= require '../config'
-		# @user ?= require '../models/user'
 
-		# @listenTo @user, 'change:loggedIn', => @showControls()
 		@render()
 
 	isReception: (r) ->

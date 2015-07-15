@@ -8,7 +8,7 @@ resultsTemplate = require '../../jade/views/search-results.jade'
 {createFacetedSearch} = require '../helpers/search.coffee'
 
 config = require '../config'
-user = require '../models/user'
+LoginComponent = require 'hibb-login'
 
 class SearchView extends Backbone.View
 	template: searchTemplate
@@ -87,7 +87,7 @@ class SearchView extends Backbone.View
 			sortedBy: @sortField
 			showCurated: (o) ->
 				isCurated = byId[o.id]['^modified'].userId isnt 'importer'
-				isCurated and user.get('loggedIn') is true
+				isCurated and LoginComponent.getUser().isLoggedIn()
 
 		@$('.cursor .loader').hide()
 		@$('.cursor .position').show()

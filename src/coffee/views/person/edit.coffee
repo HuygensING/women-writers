@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 
-config = require '../../config.coffee'
+config = require '../../config'
 
 personDescription = require '../../../data/metadata/wwperson.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
@@ -45,7 +45,7 @@ class Person extends Backbone.View
 
 	initialize: ->
 		@render() if @model?
-		
+
 		@model.on 'sync', =>
 			@render()
 
@@ -88,7 +88,7 @@ class Person extends Backbone.View
 			readonly: [ /^temp/	]
 
 		_.extend schema['gender'],
-			options: schema['gender'].options.map (o) -> 
+			options: schema['gender'].options.map (o) ->
 				val: o, label: config.mapGenderOption o
 
 		for type in @relationTypes
@@ -101,7 +101,7 @@ class Person extends Backbone.View
 					typeId: relationType._id
 					baseSourceType: relationType.sourceTypeName
 					baseTargetType: relationType.targetTypeName
-					
+
 		_.extend schema['timbuctoo-relation.hasBirthPlace'],
 			title: 'Birth place'
 			options: config.get 'locations'
@@ -109,7 +109,7 @@ class Person extends Backbone.View
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
 			placeholderString: 'Location'
-			
+
 		_.extend schema['timbuctoo-relation.hasResidenceLocation'],
 			title: 'Lived in'
 			options: config.get 'locations'
@@ -124,37 +124,37 @@ class Person extends Backbone.View
 			relationTypeHelper: new DynamicRelationTypeHelper()
 			onlyOne: true
 			placeholderString: 'Location'
-			
+
 		_.extend schema['timbuctoo-relation.hasEducation'],
 			title: 'Education'
 			options: config.get 'educations'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-						
+
 		_.extend schema['timbuctoo-relation.hasFinancialSituation'],
 			title: 'Financials'
 			options: config.get 'financialSituations'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-		
+
 		_.extend schema['timbuctoo-relation.hasMaritalStatus'],
 			title: 'Marital status'
 			options: config.get 'maritalStatuses'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+
 		_.extend schema['timbuctoo-relation.hasProfession'],
 			title: 'Profession'
 			options: config.get 'professions'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+
 		_.extend schema['timbuctoo-relation.hasReligion'],
 			title: 'Religion'
 			options: config.get 'religions'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+
 		_.extend schema['timbuctoo-relation.hasSocialClass'],
 			title: 'Social class'
 			options: config.get 'socialClasses'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+
 		_.extend schema['timbuctoo-relation.isMemberOf'],
 			title: 'Memberships'
 			options: config.get 'collectives'
@@ -187,7 +187,7 @@ class Person extends Backbone.View
 			title: 'Has pseudonym'
 			autocomplete: (value) ->
 				simpleSearch value, 'wwperson', 500
-				# TODO: Awaiting bugfix 
+				# TODO: Awaiting bugfix
 				# ,
 				# facetValues: [
 				# 	{ name: 'dynamic_s_types', values: ['PSEUDONYM'] }

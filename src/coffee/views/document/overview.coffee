@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 
-config = require '../../config.coffee'
+config = require '../../config'
 
 class DocumentOverview extends Backbone.View
 	template: require '../../../jade/views/document/document-overview.jade'

@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 
-config = require '../../config.coffee'
+config = require '../../config'
 
 documentDescription = require '../../../data/metadata/wwdocument.json'
 Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'

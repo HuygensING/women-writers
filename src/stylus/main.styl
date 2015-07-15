@@ -66,7 +66,7 @@ a, .link
 	.huygens-ing
 		text-decoration none
 		border none
-		
+
 		display block
 		position absolute
 		top 0
@@ -86,12 +86,12 @@ a, .link
 	background-color lightBackgroundColor
 	border-top 1px solid lightBackgroundEdgeColor
 	border-bottom 1px solid lightBackgroundEdgeColor
-	
+
 	i.fa.fa-adjust
 		color #888
 		margin-left 10px
 		cursor pointer
-	
+
 
 	.centered
 		display table
@@ -119,6 +119,17 @@ a, .link
 				border-bottom 5px solid lightBackgroundEdgeColor
 				transition border-color .1s ease 0s
 
+		span.add-person, span.add-document
+			background-color #F2F9F9
+			color baseColor
+			padding 1px 6px
+			cursor pointer
+
+			&:hover
+				color white
+				background-color baseColor
+
+
 	.user-status
 		display inline-block
 		float right
@@ -129,7 +140,7 @@ a, .link
 
 		& > span
 			display none
-		
+
 		& > span, button
 			float right
 

@@ -1,8 +1,8 @@
 .container
-	if config.get('isProduction')
-		.is-production-text Production
-	else
-		.is-test-text Test
+	//- if config.get('isProduction')
+	//- 	.is-production-text Production
+	//- else
+	//- 	.is-test-text Test
 	.header.centered
 		a.home(href=config.get('baseUrl'))
 			.header-logo.largest-text
@@ -13,11 +13,14 @@
 		.centered
 			.links
 				a.person(href=config.get('baseUrl') + "/persons/") Persons
+				span.add-person +
 				a.document(href=config.get('baseUrl') + "/documents/") Documents
+				span.add-document +
 				a.reception(href=config.get('baseUrl') + "/receptions/") Receptions
 				a.source(href=config.get('baseUrl') + "/sources/") Sources
 				i.fa.fa-adjust
 				.user-status
+
 	#search
 		.persons.centered
 		.documents.centered
