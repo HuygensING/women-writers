@@ -8510,7 +8510,7 @@ config = require('../config');
 searchQuery = require('./search').searchQuery;
 
 module.exports = function() {
-  var loadPromise, loadedEducations, loadedFinancialSituations, loadedGenres, loadedLanguages, loadedMaritalStatuses, loadedProfessions, loadedRelationTypesDocument, loadedRelationTypesPerson, loadedReligions, loadedSocialClasses;
+  var l, languages, loadPromise, loadedEducations, loadedFinancialSituations, loadedGenres, loadedMaritalStatuses, loadedProfessions, loadedRelationTypesDocument, loadedRelationTypesPerson, loadedReligions, loadedSocialClasses;
   loadedRelationTypesPerson = new $.Deferred();
   $.getJSON(config.get('facetedSearchBaseUrl') + '/system/relationtypes?iname=wwperson').then(function(data) {
     var relationTypes, t, _i, _len;
@@ -8542,35 +8542,1836 @@ module.exports = function() {
     });
     return loadedRelationTypesDocument.resolve();
   });
-  loadedLanguages = new $.Deferred();
-  searchQuery({
-    query: {
-      term: '*'
-    },
-    options: {
-      searchUrl: config.searchUrl('wwlanguages'),
-      resultRows: 1000
-    }
-  }).then(function(data) {
-    var l, languages;
-    languages = (function() {
-      var _i, _len, _ref, _results;
-      _ref = data.refs;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        l = _ref[_i];
-        _results.push({
-          value: l.id,
-          label: l.displayName
-        });
+  languages = {
+    "sortableFields": [],
+    "numFound": 45,
+    "results": [
+      {
+        "@type": "wwlanguage",
+        "name": "Norwegian Nynorsk",
+        "core": true,
+        "_id": "LANG000000004747",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "nno",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000004747"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000004747"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000004747"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Swedish",
+        "core": true,
+        "_id": "LANG000000006131",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "swe",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000006131"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000006131"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000006131"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Italian",
+        "core": true,
+        "_id": "LANG000000002645",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ita",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002645"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002645"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002645"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Russian",
+        "core": true,
+        "_id": "LANG000000005658",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "rus",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005658"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005658"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005658"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Galician",
+        "core": true,
+        "_id": "LANG000000002137",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "glg",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002137"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002137"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002137"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Catalan",
+        "core": true,
+        "_id": "LANG000000001176",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "cat",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001176"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001176"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001176"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Basque",
+        "core": true,
+        "_id": "LANG000000001880",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "eus",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001880"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001880"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001880"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Breton",
+        "core": true,
+        "_id": "LANG000000000938",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "bre",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000000938"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000000938"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000000938"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Serbian",
+        "core": true,
+        "_id": "LANG000000006042",
+        "^rev": 4,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "srp",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000006042"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000006042"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000006042"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Latin",
+        "core": true,
+        "_id": "LANG000000003487",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "lat",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000003487"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000003487"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000003487"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Spanish",
+        "core": true,
+        "_id": "LANG000000005996",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "spa",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005996"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005996"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005996"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "French",
+        "core": true,
+        "_id": "LANG000000001948",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "fra",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001948"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001948"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001948"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Esperanto",
+        "core": true,
+        "_id": "LANG000000001846",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "epo",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001846"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001846"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001846"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Occitan (post 1500)",
+        "core": true,
+        "_id": "LANG000000004956",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "oci",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000004956"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000004956"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000004956"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Ukrainian",
+        "core": true,
+        "_id": "LANG000000006749",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ukr",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000006749"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000006749"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000006749"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Ancient Hebrew",
+        "core": true,
+        "_id": "LANG000000002345",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "hbo",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002345"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002345"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002345"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Romanian",
+        "core": true,
+        "_id": "LANG000000005628",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ron",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005628"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005628"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005628"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Armenian",
+        "core": true,
+        "_id": "LANG000000002506",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "hye",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002506"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002506"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002506"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Arabic",
+        "core": true,
+        "_id": "LANG000000000348",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ara",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000000348"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000000348"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000000348"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Ottoman Turkish (1500-1928)",
+        "core": true,
+        "_id": "LANG000000005079",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ota",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005079"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005079"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005079"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Western Frisian",
+        "core": true,
+        "_id": "LANG000000001959",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "fry",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001959"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001959"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001959"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Persian",
+        "core": true,
+        "_id": "LANG000000001906",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "fas",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001906"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001906"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001906"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Lithuanian",
+        "core": true,
+        "_id": "LANG000000003612",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "lit",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000003612"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000003612"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000003612"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Icelandic",
+        "core": true,
+        "_id": "LANG000000002638",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "isl",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002638"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002638"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002638"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Croatian",
+        "core": true,
+        "_id": "LANG000000002458",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "hrv",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002458"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002458"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002458"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Chinese",
+        "core": true,
+        "_id": "LANG000000007742",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "zho",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000007742"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000007742"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000007742"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Japanese",
+        "core": true,
+        "_id": "LANG000000002777",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "jpn",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002777"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002777"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002777"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Uzbek",
+        "core": true,
+        "_id": "LANG000000006836",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "uzb",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000006836"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000006836"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000006836"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Portuguese",
+        "core": true,
+        "_id": "LANG000000005341",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "por",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005341"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005341"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005341"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Irish",
+        "core": true,
+        "_id": "LANG000000002136",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "gle",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002136"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002136"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002136"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Modern Greek (1453-)",
+        "core": true,
+        "_id": "LANG000000001809",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ell",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001809"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001809"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001809"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Polish",
+        "core": true,
+        "_id": "LANG000000005335",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "pol",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005335"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005335"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005335"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Czech",
+        "core": true,
+        "_id": "LANG000000001232",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "ces",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001232"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001232"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001232"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Finnish",
+        "core": true,
+        "_id": "LANG000000001922",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "fin",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001922"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001922"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001922"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Turkish",
+        "core": true,
+        "_id": "LANG000000006631",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "tur",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000006631"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000006631"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000006631"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Bulgarian",
+        "core": true,
+        "_id": "LANG000000001019",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "bul",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001019"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001019"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001019"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Slovenian",
+        "core": true,
+        "_id": "LANG000000005917",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "slv",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005917"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005917"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005917"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Slovak",
+        "core": true,
+        "_id": "LANG000000005907",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "slk",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000005907"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000005907"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000005907"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "English",
+        "core": true,
+        "_id": "LANG000000001834",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "eng",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001834"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001834"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001834"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "German",
+        "core": true,
+        "_id": "LANG000000001550",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "deu",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001550"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001550"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001550"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Dutch",
+        "core": true,
+        "_id": "LANG000000004692",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "nld",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000004692"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000004692"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000004692"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Hungarian",
+        "core": true,
+        "_id": "LANG000000002484",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "hun",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000002484"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000002484"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000002484"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Estonian",
+        "core": true,
+        "_id": "LANG000000001867",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "est",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001867"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001867"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001867"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Albanian",
+        "core": true,
+        "_id": "LANG000000006018",
+        "^rev": 5,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "sqi",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000006018"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000006018"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000006018"
+          }
+        ]
+      }, {
+        "@type": "wwlanguage",
+        "name": "Danish",
+        "core": true,
+        "_id": "LANG000000001492",
+        "^rev": 2,
+        "^created": {
+          "timeStamp": 1429107283185,
+          "userId": "importer",
+          "vreId": "base"
+        },
+        "^modified": {
+          "timeStamp": 1429107503869,
+          "userId": "importer",
+          "vreId": "neww"
+        },
+        "^pid": null,
+        "^deleted": false,
+        "@relationCount": 0,
+        "@properties": {},
+        "@relations": {},
+        "^code": "dan",
+        "@variationRefs": [
+          {
+            "type": "language",
+            "id": "LANG000000001492"
+          }, {
+            "type": "baselanguage",
+            "id": "LANG000000001492"
+          }, {
+            "type": "wwlanguage",
+            "id": "LANG000000001492"
+          }
+        ]
       }
-      return _results;
-    })();
-    config.set({
-      languages: languages
-    });
-    return loadedLanguages.resolve();
-  });
+    ],
+    "ids": ["LANG000000004747", "LANG000000006131", "LANG000000002645", "LANG000000005658", "LANG000000002137", "LANG000000001176", "LANG000000001880", "LANG000000000938", "LANG000000006042", "LANG000000003487", "LANG000000005996", "LANG000000001948", "LANG000000001846", "LANG000000004956", "LANG000000006749", "LANG000000002345", "LANG000000005628", "LANG000000002506", "LANG000000000348", "LANG000000005079", "LANG000000001959", "LANG000000001906", "LANG000000003612", "LANG000000002638", "LANG000000002458", "LANG000000007742", "LANG000000002777", "LANG000000006836", "LANG000000005341", "LANG000000002136", "LANG000000001809", "LANG000000005335", "LANG000000001232", "LANG000000001922", "LANG000000006631", "LANG000000001019", "LANG000000005917", "LANG000000005907", "LANG000000001834", "LANG000000001550", "LANG000000004692", "LANG000000002484", "LANG000000001867", "LANG000000006018", "LANG000000001492"],
+    "start": 0,
+    "rows": 45,
+    "term": "*",
+    "facets": null,
+    "refs": [
+      {
+        "type": "wwlanguage",
+        "id": "LANG000000004747",
+        "path": "domain/wwlanguages/LANG000000004747",
+        "displayName": "Norwegian Nynorsk",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000006131",
+        "path": "domain/wwlanguages/LANG000000006131",
+        "displayName": "Swedish",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002645",
+        "path": "domain/wwlanguages/LANG000000002645",
+        "displayName": "Italian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005658",
+        "path": "domain/wwlanguages/LANG000000005658",
+        "displayName": "Russian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002137",
+        "path": "domain/wwlanguages/LANG000000002137",
+        "displayName": "Galician",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001176",
+        "path": "domain/wwlanguages/LANG000000001176",
+        "displayName": "Catalan",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001880",
+        "path": "domain/wwlanguages/LANG000000001880",
+        "displayName": "Basque",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000000938",
+        "path": "domain/wwlanguages/LANG000000000938",
+        "displayName": "Breton",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000006042",
+        "path": "domain/wwlanguages/LANG000000006042",
+        "displayName": "Serbian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000003487",
+        "path": "domain/wwlanguages/LANG000000003487",
+        "displayName": "Latin",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005996",
+        "path": "domain/wwlanguages/LANG000000005996",
+        "displayName": "Spanish",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001948",
+        "path": "domain/wwlanguages/LANG000000001948",
+        "displayName": "French",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001846",
+        "path": "domain/wwlanguages/LANG000000001846",
+        "displayName": "Esperanto",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000004956",
+        "path": "domain/wwlanguages/LANG000000004956",
+        "displayName": "Occitan (post 1500)",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000006749",
+        "path": "domain/wwlanguages/LANG000000006749",
+        "displayName": "Ukrainian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002345",
+        "path": "domain/wwlanguages/LANG000000002345",
+        "displayName": "Ancient Hebrew",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005628",
+        "path": "domain/wwlanguages/LANG000000005628",
+        "displayName": "Romanian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002506",
+        "path": "domain/wwlanguages/LANG000000002506",
+        "displayName": "Armenian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000000348",
+        "path": "domain/wwlanguages/LANG000000000348",
+        "displayName": "Arabic",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005079",
+        "path": "domain/wwlanguages/LANG000000005079",
+        "displayName": "Ottoman Turkish (1500-1928)",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001959",
+        "path": "domain/wwlanguages/LANG000000001959",
+        "displayName": "Western Frisian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001906",
+        "path": "domain/wwlanguages/LANG000000001906",
+        "displayName": "Persian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000003612",
+        "path": "domain/wwlanguages/LANG000000003612",
+        "displayName": "Lithuanian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002638",
+        "path": "domain/wwlanguages/LANG000000002638",
+        "displayName": "Icelandic",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002458",
+        "path": "domain/wwlanguages/LANG000000002458",
+        "displayName": "Croatian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000007742",
+        "path": "domain/wwlanguages/LANG000000007742",
+        "displayName": "Chinese",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002777",
+        "path": "domain/wwlanguages/LANG000000002777",
+        "displayName": "Japanese",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000006836",
+        "path": "domain/wwlanguages/LANG000000006836",
+        "displayName": "Uzbek",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005341",
+        "path": "domain/wwlanguages/LANG000000005341",
+        "displayName": "Portuguese",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002136",
+        "path": "domain/wwlanguages/LANG000000002136",
+        "displayName": "Irish",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001809",
+        "path": "domain/wwlanguages/LANG000000001809",
+        "displayName": "Modern Greek (1453-)",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005335",
+        "path": "domain/wwlanguages/LANG000000005335",
+        "displayName": "Polish",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001232",
+        "path": "domain/wwlanguages/LANG000000001232",
+        "displayName": "Czech",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001922",
+        "path": "domain/wwlanguages/LANG000000001922",
+        "displayName": "Finnish",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000006631",
+        "path": "domain/wwlanguages/LANG000000006631",
+        "displayName": "Turkish",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001019",
+        "path": "domain/wwlanguages/LANG000000001019",
+        "displayName": "Bulgarian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005917",
+        "path": "domain/wwlanguages/LANG000000005917",
+        "displayName": "Slovenian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000005907",
+        "path": "domain/wwlanguages/LANG000000005907",
+        "displayName": "Slovak",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001834",
+        "path": "domain/wwlanguages/LANG000000001834",
+        "displayName": "English",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001550",
+        "path": "domain/wwlanguages/LANG000000001550",
+        "displayName": "German",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000004692",
+        "path": "domain/wwlanguages/LANG000000004692",
+        "displayName": "Dutch",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000002484",
+        "path": "domain/wwlanguages/LANG000000002484",
+        "displayName": "Hungarian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001867",
+        "path": "domain/wwlanguages/LANG000000001867",
+        "displayName": "Estonian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000006018",
+        "path": "domain/wwlanguages/LANG000000006018",
+        "displayName": "Albanian",
+        "data": null
+      }, {
+        "type": "wwlanguage",
+        "id": "LANG000000001492",
+        "path": "domain/wwlanguages/LANG000000001492",
+        "displayName": "Danish",
+        "data": null
+      }
+    ],
+    "fullTextSearchFields": ["dynamic_t_name"]
+  };
+  languages = (function() {
+    var _i, _len, _ref, _results;
+    _ref = languages.refs;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _results.push({
+        value: l.id,
+        label: l.displayName
+      });
+    }
+    return _results;
+  })();
+  config.set("languages", languages);
   loadPromise = function(url, key) {
     var promise;
     promise = new $.Deferred();
@@ -8599,7 +10400,7 @@ module.exports = function() {
   loadedReligions = loadPromise(config.religionUrl(), 'religions');
   loadedSocialClasses = loadPromise(config.socialClassUrl(), 'socialClasses');
   loadedGenres = loadPromise(config.genreUrl(), 'genres');
-  return $.when(loadedRelationTypesPerson, loadedRelationTypesDocument, loadedLanguages, loadedEducations, loadedFinancialSituations, loadedMaritalStatuses, loadedProfessions, loadedReligions, loadedSocialClasses, loadedGenres);
+  return $.when(loadedRelationTypesPerson, loadedRelationTypesDocument, loadedEducations, loadedFinancialSituations, loadedMaritalStatuses, loadedProfessions, loadedReligions, loadedSocialClasses, loadedGenres);
 };
 
 
@@ -11553,7 +13354,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -11662,7 +13463,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   }
 }
 },{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "tempPsChildren" : {
     "type" : "String"
   },
@@ -21767,7 +23568,7 @@ module.exports = RelationItem;
 
 
 },{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "value" : {
     "type" : "String"
   },
