@@ -36,7 +36,7 @@ unless ENV?
 
 cfg[ENV].ENV = ENV
 
-cfg.devDir = "./" + cfg['development']['SOURCE'] 
+cfg.devDir = "./" + cfg['development']['SOURCE']
 cfg.testDir = "./" + cfg['test']['SOURCE']
 cfg.prodDir = "./" + cfg['production']['SOURCE']
 cfg.outputDir = switch ENV
@@ -126,6 +126,8 @@ createBundle = (watch=false) ->
 		# Make external libs available to external modules (fs, hibb-login)
 		for own id, path of cfg['external-libs']
 			bundler.require path, expose: id
+
+	bundler.external "react"
 
 	bundler.transform 'coffeeify'
 	bundler.transform 'jadeify'

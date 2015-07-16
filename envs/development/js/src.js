@@ -7407,7 +7407,7 @@ exports.rethrow = function rethrow(err, filename, lineno, str){
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"/home/gijs/Projects/women-writers/src/coffee/app.coffee":[function(require,module,exports){
-var $, App, Backbone, Document, DocumentForm, DocumentSearchView, DocumentView, Modal, Person, PersonForm, PersonGraphView, PersonSearchView, PersonView, ReceptionSearchView, SourceList, UserStatusView, addDocumentTpl, addPersonTpl, baseTemplate, config, _,
+var $, App, Backbone, Document, DocumentForm, DocumentSearchView, DocumentView, Modal, Person, PersonForm, PersonGraphView, PersonSearchView, PersonView, React, ReceptionSearchView, SourceList, UserStatusView, addDocumentTpl, addPersonTpl, baseTemplate, config, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   __slice = [].slice;
@@ -7418,6 +7418,8 @@ $ = require('jquery');
 
 _ = require('underscore');
 
+React = require("react");
+
 baseTemplate = require('../jade/views/base.jade');
 
 config = require('./config');
@@ -7426,7 +7428,7 @@ UserStatusView = require('./views/user-status');
 
 Person = require('./models/person');
 
-PersonForm = require('./views/person/edit');
+PersonForm = require("../edit-person/build/development");
 
 PersonView = require('./views/person/view');
 
@@ -7648,19 +7650,10 @@ App = (function(_super) {
   App.prototype.home = function() {};
 
   App.prototype.showPersonForm = function(id) {
-    var person;
-    person = new Person({
-      _id: id
-    });
-    person.fetch().done((function(_this) {
-      return function() {
-        var view;
-        view = new PersonForm({
-          model: person
-        });
-        return _this.switchView(view);
-      };
-    })(this));
+    var Factory;
+    console.log("SHOW: ", id);
+    Factory = React.createFactory(PersonForm);
+    React.render(Factory(), document.getElementById("view"));
     return this.showView();
   };
 
@@ -7897,7 +7890,7 @@ module.exports = App;
 
 
 
-},{"../jade/views/base.jade":"/home/gijs/Projects/women-writers/src/jade/views/base.jade","../jade/views/document/add.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/add.jade","../jade/views/person/add.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/add.jade","./config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./models/document":"/home/gijs/Projects/women-writers/src/coffee/models/document.coffee","./models/person":"/home/gijs/Projects/women-writers/src/coffee/models/person.coffee","./views/document/edit":"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee","./views/document/search":"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee","./views/document/view":"/home/gijs/Projects/women-writers/src/coffee/views/document/view.coffee","./views/person/edit":"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee","./views/person/graph":"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee","./views/person/search":"/home/gijs/Projects/women-writers/src/coffee/views/person/search.coffee","./views/person/view":"/home/gijs/Projects/women-writers/src/coffee/views/person/view.coffee","./views/reception/search":"/home/gijs/Projects/women-writers/src/coffee/views/reception/search.coffee","./views/sources/view":"/home/gijs/Projects/women-writers/src/coffee/views/sources/view.coffee","./views/user-status":"/home/gijs/Projects/women-writers/src/coffee/views/user-status.coffee","backbone":false,"hibb-modal":"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/config/base.coffee":[function(require,module,exports){
+},{"../edit-person/build/development":"/home/gijs/Projects/women-writers/src/edit-person/build/development/index.js","../jade/views/base.jade":"/home/gijs/Projects/women-writers/src/jade/views/base.jade","../jade/views/document/add.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/add.jade","../jade/views/person/add.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/add.jade","./config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./models/document":"/home/gijs/Projects/women-writers/src/coffee/models/document.coffee","./models/person":"/home/gijs/Projects/women-writers/src/coffee/models/person.coffee","./views/document/edit":"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee","./views/document/search":"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee","./views/document/view":"/home/gijs/Projects/women-writers/src/coffee/views/document/view.coffee","./views/person/graph":"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee","./views/person/search":"/home/gijs/Projects/women-writers/src/coffee/views/person/search.coffee","./views/person/view":"/home/gijs/Projects/women-writers/src/coffee/views/person/view.coffee","./views/reception/search":"/home/gijs/Projects/women-writers/src/coffee/views/reception/search.coffee","./views/sources/view":"/home/gijs/Projects/women-writers/src/coffee/views/sources/view.coffee","./views/user-status":"/home/gijs/Projects/women-writers/src/coffee/views/user-status.coffee","backbone":false,"hibb-modal":"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js","jquery":false,"react":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/config/base.coffee":[function(require,module,exports){
 module.exports = {
   "baseUrl": "-",
   "searchPath": "-",
@@ -11704,300 +11697,7 @@ module.exports = DocumentView;
 
 
 
-},{"../../../jade/views/document/view.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/view.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/base-view-helper":"/home/gijs/Projects/women-writers/src/coffee/helpers/base-view-helper.coffee","../base-view":"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee":[function(require,module,exports){
-var Backbone, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, LoginComponent, Person, StatusIndicator, config, createTimbuctooSchema, onlyRealPeople, personDescription, searchLocation, searchQuery, simpleSearch, _, _ref,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-Backbone = require('backbone');
-
-_ = require('underscore');
-
-config = require('../../config');
-
-personDescription = require('../../../data/metadata/wwperson.json');
-
-Form = require('timbuctoo-edit-forms/src/coffee/views/form.coffee');
-
-StatusIndicator = require('../status');
-
-createTimbuctooSchema = require('timbuctoo-edit-forms/src/coffee/helpers.coffee').createTimbuctooSchema;
-
-_ref = require('../../helpers/search'), searchQuery = _ref.searchQuery, simpleSearch = _ref.simpleSearch, searchLocation = _ref.searchLocation;
-
-DynamicRelationTypeHelper = require('timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper');
-
-DynamicInverseRelationTypeHelper = require('timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper');
-
-onlyRealPeople = ['AUTHOR', 'ARCHETYPE', '(empty)'];
-
-LoginComponent = require('hibb-login');
-
-Person = (function(_super) {
-  __extends(Person, _super);
-
-  function Person() {
-    return Person.__super__.constructor.apply(this, arguments);
-  }
-
-  Person.prototype.className = 'person-edit';
-
-  Person.prototype.template = require('../../../jade/views/person/edit.jade');
-
-  Person.prototype.relationTypes = ['hasBirthPlace', 'hasDeathPlace', 'hasResidenceLocation', 'hasEducation', 'hasFinancialSituation', 'hasMaritalStatus', 'isSpouseOf', 'hasPseudonym', 'hasProfession', 'hasReligion', 'hasSocialClass', 'isCreatorOf', 'isCollaboratorOf', 'isMemberOf', 'isPseudonymOf'];
-
-  Person.prototype.events = {
-    'click .save': 'save'
-  };
-
-  Person.prototype.initialize = function() {
-    if (this.model != null) {
-      this.render();
-    }
-    return this.model.on('sync', (function(_this) {
-      return function() {
-        return _this.render();
-      };
-    })(this));
-  };
-
-  Person.prototype.save = function() {
-    var errors, margin, result, status, top, _ref1;
-    status = new StatusIndicator;
-    _ref1 = this.form.save(), result = _ref1.result, errors = _ref1.errors;
-    if (errors == null) {
-      status.show().loading();
-      result.error((function(_this) {
-        return function(rsp, data) {
-          var e, errorMessage;
-          try {
-            errorMessage = JSON.parse(rsp.responseText).message;
-          } catch (_error) {
-            e = _error;
-            errorMessage = rsp.status;
-          }
-          console.log(errorMessage);
-          return status.show().error(errorMessage);
-        };
-      })(this));
-      return result.done((function(_this) {
-        return function() {
-          return _this.model.fetch().done(function() {
-            return status.show().success(function() {
-              return config.router().navigate(config.personViewPath(_this.model.id), {
-                trigger: true
-              });
-            });
-          });
-        };
-      })(this));
-    } else {
-      margin = 100;
-      top = this.$('.field.error').first().offset().top;
-      return Backbone.$('html, body').animate({
-        scrollTop: top - margin
-      });
-    }
-  };
-
-  Person.prototype.render = function() {
-    var relationType, schema, type, _i, _len, _ref1;
-    this.$el.html(this.template({
-      config: config,
-      person: this.model.attributes
-    }));
-    schema = createTimbuctooSchema(personDescription, {
-      exclude: [/^[_@^]/, 'DELETED', 'ID', 'PID', 'ROLES', 'VARIATIONS'],
-      readonly: [/^temp/]
-    });
-    _.extend(schema['gender'], {
-      options: schema['gender'].options.map(function(o) {
-        return {
-          val: o,
-          label: config.mapGenderOption(o)
-        };
-      })
-    });
-    _ref1 = this.relationTypes;
-    for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-      type = _ref1[_i];
-      relationType = config.get('personRelationTypes')[type];
-      schema["timbuctoo-relation." + type] = {
-        type: 'Relation',
-        relationTypeDescription: {
-          relationTypeVariation: config.get('relationTypeVariation'),
-          typeId: relationType._id,
-          baseSourceType: relationType.sourceTypeName,
-          baseTargetType: relationType.targetTypeName
-        }
-      };
-    }
-    _.extend(schema['timbuctoo-relation.hasBirthPlace'], {
-      title: 'Birth place',
-      options: config.get('locations'),
-      autocomplete: function(value) {
-        return searchLocation(value);
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      onlyOne: true,
-      placeholderString: 'Location'
-    });
-    _.extend(schema['timbuctoo-relation.hasResidenceLocation'], {
-      title: 'Lived in',
-      options: config.get('locations'),
-      autocomplete: function(value) {
-        return searchLocation(value);
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      placeholderString: 'Location'
-    });
-    _.extend(schema['timbuctoo-relation.hasDeathPlace'], {
-      title: 'Death place',
-      options: config.get('locations'),
-      autocomplete: function(value) {
-        return searchLocation(value);
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      onlyOne: true,
-      placeholderString: 'Location'
-    });
-    _.extend(schema['timbuctoo-relation.hasEducation'], {
-      title: 'Education',
-      options: config.get('educations'),
-      relationTypeHelper: new DynamicRelationTypeHelper()
-    });
-    _.extend(schema['timbuctoo-relation.hasFinancialSituation'], {
-      title: 'Financials',
-      options: config.get('financialSituations'),
-      relationTypeHelper: new DynamicRelationTypeHelper()
-    });
-    _.extend(schema['timbuctoo-relation.hasMaritalStatus'], {
-      title: 'Marital status',
-      options: config.get('maritalStatuses'),
-      relationTypeHelper: new DynamicRelationTypeHelper()
-    });
-    _.extend(schema['timbuctoo-relation.hasProfession'], {
-      title: 'Profession',
-      options: config.get('professions'),
-      relationTypeHelper: new DynamicRelationTypeHelper()
-    });
-    _.extend(schema['timbuctoo-relation.hasReligion'], {
-      title: 'Religion',
-      options: config.get('religions'),
-      relationTypeHelper: new DynamicRelationTypeHelper()
-    });
-    _.extend(schema['timbuctoo-relation.hasSocialClass'], {
-      title: 'Social class',
-      options: config.get('socialClasses'),
-      relationTypeHelper: new DynamicRelationTypeHelper()
-    });
-    _.extend(schema['timbuctoo-relation.isMemberOf'], {
-      title: 'Memberships',
-      options: config.get('collectives'),
-      autocomplete: function(value) {
-        return simpleSearch(value, 'wwcollective');
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      placeholderString: 'Collective'
-    });
-    _.extend(schema['timbuctoo-relation.isCollaboratorOf'], {
-      title: 'Collaborations',
-      autocomplete: function(value) {
-        return simpleSearch(value, 'wwperson', 500);
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      placeholderString: 'Person'
-    });
-    _.extend(schema['timbuctoo-relation.isCreatorOf'], {
-      title: 'Is creator of',
-      options: config.get('documents'),
-      autocomplete: function(value) {
-        return simpleSearch(value, 'wwdocument');
-      },
-      relationTypeHelper: new DynamicInverseRelationTypeHelper(),
-      placeholderString: 'Work'
-    });
-    _.extend(schema['timbuctoo-relation.hasPseudonym'], {
-      title: 'Has pseudonym',
-      autocomplete: function(value) {
-        return simpleSearch(value, 'wwperson', 500);
-      },
-      relationTypeHelper: new DynamicInverseRelationTypeHelper(),
-      placeholderString: 'Pseudonym'
-    });
-    _.extend(schema['timbuctoo-relation.isPseudonymOf'], {
-      title: 'Is pseudonym of',
-      autocomplete: function(value) {
-        return simpleSearch(value, 'wwperson', 500);
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      placeholderString: 'Person'
-    });
-    _.extend(schema['timbuctoo-relation.isSpouseOf'], {
-      title: 'Is spouse of',
-      autocomplete: function(value) {
-        return simpleSearch(value, 'wwperson', 500);
-      },
-      relationTypeHelper: new DynamicRelationTypeHelper(),
-      placeholderString: 'Person'
-    });
-    schema.notes.type = 'TextArea';
-    schema.personalSituation.type = 'TextArea';
-    schema['birthDate'].validators = ['datable'];
-    schema['deathDate'].validators = ['datable'];
-    this.form = new Form({
-      className: 'timbuctoo-form',
-      authToken: LoginComponent.getUser().getToken(),
-      VRE_ID: config.get('VRE_ID'),
-      relationsUrl: config.relationsUrl(),
-      model: this.model,
-      schema: schema,
-      fieldsets: [
-        {
-          fields: ['tempOldId', 'tempName', 'tempSpouse', 'names', 'gender', 'types', 'tempPseudonyms', 'timbuctoo-relation.hasPseudonym', 'timbuctoo-relation.isPseudonymOf']
-        }, {
-          legend: 'Notes',
-          collapsed: false,
-          fields: ['notes']
-        }, {
-          legend: 'Personal situation',
-          collapsed: false,
-          fields: ['personalSituation']
-        }, {
-          legend: 'Dates and Places',
-          collapsed: true,
-          fields: ['birthDate', 'deathDate', 'tempBirthPlace', 'tempPlaceOfBirth', 'timbuctoo-relation.hasBirthPlace', 'timbuctoo-relation.hasResidenceLocation', 'tempDeathPlace', 'timbuctoo-relation.hasDeathPlace', 'nationality']
-        }, {
-          legend: 'Personal',
-          collapsed: true,
-          fields: ['timbuctoo-relation.hasMaritalStatus', 'tempSpouse', 'timbuctoo-relation.isSpouseOf', 'tempChildren', 'tempPsChildren', 'children', 'timbuctoo-relation.hasSocialClass', 'timbuctoo-relation.hasEducation', 'timbuctoo-relation.hasReligion', 'health']
-        }, {
-          legend: 'Public',
-          collapsed: true,
-          fields: ['tempFinancialSituation', 'timbuctoo-relation.hasProfession', 'tempCollaborations', 'timbuctoo-relation.isCollaboratorOf', 'timbuctoo-relation.hasFinancialSituation', 'tempMemberships', 'timbuctoo-relation.isMemberOf']
-        }, {
-          legend: 'Other',
-          collapsed: true,
-          fields: ['bibliography', 'links']
-        }, {
-          legend: 'Works',
-          collapsed: true,
-          fields: ['timbuctoo-relation.isCreatorOf']
-        }
-      ]
-    });
-    return this.$('.form').html(this.form.el);
-  };
-
-  return Person;
-
-})(Backbone.View);
-
-module.exports = Person;
-
-
-
-},{"../../../data/metadata/wwperson.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json","../../../jade/views/person/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/edit.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee","underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee":[function(require,module,exports){
+},{"../../../jade/views/document/view.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/view.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/base-view-helper":"/home/gijs/Projects/women-writers/src/coffee/helpers/base-view-helper.coffee","../base-view":"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee":[function(require,module,exports){
 var Backbone, Graph, PersonNetworkGraph, config, d3,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -13354,7 +13054,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -13462,147 +13162,614 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
     "type" : "List of (Role)"
   }
 }
-},{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
-  "tempPsChildren" : {
-    "type" : "String"
-  },
-  "PID" : {
-    "value" : "^pid",
-    "type" : "String"
-  },
-  "^deleted" : {
-    "type" : "boolean"
-  },
-  "tempName" : {
-    "type" : "String"
-  },
-  "livedIn" : {
-    "type" : "String"
-  },
-  "^created" : {
-    "type" : "Change"
-  },
-  "children" : {
-    "value" : [ "UNKNOWN", "NO", "YES" ],
-    "type" : "String"
-  },
-  "deathDate" : {
-    "type" : "Datable"
-  },
-  "bibliography" : {
-    "type" : "String"
-  },
-  "^modified" : {
-    "type" : "Change"
-  },
-  "tempSpouse" : {
-    "type" : "String"
-  },
-  "_id" : {
-    "type" : "String"
-  },
-  "tempMemberships" : {
-    "type" : "String"
-  },
-  "ID" : {
-    "value" : "_id",
-    "type" : "String"
-  },
-  "@relations" : {
-    "type" : "Map of (String, List of (EntityRef))"
-  },
-  "gender" : {
-    "value" : [ "UNKNOWN", "MALE", "FEMALE", "NOT_APPLICABLE" ],
-    "type" : "String"
-  },
-  "birthDate" : {
-    "type" : "Datable"
-  },
-  "types" : {
-    "value" : [ "ARCHETYPE", "AUTHOR", "PSEUDONYM" ],
-    "type" : "List of (String)"
-  },
-  "DELETED" : {
-    "value" : "^deleted",
-    "type" : "String"
-  },
-  "^pid" : {
-    "type" : "String"
-  },
-  "VARIATIONS" : {
-    "value" : "^variations",
-    "type" : "String"
-  },
-  "ROLES" : {
-    "value" : "^roles",
-    "type" : "String"
-  },
-  "tempPseudonyms" : {
-    "type" : "String"
-  },
-  "tempCollaborations" : {
-    "type" : "String"
-  },
-  "tempFinancialSituation" : {
-    "type" : "String"
-  },
-  "links" : {
-    "type" : "List of (Link)"
-  },
-  "tempChildren" : {
-    "type" : "String"
-  },
-  "health" : {
-    "type" : "String"
-  },
-  "fsPseudonyms" : {
-    "type" : "List of (String)"
-  },
-  "tempDeath" : {
-    "type" : "String"
-  },
-  "tempBirthPlace" : {
-    "type" : "String"
-  },
-  "tempMotherTongue" : {
-    "type" : "String"
-  },
-  "nationality" : {
-    "type" : "String"
-  },
-  "^rev" : {
-    "type" : "int"
-  },
-  "names" : {
-    "value" : [ ],
-    "type" : "WWPerson.Names"
-  },
-  "^variations" : {
-    "type" : "List of (String)"
-  },
-  "tempDeathPlace" : {
-    "type" : "String"
-  },
-  "@relationCount" : {
-    "type" : "int"
-  },
-  "tempOldId" : {
-    "type" : "String"
-  },
-  "notes" : {
-    "type" : "String"
-  },
-  "tempPlaceOfBirth" : {
-    "type" : "String"
-  },
-  "^roles" : {
-    "type" : "List of (Role)"
-  },
-  "personalSituation" : {
-    "type" : "String"
-  }
-}
+},{}],"/home/gijs/Projects/women-writers/src/edit-person/build/development/index.js":[function(require,module,exports){
+(function (global){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.WomenWritersEditPerson = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+"use strict";
+
+(function (f) {
+	if (typeof exports === "object" && typeof module !== "undefined") {
+		module.exports = f();
+	} else if (typeof define === "function" && define.amd) {
+		define([], f);
+	} else {
+		var g;if (typeof window !== "undefined") {
+			g = window;
+		} else if (typeof global !== "undefined") {
+			g = global;
+		} else if (typeof self !== "undefined") {
+			g = self;
+		} else {
+			g = this;
+		}g.HireTabs = f();
+	}
+})(function () {
+	var define, module, exports;return (function e(t, n, r) {
+		function s(o, u) {
+			if (!n[o]) {
+				if (!t[o]) {
+					var a = typeof require == "function" && require;if (!u && a) return a(o, !0);if (i) return i(o, !0);var f = new Error("Cannot find module '" + o + "'");throw (f.code = "MODULE_NOT_FOUND", f);
+				}var l = n[o] = { exports: {} };t[o][0].call(l.exports, function (e) {
+					var n = t[o][1][e];return s(n ? n : e);
+				}, l, l.exports, e, t, n, r);
+			}return n[o].exports;
+		}var i = typeof require == "function" && require;for (var o = 0; o < r.length; o++) s(r[o]);return s;
+	})({ 1: [function (_dereq_, module, exports) {
+			"use strict";
+
+			Object.defineProperty(exports, "__esModule", {
+				value: true
+			});
+
+			function _interopRequireDefault(obj) {
+				return obj && obj.__esModule ? obj : { "default": obj };
+			}
+
+			var _react = _dereq_("react");
+
+			var _react2 = _interopRequireDefault(_react);
+
+			var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
+
+			exports.elementOrArrayOfElement = elementOrArrayOfElement;
+			/**
+    * A string or an object,
+    * example: {key: "somekey", value: "somevalue"}.
+    */
+			var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
+				key: _react2["default"].PropTypes.string,
+				value: _react2["default"].PropTypes.string
+			})]);
+
+			exports.stringOrKeyValue = stringOrKeyValue;
+			var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
+
+			exports.stringOrArray = stringOrArray;
+			var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
+
+			exports.stringOrArrayOfString = stringOrArrayOfString;
+			var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
+				key: _react2["default"].PropTypes.string.isRequired,
+				value: _react2["default"].PropTypes.string.isRequired
+			}));
+
+			exports.arrayOfKeyValue = arrayOfKeyValue;
+			/**
+    * An array of strings or an array of key/value objects,
+    * example: [{key: "somekey", value: "somevalue"}].
+    */
+			var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
+				key: _react2["default"].PropTypes.string,
+				value: _react2["default"].PropTypes.string
+			}))]);
+			exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
+		}, { "react": "react" }], 2: [function (_dereq_, module, exports) {
+			"use strict";
+
+			Object.defineProperty(exports, "__esModule", {
+				value: true
+			});
+
+			function _interopRequireDefault(obj) {
+				return obj && obj.__esModule ? obj : { "default": obj };
+			}
+
+			var _tabs = _dereq_("./tabs");
+
+			var _tabs2 = _interopRequireDefault(_tabs);
+
+			var _tab = _dereq_("./tab");
+
+			var _tab2 = _interopRequireDefault(_tab);
+
+			exports.Tabs = _tabs2["default"];
+			exports.Tab = _tab2["default"];
+		}, { "./tab": 3, "./tabs": 4 }], 3: [function (_dereq_, module, exports) {
+			"use strict";
+
+			Object.defineProperty(exports, "__esModule", {
+				value: true
+			});
+
+			var _createClass = (function () {
+				function defineProperties(target, props) {
+					for (var i = 0; i < props.length; i++) {
+						var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+					}
+				}return function (Constructor, protoProps, staticProps) {
+					if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+				};
+			})();
+
+			function _interopRequireDefault(obj) {
+				return obj && obj.__esModule ? obj : { "default": obj };
+			}
+
+			function _classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) {
+					throw new TypeError("Cannot call a class as a function");
+				}
+			}
+
+			function _inherits(subClass, superClass) {
+				if (typeof superClass !== "function" && superClass !== null) {
+					throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+			}
+
+			var _react = _dereq_("react");
+
+			var _react2 = _interopRequireDefault(_react);
+
+			var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
+
+			var Tab = (function (_React$Component) {
+				function Tab() {
+					_classCallCheck(this, Tab);
+
+					if (_React$Component != null) {
+						_React$Component.apply(this, arguments);
+					}
+				}
+
+				_inherits(Tab, _React$Component);
+
+				_createClass(Tab, [{
+					key: "render",
+					value: function render() {
+						if (this.props.active) {
+							return _react2["default"].createElement("div", { className: "hire-tab" }, this.props.children);
+						}
+
+						return null;
+					}
+				}]);
+
+				return Tab;
+			})(_react2["default"].Component);
+
+			Tab.defaultProps = {
+				active: false
+			};
+
+			Tab.propTypes = {
+				active: _react2["default"].PropTypes.bool,
+				children: _hireFormsPropTypes.elementOrArrayOfElement
+			};
+
+			exports["default"] = Tab;
+			module.exports = exports["default"];
+		}, { "hire-forms-prop-types": 1, "react": "react" }], 4: [function (_dereq_, module, exports) {
+			"use strict";
+
+			Object.defineProperty(exports, "__esModule", {
+				value: true
+			});
+
+			var _createClass = (function () {
+				function defineProperties(target, props) {
+					for (var i = 0; i < props.length; i++) {
+						var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+					}
+				}return function (Constructor, protoProps, staticProps) {
+					if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+				};
+			})();
+
+			function _interopRequireDefault(obj) {
+				return obj && obj.__esModule ? obj : { "default": obj };
+			}
+
+			function _classCallCheck(instance, Constructor) {
+				if (!(instance instanceof Constructor)) {
+					throw new TypeError("Cannot call a class as a function");
+				}
+			}
+
+			function _inherits(subClass, superClass) {
+				if (typeof superClass !== "function" && superClass !== null) {
+					throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+			}
+
+			var _react = _dereq_("react");
+
+			var _react2 = _interopRequireDefault(_react);
+
+			var _classnames = _dereq_("classnames");
+
+			var _classnames2 = _interopRequireDefault(_classnames);
+
+			var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
+
+			var _hireFormsUtils = _dereq_("hire-forms-utils");
+
+			var Tabs = (function (_React$Component) {
+				function Tabs() {
+					_classCallCheck(this, Tabs);
+
+					if (_React$Component != null) {
+						_React$Component.apply(this, arguments);
+					}
+				}
+
+				_inherits(Tabs, _React$Component);
+
+				_createClass(Tabs, [{
+					key: "handleClick",
+					value: function handleClick(index) {
+						if (this.props.onChange) {
+							var tabLabel = this.props.children[index].props.label;
+							this.props.onChange(tabLabel, index);
+						}
+					}
+				}, {
+					key: "render",
+					value: function render() {
+						var _this = this;
+
+						var children = (0, _hireFormsUtils.castArray)(this.props.children);
+
+						var labels = children.map(function (tab, index) {
+							return _react2["default"].createElement("li", {
+								className: (0, _classnames2["default"])({ active: tab.props.active }),
+								key: index,
+								onClick: _this.handleClick.bind(_this, index) }, _react2["default"].createElement("span", { className: "label" }, tab.props.label));
+						});
+
+						return _react2["default"].createElement("div", { className: "hire-tabs" }, _react2["default"].createElement("ul", null, labels), children);
+					}
+				}]);
+
+				return Tabs;
+			})(_react2["default"].Component);
+
+			Tabs.propTypes = {
+				children: _hireFormsPropTypes.elementOrArrayOfElement,
+				onChange: _react2["default"].PropTypes.func
+			};
+
+			exports["default"] = Tabs;
+			module.exports = exports["default"];
+		}, { "classnames": "classnames", "hire-forms-prop-types": 1, "hire-forms-utils": 5, "react": "react" }], 5: [function (_dereq_, module, exports) {
+			"use strict";
+
+			Object.defineProperty(exports, "__esModule", {
+				value: true
+			});
+			var castArray = function castArray(array) {
+				return Array.isArray(array) ? array : [array];
+			};
+			exports.castArray = castArray;
+		}, {}] }, {}, [2])(2);
+});
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _hireTabs = require("hire-tabs");
+
+var PersonForm = (function (_React$Component) {
+	_inherits(PersonForm, _React$Component);
+
+	function PersonForm(props) {
+		_classCallCheck(this, PersonForm);
+
+		_get(Object.getPrototypeOf(PersonForm.prototype), "constructor", this).call(this, props);
+
+		this.state = {
+			activeTab: "basic-info"
+		};
+	}
+
+	_createClass(PersonForm, [{
+		key: "handleTabChange",
+		value: function handleTabChange(label) {
+			this.setState({
+				activeTab: label
+			});
+		}
+	}, {
+		key: "render",
+		value: function render() {
+			console.log(this.state.activeTab);
+			return _react2["default"].createElement(
+				_hireTabs.Tabs,
+				{ onChange: this.handleTabChange.bind(this) },
+				_react2["default"].createElement(
+					_hireTabs.Tab,
+					{
+						active: this.state.activeTab === "Basic Info",
+						label: "Basic Info" },
+					_react2["default"].createElement(
+						"div",
+						null,
+						"BASIC"
+					)
+				),
+				_react2["default"].createElement(
+					_hireTabs.Tab,
+					{
+						active: this.state.activeTab === "Works",
+						label: "Works" },
+					_react2["default"].createElement(
+						"div",
+						null,
+						"WORKS"
+					)
+				)
+			);
+		}
+	}]);
+
+	return PersonForm;
+})(_react2["default"].Component);
+
+exports["default"] = PersonForm;
+module.exports = exports["default"];
+
+},{"hire-tabs":1,"react":"react"}]},{},[2])(2)
+});
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"hire-tabs":"/home/gijs/Projects/women-writers/src/edit-person/node_modules/hire-tabs/build/index.js","react":false}],"/home/gijs/Projects/women-writers/src/edit-person/node_modules/hire-tabs/build/index.js":[function(require,module,exports){
+(function (global){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.HireTabs = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = _dereq_("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
+
+exports.elementOrArrayOfElement = elementOrArrayOfElement;
+/**
+ * A string or an object,
+ * example: {key: "somekey", value: "somevalue"}.
+ */
+var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
+	key: _react2["default"].PropTypes.string,
+	value: _react2["default"].PropTypes.string
+})]);
+
+exports.stringOrKeyValue = stringOrKeyValue;
+var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
+
+exports.stringOrArray = stringOrArray;
+var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
+
+exports.stringOrArrayOfString = stringOrArrayOfString;
+var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
+	key: _react2["default"].PropTypes.string.isRequired,
+	value: _react2["default"].PropTypes.string.isRequired
+}));
+
+exports.arrayOfKeyValue = arrayOfKeyValue;
+/**
+ * An array of strings or an array of key/value objects,
+ * example: [{key: "somekey", value: "somevalue"}].
+ */
+var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
+	key: _react2["default"].PropTypes.string,
+	value: _react2["default"].PropTypes.string
+}))]);
+exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
+
+},{"react":"react"}],2:[function(_dereq_,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _tabs = _dereq_("./tabs");
+
+var _tabs2 = _interopRequireDefault(_tabs);
+
+var _tab = _dereq_("./tab");
+
+var _tab2 = _interopRequireDefault(_tab);
+
+exports.Tabs = _tabs2["default"];
+exports.Tab = _tab2["default"];
+
+},{"./tab":3,"./tabs":4}],3:[function(_dereq_,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _react = _dereq_("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
+
+var Tab = (function (_React$Component) {
+	function Tab() {
+		_classCallCheck(this, Tab);
+
+		if (_React$Component != null) {
+			_React$Component.apply(this, arguments);
+		}
+	}
+
+	_inherits(Tab, _React$Component);
+
+	_createClass(Tab, [{
+		key: "render",
+		value: function render() {
+			if (this.props.active) {
+				return _react2["default"].createElement(
+					"div",
+					{ className: "hire-tab" },
+					this.props.children
+				);
+			}
+
+			return null;
+		}
+	}]);
+
+	return Tab;
+})(_react2["default"].Component);
+
+Tab.defaultProps = {
+	active: false
+};
+
+Tab.propTypes = {
+	active: _react2["default"].PropTypes.bool,
+	children: _hireFormsPropTypes.elementOrArrayOfElement
+};
+
+exports["default"] = Tab;
+module.exports = exports["default"];
+
+},{"hire-forms-prop-types":1,"react":"react"}],4:[function(_dereq_,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _react = _dereq_("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = _dereq_("classnames");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
+
+var _hireFormsUtils = _dereq_("hire-forms-utils");
+
+var Tabs = (function (_React$Component) {
+	function Tabs() {
+		_classCallCheck(this, Tabs);
+
+		if (_React$Component != null) {
+			_React$Component.apply(this, arguments);
+		}
+	}
+
+	_inherits(Tabs, _React$Component);
+
+	_createClass(Tabs, [{
+		key: "handleClick",
+		value: function handleClick(index) {
+			if (this.props.onChange) {
+				var tabLabel = this.props.children[index].props.label;
+				this.props.onChange(tabLabel, index);
+			}
+		}
+	}, {
+		key: "render",
+		value: function render() {
+			var _this = this;
+
+			var children = (0, _hireFormsUtils.castArray)(this.props.children);
+
+			var labels = children.map(function (tab, index) {
+				return _react2["default"].createElement(
+					"li",
+					{
+						className: (0, _classnames2["default"])({ active: tab.props.active }),
+						key: index,
+						onClick: _this.handleClick.bind(_this, index) },
+					_react2["default"].createElement(
+						"span",
+						{ className: "label" },
+						tab.props.label
+					)
+				);
+			});
+
+			return _react2["default"].createElement(
+				"div",
+				{ className: "hire-tabs" },
+				_react2["default"].createElement(
+					"ul",
+					null,
+					labels
+				),
+				children
+			);
+		}
+	}]);
+
+	return Tabs;
+})(_react2["default"].Component);
+
+Tabs.propTypes = {
+	children: _hireFormsPropTypes.elementOrArrayOfElement,
+	onChange: _react2["default"].PropTypes.func
+};
+
+exports["default"] = Tabs;
+module.exports = exports["default"];
+
+},{"classnames":"classnames","hire-forms-prop-types":1,"hire-forms-utils":5,"react":"react"}],5:[function(_dereq_,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var castArray = function castArray(array) {
+	return Array.isArray(array) ? array : [array];
+};
+exports.castArray = castArray;
+
+},{}]},{},[2])(2)
+});
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"/home/gijs/Projects/women-writers/src/jade/faceted-search/document.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
 
@@ -14068,16 +14235,6 @@ var jade_mixins = {};
 var jade_interp;
 
 buf.push("<form><ul><li><label>First Name</label><input type=\"text\" name=\"first-name\"/></li><li><label>Last Name</label><input type=\"text\" name=\"last-name\"/></li><li><label>Gender</label><select name=\"gender\"><option value=\"FEMALE\">Female</option><option value=\"MALE\">Male</option><option value=\"UNKNOWN\">Unknown</option></select></li><li><label>Types</label><select name=\"types\"><option></option><option value=\"AUTHOR\">Author</option><option value=\"ARCHETYPE\">Archetype</option><option value=\"PSEUDONYM\">Pseudonym</option></select></li><li><label>Birth Date</label><input type=\"text\" name=\"birthDate\"/></li><li><label>Death Date</label><input type=\"text\" name=\"deathDate\"/></li></ul></form>");;return buf.join("");
-};
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/edit.jade":[function(require,module,exports){
-var jade = require("jade/runtime");
-
-module.exports = function template(locals) {
-var buf = [];
-var jade_mixins = {};
-var jade_interp;
-;var locals_for_with = (locals || {});(function (config, person) {
-buf.push("<div class=\"centered\"><div class=\"controls\"><button class=\"btn save\"><i class=\"fa fa-check\"></i>Save</button><a" + (jade.attr("href", config.personViewUrl(person._id), true, false)) + " class=\"btn gray cancel\"><i class=\"fa fa-times\"></i>Cancel</a></div><h1>" + (jade.escape(null == (jade_interp = person.tempName) ? "" : jade_interp)) + "</h1><div class=\"form\"></div><div class=\"controls bottom\"><button class=\"btn save\"><i class=\"fa fa-check\"></i>Save</button><a" + (jade.attr("href", config.personViewUrl(person._id), true, false)) + " class=\"btn gray cancel\"><i class=\"fa fa-times\"></i>Cancel</a></div></div>");}.call(this,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"person" in locals_for_with?locals_for_with.person:typeof person!=="undefined"?person:undefined));;return buf.join("");
 };
 },{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/graph.jade":[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -23568,7 +23725,7 @@ module.exports = RelationItem;
 
 
 },{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "value" : {
     "type" : "String"
   },

@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 $ = require 'jquery'
 _ = require 'underscore'
+React = require "react"
 
 baseTemplate = require '../jade/views/base.jade'
 config = require './config'
@@ -8,7 +9,8 @@ config = require './config'
 UserStatusView = require './views/user-status'
 
 Person = require './models/person'
-PersonForm = require './views/person/edit'
+# PersonForm = require './views/person/edit'
+PersonForm = require "../edit-person/build/development"
 PersonView = require './views/person/view'
 PersonGraphView = require './views/person/graph'
 PersonSearchView = require './views/person/search'
@@ -180,12 +182,18 @@ class App extends Backbone.View
 	home: -> # TODO: Define what's displayed in home
 
 	showPersonForm: (id) ->
-		person = new Person _id: id
-		person.fetch().done =>
-			view = new PersonForm
-				model: person
-			@switchView view
+		console.log "SHOW: ", id
+
+		Factory = React.createFactory(PersonForm)
+		React.render Factory(), document.getElementById("view")
+
 		@showView()
+		# person = new Person _id: id
+		# person.fetch().done =>
+		# 	view = new PersonForm
+		# 		model: person
+		# 	@switchView view
+		# @showView()
 
 	showDocumentForm: (id) ->
 		document = new Document _id: id

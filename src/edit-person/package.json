@@ -1,0 +1,53 @@
+{
+  "name": "hire-women-writers-edit-person",
+  "version": "0.0.0",
+  "author": {
+    "name": "Gijsjan Brouwer",
+    "email": "gijsjan.brouwer@huygens.knaw.nl"
+  },
+  "main": "build/development/js/index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "scripts/server.js",
+    "watch": "scripts/watch.sh",
+    "build": "scripts/build-libs.sh && scripts/build.sh",
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint src/"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "./node_modules/react"
+    ],
+    "testFileExtensions": [
+      "js",
+      "jsx"
+    ]
+  },
+  "dependencies": {
+    "classnames": "^2.1.1",
+    "extend": "^2.0.1",
+    "immutable": "^3.7.2",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "babel": "^5.4.7",
+    "babel-core": "^5.4.7",
+    "babel-eslint": "^3.1.15",
+    "babel-plugin-object-assign": "^1.1.0",
+    "babelify": "^6.1.2",
+    "browser-sync": "^2.7.1",
+    "browserify": "^10.1.1",
+    "connect-modrewrite": "^0.8.1",
+    "derequire": "^2.0.0",
+    "eslint": "^0.23.0",
+    "eslint-plugin-react": "^2.4.0",
+    "lodash.debounce": "^3.1.0",
+    "nib": "^1.1.0",
+    "stylus": "^0.51.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.1"
+  }
+}
