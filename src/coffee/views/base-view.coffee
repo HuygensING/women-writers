@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+_ = require "underscore"
 LoginComponent = require 'hibb-login'
 
 niceify = (str) ->
@@ -92,7 +93,7 @@ class BaseView extends Backbone.View
 				field
 			else if _.isRegExp field.field
 				field.field
-			
+
 			continue if not matcher
 
 			matchingFields = for m in _.keys(values) when m.match matcher
@@ -112,7 +113,7 @@ class BaseView extends Backbone.View
 
 		data = _.extend _.clone(field),
 			title: if field.title? then niceify(field.title) else field.field
-			value: value 
+			value: value
 
 		# if _.isArray(value)
 		# 	value = (field.options.map el for el in value)

@@ -1,4 +1,5 @@
 Backbone = require  'backbone'
+_ = require "underscore"
 $ = require 'jquery'
 
 config = require '../../config'
@@ -17,7 +18,7 @@ class ReceptionSearchResult extends Backbone.View
 		'click .next': 'clickNext'
 		'click .prev': 'clickPrev'
 		'click .num-rows li': 'clickNumberOfResultRows'
-	
+
 	clickNext: -> @collection.moveCursor '_next'
 	clickPrev: -> @collection.moveCursor '_prev'
 
@@ -45,9 +46,9 @@ class ReceptionSearchResult extends Backbone.View
 				shortenTitle: (title, len) ->
 					if String(title).length > len
 						String(title).substring(0, len) + "…"
-					else 
+					else
 						title
 				config: config
 				relIds: relIds
-	
+
 module.exports = ReceptionSearchResult

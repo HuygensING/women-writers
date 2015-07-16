@@ -3,15 +3,15 @@ Backbone = require 'backbone'
 config = require '../../config'
 
 documentDescription = require '../../../data/metadata/wwdocument.json'
-Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
+# Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
 StatusIndicator = require '../status'
 
 {simpleSearch, searchLocation} = require '../../helpers/search'
-DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
-DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
+# DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
+# DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
-{createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
+# {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 
 LoginComponent = require 'hibb-login'
 
@@ -113,13 +113,13 @@ class Document extends Backbone.View
 			autocomplete: (value) -> searchLocation value
 			onlyOne: true
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+
 		_.extend schema['timbuctoo-relation.hasSourceCategory'],
 			title: 'Has source categories'
 			onlyOne: false
 			options: config.get 'sourceCategories'
 			relationTypeHelper: new DynamicRelationTypeHelper()
-			
+
 		_.extend schema['timbuctoo-relation.hasDocumentSource'],
 			title: 'Has sources'
 			onlyOne: false
@@ -136,13 +136,13 @@ class Document extends Backbone.View
 
 		# reception of
 		receivedInTypes = _.filter config.get('receptions'), (r) -> r.baseSourceType is 'document'
-		# received in 
+		# received in
 		receptionOfTypes = _.filter config.get('receptions'), (r) -> r.baseTargetType is 'document'
-		
+
 		autocompleteFactory = (relatedType) ->
 			# Only search for documents from this particular VRE
 			query = (value) -> simpleSearch value, relatedType, 5000
-			
+
 			query
 
 		schema[@receptionOf] =
@@ -152,8 +152,8 @@ class Document extends Backbone.View
 			relationTypeVariation: config.get 'relationTypeVariation'
 			relationName: 'reception'
 			relationTypeHelper: new DynamicInverseRelationTypeHelper autocompleteFactory
-			
-		
+
+
 		schema[@receivedIn] =
 			type: 'DynamicRelations'
 			title: 'Received in'
@@ -210,7 +210,7 @@ class Document extends Backbone.View
 					]
 				}
 			]
-			
+
 		@$('.form').html @form.el
 
 module.exports = Document

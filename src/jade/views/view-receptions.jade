@@ -1,5 +1,5 @@
 .c4_4
-	if receptions && _.keys(receptions).length
+	if receptions && Object.keys(receptions).length
 		h3
 			| Receptions of this
 			= data._id.match(/^PERS/) ? ' person' : ' work'

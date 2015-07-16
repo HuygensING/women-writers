@@ -3,6 +3,7 @@
 # once all data is loaded
 
 Backbone = require 'backbone'
+_ = require "underscore"
 $ = Backbone.$ = require 'jquery'
 
 config = require '../config'

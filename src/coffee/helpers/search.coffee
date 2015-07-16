@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+_ = require "underscore"
 FacetedSearch = require 'huygens-faceted-search/src/coffee/main'
 
 facetedSearchMainTemplate = require '../../jade/faceted-search/main.jade'
@@ -88,7 +89,7 @@ escapeTerm = (term) ->
 	escaped = term
 
 	for char in special
-		escaped = term.replace /#{char}/g, '\\' + char 
+		escaped = term.replace /#{char}/g, '\\' + char
 
 	escaped
 

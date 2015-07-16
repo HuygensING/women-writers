@@ -4,15 +4,15 @@ _ = require 'underscore'
 config = require '../../config'
 
 personDescription = require '../../../data/metadata/wwperson.json'
-Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
+# Form = require 'timbuctoo-edit-forms/src/coffee/views/form.coffee'
 
 StatusIndicator = require '../status'
 
-{createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
+# {createTimbuctooSchema}  = require 'timbuctoo-edit-forms/src/coffee/helpers.coffee'
 {searchQuery, simpleSearch, searchLocation} = require '../../helpers/search'
 
-DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
-DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
+# DynamicRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper'
+# DynamicInverseRelationTypeHelper = require 'timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper'
 
 onlyRealPeople = ['AUTHOR', 'ARCHETYPE', '(empty)']
 

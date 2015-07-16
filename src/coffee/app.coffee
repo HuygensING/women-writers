@@ -179,7 +179,8 @@ class App extends Backbone.View
 	toggleHighContrast: (ev) ->
 		$('body').toggleClass 'high-contrast'
 
-	home: -> # TODO: Define what's displayed in home
+	# TODO: Define what's displayed in home
+	home: ->
 
 	showPersonForm: (id) ->
 		console.log "SHOW: ", id
