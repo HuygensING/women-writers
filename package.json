@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha -w --compilers coffee:coffee-script/register,jade:jade --reporter spec tests/unit/*",
     "test-acceptance": "tests/acceptance/bin/run default",
-    "test-acceptance-browserstack": "tests/acceptance/bin/run browserstack"
+    "test-acceptance-browserstack": "tests/acceptance/bin/run browserstack",
+    "deploy-acc": "rsync -vaP envs/development/ wowr@hi24.huygens.knaw.nl:/data/wowr/public_html"
   },
   "repository": {
     "type": "git",

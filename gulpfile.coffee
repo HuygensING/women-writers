@@ -36,12 +36,13 @@ unless ENV?
 
 cfg[ENV].ENV = ENV
 
-cfg.devDir = "./" + cfg['development']['SOURCE'] 
+cfg.devDir = "./" + cfg['development']['SOURCE']
 cfg.testDir = "./" + cfg['test']['SOURCE']
 cfg.prodDir = "./" + cfg['production']['SOURCE']
 cfg.outputDir = switch ENV
 	when 'development' then cfg.devDir
-	when 'test' then cfg.testDir
+	when 'test' then cfg.devDir
+	when 'acceptation' then cfg.devDir
 	when 'production' then cfg.prodDir
 
 gulp.task 'copy-env-config', ->
@@ -198,6 +199,11 @@ gulp.task 'deploy-production', ['build'], (done) ->
 
 gulp.task 'deploy-test', ['compile'], (done) ->
 	return gutil.log("Cannot deploy-test in '#{ENV}'") if ENV isnt 'test'
+
+	deploy()
+
+gulp.task 'deploy-acceptation', ['compile'], (done) ->
+	return gutil.log("Cannot deploy-test in '#{ENV}'") if ENV isnt 'acceptation'
 
 	deploy()
 

@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./src/coffee/main.coffee":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var $, App, Backbone, LoginComponent, MainRouter, config, handleLinkClicks, loadAppData, loadEditData, searchQuery, startApp;
 
 Backbone = require('backbone');
@@ -81,9 +81,9 @@ $(function() {
 
 
 
-},{"./app":"/home/gijs/Projects/women-writers/src/coffee/app.coffee","./config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./helpers/load-app-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-app-data.coffee","./helpers/load-edit-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-edit-data.coffee","./helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","./routers/main":"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
+},{"./app":37,"./config":40,"./helpers/load-app-data":42,"./helpers/load-edit-data":43,"./helpers/search":45,"./routers/main":50,"backbone":undefined,"hibb-login":3,"jquery":undefined}],2:[function(require,module,exports){
 
-},{}],"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js":[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.hibbLogin=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -4080,7 +4080,7 @@ buf.push("<h3>Request access</h3><div class=\"message\">Request for access has b
 (13)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js":[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.Pagination=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
@@ -4687,9 +4687,9 @@ module.exports = new ModalManager();
 (3)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.util/dist/latest/index.min.js":[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function(){module.exports={generateID:function(t){var n,r;for(t=null!=t&&t>0?t-1:7,n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",r=n.charAt(Math.floor(52*Math.random()));t--;)r+=n.charAt(Math.floor(Math.random()*n.length));return r},setResetTimeout:function(){var t;return t=null,function(n,r,e){return null!=t&&(null!=e&&e(),clearTimeout(t)),t=setTimeout(function(){return t=null,r()},n)}}()}}).call(this);
-},{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/list.options.coffee":[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var Backbone, ListOptions, Models, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -4801,7 +4801,7 @@ module.exports = ListOptions;
 
 
 
-},{"../models/facets/list.option.coffee":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/list.option.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/searchresults.coffee":[function(require,module,exports){
+},{"../models/facets/list.option.coffee":13,"backbone":undefined,"underscore":undefined}],7:[function(require,module,exports){
 var Backbone, SearchResult, SearchResults, funcky, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -4965,7 +4965,7 @@ module.exports = SearchResults;
 
 
 
-},{"../models/searchresult":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/searchresult.coffee","backbone":false,"funcky.req":"/usr/local/lib/node_modules/funcky.req/dist/main.js","underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee":[function(require,module,exports){
+},{"../models/searchresult":18,"backbone":undefined,"funcky.req":100,"underscore":undefined}],8:[function(require,module,exports){
 var Backbone, Config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5001,7 +5001,7 @@ module.exports = Config;
 
 
 
-},{"backbone":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/main.coffee":[function(require,module,exports){
+},{"backbone":undefined}],9:[function(require,module,exports){
 var $, Backbone, Config, MainView, QueryOptions, SearchResults, Views, funcky, tpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5343,7 +5343,7 @@ module.exports = MainView;
 
 
 
-},{"../jade/main.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/main.jade","./collections/searchresults":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/searchresults.coffee","./config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","./models/query-options":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/query-options.coffee","./views/facets":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets.coffee","./views/text-search":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/text-search.coffee","backbone":false,"funcky.el":"/usr/local/lib/node_modules/funcky.el/dist/index.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/boolean.coffee":[function(require,module,exports){
+},{"../jade/main.jade":34,"./collections/searchresults":7,"./config":8,"./models/query-options":16,"./views/facets":19,"./views/text-search":26,"backbone":undefined,"funcky.el":99,"jquery":undefined,"underscore":undefined}],10:[function(require,module,exports){
 var BooleanFacet, Models,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5388,12 +5388,12 @@ module.exports = BooleanFacet;
 
 
 
-},{"./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/main.coffee"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/date.coffee":[function(require,module,exports){
+},{"./main":14}],11:[function(require,module,exports){
 
 
 
 
-},{}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/list.coffee":[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var List, Models,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5417,7 +5417,7 @@ module.exports = List;
 
 
 
-},{"./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/main.coffee"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/list.option.coffee":[function(require,module,exports){
+},{"./main":14}],13:[function(require,module,exports){
 var Backbone, ListOption,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5456,7 +5456,7 @@ module.exports = ListOption;
 
 
 
-},{"backbone":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/main.coffee":[function(require,module,exports){
+},{"backbone":undefined}],14:[function(require,module,exports){
 var Backbone, Facet, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5491,7 +5491,7 @@ module.exports = Facet;
 
 
 
-},{"../../config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","backbone":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/range.coffee":[function(require,module,exports){
+},{"../../config":8,"backbone":undefined}],15:[function(require,module,exports){
 var FacetModel, RangeFacet, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5557,7 +5557,7 @@ module.exports = RangeFacet;
 
 
 
-},{"./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/main.coffee","underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/query-options.coffee":[function(require,module,exports){
+},{"./main":14,"underscore":undefined}],16:[function(require,module,exports){
 var Backbone, QueryOptions, config, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5625,7 +5625,7 @@ module.exports = QueryOptions;
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/search.coffee":[function(require,module,exports){
+},{"../config":8,"backbone":undefined,"underscore":undefined}],17:[function(require,module,exports){
 var Backbone, Search, escapeTerm, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5690,7 +5690,7 @@ module.exports = Search;
 
 
 
-},{"backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/searchresult.coffee":[function(require,module,exports){
+},{"backbone":undefined,"underscore":undefined}],18:[function(require,module,exports){
 var Backbone, SearchResult, config, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -5731,7 +5731,7 @@ module.exports = SearchResult;
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/config.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets.coffee":[function(require,module,exports){
+},{"../config":8,"backbone":undefined,"underscore":undefined}],19:[function(require,module,exports){
 var Backbone, Facets, _,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -5927,7 +5927,7 @@ module.exports = Facets;
 
 
 
-},{"./facets/boolean":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/boolean.coffee","./facets/date":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/date.coffee","./facets/list":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/list.coffee","./facets/range":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/range.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/boolean.coffee":[function(require,module,exports){
+},{"./facets/boolean":20,"./facets/date":21,"./facets/list":22,"./facets/range":25,"backbone":undefined,"underscore":undefined}],20:[function(require,module,exports){
 var $, BooleanFacet, Models, Views, bodyTpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -6023,7 +6023,7 @@ module.exports = BooleanFacet;
 
 
 
-},{"../../../jade/facets/boolean.body.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/boolean.body.jade","../../models/facets/boolean":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/boolean.coffee","./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/date.coffee":[function(require,module,exports){
+},{"../../../jade/facets/boolean.body.jade":27,"../../models/facets/boolean":10,"./main":24,"jquery":undefined,"underscore":undefined}],21:[function(require,module,exports){
 var DateFacet, Models, Views, tpl,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -6080,7 +6080,7 @@ module.exports = DateFacet;
 
 
 
-},{"../../../jade/facets/date.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/date.jade","../../models/facets/date":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/date.coffee","./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/list.coffee":[function(require,module,exports){
+},{"../../../jade/facets/date.jade":28,"../../models/facets/date":11,"./main":24}],22:[function(require,module,exports){
 var $, Collections, ListFacet, Models, Views, menuTpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -6245,7 +6245,7 @@ module.exports = ListFacet;
 
 
 
-},{"../../../jade/facets/list.menu.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.menu.jade","../../collections/list.options":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/list.options.coffee","../../models/facets/list":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/list.coffee","./list.options":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/list.options.coffee","./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/list.options.coffee":[function(require,module,exports){
+},{"../../../jade/facets/list.menu.jade":30,"../../collections/list.options":6,"../../models/facets/list":12,"./list.options":23,"./main":24,"jquery":undefined,"underscore":undefined}],23:[function(require,module,exports){
 var $, Backbone, ListFacetOptions, Models, bodyTpl, funcky, optionTpl, _,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -6443,7 +6443,7 @@ module.exports = ListFacetOptions;
 
 
 
-},{"../../../jade/facets/list.body.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.body.jade","../../../jade/facets/list.option.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.option.jade","../../models/facets/list":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/list.coffee","backbone":false,"funcky.util":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/node_modules/funcky.util/dist/latest/index.min.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee":[function(require,module,exports){
+},{"../../../jade/facets/list.body.jade":29,"../../../jade/facets/list.option.jade":31,"../../models/facets/list":12,"backbone":undefined,"funcky.util":5,"jquery":undefined,"underscore":undefined}],24:[function(require,module,exports){
 var $, Backbone, Facet, tpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -6544,7 +6544,7 @@ module.exports = Facet;
 
 
 
-},{"../../../jade/facets/main.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/main.jade","backbone":false,"jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/range.coffee":[function(require,module,exports){
+},{"../../../jade/facets/main.jade":32,"backbone":undefined,"jquery":undefined,"underscore":undefined}],25:[function(require,module,exports){
 var $, Models, RangeFacet, Views, bodyTpl, dragStopper, resizer, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -6907,7 +6907,7 @@ module.exports = RangeFacet;
 
 
 
-},{"../../../jade/facets/range.body.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/range.body.jade","../../models/facets/range":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/facets/range.coffee","./main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/facets/main.coffee","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/views/text-search.coffee":[function(require,module,exports){
+},{"../../../jade/facets/range.body.jade":33,"../../models/facets/range":15,"./main":24,"jquery":undefined,"underscore":undefined}],26:[function(require,module,exports){
 var Backbone, Models, TextSearch, tpl, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -7011,7 +7011,7 @@ module.exports = TextSearch;
 
 
 
-},{"../../jade/text-search.jade":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/text-search.jade","../models/search":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/models/search.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/boolean.body.jade":[function(require,module,exports){
+},{"../../jade/text-search.jade":35,"../models/search":17,"backbone":undefined,"underscore":undefined}],27:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7044,7 +7044,7 @@ buf.push("<li><div class=\"row span6\"><div class=\"cell span5\"><i" + (jade.att
 
 buf.push("</ul>");}.call(this,"options" in locals_for_with?locals_for_with.options:typeof options!=="undefined"?options:undefined,"ucfirst" in locals_for_with?locals_for_with.ucfirst:typeof ucfirst!=="undefined"?ucfirst:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/date.jade":[function(require,module,exports){
+},{"jade/runtime":36}],28:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7100,7 +7100,7 @@ buf.push("<option>" + (jade.escape(null == (jade_interp = option) ? "" : jade_in
 
 buf.push("</select></div>");}.call(this,"name" in locals_for_with?locals_for_with.name:typeof name!=="undefined"?name:undefined,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined,"options" in locals_for_with?locals_for_with.options:typeof options!=="undefined"?options:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.body.jade":[function(require,module,exports){
+},{"jade/runtime":36}],29:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7110,7 +7110,7 @@ var jade_interp;
 
 buf.push("<ul></ul>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.menu.jade":[function(require,module,exports){
+},{"jade/runtime":36}],30:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7120,7 +7120,7 @@ var jade_interp;
 
 buf.push("<input type=\"checkbox\" name=\"all\"/><input type=\"text\" name=\"filter\" placeholder=\"Filter options...\"/><small class=\"optioncount\"></small>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/list.option.jade":[function(require,module,exports){
+},{"jade/runtime":36}],31:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7130,7 +7130,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (option) {
 buf.push("<li" + (jade.attr("data-count", option.get('count'), true, false)) + (jade.attr("data-value", option.id, true, false)) + (jade.attr("data-state", option.get('checked') ? 'checked' : 'unchecked', true, false)) + "><i" + (jade.attr("data-value", option.id, true, false)) + (jade.cls(['unchecked','fa','fa-square-o',option.get('checked')?'hidden':'visible'], [null,null,null,true])) + "></i><i" + (jade.attr("data-value", option.id, true, false)) + (jade.cls(['checked','fa','fa-check-square-o',option.get('checked')?'visible':'hidden'], [null,null,null,true])) + "></i><label" + (jade.attr("data-value", option.id, true, false)) + ">" + (null == (jade_interp = option.id === ':empty' ? '<em>(empty)</em>' : option.id) ? "" : jade_interp) + "</label><div class=\"count\">" + (jade.escape(null == (jade_interp = option.get('count') === 0 ? option.get('total') : option.get('count')) ? "" : jade_interp)) + "</div></li>");}.call(this,"option" in locals_for_with?locals_for_with.option:typeof option!=="undefined"?option:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/main.jade":[function(require,module,exports){
+},{"jade/runtime":36}],32:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7140,7 +7140,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (title) {
 buf.push("<header><h3>" + (jade.escape(null == (jade_interp = title) ? "" : jade_interp)) + "</h3><div class=\"menu\"><i title=\"Filter options\" class=\"filter fa fa-filter\"></i><i title=\"Sort alphabetically\" class=\"alpha fa fa-sort-alpha-asc\"></i><i title=\"Sort numerically\" class=\"amount active fa fa-sort-amount-desc\"></i></div><div class=\"options\"></div></header><div class=\"body\"></div>");}.call(this,"title" in locals_for_with?locals_for_with.title:typeof title!=="undefined"?title:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/facets/range.body.jade":[function(require,module,exports){
+},{"jade/runtime":36}],33:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7150,7 +7150,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (options) {
 buf.push("<div class=\"slider\"><span class=\"dash\">-</span><div class=\"handle-min handle\"><input" + (jade.attr("value", options.lowerLimit, true, false)) + " disabled=\"disabled\" class=\"min\"/></div><div class=\"handle-max handle\"><input" + (jade.attr("value", options.upperLimit, true, false)) + " disabled=\"disabled\" class=\"max\"/></div><div class=\"bar\">&nbsp;</div><button>Search?</button></div>");}.call(this,"options" in locals_for_with?locals_for_with.options:typeof options!=="undefined"?options:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/main.jade":[function(require,module,exports){
+},{"jade/runtime":36}],34:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7160,7 +7160,7 @@ var jade_interp;
 
 buf.push("<div class=\"overlay\"><div><i class=\"fa fa-spinner fa-spin fa-2x\"></i></div></div><div class=\"faceted-search\"><div class=\"text-search-placeholder\"></div><ul class=\"facets-menu\"><li class=\"reset\"><button><i class=\"fa fa-refresh\"></i><span>Reset search</span></button></li><li class=\"switch\"><button><i class=\"fa fa-angle-double-down\"></i><span>Switch to</span></button></li><li class=\"collapse-expand\"><button><i class=\"fa fa-compress\"></i><span>Collapse facets</span></button></li></ul><div class=\"facets-placeholder\"></div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/jade/text-search.jade":[function(require,module,exports){
+},{"jade/runtime":36}],35:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -7193,7 +7193,7 @@ buf.push("<div" + (jade.attr("data-name", field, true, false)) + " class=\"searc
 
 buf.push("</div>");}.call(this,"fields" in locals_for_with?locals_for_with.fields:typeof fields!=="undefined"?fields:undefined,"textSearchTitles" in locals_for_with?locals_for_with.textSearchTitles:typeof textSearchTitles!=="undefined"?textSearchTitles:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js":[function(require,module,exports){
+},{"jade/runtime":36}],36:[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
@@ -7406,7 +7406,7 @@ exports.rethrow = function rethrow(err, filename, lineno, str){
 (1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/home/gijs/Projects/women-writers/src/coffee/app.coffee":[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var $, App, Backbone, Document, DocumentForm, DocumentSearchView, DocumentView, Modal, Person, PersonForm, PersonGraphView, PersonSearchView, PersonView, ReceptionSearchView, SourceList, UserStatusView, addDocumentTpl, addPersonTpl, baseTemplate, config, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -7897,7 +7897,7 @@ module.exports = App;
 
 
 
-},{"../jade/views/base.jade":"/home/gijs/Projects/women-writers/src/jade/views/base.jade","../jade/views/document/add.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/add.jade","../jade/views/person/add.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/add.jade","./config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./models/document":"/home/gijs/Projects/women-writers/src/coffee/models/document.coffee","./models/person":"/home/gijs/Projects/women-writers/src/coffee/models/person.coffee","./views/document/edit":"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee","./views/document/search":"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee","./views/document/view":"/home/gijs/Projects/women-writers/src/coffee/views/document/view.coffee","./views/person/edit":"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee","./views/person/graph":"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee","./views/person/search":"/home/gijs/Projects/women-writers/src/coffee/views/person/search.coffee","./views/person/view":"/home/gijs/Projects/women-writers/src/coffee/views/person/view.coffee","./views/reception/search":"/home/gijs/Projects/women-writers/src/coffee/views/reception/search.coffee","./views/sources/view":"/home/gijs/Projects/women-writers/src/coffee/views/sources/view.coffee","./views/user-status":"/home/gijs/Projects/women-writers/src/coffee/views/user-status.coffee","backbone":false,"hibb-modal":"/home/gijs/Projects/women-writers/node_modules/hibb-modal/dist/index.js","jquery":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/config/base.coffee":[function(require,module,exports){
+},{"../jade/views/base.jade":77,"../jade/views/document/add.jade":78,"../jade/views/person/add.jade":82,"./config":40,"./models/document":47,"./models/person":49,"./views/document/edit":53,"./views/document/search":54,"./views/document/view":55,"./views/person/edit":56,"./views/person/graph":57,"./views/person/search":58,"./views/person/view":59,"./views/reception/search":63,"./views/sources/view":65,"./views/user-status":67,"backbone":undefined,"hibb-modal":4,"jquery":undefined,"underscore":undefined}],38:[function(require,module,exports){
 module.exports = {
   "baseUrl": "-",
   "searchPath": "-",
@@ -8011,11 +8011,11 @@ module.exports = {
 
 
 
-},{}],"/home/gijs/Projects/women-writers/src/coffee/config/env.coffee":[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 module.exports = {
-  "baseUrl": "https://acc.repository.huygens.knaw.nl",
+  "baseUrl": "https://acc.resources.huygens.knaw.nl/womenwriters/api",
   "searchPath": "/v1/search",
-  "facetedSearchBaseUrl": "https://acc.repository.huygens.knaw.nl",
+  "facetedSearchBaseUrl": "https://acc.resources.huygens.knaw.nl/womenwriters/api",
   "tokenPrefix": "womenwriters",
   "relationSearchPath": "/search/relations",
   "receptionsPath": "/system/vres/",
@@ -8024,7 +8024,7 @@ module.exports = {
 
 
 
-},{}],"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee":[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var Backbone, Config, baseConfig, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -8283,7 +8283,7 @@ module.exports = new Config;
 
 
 
-},{"./base":"/home/gijs/Projects/women-writers/src/coffee/config/base.coffee","./env":"/home/gijs/Projects/women-writers/src/coffee/config/env.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/helpers/base-view-helper.coffee":[function(require,module,exports){
+},{"./base":38,"./env":39,"backbone":undefined,"underscore":undefined}],41:[function(require,module,exports){
 var config, helpers, linkTemplate, nameComponentTemplate, nameTemplate;
 
 config = require('../config');
@@ -8395,7 +8395,7 @@ module.exports = helpers;
 
 
 
-},{"../../jade/views/base-link.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-link.jade","../../jade/views/person/name-component.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/name-component.jade","../../jade/views/person/name.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/name.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/helpers/load-app-data.coffee":[function(require,module,exports){
+},{"../../jade/views/base-link.jade":76,"../../jade/views/person/name-component.jade":85,"../../jade/views/person/name.jade":86,"../config":40}],42:[function(require,module,exports){
 var $, Backbone, config, loadPromise, loadedReceptions, loadedSourceCategories, loadedSources, searchQuery;
 
 Backbone = require('backbone');
@@ -8498,7 +8498,7 @@ module.exports = {
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","backbone":false,"jquery":false}],"/home/gijs/Projects/women-writers/src/coffee/helpers/load-edit-data.coffee":[function(require,module,exports){
+},{"../config":40,"./search":45,"backbone":undefined,"jquery":undefined}],43:[function(require,module,exports){
 var $, Backbone, config, searchQuery;
 
 Backbone = require('backbone');
@@ -10405,7 +10405,7 @@ module.exports = function() {
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","backbone":false,"jquery":false}],"/home/gijs/Projects/women-writers/src/coffee/helpers/reception-service.coffee":[function(require,module,exports){
+},{"../config":40,"./search":45,"backbone":undefined,"jquery":undefined}],44:[function(require,module,exports){
 var Backbone, ReceptionService, config;
 
 Backbone = require('backbone');
@@ -10460,7 +10460,7 @@ module.exports = ReceptionService;
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee":[function(require,module,exports){
+},{"../config":40,"backbone":undefined}],45:[function(require,module,exports){
 var Backbone, FacetedSearch, config, createFacetedSearch, escapeTerm, facetPlaceholderList, facetedSearchMainTemplate, searchLocation, searchQuery, simpleSearch;
 
 Backbone = require('backbone');
@@ -10622,7 +10622,7 @@ module.exports = {
 
 
 
-},{"../../jade/faceted-search/main.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/main.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","backbone":false,"huygens-faceted-search/src/coffee/main":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/main.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/models/base.coffee":[function(require,module,exports){
+},{"../../jade/faceted-search/main.jade":71,"../config":40,"backbone":undefined,"huygens-faceted-search/src/coffee/main":9}],46:[function(require,module,exports){
 var Backbone, BaseModel,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -10652,7 +10652,7 @@ module.exports = BaseModel;
 
 
 
-},{"backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/models/document.coffee":[function(require,module,exports){
+},{"backbone":undefined}],47:[function(require,module,exports){
 var $, BaseModel, Document, config, types,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -10735,7 +10735,7 @@ module.exports = Document;
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./base":"/home/gijs/Projects/women-writers/src/coffee/models/base.coffee","jquery":false}],"/home/gijs/Projects/women-writers/src/coffee/models/graph.coffee":[function(require,module,exports){
+},{"../config":40,"./base":46,"jquery":undefined}],48:[function(require,module,exports){
 var Backbone, Graph,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -10765,7 +10765,7 @@ module.exports = Graph;
 
 
 
-},{"backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/models/person.coffee":[function(require,module,exports){
+},{"backbone":undefined}],49:[function(require,module,exports){
 var BaseModel, Person, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -10830,7 +10830,7 @@ module.exports = Person;
 
 
 
-},{"../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","./base":"/home/gijs/Projects/women-writers/src/coffee/models/base.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/routers/main.coffee":[function(require,module,exports){
+},{"../config":40,"./base":46}],50:[function(require,module,exports){
 var Backbone, MainRouter, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -10898,7 +10898,7 @@ module.exports = MainRouter;
 
 
 
-},{"backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/base-search.coffee":[function(require,module,exports){
+},{"backbone":undefined,"underscore":undefined}],51:[function(require,module,exports){
 var $, Backbone, LoginComponent, SearchView, config, createFacetedSearch, resultsTemplate, searchTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -11052,7 +11052,7 @@ module.exports = SearchView;
 
 
 
-},{"../../jade/views/search-results.jade":"/home/gijs/Projects/women-writers/src/jade/views/search-results.jade","../../jade/views/search.jade":"/home/gijs/Projects/women-writers/src/jade/views/search.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../helpers/search.coffee":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee":[function(require,module,exports){
+},{"../../jade/views/search-results.jade":94,"../../jade/views/search.jade":95,"../config":40,"../helpers/search.coffee":45,"backbone":undefined,"hibb-login":3,"underscore":undefined}],52:[function(require,module,exports){
 var Backbone, BaseView, LoginComponent, niceify, slugify,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -11354,7 +11354,7 @@ module.exports = BaseView;
 
 
 
-},{"../../jade/views/base-field.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-field.jade","../../jade/views/base-fieldset.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-fieldset.jade","../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js"}],"/home/gijs/Projects/women-writers/src/coffee/views/document/edit.coffee":[function(require,module,exports){
+},{"../../jade/views/base-field.jade":74,"../../jade/views/base-fieldset.jade":75,"../config":40,"backbone":undefined,"hibb-login":3}],53:[function(require,module,exports){
 var Backbone, Document, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, LoginComponent, StatusIndicator, config, createTimbuctooSchema, documentDescription, searchLocation, simpleSearch, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -11580,7 +11580,7 @@ module.exports = Document;
 
 
 
-},{"../../../data/metadata/wwdocument.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json","../../../jade/views/document/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/edit.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/document/search.coffee":[function(require,module,exports){
+},{"../../../data/metadata/wwdocument.json":68,"../../../jade/views/document/edit.jade":80,"../../config":40,"../../helpers/search":45,"../status":66,"backbone":undefined,"hibb-login":3,"timbuctoo-edit-forms/src/coffee/helpers.coffee":108,"timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":109,"timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":110,"timbuctoo-edit-forms/src/coffee/views/form.coffee":114}],54:[function(require,module,exports){
 var Backbone, BaseSearch, DocumentSearch, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -11646,7 +11646,7 @@ module.exports = DocumentSearch;
 
 
 
-},{"../../../jade/faceted-search/document.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/document.jade","../../../jade/views/document/document-search-results.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/document-search-results.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../base-search.coffee":"/home/gijs/Projects/women-writers/src/coffee/views/base-search.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/views/document/view.coffee":[function(require,module,exports){
+},{"../../../jade/faceted-search/document.jade":70,"../../../jade/views/document/document-search-results.jade":79,"../../config":40,"../base-search.coffee":51,"backbone":undefined}],55:[function(require,module,exports){
 var BaseView, DocumentView, config, externalLinksMap, namesMap, relationField, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -11704,7 +11704,7 @@ module.exports = DocumentView;
 
 
 
-},{"../../../jade/views/document/view.jade":"/home/gijs/Projects/women-writers/src/jade/views/document/view.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/base-view-helper":"/home/gijs/Projects/women-writers/src/coffee/helpers/base-view-helper.coffee","../base-view":"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/person/edit.coffee":[function(require,module,exports){
+},{"../../../jade/views/document/view.jade":81,"../../config":40,"../../helpers/base-view-helper":41,"../base-view":52}],56:[function(require,module,exports){
 var Backbone, DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper, Form, LoginComponent, Person, StatusIndicator, config, createTimbuctooSchema, onlyRealPeople, personDescription, searchLocation, searchQuery, simpleSearch, _, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -11997,7 +11997,7 @@ module.exports = Person;
 
 
 
-},{"../../../data/metadata/wwperson.json":"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json","../../../jade/views/person/edit.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/edit.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","../status":"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","timbuctoo-edit-forms/src/coffee/helpers.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee","timbuctoo-edit-forms/src/coffee/views/form.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee","underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/person/graph.coffee":[function(require,module,exports){
+},{"../../../data/metadata/wwperson.json":69,"../../../jade/views/person/edit.jade":83,"../../config":40,"../../helpers/search":45,"../status":66,"backbone":undefined,"hibb-login":3,"timbuctoo-edit-forms/src/coffee/helpers.coffee":108,"timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper":109,"timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper":110,"timbuctoo-edit-forms/src/coffee/views/form.coffee":114,"underscore":undefined}],57:[function(require,module,exports){
 var Backbone, Graph, PersonNetworkGraph, config, d3,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12192,7 +12192,7 @@ module.exports = PersonNetworkGraph;
 
 
 
-},{"../../../jade/views/person/graph.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/graph.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../models/graph":"/home/gijs/Projects/women-writers/src/coffee/models/graph.coffee","backbone":false,"d3":false}],"/home/gijs/Projects/women-writers/src/coffee/views/person/search.coffee":[function(require,module,exports){
+},{"../../../jade/views/person/graph.jade":84,"../../config":40,"../../models/graph":48,"backbone":undefined,"d3":undefined}],58:[function(require,module,exports){
 var Backbone, BaseSearch, PersonSearch, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12259,7 +12259,7 @@ module.exports = PersonSearch;
 
 
 
-},{"../../../jade/faceted-search/person.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/person.jade","../../../jade/views/person/person-search-results.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/person-search-results.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../base-search.coffee":"/home/gijs/Projects/women-writers/src/coffee/views/base-search.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/views/person/view.coffee":[function(require,module,exports){
+},{"../../../jade/faceted-search/person.jade":72,"../../../jade/views/person/person-search-results.jade":87,"../../config":40,"../base-search.coffee":51,"backbone":undefined}],59:[function(require,module,exports){
 var BaseView, PersonView, config, externalLinksMap, linkTemplate, namesMap, relationField, ucFirst, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12408,7 +12408,7 @@ module.exports = PersonView;
 
 
 
-},{"../../../jade/views/base-link.jade":"/home/gijs/Projects/women-writers/src/jade/views/base-link.jade","../../../jade/views/person/view.jade":"/home/gijs/Projects/women-writers/src/jade/views/person/view.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/base-view-helper":"/home/gijs/Projects/women-writers/src/coffee/helpers/base-view-helper.coffee","../base-view":"/home/gijs/Projects/women-writers/src/coffee/views/base-view.coffee"}],"/home/gijs/Projects/women-writers/src/coffee/views/reception/receptee-selector.coffee":[function(require,module,exports){
+},{"../../../jade/views/base-link.jade":76,"../../../jade/views/person/view.jade":88,"../../config":40,"../../helpers/base-view-helper":41,"../base-view":52}],60:[function(require,module,exports){
 var Backbone, RecepteeSelector, config, createFacetedSearch, documentFacetsSearchTemplate, mainReceptionSearchTemplate, personFacetsSearchTemplate,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12541,7 +12541,7 @@ module.exports = RecepteeSelector;
 
 
 
-},{"../../../jade/faceted-search/document.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/document.jade","../../../jade/faceted-search/person.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/person.jade","../../../jade/faceted-search/reception-main.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/reception-main.jade","../../../jade/views/reception/source-query-builder.jade":"/home/gijs/Projects/women-writers/src/jade/views/reception/source-query-builder.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/views/reception/reception-selector.coffee":[function(require,module,exports){
+},{"../../../jade/faceted-search/document.jade":70,"../../../jade/faceted-search/person.jade":72,"../../../jade/faceted-search/reception-main.jade":73,"../../../jade/views/reception/source-query-builder.jade":92,"../../config":40,"../../helpers/search":45,"backbone":undefined}],61:[function(require,module,exports){
 var Backbone, ReceptionSelector, config, createFacetedSearch, documentFacetsSearchTemplate, mainReceptionSearchTemplate,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12630,7 +12630,7 @@ module.exports = ReceptionSelector;
 
 
 
-},{"../../../jade/faceted-search/document.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/document.jade","../../../jade/faceted-search/reception-main.jade":"/home/gijs/Projects/women-writers/src/jade/faceted-search/reception-main.jade","../../../jade/views/reception/reception-selector.jade":"/home/gijs/Projects/women-writers/src/jade/views/reception/reception-selector.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/search":"/home/gijs/Projects/women-writers/src/coffee/helpers/search.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/views/reception/results.coffee":[function(require,module,exports){
+},{"../../../jade/faceted-search/document.jade":70,"../../../jade/faceted-search/reception-main.jade":73,"../../../jade/views/reception/reception-selector.jade":89,"../../config":40,"../../helpers/search":45,"backbone":undefined}],62:[function(require,module,exports){
 var $, Backbone, ReceptionSearchResult, config,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12723,7 +12723,7 @@ module.exports = ReceptionSearchResult;
 
 
 
-},{"../../../jade/views/reception/search-result.jade":"/home/gijs/Projects/women-writers/src/jade/views/reception/search-result.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","backbone":false,"jquery":false}],"/home/gijs/Projects/women-writers/src/coffee/views/reception/search.coffee":[function(require,module,exports){
+},{"../../../jade/views/reception/search-result.jade":90,"../../config":40,"backbone":undefined,"jquery":undefined}],63:[function(require,module,exports){
 var Backbone, RecepteeSelector, ReceptionResultsView, ReceptionSearch, ReceptionSelector, ReceptionService, ReceptionTypeSelector, SearchResults, config, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12994,7 +12994,7 @@ module.exports = ReceptionSearch;
 
 
 
-},{"../../../jade/views/reception/search.jade":"/home/gijs/Projects/women-writers/src/jade/views/reception/search.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/reception-service":"/home/gijs/Projects/women-writers/src/coffee/helpers/reception-service.coffee","./receptee-selector":"/home/gijs/Projects/women-writers/src/coffee/views/reception/receptee-selector.coffee","./reception-selector":"/home/gijs/Projects/women-writers/src/coffee/views/reception/reception-selector.coffee","./results":"/home/gijs/Projects/women-writers/src/coffee/views/reception/results.coffee","./type-selector":"/home/gijs/Projects/women-writers/src/coffee/views/reception/type-selector.coffee","backbone":false,"huygens-faceted-search/src/coffee/collections/searchresults":"/home/gijs/Projects/women-writers/node_modules/huygens-faceted-search/src/coffee/collections/searchresults.coffee","underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/reception/type-selector.coffee":[function(require,module,exports){
+},{"../../../jade/views/reception/search.jade":91,"../../config":40,"../../helpers/reception-service":44,"./receptee-selector":60,"./reception-selector":61,"./results":62,"./type-selector":64,"backbone":undefined,"huygens-faceted-search/src/coffee/collections/searchresults":7,"underscore":undefined}],64:[function(require,module,exports){
 var $, Backbone, ReceptionTypeSelector, config, receptionTypes, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -13081,7 +13081,7 @@ module.exports = ReceptionTypeSelector;
 
 
 
-},{"../../../jade/views/reception/type-selector.jade":"/home/gijs/Projects/women-writers/src/jade/views/reception/type-selector.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/sources/view.coffee":[function(require,module,exports){
+},{"../../../jade/views/reception/type-selector.jade":93,"../../config":40,"backbone":undefined,"underscore":undefined}],65:[function(require,module,exports){
 var Backbone, SourceList, config, loadSources,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -13167,7 +13167,7 @@ module.exports = SourceList;
 
 
 
-},{"../../../jade/views/sources/list.jade":"/home/gijs/Projects/women-writers/src/jade/views/sources/list.jade","../../config":"/home/gijs/Projects/women-writers/src/coffee/config/index.coffee","../../helpers/load-app-data":"/home/gijs/Projects/women-writers/src/coffee/helpers/load-app-data.coffee","backbone":false}],"/home/gijs/Projects/women-writers/src/coffee/views/status.coffee":[function(require,module,exports){
+},{"../../../jade/views/sources/list.jade":96,"../../config":40,"../../helpers/load-app-data":42,"backbone":undefined}],66:[function(require,module,exports){
 var $, Backbone, Status, statusTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -13289,7 +13289,7 @@ module.exports = Status;
 
 
 
-},{"../../jade/views/status.jade":"/home/gijs/Projects/women-writers/src/jade/views/status.jade","backbone":false,"underscore":false}],"/home/gijs/Projects/women-writers/src/coffee/views/user-status.coffee":[function(require,module,exports){
+},{"../../jade/views/status.jade":97,"backbone":undefined,"underscore":undefined}],67:[function(require,module,exports){
 var $, Backbone, LoginComponent, UserStatus, tpl,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -13353,8 +13353,8 @@ module.exports = UserStatus;
 
 
 
-},{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{"../../jade/views/user-status.jade":98,"backbone":undefined,"hibb-login":3,"jquery":undefined}],68:[function(require,module,exports){
+module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -13462,8 +13462,8 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
     "type" : "List of (Role)"
   }
 }
-},{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{}],69:[function(require,module,exports){
+module.exports={
   "tempPsChildren" : {
     "type" : "String"
   },
@@ -13603,7 +13603,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
     "type" : "String"
   }
 }
-},{}],"/home/gijs/Projects/women-writers/src/jade/faceted-search/document.jade":[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13613,7 +13613,7 @@ var jade_interp;
 
 buf.push("<div class=\"dynamic_s_creator-placeholder\"></div><div class=\"dynamic_s_date-placeholder\"></div><div class=\"dynamic_s_origin-placeholder\"></div><div class=\"dynamic_s_language-placeholder\"></div><div class=\"dynamic_s_genre-placeholder\"></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/faceted-search/main.jade":[function(require,module,exports){
+},{"jade/runtime":36}],71:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13623,7 +13623,7 @@ var jade_interp;
 
 buf.push("<div class=\"overlay\"><div><i class=\"fa fa-spinner fa-spin fa-2x\"></i></div></div><div class=\"faceted-search\"><ul class=\"facets-menu\"><li class=\"reset\"><button><i class=\"fa fa-refresh\"></i><span>Reset search</span></button></li><li class=\"switch\"><button><i class=\"fa fa-angle-double-down\"></i><span>Switch to</span></button></li><li class=\"collapse-expand\"><button><i class=\"fa fa-compress\"></i><span>Collapse facets</span></button></li></ul><div class=\"text-search-placeholder\"></div><div class=\"facets-placeholder\"></div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/faceted-search/person.jade":[function(require,module,exports){
+},{"jade/runtime":36}],72:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13633,7 +13633,7 @@ var jade_interp;
 
 buf.push("<div class=\"dynamic_s_types-placeholder\"></div><div class=\"dynamic_s_gender-placeholder\"></div><div class=\"dynamic_s_residence-placeholder\"></div><div class=\"dynamic_s_language-placeholder\"></div><div class=\"dynamic_s_birthDate-placeholder\"></div><div class=\"dynamic_s_deathDate-placeholder\"></div><div class=\"dynamic_s_birthplace-placeholder\"></div><div class=\"dynamic_s_deathplace-placeholder\"></div><div class=\"dynamic_s_collective-placeholder\"></div><div class=\"dynamic_s_religion-placeholder\"></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/faceted-search/reception-main.jade":[function(require,module,exports){
+},{"jade/runtime":36}],73:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13643,7 +13643,7 @@ var jade_interp;
 
 buf.push("<div class=\"overlay\"><div><i class=\"fa fa-spinner fa-spin fa-2x\"></i></div></div><div class=\"faceted-search\"><ul class=\"facets-menu\"><li class=\"reset\"><button><i class=\"fa fa-refresh\"></i><span>Clear selection</span></button></li></ul><div class=\"facets-placeholder\"></div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/base-field.jade":[function(require,module,exports){
+},{"jade/runtime":36}],74:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13685,7 +13685,7 @@ buf.push("<div class=\"value\">" + (null == (jade_interp = field.value) ? "" : j
 }
 buf.push("</div>");}.call(this,"field" in locals_for_with?locals_for_with.field:typeof field!=="undefined"?field:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/base-fieldset.jade":[function(require,module,exports){
+},{"jade/runtime":36}],75:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13722,7 +13722,7 @@ buf.push(null == (jade_interp = field.html) ? "" : jade_interp);
 
 buf.push("<div class=\"clear\"></div></div>");}.call(this,"fieldset" in locals_for_with?locals_for_with.fieldset:typeof fieldset!=="undefined"?fieldset:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/base-link.jade":[function(require,module,exports){
+},{"jade/runtime":36}],76:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13739,7 +13739,7 @@ else
 buf.push("<a" + (jade.attr("href", link.url, true, false)) + " class=\"link\">" + (jade.escape(null == (jade_interp = link.label) ? "" : jade_interp)) + "</a>");
 }}.call(this,"link" in locals_for_with?locals_for_with.link:typeof link!=="undefined"?link:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/base.jade":[function(require,module,exports){
+},{"jade/runtime":36}],77:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13749,7 +13749,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (config) {
 buf.push("<div class=\"container\"><div class=\"header centered\"><a" + (jade.attr("href", config.get('baseUrl'), true, false)) + " class=\"home\"><div class=\"header-logo largest-text\"><span class=\"small-caps\">NEWW</span>Women Writers</div></a><a href=\"http://www.huygens.knaw.nl/\" target=\"_self\" class=\"huygens-ing\"></a></div><div class=\"navigation\"><div class=\"centered\"><div class=\"links\"><a" + (jade.attr("href", config.get('baseUrl') + "/persons/", true, false)) + " class=\"person\">Persons</a><span class=\"add-person\">+</span><a" + (jade.attr("href", config.get('baseUrl') + "/documents/", true, false)) + " class=\"document\">Documents</a><span class=\"add-document\">+</span><a" + (jade.attr("href", config.get('baseUrl') + "/receptions/", true, false)) + " class=\"reception\">Receptions</a><a" + (jade.attr("href", config.get('baseUrl') + "/sources/", true, false)) + " class=\"source\">Sources</a><i class=\"fa fa-adjust\"></i><div class=\"user-status\"></div></div></div></div><div id=\"search\"><div class=\"persons centered\"></div><div class=\"documents centered\"></div><div class=\"receptions\"></div></div><div id=\"view\"></div></div>");}.call(this,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/document/add.jade":[function(require,module,exports){
+},{"jade/runtime":36}],78:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13851,7 +13851,7 @@ buf.push("<option" + (jade.attr("value", location.id, true, false)) + ">" + (jad
 
 buf.push("</select></li><li><label>Date</label><input type=\"text\" name=\"date\"/></li></ul></form>");}.call(this,"persons" in locals_for_with?locals_for_with.persons:typeof persons!=="undefined"?persons:undefined,"languages" in locals_for_with?locals_for_with.languages:typeof languages!=="undefined"?languages:undefined,"genres" in locals_for_with?locals_for_with.genres:typeof genres!=="undefined"?genres:undefined,"locations" in locals_for_with?locals_for_with.locations:typeof locations!=="undefined"?locations:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/document/document-search-results.jade":[function(require,module,exports){
+},{"jade/runtime":36}],79:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13934,7 +13934,7 @@ buf.push("<li" + (jade.cls([showCurated(document) ? 'is-curated' : ''], [true]))
 
 buf.push("</ol>");}.call(this,"response" in locals_for_with?locals_for_with.response:typeof response!=="undefined"?response:undefined,"sortedBy" in locals_for_with?locals_for_with.sortedBy:typeof sortedBy!=="undefined"?sortedBy:undefined,"sortableFieldsMap" in locals_for_with?locals_for_with.sortableFieldsMap:typeof sortableFieldsMap!=="undefined"?sortableFieldsMap:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"Math" in locals_for_with?locals_for_with.Math:typeof Math!=="undefined"?Math:undefined,"showCurated" in locals_for_with?locals_for_with.showCurated:typeof showCurated!=="undefined"?showCurated:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/document/edit.jade":[function(require,module,exports){
+},{"jade/runtime":36}],80:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -13944,7 +13944,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (config, document) {
 buf.push("<div class=\"centered\"><div class=\"controls\"><button class=\"btn save\"><i class=\"fa fa-check\"></i>Save</button><a" + (jade.attr("href", config.documentViewUrl(document._id), true, false)) + " class=\"btn gray cancel\"><i class=\"fa fa-times\"></i>Cancel</a></div><h1>" + (jade.escape(null == (jade_interp = document.title) ? "" : jade_interp)) + "</h1><div class=\"form\"></div><div class=\"controls bottom\"><button class=\"btn save\"><i class=\"fa fa-check\"></i>Save</button><a" + (jade.attr("href", config.documentViewUrl(document._id), true, false)) + " class=\"btn gray cancel\"><i class=\"fa fa-times\"></i>Cancel</a></div></div>");}.call(this,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"document" in locals_for_with?locals_for_with.document:typeof document!=="undefined"?document:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/document/view.jade":[function(require,module,exports){
+},{"jade/runtime":36}],81:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14059,7 +14059,7 @@ buf.push("<div class=\"last-modified\">Last modified by user&nbsp;<span class=\"
 }
 buf.push("</div>");}.call(this,"showingRevision" in locals_for_with?locals_for_with.showingRevision:typeof showingRevision!=="undefined"?showingRevision:undefined,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined,"isDeleted" in locals_for_with?locals_for_with.isDeleted:typeof isDeleted!=="undefined"?isDeleted:undefined,"canEdit" in locals_for_with?locals_for_with.canEdit:typeof canEdit!=="undefined"?canEdit:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"resultIndex" in locals_for_with?locals_for_with.resultIndex:typeof resultIndex!=="undefined"?resultIndex:undefined,"resultTotal" in locals_for_with?locals_for_with.resultTotal:typeof resultTotal!=="undefined"?resultTotal:undefined,"prevId" in locals_for_with?locals_for_with.prevId:typeof prevId!=="undefined"?prevId:undefined,"nextId" in locals_for_with?locals_for_with.nextId:typeof nextId!=="undefined"?nextId:undefined,"receptions" in locals_for_with?locals_for_with.receptions:typeof receptions!=="undefined"?receptions:undefined,"_" in locals_for_with?locals_for_with._:typeof _!=="undefined"?_:undefined,"modified" in locals_for_with?locals_for_with.modified:typeof modified!=="undefined"?modified:undefined,"Date" in locals_for_with?locals_for_with.Date:typeof Date!=="undefined"?Date:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/add.jade":[function(require,module,exports){
+},{"jade/runtime":36}],82:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14069,7 +14069,7 @@ var jade_interp;
 
 buf.push("<form><ul><li><label>First Name</label><input type=\"text\" name=\"first-name\"/></li><li><label>Last Name</label><input type=\"text\" name=\"last-name\"/></li><li><label>Gender</label><select name=\"gender\"><option value=\"FEMALE\">Female</option><option value=\"MALE\">Male</option><option value=\"UNKNOWN\">Unknown</option></select></li><li><label>Types</label><select name=\"types\"><option></option><option value=\"AUTHOR\">Author</option><option value=\"ARCHETYPE\">Archetype</option><option value=\"PSEUDONYM\">Pseudonym</option></select></li><li><label>Birth Date</label><input type=\"text\" name=\"birthDate\"/></li><li><label>Death Date</label><input type=\"text\" name=\"deathDate\"/></li></ul></form>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/edit.jade":[function(require,module,exports){
+},{"jade/runtime":36}],83:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14079,7 +14079,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (config, person) {
 buf.push("<div class=\"centered\"><div class=\"controls\"><button class=\"btn save\"><i class=\"fa fa-check\"></i>Save</button><a" + (jade.attr("href", config.personViewUrl(person._id), true, false)) + " class=\"btn gray cancel\"><i class=\"fa fa-times\"></i>Cancel</a></div><h1>" + (jade.escape(null == (jade_interp = person.tempName) ? "" : jade_interp)) + "</h1><div class=\"form\"></div><div class=\"controls bottom\"><button class=\"btn save\"><i class=\"fa fa-check\"></i>Save</button><a" + (jade.attr("href", config.personViewUrl(person._id), true, false)) + " class=\"btn gray cancel\"><i class=\"fa fa-times\"></i>Cancel</a></div></div>");}.call(this,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"person" in locals_for_with?locals_for_with.person:typeof person!=="undefined"?person:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/graph.jade":[function(require,module,exports){
+},{"jade/runtime":36}],84:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14089,7 +14089,7 @@ var jade_interp;
 
 buf.push("<h5 class=\"title\">Graph for&nbsp;<span class=\"name\"></span></h5><ul></ul><svg></svg>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/name-component.jade":[function(require,module,exports){
+},{"jade/runtime":36}],85:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14099,7 +14099,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (value) {
 buf.push("<span class=\"value\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</span><!-- span.type= type-->");}.call(this,"value" in locals_for_with?locals_for_with.value:typeof value!=="undefined"?value:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/name.jade":[function(require,module,exports){
+},{"jade/runtime":36}],86:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14132,7 +14132,7 @@ buf.push("<span class=\"component\">" + (null == (jade_interp = component) ? "" 
 
 buf.push("</div>");}.call(this,"components" in locals_for_with?locals_for_with.components:typeof components!=="undefined"?components:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/person-search-results.jade":[function(require,module,exports){
+},{"jade/runtime":36}],87:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14243,7 +14243,7 @@ buf.push("</a></li>");
 
 buf.push("</ol>");}.call(this,"response" in locals_for_with?locals_for_with.response:typeof response!=="undefined"?response:undefined,"sortedBy" in locals_for_with?locals_for_with.sortedBy:typeof sortedBy!=="undefined"?sortedBy:undefined,"sortableFieldsMap" in locals_for_with?locals_for_with.sortableFieldsMap:typeof sortableFieldsMap!=="undefined"?sortableFieldsMap:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"Math" in locals_for_with?locals_for_with.Math:typeof Math!=="undefined"?Math:undefined,"showCurated" in locals_for_with?locals_for_with.showCurated:typeof showCurated!=="undefined"?showCurated:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/person/view.jade":[function(require,module,exports){
+},{"jade/runtime":36}],88:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14367,7 +14367,7 @@ buf.push("<div class=\"last-modified\">Last modified by user&nbsp;<span class=\"
 }
 buf.push("</div>");}.call(this,"showingRevision" in locals_for_with?locals_for_with.showingRevision:typeof showingRevision!=="undefined"?showingRevision:undefined,"data" in locals_for_with?locals_for_with.data:typeof data!=="undefined"?data:undefined,"isDeleted" in locals_for_with?locals_for_with.isDeleted:typeof isDeleted!=="undefined"?isDeleted:undefined,"canEdit" in locals_for_with?locals_for_with.canEdit:typeof canEdit!=="undefined"?canEdit:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"componentsToName" in locals_for_with?locals_for_with.componentsToName:typeof componentsToName!=="undefined"?componentsToName:undefined,"Unnamed" in locals_for_with?locals_for_with.Unnamed:typeof Unnamed!=="undefined"?Unnamed:undefined,"resultIndex" in locals_for_with?locals_for_with.resultIndex:typeof resultIndex!=="undefined"?resultIndex:undefined,"resultTotal" in locals_for_with?locals_for_with.resultTotal:typeof resultTotal!=="undefined"?resultTotal:undefined,"prevId" in locals_for_with?locals_for_with.prevId:typeof prevId!=="undefined"?prevId:undefined,"nextId" in locals_for_with?locals_for_with.nextId:typeof nextId!=="undefined"?nextId:undefined,"receptions" in locals_for_with?locals_for_with.receptions:typeof receptions!=="undefined"?receptions:undefined,"_" in locals_for_with?locals_for_with._:typeof _!=="undefined"?_:undefined,"modified" in locals_for_with?locals_for_with.modified:typeof modified!=="undefined"?modified:undefined,"Date" in locals_for_with?locals_for_with.Date:typeof Date!=="undefined"?Date:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/reception/reception-selector.jade":[function(require,module,exports){
+},{"jade/runtime":36}],89:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14377,7 +14377,7 @@ var jade_interp;
 
 buf.push("<h5 class=\"reception-criteria-header\">Reception criteria</h5><div class=\"search-container\"></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/reception/search-result.jade":[function(require,module,exports){
+},{"jade/runtime":36}],90:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14490,7 +14490,7 @@ buf.push("<p>No results found</p>");
 }
 }}.call(this,"response" in locals_for_with?locals_for_with.response:typeof response!=="undefined"?response:undefined,"excelUrl" in locals_for_with?locals_for_with.excelUrl:typeof excelUrl!=="undefined"?excelUrl:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"relIds" in locals_for_with?locals_for_with.relIds:typeof relIds!=="undefined"?relIds:undefined,"shortenTitle" in locals_for_with?locals_for_with.shortenTitle:typeof shortenTitle!=="undefined"?shortenTitle:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/reception/search.jade":[function(require,module,exports){
+},{"jade/runtime":36}],91:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14500,7 +14500,7 @@ var jade_interp;
 
 buf.push("<div class=\"reception-search\"><div class=\"centered query\"><div class=\"tabs smaller-text\"><div class=\"tab type\"><div class=\"text\">All receptions</div><div class=\"link\">All receptions</div></div><div class=\"tab reception\"><div class=\"text\">(all receptions)</div><div class=\"link\">(all receptions)</div></div><div class=\"tab receptee\"><div class=\"text\">All persons/works</div><div class=\"link\">All persons/works</div></div><div class=\"tab search\"><button disabled=\"disabled\" class=\"btn search-receptions\"><i class=\"fa fa-search\"></i><span class=\"s\">Search</span><span class=\"ing\">ing</span></button></div></div></div></div><div class=\"views\"><div class=\"select-type centered\"></div><div class=\"select-reception centered hidden\"></div><div class=\"select-receptee centered hidden\"></div></div><div class=\"reception-results centered\"></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/reception/source-query-builder.jade":[function(require,module,exports){
+},{"jade/runtime":36}],92:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14510,7 +14510,7 @@ var jade_interp;
 
 buf.push("<h5 class=\"search-criteria-header\">Search criteria</h5><div class=\"search-container\"></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/reception/type-selector.jade":[function(require,module,exports){
+},{"jade/runtime":36}],93:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14566,7 +14566,7 @@ buf.push("<li" + (jade.attr("data-type", type.regularName, true, false)) + (jade
 
 buf.push("</ul></div>");}.call(this,"documentReceptions" in locals_for_with?locals_for_with.documentReceptions:typeof documentReceptions!=="undefined"?documentReceptions:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined,"personReceptions" in locals_for_with?locals_for_with.personReceptions:typeof personReceptions!=="undefined"?personReceptions:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/search-results.jade":[function(require,module,exports){
+},{"jade/runtime":36}],94:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14599,7 +14599,7 @@ buf.push("<li>" + (jade.escape(null == (jade_interp = result.tempName) ? "" : ja
 
 buf.push("</ul>");}.call(this,"response" in locals_for_with?locals_for_with.response:typeof response!=="undefined"?response:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/search.jade":[function(require,module,exports){
+},{"jade/runtime":36}],95:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14609,7 +14609,7 @@ var jade_interp;
 
 buf.push("<div class=\"search\"></div><div class=\"results\"></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/sources/list.jade":[function(require,module,exports){
+},{"jade/runtime":36}],96:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14710,7 +14710,7 @@ buf.push("</ul></div>");
 }).call(this);
 }.call(this,"letters" in locals_for_with?locals_for_with.letters:typeof letters!=="undefined"?letters:undefined,"sources" in locals_for_with?locals_for_with.sources:typeof sources!=="undefined"?sources:undefined,"config" in locals_for_with?locals_for_with.config:typeof config!=="undefined"?config:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/status.jade":[function(require,module,exports){
+},{"jade/runtime":36}],97:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14720,7 +14720,7 @@ var jade_interp;
 
 buf.push("<div class=\"loading box\"><h1>Please wait...</h1></div><div class=\"error box\"><h1><i class=\"fa fa-warning\"></i><span class=\"title\">Error</span></h1><div class=\"message\">I'm very sorry, but it seems an error has occurred:</div><code class=\"error-message\"></code><button type=\"button\" class=\"btn ok\">OK</button></div><div class=\"success box\"><h1><i class=\"fa fa-check\"></i><span class=\"title\">Success!</span></h1></div>");;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade":[function(require,module,exports){
+},{"jade/runtime":36}],98:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -14730,7 +14730,7 @@ var jade_interp;
 ;var locals_for_with = (locals || {});(function (username) {
 buf.push("<a href=\"#\" class=\"login\">Login</a><div class=\"loader\">Logging in</div><span><span class=\"label\">Logged in as&nbsp;</span><span class=\"user-name\">" + (jade.escape(null == (jade_interp = username ? username : 'unknown') ? "" : jade_interp)) + "</span></span>");}.call(this,"username" in locals_for_with?locals_for_with.username:typeof username!=="undefined"?username:undefined));;return buf.join("");
 };
-},{"jade/runtime":"/home/gijs/Projects/women-writers/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/funcky.el/dist/index.js":[function(require,module,exports){
+},{"jade/runtime":36}],99:[function(require,module,exports){
 (function() {
   module.exports = {
     el: function(el) {
@@ -14829,7 +14829,7 @@ buf.push("<a href=\"#\" class=\"login\">Login</a><div class=\"loader\">Logging i
 
 }).call(this);
 
-},{}],"/usr/local/lib/node_modules/funcky.req/dist/main.js":[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 (function() {
   var __hasProp = {}.hasOwnProperty;
 
@@ -14910,7 +14910,7 @@ buf.push("<a href=\"#\" class=\"login\">Login</a><div class=\"loader\">Logging i
 
 }).call(this);
 
-},{}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/adapters/backbone.bootstrap-modal.js":[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 /**
  * Bootstrap Modal wrapper for use with Backbone.
  * 
@@ -15151,7 +15151,7 @@ buf.push("<a href=\"#\" class=\"login\">Login</a><div class=\"loader\">Logging i
 
 })(jQuery, _, Backbone);
 
-},{}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js":[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 (function (global){
 /**
  * Backbone Forms v0.14.0
@@ -17645,7 +17645,7 @@ Form.editors.DateTime = Form.editors.Base.extend({
 })(window || global || this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"backbone":false,"jquery":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/editors/list.js":[function(require,module,exports){
+},{"backbone":undefined,"jquery":undefined,"underscore":undefined}],103:[function(require,module,exports){
 ;
 
 var Backbone = require('backbone');
@@ -18305,7 +18305,7 @@ var $ = require('jquery');
 
 
 module.exports = Backbone.Form.editors.List
-},{"backbone":false,"jquery":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js":[function(require,module,exports){
+},{"backbone":undefined,"jquery":undefined,"underscore":undefined}],104:[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
@@ -18518,12 +18518,12 @@ exports.rethrow = function rethrow(err, filename, lineno, str){
 (1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"fs":"/home/gijs/Projects/women-writers/node_modules/browserify/lib/_empty.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/lib/select2.js":[function(require,module,exports){
+},{"fs":2}],105:[function(require,module,exports){
 
 require('../select2/select2.js');
 module.exports = window.Select2;
 
-},{"../select2/select2.js":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/select2.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/select2/select2.js":[function(require,module,exports){
+},{"../select2/select2.js":106}],106:[function(require,module,exports){
 /*
 Copyright 2012 Igor Vaynberg
 
@@ -21780,7 +21780,7 @@ the specific language governing permissions and limitations under the Apache Lic
 
 }(jQuery));
 
-},{}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/collections/relations.coffee":[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 var Backbone, Relation, Relations, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -21837,7 +21837,7 @@ module.exports = Relations = (function(_super) {
 })(Backbone.Collection);
 
 
-},{"../models/relation":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/models/relation.coffee","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers.coffee":[function(require,module,exports){
+},{"../models/relation":112,"backbone":undefined,"underscore":undefined}],108:[function(require,module,exports){
 var Backbone, LinkModel, getFieldType, getType, isList, isNames, keyMatches, simpleTypeMap, _;
 
 Backbone = require('backbone');
@@ -21969,7 +21969,7 @@ module.exports = {
 };
 
 
-},{"backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-inverse-relation-type-helper.coffee":[function(require,module,exports){
+},{"backbone":undefined,"underscore":undefined}],109:[function(require,module,exports){
 var DynamicInverseRelationTypeHelper, DynamicRelationTypeHelper,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -22010,7 +22010,7 @@ DynamicInverseRelationTypeHelper = (function(_super) {
 module.exports = DynamicInverseRelationTypeHelper;
 
 
-},{"./dynamic-relation-type-helper":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/dynamic-relation-type-helper.coffee":[function(require,module,exports){
+},{"./dynamic-relation-type-helper":110}],110:[function(require,module,exports){
 var DynamicRelationTypeHelper;
 
 DynamicRelationTypeHelper = (function() {
@@ -22075,7 +22075,7 @@ DynamicRelationTypeHelper = (function() {
 module.exports = DynamicRelationTypeHelper;
 
 
-},{}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/validators.coffee":[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 module.exports = {
   datable: function(options) {
     return function(value, formValues) {
@@ -22097,7 +22097,7 @@ module.exports = {
 };
 
 
-},{}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/models/relation.coffee":[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 var Backbone, Relation, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -22177,7 +22177,7 @@ module.exports = Relation = (function(_super) {
 })(Backbone.Model);
 
 
-},{"backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/dynamic-relations-editor.coffee":[function(require,module,exports){
+},{"backbone":undefined,"underscore":undefined}],113:[function(require,module,exports){
 var $, Backbone, DynamicRelationsEditor, Form, Relation, RelationAutocompleteView, RelationsCollection, dynamicRelationsTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -22416,7 +22416,7 @@ DynamicRelationsEditor = (function(_super) {
 module.exports = DynamicRelationsEditor;
 
 
-},{"../../templates/dynamic-relations.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dynamic-relations.jade","../collections/relations.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/collections/relations.coffee","../models/relation":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/models/relation.coffee","./relation-autocomplete-item":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-autocomplete-item.coffee","backbone":false,"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/form.coffee":[function(require,module,exports){
+},{"../../templates/dynamic-relations.jade":125,"../collections/relations.coffee":107,"../models/relation":112,"./relation-autocomplete-item":120,"backbone":undefined,"backbone-forms/distribution/backbone-forms":102,"underscore":undefined}],114:[function(require,module,exports){
 (function (global){
 var Backbone, EditForm, FilteredBackboneForm, Relation, customSerializer, fieldsToSave, timbuctooRelationRegex, _,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
@@ -22664,7 +22664,7 @@ module.exports = EditForm = (function(_super) {
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../../templates/field.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/field.jade","../../templates/fieldset.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/fieldset.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","../../templates/list.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list.jade","../helpers/validators":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/helpers/validators.coffee","../models/relation":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/models/relation.coffee","./dynamic-relations-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/dynamic-relations-editor.coffee","./link-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/link-editor.coffee","./person-names-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/person-names-editor.coffee","./read-only-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/read-only-editor.coffee","./relation-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-editor.coffee","backbone":false,"backbone-forms/distribution/adapters/backbone.bootstrap-modal":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/adapters/backbone.bootstrap-modal.js","backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","backbone-forms/distribution/editors/list":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/editors/list.js","jquery":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/link-editor.coffee":[function(require,module,exports){
+},{"../../templates/field.jade":126,"../../templates/fieldset.jade":127,"../../templates/list-item.jade":129,"../../templates/list.jade":130,"../helpers/validators":111,"../models/relation":112,"./dynamic-relations-editor":113,"./link-editor":115,"./person-names-editor":118,"./read-only-editor":119,"./relation-editor":121,"backbone":undefined,"backbone-forms/distribution/adapters/backbone.bootstrap-modal":101,"backbone-forms/distribution/backbone-forms":102,"backbone-forms/distribution/editors/list":103,"jquery":undefined,"underscore":undefined}],115:[function(require,module,exports){
 var Backbone, Form, LinkEditor, linkTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -22741,7 +22741,7 @@ LinkEditor = (function(_super) {
 module.exports = LinkEditor;
 
 
-},{"../../templates/link.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/link.jade","backbone":false,"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/person-name-component-editor.coffee":[function(require,module,exports){
+},{"../../templates/link.jade":128,"backbone":undefined,"backbone-forms/distribution/backbone-forms":102,"underscore":undefined}],116:[function(require,module,exports){
 var Backbone, Form, NameComponentEditor, nameComponentMetadata, nameComponentTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -22837,7 +22837,7 @@ NameComponentEditor = (function(_super) {
 module.exports = NameComponentEditor;
 
 
-},{"../../data/personnamecomponent.json":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json","../../templates/person-name-component.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/person-name-component.jade","backbone":false,"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/person-name-editor.coffee":[function(require,module,exports){
+},{"../../data/personnamecomponent.json":123,"../../templates/person-name-component.jade":131,"backbone":undefined,"backbone-forms/distribution/backbone-forms":102,"underscore":undefined}],117:[function(require,module,exports){
 var Backbone, Form, NameComponentEditor, NameEditor, nameComponentMetadata, personNameEditorTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -22980,7 +22980,7 @@ NameEditor = (function(_super) {
 module.exports = NameEditor;
 
 
-},{"../../data/personnamecomponent.json":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json","../../templates/person-name-editor.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/person-name-editor.jade","./person-name-component-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/person-name-component-editor.coffee","backbone":false,"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/person-names-editor.coffee":[function(require,module,exports){
+},{"../../data/personnamecomponent.json":123,"../../templates/person-name-editor.jade":132,"./person-name-component-editor":116,"backbone":undefined,"backbone-forms/distribution/backbone-forms":102,"underscore":undefined}],118:[function(require,module,exports){
 var Backbone, Form, NameEditor, NamesEditor, listTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -23095,7 +23095,7 @@ NamesEditor = (function(_super) {
 module.exports = NamesEditor;
 
 
-},{"../../templates/person-names-editor.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/person-names-editor.jade","./person-name-editor":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/person-name-editor.coffee","backbone":false,"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/read-only-editor.coffee":[function(require,module,exports){
+},{"../../templates/person-names-editor.jade":133,"./person-name-editor":117,"backbone":undefined,"backbone-forms/distribution/backbone-forms":102,"underscore":undefined}],119:[function(require,module,exports){
 var Form, ReadOnlyEditor,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -23142,7 +23142,7 @@ ReadOnlyEditor = (function(_super) {
 module.exports = ReadOnlyEditor;
 
 
-},{"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-autocomplete-item.coffee":[function(require,module,exports){
+},{"backbone-forms/distribution/backbone-forms":102}],120:[function(require,module,exports){
 var Backbone, RelationAutocompleteItem, RelationItemView, select2, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -23256,7 +23256,7 @@ RelationAutocompleteItem = (function(_super) {
 module.exports = RelationAutocompleteItem;
 
 
-},{"./relation-item":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-item.coffee","backbone":false,"select2-browserify":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/select2-browserify/lib/select2.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-editor.coffee":[function(require,module,exports){
+},{"./relation-item":122,"backbone":undefined,"select2-browserify":105,"underscore":undefined}],121:[function(require,module,exports){
 var Backbone, Form, RelationAutocompleteView, RelationEditor, RelationView, RelationsCollection, listTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -23504,7 +23504,7 @@ RelationEditor = (function(_super) {
 module.exports = RelationEditor;
 
 
-},{"../../templates/list.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list.jade","../collections/relations.coffee":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/collections/relations.coffee","./relation-autocomplete-item":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-autocomplete-item.coffee","./relation-item":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-item.coffee","backbone":false,"backbone-forms/distribution/backbone-forms":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/backbone-forms/distribution/backbone-forms.js","underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/coffee/views/relation-item.coffee":[function(require,module,exports){
+},{"../../templates/list.jade":130,"../collections/relations.coffee":107,"./relation-autocomplete-item":120,"./relation-item":122,"backbone":undefined,"backbone-forms/distribution/backbone-forms":102,"underscore":undefined}],122:[function(require,module,exports){
 var Backbone, RelationItem, dropdownTemplate, listItemTemplate, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -23567,8 +23567,8 @@ RelationItem = (function(_super) {
 module.exports = RelationItem;
 
 
-},{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+},{"../../templates/dropdown.jade":124,"../../templates/list-item.jade":129,"backbone":undefined,"underscore":undefined}],123:[function(require,module,exports){
+module.exports={
   "value" : {
     "type" : "String"
   },
@@ -23577,7 +23577,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
     "type" : "String"
   }
 }
-},{}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade":[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23609,7 +23609,7 @@ buf.push("<option" + (jade.attr("value", option.value, true, false)) + (jade.att
 
 buf.push("</select>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dynamic-relations.jade":[function(require,module,exports){
+},{"jade/runtime":104}],125:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23641,7 +23641,7 @@ buf.push("<li" + (jade.attr("data-type", relationTypeHelper.getName(type), true,
 
 buf.push("</ul><button class=\"btn\">" + (jade.escape(null == (jade.interp = 'Add ' + relationName) ? "" : jade.interp)) + "</button></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/field.jade":[function(require,module,exports){
+},{"jade/runtime":104}],126:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23650,7 +23650,7 @@ var jade_mixins = {};
 var locals_ = (locals || {}),key = locals_.key,editorId = locals_.editorId,title = locals_.title,help = locals_.help;
 buf.push("<div" + (jade.cls(["field field-" + (key) + ""], [true])) + "><div" + (jade.attr("for", editorId, true, false)) + " class=\"field-label\">" + (jade.escape(null == (jade.interp = title) ? "" : jade.interp)) + "</div><span data-editor=\"data-editor\"></span><div class=\"error\"><i class=\"fa fa-times\"></i><span data-error=\"data-error\"></span></div><div class=\"help\">" + (jade.escape(null == (jade.interp = help) ? "" : jade.interp)) + "</div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/fieldset.jade":[function(require,module,exports){
+},{"jade/runtime":104}],127:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23664,7 +23664,7 @@ buf.push("<legend>" + (jade.escape(null == (jade.interp = legend) ? "" : jade.in
 }
 buf.push("<div data-fields=\"data-fields\" class=\"fields\"></div></fieldset>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/link.jade":[function(require,module,exports){
+},{"jade/runtime":104}],128:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23673,7 +23673,7 @@ var jade_mixins = {};
 
 buf.push("<span class=\"loading\"></span><div class=\"timbuctoo-link-editor\"><div class=\"label-field\"><span>label</span><input type=\"text\" name=\"label\"/></div><div class=\"url-field\"><span>URL</span><input type=\"text\" name=\"url\"/></div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade":[function(require,module,exports){
+},{"jade/runtime":104}],129:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23682,7 +23682,7 @@ var jade_mixins = {};
 
 buf.push("<div class=\"timbuctoo-list-item\"><span data-editor=\"data-editor\"></span><button type=\"button\" data-action=\"remove\" title=\"Remove this item\"><i class=\"fa fa-minus\"></i><span>Remove</span></button></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list.jade":[function(require,module,exports){
+},{"jade/runtime":104}],130:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23691,7 +23691,7 @@ var jade_mixins = {};
 
 buf.push("<div class=\"timbuctoo-list-editor\"><div data-items=\"data-items\"></div><button type=\"button\" data-action=\"add\" title=\"Add another item\"><i class=\"fa fa-plus\"></i><span>Add</span></button></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/person-name-component.jade":[function(require,module,exports){
+},{"jade/runtime":104}],131:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23700,7 +23700,7 @@ var jade_mixins = {};
 var locals_ = (locals || {}),type = locals_.type;
 buf.push("<div class=\"timbuctoo-list-item\"><div class=\"name-component-editor\"><div class=\"component-header\"><label class=\"type\"><span>" + (jade.escape(null == (jade.interp = type) ? "" : jade.interp)) + "</span></label><span" + (jade.attr("title", type ? 'Remove this ' + type : 'Remove this component', true, false)) + " class=\"remove-name-component link\">Remove</span></div><input type=\"text\" name=\"value\"/></div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/person-name-editor.jade":[function(require,module,exports){
+},{"jade/runtime":104}],132:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23732,7 +23732,7 @@ buf.push("<option" + (jade.attr("value", type, true, false)) + ">" + (jade.escap
 
 buf.push("</select></div></div></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/person-names-editor.jade":[function(require,module,exports){
+},{"jade/runtime":104}],133:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -23741,4 +23741,4 @@ var jade_mixins = {};
 
 buf.push("<div class=\"timbuctoo-list-editor\"><div data-items=\"data-items\" class=\"person-name-editors\"></div><button type=\"button\" data-action=\"add\" title=\"Add another name\" class=\"add-name-editor\"><i class=\"fa fa-plus\"></i><span>Name</span></button></div>");;return buf.join("");
 };
-},{"jade/runtime":"/usr/local/lib/node_modules/timbuctoo-edit-forms/node_modules/jade/runtime.js"}]},{},["./src/coffee/main.coffee"]);
+},{"jade/runtime":104}]},{},[1]);
