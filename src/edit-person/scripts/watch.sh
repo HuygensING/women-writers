@@ -12,13 +12,25 @@
 # 	--watch \
 # 	src/ &
 
+# node_modules/.bin/browserify src/index.jsx \
+# 	--detect-globals false \
+# 	--extension=.jsx \
+# 	--external classnames \
+# 	--external immutable \
+# 	--external react \
+# 	--standalone WomenWritersEditPerson \
+# 	--transform [ babelify --plugins object-assign ] \
+# 	--verbose | derequire > build/development/index.js
+# 
+
+
 node_modules/.bin/watchify src/index.jsx \
 	--detect-globals false \
 	--extension=.jsx \
 	--external classnames \
 	--external immutable \
 	--external react \
-	--outfile build/development/index.js \
+	--outfile 'derequire > build/development/index.js' \
 	--standalone WomenWritersEditPerson \
 	--transform [ babelify --plugins object-assign ] \
 	--verbose
