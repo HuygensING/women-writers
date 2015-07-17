@@ -6,7 +6,7 @@ class PersonForm extends React.Component {
 		super(props);
 
 		this.state = {
-			activeTab: "basic-info"
+			activeTab: "Basic Info"
 		};
 	}
 

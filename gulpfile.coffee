@@ -14,6 +14,7 @@ nib = require 'nib'
 async = require 'async'
 exec = require('child_process').exec
 rimraf = require 'rimraf'
+cfg = require './config.json'
 rsync = require('rsyncwrapper').rsync
 preprocess = require 'gulp-preprocess'
 minifyCss = require 'gulp-minify-css'
@@ -27,27 +28,21 @@ proxy = require 'proxy-middleware'
 url = require 'url'
 rename = require 'gulp-rename'
 
-cfg = {
-	"outputDir": "envs/development"
-	"ENV": "development"
-	"local-modules": ["gulp-task-link"]
-}
-
 link = require('gulp-task-link')(gulp, cfg['local-modules'])
+
 
 unless ENV?
 	ENV = if process.env.NODE_ENV? then process.env.NODE_ENV else 'development'
 
-# cfg[ENV].ENV = ENV
+cfg[ENV].ENV = ENV
 
-# cfg.devDir = "./" + cfg['development']['SOURCE']
-# cfg.testDir = "./" + cfg['test']['SOURCE']
-# cfg.prodDir = "./" + cfg['production']['SOURCE']
-# cfg.outputDir = switch ENV
-# 	when 'development' then cfg.devDir
-# 	when 'test' then cfg.testDir
-# 	when 'production' then cfg.prodDir
-
+cfg.devDir = "./" + cfg['development']['SOURCE']
+cfg.testDir = "./" + cfg['test']['SOURCE']
+cfg.prodDir = "./" + cfg['production']['SOURCE']
+cfg.outputDir = switch ENV
+	when 'development' then cfg.devDir
+	when 'test' then cfg.testDir
+	when 'production' then cfg.prodDir
 
 gulp.task 'copy-env-config', ->
 	configDir = "./src/coffee/config/"

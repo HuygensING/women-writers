@@ -1,6 +1,12 @@
 # API CHANGES
 
-Diverse UI-components hebben lijsten nodig. Vooral voor autocompletes en dergelijke is het van belang dat deze data (zeer) snel geladen wordt. Het voorstel is daarom om interfaces te maken die direct uit Mongo de benodigde data halen. Liefst met alle cache toeters en bellen die mogelijk zijn, want deze GETs moeten zoveel mogelijk geoptimaliseerd worden voor een goede gebruikerservaring. In de huidige situatie duurt het ophalen van resultaten soms wel 30s!
+Diverse UI-components hebben lijsten nodig. Vooral voor autocompletes en
+dergelijke is het van belang dat deze data (zeer) snel geladen wordt. Het
+voorstel is daarom om interfaces te maken die direct uit Mongo de benodigde
+data halen. Liefst met alle cache toeters en bellen die mogelijk zijn, want
+deze GETs moeten zoveel mogelijk geoptimaliseerd worden voor een goede
+gebruikerservaring. In de huidige situatie duurt het ophalen van resultaten
+soms wel 30s!
 
 ## Languages
 
@@ -24,10 +30,10 @@ Diverse UI-components hebben lijsten nodig. Vooral voor autocompletes en dergeli
 					name: "Norwegian Nynorsk"
 
 ### Voorstel
-- GET https://acc.repository.huygens.knaw.nl/languages
+- GET https://acc.repository.huygens.knaw.nl/languages?vres=womenwriter,ebnm&query=*tes*&metadata=description,date,name
 - RESPONSE [
 		{
-			key: "LANG000000004747",
+			key: "https://acc.repository.huygens.knaw.nl/languages/LANG000000004747",
 			value: "Norwegian Nynorsk"
 		}
 	]
