@@ -4,22 +4,22 @@ import Immutable from "immutable";
 import dispatcher from "../dispatcher";
 
 import BaseStore from "./base";
-import personModel from "./model";
+import publicationModel from "./models/publication";
 
 import {castArray} from "hire-forms-utils";
 
 const CHANGE_EVENT = "change";
 
-class PersonStore extends BaseStore {
+class PublicationStore extends BaseStore {
 	constructor() {
 		super();
 
-		this.model = personModel;
+		this.model = publicationModel;
 	}
 
 	getState() {
 		return {
-			person: this.model
+			publication: this.model
 		};
 	}
 
@@ -48,26 +48,26 @@ class PersonStore extends BaseStore {
 	}
 }
 
-let person = new PersonStore();
+let publicationStore = new PublicationStore();
 
 let dispatcherCallback = function(payload) {
 	switch(payload.action.actionType) {
-		case "PERSON_RECEIVE":
-			person.receive(payload.action.data);
+		case "PUBLICATION_RECEIVE":
+			publicationStore.receive(payload.action.data);
 			break;
-		case "PERSON_SET_KEY":
-			person.setKey(payload.action.key, payload.action.value);
+		case "PUBLICATION_SET_KEY":
+			publicationStore.setKey(payload.action.key, payload.action.value);
 			break;
-		case "PERSON_DELETE_KEY":
-			person.deleteKey(payload.action.key);
+		case "PUBLICATION_DELETE_KEY":
+			publicationStore.deleteKey(payload.action.key);
 			break;
 		default:
 			return;
 	}
 
-	person.emit(CHANGE_EVENT);
+	publicationStore.emit(CHANGE_EVENT);
 };
 
-person.dispatcherIndex = dispatcher.register(dispatcherCallback);
+publicationStore.dispatcherIndex = dispatcher.register(dispatcherCallback);
 
-export default person;
+export default publicationStore;

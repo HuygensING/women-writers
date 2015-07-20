@@ -21,10 +21,10 @@
 # 	--standalone WomenWritersEditPerson \
 # 	--transform [ babelify --plugins object-assign ] \
 # 	--verbose | derequire > build/development/index.js
-# 
+#
 
 
-node_modules/.bin/watchify src/index.jsx \
+node_modules/.bin/watchify src/index.js \
 	--detect-globals false \
 	--extension=.jsx \
 	--external classnames \

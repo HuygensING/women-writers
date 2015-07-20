@@ -10,7 +10,7 @@ UserStatusView = require './views/user-status'
 
 Person = require './models/person'
 # PersonForm = require './views/person/edit'
-PersonForm = require "../edit-person/build/development"
+{Author, Publication} = require "../edit-person/build/development"
 PersonView = require './views/person/view'
 PersonGraphView = require './views/person/graph'
 PersonSearchView = require './views/person/search'
@@ -79,10 +79,14 @@ class App extends Backbone.View
 
 	_showAddDocumentModal: ->
 		showModal = =>
+			capitalizePerson = (person) ->
+				person.displayName = person.displayName.charAt(0).toUpperCase() + person.displayName.substr(1)
+				person
+
 			rhtml = addDocumentTpl
 				genres: _.sortBy(config.get("genres"), "label")
 				languages: _.sortBy(config.get("languages"), "label")
-				persons: _.sortBy(config.get("persons"), "displayName")
+				persons: _.chain(config.get("persons")).map(capitalizePerson).sortBy("displayName").value()
 				locations: _.sortBy(config.get("locations"), "displayName")
 
 			modal = new Modal
@@ -185,24 +189,26 @@ class App extends Backbone.View
 	showPersonForm: (id) ->
 		console.log "SHOW: ", id
 
-		Factory = React.createFactory(PersonForm)
-		React.render Factory(), document.getElementById("view")
+		Factory = React.createFactory(Author)
+		React.render Factory(id: id), document.getElementById("view")
 
-		@showView()
-		# person = new Person _id: id
-		# person.fetch().done =>
-		# 	view = new PersonForm
-		# 		model: person
-		# 	@switchView view
-		# @showView()
 
 	showDocumentForm: (id) ->
-		document = new Document _id: id
-		document.fetch().done =>
-			view = new DocumentForm
-				model: document
-			@switchView view
+		console.log "SHOW: ", id
+
+		Factory = React.createFactory(Publication)
+		React.render Factory(id: id), document.getElementById("view")
+
 		@showView()
+
+
+
+		# document = new Document _id: id
+		# document.fetch().done =>
+		# 	view = new DocumentForm
+		# 		model: document
+		# 	@switchView view
+		# @showView()
 
 	showPersonSearch: ->
 		@personSearch ?= new PersonSearchView

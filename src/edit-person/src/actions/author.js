@@ -1,9 +1,14 @@
 import dispatcher from "../dispatcher";
+import API from "../api";
 
-let personActions = {
+let authorActions = {
+	getAuthor(id) {
+		API.getAuthor(id);
+	},
+
 	setKey(key, value) {
 		dispatcher.handleViewAction({
-			actionType: "PERSON_SET_KEY",
+			actionType: "AUTHOR_SET_KEY",
 			key: key,
 			value: value
 		});
@@ -11,10 +16,10 @@ let personActions = {
 
 	deleteKey(key) {
 		dispatcher.handleViewAction({
-			actionType: "PERSON_DELETE_KEY",
+			actionType: "AUTHOR_DELETE_KEY",
 			key: key
 		});
 	}
 };
 
-export default personActions;
+export default authorActions;

@@ -73,6 +73,132 @@ p,
   font-size: 0.875em;
   text-transform: uppercase;
 }
+#view > .hire-tabs {
+  margin: auto;
+  margin-top: 40px;
+  width: 960px;
+}
+#view > .hire-tabs > ul,
+#view > .hire-tabs > .hire-tab {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+#view > .hire-tabs > ul {
+  width: 20%;
+}
+#view > .hire-tabs > .hire-tab {
+  width: 80%;
+}
+.hire-forms-form > ul > li {
+  margin-bottom: 20px;
+}
+.hire-forms-form > ul > li label,
+.hire-forms-form > ul > li label + div {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+.hire-forms-form > ul > li label {
+  width: 140px;
+}
+.hire-forms-form > ul > li input {
+  width: 400px;
+  height: 32px;
+  border: 1px solid #ccc;
+  padding-left: 6px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.hire-forms-form > ul > li textarea {
+  width: 400px;
+}
+.hire-select {
+  width: 397px;
+  position: relative;
+}
+.hire-select .input-container {
+  position: relative;
+  height: 32px;
+  border: 1px solid #ccc;
+  padding-left: 6px;
+  line-height: 32px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.hire-select .input-container button {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  height: 31px;
+  width: 31px;
+}
+.hire-select ul.hire-options {
+  position: absolute;
+  background: #fff;
+  width: 367px;
+  border: 1px solid #ccc;
+  top: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.hire-select ul.hire-options li {
+  line-height: 32px;
+  padding-left: 6px;
+  cursor: pointer;
+}
+.hire-select ul.hire-options li:hover {
+  background: #ffffe0;
+}
+.hire-multi-form {
+  position: relative;
+}
+.hire-multi-form > ul {
+  margin-bottom: 40px;
+}
+.hire-multi-form > ul > li {
+  position: relative;
+  margin-bottom: 20px;
+}
+.hire-multi-form > ul > li > button.hire-remove-form {
+  width: 24px;
+  position: absolute;
+  right: -40px;
+  top: 0;
+}
+.hire-multi-form > ul + button.hire-add-form {
+  width: 24px;
+  position: absolute;
+  right: -40px;
+  bottom: 0;
+}
+.hire-forms-form.names-form > ul {
+  width: 400px;
+}
+.hire-forms-form.names-form > ul > li {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-bottom: 0;
+}
+.hire-forms-form.names-form > ul > li:first-child {
+  width: 36%;
+  margin-right: 4%;
+}
+.hire-forms-form.names-form > ul > li:last-child {
+  width: 60%;
+}
+.hire-forms-form.names-form > ul > li input {
+  width: 100%;
+}
 .overlay {
   position: absolute;
   background-color: rgba(0,0,0,0.2);

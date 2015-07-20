@@ -3,28 +3,28 @@ import {Tabs, Tab} from "hire-tabs";
 
 import BasicInfoForm from "./basic-info";
 
-import actions from "./actions";
-import store from "./store";
+import actions from "../actions/publication";
+import publicationStore from "../stores/publication";
 
-class PersonForm extends React.Component {
+class PublicationController extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = Object.assign(store.getState(), {
+		this.state = Object.assign(publicationStore.getState(), {
 			activeTab: "Basic Info"
 		});
 	}
 
 	componentDidMount() {
-		store.listen(this.onStoreChange.bind(this));
+		publicationStore.listen(this.onStoreChange.bind(this));
 	}
 
 	componentWillUnmount() {
-		store.stopListening(this.onStoreChange.bind(this));
+		publicationStore.stopListening(this.onStoreChange.bind(this));
 	}
 
 	onStoreChange() {
-		this.setState(store.getState());
+		this.setState(publicationStore.getState());
 	}
 
 	handleTabChange(label) {
@@ -37,6 +37,10 @@ class PersonForm extends React.Component {
 		actions.setKey(key, value);
 	}
 
+	handleFormDelete(key) {
+		actions.deleteKey(key);
+	}
+
 	render() {
 		return (
 			<Tabs onChange={this.handleTabChange.bind(this)}>
@@ -45,16 +49,14 @@ class PersonForm extends React.Component {
 					label="Basic Info">
 					<BasicInfoForm
 						onChange={this.handleFormChange}
-						value={this.state.person} />
+						onDelete={this.handleFormDelete}
+						value={this.state.publication} />
 				</Tab>
-				<Tab
-					active={this.state.activeTab === "Works"}
-					label="Works">
-					<div>WORKS</div>
-				</Tab>
+				{/* Links */}
+				{/* Receptions */}
 			</Tabs>
 		);
 	}
 }
 
-export default PersonForm;
+export default PublicationController;
