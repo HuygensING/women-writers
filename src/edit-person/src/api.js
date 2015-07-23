@@ -10,6 +10,24 @@ let handleError = function(err, resp, body) {
 	console.error("Some xhr request failed!", err);
 };
 
+let getAutocompleteValues = function(name, query, done) {
+	let options = {
+		headers: {
+			"Content-Type": "application/json",
+			"VRE_ID": "WomenWriters"
+		},
+		url: `${baseUrl}/v2/domain/ww${name}/autocomplete?query=*${query}*`
+	};
+
+	let xhrDone = function(err, resp, body) {
+		if (err) { handleError(err); }
+
+		done(JSON.parse(body));
+	};
+
+	xhr(options, xhrDone);
+};
+
 export default {
 	getAuthor(id) {
 		let options = {
@@ -45,5 +63,17 @@ export default {
 		};
 
 		xhr(options, done);
+	},
+
+	getLanguages(query, done) {
+		getAutocompleteValues("languages", query, done);
+	},
+
+	getPersons(query, done) {
+		getAutocompleteValues("persons", query, done);
+	},
+
+	getLocations(query, done) {
+		getAutocompleteValues("locations", query, done);
 	}
 };

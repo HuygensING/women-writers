@@ -3,10 +3,25 @@ inline_block()
 	box-sizing border-box
 	vertical-align top
 
+input()
+	width 400px
+	height 32px
+	border 1px solid #CCC
+	padding-left 6px
+	box-sizing border-box
+	font-size 1em
+
+well()
+	background white
+	box-shadow 1px 1px 3px rgba(0, 0, 0, 0.12), -1px -1px 1px rgba(0, 0, 0, 0.04)
+	padding 20px
+
 #view
+	background #EEE
+	padding 40px 0
+
 	& > .hire-tabs
 		margin auto
-		margin-top 40px
 		width 960px
 
 		& > ul, & > .hire-tab
@@ -15,8 +30,18 @@ inline_block()
 		& > ul
 			width 20%
 
+			li
+				cursor pointer
+
+				&.active
+					font-weight bold
+					font-size 1.2em
+					transition font-size 150ms
+
 		& > .hire-tab
 			width 80%
+			well()
+
 
 
 .hire-forms-form > ul > li
@@ -28,18 +53,10 @@ inline_block()
 	label
 		width 140px
 
-	input
-		width 400px
-		height 32px
-		border 1px solid #CCC
-		padding-left 6px
-		box-sizing border-box
+	input, textarea
+		input()
 
-	textarea
-		width 400px
-
-.hire-select
-	width 397px
+.hire-select, .hire-forms-autocomplete
 	position relative
 
 	.input-container
@@ -60,23 +77,36 @@ inline_block()
 	ul.hire-options
 		position absolute
 		background white
-		width 367px
 		border 1px solid #CCC
-		top 0
 		max-height 400px
 		overflow-y auto
+		width 100%
+		box-sizing border-box
+		margin-top -1px
 
 		li
 			line-height 32px
 			padding-left 6px
 			cursor pointer
 
-			&:hover
+			&:hover, &.highlight
 				background lightyellow
+
+			span.highlight
+				font-weight bold
+				text-decoration underline
+
+.hire-select
+	width 397px
+
+	ul.hire-options
+		width 367px
+		top 0
 
 
 .hire-multi-form
 	position relative
+	display inline-block
 
 	& > ul
 		margin-bottom 40px
@@ -114,3 +144,14 @@ inline_block()
 
 			input
 				width 100%
+
+.hire-forms-link-form
+	margin-bottom 40px
+
+	& > ul > li:last-child
+		.hire-input.invalid
+			.hire-forms-invalid-message
+				display none
+
+			input
+				border 1px solid red

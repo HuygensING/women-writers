@@ -1,9 +1,12 @@
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
+import MultiForm from "hire-forms-multi-form";
+
 import BasicInfoForm from "./basic-info";
 import PersonalForm from "./personal";
 import PublicForm from "./public";
+import LinkForm from "./link";
 
 import actions from "../actions/author";
 import authorStore from "../stores/author";
@@ -71,6 +74,16 @@ class AuthorController extends React.Component {
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
 						value={this.state.author} />
+				</Tab>
+				<Tab
+					active={this.state.activeTab === "Links"}
+					label="Links">
+					<MultiForm
+						attr={"links"}
+						component = {LinkForm}
+						onChange={this.handleFormChange}
+						onDelete={this.handleFormDelete}
+						values={this.state.author.get("links")} />
 				</Tab>
 				{/* Links */}
 			</Tabs>

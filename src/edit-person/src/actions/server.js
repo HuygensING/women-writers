@@ -27,6 +27,13 @@ let serverActions = {
 			actionType: "PUBLICATION_UPDATE",
 			data: data
 		});
+	},
+
+	receivelanguages(data) {
+		dispatcher.handleServerAction({
+			actionType: "LANGUAGES_RECEIVE",
+			data: data
+		});
 	}
 };
 

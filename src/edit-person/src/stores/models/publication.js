@@ -1,11 +1,20 @@
 import Immutable from "immutable";
 
+let keyValueMap = new Immutable.Map({
+	key: "",
+	value: ""
+});
+
 export default new Immutable.Map({
-	title: "",
-	documentType: "",
-	genre: "",
-	language: "",
+	author: keyValueMap,
 	date: "",
+	documentType: "",
+	firstEditor: keyValueMap,
+	genre: "",
+	language: keyValueMap,
+	links: new Immutable.List(),
+	notes: "",
+	publishLocation: keyValueMap,
 	reference: "",
-	notes: ""
+	title: ""
 });

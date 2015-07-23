@@ -73,9 +73,12 @@ p,
   font-size: 0.875em;
   text-transform: uppercase;
 }
+#view {
+  background: #eee;
+  padding: 40px 0;
+}
 #view > .hire-tabs {
   margin: auto;
-  margin-top: 40px;
   width: 960px;
 }
 #view > .hire-tabs > ul,
@@ -89,8 +92,24 @@ p,
 #view > .hire-tabs > ul {
   width: 20%;
 }
+#view > .hire-tabs > ul li {
+  cursor: pointer;
+}
+#view > .hire-tabs > ul li.active {
+  font-weight: bold;
+  font-size: 1.2em;
+  -webkit-transition: font-size 150ms;
+  -moz-transition: font-size 150ms;
+  -o-transition: font-size 150ms;
+  -ms-transition: font-size 150ms;
+  transition: font-size 150ms;
+}
 #view > .hire-tabs > .hire-tab {
   width: 80%;
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.04);
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.04);
+  padding: 20px;
 }
 .hire-forms-form > ul > li {
   margin-bottom: 20px;
@@ -106,7 +125,8 @@ p,
 .hire-forms-form > ul > li label {
   width: 140px;
 }
-.hire-forms-form > ul > li input {
+.hire-forms-form > ul > li input,
+.hire-forms-form > ul > li textarea {
   width: 400px;
   height: 32px;
   border: 1px solid #ccc;
@@ -114,15 +134,14 @@ p,
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  font-size: 1em;
 }
-.hire-forms-form > ul > li textarea {
-  width: 400px;
-}
-.hire-select {
-  width: 397px;
+.hire-select,
+.hire-forms-autocomplete {
   position: relative;
 }
-.hire-select .input-container {
+.hire-select .input-container,
+.hire-forms-autocomplete .input-container {
   position: relative;
   height: 32px;
   border: 1px solid #ccc;
@@ -132,32 +151,54 @@ p,
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.hire-select .input-container button {
+.hire-select .input-container button,
+.hire-forms-autocomplete .input-container button {
   position: absolute;
   right: -3px;
   top: 0;
   height: 31px;
   width: 31px;
 }
-.hire-select ul.hire-options {
+.hire-select ul.hire-options,
+.hire-forms-autocomplete ul.hire-options {
   position: absolute;
   background: #fff;
-  width: 367px;
   border: 1px solid #ccc;
-  top: 0;
   max-height: 400px;
   overflow-y: auto;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: -1px;
 }
-.hire-select ul.hire-options li {
+.hire-select ul.hire-options li,
+.hire-forms-autocomplete ul.hire-options li {
   line-height: 32px;
   padding-left: 6px;
   cursor: pointer;
 }
-.hire-select ul.hire-options li:hover {
+.hire-select ul.hire-options li:hover,
+.hire-forms-autocomplete ul.hire-options li:hover,
+.hire-select ul.hire-options li.highlight,
+.hire-forms-autocomplete ul.hire-options li.highlight {
   background: #ffffe0;
+}
+.hire-select ul.hire-options li span.highlight,
+.hire-forms-autocomplete ul.hire-options li span.highlight {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.hire-select {
+  width: 397px;
+}
+.hire-select ul.hire-options {
+  width: 367px;
+  top: 0;
 }
 .hire-multi-form {
   position: relative;
+  display: inline-block;
 }
 .hire-multi-form > ul {
   margin-bottom: 40px;
@@ -198,6 +239,15 @@ p,
 }
 .hire-forms-form.names-form > ul > li input {
   width: 100%;
+}
+.hire-forms-link-form {
+  margin-bottom: 40px;
+}
+.hire-forms-link-form > ul > li:last-child .hire-input.invalid .hire-forms-invalid-message {
+  display: none;
+}
+.hire-forms-link-form > ul > li:last-child .hire-input.invalid input {
+  border: 1px solid #f00;
 }
 .overlay {
   position: absolute;

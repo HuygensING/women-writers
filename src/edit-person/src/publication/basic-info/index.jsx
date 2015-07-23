@@ -3,6 +3,9 @@ import form from "hire-forms-form";
 import Select from "hire-forms-select";
 import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
+import Autocomplete from "hire-forms-autocomplete";
+
+import API from "../../api";
 
 class BasicInfoForm {
 	render() {
@@ -10,7 +13,13 @@ class BasicInfoForm {
 
 		return (
 			<ul>
-				{/* author */}
+				<li>
+					<label>Author</label>
+					<Autocomplete
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, "author")}
+						value={model.get("author").toJS()} />
+				</li>
 				<li>
 					<label>Title</label>
 					<Input
@@ -33,20 +42,32 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Language</label>
-					<Select
+					<Autocomplete
+						async={API.getLanguages}
 						onChange={this.props.onChange.bind(this, "language")}
-						options={["Esperanto", "Occitan (post 1500)", "Ukrainian", "Ancient Hebrew", "Romanian", "Armenian", "Arabic", "Ottoman Turkish (1500-1928)", "Western Frisian", "Persian", "Lithuanian", "Icelandic", "Estonian", "Croatian", "Chinese", "Japanese", "Uzbek", "Portuguese", "Norwegian Nynorsk", "Swedish", "Russian", "Galician", "Catalan", "Basque", "Breton", "Serbian", "Spanish", "Irish", "Modern Greek (1453-)", "Polish", "Finnish", "Turkish", "Bulgarian", "Slovak", "German", "Hungarian", "English", "Latin", "Slovenian", "Albanian", "Italian", "Danish", "Czech", "Dutch", "French"]}
-						value={model.get("language")} />
+						value={model.get("language").toJS()} />
 				</li>
-				{/* firstEditor */}
-				{/* publishLocation */}
+				<li>
+					<label>First editor</label>
+					<Autocomplete
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, "firstEditor")}
+						value={model.get("firstEditor").toJS()} />
+				</li>
+				<li>
+					<label>Publish location</label>
+					<Autocomplete
+						async={API.getLocations}
+						onChange={this.props.onChange.bind(this, "publishLocation")}
+						value={model.get("publishLocation").toJS()} />
+				</li>
 				<li>
 					<label>Date</label>
 					<Input
 						onChange={this.props.onChange.bind(this, "date")}
 						value={model.get("date")} />
 				</li>
-			{/* source */}
+				{/* source */}
 				<li>
 					<label>Reference</label>
 					<Input

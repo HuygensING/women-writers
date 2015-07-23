@@ -1,7 +1,10 @@
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
+import MultiForm from "hire-forms-multi-form";
+
 import BasicInfoForm from "./basic-info";
+import LinkForm from "../author/link";
 
 import actions from "../actions/publication";
 import publicationStore from "../stores/publication";
@@ -10,9 +13,12 @@ class PublicationController extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = Object.assign(publicationStore.getState(), {
-			activeTab: "Basic Info"
-		});
+		this.state = Object.assign(
+			publicationStore.getState(),
+			{
+				activeTab: "Basic Info"
+			}
+		);
 	}
 
 	componentDidMount() {
@@ -24,7 +30,8 @@ class PublicationController extends React.Component {
 	}
 
 	onStoreChange() {
-		this.setState(publicationStore.getState());
+		let state = Object.assign(publicationStore.getState());
+		this.setState(state);
 	}
 
 	handleTabChange(label) {
@@ -52,7 +59,16 @@ class PublicationController extends React.Component {
 						onDelete={this.handleFormDelete}
 						value={this.state.publication} />
 				</Tab>
-				{/* Links */}
+				<Tab
+					active={this.state.activeTab === "Links"}
+					label="Links">
+					<MultiForm
+						attr={"links"}
+						component = {LinkForm}
+						onChange={this.handleFormChange}
+						onDelete={this.handleFormDelete}
+						values={this.state.publication.get("links")} />
+				</Tab>
 				{/* Receptions */}
 			</Tabs>
 		);
