@@ -4,10 +4,11 @@
   "description": "Women's Writers Edit Environment",
   "main": "src/app/main.coffee",
   "scripts": {
-    "test": "mocha -w --compilers coffee:coffee-script/register,jade:jade --reporter spec tests/unit/*",
-    "test-acceptance": "tests/acceptance/bin/run default",
-    "test-acceptance-browserstack": "tests/acceptance/bin/run browserstack",
-    "deploy-acc": "rsync -vaP envs/development/ wowr@hi24.huygens.knaw.nl:/data/wowr/public_html"
+    "testOLD": "mocha -w --compilers coffee:coffee-script/register,jade:jade --reporter spec tests/unit/*",
+    "test-acceptanceOLD": "tests/acceptance/bin/run default",
+    "test-acceptance-browserstackOLD": "tests/acceptance/bin/run browserstack",
+    "deploy:acc": "rsync -vaP envs/development/ wowr@hi24.huygens.knaw.nl:/data/wowr/public_html",
+    "deploy:prod": "rsync -vaP envs/production/ wowr@hi2.huygens.knaw.nl:/data/wowr"
   },
   "repository": {
     "type": "git",

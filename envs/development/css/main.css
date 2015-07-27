@@ -13,19 +13,19 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
-  src: local('Open Sans Light'), local('Open Sans-Light'), url("/womenwriters/fonts/OpenSans-Light.ttf");
+  src: local('Open Sans Light'), local('Open Sans-Light'), url("/fonts/OpenSans-Light.ttf");
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Open Sans'), url("/womenwriters/fonts/OpenSans-Regular.ttf");
+  src: local('Open Sans'), url("/fonts/OpenSans-Regular.ttf");
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/womenwriters/fonts/OpenSans-Semibold.ttf");
+  src: local('Open Sans Semibold'), local('Open Sans-Semibold'), url("/fonts/OpenSans-Semibold.ttf");
 }
 body {
   font-size: 100%;
@@ -1130,7 +1130,7 @@ svg circle.unknown {
   -webkit-perspective: 800;
 }
 .huygens-loader .loader-huygens-logo {
-  background-image: url("/womenwriters/images/BasisLogo.png");
+  background-image: url("/images/BasisLogo.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -1716,7 +1716,7 @@ svg circle.unknown {
 .results .cursor .loader {
   width: 16px;
   height: 16px;
-  background-image: url("/womenwriters/images/small-loader.gif");
+  background-image: url("/images/small-loader.gif");
   background-repeat: no-repeat;
   background-position: center center;
   top: 16px;
@@ -1807,7 +1807,7 @@ svg circle.unknown {
 }
 .select2-container a.select2-choice.select2-default .select2-chosen {
   padding-left: 1.6em;
-  background: url("/womenwriters/images/search-glass.png") no-repeat;
+  background: url("/images/search-glass.png") no-repeat;
   background-position: 2px 2px;
 }
 .select2-container.select2-container-active {
@@ -2372,7 +2372,7 @@ a:hover,
 .header .header-logo {
   margin: 1em 0 1em 0;
   line-height: 56px;
-  background-image: url("/womenwriters/images/nwwlogo.png");
+  background-image: url("/images/nwwlogo.png");
   -webkit-background-size: auto 100%;
   -moz-background-size: auto 100%;
   background-size: auto 100%;
@@ -2389,7 +2389,7 @@ a:hover,
   right: 0;
   width: 80px;
   height: 56px;
-  background-image: url("/womenwriters/images/huygens-ing-small.png");
+  background-image: url("/images/huygens-ing-small.png");
 }
 .header .huygens-ing:hover {
   text-decoration: none;
@@ -2488,7 +2488,7 @@ a:hover,
 .navigation .user-status .loader {
   width: 16px;
   height: 16px;
-  background-image: url("/womenwriters/images/small-rect-loader.gif");
+  background-image: url("/images/small-rect-loader.gif");
   background-repeat: no-repeat;
   background-position: center center;
   background-position: center left;

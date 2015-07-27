@@ -34,6 +34,7 @@ link = require('gulp-task-link')(gulp, cfg['local-modules'])
 unless ENV?
 	ENV = if process.env.NODE_ENV? then process.env.NODE_ENV else 'development'
 
+console.log ENV
 cfg[ENV].ENV = ENV
 
 cfg.devDir = "./" + cfg['development']['SOURCE']
