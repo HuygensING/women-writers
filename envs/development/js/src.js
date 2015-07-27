@@ -13052,7 +13052,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -16718,17 +16718,6 @@ module.exports = exports["default"];
 },{"classnames":"classnames","hire-forms-prop-types":14,"react":"react"}],14:[function(_dereq_,module,exports){
 arguments[4][5][0].apply(exports,arguments)
 },{"dup":5,"react":"react"}],15:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-var castArray = function castArray(array) {
-	return Array.isArray(array) ? array : [array];
-};
-exports.castArray = castArray;
-
-},{}],16:[function(_dereq_,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -17029,6 +17018,76 @@ function isObject(arg) {
 
 function isUndefined(arg) {
   return arg === void 0;
+}
+
+},{}],16:[function(_dereq_,module,exports){
+
+/*
+ * @param {Array} list
+ * @returns {Boolean}
+ */
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.isListOfStrings = isListOfStrings;
+exports.isKeyValueMap = isKeyValueMap;
+exports.castArray = castArray;
+exports.castKeyValueArray = castKeyValueArray;
+
+function isListOfStrings(list) {
+	if (!Array.isArray(list) || !list.length) {
+		return false;
+	}
+
+	return list.every(function (item) {
+		return typeof item === "string";
+	});
+}
+
+/*
+ * @param {Object} map
+ * @returns {Boolean}
+ */
+
+function isKeyValueMap(map) {
+	if (map == null) {
+		return false;
+	}
+
+	return map.hasOwnProperty("key") && map.hasOwnProperty("value");
+}
+
+/*
+ * Always return an array.
+ *
+ * @param {String|Array} arr
+ * @returns {Array}
+ */
+
+function castArray(arr) {
+	return Array.isArray(arr) ? arr : [arr];
+}
+
+;
+
+/*
+ * Always return an array of key/value maps.
+ *
+ * @param {Number|String|Boolean|Array} list
+ * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+ */
+
+function castKeyValueArray(list) {
+	list = castArray(list);
+
+	return list.map(function (item) {
+		return isKeyValueMap(item) ? item : {
+			key: item,
+			value: item
+		};
+	});
 }
 
 },{}],17:[function(_dereq_,module,exports){
@@ -17523,6 +17582,26 @@ var getAutocompleteValues = function getAutocompleteValues(name, query, done) {
 	(0, _xhr2["default"])(options, xhrDone);
 };
 
+var getSelectValues = function getSelectValues(name, done) {
+	var options = {
+		headers: {
+			"Content-Type": "application/json",
+			"VRE_ID": "WomenWriters"
+		},
+		url: baseUrl + "/v2/domain/wwkeyword/autocomplete?query=*" + query + "*&type=" + name
+	};
+
+	var xhrDone = function xhrDone(err, resp, body) {
+		if (err) {
+			handleError(err);
+		}
+
+		done(JSON.parse(body));
+	};
+
+	(0, _xhr2["default"])(options, xhrDone);
+};
+
 exports["default"] = {
 	getAuthor: function getAuthor(id) {
 		var options = {
@@ -17574,6 +17653,38 @@ exports["default"] = {
 
 	getLocations: function getLocations(query, done) {
 		getAutocompleteValues("locations", query, done);
+	},
+
+	getMaritalStatus: function getMaritalStatus(done) {
+		getSelectValues("maritalStatus", done);
+	},
+
+	getFinancialSituation: function getFinancialSituation(done) {
+		getSelectValues("financialSituation", done);
+	},
+
+	getEducation: function getEducation(done) {
+		getSelectValues("education", done);
+	},
+
+	getProfession: function getProfession(done) {
+		getSelectValues("profession", done);
+	},
+
+	getReligion: function getReligion(done) {
+		getSelectValues("religion", done);
+	},
+
+	getSocialClass: function getSocialClass(done) {
+		getSelectValues("socialClass", done);
+	},
+
+	getDocSourceType: function getDocSourceType(done) {
+		getSelectValues("docSourceType", done);
+	},
+
+	getGenre: function getGenre(done) {
+		getSelectValues("genre", done);
 	}
 };
 module.exports = exports["default"];
@@ -18877,7 +18988,7 @@ authorStore.dispatcherIndex = _dispatcher2["default"].register(dispatcherCallbac
 exports["default"] = authorStore;
 module.exports = exports["default"];
 
-},{"../dispatcher":34,"./base":40,"./models/author":41,"hire-forms-utils":15,"immutable":"immutable"}],40:[function(_dereq_,module,exports){
+},{"../dispatcher":34,"./base":40,"./models/author":41,"hire-forms-utils":16,"immutable":"immutable"}],40:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18923,7 +19034,7 @@ var BaseStore = (function (_EventEmitter) {
 exports["default"] = BaseStore;
 module.exports = exports["default"];
 
-},{"events":16}],41:[function(_dereq_,module,exports){
+},{"events":15}],41:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19095,7 +19206,7 @@ publicationStore.dispatcherIndex = _dispatcher2["default"].register(dispatcherCa
 exports["default"] = publicationStore;
 module.exports = exports["default"];
 
-},{"../dispatcher":34,"./base":40,"./models/publication":42,"hire-forms-utils":15,"immutable":"immutable"}]},{},[35])(35)
+},{"../dispatcher":34,"./base":40,"./models/publication":42,"hire-forms-utils":16,"immutable":"immutable"}]},{},[35])(35)
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})

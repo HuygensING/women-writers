@@ -28,6 +28,24 @@ let getAutocompleteValues = function(name, query, done) {
 	xhr(options, xhrDone);
 };
 
+let getSelectValues = function(name, done) {
+	let options = {
+		headers: {
+			"Content-Type": "application/json",
+			"VRE_ID": "WomenWriters"
+		},
+		url: `${baseUrl}/v2/domain/wwkeyword/autocomplete?query=*${query}*&type=${name}`
+	};
+
+	let xhrDone = function(err, resp, body) {
+		if (err) { handleError(err); }
+
+		done(JSON.parse(body));
+	};
+
+	xhr(options, xhrDone);
+};
+
 export default {
 	getAuthor(id) {
 		let options = {
@@ -75,5 +93,37 @@ export default {
 
 	getLocations(query, done) {
 		getAutocompleteValues("locations", query, done);
+	},
+
+	getMaritalStatus(done) {
+		getSelectValues("maritalStatus", done);
+	},
+
+	getFinancialSituation(done) {
+		getSelectValues("financialSituation", done);
+	},
+
+	getEducation(done) {
+		getSelectValues("education", done);
+	},
+
+	getProfession(done) {
+		getSelectValues("profession", done);
+	},
+
+	getReligion(done) {
+		getSelectValues("religion", done);
+	},
+
+	getSocialClass(done) {
+		getSelectValues("socialClass", done);
+	},
+
+	getDocSourceType(done) {
+		getSelectValues("docSourceType", done);
+	},
+
+	getGenre(done) {
+		getSelectValues("genre", done);
 	}
 };
