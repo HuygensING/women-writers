@@ -1,6 +1,6 @@
 {
   "name": "women-writers",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "description": "Women's Writers Edit Environment",
   "main": "src/app/main.coffee",
   "scripts": {
