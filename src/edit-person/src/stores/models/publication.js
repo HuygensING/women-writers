@@ -8,9 +8,9 @@ let keyValueMap = new Immutable.Map({
 export default new Immutable.Map({
 	author: keyValueMap,
 	date: "",
-	documentType: "",
+	documentType: keyValueMap,
 	firstEditor: keyValueMap,
-	genre: "",
+	genre: keyValueMap,
 	language: keyValueMap,
 	links: new Immutable.List(),
 	notes: "",

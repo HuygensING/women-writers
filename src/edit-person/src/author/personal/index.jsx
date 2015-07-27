@@ -4,6 +4,8 @@ import Select from "hire-forms-select";
 import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
 
+import API from "../../api";
+
 class PersonalForm {
 	render() {
 		let model = this.props.value;
@@ -13,9 +15,9 @@ class PersonalForm {
 				<li>
 					<label>Marital status</label>
 					<Select
+						async={API.getMaritalStatus}
 						onChange={this.props.onChange.bind(this, "maritalStatus")}
-						options={["Abandoned by husband/partner", "Co-habitation with partner female", "Co-habitation with partner male", "Divorced", "Liaison with man", "Liaison with woman", "Married", "Remarried", "Separated", "Single", "Widowed"]}
-						value={model.get("maritalStatus")} />
+						value={model.get("maritalStatus").toJS()} />
 				</li>
 				{/* isSpouseOf */}
 				<li>
@@ -28,23 +30,23 @@ class PersonalForm {
 				<li>
 					<label>Social class</label>
 					<Select
+						async={API.getSocialClass}
 						onChange={this.props.onChange.bind(this, "socialClass")}
-						options={["Royalty", "Aristocracy by birth", "Aristocracy by marriage", "Upper class", "Middle class", "Lower class"]}
-						value={model.get("socialClass")} />
+						value={model.get("socialClass").toJS()} />
 				</li>
 				<li>
 					<label>Education</label>
 					<Select
+						async={API.getEducation}
 						onChange={this.props.onChange.bind(this, "education")}
-						options={["Convent education", "Educated at home", "School education", "Self-educated", "University education", "Other"]}
-						value={model.get("education")} />
+						value={model.get("education").toJS()} />
 				</li>
 				<li>
 					<label>Religion</label>
 					<Select
+						async={API.getReligion}
 						onChange={this.props.onChange.bind(this, "religion")}
-						options={["Atheist", "Catholic", "Eastern Orthodox", "Jewish", "Muslim", "Protestant", "Spiritist"]}
-						value={model.get("religion")} />
+						value={model.get("religion").toJS()} />
 				</li>
 				<li>
 					<label>Bibliography</label>

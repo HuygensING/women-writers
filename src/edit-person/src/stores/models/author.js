@@ -1,13 +1,26 @@
 import Immutable from "immutable";
 
+let keyValueMap = new Immutable.Map({
+	key: "",
+	value: ""
+});
+
+let emptyList = new Immutable.List();
+
 export default new Immutable.Map({
 	birthDate: "",
 	birthPlace: "",
 	deathDate: "",
 	deathPlace: "",
+	education: keyValueMap,
+	financials: keyValueMap,
 	gender: "",
-	languages: new Immutable.List(),
-	names: new Immutable.List(),
+	languages: emptyList,
+	maritalStatus: keyValueMap,
+	names: emptyList,
 	persontype: "",
-	pseudonyms: new Immutable.List()
+	profession: keyValueMap,
+	pseudonyms: emptyList,
+	religion: keyValueMap,
+	socialClass: keyValueMap
 });

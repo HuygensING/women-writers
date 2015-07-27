@@ -34,7 +34,7 @@ let getSelectValues = function(name, done) {
 			"Content-Type": "application/json",
 			"VRE_ID": "WomenWriters"
 		},
-		url: `${baseUrl}/v2/domain/wwkeyword/autocomplete?query=*${query}*&type=${name}`
+		url: `${baseUrl}/v2/domain/wwkeywords/autocomplete?type=${name}`
 	};
 
 	let xhrDone = function(err, resp, body) {

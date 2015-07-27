@@ -29,16 +29,16 @@ class BasicInfoForm {
 				<li>
 					<label>Document type</label>
 					<Select
+						async={API.getDocSourceType}
 						onChange={this.props.onChange.bind(this, "documentType")}
-						options={["Unknown", "Anthology", "Article", "Award", "Catalogue", "Compilation", "Diary", "Letter", "List", "Monograph", "Periodical", "Picture", "Publicity", "Sheetmusic", "Theaterscript", "Work"]}
-						value={model.get("documentType")} />
+						value={model.get("documentType").toJS()} />
 				</li>
 				<li>
 					<label>Genre</label>
 					<Select
+						async={API.getGenre}
 						onChange={this.props.onChange.bind(this, "genre")}
-						options={["Religious", "Biography: diary", "Novel", "Literary criticism", "Short story", "Short story: conte", "Travel writing", "Educational", "Drama", "Short story: novella", "Feminist writing", "Poetry", "Essay", "Novel: historical", "Children's literature", "Scholarship", "Religious: mystical", "Biography: memoir", "TBD", "Cookery book", "Conduct book", "Essay: tract", "Irrelevant", "Drama: closet", "Poetry: folk song", "Novel: epistolary", "Essay: lecture", "Poetry: occasional", "Embroidery", "Medical", "Novel: robinsonade", "Textbook", "Poetry: prose", "Religious monastic rule", "Philosophy", "Novel: fictional diary", "Short story: sketch", "Short story: moral tale", "Short story: oriental", "Biography", "Biography: autobiography", "Biography: letter(s)", "Biography: obituary", "Periodical press: contribution", "Periodical press: editorial", "Scholarship: history", "Scholarship: BBC"]}
-						value={model.get("genre")} />
+						value={model.get("genre").toJS()} />
 				</li>
 				<li>
 					<label>Language</label>
