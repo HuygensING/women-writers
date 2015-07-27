@@ -40,13 +40,13 @@ class Document extends BaseModel
 			"^targetType": relation.targetTypeName
 
 		$.ajax
-			url: "https://acc.repository.huygens.knaw.nl/domain/wwrelations"
+			url: "http://resources.huygens.knaw.nl/womenwriters/api/v1/domain/wwrelations"
 			type: "POST"
 			data: JSON.stringify(data)
 			contentType: "application/json"
 			headers:
 				VRE_ID: "WomenWriters"
-				Authorization: localStorage.getItem("hi-womenwriters-auth-token")
+				Authorization: localStorage.getItem("hi-undefined-auth-token")
 
 
 	# Turn an array of name/value objects into an object

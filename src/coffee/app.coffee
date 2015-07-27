@@ -72,7 +72,7 @@ class App extends Backbone.View
 					contentType: "application/json"
 					headers:
 						VRE_ID: "WomenWriters"
-						Authorization: localStorage.getItem("hi-womenwriters-auth-token")
+						Authorization: localStorage.getItem("hi-undefined-auth-token")
 
 
 	_showAddDocumentModal: ->
@@ -126,7 +126,7 @@ class App extends Backbone.View
 						contentType: "application/json"
 						headers:
 							VRE_ID: "WomenWriters"
-							Authorization: localStorage.getItem("hi-womenwriters-auth-token")
+							Authorization: localStorage.getItem("hi-undefined-auth-token")
 
 		if config.has("persons") and config.has("locations")
 			showModal()
@@ -146,7 +146,7 @@ class App extends Backbone.View
 			fetchLocations = new $.Deferred()
 
 			jqXHRPostPersons = $.ajax _.extend formData,
-				url: "https://acc.repository.huygens.knaw.nl/v1/search/wwpersons"
+				url: "http://resources.huygens.knaw.nl/womenwriters/api/v1/search/wwpersons"
 
 			jqXHRPostPersons.done (response, textStatus, xhr) =>
 				jqXHRGetPersons = $.ajax
@@ -156,7 +156,7 @@ class App extends Backbone.View
 					fetchPersons.resolve response
 
 			jqXHRPostLocations = $.ajax _.extend formData,
-				url: "https://acc.repository.huygens.knaw.nl/v1/search/wwlocations"
+				url: "http://resources.huygens.knaw.nl/womenwriters/api/v1/search/wwlocations"
 
 			jqXHRPostLocations.done (response, textStatus, xhr) =>
 				jqXHRGetLocations = $.ajax
