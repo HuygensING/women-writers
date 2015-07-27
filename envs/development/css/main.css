@@ -184,6 +184,11 @@ p,
 .hire-forms-autocomplete ul.hire-options li.highlight {
   background: #ffffe0;
 }
+.hire-select ul.hire-options li.selected:before,
+.hire-forms-autocomplete ul.hire-options li.selected:before {
+  color: #129275;
+  content: "✓";
+}
 .hire-select ul.hire-options li span.highlight,
 .hire-forms-autocomplete ul.hire-options li span.highlight {
   font-weight: bold;

@@ -3,6 +3,7 @@ import xhr from "xhr";
 import serverActions from "./actions/server";
 
 import {parseIncomingAuthor, parseOutgoingAuthor} from "./parsers/author";
+import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publication";
 
 let baseUrl = "https://acc.repository.huygens.knaw.nl";
 
@@ -34,7 +35,7 @@ let getSelectValues = function(name, done) {
 			"Content-Type": "application/json",
 			"VRE_ID": "WomenWriters"
 		},
-		url: `${baseUrl}/v2/domain/wwkeywords/autocomplete?type=${name}`
+		url: `${baseUrl}/v2/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
 	};
 
 	let xhrDone = function(err, resp, body) {
@@ -75,9 +76,11 @@ export default {
 		};
 
 		let done = function(err, resp, body) {
-			if (err) { handleError(err); }
+			if (err) { handleError(err, resp, body); }
 
-			serverActions.receivePublication(JSON.parse(body));
+			body = parseIncomingPublication(JSON.parse(body));
+
+			serverActions.receivePublication(body);
 		};
 
 		xhr(options, done);

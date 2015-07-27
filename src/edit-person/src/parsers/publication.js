@@ -20,18 +20,30 @@ let iterateObjectKeys = function(obj, parser) {
 	});
 };
 
+let relationMap = {
+	isCreatedBy: "author",
+	hasPublishLocation: "publishLocation",
+	hasGenre: "genre",
+	hasWorkLanguage: "language"
+};
+
+
 let inComingParser = function(key, value, obj) {
-	if (key === "names") {
-		obj[key] = value.map((names) => {
-			return {
-				firstName: names.components[0].value,
-				lastName: names.components[1].value
-			};
-		});
+	if (key === "documentType") {
+		obj[key] = {
+			key: value,
+			value: value
+		};
 	}
 
-	if ((key === "gender") || (key === "children")) {
-		obj[key] = value.charAt(0) + value.substr(1).toLowerCase();
+
+	if (relationMap.hasOwnProperty(key)) {
+		obj[relationMap[key]] = {
+			key: "https://acc.repository.huygens.knaw.nl/domain/wwkeywords/" + value[0].id,
+			value: value[0].displayName
+		};
+
+		delete obj[key];
 	}
 };
 
@@ -39,13 +51,13 @@ let outGoingParser = function(key, value, obj) {
 
 };
 
-export let parseIncomingAuthor = function(data) {
+export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);
 
 	return data;
 };
 
-export let parseOutgoingAuthor = function(data) {
+export let parseOutgoingPublication = function(data) {
 	iterateObjectKeys(data, outGoingParser);
 
 	return data;

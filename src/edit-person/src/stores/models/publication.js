@@ -5,16 +5,20 @@ let keyValueMap = new Immutable.Map({
 	value: ""
 });
 
+let emptyList = new Immutable.List();
+
 export default new Immutable.Map({
-	author: keyValueMap,
 	date: "",
-	documentType: keyValueMap,
-	firstEditor: keyValueMap,
-	genre: keyValueMap,
-	language: keyValueMap,
-	links: new Immutable.List(),
+	links: emptyList,
 	notes: "",
-	publishLocation: keyValueMap,
 	reference: "",
+	"@relations": new Immutable.Map({
+		author: keyValueMap,
+		documentType: keyValueMap,
+		firstEditor: keyValueMap,
+		genre: keyValueMap,
+		language: keyValueMap,
+		publishLocation: keyValueMap
+	}),
 	title: ""
 });

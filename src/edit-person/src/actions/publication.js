@@ -1,6 +1,11 @@
 import dispatcher from "../dispatcher";
+import API from "../api";
 
 let publicationActions = {
+	getPublication(id) {
+		API.getPublication(id);
+	},
+
 	setKey(key, value) {
 		dispatcher.handleViewAction({
 			actionType: "PUBLICATION_SET_KEY",

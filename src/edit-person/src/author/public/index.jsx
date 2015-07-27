@@ -14,15 +14,15 @@ class PublicForm {
 					<label>Profession</label>
 					<Select
 						async={API.getProfession}
-						onChange={this.props.onChange.bind(this, "profession")}
-						value={model.get("profession").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "profession"])}
+						value={model.getIn(["@relations", "profession"]).toJS()} />
 				</li>
 				<li>
 					<label>Financials</label>
 					<Select
 						async={API.getFinancialSituation}
-						onChange={this.props.onChange.bind(this, "financials")}
-						value={model.get("financials").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "financials"])}
+						value={model.getIn(["@relations", "financials"]).toJS()} />
 				</li>
 				{/* Collaborations */}
 				{/* Memberschips */}

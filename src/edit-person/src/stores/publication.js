@@ -10,6 +10,27 @@ import {castArray} from "hire-forms-utils";
 
 const CHANGE_EVENT = "change";
 
+let diffData = function(receivedData) {
+	let contract = publicationModel.keySeq().toArray();
+	// let serverContract = ["@type", "names", "gender", "birthDate", "deathDate", "types", "links", "floruit", "bibliography", "children", "fsPseudonyms", "health", "livedIn", "nationality", "notes", "personalSituation", "tempOldId", "tempBirthPlace", "tempChildren", "tempCollaborations", "tempDeathPlace", "tempDeath", "tempFinancialSituation", "tempMemberships", "tempMotherTongue", "tempName", "tempPlaceOfBirth", "tempPsChildren", "tempPseudonyms", "tempSpouse", "relatedLocations", "_id", "^rev", "^created", "^modified", "^pid", "^deleted", "@relationCount", "@properties", "@relations", "@variationRefs"];
+
+	let receivedProps = Object.keys(receivedData);
+
+	let addedProps = receivedProps.filter((prop) =>
+		contract.indexOf(prop) === -1
+	);
+
+	let removedProps = contract.filter((prop) =>
+		receivedProps.indexOf(prop) === -1
+	);
+
+	return {
+		added: addedProps,
+		removed: removedProps
+	};
+};
+
+
 class PublicationStore extends BaseStore {
 	constructor() {
 		super();
@@ -44,7 +65,12 @@ class PublicationStore extends BaseStore {
 	}
 
 	receive(data) {
-		this.model = Immutable.fromJS(data);
+		let diff = diffData(data);
+		if ((diff.added.length > 0) || (diff.removed.length > 0)) {
+			console.warn("Contracts mismatch! ", diff);
+		}
+
+		this.model = this.model.mergeDeep(Immutable.fromJS(data));
 	}
 }
 

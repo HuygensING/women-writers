@@ -12,15 +12,16 @@ export default new Immutable.Map({
 	birthPlace: "",
 	deathDate: "",
 	deathPlace: "",
-	education: keyValueMap,
-	financials: keyValueMap,
 	gender: "",
-	languages: emptyList,
-	maritalStatus: keyValueMap,
 	names: emptyList,
 	persontype: "",
-	profession: keyValueMap,
 	pseudonyms: emptyList,
-	religion: keyValueMap,
-	socialClass: keyValueMap
+	"@relations": new Immutable.Map({
+		education: keyValueMap,
+		financials: keyValueMap,
+		maritalStatus: keyValueMap,
+		profession: keyValueMap,
+		religion: keyValueMap,
+		socialClass: keyValueMap
+	})
 });

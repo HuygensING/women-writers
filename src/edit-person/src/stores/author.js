@@ -69,7 +69,7 @@ class AuthorStore extends BaseStore {
 			console.warn("Contracts mismatch! ", diff);
 		}
 
-		this.model = this.model.merge(Immutable.fromJS(data));
+		this.model = this.model.mergeDeep(Immutable.fromJS(data));
 		console.log(data);
 	}
 }

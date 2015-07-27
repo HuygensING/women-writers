@@ -92,9 +92,14 @@ well()
 			&:hover, &.highlight
 				background lightyellow
 
+			&.selected:before
+				color baseColor
+				content "✓"
+
 			span.highlight
 				font-weight bold
 				text-decoration underline
+
 
 .hire-select
 	width 397px

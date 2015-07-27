@@ -10,15 +10,15 @@ import API from "../../api";
 class BasicInfoForm {
 	render() {
 		let model = this.props.value;
-
+		console.log("m", model.toJS());
 		return (
 			<ul>
 				<li>
 					<label>Author</label>
 					<Autocomplete
 						async={API.getPersons}
-						onChange={this.props.onChange.bind(this, "author")}
-						value={model.get("author").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "author"])}
+						value={model.getIn(["@relations", "author"]).toJS()} />
 				</li>
 				<li>
 					<label>Title</label>
@@ -30,36 +30,38 @@ class BasicInfoForm {
 					<label>Document type</label>
 					<Select
 						async={API.getDocSourceType}
-						onChange={this.props.onChange.bind(this, "documentType")}
-						value={model.get("documentType").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "documentType"])}
+						sort={true}
+						value={model.getIn(["@relations", "documentType"]).toJS()} />
 				</li>
 				<li>
 					<label>Genre</label>
 					<Select
 						async={API.getGenre}
-						onChange={this.props.onChange.bind(this, "genre")}
-						value={model.get("genre").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "genre"])}
+						sort={true}
+						value={model.getIn(["@relations", "genre"]).toJS()} />
 				</li>
 				<li>
 					<label>Language</label>
 					<Autocomplete
 						async={API.getLanguages}
-						onChange={this.props.onChange.bind(this, "language")}
-						value={model.get("language").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "language"])}
+						value={model.getIn(["@relations", "language"]).toJS()} />
 				</li>
 				<li>
 					<label>First editor</label>
 					<Autocomplete
 						async={API.getPersons}
-						onChange={this.props.onChange.bind(this, "firstEditor")}
-						value={model.get("firstEditor").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "firstEditor"])}
+						value={model.getIn(["@relations", "firstEditor"]).toJS()} />
 				</li>
 				<li>
 					<label>Publish location</label>
 					<Autocomplete
 						async={API.getLocations}
-						onChange={this.props.onChange.bind(this, "publishLocation")}
-						value={model.get("publishLocation").toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "publishLocation"])}
+						value={model.getIn(["@relations", "publishLocation"]).toJS()} />
 				</li>
 				<li>
 					<label>Date</label>

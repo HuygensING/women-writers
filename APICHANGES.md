@@ -1,39 +1,92 @@
 # API CHANGES
 
-Diverse UI-components hebben lijsten nodig. Vooral voor autocompletes en
-dergelijke is het van belang dat deze data (zeer) snel geladen wordt. Het
-voorstel is daarom om interfaces te maken die direct uit Mongo de benodigde
-data halen. Liefst met alle cache toeters en bellen die mogelijk zijn, want
-deze GETs moeten zoveel mogelijk geoptimaliseerd worden voor een goede
-gebruikerservaring. In de huidige situatie duurt het ophalen van resultaten
-soms wel 30s!
+## One-to-many relaties
+Er wordt geen onderscheidt gemaakt tussen one-to-many en many-to-many
+relaties. Een document heeft bijvoorbeeld een "hasPublishLocation",
+volgens de UI een one-to-many relatie, maar van de server wordt een
+array ontvangen.
 
-## Languages
+### Nu
 
-### Huidige situatie
-- POST https://acc.repository.huygens.knaw.nl/v1/search/wwlanguages, met {term: *}
-- GET https://acc.repository.huygens.knaw.nl/v1/search/QURY000000000644?rows=100
-- RESPONSE facets, ids, results, rows, start, term, etc...
-- results[0] = @properties: {}
-					@relationCount: 0
-					@relations: {}
-					@type: "wwlanguage"
-					@variationRefs: [{type: "language", id: "LANG000000004747"}, {type: "baselanguage", id: "LANG000000004747"},…]
-					^code: "nno"
-					^created: {timeStamp: 1429107283185, userId: "importer", vreId: "base"}
-					^deleted: false
-					^modified: {timeStamp: 1429107503869, userId: "importer", vreId: "neww"}
-					^pid: null
-					^rev: 2
-					_id: "LANG000000004747"
-					core: true
-					name: "Norwegian Nynorsk"
+## GET @relations
+De relaties zijn er ingewikkeld en niet het volledige path van
+het object wordt teruggegeven. Accepted: false zou gefiltered moeten
+worden, want dient als een verkapte delete.
+
+### Nu
+{
+	accepted: true
+	displayName: "German"
+	id: "LANG000000001550"
+	path: "domain/wwlanguages/LANG000000001550"
+	relationId: null
+	rev: 0
+	type: "wwlanguage"
+}
 
 ### Voorstel
-- GET https://acc.repository.huygens.knaw.nl/languages?vres=womenwriter,ebnm&query=*tes*&metadata=description,date,name
-- RESPONSE [
-		{
-			key: "https://acc.repository.huygens.knaw.nl/languages/LANG000000004747",
-			value: "Norwegian Nynorsk"
-		}
-	]
+{
+	key: "https://acc.hing.nl/domain/wwlanguages/LANG000000001550"
+	value: "German"
+}
+
+## @relations object
+
+## Author.types
+Geeft een array terug, maar de UI biedt maar één waarde aan.
+
+### Nu
+types: ["AUTHOR"]
+
+### Voorstel
+type: "Author"
+
+## Author.children & Author.gender
+Geeft hoofdletters
+
+### Nu
+children: "UNKOWN"
+
+### Voorstel
+children: "Unknown"
+
+## Author.birthPlace & Author.deathPlace
+
+### Nu
+Author.tempBirthPlace
+Author.tempDeathPlace
+
+### Voorstel
+Author.birthPlace
+Author.deathPlace
+
+## Author.names & Author.pseudonyms
+
+### Nu
+Een array van objecten, met daarin een components prop:
+names: [{
+	components: [{
+		type: FORENAME,
+		value: "Sophie"
+	}, {
+		type: SURNAME,
+		value: "Alberti"
+	}]
+}, ...]
+
+### Voorstel
+names: [{
+	firstName: "Sophie",
+	lastName: "Alberti"
+}, ...]
+
+## Author.pseudonyms
+Voorbeeld: https://acc.repository.huygens.knaw.nl/domain/wwpersons/PERS000000007037
+
+### Nu
+Er is een relatie hasPseudonym, maar die geeft een displayName terug,
+dus geen splitsing tussen firstName en lastName. Er is ook een fsPseudonyms prop, maar die blijft leeg ([]).
+
+### Voorstel
+Relatie pseudonym verwijderen en de prop fsPseudonyms hernoemen naar
+pseudonyms. Vergelijk vorige issue "Author.names & Author.pseudonyms".

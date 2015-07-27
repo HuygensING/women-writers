@@ -22,6 +22,7 @@ class PublicationController extends React.Component {
 	}
 
 	componentDidMount() {
+		actions.getPublication(this.props.id);
 		publicationStore.listen(this.onStoreChange.bind(this));
 	}
 

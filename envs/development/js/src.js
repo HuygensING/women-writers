@@ -13052,7 +13052,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -15109,6 +15109,7 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 			exports.isListOfStrings = isListOfStrings;
 			exports.isKeyValueMap = isKeyValueMap;
 			exports.castArray = castArray;
+			exports.castKeyValue = castKeyValue;
 			exports.castKeyValueArray = castKeyValueArray;
 
 			function isListOfStrings(list) {
@@ -15148,21 +15149,30 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 			;
 
 			/*
+    * Always return a key/value map.
+    *
+    * @param {Number|String|Boolean|Object} item
+    * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+    */
+
+			function castKeyValue(item) {
+				return isKeyValueMap(item) ? item : {
+					key: item,
+					value: item
+				};
+			}
+
+			/*
     * Always return an array of key/value maps.
     *
-    * @param {Number|String|Boolean|Array} list
+    * @param {Number|String|Boolean|Array|Object} list
     * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
     */
 
 			function castKeyValueArray(list) {
 				list = castArray(list);
 
-				return list.map(function (item) {
-					return isKeyValueMap(item) ? item : {
-						key: item,
-						value: item
-					};
-				});
+				return list.map(castKeyValue);
 			}
 		}, {}], 3: [function (_dereq_, module, exports) {
 			// TODO move listitem to seperate component (so we don't have to store data-key and data-value as attributes)
@@ -15184,6 +15194,26 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 				};
 			})();
 
+			var _get = function get(_x, _x2, _x3) {
+				var _again = true;_function: while (_again) {
+					var object = _x,
+					    property = _x2,
+					    receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+						var parent = Object.getPrototypeOf(object);if (parent === null) {
+							return undefined;
+						} else {
+							_x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+						}
+					} else if ("value" in desc) {
+						return desc.value;
+					} else {
+						var getter = desc.get;if (getter === undefined) {
+							return undefined;
+						}return getter.call(receiver);
+					}
+				}
+			};
+
 			function _interopRequireDefault(obj) {
 				return obj && obj.__esModule ? obj : { "default": obj };
 			}
@@ -15197,7 +15227,7 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 			function _inherits(subClass, superClass) {
 				if (typeof superClass !== "function" && superClass !== null) {
 					throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 			}
 
 			var _react = _dereq_("react");
@@ -15212,6 +15242,12 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 
 			var _hireFormsUtils = _dereq_("hire-forms-utils");
 
+			var hasKeyValue = function hasKeyValue(list, item) {
+				return list.filter(function (li) {
+					return li.key === item.key;
+				}).length > 0;
+			};
+
 			/**
     * Options are rendered beneath the autocomplete and select components.
     *
@@ -15220,15 +15256,13 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
     */
 
 			var Options = (function (_React$Component) {
+				_inherits(Options, _React$Component);
+
 				function Options() {
 					_classCallCheck(this, Options);
 
-					if (_React$Component != null) {
-						_React$Component.apply(this, arguments);
-					}
+					_get(Object.getPrototypeOf(Options.prototype), "constructor", this).apply(this, arguments);
 				}
-
-				_inherits(Options, _React$Component);
 
 				_createClass(Options, [{
 					key: "componentDidMount",
@@ -15245,8 +15279,6 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 						var node = _react2["default"].findDOMNode(this);
 						node.style.zIndex = 0;
 					}
-				}, {
-					key: "sortRelevance",
 
 					/**
       * Sort values on relevance. A result is more relevant when the search
@@ -15256,6 +15288,8 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
       * @param {String} query A search query
       * @returns {Array<Object>} Sorted values on relevance
       */
+				}, {
+					key: "sortRelevance",
 					value: function sortRelevance(values, query) {
 						return values.sort(function (a, b) {
 							a = a.value.toLowerCase();
@@ -15285,8 +15319,6 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 							return 0;
 						});
 					}
-				}, {
-					key: "highlight",
 
 					/*
       * highlight the currently highlighted option.
@@ -15294,6 +15326,8 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
       * @param {Object} target An HTMLElement or event object
       * @param {String} className Name of the highlight class
       */
+				}, {
+					key: "highlight",
 					value: function highlight(target, className) {
 						// Check if target is an event object.
 						if (target.hasOwnProperty("currentTarget")) {
@@ -15302,8 +15336,6 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 
 						target.classList.add(className);
 					}
-				}, {
-					key: "unhighlight",
 
 					/**
       * Unhighlight the currently highlighted option.
@@ -15311,6 +15343,8 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
       * @param {String} className Name of the highlight class
       * @return {Object} The unhighlighted HTMLElement
       */
+				}, {
+					key: "unhighlight",
 					value: function unhighlight(className) {
 						var el = undefined;
 						var node = _react2["default"].findDOMNode(this);
@@ -15377,8 +15411,6 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 							this.props.onChange(this.getOptionData(current));
 						}
 					}
-				}, {
-					key: "getOptionData",
 
 					/**
       * Get the key (id) and value (display name) of an option DOM element.
@@ -15386,6 +15418,8 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
       * @param {Object} el - Option DOM element
       * @returns {Object}
       */
+				}, {
+					key: "getOptionData",
 					value: function getOptionData(el) {
 						return {
 							key: el.getAttribute("data-key"),
@@ -15401,7 +15435,7 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 							return null;
 						}
 
-						var values = this.props.sortRelevance && this.props.query !== "" ? this.sortRelevance(this.props.values, this.props.querySelector) : this.props.values;
+						var values = this.props.sort || this.props.sortRelevance && this.props.query !== "" ? this.sortRelevance(this.props.values, this.props.querySelector) : this.props.values;
 
 						var listitems = values.map(function (data, index) {
 							var displayValue = data.value;
@@ -15411,12 +15445,10 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 								displayValue = data.value.replace(re, "<span class=\"highlight\">$&</span>");
 							}
 
-							var selectedValue = (0, _hireFormsUtils.castArray)(_this.props.value);
-
 							return _react2["default"].createElement("li", {
 								className: (0, _classnames2["default"])({
 									"hire-forms-option": true,
-									selected: selectedValue.indexOf(data.value) > -1
+									selected: hasKeyValue((0, _hireFormsUtils.castArray)(_this.props.value), data)
 								}),
 								dangerouslySetInnerHTML: { __html: displayValue },
 								"data-key": data.key,
@@ -15436,6 +15468,7 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 			Options.defaultProps = {
 				highlightClass: "highlight",
 				query: "",
+				sort: false,
 				sortRelevance: true,
 				value: { key: "", value: "" },
 				values: []
@@ -15445,6 +15478,7 @@ exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
 				highlightClass: _react2["default"].PropTypes.string,
 				onChange: _react2["default"].PropTypes.func.isRequired,
 				query: _react2["default"].PropTypes.string,
+				sort: _react2["default"].PropTypes.bool,
 				sortRelevance: _react2["default"].PropTypes.bool,
 				value: _hireFormsPropTypes.keyValueMapOrArrayOfKeyValueMaps,
 				values: _hireFormsPropTypes.arrayOfKeyValueMaps
@@ -15515,21 +15549,22 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.isListOfStrings = isListOfStrings;
 exports.isKeyValueMap = isKeyValueMap;
 exports.castArray = castArray;
+exports.castKeyValue = castKeyValue;
 exports.castKeyValueArray = castKeyValueArray;
 
 function isListOfStrings(list) {
-	if (!Array.isArray(list) || !list.length) {
-		return false;
-	}
+  if (!Array.isArray(list) || !list.length) {
+    return false;
+  }
 
-	return list.every(function (item) {
-		return typeof item === "string";
-	});
+  return list.every(function (item) {
+    return typeof item === "string";
+  });
 }
 
 /*
@@ -15538,11 +15573,11 @@ function isListOfStrings(list) {
  */
 
 function isKeyValueMap(map) {
-	if (map == null) {
-		return false;
-	}
+  if (map == null) {
+    return false;
+  }
 
-	return map.hasOwnProperty("key") && map.hasOwnProperty("value");
+  return map.hasOwnProperty("key") && map.hasOwnProperty("value");
 }
 
 /*
@@ -15553,27 +15588,36 @@ function isKeyValueMap(map) {
  */
 
 function castArray(arr) {
-	return Array.isArray(arr) ? arr : [arr];
+  return Array.isArray(arr) ? arr : [arr];
 }
 
 ;
 
 /*
+ * Always return a key/value map.
+ *
+ * @param {Number|String|Boolean|Object} item
+ * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+ */
+
+function castKeyValue(item) {
+  return isKeyValueMap(item) ? item : {
+    key: item,
+    value: item
+  };
+}
+
+/*
  * Always return an array of key/value maps.
  *
- * @param {Number|String|Boolean|Array} list
+ * @param {Number|String|Boolean|Array|Object} list
  * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
  */
 
 function castKeyValueArray(list) {
-	list = castArray(list);
+  list = castArray(list);
 
-	return list.map(function (item) {
-		return isKeyValueMap(item) ? item : {
-			key: item,
-			value: item
-		};
-	});
+  return list.map(castKeyValue);
 }
 
 },{}],9:[function(_dereq_,module,exports){
@@ -15753,6 +15797,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 							exports.isListOfStrings = isListOfStrings;
 							exports.isKeyValueMap = isKeyValueMap;
 							exports.castArray = castArray;
+							exports.castKeyValue = castKeyValue;
 							exports.castKeyValueArray = castKeyValueArray;
 
 							function isListOfStrings(list) {
@@ -15792,21 +15837,30 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 							;
 
 							/*
+        * Always return a key/value map.
+        *
+        * @param {Number|String|Boolean|Object} item
+        * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+        */
+
+							function castKeyValue(item) {
+								return isKeyValueMap(item) ? item : {
+									key: item,
+									value: item
+								};
+							}
+
+							/*
         * Always return an array of key/value maps.
         *
-        * @param {Number|String|Boolean|Array} list
+        * @param {Number|String|Boolean|Array|Object} list
         * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
         */
 
 							function castKeyValueArray(list) {
 								list = castArray(list);
 
-								return list.map(function (item) {
-									return isKeyValueMap(item) ? item : {
-										key: item,
-										value: item
-									};
-								});
+								return list.map(castKeyValue);
 							}
 						}, {}], 3: [function (_dereq_, module, exports) {
 							// TODO move listitem to seperate component (so we don't have to store data-key and data-value as attributes)
@@ -15828,6 +15882,26 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 								};
 							})();
 
+							var _get = function get(_x, _x2, _x3) {
+								var _again = true;_function: while (_again) {
+									var object = _x,
+									    property = _x2,
+									    receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+										var parent = Object.getPrototypeOf(object);if (parent === null) {
+											return undefined;
+										} else {
+											_x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+										}
+									} else if ("value" in desc) {
+										return desc.value;
+									} else {
+										var getter = desc.get;if (getter === undefined) {
+											return undefined;
+										}return getter.call(receiver);
+									}
+								}
+							};
+
 							function _interopRequireDefault(obj) {
 								return obj && obj.__esModule ? obj : { "default": obj };
 							}
@@ -15841,7 +15915,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 							function _inherits(subClass, superClass) {
 								if (typeof superClass !== "function" && superClass !== null) {
 									throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-								}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+								}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 							}
 
 							var _react = _dereq_("react");
@@ -15856,6 +15930,12 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 
 							var _hireFormsUtils = _dereq_("hire-forms-utils");
 
+							var hasKeyValue = function hasKeyValue(list, item) {
+								return list.filter(function (li) {
+									return li.key === item.key;
+								}).length > 0;
+							};
+
 							/**
         * Options are rendered beneath the autocomplete and select components.
         *
@@ -15864,15 +15944,13 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
         */
 
 							var Options = (function (_React$Component) {
+								_inherits(Options, _React$Component);
+
 								function Options() {
 									_classCallCheck(this, Options);
 
-									if (_React$Component != null) {
-										_React$Component.apply(this, arguments);
-									}
+									_get(Object.getPrototypeOf(Options.prototype), "constructor", this).apply(this, arguments);
 								}
-
-								_inherits(Options, _React$Component);
 
 								_createClass(Options, [{
 									key: "componentDidMount",
@@ -15889,8 +15967,6 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 										var node = _react2["default"].findDOMNode(this);
 										node.style.zIndex = 0;
 									}
-								}, {
-									key: "sortRelevance",
 
 									/**
           * Sort values on relevance. A result is more relevant when the search
@@ -15900,6 +15976,8 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
           * @param {String} query A search query
           * @returns {Array<Object>} Sorted values on relevance
           */
+								}, {
+									key: "sortRelevance",
 									value: function sortRelevance(values, query) {
 										return values.sort(function (a, b) {
 											a = a.value.toLowerCase();
@@ -15929,8 +16007,6 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 											return 0;
 										});
 									}
-								}, {
-									key: "highlight",
 
 									/*
           * highlight the currently highlighted option.
@@ -15938,6 +16014,8 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
           * @param {Object} target An HTMLElement or event object
           * @param {String} className Name of the highlight class
           */
+								}, {
+									key: "highlight",
 									value: function highlight(target, className) {
 										// Check if target is an event object.
 										if (target.hasOwnProperty("currentTarget")) {
@@ -15946,8 +16024,6 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 
 										target.classList.add(className);
 									}
-								}, {
-									key: "unhighlight",
 
 									/**
           * Unhighlight the currently highlighted option.
@@ -15955,6 +16031,8 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
           * @param {String} className Name of the highlight class
           * @return {Object} The unhighlighted HTMLElement
           */
+								}, {
+									key: "unhighlight",
 									value: function unhighlight(className) {
 										var el = undefined;
 										var node = _react2["default"].findDOMNode(this);
@@ -16021,8 +16099,6 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 											this.props.onChange(this.getOptionData(current));
 										}
 									}
-								}, {
-									key: "getOptionData",
 
 									/**
           * Get the key (id) and value (display name) of an option DOM element.
@@ -16030,6 +16106,8 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
           * @param {Object} el - Option DOM element
           * @returns {Object}
           */
+								}, {
+									key: "getOptionData",
 									value: function getOptionData(el) {
 										return {
 											key: el.getAttribute("data-key"),
@@ -16045,7 +16123,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 											return null;
 										}
 
-										var values = this.props.sortRelevance && this.props.query !== "" ? this.sortRelevance(this.props.values, this.props.querySelector) : this.props.values;
+										var values = this.props.sort || this.props.sortRelevance && this.props.query !== "" ? this.sortRelevance(this.props.values, this.props.querySelector) : this.props.values;
 
 										var listitems = values.map(function (data, index) {
 											var displayValue = data.value;
@@ -16055,12 +16133,10 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 												displayValue = data.value.replace(re, "<span class=\"highlight\">$&</span>");
 											}
 
-											var selectedValue = (0, _hireFormsUtils.castArray)(_this.props.value);
-
 											return _react2["default"].createElement("li", {
 												className: (0, _classnames2["default"])({
 													"hire-forms-option": true,
-													selected: selectedValue.indexOf(data.value) > -1
+													selected: hasKeyValue((0, _hireFormsUtils.castArray)(_this.props.value), data)
 												}),
 												dangerouslySetInnerHTML: { __html: displayValue },
 												"data-key": data.key,
@@ -16080,6 +16156,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 							Options.defaultProps = {
 								highlightClass: "highlight",
 								query: "",
+								sort: false,
 								sortRelevance: true,
 								value: { key: "", value: "" },
 								values: []
@@ -16089,6 +16166,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 								highlightClass: _react2["default"].PropTypes.string,
 								onChange: _react2["default"].PropTypes.func.isRequired,
 								query: _react2["default"].PropTypes.string,
+								sort: _react2["default"].PropTypes.bool,
 								sortRelevance: _react2["default"].PropTypes.bool,
 								value: _hireFormsPropTypes.keyValueMapOrArrayOfKeyValueMaps,
 								values: _hireFormsPropTypes.arrayOfKeyValueMaps
@@ -16164,6 +16242,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 			exports.isListOfStrings = isListOfStrings;
 			exports.isKeyValueMap = isKeyValueMap;
 			exports.castArray = castArray;
+			exports.castKeyValue = castKeyValue;
 			exports.castKeyValueArray = castKeyValueArray;
 
 			function isListOfStrings(list) {
@@ -16203,21 +16282,30 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 			;
 
 			/*
+    * Always return a key/value map.
+    *
+    * @param {Number|String|Boolean|Object} item
+    * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+    */
+
+			function castKeyValue(item) {
+				return isKeyValueMap(item) ? item : {
+					key: item,
+					value: item
+				};
+			}
+
+			/*
     * Always return an array of key/value maps.
     *
-    * @param {Number|String|Boolean|Array} list
+    * @param {Number|String|Boolean|Array|Object} list
     * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
     */
 
 			function castKeyValueArray(list) {
 				list = castArray(list);
 
-				return list.map(function (item) {
-					return isKeyValueMap(item) ? item : {
-						key: item,
-						value: item
-					};
-				});
+				return list.map(castKeyValue);
 			}
 		}, {}], 4: [function (_dereq_, module, exports) {
 			arguments[4][2][0].apply(exports, arguments);
@@ -16353,7 +16441,9 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 						if (this.state.visible) {
 							options = _react2["default"].createElement(_hireFormsOptions2["default"], {
 								onChange: this.handleOptionsChange.bind(this),
+								sort: this.props.sort,
 								sortRelevance: this.props.sortRelevance,
+								value: (0, _hireFormsUtils.castKeyValue)(this.props.value),
 								values: (0, _hireFormsUtils.castKeyValueArray)(this.state.options) });
 						}
 
@@ -16384,6 +16474,7 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 				onChange: _react2["default"].PropTypes.func.isRequired,
 				options: _hireFormsPropTypes.arrayOfStringsOrArrayOfKeyValueMaps,
 				placeholder: _react2["default"].PropTypes.string,
+				sort: _react2["default"].PropTypes.bool,
 				sortRelevance: _react2["default"].PropTypes.bool,
 				value: _hireFormsPropTypes.stringOrKeyValueMap
 			};
@@ -16598,21 +16689,22 @@ exports.keyValueMapOrArrayOfKeyValueMaps = keyValueMapOrArrayOfKeyValueMaps;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.isListOfStrings = isListOfStrings;
 exports.isKeyValueMap = isKeyValueMap;
 exports.castArray = castArray;
+exports.castKeyValue = castKeyValue;
 exports.castKeyValueArray = castKeyValueArray;
 
 function isListOfStrings(list) {
-	if (!Array.isArray(list) || !list.length) {
-		return false;
-	}
+  if (!Array.isArray(list) || !list.length) {
+    return false;
+  }
 
-	return list.every(function (item) {
-		return typeof item === "string";
-	});
+  return list.every(function (item) {
+    return typeof item === "string";
+  });
 }
 
 /*
@@ -16621,11 +16713,11 @@ function isListOfStrings(list) {
  */
 
 function isKeyValueMap(map) {
-	if (map == null) {
-		return false;
-	}
+  if (map == null) {
+    return false;
+  }
 
-	return map.hasOwnProperty("key") && map.hasOwnProperty("value");
+  return map.hasOwnProperty("key") && map.hasOwnProperty("value");
 }
 
 /*
@@ -16636,27 +16728,36 @@ function isKeyValueMap(map) {
  */
 
 function castArray(arr) {
-	return Array.isArray(arr) ? arr : [arr];
+  return Array.isArray(arr) ? arr : [arr];
 }
 
 ;
 
 /*
+ * Always return a key/value map.
+ *
+ * @param {Number|String|Boolean|Object} item
+ * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+ */
+
+function castKeyValue(item) {
+  return isKeyValueMap(item) ? item : {
+    key: item,
+    value: item
+  };
+}
+
+/*
  * Always return an array of key/value maps.
  *
- * @param {Number|String|Boolean|Array} list
+ * @param {Number|String|Boolean|Array|Object} list
  * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
  */
 
 function castKeyValueArray(list) {
-	list = castArray(list);
+  list = castArray(list);
 
-	return list.map(function (item) {
-		return isKeyValueMap(item) ? item : {
-			key: item,
-			value: item
-		};
-	});
+  return list.map(castKeyValue);
 }
 
 },{}],13:[function(_dereq_,module,exports){
@@ -17261,844 +17362,6 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 },{}],17:[function(_dereq_,module,exports){
-(function (global){
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.HireFormsSelect = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-(function (global){
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.HireFormsOptions = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = _dereq_("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
-
-exports.elementOrArrayOfElement = elementOrArrayOfElement;
-/**
- * A string or an object,
- * example: {key: "somekey", value: "somevalue"}.
- */
-var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-})]);
-
-exports.stringOrKeyValue = stringOrKeyValue;
-var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
-
-exports.stringOrArray = stringOrArray;
-var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
-
-exports.stringOrArrayOfString = stringOrArrayOfString;
-var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string.isRequired,
-	value: _react2["default"].PropTypes.string.isRequired
-}));
-
-exports.arrayOfKeyValue = arrayOfKeyValue;
-/**
- * An array of strings or an array of key/value objects,
- * example: [{key: "somekey", value: "somevalue"}].
- */
-var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-}))]);
-exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
-
-},{"react":"react"}],2:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _react = _dereq_("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = _dereq_("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
-
-var HIGHTLIGHT_CLASS = "highlight";
-
-/**
- * Options are rendered beneath the autocomplete and select components.
- *
- * @class
- * @extends React.Component
- */
-
-var Options = (function (_React$Component) {
-	function Options() {
-		_classCallCheck(this, Options);
-
-		if (_React$Component != null) {
-			_React$Component.apply(this, arguments);
-		}
-	}
-
-	_inherits(Options, _React$Component);
-
-	_createClass(Options, [{
-		key: "componentDidMount",
-		value: function componentDidMount() {
-			var node = _react2["default"].findDOMNode(this);
-
-			if (node) {
-				node.style.zIndex = 1000;
-			}
-		}
-	}, {
-		key: "componentWillUnmount",
-		value: function componentWillUnmount() {
-			var node = _react2["default"].findDOMNode(this);
-			node.style.zIndex = 0;
-		}
-	}, {
-		key: "sortRelevance",
-
-		/**
-   * Sort props.values on relevance. A result is more relevant
-   * when the search query is more at the beginning of the string.
-   * String.indexOf(props.query): lower is better.
-   *
-   * @returns {Array<String>} Sorted values on relevance
-   */
-		value: function sortRelevance(values) {
-			var _this = this;
-
-			return values.sort(function (a, b) {
-				a = a.value.toLowerCase();
-				b = b.value.toLowerCase();
-
-				var indexA = a.indexOf(_this.props.query);
-				var indexB = b.indexOf(_this.props.query);
-
-				if (indexA > indexB) {
-					return 1;
-				}
-
-				if (indexA < indexB) {
-					return -1;
-				}
-
-				if (indexA === indexB) {
-					if (a > b) {
-						return 1;
-					}
-
-					if (a < b) {
-						return -1;
-					}
-				}
-
-				return 0;
-			});
-		}
-	}, {
-		key: "highlight",
-		value: function highlight(target) {
-			// Check if target is an event object.
-			if (target.hasOwnProperty("currentTarget")) {
-				target = target.currentTarget;
-			}
-
-			target.classList.add(HIGHTLIGHT_CLASS);
-		}
-	}, {
-		key: "unhighlight",
-
-		/**
-   * Unhighlight the currently highlighted option.
-   *
-   *
-   */
-		value: function unhighlight() {
-			var el = undefined;
-			var node = _react2["default"].findDOMNode(this);
-
-			if (node) {
-				el = node.querySelector("li.highlight");
-
-				if (el) {
-					el.classList.remove(HIGHTLIGHT_CLASS);
-				}
-			}
-
-			return el;
-		}
-	}, {
-		key: "handleClick",
-		value: function handleClick(ev) {
-			this.props.onChange(this.getOptionData(ev.currentTarget));
-		}
-	}, {
-		key: "highlightPrev",
-		value: function highlightPrev() {
-			var prev = undefined;
-			var current = this.unhighlight();
-
-			if (current) {
-				prev = current.previousElementSibling;
-			}
-
-			// If current and prev aren't found, start at the top.
-			// Current is not found if there is no list item highlighted.
-			// Prev is not found if the first list item is highlighted.
-			if (!prev) {
-				prev = _react2["default"].findDOMNode(this).lastChild;
-			}
-
-			this.highlight(prev);
-		}
-	}, {
-		key: "highlightNext",
-		value: function highlightNext() {
-			var next = undefined;
-			var current = this.unhighlight();
-
-			if (current) {
-				next = current.nextElementSibling;
-			}
-
-			// If current and next aren't found, start at the top.
-			// Current is not found if there is no list item highlighted.
-			// Next is not found if the last list item is highlighted.
-			if (!next) {
-				next = _react2["default"].findDOMNode(this).firstChild;
-			}
-
-			this.highlight(next);
-		}
-	}, {
-		key: "select",
-		value: function select() {
-			var current = this.unhighlight();
-
-			if (current) {
-				this.props.onChange(this.getOptionData(current));
-			}
-		}
-	}, {
-		key: "getOptionData",
-
-		/**
-   * Get the key (id) and value (display name) of an option DOM element.
-   *
-   * @param {Object} el - Option DOM element
-   * @returns {Object}
-   */
-		value: function getOptionData(el) {
-			return {
-				key: el.getAttribute("data-key"),
-				value: el.getAttribute("data-value")
-			};
-		}
-	}, {
-		key: "render",
-		value: function render() {
-			var _this2 = this;
-
-			if (this.props.values.length === 0) {
-				return null;
-			}
-
-			var values = this.props.sortRelevance ? this.sortRelevance(this.props.values) : this.props.values;
-
-			var listitems = values.map(function (data, index) {
-				var displayValue = data.value;
-
-				if (_this2.props.query.length) {
-					var re = new RegExp(_this2.props.query, "ig");
-					displayValue = data.value.replace(re, "<span class=\"highlight\">$&</span>");
-				}
-
-				var selectedValue = Array.isArray(_this2.props.value) ? _this2.props.value : [_this2.props.value];
-
-				return _react2["default"].createElement("li", {
-					className: (0, _classnames2["default"])({ selected: selectedValue.indexOf(data.value) > -1 }),
-					dangerouslySetInnerHTML: { __html: displayValue },
-					"data-key": data.key,
-					"data-value": data.value,
-					key: index,
-					onClick: _this2.handleClick.bind(_this2),
-					onMouseEnter: _this2.highlight.bind(_this2),
-					onMouseLeave: _this2.unhighlight.bind(_this2) });
-			});
-
-			return _react2["default"].createElement(
-				"ul",
-				{
-					className: "hire-options" },
-				listitems
-			);
-		}
-	}]);
-
-	return Options;
-})(_react2["default"].Component);
-
-Options.defaultProps = {
-	query: "",
-	sortRelevance: true,
-	value: "",
-	values: []
-};
-
-Options.propTypes = {
-	onChange: _react2["default"].PropTypes.func.isRequired,
-	query: _react2["default"].PropTypes.string,
-	sortRelevance: _react2["default"].PropTypes.bool,
-	value: _hireFormsPropTypes.stringOrArrayOfString,
-	values: _hireFormsPropTypes.arrayOfKeyValue
-};
-
-exports["default"] = Options;
-module.exports = exports["default"];
-
-},{"classnames":"classnames","hire-forms-prop-types":1,"react":"react"}]},{},[2])(2)
-});
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"classnames":"classnames","hire-forms-prop-types":2,"react":"react"}],2:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = _dereq_("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
-
-exports.elementOrArrayOfElement = elementOrArrayOfElement;
-/**
- * A string or an object,
- * example: {key: "somekey", value: "somevalue"}.
- */
-var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-})]);
-
-exports.stringOrKeyValue = stringOrKeyValue;
-var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
-
-exports.stringOrArray = stringOrArray;
-var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
-
-exports.stringOrArrayOfString = stringOrArrayOfString;
-var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string.isRequired,
-	value: _react2["default"].PropTypes.string.isRequired
-}));
-
-exports.arrayOfKeyValue = arrayOfKeyValue;
-/**
- * An array of strings or an array of key/value objects,
- * example: [{key: "somekey", value: "somevalue"}].
- */
-var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-}))]);
-exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
-
-},{"react":"react"}],3:[function(_dereq_,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2,"react":"react"}],4:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _react = _dereq_("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = _dereq_("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _hireFormsOptions = _dereq_("hire-forms-options");
-
-var _hireFormsOptions2 = _interopRequireDefault(_hireFormsOptions);
-
-var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
-
-var Select = (function (_React$Component) {
-	function Select(props) {
-		_classCallCheck(this, Select);
-
-		_get(Object.getPrototypeOf(Select.prototype), "constructor", this).call(this, props);
-
-		this.state = { visible: false };
-	}
-
-	_inherits(Select, _React$Component);
-
-	_createClass(Select, [{
-		key: "isListOfStrings",
-		value: function isListOfStrings(list) {
-			return list.length && typeof list[0] === "string";
-		}
-	}, {
-		key: "isKeyValueMap",
-		value: function isKeyValueMap(map) {
-			return map.hasOwnProperty("key") && map.hasOwnProperty("value");
-		}
-	}, {
-		key: "stringArray2KeyValueArray",
-		value: function stringArray2KeyValueArray(list) {
-			return list.map(function (item) {
-				return {
-					key: item,
-					value: item
-				};
-			});
-		}
-	}, {
-		key: "handleInputClick",
-		value: function handleInputClick() {
-			this.setState({ visible: !this.state.visible });
-		}
-	}, {
-		key: "handleOptionsChange",
-
-		/**
-   * @method
-   * @param {object} value Map of key and value: {key: "somekey", value: "somevalue"}
-   */
-		value: function handleOptionsChange(value) {
-			this.setState({ visible: false });
-
-			// If the options prop is an array of strings,
-			// return a string.
-			if (this.isListOfStrings(this.props.options)) {
-				value = value.value;
-			}
-
-			this.props.onChange(value);
-		}
-	}, {
-		key: "render",
-		value: function render() {
-			var optionValues = undefined,
-			    options = undefined;
-
-			if (this.state.visible) {
-				optionValues = this.isListOfStrings(this.props.options) ? this.stringArray2KeyValueArray(this.props.options) : this.props.options;
-
-				options = _react2["default"].createElement(_hireFormsOptions2["default"], {
-					onChange: this.handleOptionsChange.bind(this),
-					sortRelevance: this.props.sortRelevance,
-					values: optionValues });
-			}
-
-			var value = this.props.value === "" ? this.props.placeholder : this.props.value;
-
-			if (this.isKeyValueMap(this.props.value)) {
-				value = this.props.value.value;
-			}
-
-			return _react2["default"].createElement(
-				"div",
-				{ className: "hire-select" },
-				_react2["default"].createElement(
-					"div",
-					{
-						className: "input-container",
-						onClick: this.handleInputClick.bind(this) },
-					_react2["default"].createElement(
-						"div",
-						{ className: (0, _classnames2["default"])({
-								"input": true,
-								"placeholder": this.props.value === "" }) },
-						value
-					),
-					_react2["default"].createElement(
-						"button",
-						null,
-						"▾"
-					)
-				),
-				options
-			);
-		}
-	}]);
-
-	return Select;
-})(_react2["default"].Component);
-
-Select.defaultProps = {
-	value: "",
-	options: []
-};
-
-Select.propTypes = {
-	onChange: _react2["default"].PropTypes.func.isRequired,
-	options: _hireFormsPropTypes.arrayOfStringOrArrayOfKeyValue,
-	placeholder: _react2["default"].PropTypes.string,
-	sortRelevance: _react2["default"].PropTypes.bool,
-	value: _hireFormsPropTypes.stringOrKeyValue
-};
-
-exports["default"] = Select;
-module.exports = exports["default"];
-
-},{"classnames":"classnames","hire-forms-options":1,"hire-forms-prop-types":3,"react":"react"}]},{},[4])(4)
-});
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"classnames":"classnames","hire-forms-options":18,"hire-forms-prop-types":19,"react":"react"}],18:[function(_dereq_,module,exports){
-(function (global){
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.HireFormsOptions = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = _dereq_("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
-
-exports.elementOrArrayOfElement = elementOrArrayOfElement;
-/**
- * A string or an object,
- * example: {key: "somekey", value: "somevalue"}.
- */
-var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-})]);
-
-exports.stringOrKeyValue = stringOrKeyValue;
-var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
-
-exports.stringOrArray = stringOrArray;
-var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
-
-exports.stringOrArrayOfString = stringOrArrayOfString;
-var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string.isRequired,
-	value: _react2["default"].PropTypes.string.isRequired
-}));
-
-exports.arrayOfKeyValue = arrayOfKeyValue;
-/**
- * An array of strings or an array of key/value objects,
- * example: [{key: "somekey", value: "somevalue"}].
- */
-var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-}))]);
-exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
-
-},{"react":"react"}],2:[function(_dereq_,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _react = _dereq_("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _classnames = _dereq_("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _hireFormsPropTypes = _dereq_("hire-forms-prop-types");
-
-var HIGHTLIGHT_CLASS = "highlight";
-
-/**
- * Options are rendered beneath the autocomplete and select components.
- *
- * @class
- * @extends React.Component
- */
-
-var Options = (function (_React$Component) {
-	function Options() {
-		_classCallCheck(this, Options);
-
-		if (_React$Component != null) {
-			_React$Component.apply(this, arguments);
-		}
-	}
-
-	_inherits(Options, _React$Component);
-
-	_createClass(Options, [{
-		key: "componentDidMount",
-		value: function componentDidMount() {
-			var node = _react2["default"].findDOMNode(this);
-
-			if (node) {
-				node.style.zIndex = 1000;
-			}
-		}
-	}, {
-		key: "componentWillUnmount",
-		value: function componentWillUnmount() {
-			var node = _react2["default"].findDOMNode(this);
-			node.style.zIndex = 0;
-		}
-	}, {
-		key: "sortRelevance",
-
-		/**
-   * Sort props.values on relevance. A result is more relevant
-   * when the search query is more at the beginning of the string.
-   * String.indexOf(props.query): lower is better.
-   *
-   * @returns {Array<String>} Sorted values on relevance
-   */
-		value: function sortRelevance(values) {
-			var _this = this;
-
-			return values.sort(function (a, b) {
-				a = a.value.toLowerCase();
-				b = b.value.toLowerCase();
-
-				var indexA = a.indexOf(_this.props.query);
-				var indexB = b.indexOf(_this.props.query);
-
-				if (indexA > indexB) {
-					return 1;
-				}
-
-				if (indexA < indexB) {
-					return -1;
-				}
-
-				if (indexA === indexB) {
-					if (a > b) {
-						return 1;
-					}
-
-					if (a < b) {
-						return -1;
-					}
-				}
-
-				return 0;
-			});
-		}
-	}, {
-		key: "highlight",
-		value: function highlight(target) {
-			// Check if target is an event object.
-			if (target.hasOwnProperty("currentTarget")) {
-				target = target.currentTarget;
-			}
-
-			target.classList.add(HIGHTLIGHT_CLASS);
-		}
-	}, {
-		key: "unhighlight",
-
-		/**
-   * Unhighlight the currently highlighted option.
-   *
-   *
-   */
-		value: function unhighlight() {
-			var el = undefined;
-			var node = _react2["default"].findDOMNode(this);
-
-			if (node) {
-				el = node.querySelector("li.highlight");
-
-				if (el) {
-					el.classList.remove(HIGHTLIGHT_CLASS);
-				}
-			}
-
-			return el;
-		}
-	}, {
-		key: "handleClick",
-		value: function handleClick(ev) {
-			this.props.onChange(this.getOptionData(ev.currentTarget));
-		}
-	}, {
-		key: "highlightPrev",
-		value: function highlightPrev() {
-			var prev = undefined;
-			var current = this.unhighlight();
-
-			if (current) {
-				prev = current.previousElementSibling;
-			}
-
-			// If current and prev aren't found, start at the top.
-			// Current is not found if there is no list item highlighted.
-			// Prev is not found if the first list item is highlighted.
-			if (!prev) {
-				prev = _react2["default"].findDOMNode(this).lastChild;
-			}
-
-			this.highlight(prev);
-		}
-	}, {
-		key: "highlightNext",
-		value: function highlightNext() {
-			var next = undefined;
-			var current = this.unhighlight();
-
-			if (current) {
-				next = current.nextElementSibling;
-			}
-
-			// If current and next aren't found, start at the top.
-			// Current is not found if there is no list item highlighted.
-			// Next is not found if the last list item is highlighted.
-			if (!next) {
-				next = _react2["default"].findDOMNode(this).firstChild;
-			}
-
-			this.highlight(next);
-		}
-	}, {
-		key: "select",
-		value: function select() {
-			var current = this.unhighlight();
-
-			if (current) {
-				this.props.onChange(this.getOptionData(current));
-			}
-		}
-	}, {
-		key: "getOptionData",
-
-		/**
-   * Get the key (id) and value (display name) of an option DOM element.
-   *
-   * @param {Object} el - Option DOM element
-   * @returns {Object}
-   */
-		value: function getOptionData(el) {
-			return {
-				key: el.getAttribute("data-key"),
-				value: el.getAttribute("data-value")
-			};
-		}
-	}, {
-		key: "render",
-		value: function render() {
-			var _this2 = this;
-
-			if (this.props.values.length === 0) {
-				return null;
-			}
-
-			var values = this.props.sortRelevance ? this.sortRelevance(this.props.values) : this.props.values;
-
-			var listitems = values.map(function (data, index) {
-				var displayValue = data.value;
-
-				if (_this2.props.query.length) {
-					var re = new RegExp(_this2.props.query, "ig");
-					displayValue = data.value.replace(re, "<span class=\"highlight\">$&</span>");
-				}
-
-				var selectedValue = Array.isArray(_this2.props.value) ? _this2.props.value : [_this2.props.value];
-
-				return _react2["default"].createElement("li", {
-					className: (0, _classnames2["default"])({ selected: selectedValue.indexOf(data.value) > -1 }),
-					dangerouslySetInnerHTML: { __html: displayValue },
-					"data-key": data.key,
-					"data-value": data.value,
-					key: index,
-					onClick: _this2.handleClick.bind(_this2),
-					onMouseEnter: _this2.highlight.bind(_this2),
-					onMouseLeave: _this2.unhighlight.bind(_this2) });
-			});
-
-			return _react2["default"].createElement(
-				"ul",
-				{
-					className: "hire-options" },
-				listitems
-			);
-		}
-	}]);
-
-	return Options;
-})(_react2["default"].Component);
-
-Options.defaultProps = {
-	query: "",
-	sortRelevance: true,
-	value: "",
-	values: []
-};
-
-Options.propTypes = {
-	onChange: _react2["default"].PropTypes.func.isRequired,
-	query: _react2["default"].PropTypes.string,
-	sortRelevance: _react2["default"].PropTypes.bool,
-	value: _hireFormsPropTypes.stringOrArrayOfString,
-	values: _hireFormsPropTypes.arrayOfKeyValue
-};
-
-exports["default"] = Options;
-module.exports = exports["default"];
-
-},{"classnames":"classnames","hire-forms-prop-types":1,"react":"react"}]},{},[2])(2)
-});
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"classnames":"classnames","hire-forms-prop-types":19,"react":"react"}],19:[function(_dereq_,module,exports){
-arguments[4][5][0].apply(exports,arguments)
-},{"dup":5,"react":"react"}],20:[function(_dereq_,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -18401,9 +17664,77 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],21:[function(_dereq_,module,exports){
-arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],22:[function(_dereq_,module,exports){
+},{}],18:[function(_dereq_,module,exports){
+
+/*
+ * @param {Array} list
+ * @returns {Boolean}
+ */
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.isListOfStrings = isListOfStrings;
+exports.isKeyValueMap = isKeyValueMap;
+exports.castArray = castArray;
+exports.castKeyValueArray = castKeyValueArray;
+
+function isListOfStrings(list) {
+	if (!Array.isArray(list) || !list.length) {
+		return false;
+	}
+
+	return list.every(function (item) {
+		return typeof item === "string";
+	});
+}
+
+/*
+ * @param {Object} map
+ * @returns {Boolean}
+ */
+
+function isKeyValueMap(map) {
+	if (map == null) {
+		return false;
+	}
+
+	return map.hasOwnProperty("key") && map.hasOwnProperty("value");
+}
+
+/*
+ * Always return an array.
+ *
+ * @param {String|Array} arr
+ * @returns {Array}
+ */
+
+function castArray(arr) {
+	return Array.isArray(arr) ? arr : [arr];
+}
+
+;
+
+/*
+ * Always return an array of key/value maps.
+ *
+ * @param {Number|String|Boolean|Array} list
+ * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+ */
+
+function castKeyValueArray(list) {
+	list = castArray(list);
+
+	return list.map(function (item) {
+		return isKeyValueMap(item) ? item : {
+			key: item,
+			value: item
+		};
+	});
+}
+
+},{}],19:[function(_dereq_,module,exports){
 "use strict";
 var window = _dereq_("global/window")
 var once = _dereq_("once")
@@ -18576,7 +17907,7 @@ function createXHR(options, callback) {
 
 function noop() {}
 
-},{"global/window":23,"once":24,"parse-headers":28}],23:[function(_dereq_,module,exports){
+},{"global/window":20,"once":21,"parse-headers":25}],20:[function(_dereq_,module,exports){
 (function (global){
 if (typeof window !== "undefined") {
     module.exports = window;
@@ -18589,7 +17920,7 @@ if (typeof window !== "undefined") {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],24:[function(_dereq_,module,exports){
+},{}],21:[function(_dereq_,module,exports){
 module.exports = once
 
 once.proto = once(function () {
@@ -18610,7 +17941,7 @@ function once (fn) {
   }
 }
 
-},{}],25:[function(_dereq_,module,exports){
+},{}],22:[function(_dereq_,module,exports){
 var isFunction = _dereq_('is-function')
 
 module.exports = forEach
@@ -18658,7 +17989,7 @@ function forEachObject(object, iterator, context) {
     }
 }
 
-},{"is-function":26}],26:[function(_dereq_,module,exports){
+},{"is-function":23}],23:[function(_dereq_,module,exports){
 module.exports = isFunction
 
 var toString = Object.prototype.toString
@@ -18675,7 +18006,7 @@ function isFunction (fn) {
       fn === window.prompt))
 };
 
-},{}],27:[function(_dereq_,module,exports){
+},{}],24:[function(_dereq_,module,exports){
 
 exports = module.exports = trim;
 
@@ -18691,7 +18022,7 @@ exports.right = function(str){
   return str.replace(/\s*$/, '');
 };
 
-},{}],28:[function(_dereq_,module,exports){
+},{}],25:[function(_dereq_,module,exports){
 var trim = _dereq_('trim')
   , forEach = _dereq_('for-each')
   , isArray = function(arg) {
@@ -18723,7 +18054,7 @@ module.exports = function (headers) {
 
   return result
 }
-},{"for-each":25,"trim":27}],29:[function(_dereq_,module,exports){
+},{"for-each":22,"trim":24}],26:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18764,7 +18095,7 @@ var authorActions = {
 exports["default"] = authorActions;
 module.exports = exports["default"];
 
-},{"../api":32,"../dispatcher":39}],30:[function(_dereq_,module,exports){
+},{"../api":29,"../dispatcher":36}],27:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18777,7 +18108,15 @@ var _dispatcher = _dereq_("../dispatcher");
 
 var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
+var _api = _dereq_("../api");
+
+var _api2 = _interopRequireDefault(_api);
+
 var publicationActions = {
+	getPublication: function getPublication(id) {
+		_api2["default"].getPublication(id);
+	},
+
 	setKey: function setKey(key, value) {
 		_dispatcher2["default"].handleViewAction({
 			actionType: "PUBLICATION_SET_KEY",
@@ -18797,7 +18136,7 @@ var publicationActions = {
 exports["default"] = publicationActions;
 module.exports = exports["default"];
 
-},{"../dispatcher":39}],31:[function(_dereq_,module,exports){
+},{"../api":29,"../dispatcher":36}],28:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18850,7 +18189,7 @@ var serverActions = {
 exports["default"] = serverActions;
 module.exports = exports["default"];
 
-},{"../dispatcher":39}],32:[function(_dereq_,module,exports){
+},{"../dispatcher":36}],29:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18868,6 +18207,8 @@ var _actionsServer = _dereq_("./actions/server");
 var _actionsServer2 = _interopRequireDefault(_actionsServer);
 
 var _parsersAuthor = _dereq_("./parsers/author");
+
+var _parsersPublication = _dereq_("./parsers/publication");
 
 var baseUrl = "https://acc.repository.huygens.knaw.nl";
 
@@ -18901,7 +18242,7 @@ var getSelectValues = function getSelectValues(name, done) {
 			"Content-Type": "application/json",
 			"VRE_ID": "WomenWriters"
 		},
-		url: baseUrl + "/v2/domain/wwkeywords/autocomplete?type=" + name
+		url: baseUrl + "/v2/domain/wwkeywords/autocomplete?type=" + name + "&rows=1000"
 	};
 
 	var xhrDone = function xhrDone(err, resp, body) {
@@ -18947,10 +18288,12 @@ exports["default"] = {
 
 		var done = function done(err, resp, body) {
 			if (err) {
-				handleError(err);
+				handleError(err, resp, body);
 			}
 
-			_actionsServer2["default"].receivePublication(JSON.parse(body));
+			body = (0, _parsersPublication.parseIncomingPublication)(JSON.parse(body));
+
+			_actionsServer2["default"].receivePublication(body);
 		};
 
 		(0, _xhr2["default"])(options, done);
@@ -19002,7 +18345,7 @@ exports["default"] = {
 };
 module.exports = exports["default"];
 
-},{"./actions/server":31,"./parsers/author":41,"xhr":22}],33:[function(_dereq_,module,exports){
+},{"./actions/server":28,"./parsers/author":38,"./parsers/publication":39,"xhr":19}],30:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19166,7 +18509,7 @@ var BasicInfoForm = (function () {
 exports["default"] = (0, _hireFormsForm2["default"])(BasicInfoForm);
 module.exports = exports["default"];
 
-},{"./name":34,"hire-forms-form":2,"hire-forms-input":3,"hire-forms-multi-form":4,"hire-forms-select":17,"react":"react"}],34:[function(_dereq_,module,exports){
+},{"./name":31,"hire-forms-form":2,"hire-forms-input":3,"hire-forms-multi-form":4,"hire-forms-select":10,"react":"react"}],31:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19239,7 +18582,7 @@ var NameForm = (function () {
 exports["default"] = (0, _hireFormsForm2["default"])(NameForm, "names-form");
 module.exports = exports["default"];
 
-},{"hire-forms-form":2,"hire-forms-input":3,"immutable":"immutable","react":"react"}],35:[function(_dereq_,module,exports){
+},{"hire-forms-form":2,"hire-forms-input":3,"immutable":"immutable","react":"react"}],32:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19401,7 +18744,7 @@ exports["default"] = AuthorController;
 module.exports = exports["default"];
 /* Works */ /* Links */
 
-},{"../actions/author":29,"../stores/author":44,"./basic-info":33,"./link":36,"./personal":37,"./public":38,"hire-forms-multi-form":4,"hire-tabs":13,"react":"react"}],36:[function(_dereq_,module,exports){
+},{"../actions/author":26,"../stores/author":42,"./basic-info":30,"./link":33,"./personal":34,"./public":35,"hire-forms-multi-form":4,"hire-tabs":13,"react":"react"}],33:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19490,7 +18833,7 @@ var LinkForm = (function () {
 exports["default"] = (0, _hireFormsForm2["default"])(LinkForm, "hire-forms-link-form");
 module.exports = exports["default"];
 
-},{"hire-forms-form":2,"hire-forms-input":3,"react":"react"}],37:[function(_dereq_,module,exports){
+},{"hire-forms-form":2,"hire-forms-input":3,"react":"react"}],34:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19514,10 +18857,6 @@ var _hireFormsForm2 = _interopRequireDefault(_hireFormsForm);
 var _hireFormsSelect = _dereq_("hire-forms-select");
 
 var _hireFormsSelect2 = _interopRequireDefault(_hireFormsSelect);
-
-var _hireFormsInput = _dereq_("hire-forms-input");
-
-var _hireFormsInput2 = _interopRequireDefault(_hireFormsInput);
 
 var _hireFormsTextarea = _dereq_("hire-forms-textarea");
 
@@ -19550,8 +18889,9 @@ var PersonalForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getMaritalStatus,
-						onChange: this.props.onChange.bind(this, "maritalStatus"),
-						value: model.get("maritalStatus").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "maritalStatus"]),
+						sort: true,
+						value: model.getIn(["@relations", "maritalStatus"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19563,7 +18903,7 @@ var PersonalForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						onChange: this.props.onChange.bind(this, "children"),
-						options: ["yes", "no", "unknown"],
+						options: ["Yes", "No", "Unknown"],
 						value: model.get("children") })
 				),
 				_react2["default"].createElement(
@@ -19576,8 +18916,9 @@ var PersonalForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getSocialClass,
-						onChange: this.props.onChange.bind(this, "socialClass"),
-						value: model.get("socialClass").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "socialClass"]),
+						sort: true,
+						value: model.getIn(["@relations", "socialClass"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19589,8 +18930,9 @@ var PersonalForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getEducation,
-						onChange: this.props.onChange.bind(this, "education"),
-						value: model.get("education").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "education"]),
+						sort: true,
+						value: model.getIn(["@relations", "education"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19602,8 +18944,9 @@ var PersonalForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getReligion,
-						onChange: this.props.onChange.bind(this, "religion"),
-						value: model.get("religion").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "religion"]),
+						sort: true,
+						value: model.getIn(["@relations", "religion"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19640,7 +18983,7 @@ exports["default"] = (0, _hireFormsForm2["default"])(PersonalForm);
 module.exports = exports["default"];
 /* isSpouseOf */
 
-},{"../../api":32,"hire-forms-form":2,"hire-forms-input":3,"hire-forms-select":10,"hire-forms-textarea":11,"react":"react"}],38:[function(_dereq_,module,exports){
+},{"../../api":29,"hire-forms-form":2,"hire-forms-select":10,"hire-forms-textarea":11,"react":"react"}],35:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19692,8 +19035,8 @@ var PublicForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getProfession,
-						onChange: this.props.onChange.bind(this, "profession"),
-						value: model.get("profession").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "profession"]),
+						value: model.getIn(["@relations", "profession"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19705,8 +19048,8 @@ var PublicForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getFinancialSituation,
-						onChange: this.props.onChange.bind(this, "financials"),
-						value: model.get("financials").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "financials"]),
+						value: model.getIn(["@relations", "financials"]).toJS() })
 				)
 			);
 		}
@@ -19719,7 +19062,7 @@ exports["default"] = (0, _hireFormsForm2["default"])(PublicForm);
 module.exports = exports["default"];
 /* Collaborations */ /* Memberschips */ /* TEMP DATA */
 
-},{"../../api":32,"hire-forms-form":2,"hire-forms-select":10,"react":"react"}],39:[function(_dereq_,module,exports){
+},{"../../api":29,"hire-forms-form":2,"hire-forms-select":10,"react":"react"}],36:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19769,7 +19112,7 @@ var AppDispatcher = (function (_Dispatcher) {
 exports["default"] = new AppDispatcher();
 module.exports = exports["default"];
 
-},{"flux":14}],40:[function(_dereq_,module,exports){
+},{"flux":14}],37:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19789,13 +19132,12 @@ var _publication2 = _interopRequireDefault(_publication);
 exports.Author = _author2["default"];
 exports.Publication = _publication2["default"];
 
-},{"./author":35,"./publication":43}],41:[function(_dereq_,module,exports){
+},{"./author":32,"./publication":41}],38:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
 var iterateObjectKeys = function iterateObjectKeys(obj, parser) {
 	var isObject = function isObject(o) {
 		return o !== null && !Array.isArray(o) && typeof o === "object";
@@ -19849,7 +19191,76 @@ var parseOutgoingAuthor = function parseOutgoingAuthor(data) {
 };
 exports.parseOutgoingAuthor = parseOutgoingAuthor;
 
-},{}],42:[function(_dereq_,module,exports){
+},{}],39:[function(_dereq_,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var iterateObjectKeys = function iterateObjectKeys(obj, parser) {
+	var isObject = function isObject(o) {
+		return o !== null && !Array.isArray(o) && typeof o === "object";
+	};
+
+	Object.keys(obj).forEach(function (key) {
+		var value = obj[key];
+
+		if (Array.isArray(value)) {
+			if (value.length && isObject(value[0])) {
+				value.forEach(function (nestedObject) {
+					return iterateObjectKeys(nestedObject, parser);
+				});
+			}
+		} else if (isObject(value)) {
+			iterateObjectKeys(value, parser);
+		}
+
+		parser(key, value, obj);
+	});
+};
+
+var relationMap = {
+	isCreatedBy: "author",
+	hasPublishLocation: "publishLocation",
+	hasGenre: "genre",
+	hasWorkLanguage: "language"
+};
+
+var inComingParser = function inComingParser(key, value, obj) {
+	if (key === "documentType") {
+		obj[key] = {
+			key: value,
+			value: value
+		};
+	}
+
+	if (relationMap.hasOwnProperty(key)) {
+		obj[relationMap[key]] = {
+			key: "https://acc.repository.huygens.knaw.nl/domain/wwkeywords/" + value[0].id,
+			value: value[0].displayName
+		};
+
+		delete obj[key];
+	}
+};
+
+var outGoingParser = function outGoingParser(key, value, obj) {};
+
+var parseIncomingPublication = function parseIncomingPublication(data) {
+	iterateObjectKeys(data, inComingParser);
+
+	return data;
+};
+
+exports.parseIncomingPublication = parseIncomingPublication;
+var parseOutgoingPublication = function parseOutgoingPublication(data) {
+	iterateObjectKeys(data, outGoingParser);
+
+	return data;
+};
+exports.parseOutgoingPublication = parseOutgoingPublication;
+
+},{}],40:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19899,7 +19310,7 @@ var BasicInfoForm = (function () {
 		key: "render",
 		value: function render() {
 			var model = this.props.value;
-
+			console.log("m", model.toJS());
 			return _react2["default"].createElement(
 				"ul",
 				null,
@@ -19913,8 +19324,8 @@ var BasicInfoForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsAutocomplete2["default"], {
 						async: _api2["default"].getPersons,
-						onChange: this.props.onChange.bind(this, "author"),
-						value: model.get("author").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "author"]),
+						value: model.getIn(["@relations", "author"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19938,8 +19349,9 @@ var BasicInfoForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getDocSourceType,
-						onChange: this.props.onChange.bind(this, "documentType"),
-						value: model.get("documentType").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "documentType"]),
+						sort: true,
+						value: model.getIn(["@relations", "documentType"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19951,8 +19363,9 @@ var BasicInfoForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsSelect2["default"], {
 						async: _api2["default"].getGenre,
-						onChange: this.props.onChange.bind(this, "genre"),
-						value: model.get("genre").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "genre"]),
+						sort: true,
+						value: model.getIn(["@relations", "genre"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19964,8 +19377,8 @@ var BasicInfoForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsAutocomplete2["default"], {
 						async: _api2["default"].getLanguages,
-						onChange: this.props.onChange.bind(this, "language"),
-						value: model.get("language").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "language"]),
+						value: model.getIn(["@relations", "language"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19977,8 +19390,8 @@ var BasicInfoForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsAutocomplete2["default"], {
 						async: _api2["default"].getPersons,
-						onChange: this.props.onChange.bind(this, "firstEditor"),
-						value: model.get("firstEditor").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "firstEditor"]),
+						value: model.getIn(["@relations", "firstEditor"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -19990,8 +19403,8 @@ var BasicInfoForm = (function () {
 					),
 					_react2["default"].createElement(_hireFormsAutocomplete2["default"], {
 						async: _api2["default"].getLocations,
-						onChange: this.props.onChange.bind(this, "publishLocation"),
-						value: model.get("publishLocation").toJS() })
+						onChange: this.props.onChange.bind(this, ["@relations", "publishLocation"]),
+						value: model.getIn(["@relations", "publishLocation"]).toJS() })
 				),
 				_react2["default"].createElement(
 					"li",
@@ -20040,7 +19453,7 @@ exports["default"] = (0, _hireFormsForm2["default"])(BasicInfoForm);
 module.exports = exports["default"];
 /* source */
 
-},{"../../api":32,"hire-forms-autocomplete":1,"hire-forms-form":2,"hire-forms-input":3,"hire-forms-select":10,"hire-forms-textarea":11,"react":"react"}],43:[function(_dereq_,module,exports){
+},{"../../api":29,"hire-forms-autocomplete":1,"hire-forms-form":2,"hire-forms-input":3,"hire-forms-select":10,"hire-forms-textarea":11,"react":"react"}],41:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20101,6 +19514,7 @@ var PublicationController = (function (_React$Component) {
 	_createClass(PublicationController, [{
 		key: "componentDidMount",
 		value: function componentDidMount() {
+			_actionsPublication2["default"].getPublication(this.props.id);
 			_storesPublication2["default"].listen(this.onStoreChange.bind(this));
 		}
 	}, {
@@ -20170,7 +19584,7 @@ exports["default"] = PublicationController;
 module.exports = exports["default"];
 /* Receptions */
 
-},{"../actions/publication":30,"../author/link":36,"../stores/publication":48,"./basic-info":42,"hire-forms-multi-form":4,"hire-tabs":13,"react":"react"}],44:[function(_dereq_,module,exports){
+},{"../actions/publication":27,"../author/link":33,"../stores/publication":46,"./basic-info":40,"hire-forms-multi-form":4,"hire-tabs":13,"react":"react"}],42:[function(_dereq_,module,exports){
 // TODO Remove uncamel cased vars
 "use strict";
 
@@ -20276,7 +19690,7 @@ var AuthorStore = (function (_BaseStore) {
 				console.warn("Contracts mismatch! ", diff);
 			}
 
-			this.model = this.model.merge(_immutable2["default"].fromJS(data));
+			this.model = this.model.mergeDeep(_immutable2["default"].fromJS(data));
 			console.log(data);
 		}
 	}]);
@@ -20309,7 +19723,7 @@ authorStore.dispatcherIndex = _dispatcher2["default"].register(dispatcherCallbac
 exports["default"] = authorStore;
 module.exports = exports["default"];
 
-},{"../dispatcher":39,"./base":45,"./models/author":46,"hire-forms-utils":21,"immutable":"immutable"}],45:[function(_dereq_,module,exports){
+},{"../dispatcher":36,"./base":43,"./models/author":44,"hire-forms-utils":18,"immutable":"immutable"}],43:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20355,7 +19769,7 @@ var BaseStore = (function (_EventEmitter) {
 exports["default"] = BaseStore;
 module.exports = exports["default"];
 
-},{"events":20}],46:[function(_dereq_,module,exports){
+},{"events":17}],44:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20380,21 +19794,22 @@ exports["default"] = new _immutable2["default"].Map({
 	birthPlace: "",
 	deathDate: "",
 	deathPlace: "",
-	education: keyValueMap,
-	financials: keyValueMap,
 	gender: "",
-	languages: emptyList,
-	maritalStatus: keyValueMap,
 	names: emptyList,
 	persontype: "",
-	profession: keyValueMap,
 	pseudonyms: emptyList,
-	religion: keyValueMap,
-	socialClass: keyValueMap
+	"@relations": new _immutable2["default"].Map({
+		education: keyValueMap,
+		financials: keyValueMap,
+		maritalStatus: keyValueMap,
+		profession: keyValueMap,
+		religion: keyValueMap,
+		socialClass: keyValueMap
+	})
 });
 module.exports = exports["default"];
 
-},{"immutable":"immutable"}],47:[function(_dereq_,module,exports){
+},{"immutable":"immutable"}],45:[function(_dereq_,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20412,22 +19827,26 @@ var keyValueMap = new _immutable2["default"].Map({
 	value: ""
 });
 
+var emptyList = new _immutable2["default"].List();
+
 exports["default"] = new _immutable2["default"].Map({
-	author: keyValueMap,
 	date: "",
-	documentType: keyValueMap,
-	firstEditor: keyValueMap,
-	genre: keyValueMap,
-	language: keyValueMap,
-	links: new _immutable2["default"].List(),
+	links: emptyList,
 	notes: "",
-	publishLocation: keyValueMap,
 	reference: "",
+	"@relations": new _immutable2["default"].Map({
+		author: keyValueMap,
+		documentType: keyValueMap,
+		firstEditor: keyValueMap,
+		genre: keyValueMap,
+		language: keyValueMap,
+		publishLocation: keyValueMap
+	}),
 	title: ""
 });
 module.exports = exports["default"];
 
-},{"immutable":"immutable"}],48:[function(_dereq_,module,exports){
+},{"immutable":"immutable"}],46:[function(_dereq_,module,exports){
 // TODO Remove uncamel cased vars
 "use strict";
 
@@ -20464,6 +19883,26 @@ var _modelsPublication2 = _interopRequireDefault(_modelsPublication);
 var _hireFormsUtils = _dereq_("hire-forms-utils");
 
 var CHANGE_EVENT = "change";
+
+var diffData = function diffData(receivedData) {
+	var contract = _modelsPublication2["default"].keySeq().toArray();
+	// let serverContract = ["@type", "names", "gender", "birthDate", "deathDate", "types", "links", "floruit", "bibliography", "children", "fsPseudonyms", "health", "livedIn", "nationality", "notes", "personalSituation", "tempOldId", "tempBirthPlace", "tempChildren", "tempCollaborations", "tempDeathPlace", "tempDeath", "tempFinancialSituation", "tempMemberships", "tempMotherTongue", "tempName", "tempPlaceOfBirth", "tempPsChildren", "tempPseudonyms", "tempSpouse", "relatedLocations", "_id", "^rev", "^created", "^modified", "^pid", "^deleted", "@relationCount", "@properties", "@relations", "@variationRefs"];
+
+	var receivedProps = Object.keys(receivedData);
+
+	var addedProps = receivedProps.filter(function (prop) {
+		return contract.indexOf(prop) === -1;
+	});
+
+	var removedProps = contract.filter(function (prop) {
+		return receivedProps.indexOf(prop) === -1;
+	});
+
+	return {
+		added: addedProps,
+		removed: removedProps
+	};
+};
 
 var PublicationStore = (function (_BaseStore) {
 	_inherits(PublicationStore, _BaseStore);
@@ -20508,7 +19947,12 @@ var PublicationStore = (function (_BaseStore) {
 	}, {
 		key: "receive",
 		value: function receive(data) {
-			this.model = _immutable2["default"].fromJS(data);
+			var diff = diffData(data);
+			if (diff.added.length > 0 || diff.removed.length > 0) {
+				console.warn("Contracts mismatch! ", diff);
+			}
+
+			this.model = this.model.mergeDeep(_immutable2["default"].fromJS(data));
 		}
 	}]);
 
@@ -20540,7 +19984,7 @@ publicationStore.dispatcherIndex = _dispatcher2["default"].register(dispatcherCa
 exports["default"] = publicationStore;
 module.exports = exports["default"];
 
-},{"../dispatcher":39,"./base":45,"./models/publication":47,"hire-forms-utils":21,"immutable":"immutable"}]},{},[40])(40)
+},{"../dispatcher":36,"./base":43,"./models/publication":45,"hire-forms-utils":18,"immutable":"immutable"}]},{},[37])(37)
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
