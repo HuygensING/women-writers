@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 $ = require 'jquery'
 _ = require 'underscore'
-React = require "react"
+# React = require "react"
 
 baseTemplate = require '../jade/views/base.jade'
 config = require './config'
@@ -10,7 +10,7 @@ UserStatusView = require './views/user-status'
 
 Person = require './models/person'
 # PersonForm = require './views/person/edit'
-{Author, Publication} = require "../edit-person/build/development"
+# {Author, Publication} = require "../edit-person/build/development"
 PersonView = require './views/person/view'
 PersonGraphView = require './views/person/graph'
 PersonSearchView = require './views/person/search'
@@ -188,18 +188,23 @@ class App extends Backbone.View
 
 	showPersonForm: (id) ->
 		console.log "SHOW: ", id
-
-		Factory = React.createFactory(Author)
-		React.render Factory(id: id), document.getElementById("view")
-
+		location.reload();
 
 	showDocumentForm: (id) ->
 		console.log "SHOW: ", id
+		location.reload();
 
-		Factory = React.createFactory(Publication)
-		React.render Factory(id: id), document.getElementById("view")
 
-		@showView()
+
+
+		# Factory = React.createFactory(Author)
+		# React.render Factory(id: id), document.getElementById("view")
+
+
+		# Factory = React.createFactory(Publication)
+		# React.render Factory(id: id), document.getElementById("view")
+
+		# @showView()
 
 
 

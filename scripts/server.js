@@ -11,7 +11,7 @@ var watchFiles = [
 	baseDir + "/index.html"
 ];
 
-var onFilesChanged = function (event, file) {
+var onFilesChanged = function(event, file) {
 	if (event === "change") {
 		browserSync.reload(file);
 	}
@@ -23,7 +23,9 @@ browserSync.init({
 	server: {
 		baseDir: baseDir,
 		middleware: modRewrite([
-			"^[^\\.]*$ /index.html [L]"
+			"^/womenwriters$ /index.html",
+			"^/womenwriters/.*/edit$ /edit.html [L]",
+			"^/womenwriters/.*$ /index.html [L]"
 		])
 	}
 });

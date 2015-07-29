@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 _ = require "underscore"
-FacetedSearch = require 'huygens-faceted-search/src/coffee/main'
+FacetedSearch = require 'hibb-faceted-search'
 
 facetedSearchMainTemplate = require '../../jade/faceted-search/main.jade'
 

@@ -2,6 +2,10 @@
 	.controls
 		include ../view-controls.jade
 
+	a.edit.btn.green(href=config.editUrl(data._id))
+		i.fa.fa-pencil
+		| Edit
+
 	h2= data.title
 
 	.results-paging

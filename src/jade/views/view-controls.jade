@@ -1,7 +1,11 @@
 if showingRevision
 	p
-		| Showing revision 
+		| Showing revision
 		= data['^rev']
+
+a.edit.btn.green(href=config.editUrl(data._id))
+	i.fa.fa-pencil
+	| Edit
 
 if isDeleted
 	.is-deleted

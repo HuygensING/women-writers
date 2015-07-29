@@ -1,7 +1,8 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 
-SearchResults = require 'huygens-faceted-search/src/coffee/collections/searchresults'
+# FIX should link to searchresults ie: fs.searchResults
+SearchResults = require 'hibb-faceted-search'
 
 config = require '../../config'
 
@@ -67,7 +68,7 @@ class ReceptionSearch extends Backbone.View
 
 		# Type
 		@tabs['type'] = @receptionTypeSelector = new ReceptionTypeSelector
-			
+
 		# Reception (always a 'work')
 		@tabs['reception'] = @receptionSelector = new ReceptionSelector
 		@listenTo @receptionSelector, 'change', =>
@@ -167,7 +168,7 @@ class ReceptionSearch extends Backbone.View
 			$typeText.html text
 		else
 			$typeText.text @types.map(toNiceName).join ', '
-		
+
 		$typeText.show()
 
 	renderReceptionTab: ->

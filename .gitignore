@@ -1,10 +1,4 @@
 node_modules
-.project
-stage
-src/templates/.templates.js
-targets/
-build/
-tests/acceptance/reports
 npm-debug.log
-selenium-debug.log
 config.json
+build
