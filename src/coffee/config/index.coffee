@@ -38,7 +38,7 @@ class Config extends Backbone.Model
 	allPersonsUrl: -> @get('facetedSearchBaseUrl') + @get('personsRootUrl')
 	personUrl: (id) -> @allPersonsUrl() + '/' + id
 	personViewPath: (id) -> '/persons/' + id
-	personViewUrl: (id) -> @get('baseUrl') + @personViewPath id 
+	personViewUrl: (id) -> @get('baseUrl') + @personViewPath id
 
 	personGraphPath: (id) -> "/persons/#{id}/graph"
 	personGraphUrl: (id) -> @get('baseUrl') + @personGraphPath id
@@ -77,13 +77,13 @@ class Config extends Backbone.Model
 
 	maritalStatusUrl: ->
 		@get('facetedSearchBaseUrl') + @get('maritalStatusPath')
-	
+
 	professionUrl: ->
 		@get('facetedSearchBaseUrl') + @get('professionPath')
-		
+
 	religionUrl: ->
 		@get('facetedSearchBaseUrl') + @get('religionPath')
-		
+
 	socialClassUrl: ->
 		@get('facetedSearchBaseUrl') + @get('socialClassPath')
 

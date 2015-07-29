@@ -1,5 +1,8 @@
 module.exports =
-	"baseUrl": "http://resources.huygens.knaw.nl/womenwriters"
-	"searchPath": "/api/v1/search"
-	"relationSearchPath": "/api/search/relations"
-	"facetedSearchBaseUrl": "http://resources.huygens.knaw.nl/womenwriters/api"
+	"baseUrl": "https://acc.resources.huygens.knaw.nl/womenwriters/api"
+	"searchPath": "/v1/search"
+	"facetedSearchBaseUrl": "https://acc.resources.huygens.knaw.nl/womenwriters/api"
+	"tokenPrefix": "womenwriters"
+	"relationSearchPath": "/search/relations"
+	"receptionsPath": "/system/vres/"
+	"userInfoPath": "/system/users/me"
