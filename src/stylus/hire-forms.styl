@@ -16,6 +16,11 @@ well()
 	box-shadow 1px 1px 3px rgba(0, 0, 0, 0.12), -1px -1px 1px rgba(0, 0, 0, 0.04)
 	padding 20px
 
+small()
+	font-style italic
+	font-size 0.8em
+	color #AAA
+
 #view
 	background #EEE
 	padding 40px 0
@@ -40,9 +45,35 @@ well()
 
 		& > .hire-tab
 			width 80%
-			well()
 
+			& > .hire-forms-form
+				well()
 
+			& > .temp-data
+				well()
+				margin-top 20px
+				background-color #EEE
+				color #AAA
+				font-size 0.8em
+
+				ul > li
+					margin-bottom 4px
+
+				h2
+					font-size 1.2em
+					margin 0 0 10px 0
+
+				label, span
+					inline_block()
+
+				label
+					width 140px
+
+				span
+					max-width 500px
+
+.hire-empty-list
+	small()
 
 .hire-forms-form > ul > li
 	margin-bottom 20px

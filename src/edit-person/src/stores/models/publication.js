@@ -13,12 +13,18 @@ export default new Immutable.Map({
 	notes: "",
 	reference: "",
 	"@relations": new Immutable.Map({
-		author: keyValueMap,
-		documentType: keyValueMap,
-		firstEditor: keyValueMap,
-		genre: keyValueMap,
-		language: keyValueMap,
-		publishLocation: keyValueMap
+		documentType: emptyList,
+		firstEditor: emptyList,
+		isCreatedBy: emptyList,
+		hasPublishLocation: emptyList,
+		hasGenre: emptyList,
+		hasWorkLanguage: emptyList
 	}),
+	tempCreator: "",
+	tempLanguage: "",
+	tempOrigin: "",
 	title: ""
 });
+
+
+

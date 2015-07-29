@@ -3,7 +3,10 @@ import form from "hire-forms-form";
 import MultiForm from "hire-forms-multi-form";
 import Select from "hire-forms-select";
 import Input from "hire-forms-input";
+import AutocompleteList from "hire-forms-autocomplete-list";
 import NameForm from "./name";
+
+import API from "../../api";
 
 class BasicInfoForm {
 	render() {
@@ -22,12 +25,10 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Pseudonyms</label>
-					<MultiForm
-						attr={"pseudonyms"}
-						component = {NameForm}
-						onChange={this.props.onChange}
-						onDelete={this.props.onDelete}
-						values={model.get("pseudonyms")} />
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasPseudonym"])}
+						values={model.getIn(["@relations", "hasPseudonym"]).toJS()} />
 				</li>
 				<li>
 					<label>Person type</label>
@@ -51,9 +52,17 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Birth place</label>
-					<Input
-						onChange={this.props.onChange.bind(this, "birthPlace")}
-						value={model.get("birthPlace")} />
+					<AutocompleteList
+						async={API.getLocations}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasBirthPlace"])}
+						values={model.getIn(["@relations", "hasBirthPlace"]).toJS()} />
+				</li>
+				<li>
+					<label>Lived in</label>
+					<AutocompleteList
+						async={API.getLocations}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasResidenceLocation"])}
+						values={model.getIn(["@relations", "hasResidenceLocation"]).toJS()} />
 				</li>
 				<li>
 					<label>Death date</label>
@@ -63,9 +72,10 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Death place</label>
-					<Input
-						onChange={this.props.onChange.bind(this, "deathPlace")}
-						value={model.get("deathPlace")} />
+					<AutocompleteList
+						async={API.getLocations}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasDeathPlace"])}
+						values={model.getIn(["@relations", "hasDeathPlace"]).toJS()} />
 				</li>
 			</ul>
 		);

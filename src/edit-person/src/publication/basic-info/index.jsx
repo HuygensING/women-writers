@@ -4,21 +4,22 @@ import Select from "hire-forms-select";
 import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
 import Autocomplete from "hire-forms-autocomplete";
+import AutocompleteList from "hire-forms-autocomplete-list";
 
 import API from "../../api";
 
 class BasicInfoForm {
 	render() {
 		let model = this.props.value;
-		console.log("m", model.toJS());
+
 		return (
 			<ul>
 				<li>
 					<label>Author</label>
-					<Autocomplete
+					<AutocompleteList
 						async={API.getPersons}
-						onChange={this.props.onChange.bind(this, ["@relations", "author"])}
-						value={model.getIn(["@relations", "author"]).toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "isCreatedBy"])}
+						values={model.getIn(["@relations", "isCreatedBy"]).toJS()} />
 				</li>
 				<li>
 					<label>Title</label>
@@ -36,18 +37,18 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Genre</label>
-					<Select
+					<AutocompleteList
 						async={API.getGenre}
-						onChange={this.props.onChange.bind(this, ["@relations", "genre"])}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasGenre"])}
 						sort={true}
-						value={model.getIn(["@relations", "genre"]).toJS()} />
+						values={model.getIn(["@relations", "hasGenre"]).toJS()} />
 				</li>
 				<li>
 					<label>Language</label>
-					<Autocomplete
+					<AutocompleteList
 						async={API.getLanguages}
-						onChange={this.props.onChange.bind(this, ["@relations", "language"])}
-						value={model.getIn(["@relations", "language"]).toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "hasWorkLanguage"])}
+						values={model.getIn(["@relations", "hasWorkLanguage"]).toJS()} />
 				</li>
 				<li>
 					<label>First editor</label>
@@ -58,10 +59,10 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Publish location</label>
-					<Autocomplete
+					<AutocompleteList
 						async={API.getLocations}
-						onChange={this.props.onChange.bind(this, ["@relations", "publishLocation"])}
-						value={model.getIn(["@relations", "publishLocation"]).toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "hasPublishLocation"])}
+						values={model.getIn(["@relations", "hasPublishLocation"]).toJS()} />
 				</li>
 				<li>
 					<label>Date</label>

@@ -1,6 +1,7 @@
 import React from "react";
 import form from "hire-forms-form";
-import Select from "hire-forms-select";
+import SelectList from "hire-forms-select-list";
+import AutocompleteList from "hire-forms-autocomplete-list";
 
 import API from "../../api";
 
@@ -12,21 +13,32 @@ class PublicForm {
 			<ul>
 				<li>
 					<label>Profession</label>
-					<Select
+					<SelectList
 						async={API.getProfession}
-						onChange={this.props.onChange.bind(this, ["@relations", "profession"])}
-						value={model.getIn(["@relations", "profession"]).toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "hasProfession"])}
+						values={model.getIn(["@relations", "hasProfession"]).toJS()} />
 				</li>
 				<li>
 					<label>Financials</label>
-					<Select
+					<SelectList
 						async={API.getFinancialSituation}
-						onChange={this.props.onChange.bind(this, ["@relations", "financials"])}
-						value={model.getIn(["@relations", "financials"]).toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "hasFinancials"])}
+						values={model.getIn(["@relations", "hasFinancials"]).toJS()} />
 				</li>
-				{/* Collaborations */}
-				{/* Memberschips */}
-				{/* TEMP DATA */}
+				<li>
+					<label>Collaborations</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isCollaboratorOf"])}
+						values={model.getIn(["@relations", "isCollaboratorOf"]).toJS()} />
+				</li>
+				<li>
+					<label>Memberships</label>
+					<AutocompleteList
+						async={API.getCollectives}
+						onChange={this.props.onChange.bind(this, ["@relations", "isMemberOf"])}
+						values={model.getIn(["@relations", "isMemberOf"]).toJS()} />
+				</li>
 			</ul>
 		);
 	}

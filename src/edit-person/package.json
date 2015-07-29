@@ -29,6 +29,8 @@
   "dependencies": {
     "classnames": "^2.1.1",
     "extend": "^2.0.1",
+    "hire-forms-autocomplete-list": "^1.0.1",
+    "hire-forms-select-list": "^1.0.3",
     "hire-forms-utils": "^1.1.0",
     "immutable": "^3.7.2",
     "react": "^0.13.3",

@@ -21,10 +21,10 @@ let iterateObjectKeys = function(obj, parser) {
 };
 
 let relationMap = {
-	isCreatedBy: "author",
-	hasPublishLocation: "publishLocation",
-	hasGenre: "genre",
-	hasWorkLanguage: "language"
+	isCreatedBy: "wwpersons",
+	hasPublishLocation: "wwlocations",
+	hasGenre: "wwkeywords",
+	hasWorkLanguage: "wwlanguages"
 };
 
 
@@ -38,12 +38,12 @@ let inComingParser = function(key, value, obj) {
 
 
 	if (relationMap.hasOwnProperty(key)) {
-		obj[relationMap[key]] = {
-			key: "https://acc.repository.huygens.knaw.nl/domain/wwkeywords/" + value[0].id,
-			value: value[0].displayName
-		};
-
-		delete obj[key];
+		obj[key] = value.map((v) => {
+			return {
+				key: `https://acc.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
+				value: v.displayName
+			};
+		});
 	}
 };
 

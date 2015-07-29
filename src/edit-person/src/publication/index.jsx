@@ -31,8 +31,7 @@ class PublicationController extends React.Component {
 	}
 
 	onStoreChange() {
-		let state = Object.assign(publicationStore.getState());
-		this.setState(state);
+		this.setState(publicationStore.getState());
 	}
 
 	handleTabChange(label) {
@@ -59,6 +58,23 @@ class PublicationController extends React.Component {
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
 						value={this.state.publication} />
+					<div className="temp-data">
+						<h2>Temporary data</h2>
+						<ul>
+							<li>
+								<label>Creator</label>
+								<span>{this.state.publication.get("tempCreator")}</span>
+							</li>
+							<li>
+								<label>Language</label>
+								<span>{this.state.publication.get("tempLanguage")}</span>
+							</li>
+							<li>
+								<label>Origin</label>
+								<span>{this.state.publication.get("tempOrigin")}</span>
+							</li>
+						</ul>
+					</div>
 				</Tab>
 				<Tab
 					active={this.state.activeTab === "Links"}
@@ -75,5 +91,9 @@ class PublicationController extends React.Component {
 		);
 	}
 }
+
+PublicationController.propTypes = {
+	id: React.PropTypes.string
+};
 
 export default PublicationController;

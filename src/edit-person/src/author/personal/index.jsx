@@ -1,6 +1,8 @@
 import React from "react";
 import form from "hire-forms-form";
 import Select from "hire-forms-select";
+import SelectList from "hire-forms-select-list";
+import AutocompleteList from "hire-forms-autocomplete-list";
 import Textarea from "hire-forms-textarea";
 
 import API from "../../api";
@@ -13,13 +15,19 @@ class PersonalForm {
 			<ul>
 				<li>
 					<label>Marital status</label>
-					<Select
+					<SelectList
 						async={API.getMaritalStatus}
-						onChange={this.props.onChange.bind(this, ["@relations", "maritalStatus"])}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasMaritalStatus"])}
 						sort={true}
-						value={model.getIn(["@relations", "maritalStatus"]).toJS()} />
+						values={model.getIn(["@relations", "hasMaritalStatus"]).toJS()} />
 				</li>
-				{/* isSpouseOf */}
+				<li>
+					<label>Spouse of</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isSpouseOf"])}
+						values={model.getIn(["@relations", "isSpouseOf"]).toJS()} />
+				</li>
 				<li>
 					<label>Children</label>
 					<Select
@@ -29,27 +37,27 @@ class PersonalForm {
 				</li>
 				<li>
 					<label>Social class</label>
-					<Select
+					<SelectList
 						async={API.getSocialClass}
-						onChange={this.props.onChange.bind(this, ["@relations", "socialClass"])}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasSocialClass"])}
 						sort={true}
-						value={model.getIn(["@relations", "socialClass"]).toJS()} />
+						values={model.getIn(["@relations", "hasSocialClass"]).toJS()} />
 				</li>
 				<li>
 					<label>Education</label>
-					<Select
+					<SelectList
 						async={API.getEducation}
-						onChange={this.props.onChange.bind(this, ["@relations", "education"])}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasEducation"])}
 						sort={true}
-						value={model.getIn(["@relations", "education"]).toJS()} />
+						values={model.getIn(["@relations", "hasEducation"]).toJS()} />
 				</li>
 				<li>
 					<label>Religion</label>
-					<Select
+					<SelectList
 						async={API.getReligion}
-						onChange={this.props.onChange.bind(this, ["@relations", "religion"])}
+						onChange={this.props.onChange.bind(this, ["@relations", "hasReligion"])}
 						sort={true}
-						value={model.getIn(["@relations", "religion"]).toJS()} />
+						values={model.getIn(["@relations", "hasReligion"]).toJS()} />
 				</li>
 				<li>
 					<label>Bibliography</label>

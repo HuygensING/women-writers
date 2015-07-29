@@ -98,6 +98,10 @@ export default {
 		getAutocompleteValues("locations", query, done);
 	},
 
+	getCollectives(query, done) {
+		getAutocompleteValues("collectives", query, done);
+	},
+
 	getMaritalStatus(done) {
 		getSelectValues("maritalStatus", done);
 	},

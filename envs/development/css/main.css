@@ -106,10 +106,48 @@ p,
 }
 #view > .hire-tabs > .hire-tab {
   width: 80%;
+}
+#view > .hire-tabs > .hire-tab > .hire-forms-form {
   background: #fff;
   -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.04);
   box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.04);
   padding: 20px;
+}
+#view > .hire-tabs > .hire-tab > .temp-data {
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.04);
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.12), -1px -1px 1px rgba(0,0,0,0.04);
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #eee;
+  color: #aaa;
+  font-size: 0.8em;
+}
+#view > .hire-tabs > .hire-tab > .temp-data ul > li {
+  margin-bottom: 4px;
+}
+#view > .hire-tabs > .hire-tab > .temp-data h2 {
+  font-size: 1.2em;
+  margin: 0 0 10px 0;
+}
+#view > .hire-tabs > .hire-tab > .temp-data label,
+#view > .hire-tabs > .hire-tab > .temp-data span {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+#view > .hire-tabs > .hire-tab > .temp-data label {
+  width: 140px;
+}
+#view > .hire-tabs > .hire-tab > .temp-data span {
+  max-width: 500px;
+}
+.hire-empty-list {
+  font-style: italic;
+  font-size: 0.8em;
+  color: #aaa;
 }
 .hire-forms-form > ul > li {
   margin-bottom: 20px;

@@ -57,6 +57,39 @@ class AuthorController extends React.Component {
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
 						value={this.state.author} />
+					<div className="temp-data">
+						<h2>Temporary data</h2>
+						<ul>
+							<li>
+								<label>Old ID</label>
+								<span>{this.state.author.get("tempOldId")}</span>
+							</li>
+							<li>
+								<label>Name</label>
+								<span>{this.state.author.get("tempName")}</span>
+							</li>
+							<li>
+								<label>Spouse</label>
+								<span>{this.state.author.get("tempSpouse")}</span>
+							</li>
+							<li>
+								<label>Pseudonyms</label>
+								<span>{this.state.author.get("tempPseudonyms")}</span>
+							</li>
+							<li>
+								<label>Birth Place</label>
+								<span>{this.state.author.get("tempBirthPlace")}</span>
+							</li>
+							<li>
+								<label>Place Of Birth</label>
+								<span>{this.state.author.get("tempPlaceOfBirth")}</span>
+							</li>
+							<li>
+								<label>Death Place</label>
+								<span>{this.state.author.get("tempDeathPlace")}</span>
+							</li>
+						</ul>
+					</div>
 				</Tab>
 				{/* Works */}
 				<Tab
@@ -66,6 +99,23 @@ class AuthorController extends React.Component {
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
 						value={this.state.author} />
+					<div className="temp-data">
+						<h2>Temporary data</h2>
+						<ul>
+							<li>
+								<label>Spouse</label>
+								<span>{this.state.author.get("tempSpouse")}</span>
+							</li>
+							<li>
+								<label>Children</label>
+								<span>{this.state.author.get("tempChildren")}</span>
+							</li>
+							<li>
+								<label>Ps Children</label>
+								<span>{this.state.author.get("tempPsChildren")}</span>
+							</li>
+						</ul>
+					</div>
 				</Tab>
 				<Tab
 					active={this.state.activeTab === "Public"}
@@ -74,6 +124,23 @@ class AuthorController extends React.Component {
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
 						value={this.state.author} />
+					<div className="temp-data">
+						<h2>Temporary data</h2>
+						<ul>
+							<li>
+								<label>Financial situation</label>
+								<span>{this.state.author.get("tempFinancialSituation")}</span>
+							</li>
+							<li>
+								<label>Collaborations</label>
+								<span>{this.state.author.get("tempCollaborations")}</span>
+							</li>
+							<li>
+								<label>Memberships</label>
+								<span>{this.state.author.get("tempMemberships")}</span>
+							</li>
+						</ul>
+					</div>
 				</Tab>
 				<Tab
 					active={this.state.activeTab === "Links"}
