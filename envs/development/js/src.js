@@ -8013,13 +8013,10 @@ module.exports = {
 
 },{}],"/home/gijs/Projects/women-writers/src/coffee/config/env.coffee":[function(require,module,exports){
 module.exports = {
-  "baseUrl": "https://acc.resources.huygens.knaw.nl/womenwriters/api",
-  "searchPath": "/v1/search",
-  "facetedSearchBaseUrl": "https://acc.resources.huygens.knaw.nl/womenwriters/api",
-  "tokenPrefix": "womenwriters",
-  "relationSearchPath": "/search/relations",
-  "receptionsPath": "/system/vres/",
-  "userInfoPath": "/system/users/me"
+  "baseUrl": "http://resources.huygens.knaw.nl/womenwriters",
+  "searchPath": "/api/v1/search",
+  "relationSearchPath": "/api/search/relations",
+  "facetedSearchBaseUrl": "http://resources.huygens.knaw.nl/womenwriters/api"
 };
 
 
@@ -8084,7 +8081,7 @@ Config = (function(_super) {
   };
 
   Config.prototype.relationsUrl = function() {
-    return this.get('baseUrl') + '/domain/wwrelations';
+    return this.get('facetedSearchBaseUrl') + '/domain/wwrelations';
   };
 
   Config.prototype.allPersonsUrl = function() {
@@ -13354,7 +13351,7 @@ module.exports = UserStatus;
 
 
 },{"../../jade/views/user-status.jade":"/home/gijs/Projects/women-writers/src/jade/views/user-status.jade","backbone":false,"hibb-login":"/home/gijs/Projects/women-writers/node_modules/hibb-login/dist/index.js","jquery":false}],"/home/gijs/Projects/women-writers/src/data/metadata/wwdocument.json":[function(require,module,exports){
-module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "edition" : {
     "type" : "String"
   },
@@ -13463,7 +13460,7 @@ module.exports=module.exports=module.exports={
   }
 }
 },{}],"/home/gijs/Projects/women-writers/src/data/metadata/wwperson.json":[function(require,module,exports){
-module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "tempPsChildren" : {
     "type" : "String"
   },
@@ -23568,7 +23565,7 @@ module.exports = RelationItem;
 
 
 },{"../../templates/dropdown.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/dropdown.jade","../../templates/list-item.jade":"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/templates/list-item.jade","backbone":false,"underscore":false}],"/usr/local/lib/node_modules/timbuctoo-edit-forms/src/data/personnamecomponent.json":[function(require,module,exports){
-module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "value" : {
     "type" : "String"
   },

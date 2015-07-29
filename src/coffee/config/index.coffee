@@ -33,7 +33,7 @@ class Config extends Backbone.Model
 	excelResultsUrl: (queryId) ->
 		@get('baseUrl') + @get('searchPath') + "/#{queryId}/xls"
 
-	relationsUrl: -> @get('baseUrl') + '/domain/wwrelations'
+	relationsUrl: -> @get('facetedSearchBaseUrl') + '/domain/wwrelations'
 
 	allPersonsUrl: -> @get('facetedSearchBaseUrl') + @get('personsRootUrl')
 	personUrl: (id) -> @allPersonsUrl() + '/' + id
