@@ -26,6 +26,7 @@ browserSync.init({
 			"^/womenwriters$ /index.html",
 			"^/womenwriters/css/(.*).css$ /css/$1.css [L]",
 			"^/womenwriters/js/(.*).js$ /js/$1.js [L]",
+			"^/womenwriters/images/(.*)$ /images/$1 [L]",
 			"^/womenwriters/.*/edit$ /edit.html [L]",
 			"^/womenwriters/.*$ /index.html [L]"
 		])
