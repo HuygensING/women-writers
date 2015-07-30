@@ -14,7 +14,7 @@ node_modules/.bin/jade \
 	src/stylus/main.styl
 
 # Build React JS
-node_modules/.bin/browserify src-edit/index.js \
+node_modules/.bin/browserify src-edit/index.jsx \
 	--detect-globals false \
 	--extension=.jsx \
 	--external classnames \
