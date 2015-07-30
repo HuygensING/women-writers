@@ -4,7 +4,7 @@ node_modules/.bin/jade \
 	--no-debug \
 	--out build/development \
 	--watch \
-	src/index.jade src/edit.jade &
+	src/index.jade src-edit/edit.jade &
 
 ./node_modules/.bin/stylus \
 	--use nib \
@@ -18,7 +18,7 @@ node_modules/.bin/jade \
 	--compress \
 	--out build/development/css/react.css \
 	--watch \
-	src/stylus/hire-forms.styl &
+	src-edit/stylus/index.styl &
 
 # node_modules/.bin/browserify src/index.jsx \
 # 	--detect-globals false \

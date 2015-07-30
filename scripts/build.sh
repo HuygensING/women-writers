@@ -1,16 +1,19 @@
 #!/bin/sh
 
+# Build HTML
 node_modules/.bin/jade \
 	--no-debug \
 	--out build/development \
-	src/{index, edit}.jade
+	src/index.jade src-edit/edit.jade
 
+# Build CSS
 ./node_modules/.bin/stylus \
 	--use nib \
 	--compress \
 	--out build/development/css/backbone.css \
 	src/stylus/main.styl
 
+# Build React JS
 node_modules/.bin/browserify src-edit/index.js \
 	--detect-globals false \
 	--extension=.jsx \
@@ -21,6 +24,7 @@ node_modules/.bin/browserify src-edit/index.js \
 	--transform [ babelify --plugins object-assign ] \
 	--verbose > build/development/js/react-src.js
 
+# Build Backbone JS
 node_modules/.bin/browserify src/coffee/main.coffee \
 	--detect-globals false \
 	--extension=.coffee \

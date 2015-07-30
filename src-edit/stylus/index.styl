@@ -1,0 +1,182 @@
+@import './import/variables'
+@import './import/functions'
+@import './import/fonts'
+
+body
+	background #EEE
+	padding 40px 0
+	font-size 100%
+	line-height 1.375em
+	font-size 16px
+
+body, h1, h2, h3, h4, h5
+	font-family 'Open Sans'
+
+ul
+	margin 0
+	padding 0
+	list-style none
+
+.app > .hire-tabs
+	margin auto
+	width 960px
+
+	& > ul, & > .hire-tab
+		inline_block()
+
+	& > ul
+		width 20%
+
+		li
+			cursor pointer
+
+			&.active
+				font-weight bold
+				font-size 1.2em
+				transition font-size 150ms
+
+	& > .hire-tab
+		width 80%
+
+		& > .hire-forms-form
+			well()
+
+		& > .temp-data
+			well()
+			margin-top 20px
+			background-color #EEE
+			color #AAA
+			font-size 0.8em
+
+			ul > li
+				margin-bottom 4px
+
+			h2
+				font-size 1.2em
+				margin 0 0 10px 0
+
+			label, span
+				inline_block()
+
+			label
+				width 140px
+
+			span
+				max-width 500px
+
+.hire-empty-list
+	small()
+
+.hire-forms-form > ul > li
+	margin-bottom 20px
+
+	label, label + div
+		inline_block()
+
+	label
+		width 140px
+
+	input, textarea
+		input()
+
+.hire-select, .hire-forms-autocomplete
+	position relative
+
+	.input-container
+		position relative
+		height 32px
+		border 1px solid #CCC
+		padding-left 6px
+		line-height 32px
+		box-sizing border-box
+		cursor pointer
+
+		&:hover
+			button
+				cursor pointer
+				color baseColor
+
+		button
+			select_button()
+
+ul.hire-options
+	position absolute
+	background white
+	border 1px solid #CCC
+	max-height 400px
+	overflow-y auto
+	width 100%
+	box-sizing border-box
+
+	li
+		line-height 32px
+		padding-left 6px
+		cursor pointer
+
+		&:hover, &.highlight
+			background lightyellow
+
+		&.selected:before
+			color baseColor
+			content "✓"
+
+		span.highlight
+			font-weight bold
+			text-decoration underline
+
+
+.hire-select
+	width 397px
+
+	ul.hire-options
+		width 367px
+		top 0
+
+
+.hire-multi-form
+	position relative
+	display inline-block
+
+	& > ul
+		margin-bottom 40px
+
+		& > li
+			position relative
+			margin-bottom 20px
+
+			& > button.hire-remove-form
+				multi_form_button()
+				top 0
+
+	& > ul + button.hire-add-form
+		multi_form_button()
+		bottom 0
+
+.hire-forms-form
+	&.names-form > ul
+		width 400px
+
+		& > li
+			inline_block()
+			margin-bottom 0
+
+			&:first-child
+				width 36%
+				margin-right 4%
+
+			&:last-child
+				width 60%
+
+			input
+				width 100%
+
+.hire-forms-link-form
+	margin-bottom 40px
+
+	& > ul > li:last-child
+		.hire-input.invalid
+			.hire-forms-invalid-message
+				display none
+
+			input
+				border 1px solid red
