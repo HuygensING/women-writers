@@ -1,10 +1,14 @@
-@import './import/variables'
-@import './import/functions'
-@import './import/fonts'
+@import "./import/variables"
+@import "./import/functions"
+@import "./import/fonts"
+
+@import "./footer"
 
 body
+	margin 0
+	padding 0
 	background #EEE
-	padding 40px 0
+	// padding 40px 0
 	font-size 100%
 	line-height 1.375em
 	font-size 16px
@@ -17,9 +21,57 @@ ul
 	padding 0
 	list-style none
 
-.app > .hire-tabs
-	margin auto
-	width 960px
+.app > .hire-tabs, header, ul.main-menu
+	padding 0 5%
+	width 90%
+
+header
+	background-color wwTurquoise
+
+	h1
+		margin 0
+		padding 0
+		line-height 75px
+		color wwLighterTurquoise
+
+ul.main-menu
+	background-color wwLightTurquoise
+	box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
+
+	li
+		inline_block()
+		padding 10px 0
+		width 120px
+		text-align center
+
+		&.active
+			border-bottom 2px solid wwYellow
+			font-weight bold
+			color white
+
+		a
+			color wwLighterTurquoise
+			text-decoration none
+			text-transform uppercase
+			font-size 0.9em
+
+.app > div > .hire-tabs, .app > .hire-tabs
+	padding 40px 5% 120px 5%
+	position relative
+
+	& > button
+		button()
+		background-color wwLightTurquoise
+		color wwLighterTurquoise
+		text-transform uppercase
+		padding 4px 12px
+		font-weight bold
+		position absolute
+		top 140px
+		left 5%
+
+		&:hover
+			button_box_shadow()
 
 	& > ul, & > .hire-tab
 		inline_block()
@@ -32,7 +84,7 @@ ul
 
 			&.active
 				font-weight bold
-				font-size 1.2em
+				font-size 1.1em
 				transition font-size 150ms
 
 	& > .hire-tab
@@ -67,10 +119,16 @@ ul
 .hire-empty-list
 	small()
 
-.hire-forms-form > ul > li
+.record
+	well()
+
+	& > li
+		margin-bottom 4px
+
+.hire-forms-form > ul > li, .record
 	margin-bottom 20px
 
-	label, label + div
+	label, label + div, label + span
 		inline_block()
 
 	label

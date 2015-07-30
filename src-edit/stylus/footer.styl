@@ -1,0 +1,45 @@
+footer
+	position fixed
+	bottom 0
+	left 0
+	right 0
+	height 60px
+	background #EEE
+	box-shadow -1px 0 3px #CCC
+
+	button
+		border none
+		background wwGray
+		// background none
+		color darken(wwDarkGray, 15%)
+		// font-weight bold
+		text-transform uppercase
+		font-size 0.9em
+		padding 10px 20px
+		cursor pointer
+		outline none
+		top 12px
+		position absolute
+
+
+		&.cancel
+			left 5%
+
+			&:hover
+				box-shadow 0 2px 3px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.1)
+
+		&.delete
+			right calc(5% + 100px)
+
+			&:hover
+				color wwLighterTurquoise
+				background wwRed
+				box-shadow 0 2px 3px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.1)
+
+		&.save
+			right 5%
+
+			&:hover
+				color wwLighterTurquoise
+				background wwLightTurquoise
+				box-shadow 0 2px 3px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.1)

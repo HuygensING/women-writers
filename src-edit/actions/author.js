@@ -6,6 +6,10 @@ let authorActions = {
 		API.getAuthor(id);
 	},
 
+	saveAuthor(id) {
+		API.saveAuthor(id);
+	},
+
 	setKey(key, value) {
 		dispatcher.handleViewAction({
 			actionType: "AUTHOR_SET_KEY",

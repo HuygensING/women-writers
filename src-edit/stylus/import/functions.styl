@@ -24,15 +24,19 @@ small()
 button_box_shadow()
 	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 
+button()
+	background none
+	border none
+	outline none
+	cursor pointer
+
 multi_form_button()
+	button()
 	position absolute
 	margin-top 4px
 	width 24px
 	height 24px
 	right -40px
-	background none
-	border none
-	cursor pointer
 
 	&:hover
 		button_box_shadow()
@@ -44,10 +48,9 @@ multi_form_button()
 	&.hire-remove-form:hover
 		background wwRed
 
+
 select_button()
-	background none
-	border none
-	outline none
+	button()
 	position absolute
 	top 0
 	right -3px

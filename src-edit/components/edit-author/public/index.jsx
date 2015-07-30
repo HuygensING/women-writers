@@ -3,7 +3,7 @@ import form from "hire-forms-form";
 import SelectList from "hire-forms-select-list";
 import AutocompleteList from "hire-forms-autocomplete-list";
 
-import API from "../../api";
+import API from "../../../api";
 
 class PublicForm {
 	render() {

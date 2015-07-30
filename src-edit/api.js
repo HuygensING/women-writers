@@ -1,11 +1,13 @@
 import xhr from "xhr";
 
 import serverActions from "./actions/server";
+import authorStore from "./stores/author";
 
 import {parseIncomingAuthor, parseOutgoingAuthor} from "./parsers/author";
 import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publication";
 
 let baseUrl = "https://acc.repository.huygens.knaw.nl";
+let authorUrl = baseUrl + "/domain/wwpersons";
 
 let handleError = function(err, resp, body) {
 	console.error("Some xhr request failed!", err);
@@ -53,7 +55,7 @@ export default {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			url: baseUrl + "/domain/wwpersons/" + id
+			url: authorUrl + "/" + id
 		};
 
 		let done = function(err, resp, body) {
@@ -62,6 +64,33 @@ export default {
 			body = parseIncomingAuthor(JSON.parse(body));
 
 			serverActions.receiveAuthor(body);
+		};
+
+		xhr(options, done);
+	},
+
+	saveAuthor() {
+		let model = authorStore.getState().author;
+		let data = parseOutgoingAuthor(model.toJS());
+
+		console.log("FIX IT!", data);
+
+		return;
+		// TODO fix authorization
+		// TODO fix error messages
+
+		let options = {
+			body: JSON.stringify(data),
+			headers: {
+				Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
+				"Content-Type": "application/json"
+			},
+			method: "PUT",
+			url: authorUrl + "/" + model.get("_id")
+		};
+
+		let done = function(err) {
+			if (err) { handleError(err); }
 		};
 
 		xhr(options, done);

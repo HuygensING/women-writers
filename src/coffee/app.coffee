@@ -187,11 +187,9 @@ class App extends Backbone.View
 	home: ->
 
 	showPersonForm: (id) ->
-		console.log "SHOW: ", id
 		location.reload();
 
 	showDocumentForm: (id) ->
-		console.log "SHOW: ", id
 		location.reload();
 
 
@@ -241,45 +239,46 @@ class App extends Backbone.View
 		@receptionSearch.$el.fadeIn 75
 
 	showPersonView: (id, version) ->
-		person = new Person _id: id
-		showPerson = =>
-			if 'hasPseudonym' of person.get('@relations')
-				# We want to display all the pseudonym-linked
-				# works on the 'real' author page, so we need
-				# to load those, and insert them into the model
-				# before rendering the view. It's a bit of a
-				# hack, but this really should have been done
-				# server-side within the context of the VRE, because
-				# now we have to fetch entire objects, when all we
-				# really want is a list of works linked to each pseudonym
-				person.set pseudonyms: {}
+		location.reload();
+		# person = new Person _id: id
+		# showPerson = =>
+		# 	if 'hasPseudonym' of person.get('@relations')
+		# 		# We want to display all the pseudonym-linked
+		# 		# works on the 'real' author page, so we need
+		# 		# to load those, and insert them into the model
+		# 		# before rendering the view. It's a bit of a
+		# 		# hack, but this really should have been done
+		# 		# server-side within the context of the VRE, because
+		# 		# now we have to fetch entire objects, when all we
+		# 		# really want is a list of works linked to each pseudonym
+		# 		person.set pseudonyms: {}
 
-				pseudonymsLoaded = for p in person.get('@relations').hasPseudonym
-					pseudonym = new Person _id: p.id
-					pseudonym.fetch()
+		# 		pseudonymsLoaded = for p in person.get('@relations').hasPseudonym
+		# 			pseudonym = new Person _id: p.id
+		# 			pseudonym.fetch()
 
-				Backbone.$.when(pseudonymsLoaded...).done (results...) =>
-					for r in results
-						[pseudonym] = r
-						if pseudonym?['@relations']?['isCreatorOf']?.length
-							person.get('pseudonyms')[pseudonym._id] = pseudonym
-					view = new PersonView
-						model: person
-						showingRevision: version?
-					@switchView view
-					@showView()
-			else
-				view = new PersonView
-					model: person
-					showingRevision: version?
-				@switchView view
-				@showView()
+		# 		Backbone.$.when(pseudonymsLoaded...).done (results...) =>
+		# 			for r in results
+		# 				[pseudonym] = r
+		# 				if pseudonym?['@relations']?['isCreatorOf']?.length
+		# 					person.get('pseudonyms')[pseudonym._id] = pseudonym
+		# 			view = new PersonView
+		# 				model: person
+		# 				showingRevision: version?
+		# 			@switchView view
+		# 			@showView()
+		# 	else
+		# 		view = new PersonView
+		# 			model: person
+		# 			showingRevision: version?
+		# 		@switchView view
+		# 		@showView()
 
-		fetchPerson = if version?
-			person.fetchVersion(version)
-		else
-			person.fetch()
-		fetchPerson.done => showPerson()
+		# fetchPerson = if version?
+		# 	person.fetchVersion(version)
+		# else
+		# 	person.fetch()
+		# fetchPerson.done => showPerson()
 
 	showPersonGraph: (id) ->
 		person = new Person _id: id
@@ -292,20 +291,21 @@ class App extends Backbone.View
 		person.fetch().done => showGraph()
 
 	showDocumentView: (id, version) ->
-		document = new Document _id: id
-		showDocument = =>
-			view = new DocumentView
-				model: document
-				showingRevision: version?
-			@switchView view
-			@showView()
+		location.reload();
+		# document = new Document _id: id
+		# showDocument = =>
+		# 	view = new DocumentView
+		# 		model: document
+		# 		showingRevision: version?
+		# 	@switchView view
+		# 	@showView()
 
-		fetchDocument = if version?
-			document.fetchVersion(version)
-		else
-			document.fetch()
-		fetchDocument.done =>
-			showDocument()
+		# fetchDocument = if version?
+		# 	document.fetchVersion(version)
+		# else
+		# 	document.fetch()
+		# fetchDocument.done =>
+		# 	showDocument()
 
 	showSourceView: -> @showDocumentView arguments...
 

@@ -1,15 +1,12 @@
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
-import MultiForm from "hire-forms-multi-form";
+import BasicInfo from "./basic-info";
+import Personal from "./personal";
+import Public from "./public";
 
-import BasicInfoForm from "./basic-info";
-import PersonalForm from "./personal";
-import PublicForm from "./public";
-import LinkForm from "./link";
-
-import actions from "../actions/author";
-import authorStore from "../stores/author";
+import actions from "../../actions/author";
+import authorStore from "../../stores/author";
 
 class AuthorController extends React.Component {
 	constructor(props) {
@@ -39,12 +36,9 @@ class AuthorController extends React.Component {
 		});
 	}
 
-	handleFormChange(key, value) {
-		actions.setKey(key, value);
-	}
-
-	handleFormDelete(key) {
-		actions.deleteKey(key);
+	goToEditPage() {
+		let url = window.location.pathname + "/edit";
+		window.location.assign(url);
 	}
 
 	render() {
@@ -53,10 +47,7 @@ class AuthorController extends React.Component {
 				<Tab
 					active={this.state.activeTab === "Basic Info"}
 					label="Basic Info">
-					<BasicInfoForm
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						value={this.state.author} />
+					<BasicInfo value={this.state.author} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -95,10 +86,7 @@ class AuthorController extends React.Component {
 				<Tab
 					active={this.state.activeTab === "Personal"}
 					label="Personal">
-					<PersonalForm
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						value={this.state.author} />
+					<Personal value={this.state.author} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -120,10 +108,7 @@ class AuthorController extends React.Component {
 				<Tab
 					active={this.state.activeTab === "Public"}
 					label="Public">
-					<PublicForm
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						value={this.state.author} />
+					<Public value={this.state.author} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -142,17 +127,19 @@ class AuthorController extends React.Component {
 						</ul>
 					</div>
 				</Tab>
-				<Tab
-					active={this.state.activeTab === "Links"}
-					label="Links">
-					<MultiForm
-						attr={"links"}
-						component = {LinkForm}
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						values={this.state.author.get("links")} />
-				</Tab>
-				{/* Links */}
+				<button onClick={this.goToEditPage.bind(this)}>Edit</button>
+				{/*
+					<Tab
+						active={this.state.activeTab === "Links"}
+						label="Links">
+						<MultiForm
+							attr={"links"}
+							component = {LinkForm}
+							onChange={this.handleFormChange}
+							onDelete={this.handleFormDelete}
+							values={this.state.author.get("links")} />
+					</Tab>
+				*/}
 			</Tabs>
 		);
 	}

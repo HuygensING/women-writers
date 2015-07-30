@@ -1,13 +1,11 @@
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
-import MultiForm from "hire-forms-multi-form";
+import BasicInfo from "./basic-info";
+// import LinkForm from "../edit-link";
 
-import BasicInfoForm from "./basic-info";
-import LinkForm from "../author/link";
-
-import actions from "../actions/publication";
-import publicationStore from "../stores/publication";
+import actions from "../../actions/publication";
+import publicationStore from "../../stores/publication";
 
 class PublicationController extends React.Component {
 	constructor(props) {
@@ -40,23 +38,13 @@ class PublicationController extends React.Component {
 		});
 	}
 
-	handleFormChange(key, value) {
-		actions.setKey(key, value);
-	}
-
-	handleFormDelete(key) {
-		actions.deleteKey(key);
-	}
-
 	render() {
 		return (
 			<Tabs onChange={this.handleTabChange.bind(this)}>
 				<Tab
 					active={this.state.activeTab === "Basic Info"}
 					label="Basic Info">
-					<BasicInfoForm
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
+					<BasicInfo
 						value={this.state.publication} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
@@ -76,16 +64,18 @@ class PublicationController extends React.Component {
 						</ul>
 					</div>
 				</Tab>
-				<Tab
-					active={this.state.activeTab === "Links"}
-					label="Links">
-					<MultiForm
-						attr={"links"}
-						component = {LinkForm}
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						values={this.state.publication.get("links")} />
-				</Tab>
+				{/*
+					<Tab
+						active={this.state.activeTab === "Links"}
+						label="Links">
+						<MultiForm
+							attr={"links"}
+							component = {LinkForm}
+							onChange={this.handleFormChange}
+							onDelete={this.handleFormDelete}
+							values={this.state.publication.get("links")} />
+					</Tab>
+				*/}
 				{/* Receptions */}
 			</Tabs>
 		);

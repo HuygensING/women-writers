@@ -70,7 +70,6 @@ class AuthorStore extends BaseStore {
 		}
 
 		this.model = this.model.mergeDeep(Immutable.fromJS(data));
-		console.log(data);
 	}
 }
 
