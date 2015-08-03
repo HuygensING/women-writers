@@ -3,11 +3,32 @@ import xhr from "xhr";
 import serverActions from "./actions/server";
 import authorStore from "./stores/author";
 
+import relationMap from "./stores/utils/relation-map";
+
 import {parseIncomingAuthor, parseOutgoingAuthor} from "./parsers/author";
 import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publication";
-
 let baseUrl = "https://acc.repository.huygens.knaw.nl";
 let authorUrl = baseUrl + "/domain/wwpersons";
+let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations"
+
+let relationTypes = null;
+
+xhr({
+	url: `${baseUrl}/system/relationtypes`
+}, function(err, resp, body) {
+	if (err) {
+		console.error("Fetching relation types failed!", err, resp);
+	}
+
+	let toObject = function(prev, current) {
+		prev[current.regularName] = current;
+		prev[current.inverseName] = current;
+
+		return prev;
+	};
+
+	relationTypes = JSON.parse(body).reduce(toObject, {});
+});
 
 let handleError = function(err, resp, body) {
 	console.error("Some xhr request failed!", err);
@@ -49,6 +70,80 @@ let getSelectValues = function(name, done) {
 	xhr(options, xhrDone);
 };
 
+let xhrPromiseCreator = function(url) {
+	return function(data) {
+		return new Promise(
+			function (resolve, reject) {
+				let options = {
+					body: JSON.stringify(data),
+					headers: {
+						Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
+						"Content-Type": "application/json",
+						VRE_ID: "WomenWriters"
+					},
+					method: "POST",
+					url: url
+				};
+
+				let done = function(err, resp, body) {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(body);
+					}
+				};
+
+				xhr(options, done);
+			}
+		);
+	};
+};
+
+let saveRelations = function(relations, sourceId) {
+	let notEmpty = (name) =>
+		relations[name].length > 0;
+
+	let toRelationObjects = (name) =>
+		relations[name].map((relation) => {
+			let relationType = relationTypes[name];
+
+			if (relationMap[name] == null) {
+				console.error("Unknown relation: ", name);
+			}
+
+			let targetId = relation.key.substr(relation.key.lastIndexOf("/") + 1);
+
+			if (relationType.regularName !== name) {
+				[sourceId, targetId] = [targetId, sourceId];
+			}
+
+			return {
+				"accepted": true,
+				"@type": "wwrelation",
+				"^typeId": relationType._id,
+				"^sourceId": sourceId,
+				"^sourceType": relationType.sourceTypeName,
+				"^targetId": targetId,
+				"^targetType": relationType.targetTypeName
+			};
+		});
+
+	let flatten = (prev, current) =>
+		prev.concat(current);
+
+	let relationObjects = Object.keys(relations)
+		.filter(notEmpty)
+		.map(toRelationObjects)
+		.reduce(flatten);
+
+	let relationSaver = xhrPromiseCreator(relationUrl);
+
+	let promisedRelations = relationObjects.map(relationSaver);
+	Promise.all(promisedRelations).then(function(response) {
+		console.log(response);
+	});
+};
+
 export default {
 	getAuthor(id) {
 		let options = {
@@ -73,17 +168,16 @@ export default {
 		let model = authorStore.getState().author;
 		let data = parseOutgoingAuthor(model.toJS());
 
-		console.log("FIX IT!", data);
+		console.log(data);
 
-		return;
-		// TODO fix authorization
-		// TODO fix error messages
+		return saveRelations(data["@relations"], data._id);
 
 		let options = {
 			body: JSON.stringify(data),
 			headers: {
 				Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"VRE_ID": "WomenWriters"
 			},
 			method: "PUT",
 			url: authorUrl + "/" + model.get("_id")

@@ -4,6 +4,7 @@ import {Tabs, Tab} from "hire-tabs";
 import BasicInfo from "./basic-info";
 import Personal from "./personal";
 import Public from "./public";
+import EditButton from "../edit-button";
 
 import actions from "../../actions/author";
 import authorStore from "../../stores/author";
@@ -127,7 +128,7 @@ class AuthorController extends React.Component {
 						</ul>
 					</div>
 				</Tab>
-				<button onClick={this.goToEditPage.bind(this)}>Edit</button>
+				<EditButton pid={this.state.author.get("^pid")} />
 				{/*
 					<Tab
 						active={this.state.activeTab === "Links"}

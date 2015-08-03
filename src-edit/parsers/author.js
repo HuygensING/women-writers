@@ -1,3 +1,5 @@
+import relationMap from "../stores/utils/relation-map";
+
 let iterateObjectKeys = function(obj, parser) {
 	let isObject = function(o) {
 		return o !== null && !Array.isArray(o) && typeof o === "object";
@@ -20,21 +22,22 @@ let iterateObjectKeys = function(obj, parser) {
 	});
 };
 
-let relationMap = {
-	hasBirthPlace: "wwlocations",
-	hasDeathPlace: "wwlocations",
-	hasEducation: "wwkeywords",
-	hasFinancialSituation: "wwkeywords",
-	hasMaritalStatus: "wwkeywords",
-	isCollaboratorOf: "wwpersons",
-	isMemberOf: "wwcollectives",
-	isSpouseOf: "wwpersons",
-	hasProfession: "wwkeywords",
-	hasPseudonym: "wwpersons",
-	hasReligion: "wwkeywords",
-	hasResidenceLocation: "wwlocations",
-	hasSocialClass: "wwkeywords"
-};
+// let relationMap = {
+// 	hasBirthPlace: "wwlocations",
+// 	hasDeathPlace: "wwlocations",
+// 	hasEducation: "wwkeywords",
+// 	hasFinancialSituation: "wwkeywords",
+// 	hasMaritalStatus: "wwkeywords",
+// 	isCollaboratorOf: "wwpersons",
+// 	isCreatorOf: "wwdocuments",
+// 	isMemberOf: "wwcollectives",
+// 	isSpouseOf: "wwpersons",
+// 	hasProfession: "wwkeywords",
+// 	hasPseudonym: "wwpersons",
+// 	hasReligion: "wwkeywords",
+// 	hasResidenceLocation: "wwlocations",
+// 	hasSocialClass: "wwkeywords"
+// };
 
 let inComingParser = function(key, value, obj) {
 	if (key === "names") {
@@ -65,7 +68,26 @@ let outGoingParser = function(key, value, obj) {
 		delete obj[key];
 	}
 
-	if (key.charAt(0) === "@" || key.charAt(0) === "^" || key.charAt(0) === "_") {
+	if ((key === "gender") || (key === "children")) {
+		obj[key] = value.toUpperCase();
+	}
+
+	if (key === "names") {
+		obj[key] = value.map((names) => {
+			return {
+				components: [{
+						type: "FORENAME",
+						value: names.firstName
+					}, {
+						type: "SURNAME",
+						value: names.lastName
+					}
+				]
+			};
+		});
+	}
+
+	if (key === "persontype") {
 		delete obj[key];
 	}
 };

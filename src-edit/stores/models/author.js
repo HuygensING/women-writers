@@ -13,7 +13,6 @@ export default new Immutable.Map({
 	gender: "",
 	names: emptyList,
 	persontype: "",
-	pseudonyms: emptyList,
 	"@relations": new Immutable.Map({
 		hasBirthPlace: emptyList,
 		hasDeathPlace: emptyList,
@@ -26,6 +25,7 @@ export default new Immutable.Map({
 		hasResidenceLocation: emptyList,
 		hasSocialClass: emptyList,
 		isCollaboratorOf: emptyList,
+		isCreatorOf: emptyList,
 		isMemberOf: emptyList,
 		isSpouseOf: emptyList
 	})

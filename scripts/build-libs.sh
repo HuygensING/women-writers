@@ -9,7 +9,10 @@ mkdir build/development/css
 cp -r static/* build/development
 
 # Copy Faceted Search CSS
-cp node_modules/hibb-faceted-search/dist/main.min.css build/development/css/faceted-search.css
+cp node_modules/hibb-faceted-search/dist/main.min.css build/development/css/hibb-faceted-search.css
+
+# Copy Modal CSS
+cp node_modules/hibb-modal/dist/main.css build/development/css/hibb-modal.css
 
 # Bundle React libs
 node_modules/.bin/browserify \

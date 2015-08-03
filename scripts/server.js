@@ -23,12 +23,12 @@ browserSync.init({
 	server: {
 		baseDir: baseDir,
 		middleware: modRewrite([
-			"^/womenwriters$ /index.html",
+			// "^/womenwriters$ /index.html",
 			"^/womenwriters/css/(.*).css$ /css/$1.css [L]",
 			"^/womenwriters/js/(.*).js$ /js/$1.js [L]",
 			"^/womenwriters/images/(.*)$ /images/$1 [L]",
 			"^/womenwriters/(persons|documents)/.+$ /edit.html [L]",
-			"^/womenwriters/.*$ /index.html [L]"
+			"^/womenwriters/?.*$ /index.html [L]"
 		])
 	}
 });

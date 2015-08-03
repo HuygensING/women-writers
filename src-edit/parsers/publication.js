@@ -1,3 +1,5 @@
+import relationMap from "../stores/utils/relation-map";
+
 let iterateObjectKeys = function(obj, parser) {
 	let isObject = function(o) {
 		return o !== null && !Array.isArray(o) && typeof o === "object";
@@ -20,12 +22,12 @@ let iterateObjectKeys = function(obj, parser) {
 	});
 };
 
-let relationMap = {
-	isCreatedBy: "wwpersons",
-	hasPublishLocation: "wwlocations",
-	hasGenre: "wwkeywords",
-	hasWorkLanguage: "wwlanguages"
-};
+// let relationMap = {
+// 	isCreatedBy: "wwpersons",
+// 	hasPublishLocation: "wwlocations",
+// 	hasGenre: "wwkeywords",
+// 	hasWorkLanguage: "wwlanguages"
+// };
 
 
 let inComingParser = function(key, value, obj) {

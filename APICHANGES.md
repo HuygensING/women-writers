@@ -50,16 +50,6 @@ children: "UNKOWN"
 ### Voorstel
 children: "Unknown"
 
-## Author.birthPlace & Author.deathPlace
-
-### Nu
-Author.tempBirthPlace
-Author.tempDeathPlace
-
-### Voorstel
-Author.birthPlace
-Author.deathPlace
-
 ## Author.names & Author.pseudonyms
 
 ### Nu
@@ -80,13 +70,21 @@ names: [{
 	lastName: "Alberti"
 }, ...]
 
-## Author.pseudonyms
-Voorbeeld: https://acc.repository.huygens.knaw.nl/domain/wwpersons/PERS000000007037
+## Saven
 
 ### Nu
-Er is een relatie hasPseudonym, maar die geeft een displayName terug,
-dus geen splitsing tussen firstName en lastName. Er is ook een fsPseudonyms prop, maar die blijft leeg ([]).
+1. Na het saven (PUT) moet er gewacht worden op de ^pid voor er opnieuw gesaved mag worden. Naast dat dit erg gebruikersonvriendelijk is, moeten er aan de frontend trucs worden uitgehaald (polling?) om te achterhalen wanneer er weer gesaved kan worden.
+2. Na het saven (PUT/POST), moet het object opnieuw opgehaald worden. Dat is nodig, want de frontend heeft de nieuwe ^rev en ^pid nodig voor er weer gesaved kan worden.
 
 ### Voorstel
-Relatie pseudonym verwijderen en de prop fsPseudonyms hernoemen naar
-pseudonyms. Vergelijk vorige issue "Author.names & Author.pseudonyms".
+Na een POST/PUT het nieuwe object (incl ^pid) meesturen als response.
+
+### Resource location als ID
+
+### Nu
+Soms wordt een resource location teruggestuurd door de server (bijv in
+de faceted search), soms alleen het ID. De frontend moet nu coderen waar
+welk type ID wordt teruggegeven.
+
+### Voorstel
+Overal resource locations (entiteiten, relaties, etc).
