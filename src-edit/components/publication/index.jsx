@@ -3,6 +3,7 @@ import {Tabs, Tab} from "hire-tabs";
 
 import BasicInfo from "./basic-info";
 // import LinkForm from "../edit-link";
+import EditButton from "../edit-button";
 
 import actions from "../../actions/publication";
 import publicationStore from "../../stores/publication";
@@ -77,6 +78,7 @@ class PublicationController extends React.Component {
 					</Tab>
 				*/}
 				{/* Receptions */}
+				<EditButton pid={this.state.publication.get("^pid")} />
 			</Tabs>
 		);
 	}

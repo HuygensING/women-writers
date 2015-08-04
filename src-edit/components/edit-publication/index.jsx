@@ -90,7 +90,7 @@ class PublicationEditController extends React.Component {
 					</Tab>
 					{/* Receptions */}
 				</Tabs>
-				<SaveFooter method="savePublication" />
+				<SaveFooter type="publication" />
 			</div>
 		);
 	}

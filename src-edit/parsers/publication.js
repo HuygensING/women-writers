@@ -50,9 +50,36 @@ let inComingParser = function(key, value, obj) {
 };
 
 let outGoingParser = function(key, value, obj) {
+	if (key.substr(0, 4) === "temp") {
+		delete obj[key];
+	}
 
+	if (key === "documentType") {
+		obj[key] = value.value;
+	}
+	// if ((key === "gender") || (key === "children")) {
+	// 	obj[key] = value.toUpperCase();
+	// }
+
+	// if (key === "names") {
+	// 	obj[key] = value.map((names) => {
+	// 		return {
+	// 			components: [{
+	// 					type: "FORENAME",
+	// 					value: names.firstName
+	// 				}, {
+	// 					type: "SURNAME",
+	// 					value: names.lastName
+	// 				}
+	// 			]
+	// 		};
+	// 	});
+	// }
+
+	// if (key === "persontype") {
+	// 	delete obj[key];
+	// }
 };
-
 export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);
 

@@ -6,6 +6,10 @@ let publicationActions = {
 		API.getPublication(id);
 	},
 
+	savePublication(id) {
+		API.savePublication(id);
+	},
+
 	setKey(key, value) {
 		dispatcher.handleViewAction({
 			actionType: "PUBLICATION_SET_KEY",

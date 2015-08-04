@@ -2,6 +2,7 @@ import xhr from "xhr";
 
 import serverActions from "./actions/server";
 import authorStore from "./stores/author";
+import publicationStore from "./stores/publication";
 
 import relationMap from "./stores/utils/relation-map";
 
@@ -9,6 +10,7 @@ import {parseIncomingAuthor, parseOutgoingAuthor} from "./parsers/author";
 import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publication";
 let baseUrl = "https://acc.repository.huygens.knaw.nl";
 let authorUrl = baseUrl + "/domain/wwpersons";
+let publicationUrl = baseUrl + "/domain/wwdocuments";
 let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations"
 
 let relationTypes = null;
@@ -168,9 +170,9 @@ export default {
 		let model = authorStore.getState().author;
 		let data = parseOutgoingAuthor(model.toJS());
 
-		console.log(data);
+		// console.log(data);
 
-		return saveRelations(data["@relations"], data._id);
+		// saveRelations(data["@relations"], data._id);
 
 		let options = {
 			body: JSON.stringify(data),
@@ -204,6 +206,32 @@ export default {
 			body = parseIncomingPublication(JSON.parse(body));
 
 			serverActions.receivePublication(body);
+		};
+
+		xhr(options, done);
+	},
+
+	savePublication() {
+		let model = publicationStore.getState().publication;
+		let data = parseOutgoingPublication(model.toJS());
+
+		console.log(data);
+
+		// saveRelations(data["@relations"], data._id);
+
+		let options = {
+			body: JSON.stringify(data),
+			headers: {
+				Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
+				"Content-Type": "application/json",
+				"VRE_ID": "WomenWriters"
+			},
+			method: "PUT",
+			url: publicationUrl + "/" + model.get("_id")
+		};
+
+		let done = function(err) {
+			if (err) { handleError(err); }
 		};
 
 		xhr(options, done);
