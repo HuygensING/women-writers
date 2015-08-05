@@ -2,7 +2,7 @@ import React from "react";
 
 class Str extends React.Component {
 	render() {
-		let value = (this.props.value == "") ?
+		let value = (this.props.value === "") ?
 			"-" :
 			this.props.value;
 

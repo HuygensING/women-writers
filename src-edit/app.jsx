@@ -14,12 +14,20 @@ class App extends React.Component {
 
 		if (types === "persons") {
 			form = (rest.length && rest[0] === "edit") ?
-				 <EditAuthor id={id} /> :
-				 <Author id={id} />;
+				<EditAuthor id={id} /> :
+				<Author id={id} />;
+
+			if (id === "new") {
+				form = <EditAuthor />
+			}
 		} else if (types === "documents") {
 			form = (rest.length && rest[0] === "edit") ?
-				 <EditPublication id={id} /> :
-				 <Publication id={id} />;
+				<EditPublication id={id} /> :
+				<Publication id={id} />;
+
+			if (id === "new") {
+				form = <EditPublication />
+			}
 		}
 
 		return (
@@ -27,14 +35,6 @@ class App extends React.Component {
 				<header>
 					<h1>NEWW Women Writers</h1>
 				</header>
-				<ul className="main-menu">
-					<li className={cx({active: types==="persons"})}>
-						<a href="/womenwriters/persons/">Authors</a>
-					</li>
-					<li className={cx({active: types==="documents"})}>
-						<a href="/womenwriters/documents/">Publications</a>
-					</li>
-				</ul>
 				{form}
 			</div>
 		);

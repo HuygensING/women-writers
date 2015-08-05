@@ -3,10 +3,9 @@ import form from "hire-forms-form";
 import Select from "hire-forms-select";
 import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
-import Autocomplete from "hire-forms-autocomplete";
 import AutocompleteList from "hire-forms-autocomplete-list";
 
-import API from "../../../api";
+import API from "../../../stores/api";
 
 class BasicInfoForm {
 	render() {
@@ -30,10 +29,9 @@ class BasicInfoForm {
 				<li>
 					<label>Document type</label>
 					<Select
-						async={API.getDocSourceType}
-						onChange={this.props.onChange.bind(this, ["@relations", "documentType"])}
-						sort={true}
-						value={model.getIn(["@relations", "documentType"]).toJS()} />
+						onChange={this.props.onChange.bind(this, "documentType")}
+						options={["Unknown", "Anthology", "Article", "Award", "Catalogue", "Compilation", "Diary", "Letter", "List", "Monograph", "Periodical", "Picture", "Publicity", "Sheetmusic", "Theaterscript", "Work"]}
+						value={model.get("documentType")} />
 				</li>
 				<li>
 					<label>Genre</label>
@@ -50,13 +48,15 @@ class BasicInfoForm {
 						onChange={this.props.onChange.bind(this, ["@relations", "hasWorkLanguage"])}
 						values={model.getIn(["@relations", "hasWorkLanguage"]).toJS()} />
 				</li>
-				<li>
-					<label>First editor</label>
-					<Autocomplete
-						async={API.getPersons}
-						onChange={this.props.onChange.bind(this, ["@relations", "firstEditor"])}
-						value={model.getIn(["@relations", "firstEditor"]).toJS()} />
-				</li>
+				{/*
+					<li>
+						<label>First editor</label>
+						<AutocompleteList
+							async={API.getPersons}
+							onChange={this.props.onChange.bind(this, ["@relations", "firstEditor"])}
+							value={model.getIn(["@relations", "firstEditor"]).toJS()} />
+					</li>
+				*/}
 				<li>
 					<label>Publish location</label>
 					<AutocompleteList

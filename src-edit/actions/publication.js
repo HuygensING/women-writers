@@ -1,9 +1,15 @@
 import dispatcher from "../dispatcher";
-import API from "../api";
+import API from "../stores/api";
 
 let publicationActions = {
 	getPublication(id) {
-		API.getPublication(id);
+		if (id != null) {
+			API.getPublication(id);
+		} else {
+			dispatcher.handleViewAction({
+				actionType: "PUBLICATION_NEW"
+			});
+		}
 	},
 
 	savePublication(id) {

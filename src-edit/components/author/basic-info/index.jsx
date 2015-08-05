@@ -7,11 +7,15 @@ class BasicInfo {
 	render() {
 		let model = this.props.value;
 
+		let names = (model.get("names").size) ?
+			model.get("names").toJS().map((name, index) => <li key={index}>{name.firstName} {name.lastName}</li>) :
+			"-";
+
 		return (
 			<ul className="record">
 				<li>
 					<label>Names</label>
-					<span>{model.get("names")}</span>
+					<span>{names}</span>
 				</li>
 				<li>
 					<label>Pseudonyms</label>

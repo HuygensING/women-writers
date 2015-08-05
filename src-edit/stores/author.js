@@ -86,6 +86,8 @@ let dispatcherCallback = function(payload) {
 		case "AUTHOR_DELETE_KEY":
 			authorStore.deleteKey(payload.action.key);
 			break;
+		case "AUTHOR_NEW":
+			break;
 		default:
 			return;
 	}

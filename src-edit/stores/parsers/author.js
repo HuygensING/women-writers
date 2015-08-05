@@ -1,4 +1,4 @@
-import relationMap from "../stores/utils/relation-map";
+import relationMap from "../utils/relation-map";
 
 let iterateObjectKeys = function(obj, parser) {
 	let isObject = function(o) {

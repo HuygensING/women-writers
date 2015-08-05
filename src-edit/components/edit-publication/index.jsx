@@ -1,3 +1,7 @@
+// TODO NewButton should have a select first, to choose
+// what kind of author. The select should only be visible if the the
+// parent is saved (has an _id prop).
+
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
@@ -5,6 +9,7 @@ import MultiForm from "hire-forms-multi-form";
 
 import BasicInfoForm from "./basic-info";
 import LinkForm from "../edit-link";
+import NewButton from "../new-button";
 import SaveFooter from "../save-footer";
 
 import actions from "../../actions/publication";
@@ -50,6 +55,8 @@ class PublicationEditController extends React.Component {
 	}
 
 	render() {
+		let model = this.state.publication;
+
 		return (
 			<div className="edit-publication">
 				<Tabs onChange={this.handleTabChange.bind(this)}>
@@ -59,21 +66,21 @@ class PublicationEditController extends React.Component {
 						<BasicInfoForm
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
-							value={this.state.publication} />
+							value={model} />
 						<div className="temp-data">
 							<h2>Temporary data</h2>
 							<ul>
 								<li>
 									<label>Creator</label>
-									<span>{this.state.publication.get("tempCreator")}</span>
+									<span>{model.get("tempCreator")}</span>
 								</li>
 								<li>
 									<label>Language</label>
-									<span>{this.state.publication.get("tempLanguage")}</span>
+									<span>{model.get("tempLanguage")}</span>
 								</li>
 								<li>
 									<label>Origin</label>
-									<span>{this.state.publication.get("tempOrigin")}</span>
+									<span>{model.get("tempOrigin")}</span>
 								</li>
 							</ul>
 						</div>
@@ -86,9 +93,15 @@ class PublicationEditController extends React.Component {
 							component = {LinkForm}
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
-							values={this.state.publication.get("links")} />
+							values={model.get("links")} />
 					</Tab>
 					{/* Receptions */}
+					{/*
+						<NewButton
+							key={model.get("_id")}
+							type="author"
+							value={model.get("title")} />
+					*/}
 				</Tabs>
 				<SaveFooter type="publication" />
 			</div>

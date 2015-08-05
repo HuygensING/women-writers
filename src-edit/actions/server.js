@@ -29,9 +29,9 @@ let serverActions = {
 		});
 	},
 
-	receivelanguages(data) {
+	receiveRelations(data) {
 		dispatcher.handleServerAction({
-			actionType: "LANGUAGES_RECEIVE",
+			actionType: "RELATIONS_RECEIVE",
 			data: data
 		});
 	}

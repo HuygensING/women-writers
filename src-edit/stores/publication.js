@@ -70,7 +70,7 @@ class PublicationStore extends BaseStore {
 			console.warn("Contracts mismatch! ", diff);
 		}
 
-		this.model = this.model.mergeDeep(Immutable.fromJS(data));
+		this.model = publicationModel.mergeDeep(Immutable.fromJS(data));
 	}
 }
 

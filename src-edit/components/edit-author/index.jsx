@@ -7,6 +7,7 @@ import BasicInfoForm from "./basic-info";
 import PersonalForm from "./personal";
 import PublicForm from "./public";
 import LinkForm from "../edit-link";
+import NewButton from "../new-button";
 import SaveFooter from "../save-footer";
 
 import actions from "../../actions/author";
@@ -49,6 +50,12 @@ class AuthorEditController extends React.Component {
 	}
 
 	render() {
+		let model = this.state.author;
+
+		let authorName = model.get("names").size ?
+			`${model.get("names").get(0).get("lastName")}, ${model.get("names").get(0).get("firstName")}` :
+			null;
+
 		return (
 			<div className="edit-author">
 				<Tabs onChange={this.handleTabChange.bind(this)}>
@@ -58,37 +65,37 @@ class AuthorEditController extends React.Component {
 						<BasicInfoForm
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
-							value={this.state.author} />
+							value={model} />
 						<div className="temp-data">
 							<h2>Temporary data</h2>
 							<ul>
 								<li>
 									<label>Old ID</label>
-									<span>{this.state.author.get("tempOldId")}</span>
+									<span>{model.get("tempOldId")}</span>
 								</li>
 								<li>
 									<label>Name</label>
-									<span>{this.state.author.get("tempName")}</span>
+									<span>{model.get("tempName")}</span>
 								</li>
 								<li>
 									<label>Spouse</label>
-									<span>{this.state.author.get("tempSpouse")}</span>
+									<span>{model.get("tempSpouse")}</span>
 								</li>
 								<li>
 									<label>Pseudonyms</label>
-									<span>{this.state.author.get("tempPseudonyms")}</span>
+									<span>{model.get("tempPseudonyms")}</span>
 								</li>
 								<li>
 									<label>Birth Place</label>
-									<span>{this.state.author.get("tempBirthPlace")}</span>
+									<span>{model.get("tempBirthPlace")}</span>
 								</li>
 								<li>
 									<label>Place Of Birth</label>
-									<span>{this.state.author.get("tempPlaceOfBirth")}</span>
+									<span>{model.get("tempPlaceOfBirth")}</span>
 								</li>
 								<li>
 									<label>Death Place</label>
-									<span>{this.state.author.get("tempDeathPlace")}</span>
+									<span>{model.get("tempDeathPlace")}</span>
 								</li>
 							</ul>
 						</div>
@@ -100,21 +107,21 @@ class AuthorEditController extends React.Component {
 						<PersonalForm
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
-							value={this.state.author} />
+							value={model} />
 						<div className="temp-data">
 							<h2>Temporary data</h2>
 							<ul>
 								<li>
 									<label>Spouse</label>
-									<span>{this.state.author.get("tempSpouse")}</span>
+									<span>{model.get("tempSpouse")}</span>
 								</li>
 								<li>
 									<label>Children</label>
-									<span>{this.state.author.get("tempChildren")}</span>
+									<span>{model.get("tempChildren")}</span>
 								</li>
 								<li>
 									<label>Ps Children</label>
-									<span>{this.state.author.get("tempPsChildren")}</span>
+									<span>{model.get("tempPsChildren")}</span>
 								</li>
 							</ul>
 						</div>
@@ -125,21 +132,21 @@ class AuthorEditController extends React.Component {
 						<PublicForm
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
-							value={this.state.author} />
+							value={model} />
 						<div className="temp-data">
 							<h2>Temporary data</h2>
 							<ul>
 								<li>
 									<label>Financial situation</label>
-									<span>{this.state.author.get("tempFinancialSituation")}</span>
+									<span>{model.get("tempFinancialSituation")}</span>
 								</li>
 								<li>
 									<label>Collaborations</label>
-									<span>{this.state.author.get("tempCollaborations")}</span>
+									<span>{model.get("tempCollaborations")}</span>
 								</li>
 								<li>
 									<label>Memberships</label>
-									<span>{this.state.author.get("tempMemberships")}</span>
+									<span>{model.get("tempMemberships")}</span>
 								</li>
 							</ul>
 						</div>
@@ -152,9 +159,13 @@ class AuthorEditController extends React.Component {
 							component = {LinkForm}
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
-							values={this.state.author.get("links")} />
+							values={model.get("links")} />
 					</Tab>
 					{/* Links */}
+					<NewButton
+						key={model.get("_id")}
+						type="publication"
+						value={authorName} />
 				</Tabs>
 				<SaveFooter type="author" />
 			</div>

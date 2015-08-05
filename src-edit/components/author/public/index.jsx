@@ -14,7 +14,7 @@ class Public {
 				</li>
 				<li>
 					<label>Financials</label>
-					<Relation values={model.getIn(["@relations", "hasFinancials"]).toJS()} />
+					<Relation values={model.getIn(["@relations", "hasFinancialSituation"]).toJS()} />
 				</li>
 				<li>
 					<label>Collaborations</label>

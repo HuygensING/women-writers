@@ -5,7 +5,7 @@ import SelectList from "hire-forms-select-list";
 import AutocompleteList from "hire-forms-autocomplete-list";
 import Textarea from "hire-forms-textarea";
 
-import API from "../../../api";
+import API from "../../../stores/api";
 
 class PersonalForm {
 	render() {

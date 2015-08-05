@@ -4,6 +4,8 @@ import {Tabs, Tab} from "hire-tabs";
 import BasicInfo from "./basic-info";
 import Personal from "./personal";
 import Public from "./public";
+import Publications from "./publications";
+import Links from "../links";
 import EditButton from "../edit-button";
 
 import actions from "../../actions/author";
@@ -83,7 +85,6 @@ class AuthorController extends React.Component {
 						</ul>
 					</div>
 				</Tab>
-				{/* Works */}
 				<Tab
 					active={this.state.activeTab === "Personal"}
 					label="Personal">
@@ -128,19 +129,17 @@ class AuthorController extends React.Component {
 						</ul>
 					</div>
 				</Tab>
+				<Tab
+					active={this.state.activeTab === "Publications"}
+					label="Publications">
+					<Publications value={this.state.author} />
+				</Tab>
+				<Tab
+					active={this.state.activeTab === "Links"}
+					label="Links">
+					<Links values={this.state.author.get("links").toJS()} />
+				</Tab>
 				<EditButton pid={this.state.author.get("^pid")} />
-				{/*
-					<Tab
-						active={this.state.activeTab === "Links"}
-						label="Links">
-						<MultiForm
-							attr={"links"}
-							component = {LinkForm}
-							onChange={this.handleFormChange}
-							onDelete={this.handleFormDelete}
-							values={this.state.author.get("links")} />
-					</Tab>
-				*/}
 			</Tabs>
 		);
 	}

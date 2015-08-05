@@ -3,7 +3,7 @@ import form from "hire-forms-form";
 import SelectList from "hire-forms-select-list";
 import AutocompleteList from "hire-forms-autocomplete-list";
 
-import API from "../../../api";
+import API from "../../../stores/api";
 
 class PublicForm {
 	render() {
@@ -22,8 +22,8 @@ class PublicForm {
 					<label>Financials</label>
 					<SelectList
 						async={API.getFinancialSituation}
-						onChange={this.props.onChange.bind(this, ["@relations", "hasFinancials"])}
-						values={model.getIn(["@relations", "hasFinancials"]).toJS()} />
+						onChange={this.props.onChange.bind(this, ["@relations", "hasFinancialSituation"])}
+						values={model.getIn(["@relations", "hasFinancialSituation"]).toJS()} />
 				</li>
 				<li>
 					<label>Collaborations</label>

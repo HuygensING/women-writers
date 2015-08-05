@@ -3,6 +3,7 @@
 @import "./import/fonts"
 
 @import "./footer"
+@import "./link"
 
 body
 	margin 0
@@ -21,7 +22,7 @@ ul
 	padding 0
 	list-style none
 
-.app > .hire-tabs, header, ul.main-menu
+.app > .hire-tabs, header, #main-menu
 	padding 0 5%
 	width 90%
 
@@ -34,14 +35,14 @@ header
 		line-height 75px
 		color wwLighterTurquoise
 
-ul.main-menu
+#main-menu
 	background-color wwLightTurquoise
 	box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
 
 	li
 		inline_block()
-		padding 10px 0
-		width 120px
+		padding 10px 20px
+		// width 120px
 		text-align center
 
 		&.active
@@ -67,7 +68,7 @@ ul.main-menu
 		padding 4px 12px
 		font-weight bold
 		position absolute
-		top 140px
+		top 180px
 		left 5%
 
 		&:hover
@@ -111,7 +112,7 @@ ul.main-menu
 				inline_block()
 
 			label
-				width 140px
+				width labelWidth
 
 			span
 				max-width 500px
@@ -131,8 +132,11 @@ ul.main-menu
 	label, label + div, label + span
 		inline_block()
 
+	label + span
+		max-width "calc(100% - %s)" % labelWidth
+
 	label
-		width 140px
+		width labelWidth
 
 	input, textarea
 		input()

@@ -2,11 +2,15 @@ import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
 import BasicInfo from "./basic-info";
+import Receptions from "./receptions";
 // import LinkForm from "../edit-link";
+import Links from "../links";
 import EditButton from "../edit-button";
 
 import actions from "../../actions/publication";
 import publicationStore from "../../stores/publication";
+
+import router from "../../router";
 
 class PublicationController extends React.Component {
 	constructor(props) {
@@ -15,7 +19,7 @@ class PublicationController extends React.Component {
 		this.state = Object.assign(
 			publicationStore.getState(),
 			{
-				activeTab: "Basic Info"
+				activeTab: "Basic info"
 			}
 		);
 	}
@@ -23,6 +27,12 @@ class PublicationController extends React.Component {
 	componentDidMount() {
 		actions.getPublication(this.props.id);
 		publicationStore.listen(this.onStoreChange.bind(this));
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.id !== nextProps.id) {
+			actions.getPublication(nextProps.id);
+		}
 	}
 
 	componentWillUnmount() {
@@ -34,6 +44,8 @@ class PublicationController extends React.Component {
 	}
 
 	handleTabChange(label) {
+		router.navigate(`/documents/${this.props.id}/${label.toLowerCase()}`);
+
 		this.setState({
 			activeTab: label
 		});
@@ -43,8 +55,8 @@ class PublicationController extends React.Component {
 		return (
 			<Tabs onChange={this.handleTabChange.bind(this)}>
 				<Tab
-					active={this.state.activeTab === "Basic Info"}
-					label="Basic Info">
+					active={this.state.activeTab === "Basic info"}
+					label="Basic info">
 					<BasicInfo
 						value={this.state.publication} />
 					<div className="temp-data">
@@ -65,18 +77,16 @@ class PublicationController extends React.Component {
 						</ul>
 					</div>
 				</Tab>
-				{/*
-					<Tab
-						active={this.state.activeTab === "Links"}
-						label="Links">
-						<MultiForm
-							attr={"links"}
-							component = {LinkForm}
-							onChange={this.handleFormChange}
-							onDelete={this.handleFormDelete}
-							values={this.state.publication.get("links")} />
-					</Tab>
-				*/}
+				<Tab
+					active={this.state.activeTab === "Links"}
+					label="Links">
+					<Links values={this.state.publication.get("links").toJS()} />
+				</Tab>
+				<Tab
+					active={this.state.activeTab === "Receptions"}
+					label="Receptions">
+					<Receptions value={this.state.publication} />
+				</Tab>
 				{/* Receptions */}
 				<EditButton pid={this.state.publication.get("^pid")} />
 			</Tabs>
@@ -85,7 +95,8 @@ class PublicationController extends React.Component {
 }
 
 PublicationController.propTypes = {
-	id: React.PropTypes.string
+	id: React.PropTypes.string,
+	tab: React.PropTypes.string
 };
 
 export default PublicationController;

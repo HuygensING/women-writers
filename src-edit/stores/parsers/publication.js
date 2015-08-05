@@ -1,4 +1,4 @@
-import relationMap from "../stores/utils/relation-map";
+import relationMap from "../utils/relation-map";
 
 let iterateObjectKeys = function(obj, parser) {
 	let isObject = function(o) {
@@ -22,20 +22,9 @@ let iterateObjectKeys = function(obj, parser) {
 	});
 };
 
-// let relationMap = {
-// 	isCreatedBy: "wwpersons",
-// 	hasPublishLocation: "wwlocations",
-// 	hasGenre: "wwkeywords",
-// 	hasWorkLanguage: "wwlanguages"
-// };
-
-
 let inComingParser = function(key, value, obj) {
 	if (key === "documentType") {
-		obj[key] = {
-			key: value,
-			value: value
-		};
+		obj[key] = value.charAt(0) + value.substr(1).toLowerCase();
 	}
 
 
@@ -55,30 +44,8 @@ let outGoingParser = function(key, value, obj) {
 	}
 
 	if (key === "documentType") {
-		obj[key] = value.value;
+		obj[key] = value.toUpperCase();
 	}
-	// if ((key === "gender") || (key === "children")) {
-	// 	obj[key] = value.toUpperCase();
-	// }
-
-	// if (key === "names") {
-	// 	obj[key] = value.map((names) => {
-	// 		return {
-	// 			components: [{
-	// 					type: "FORENAME",
-	// 					value: names.firstName
-	// 				}, {
-	// 					type: "SURNAME",
-	// 					value: names.lastName
-	// 				}
-	// 			]
-	// 		};
-	// 	});
-	// }
-
-	// if (key === "persontype") {
-	// 	delete obj[key];
-	// }
 };
 export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);

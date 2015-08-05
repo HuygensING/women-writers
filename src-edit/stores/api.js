@@ -1,39 +1,21 @@
 import xhr from "xhr";
 
-import serverActions from "./actions/server";
-import authorStore from "./stores/author";
-import publicationStore from "./stores/publication";
+import serverActions from "../actions/server";
+import authorStore from "./author";
+import publicationStore from "./publication";
+import relationsStore from "./relations";
 
-import relationMap from "./stores/utils/relation-map";
-
+import relationMap, {relationTypes} from "./utils/relation-map";
 import {parseIncomingAuthor, parseOutgoingAuthor} from "./parsers/author";
 import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publication";
+
 let baseUrl = "https://acc.repository.huygens.knaw.nl";
 let authorUrl = baseUrl + "/domain/wwpersons";
 let publicationUrl = baseUrl + "/domain/wwdocuments";
-let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations"
-
-let relationTypes = null;
-
-xhr({
-	url: `${baseUrl}/system/relationtypes`
-}, function(err, resp, body) {
-	if (err) {
-		console.error("Fetching relation types failed!", err, resp);
-	}
-
-	let toObject = function(prev, current) {
-		prev[current.regularName] = current;
-		prev[current.inverseName] = current;
-
-		return prev;
-	};
-
-	relationTypes = JSON.parse(body).reduce(toObject, {});
-});
+let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations";
 
 let handleError = function(err, resp, body) {
-	console.error("Some xhr request failed!", err);
+	console.error("Some xhr request failed!", err, resp, body);
 };
 
 let getAutocompleteValues = function(name, query, done) {
@@ -174,6 +156,10 @@ export default {
 
 		// saveRelations(data["@relations"], data._id);
 
+		let [method, url] = (model.get("_id") != null) ?
+			["PUT", authorUrl + "/" + model.get("_id")] :
+			["POST", authorUrl];
+
 		let options = {
 			body: JSON.stringify(data),
 			headers: {
@@ -181,12 +167,20 @@ export default {
 				"Content-Type": "application/json",
 				"VRE_ID": "WomenWriters"
 			},
-			method: "PUT",
-			url: authorUrl + "/" + model.get("_id")
+			method: method,
+			url: url
 		};
 
-		let done = function(err) {
-			if (err) { handleError(err); }
+		let done = function(err, response, body) {
+			if (err) { handleError(err, response, body); }
+
+			if (model.get("_id") == null) {
+				let location = response.headers.location;
+				let id = location.substr(location.lastIndexOf("/") + 1);
+				let locationUrl = `/womenwriters/persons/${id}`;
+
+				window.location.assign(locationUrl);
+			}
 		};
 
 		xhr(options, done);
@@ -217,7 +211,7 @@ export default {
 
 		console.log(data);
 
-		// saveRelations(data["@relations"], data._id);
+		saveRelations(data["@relations"], data._id);
 
 		let options = {
 			body: JSON.stringify(data),
@@ -232,6 +226,20 @@ export default {
 
 		let done = function(err) {
 			if (err) { handleError(err); }
+		};
+
+		xhr(options, done);
+	},
+
+	getRelations() {
+		let options = {
+			url: `${baseUrl}/system/relationtypes`
+		};
+
+		let done = function(err, resp, body) {
+			if (err) { handleError(err, resp, body); }
+
+			serverActions.receiveRelations(JSON.parse(body));
 		};
 
 		xhr(options, done);

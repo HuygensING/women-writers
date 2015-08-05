@@ -1,9 +1,15 @@
 import dispatcher from "../dispatcher";
-import API from "../api";
+import API from "../stores/api";
 
 let authorActions = {
 	getAuthor(id) {
-		API.getAuthor(id);
+		if (id != null) {
+			API.getAuthor(id);
+		} else {
+			dispatcher.handleViewAction({
+				actionType: "AUTHOR_NEW"
+			});
+		}
 	},
 
 	saveAuthor(id) {

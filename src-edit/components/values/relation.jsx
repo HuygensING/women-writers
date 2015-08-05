@@ -2,13 +2,9 @@ import React from "react";
 
 class Relation extends React.Component {
 	render() {
-		let values;
-
-		if (this.props.values.length)	{
-			values = <ul className="relation">{this.props.values.map((v) => <li>{v.value}</li>)}</ul>;
-		} else {
-			values = "-";
-		}
+		let values = (this.props.values.length) ?
+			<ul className="relation">{this.props.values.map((v, index) => <li key={index}>{v.value}</li>)}</ul> :
+			"-";
 
 		return (
 			<span>{values}</span>

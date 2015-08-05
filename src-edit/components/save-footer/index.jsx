@@ -1,5 +1,7 @@
 import React from "react";
 
+import router from "../../router";
+
 import authorActions from "../../actions/author";
 import publicationActions from "../../actions/publication";
 
@@ -9,9 +11,17 @@ let actions = {
 };
 
 class SaveFooter extends React.Component {
+	// handleCancel() {
+	// 	let [rootPath, types, id, ...rest] = window.location.pathname.substr(1).split("/");
+	// 	window.location.assign(`/${rootPath}/${types}/${id}`);
+	// }
+
 	handleCancel() {
-		let [rootPath, types, id, ...rest] = window.location.pathname.substr(1).split("/");
-		window.location.assign(`/${rootPath}/${types}/${id}`);
+		let url = (window.location.pathname.substr(-4) === "/new") ?
+			window.location.pathname.split("/").slice(2, 3) :
+			window.location.pathname.split("/").slice(2, 4);
+
+		router.navigate(url.join("/"));
 	}
 
 	handleSave() {

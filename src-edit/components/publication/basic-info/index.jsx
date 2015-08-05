@@ -1,6 +1,7 @@
 import React from "react";
 
 import StringComponent from "../../values/string";
+import PersonRelation from "../../values/relation-person";
 import Relation from "../../values/relation";
 
 class BasicInfoForm {
@@ -11,7 +12,7 @@ class BasicInfoForm {
 			<ul className="record">
 				<li>
 					<label>Author</label>
-					<Relation values={model.getIn(["@relations", "isCreatedBy"]).toJS()} />
+					<PersonRelation values={model.getIn(["@relations", "isCreatedBy"]).toJS()} />
 				</li>
 				<li>
 					<label>Title</label>
@@ -19,7 +20,7 @@ class BasicInfoForm {
 				</li>
 				<li>
 					<label>Document type</label>
-					<Relation values={model.getIn(["@relations", "documentType"]).toJS()} />
+					<StringComponent value={model.get("documentType")} />
 				</li>
 				<li>
 					<label>Genre</label>
@@ -29,10 +30,12 @@ class BasicInfoForm {
 					<label>Language</label>
 					<Relation values={model.getIn(["@relations", "hasWorkLanguage"]).toJS()} />
 				</li>
-				<li>
-					<label>First editor</label>
-					<Relation values={model.getIn(["@relations", "firstEditor"]).toJS()} />
-				</li>
+				{/*
+					<li>
+						<label>First editor</label>
+						<Relation values={model.getIn(["@relations", "firstEditor"]).toJS()} />
+					</li>
+				*/}
 				<li>
 					<label>Publish location</label>
 					<Relation values={model.getIn(["@relations", "hasPublishLocation"]).toJS()} />
