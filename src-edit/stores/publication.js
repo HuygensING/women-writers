@@ -35,27 +35,29 @@ class PublicationStore extends BaseStore {
 	constructor() {
 		super();
 
+		this.serverModel = null;
 		this.model = publicationModel;
 	}
 
 	getState() {
 		return {
-			publication: this.model
+			publication: this.model,
+			serverPublication: this.serverModel
 		};
 	}
 
 	setKey(key, value) {
 		key = castArray(key);
+		value = Immutable.fromJS(value);
+		// // Turn an array into an Immutable.List
+		// if (Array.isArray(value)) {
+		// 	value = new Immutable.List(value);
+		// }
 
-		// Turn an array into an Immutable.List
-		if (Array.isArray(value)) {
-			value = new Immutable.List(value);
-		}
-
-		// Turn a key-value object into an Immutable.Map
-		if (value.hasOwnProperty("key")) {
-			value = new Immutable.Map(value);
-		}
+		// // Turn a key-value object into an Immutable.Map
+		// if (value.hasOwnProperty("key")) {
+		// 	value = new Immutable.Map(value);
+		// }
 
 		this.model = this.model.setIn(key, value);
 	}
@@ -71,6 +73,7 @@ class PublicationStore extends BaseStore {
 		}
 
 		this.model = publicationModel.mergeDeep(Immutable.fromJS(data));
+		this.serverModel = this.model;
 	}
 }
 

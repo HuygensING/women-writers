@@ -29,6 +29,34 @@ class PersonalForm {
 						values={model.getIn(["@relations", "isSpouseOf"]).toJS()} />
 				</li>
 				<li>
+					<label>Related to</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isRelatedTo"])}
+						values={model.getIn(["@relations", "isRelatedTo"]).toJS()} />
+				</li>
+				<li>
+					<label>Parent of</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isParentOf"])}
+						values={model.getIn(["@relations", "isParentOf"]).toJS()} />
+				</li>
+				<li>
+					<label>Sibling of</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isSiblingOf"])}
+						values={model.getIn(["@relations", "isSiblingOf"]).toJS()} />
+				</li>
+				<li>
+					<label>Grandparent of</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isGrandparentOf"])}
+						values={model.getIn(["@relations", "isGrandparentOf"]).toJS()} />
+				</li>
+				<li>
 					<label>Children</label>
 					<Select
 						onChange={this.props.onChange.bind(this, "children")}

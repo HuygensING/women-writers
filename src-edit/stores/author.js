@@ -34,12 +34,14 @@ class AuthorStore extends BaseStore {
 	constructor() {
 		super();
 
+		this.serverModel = null;
 		this.model = authorModel;
 	}
 
 	getState() {
 		return {
-			author: this.model
+			author: this.model,
+			serverAuthor: this.serverModel
 		};
 	}
 
@@ -70,6 +72,7 @@ class AuthorStore extends BaseStore {
 		}
 
 		this.model = this.model.mergeDeep(Immutable.fromJS(data));
+		this.serverModel = this.model;
 	}
 }
 

@@ -29,12 +29,14 @@ let inComingParser = function(key, value, obj) {
 
 
 	if (relationMap.hasOwnProperty(key)) {
-		obj[key] = value.map((v) => {
-			return {
-				key: `https://acc.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
-				value: v.displayName
-			};
-		});
+		obj[key] = value
+			.filter((v) => v.accepted)
+			.map((v) => {
+				return {
+					key: `https://acc.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
+					value: v.displayName
+				};
+			});
 	}
 };
 

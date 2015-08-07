@@ -16,10 +16,14 @@ class PublicationController extends React.Component {
 	constructor(props) {
 		super(props);
 
+		let activeTab = (props.tab != null) ?
+			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
+			"Basic info";
+
 		this.state = Object.assign(
 			publicationStore.getState(),
 			{
-				activeTab: "Basic info"
+				activeTab: activeTab
 			}
 		);
 	}
@@ -87,7 +91,6 @@ class PublicationController extends React.Component {
 					label="Receptions">
 					<Receptions value={this.state.publication} />
 				</Tab>
-				{/* Receptions */}
 				<EditButton pid={this.state.publication.get("^pid")} />
 			</Tabs>
 		);
@@ -96,7 +99,7 @@ class PublicationController extends React.Component {
 
 PublicationController.propTypes = {
 	id: React.PropTypes.string,
-	tab: React.PropTypes.string
+	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"])
 };
 
 export default PublicationController;

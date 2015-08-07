@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 
 import Author from "./components/author";
 import Publication from "./components/publication";
@@ -8,9 +7,8 @@ import EditPublication from "./components/edit-publication";
 
 class App extends React.Component {
 	render() {
-		let [pathRoot, types, id, ...rest] = window.location.pathname.substr(1).split("/");
-
 		let form = null;
+		let [types, id, ...rest] = window.location.pathname.substr(1).split("/").slice(1);
 
 		if (types === "persons") {
 			form = (rest.length && rest[0] === "edit") ?
@@ -18,7 +16,7 @@ class App extends React.Component {
 				<Author id={id} />;
 
 			if (id === "new") {
-				form = <EditAuthor />
+				form = <EditAuthor />;
 			}
 		} else if (types === "documents") {
 			form = (rest.length && rest[0] === "edit") ?
@@ -26,7 +24,7 @@ class App extends React.Component {
 				<Publication id={id} />;
 
 			if (id === "new") {
-				form = <EditPublication />
+				form = <EditPublication />;
 			}
 		}
 

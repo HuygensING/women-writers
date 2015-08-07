@@ -8,21 +8,28 @@ import {Tabs, Tab} from "hire-tabs";
 import MultiForm from "hire-forms-multi-form";
 
 import BasicInfoForm from "./basic-info";
+import ReceptionsForm from "./receptions";
 import LinkForm from "../edit-link";
-import NewButton from "../new-button";
+// import NewButton from "../new-button";
 import SaveFooter from "../save-footer";
 
 import actions from "../../actions/publication";
 import publicationStore from "../../stores/publication";
 
+import router from "../../router";
+
 class PublicationEditController extends React.Component {
 	constructor(props) {
 		super(props);
 
+		let activeTab = (props.tab != null) ?
+			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
+			"Basic info";
+
 		this.state = Object.assign(
 			publicationStore.getState(),
 			{
-				activeTab: "Basic Info"
+				activeTab: activeTab
 			}
 		);
 	}
@@ -41,6 +48,8 @@ class PublicationEditController extends React.Component {
 	}
 
 	handleTabChange(label) {
+		router.navigate(`/documents/${this.props.id}/${label.toLowerCase()}/edit`);
+
 		this.setState({
 			activeTab: label
 		});
@@ -61,8 +70,8 @@ class PublicationEditController extends React.Component {
 			<div className="edit-publication">
 				<Tabs onChange={this.handleTabChange.bind(this)}>
 					<Tab
-						active={this.state.activeTab === "Basic Info"}
-						label="Basic Info">
+						active={this.state.activeTab === "Basic info"}
+						label="Basic info">
 						<BasicInfoForm
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
@@ -86,6 +95,14 @@ class PublicationEditController extends React.Component {
 						</div>
 					</Tab>
 					<Tab
+						active={this.state.activeTab === "Receptions"}
+						label="Receptions">
+						<ReceptionsForm
+							onChange={this.handleFormChange}
+							onDelete={this.handleFormDelete}
+							value={model} />
+					</Tab>
+					<Tab
 						active={this.state.activeTab === "Links"}
 						label="Links">
 						<MultiForm
@@ -95,7 +112,6 @@ class PublicationEditController extends React.Component {
 							onDelete={this.handleFormDelete}
 							values={model.get("links")} />
 					</Tab>
-					{/* Receptions */}
 					{/*
 						<NewButton
 							key={model.get("_id")}
@@ -110,7 +126,8 @@ class PublicationEditController extends React.Component {
 }
 
 PublicationEditController.propTypes = {
-	id: React.PropTypes.string
+	id: React.PropTypes.string,
+	tab: React.PropTypes.oneOf(["basic info", "receptions", "links"])
 };
 
 export default PublicationEditController;

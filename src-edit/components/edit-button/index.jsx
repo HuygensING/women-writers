@@ -3,7 +3,8 @@ import router from "../../router";
 
 class EditButton {
 	goToEditPage() {
-		let url = window.location.pathname.split("/").splice(2, 3);
+		let url = window.location.pathname.split("/").slice(2, 4);
+		console.log(url);
 		url.push("edit");
 		router.navigate(url.join("/"));
 	}

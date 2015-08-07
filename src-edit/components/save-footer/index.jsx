@@ -11,11 +11,6 @@ let actions = {
 };
 
 class SaveFooter extends React.Component {
-	// handleCancel() {
-	// 	let [rootPath, types, id, ...rest] = window.location.pathname.substr(1).split("/");
-	// 	window.location.assign(`/${rootPath}/${types}/${id}`);
-	// }
-
 	handleCancel() {
 		let url = (window.location.pathname.substr(-4) === "/new") ?
 			window.location.pathname.split("/").slice(2, 3) :
@@ -26,8 +21,7 @@ class SaveFooter extends React.Component {
 
 	handleSave() {
 		let method = "save" + this.props.type.charAt(0).toUpperCase() + this.props.type.substr(1);
-		actions[this.props.type][method]()
-
+		actions[this.props.type][method]();
 	}
 
 	render() {

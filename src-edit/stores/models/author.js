@@ -9,7 +9,7 @@ export default new Immutable.Map({
 	gender: "Unknown",
 	links: emptyList,
 	names: emptyList,
-	persontype: "",
+	types: emptyList,
 	"@relations": new Immutable.Map({
 		hasBirthPlace: emptyList,
 		hasBiography: emptyList,
@@ -33,6 +33,10 @@ export default new Immutable.Map({
 		isPersonMentionedIn: emptyList,
 		isPersonQuotedIn: emptyList,
 		isPersonReferencedIn: emptyList,
-		isSpouseOf: emptyList
+		isSpouseOf: emptyList,
+		isParentOf: emptyList,
+		isGrandparentOf: emptyList,
+		isSiblingOf: emptyList,
+		isRelatedTo: emptyList
 	})
 });

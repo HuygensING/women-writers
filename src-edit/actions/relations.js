@@ -1,8 +1,12 @@
 import API from "../stores/api";
 
+let firstTime = true;
+
 let relationsActions = {
 	getRelations() {
-		API.getRelations();
+		if (firstTime) {
+			API.getRelations();
+		}
 	}
 };
 

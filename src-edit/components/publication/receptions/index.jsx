@@ -33,17 +33,34 @@ class Receptions extends React.Component {
 		this.setState(relationsStore.getState());
 	}
 
+	notEmpty(model) {
+		return (relationName) =>
+			model.get("@relations").get(relationName).size > 0;
+	}
+
+	toJSX(model) {
+		return function(relationName) {
+			let label = this.state.relationDisplayNames[relationName] !== "" ?
+				this.state.relationDisplayNames[relationName] :
+				relationName;
+
+			return (
+				<li key={relationName}>
+					<label>{label}</label>
+					<DocumentRelation values={model.getIn(["@relations", relationName]).toJS()} />
+				</li>
+			);
+		};
+	}
+
 	render() {
 		let model = this.props.value;
-		console.log(model.getIn(["@relations", "isTranslationOf"]).toJS());
+
 		let relations = this.state.publicationPublicationRelations.reduce(toObject, {});
-		// console.log(JSON.stringify(Object.keys(relations)));
-		let relationViews = Object.keys(relations).map((relationName) =>
-			<li>
-				<label>{this.state.relationDisplayNames[relationName] !== "" ? this.state.relationDisplayNames[relationName] : relationName}</label>
-				<DocumentRelation values={model.getIn(["@relations", relationName]).toJS()} />
-			</li>
-		);
+
+		let notEmpty = this.notEmpty(model);
+		let toJSX = this.toJSX(model).bind(this);
+		let relationViews = Object.keys(relations).filter(notEmpty).map(toJSX);
 
 		return (
 			<ul className="record">

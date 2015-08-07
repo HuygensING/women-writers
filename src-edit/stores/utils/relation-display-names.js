@@ -24,7 +24,7 @@ export default {
 	has_sibling_archive: "",
 	has_sibling_archiver: "",
 	commentsOnPerson: "",
-	commentsOnWork: "",
+	commentsOnWork: "Comments on",
 	containedInAnthology: "Anthology",
 	hasAdaptation: "Adaptation",
 	hasAnnotationsOn: "Annotations on",

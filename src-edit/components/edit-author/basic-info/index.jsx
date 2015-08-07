@@ -2,6 +2,7 @@ import React from "react";
 import form from "hire-forms-form";
 import MultiForm from "hire-forms-multi-form";
 import Select from "hire-forms-select";
+import SelectList from "hire-forms-select-list";
 import Input from "hire-forms-input";
 import AutocompleteList from "hire-forms-autocomplete-list";
 import NameForm from "./name";
@@ -31,11 +32,11 @@ class BasicInfoForm {
 						values={model.getIn(["@relations", "hasPseudonym"]).toJS()} />
 				</li>
 				<li>
-					<label>Person type</label>
-					<Select
-						onChange={this.props.onChange.bind(this, "persontype")}
+					<label>Type</label>
+					<SelectList
+						onChange={this.props.onChange.bind(this, "types")}
 						options={["Archetype", "Author", "Pseudonym"]}
-						value={model.get("persontype")} />
+						values={model.get("types").toJS()} />
 				</li>
 				<li>
 					<label>Gender</label>

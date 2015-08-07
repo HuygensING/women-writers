@@ -1,6 +1,8 @@
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
+import router from "../../router";
+
 import MultiForm from "hire-forms-multi-form";
 
 import BasicInfoForm from "./basic-info";
@@ -17,8 +19,12 @@ class AuthorEditController extends React.Component {
 	constructor(props) {
 		super(props);
 
+		let activeTab = (props.tab != null) ?
+			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
+			"Basic info";
+
 		this.state = Object.assign(authorStore.getState(), {
-			activeTab: "Basic Info"
+			activeTab: activeTab
 		});
 	}
 
@@ -36,6 +42,8 @@ class AuthorEditController extends React.Component {
 	}
 
 	handleTabChange(label) {
+		router.navigate(`/persons/${this.props.id}/${label.toLowerCase()}/edit`);
+
 		this.setState({
 			activeTab: label
 		});
@@ -60,8 +68,8 @@ class AuthorEditController extends React.Component {
 			<div className="edit-author">
 				<Tabs onChange={this.handleTabChange.bind(this)}>
 					<Tab
-						active={this.state.activeTab === "Basic Info"}
-						label="Basic Info">
+						active={this.state.activeTab === "Basic info"}
+						label="Basic info">
 						<BasicInfoForm
 							onChange={this.handleFormChange}
 							onDelete={this.handleFormDelete}
@@ -174,7 +182,8 @@ class AuthorEditController extends React.Component {
 }
 
 AuthorEditController.propTypes = {
-	id: React.PropTypes.string
+	id: React.PropTypes.string,
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "links"])
 };
 
 export default AuthorEditController;

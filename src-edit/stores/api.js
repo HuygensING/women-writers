@@ -1,18 +1,18 @@
 import xhr from "xhr";
 
 import serverActions from "../actions/server";
+
 import authorStore from "./author";
 import publicationStore from "./publication";
-import relationsStore from "./relations";
 
-import relationMap, {relationTypes} from "./utils/relation-map";
 import {parseIncomingAuthor, parseOutgoingAuthor} from "./parsers/author";
 import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publication";
+
+import saveRelations from "./utils/save-relations";
 
 let baseUrl = "https://acc.repository.huygens.knaw.nl";
 let authorUrl = baseUrl + "/domain/wwpersons";
 let publicationUrl = baseUrl + "/domain/wwdocuments";
-let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations";
 
 let handleError = function(err, resp, body) {
 	console.error("Some xhr request failed!", err, resp, body);
@@ -54,80 +54,6 @@ let getSelectValues = function(name, done) {
 	xhr(options, xhrDone);
 };
 
-let xhrPromiseCreator = function(url) {
-	return function(data) {
-		return new Promise(
-			function (resolve, reject) {
-				let options = {
-					body: JSON.stringify(data),
-					headers: {
-						Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
-						"Content-Type": "application/json",
-						VRE_ID: "WomenWriters"
-					},
-					method: "POST",
-					url: url
-				};
-
-				let done = function(err, resp, body) {
-					if (err) {
-						reject(err);
-					} else {
-						resolve(body);
-					}
-				};
-
-				xhr(options, done);
-			}
-		);
-	};
-};
-
-let saveRelations = function(relations, sourceId) {
-	let notEmpty = (name) =>
-		relations[name].length > 0;
-
-	let toRelationObjects = (name) =>
-		relations[name].map((relation) => {
-			let relationType = relationTypes[name];
-
-			if (relationMap[name] == null) {
-				console.error("Unknown relation: ", name);
-			}
-
-			let targetId = relation.key.substr(relation.key.lastIndexOf("/") + 1);
-
-			if (relationType.regularName !== name) {
-				[sourceId, targetId] = [targetId, sourceId];
-			}
-
-			return {
-				"accepted": true,
-				"@type": "wwrelation",
-				"^typeId": relationType._id,
-				"^sourceId": sourceId,
-				"^sourceType": relationType.sourceTypeName,
-				"^targetId": targetId,
-				"^targetType": relationType.targetTypeName
-			};
-		});
-
-	let flatten = (prev, current) =>
-		prev.concat(current);
-
-	let relationObjects = Object.keys(relations)
-		.filter(notEmpty)
-		.map(toRelationObjects)
-		.reduce(flatten);
-
-	let relationSaver = xhrPromiseCreator(relationUrl);
-
-	let promisedRelations = relationObjects.map(relationSaver);
-	Promise.all(promisedRelations).then(function(response) {
-		console.log(response);
-	});
-};
-
 export default {
 	getAuthor(id) {
 		let options = {
@@ -149,12 +75,14 @@ export default {
 	},
 
 	saveAuthor() {
-		let model = authorStore.getState().author;
+		let state = authorStore.getState();
+		let model = state.author;
 		let data = parseOutgoingAuthor(model.toJS());
 
-		// console.log(data);
+		let currentRelations = model.get("@relations").toJS();
+		let prevRelations = state.serverAuthor.get("@relations").toJS();
 
-		// saveRelations(data["@relations"], data._id);
+		saveRelations(currentRelations, prevRelations, data._id);
 
 		let [method, url] = (model.get("_id") != null) ?
 			["PUT", authorUrl + "/" + model.get("_id")] :
@@ -206,12 +134,14 @@ export default {
 	},
 
 	savePublication() {
-		let model = publicationStore.getState().publication;
+		let state = publicationStore.getState();
+		let model = state.publication;
 		let data = parseOutgoingPublication(model.toJS());
 
-		console.log(data);
+		let currentRelations = model.get("@relations").toJS();
+		let prevRelations = state.serverPublication.get("@relations").toJS();
 
-		saveRelations(data["@relations"], data._id);
+		saveRelations(currentRelations, prevRelations, data._id);
 
 		let options = {
 			body: JSON.stringify(data),
@@ -251,6 +181,10 @@ export default {
 
 	getPersons(query, done) {
 		getAutocompleteValues("persons", query, done);
+	},
+
+	getDocuments(query, done) {
+		getAutocompleteValues("documents", query, done);
 	},
 
 	getLocations(query, done) {

@@ -12,8 +12,8 @@ let publicationActions = {
 		}
 	},
 
-	savePublication(id) {
-		API.savePublication(id);
+	savePublication() {
+		API.savePublication();
 	},
 
 	setKey(key, value) {

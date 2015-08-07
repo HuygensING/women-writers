@@ -1,6 +1,8 @@
 import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
+import router from "../../router";
+
 import BasicInfo from "./basic-info";
 import Personal from "./personal";
 import Public from "./public";
@@ -15,8 +17,12 @@ class AuthorController extends React.Component {
 	constructor(props) {
 		super(props);
 
+		let activeTab = (props.tab != null) ?
+			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
+			"Basic info";
+
 		this.state = Object.assign(authorStore.getState(), {
-			activeTab: "Basic Info"
+			activeTab: activeTab
 		});
 	}
 
@@ -34,6 +40,8 @@ class AuthorController extends React.Component {
 	}
 
 	handleTabChange(label) {
+		router.navigate(`/persons/${this.props.id}/${label.toLowerCase()}`);
+
 		this.setState({
 			activeTab: label
 		});
@@ -48,8 +56,8 @@ class AuthorController extends React.Component {
 		return (
 			<Tabs onChange={this.handleTabChange.bind(this)}>
 				<Tab
-					active={this.state.activeTab === "Basic Info"}
-					label="Basic Info">
+					active={this.state.activeTab === "Basic info"}
+					label="Basic info">
 					<BasicInfo value={this.state.author} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
@@ -146,7 +154,8 @@ class AuthorController extends React.Component {
 }
 
 AuthorController.propTypes = {
-	id: React.PropTypes.string
+	id: React.PropTypes.string,
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "links"])
 };
 
 export default AuthorController;
