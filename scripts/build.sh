@@ -1,17 +1,24 @@
 #!/bin/sh
 
-# Build HTML
+# Build Backbone && React HTML
 node_modules/.bin/jade \
 	--no-debug \
 	--out build/development \
 	src/index.jade src-edit/edit.jade
 
-# Build CSS
+# Build Backbone CSS
 ./node_modules/.bin/stylus \
 	--use nib \
 	--compress \
 	--out build/development/css/backbone.css \
 	src/stylus/main.styl
+
+# Build React CSS
+./node_modules/.bin/stylus \
+	--use nib \
+	--compress \
+	--out build/development/css/react.css \
+	src-edit/stylus/index.styl
 
 # Build React JS
 node_modules/.bin/browserify src-edit/index.jsx \
