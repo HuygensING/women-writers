@@ -12,6 +12,7 @@ import EditButton from "../edit-button";
 
 import actions from "../../actions/author";
 import authorStore from "../../stores/author";
+import userStore from "../../stores/user";
 
 class AuthorController extends React.Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ class AuthorController extends React.Component {
 			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
 			"Basic info";
 
-		this.state = Object.assign(authorStore.getState(), {
+		this.state = Object.assign(authorStore.getState(), userStore.getState(), {
 			activeTab: activeTab
 		});
 	}
@@ -29,14 +30,18 @@ class AuthorController extends React.Component {
 	componentDidMount() {
 		actions.getAuthor(this.props.id);
 		authorStore.listen(this.onStoreChange.bind(this));
+		userStore.listen(this.onStoreChange.bind(this));
 	}
 
 	componentWillUnmount() {
 		authorStore.stopListening(this.onStoreChange.bind(this));
+		userStore.stopListening(this.onStoreChange.bind(this));
 	}
 
 	onStoreChange() {
-		this.setState(authorStore.getState());
+		let state = Object.assign(authorStore.getState(), userStore.getState());
+
+		this.setState(state);
 	}
 
 	handleTabChange(label) {
@@ -147,7 +152,9 @@ class AuthorController extends React.Component {
 					label="Links">
 					<Links values={this.state.author.get("links").toJS()} />
 				</Tab>
-				<EditButton pid={this.state.author.get("^pid")} />
+				<EditButton
+					pid={this.state.author.get("^pid")}
+					token={this.state.user.get("token")} />
 			</Tabs>
 		);
 	}

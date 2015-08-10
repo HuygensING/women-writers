@@ -29,18 +29,34 @@ let R = Router.extend({
 	},
 
 	author: function(id, tab) {
+		if (id === "new") {
+			id = null;
+		}
+
 		React.render(<Author id={id} tab={tab} />, document.querySelector(".app"));
 	},
 
 	editAuthor: function(id, tab) {
+		if (id === "new") {
+			id = null;
+		}
+
 		React.render(<EditAuthor id={id} tab={tab} />, document.querySelector(".app"));
 	},
 
 	publication: function(id, tab) {
+		if (id === "new") {
+			id = null;
+		}
+
 		React.render(<Publication id={id} tab={tab} />, document.querySelector(".app"));
 	},
 
 	editPublication: function(id, tab) {
+		if (id === "new") {
+			id = null;
+		}
+
 		React.render(<EditPublication id={id} tab={tab} />, document.querySelector(".app"));
 	}
 });

@@ -29,8 +29,12 @@ class AuthorEditController extends React.Component {
 	}
 
 	componentDidMount() {
-		actions.getAuthor(this.props.id);
 		authorStore.listen(this.onStoreChange.bind(this));
+		actions.getAuthor(this.props.id);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		actions.getAuthor(nextProps.id);
 	}
 
 	componentWillUnmount() {
@@ -42,7 +46,11 @@ class AuthorEditController extends React.Component {
 	}
 
 	handleTabChange(label) {
-		router.navigate(`/persons/${this.props.id}/${label.toLowerCase()}/edit`);
+		let id = (this.props.id != null) ?
+			this.props.id :
+			"new";
+
+		router.navigate(`/persons/${id}/${label.toLowerCase()}/edit`);
 
 		this.setState({
 			activeTab: label
@@ -63,6 +71,62 @@ class AuthorEditController extends React.Component {
 		let authorName = model.get("names").size ?
 			`${model.get("names").get(0).get("lastName")}, ${model.get("names").get(0).get("firstName")}` :
 			null;
+
+		let personalTab = (model.get("_id") == null) ?
+			null :
+			<Tab
+				active={this.state.activeTab === "Personal"}
+				label="Personal">
+				<PersonalForm
+					onChange={this.handleFormChange}
+					onDelete={this.handleFormDelete}
+					value={model} />
+				<div className="temp-data">
+					<h2>Temporary data</h2>
+					<ul>
+						<li>
+							<label>Spouse</label>
+							<span>{model.get("tempSpouse")}</span>
+						</li>
+						<li>
+							<label>Children</label>
+							<span>{model.get("tempChildren")}</span>
+						</li>
+						<li>
+							<label>Ps Children</label>
+							<span>{model.get("tempPsChildren")}</span>
+						</li>
+					</ul>
+				</div>
+			</Tab>;
+
+		let publicTab = (model.get("_id") == null) ?
+			null :
+			<Tab
+				active={this.state.activeTab === "Public"}
+				label="Public">
+				<PublicForm
+					onChange={this.handleFormChange}
+					onDelete={this.handleFormDelete}
+					value={model} />
+				<div className="temp-data">
+					<h2>Temporary data</h2>
+					<ul>
+						<li>
+							<label>Financial situation</label>
+							<span>{model.get("tempFinancialSituation")}</span>
+						</li>
+						<li>
+							<label>Collaborations</label>
+							<span>{model.get("tempCollaborations")}</span>
+						</li>
+						<li>
+							<label>Memberships</label>
+							<span>{model.get("tempMemberships")}</span>
+						</li>
+					</ul>
+				</div>
+			</Tab>;
 
 		return (
 			<div className="edit-author">
@@ -109,56 +173,8 @@ class AuthorEditController extends React.Component {
 						</div>
 					</Tab>
 					{/* Works */}
-					<Tab
-						active={this.state.activeTab === "Personal"}
-						label="Personal">
-						<PersonalForm
-							onChange={this.handleFormChange}
-							onDelete={this.handleFormDelete}
-							value={model} />
-						<div className="temp-data">
-							<h2>Temporary data</h2>
-							<ul>
-								<li>
-									<label>Spouse</label>
-									<span>{model.get("tempSpouse")}</span>
-								</li>
-								<li>
-									<label>Children</label>
-									<span>{model.get("tempChildren")}</span>
-								</li>
-								<li>
-									<label>Ps Children</label>
-									<span>{model.get("tempPsChildren")}</span>
-								</li>
-							</ul>
-						</div>
-					</Tab>
-					<Tab
-						active={this.state.activeTab === "Public"}
-						label="Public">
-						<PublicForm
-							onChange={this.handleFormChange}
-							onDelete={this.handleFormDelete}
-							value={model} />
-						<div className="temp-data">
-							<h2>Temporary data</h2>
-							<ul>
-								<li>
-									<label>Financial situation</label>
-									<span>{model.get("tempFinancialSituation")}</span>
-								</li>
-								<li>
-									<label>Collaborations</label>
-									<span>{model.get("tempCollaborations")}</span>
-								</li>
-								<li>
-									<label>Memberships</label>
-									<span>{model.get("tempMemberships")}</span>
-								</li>
-							</ul>
-						</div>
-					</Tab>
+					{personalTab}
+					{publicTab}
 					<Tab
 						active={this.state.activeTab === "Links"}
 						label="Links">

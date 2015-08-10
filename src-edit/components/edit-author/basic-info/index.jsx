@@ -13,6 +13,47 @@ class BasicInfoForm {
 	render() {
 		let model = this.props.value;
 
+		let pseudonyms = (model.get("_id") == null) ?
+			null :
+			<li>
+				<label>Pseudonyms</label>
+				<AutocompleteList
+					async={API.getPersons}
+					onChange={this.props.onChange.bind(this, ["@relations", "hasPseudonym"])}
+					values={model.getIn(["@relations", "hasPseudonym"]).toJS()} />
+			</li>;
+
+		let birthPlace = (model.get("_id") == null) ?
+			null :
+			<li>
+				<label>Birth place</label>
+				<AutocompleteList
+					async={API.getLocations}
+					onChange={this.props.onChange.bind(this, ["@relations", "hasBirthPlace"])}
+					values={model.getIn(["@relations", "hasBirthPlace"]).toJS()} />
+			</li>;
+
+		let livedIn = (model.get("_id") == null) ?
+			null :
+			<li>
+				<label>Lived in</label>
+				<AutocompleteList
+					async={API.getLocations}
+					onChange={this.props.onChange.bind(this, ["@relations", "hasResidenceLocation"])}
+					values={model.getIn(["@relations", "hasResidenceLocation"]).toJS()} />
+			</li>;
+
+		let deathPlace = (model.get("_id") == null) ?
+			null :
+			<li>
+				<label>Death place</label>
+				<AutocompleteList
+					async={API.getLocations}
+					onChange={this.props.onChange.bind(this, ["@relations", "hasDeathPlace"])}
+					values={model.getIn(["@relations", "hasDeathPlace"]).toJS()} />
+			</li>;
+
+
 		return (
 			<ul>
 				<li>
@@ -24,13 +65,7 @@ class BasicInfoForm {
 						onDelete={this.props.onDelete}
 						values={model.get("names")} />
 				</li>
-				<li>
-					<label>Pseudonyms</label>
-					<AutocompleteList
-						async={API.getPersons}
-						onChange={this.props.onChange.bind(this, ["@relations", "hasPseudonym"])}
-						values={model.getIn(["@relations", "hasPseudonym"]).toJS()} />
-				</li>
+				{pseudonyms}
 				<li>
 					<label>Type</label>
 					<SelectList
@@ -51,33 +86,15 @@ class BasicInfoForm {
 						onChange={this.props.onChange.bind(this, "birthDate")}
 						value={model.get("birthDate")} />
 				</li>
-				<li>
-					<label>Birth place</label>
-					<AutocompleteList
-						async={API.getLocations}
-						onChange={this.props.onChange.bind(this, ["@relations", "hasBirthPlace"])}
-						values={model.getIn(["@relations", "hasBirthPlace"]).toJS()} />
-				</li>
-				<li>
-					<label>Lived in</label>
-					<AutocompleteList
-						async={API.getLocations}
-						onChange={this.props.onChange.bind(this, ["@relations", "hasResidenceLocation"])}
-						values={model.getIn(["@relations", "hasResidenceLocation"]).toJS()} />
-				</li>
+				{birthPlace}
+				{livedIn}
 				<li>
 					<label>Death date</label>
 					<Input
 						onChange={this.props.onChange.bind(this, "deathDate")}
 						value={model.get("deathDate")} />
 				</li>
-				<li>
-					<label>Death place</label>
-					<AutocompleteList
-						async={API.getLocations}
-						onChange={this.props.onChange.bind(this, ["@relations", "hasDeathPlace"])}
-						values={model.getIn(["@relations", "hasDeathPlace"]).toJS()} />
-				</li>
+				{deathPlace}
 			</ul>
 		);
 	}

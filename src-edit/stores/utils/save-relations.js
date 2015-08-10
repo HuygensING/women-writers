@@ -1,5 +1,6 @@
 import xhr from "xhr";
 import relationsStore from "../relations";
+import userStore from "../user";
 
 let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations";
 
@@ -9,7 +10,7 @@ let toXhrPromise = function(data) {
 			let options = {
 				body: JSON.stringify(data),
 				headers: {
-					Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
+					Authorization: userStore.getState().user.get("token"),
 					"Content-Type": "application/json",
 					VRE_ID: "WomenWriters"
 				},

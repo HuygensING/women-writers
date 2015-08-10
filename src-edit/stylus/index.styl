@@ -9,10 +9,10 @@ body
 	margin 0
 	padding 0
 	background #EEE
-	// padding 40px 0
 	font-size 100%
 	line-height 1.375em
 	font-size 16px
+	overflow-y scroll
 
 body, h1, h2, h3, h4, h5
 	font-family 'Open Sans'
@@ -55,6 +55,14 @@ header
 			text-decoration none
 			text-transform uppercase
 			font-size 0.9em
+
+		&.new-author, &.new-publication
+			position absolute
+			top 0
+			right 0
+
+		&.new-publication
+			top 30px
 
 .app > div > .hire-tabs, .app > .hire-tabs
 	padding 40px 5% 120px 5%

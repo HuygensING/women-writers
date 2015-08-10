@@ -2,6 +2,7 @@ import xhr from "xhr";
 
 import serverActions from "../actions/server";
 
+import userStore from "./user";
 import authorStore from "./author";
 import publicationStore from "./publication";
 
@@ -54,6 +55,47 @@ let getSelectValues = function(name, done) {
 	xhr(options, xhrDone);
 };
 
+let save = function(type, token, model, serverModel, parse, url) {
+	let data = parse(model.toJS());
+
+	// Only save relations if the entity has been saved (has an ID).
+	if (model.get("_id") != null ) {
+		let currentRelations = model.get("@relations").toJS();
+		let prevRelations = serverModel.get("@relations").toJS();
+
+		saveRelations(currentRelations, prevRelations, data._id);
+	}
+
+	let [method, theUrl] = (model.get("_id") != null) ?
+		["PUT", url + "/" + model.get("_id")] :
+		["POST", url];
+
+	let options = {
+		body: JSON.stringify(data),
+		headers: {
+			Authorization: token,
+			"Content-Type": "application/json",
+			"VRE_ID": "WomenWriters"
+		},
+		method: method,
+		url: theUrl
+	};
+
+	let done = function(err, response, body) {
+		if (err) { handleError(err, response, body); }
+
+		if (model.get("_id") == null) {
+			let location = response.headers.location;
+			let id = location.substr(location.lastIndexOf("/") + 1);
+			let locationUrl = `/womenwriters/${type}s/${id}`;
+
+			window.location.assign(locationUrl);
+		}
+	};
+
+	xhr(options, done);
+};
+
 export default {
 	getAuthor(id) {
 		let options = {
@@ -75,12 +117,13 @@ export default {
 	},
 
 	saveAuthor() {
-		let state = authorStore.getState();
-		let model = state.author;
+		let userState = userStore.getState();
+		let authorState = authorStore.getState();
+		let model = authorState.author;
 		let data = parseOutgoingAuthor(model.toJS());
 
 		let currentRelations = model.get("@relations").toJS();
-		let prevRelations = state.serverAuthor.get("@relations").toJS();
+		let prevRelations = authorState.serverAuthor.get("@relations").toJS();
 
 		saveRelations(currentRelations, prevRelations, data._id);
 
@@ -91,7 +134,7 @@ export default {
 		let options = {
 			body: JSON.stringify(data),
 			headers: {
-				Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
+				Authorization: userState.user.get("token"),
 				"Content-Type": "application/json",
 				"VRE_ID": "WomenWriters"
 			},
@@ -135,30 +178,38 @@ export default {
 
 	savePublication() {
 		let state = publicationStore.getState();
-		let model = state.publication;
-		let data = parseOutgoingPublication(model.toJS());
 
-		let currentRelations = model.get("@relations").toJS();
-		let prevRelations = state.serverPublication.get("@relations").toJS();
+		save("document",
+			userStore.getState().user.get("token"),
+			state.publication,
+			state.serverPublication,
+			parseOutgoingPublication,
+			publicationUrl);
 
-		saveRelations(currentRelations, prevRelations, data._id);
+		// let userState = userStore.getState();
+		// let data = parseOutgoingPublication(model.toJS());
 
-		let options = {
-			body: JSON.stringify(data),
-			headers: {
-				Authorization: localStorage.getItem("hi-womenwriters-auth-token"),
-				"Content-Type": "application/json",
-				"VRE_ID": "WomenWriters"
-			},
-			method: "PUT",
-			url: publicationUrl + "/" + model.get("_id")
-		};
+		// let currentRelations = model.get("@relations").toJS();
+		// let prevRelations = state.serverPublication.get("@relations").toJS();
 
-		let done = function(err) {
-			if (err) { handleError(err); }
-		};
+		// saveRelations(currentRelations, prevRelations, data._id);
 
-		xhr(options, done);
+		// let options = {
+		// 	body: JSON.stringify(data),
+		// 	headers: {
+		// 		Authorization: userState.user.get("token"),
+		// 		"Content-Type": "application/json",
+		// 		"VRE_ID": "WomenWriters"
+		// 	},
+		// 	method: "PUT",
+		// 	url: publicationUrl + "/" + model.get("_id")
+		// };
+
+		// let done = function(err) {
+		// 	if (err) { handleError(err); }
+		// };
+
+		// xhr(options, done);
 	},
 
 	getRelations() {

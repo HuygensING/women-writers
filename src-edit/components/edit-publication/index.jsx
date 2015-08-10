@@ -35,8 +35,12 @@ class PublicationEditController extends React.Component {
 	}
 
 	componentDidMount() {
-		actions.getPublication(this.props.id);
 		publicationStore.listen(this.onStoreChange.bind(this));
+		actions.getPublication(this.props.id);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		actions.getPublication(nextProps.id);
 	}
 
 	componentWillUnmount() {
@@ -48,7 +52,11 @@ class PublicationEditController extends React.Component {
 	}
 
 	handleTabChange(label) {
-		router.navigate(`/documents/${this.props.id}/${label.toLowerCase()}/edit`);
+		let id = (this.props.id != null) ?
+			this.props.id :
+			"new";
+
+		router.navigate(`/documents/${id}/${label.toLowerCase()}/edit`);
 
 		this.setState({
 			activeTab: label
@@ -65,6 +73,17 @@ class PublicationEditController extends React.Component {
 
 	render() {
 		let model = this.state.publication;
+
+		let receptions = (model.get("_id") == null) ?
+			null :
+			<Tab
+				active={this.state.activeTab === "Receptions"}
+				label="Receptions">
+				<ReceptionsForm
+					onChange={this.handleFormChange}
+					onDelete={this.handleFormDelete}
+					value={model} />
+			</Tab>;
 
 		return (
 			<div className="edit-publication">
@@ -94,14 +113,7 @@ class PublicationEditController extends React.Component {
 							</ul>
 						</div>
 					</Tab>
-					<Tab
-						active={this.state.activeTab === "Receptions"}
-						label="Receptions">
-						<ReceptionsForm
-							onChange={this.handleFormChange}
-							onDelete={this.handleFormDelete}
-							value={model} />
-					</Tab>
+					{receptions}
 					<Tab
 						active={this.state.activeTab === "Links"}
 						label="Links">

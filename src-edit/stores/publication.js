@@ -35,8 +35,7 @@ class PublicationStore extends BaseStore {
 	constructor() {
 		super();
 
-		this.serverModel = null;
-		this.model = publicationModel;
+		this.setDefaults();
 	}
 
 	getState() {
@@ -44,6 +43,11 @@ class PublicationStore extends BaseStore {
 			publication: this.model,
 			serverPublication: this.serverModel
 		};
+	}
+
+	setDefaults() {
+		this.serverModel = publicationModel;
+		this.model = publicationModel;
 	}
 
 	setKey(key, value) {
@@ -89,6 +93,9 @@ let dispatcherCallback = function(payload) {
 			break;
 		case "PUBLICATION_DELETE_KEY":
 			publicationStore.deleteKey(payload.action.key);
+			break;
+		case "PUBLICATION_NEW":
+			publicationStore.setDefaults();
 			break;
 		default:
 			return;

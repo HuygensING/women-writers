@@ -43,7 +43,7 @@ class Publications extends React.Component {
 
 		let relations = this.state.authorPublicationRelations.reduce(hasSourceType("person"), {});
 		let relationViews = Object.keys(relations).map((relationName) =>
-			<li>
+			<li key={relationName}>
 				<label>{this.state.relationDisplayNames[relationName]}</label>
 				<DocumentRelation values={model.getIn(["@relations", relationName]).toJS()} />
 			</li>

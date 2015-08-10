@@ -34,8 +34,7 @@ class AuthorStore extends BaseStore {
 	constructor() {
 		super();
 
-		this.serverModel = null;
-		this.model = authorModel;
+		this.setDefaults();
 	}
 
 	getState() {
@@ -43,6 +42,25 @@ class AuthorStore extends BaseStore {
 			author: this.model,
 			serverAuthor: this.serverModel
 		};
+	}
+
+	setDefaults() {
+		this.serverModel = authorModel;
+		this.model = authorModel;
+	}
+
+	deleteKey(key) {
+		this.model = this.model.deleteIn(key);
+	}
+
+	receive(data) {
+		let diff = diffData(data);
+		if ((diff.added.length > 0) || (diff.removed.length > 0)) {
+			console.warn("Contracts mismatch! ", diff);
+		}
+
+		this.model = authorModel.mergeDeep(Immutable.fromJS(data));
+		this.serverModel = this.model;
 	}
 
 	setKey(key, value) {
@@ -61,19 +79,6 @@ class AuthorStore extends BaseStore {
 		this.model = this.model.setIn(key, value);
 	}
 
-	deleteKey(key) {
-		this.model = this.model.deleteIn(key);
-	}
-
-	receive(data) {
-		let diff = diffData(data);
-		if ((diff.added.length > 0) || (diff.removed.length > 0)) {
-			console.warn("Contracts mismatch! ", diff);
-		}
-
-		this.model = this.model.mergeDeep(Immutable.fromJS(data));
-		this.serverModel = this.model;
-	}
 }
 
 let authorStore = new AuthorStore();
@@ -90,6 +95,7 @@ let dispatcherCallback = function(payload) {
 			authorStore.deleteKey(payload.action.key);
 			break;
 		case "AUTHOR_NEW":
+			authorStore.setDefaults();
 			break;
 		default:
 			return;

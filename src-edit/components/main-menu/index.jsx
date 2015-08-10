@@ -3,9 +3,30 @@ import cx from "classnames";
 
 import {Login, Federated, Basic} from "hire-login";
 
+import userActions from "../../actions/user";
+import router from "../../router";
+
 class MainMenu extends React.Component {
+	handleLoginChange(response) {
+		if (response.authenticated && response.token != null) {
+			userActions.receive({
+				displayName: response.userData.displayName,
+				email: response.userData.email,
+				token: response.token
+			});
+		}
+	}
+
+	handleNew(type) {
+		let types = type === "author" ?
+			"persons" :
+			"documents";
+
+		router.navigate(`/${types}/new`, {trigger: true});
+	}
+
 	render() {
-		let [pathRoot, types, id, ...rest] = window.location.pathname.substr(1).split("/");
+		let [types] = window.location.pathname.substr(1).split("/").slice(1, 2);
 
 		return (
 			<ul>
@@ -19,11 +40,21 @@ class MainMenu extends React.Component {
 					<Login
 						appId="WomenWriters"
 						headers={{VRE_ID: "WomenWriters"}}
-						onChange={function() {}}
+						onChange={this.handleLoginChange.bind(this)}
 						userUrl="https://acc.repository.huygens.knaw.nl/system/users/me">
 						<Federated url="https://secure.huygens.knaw.nl/saml2/login" />
 						<Basic url="https://acc.repository.huygens.knaw.nl/authenticate" />
 					</Login>
+				</li>
+				<li className="new-author">
+					<button onClick={this.handleNew.bind(this, "author")}>
+						New author
+					</button>
+				</li>
+				<li className="new-publication">
+					<button onClick={this.handleNew.bind(this, "publication")}>
+						New publication
+					</button>
 				</li>
 			</ul>
 		);
