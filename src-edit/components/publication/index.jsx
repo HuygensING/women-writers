@@ -9,6 +9,7 @@ import EditButton from "../edit-button";
 
 import actions from "../../actions/publication";
 import publicationStore from "../../stores/publication";
+import userStore from "../../stores/user";
 
 import router from "../../router";
 
@@ -22,15 +23,16 @@ class PublicationController extends React.Component {
 
 		this.state = Object.assign(
 			publicationStore.getState(),
+			userStore.getState(),
 			{
 				activeTab: activeTab
-			}
-		);
+			});
 	}
 
 	componentDidMount() {
 		actions.getPublication(this.props.id);
 		publicationStore.listen(this.onStoreChange.bind(this));
+		userStore.listen(this.onStoreChange.bind(this));
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -41,10 +43,13 @@ class PublicationController extends React.Component {
 
 	componentWillUnmount() {
 		publicationStore.stopListening(this.onStoreChange.bind(this));
+		userStore.stopListening(this.onStoreChange.bind(this));
 	}
 
 	onStoreChange() {
-		this.setState(publicationStore.getState());
+		let state = Object.assign(publicationStore.getState(), userStore.getState());
+
+		this.setState(state);
 	}
 
 	handleTabChange(label) {
@@ -91,7 +96,9 @@ class PublicationController extends React.Component {
 					label="Receptions">
 					<Receptions value={this.state.publication} />
 				</Tab>
-				<EditButton pid={this.state.publication.get("^pid")} />
+				<EditButton
+					pid={this.state.publication.get("^pid")}
+					token={this.state.user.get("token")} />
 			</Tabs>
 		);
 	}

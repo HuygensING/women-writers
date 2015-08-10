@@ -22,9 +22,12 @@ class AuthorController extends React.Component {
 			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
 			"Basic info";
 
-		this.state = Object.assign(authorStore.getState(), userStore.getState(), {
-			activeTab: activeTab
-		});
+		this.state = Object.assign(
+			authorStore.getState(),
+			userStore.getState(),
+			{
+				activeTab: activeTab
+			});
 	}
 
 	componentDidMount() {

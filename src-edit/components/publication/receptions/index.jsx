@@ -62,11 +62,11 @@ class Receptions extends React.Component {
 		let toJSX = this.toJSX(model).bind(this);
 		let relationViews = Object.keys(relations).filter(notEmpty).map(toJSX);
 
-		return (
-			<ul className="record">
-				{relationViews}
-			</ul>
-		);
+		let record = relationViews.length > 0 ?
+			<ul className="record">{relationViews}</ul> :
+			<div className="hire-empty-list">The list of receptions is empty.</div>;
+
+		return record;
 	}
 }
 
