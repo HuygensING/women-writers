@@ -54,7 +54,7 @@
     "hire-forms-textarea": "^1.0.4",
     "hire-forms-utils": "^1.2.0",
     "hire-login": "^2.0.2",
-    "hire-tabs": "^1.0.1",
+    "hire-tabs": "^1.0.2",
     "immutable": "^3.7.2",
     "jquery": "^2.1.1",
     "react": "^0.13.3",
