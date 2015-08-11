@@ -1,6 +1,7 @@
 import React from "react";
 import form from "hire-forms-form";
 import Select from "hire-forms-select";
+import SelectList from "hire-forms-select-list";
 import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
 import AutocompleteList from "hire-forms-autocomplete-list";
@@ -25,7 +26,7 @@ class BasicInfoForm {
 			null :
 			<li>
 				<label>Genre</label>
-				<AutocompleteList
+				<SelectList
 					async={API.getGenre}
 					onChange={this.props.onChange.bind(this, ["@relations", "hasGenre"])}
 					sort={true}

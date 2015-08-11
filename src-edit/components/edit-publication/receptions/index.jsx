@@ -11,21 +11,22 @@ import relationsStore from "../../../stores/relations";
 
 import Relation from "../../values/relation";
 
+let toKeyValue = function(displayNames) {
+	return (relationName) => {
+		return {
+			key: relationName,
+			value: displayNames[relationName]
+		};
+	};
+};
+
 class ReceptionsForm extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			publicationPublicationRelations: [],
-			relationDisplayNames: {},
-			inverseForm: {
-				relationType: "",
-				relation: ""
-			},
-			regularForm: {
-				relationType: "",
-				relation: ""
-			}
+			relationDisplayNames: {}
 		};
 	}
 
@@ -42,13 +43,9 @@ class ReceptionsForm extends React.Component {
 		this.setState(relationsStore.getState());
 	}
 
-	handleFormChange(formName, prop, value) {
-		let oldState = this.state[formName];
-		oldState[prop] = value;
-
-		this.setState({
-			[formName]: oldState
-		});
+	handleFormChange(formData) {
+		console.log(formData.relation.key);
+		console.log(this.props.value.getIn(["@relations", formData.relationType.key]).toJS());
 	}
 
 	render() {
@@ -86,18 +83,16 @@ class ReceptionsForm extends React.Component {
 			<div>
 				<h3>Has</h3>
 				<ReceptionForm
-					displayNames={this.state.relationDisplayNames}
-					onChange={this.handleFormChange.bind(this, "regularForm")}
-					selectOptions={regularRelationNames.map((n) => this.state.relationDisplayNames[n])}
+					onChange={this.handleFormChange.bind(this)}
+					selectOptions={regularRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
 					value={this.state.regularForm} />
 				<ul>
 					{regularRelations}
 				</ul>
 				<h3>Is</h3>
 				<ReceptionForm
-					displayNames={this.state.relationDisplayNames}
-					onChange={this.handleFormChange.bind(this, "inverseForm")}
-					selectOptions={inverseRelationNames.map((n) => this.state.relationDisplayNames[n])}
+					onChange={this.handleFormChange.bind(this)}
+					selectOptions={inverseRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
 					value={this.state.inverseForm} />
 				<ul>
 					{inverseRelations}
