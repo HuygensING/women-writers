@@ -1,0 +1,66 @@
+.hire-faceted-search
+	margin-top 40px
+
+	& > ul, .hire-faceted-search-results
+		inline_block()
+		margin-right 5%
+
+	& > ul
+		width 30%
+		margin 0 5%
+
+	.hire-faceted-search-results
+		width 55%
+
+		header
+			h3
+				margin-top 0
+
+		& > ul > li
+			cursor pointer
+			margin-bottom 20px
+
+			label
+				cursor pointer
+				font-size 1.1em
+
+			ul.metadata
+				font-size 0.8em
+				color #888
+
+				li
+					label
+						inline_block()
+						width 100px
+
+	.hire-facet
+		well()
+		padding-right 0
+		padding-bottom 0
+		box-sizing border-box
+		margin-bottom 20px
+
+		h3
+			margin 0 0 6px 0
+			padding 0
+
+		& > ul
+			max-height 300px
+			overflow-y scroll
+
+			li
+				position relative
+				cursor pointer
+
+				&:hover
+					background-color wwYellow
+
+				label
+					cursor pointer
+					max-width calc(100% - 6px)
+
+				span.count
+					position absolute
+					right 6px
+
+

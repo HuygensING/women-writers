@@ -3,6 +3,8 @@
 import Router from "ampersand-router";
 import React from "react";
 
+import FacetedSearch from "hire-faceted-search";
+
 import Author from "./components/author";
 import EditAuthor from "./components/edit-author";
 
@@ -12,6 +14,7 @@ import EditPublication from "./components/edit-publication";
 let R = Router.extend({
 	routes: {
 		"": "home",
+		"persons": "searchPersons",
 		"persons/new": "editAuthor",
 		"persons/:id/edit": "editAuthor",
 		"persons/:id/:tab/edit": "editAuthor",
@@ -26,6 +29,15 @@ let R = Router.extend({
 
 	home: function() {
 		console.log("HOME");
+	},
+
+	searchPersons: function() {
+		let facetedSearch = (
+				<FacetedSearch
+					onChange={function(obj){ alert(obj.name) }}
+					sortFields={["Locatie", "Historische instelling", "Inventaris nummer"]} />);
+
+		React.render(facetedSearch, document.querySelector(".app"));
 	},
 
 	author: function(id, tab) {
