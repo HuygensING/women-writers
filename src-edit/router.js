@@ -4,6 +4,7 @@ import Router from "ampersand-router";
 import React from "react";
 
 import FacetedSearch from "hire-faceted-search";
+import facetedSearchConfig from "./fs-config";
 
 import Author from "./components/author";
 import EditAuthor from "./components/edit-author";
@@ -34,6 +35,7 @@ let R = Router.extend({
 	searchPersons: function() {
 		let facetedSearch = (
 				<FacetedSearch
+					config={facetedSearchConfig}
 					onChange={function(obj){ alert(obj.name) }}
 					sortFields={["Locatie", "Historische instelling", "Inventaris nummer"]} />);
 
