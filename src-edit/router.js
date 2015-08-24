@@ -66,8 +66,9 @@ let R = Router.extend({
 		let facetedSearch = (
 			<FacetedSearch
 				config={facetedSearchConfig}
-				i18n={i18n}
-				onChange={(item) => console.log(item)} />);
+				labels={i18n}
+				onChange={(results, query) => console.log({RESULTS: results, QUERY: query})}
+				onSelect={(item) => console.log({ITEM: item})} />);
 
 		React.render(facetedSearch, document.querySelector(".app"));
 	},
