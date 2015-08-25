@@ -9,14 +9,14 @@ import MultiForm from "hire-forms-multi-form";
 
 import BasicInfoForm from "./basic-info";
 import ReceptionsForm from "./receptions";
-import LinkForm from "../edit-link";
+import LinkForm from "../../edit-link";
 // import NewButton from "../new-button";
-import SaveFooter from "../save-footer";
+import SaveFooter from "../../save-footer";
 
-import actions from "../../actions/publication";
-import publicationStore from "../../stores/publication";
+import publicationActions from "../../../actions/publication";
+import publicationStore from "../../../stores/publication";
 
-import router from "../../router";
+import router from "../../../router";
 
 class PublicationEditController extends React.Component {
 	constructor(props) {
@@ -36,11 +36,11 @@ class PublicationEditController extends React.Component {
 
 	componentDidMount() {
 		publicationStore.listen(this.onStoreChange.bind(this));
-		actions.getPublication(this.props.id);
+		publicationActions.getPublication(this.props.id);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		actions.getPublication(nextProps.id);
+		publicationActions.getPublication(nextProps.id);
 	}
 
 	componentWillUnmount() {
@@ -64,18 +64,17 @@ class PublicationEditController extends React.Component {
 	}
 
 	handleFormChange(key, value) {
-		actions.setKey(key, value);
+		publicationActions.setKey(key, value);
 	}
 
 	handleFormDelete(key) {
-		actions.deleteKey(key);
+		publicationActions.deleteKey(key);
 	}
 
 	render() {
 		let model = this.state.publication;
 
-		let receptions = (model.get("_id") == null) ?
-			null :
+		let receptions = (model.get("_id") != null) ?
 			<Tab
 				active={this.state.activeTab === "Receptions"}
 				label="Receptions">
@@ -83,7 +82,8 @@ class PublicationEditController extends React.Component {
 					onChange={this.handleFormChange}
 					onDelete={this.handleFormDelete}
 					value={model} />
-			</Tab>;
+			</Tab> :
+			null;
 
 		return (
 			<div className="edit-publication">

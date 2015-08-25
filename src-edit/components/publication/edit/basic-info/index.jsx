@@ -6,7 +6,7 @@ import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
 import AutocompleteList from "hire-forms-autocomplete-list";
 
-import API from "../../../stores/api";
+import API from "../../../../stores/api";
 
 class BasicInfoForm {
 	render() {

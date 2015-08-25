@@ -63,7 +63,11 @@ class PublicationStore extends BaseStore {
 		// 	value = new Immutable.Map(value);
 		// }
 
+
 		this.model = this.model.setIn(key, value);
+
+
+		console.log(key, value, this.model.toJS());
 	}
 
 	deleteKey(key) {

@@ -2,22 +2,24 @@ import React from "react";
 import form from "hire-forms-form";
 import Select from "hire-forms-select";
 import Autocomplete from "hire-forms-autocomplete";
-import API from "../../../stores/api";
+import API from "../../../../stores/api";
+
+const DEFAULT_STATE = {
+	relationType: {
+		key: "",
+		value: ""
+	},
+	relation: {
+		key: "",
+		value: ""
+	}
+};
 
 class ReceptionForm extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			relationType: {
-				key: "",
-				value: ""
-			},
-			relation: {
-				key: "",
-				value: ""
-			}
-		};
+		this.state = DEFAULT_STATE;
 	}
 	handleChange(key, value) {
 		this.setState({
@@ -25,11 +27,17 @@ class ReceptionForm extends React.Component {
 		});
 	}
 
+	handleSubmit() {
+		this.setState(DEFAULT_STATE);
+
+		this.props.onChange(this.state);
+	}
+
 	render() {
 		let active = (this.state.relationType.key !== "" && this.state.relation.key !== "");
 
 		return (
-			<ul>
+			<ul className="well">
 				<li>
 					<Select
 						onChange={this.handleChange.bind(this, "relationType")}
@@ -43,7 +51,7 @@ class ReceptionForm extends React.Component {
 						value={this.state.relation} />
 				</li>
 				<li>
-					<button onClick={this.props.onChange.bind(this, this.state)}>Add relation</button>
+					<button onClick={this.handleSubmit.bind(this)}>Add relation</button>
 				</li>
 			</ul>
 		);

@@ -6,10 +6,10 @@ import form from "hire-forms-form";
 
 import ReceptionForm from "./form";
 
-import actions from "../../../actions/relations";
-import relationsStore from "../../../stores/relations";
+import actions from "../../../../actions/relations";
+import relationsStore from "../../../../stores/relations";
 
-import Relation from "../../values/relation";
+import Relation from "../../../values/relation";
 
 let toKeyValue = function(displayNames) {
 	return (relationName) => {
@@ -44,8 +44,9 @@ class ReceptionsForm extends React.Component {
 	}
 
 	handleFormChange(formData) {
-		console.log(formData.relation.key);
-		console.log(this.props.value.getIn(["@relations", formData.relationType.key]).toJS());
+		let currentRelations = this.props.value.getIn(["@relations", formData.relationType.key]).toJS();
+
+		this.props.onChange(["@relations", formData.relationType.key], [...currentRelations, formData.relation]);
 	}
 
 	render() {
@@ -86,7 +87,7 @@ class ReceptionsForm extends React.Component {
 					onChange={this.handleFormChange.bind(this)}
 					selectOptions={regularRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
 					value={this.state.regularForm} />
-				<ul>
+				<ul className="record">
 					{regularRelations}
 				</ul>
 				<h3>Is</h3>
@@ -94,7 +95,7 @@ class ReceptionsForm extends React.Component {
 					onChange={this.handleFormChange.bind(this)}
 					selectOptions={inverseRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
 					value={this.state.inverseForm} />
-				<ul>
+				<ul className="record">
 					{inverseRelations}
 				</ul>
 			</div>

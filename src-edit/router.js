@@ -10,7 +10,7 @@ import Author from "./components/author";
 import EditAuthor from "./components/edit-author";
 
 import Publication from "./components/publication";
-import EditPublication from "./components/edit-publication";
+import EditPublication from "./components/publication/edit";
 
 let i18n = {
 	facetTitles: {
