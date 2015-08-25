@@ -2,7 +2,7 @@ import React from "react";
 import form from "hire-forms-form";
 import Select from "hire-forms-select";
 import Autocomplete from "hire-forms-autocomplete";
-import API from "../../../../stores/api";
+import API from "../../../stores/api";
 
 const DEFAULT_STATE = {
 	relationType: {

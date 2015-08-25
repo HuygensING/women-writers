@@ -7,10 +7,10 @@ import React from "react";
 import facetedSearchConfig from "./fs-config";
 
 import Author from "./components/author";
-import EditAuthor from "./components/edit-author";
+import AuthorForm from "./components/author-form";
 
 import Publication from "./components/publication";
-import EditPublication from "./components/publication/edit";
+import PublicationForm from "./components/publication-form";
 
 let i18n = {
 	facetTitles: {
@@ -82,7 +82,7 @@ let R = Router.extend({
 			id = null;
 		}
 
-		React.render(<EditAuthor id={id} tab={tab} />, document.querySelector(".app"));
+		React.render(<AuthorForm id={id} tab={tab} />, document.querySelector(".app"));
 	},
 
 	publication: function(id, tab) {
@@ -98,7 +98,7 @@ let R = Router.extend({
 			id = null;
 		}
 
-		React.render(<EditPublication id={id} tab={tab} />, document.querySelector(".app"));
+		React.render(<PublicationForm id={id} tab={tab} />, document.querySelector(".app"));
 	}
 });
 

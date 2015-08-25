@@ -9,14 +9,14 @@ import MultiForm from "hire-forms-multi-form";
 
 import BasicInfoForm from "./basic-info";
 import ReceptionsForm from "./receptions";
-import LinkForm from "../../edit-link";
-// import NewButton from "../new-button";
-import SaveFooter from "../../save-footer";
+import LinkForm from "../edit-link";
+// import NewButton from "new-button";
+import SaveFooter from "../save-footer";
 
-import publicationActions from "../../../actions/publication";
-import publicationStore from "../../../stores/publication";
+import publicationActions from "../../actions/publication";
+import publicationStore from "../../stores/publication";
 
-import router from "../../../router";
+import router from "../../router";
 
 class PublicationEditController extends React.Component {
 	constructor(props) {

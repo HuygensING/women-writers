@@ -6,10 +6,10 @@ import form from "hire-forms-form";
 
 import ReceptionForm from "./form";
 
-import actions from "../../../../actions/relations";
-import relationsStore from "../../../../stores/relations";
+import actions from "../../../actions/relations";
+import relationsStore from "../../../stores/relations";
 
-import Relation from "../../../values/relation";
+import Relation from "../../values/relation";
 
 let toKeyValue = function(displayNames) {
 	return (relationName) => {
