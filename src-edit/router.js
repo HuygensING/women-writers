@@ -3,7 +3,7 @@
 import Router from "ampersand-router";
 import React from "react";
 
-import FacetedSearch from "hire-faceted-search";
+// import FacetedSearch from "hire-faceted-search";
 import facetedSearchConfig from "./fs-config";
 
 import Author from "./components/author";
@@ -58,16 +58,16 @@ let R = Router.extend({
 		console.log("HOME");
 	},
 
-	searchPersons: function() {
-		let facetedSearch = (
-			<FacetedSearch
-				config={facetedSearchConfig}
-				labels={i18n}
-				onChange={(results, query) => console.log({RESULTS: results, QUERY: query})}
-				onSelect={(item) => console.log({ITEM: item})} />);
+	// searchPersons: function() {
+	// 	let facetedSearch = (
+	// 		<FacetedSearch
+	// 			config={facetedSearchConfig}
+	// 			labels={i18n}
+	// 			onChange={(results, query) => console.log({RESULTS: results, QUERY: query})}
+	// 			onSelect={(item) => console.log({ITEM: item})} />);
 
-		React.render(facetedSearch, document.querySelector(".app"));
-	},
+	// 	React.render(facetedSearch, document.querySelector(".app"));
+	// },
 
 	author: function(id, tab) {
 		if (id === "new") {
