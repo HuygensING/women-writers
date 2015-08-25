@@ -41,7 +41,7 @@ let i18n = {
 let R = Router.extend({
 	routes: {
 		"": "home",
-		"persons": "searchPersons",
+		// "persons": "searchPersons",
 		"persons/new": "editAuthor",
 		"persons/:id/edit": "editAuthor",
 		"persons/:id/:tab/edit": "editAuthor",
@@ -56,10 +56,6 @@ let R = Router.extend({
 
 	home: function() {
 		console.log("HOME");
-	},
-
-	handleClick() {
-		console.log("BIND");
 	},
 
 	searchPersons: function() {

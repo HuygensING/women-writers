@@ -87,14 +87,14 @@ class PublicationController extends React.Component {
 					</div>
 				</Tab>
 				<Tab
-					active={this.state.activeTab === "Links"}
-					label="Links">
-					<Links values={this.state.publication.get("links").toJS()} />
-				</Tab>
-				<Tab
 					active={this.state.activeTab === "Receptions"}
 					label="Receptions">
 					<Receptions value={this.state.publication} />
+				</Tab>
+				<Tab
+					active={this.state.activeTab === "Links"}
+					label="Links">
+					<Links values={this.state.publication.get("links").toJS()} />
 				</Tab>
 				<EditButton
 					pid={this.state.publication.get("^pid")}

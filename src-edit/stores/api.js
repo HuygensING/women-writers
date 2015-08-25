@@ -185,36 +185,14 @@ export default {
 			state.serverPublication,
 			parseOutgoingPublication,
 			publicationUrl);
-
-		// let userState = userStore.getState();
-		// let data = parseOutgoingPublication(model.toJS());
-
-		// let currentRelations = model.get("@relations").toJS();
-		// let prevRelations = state.serverPublication.get("@relations").toJS();
-
-		// saveRelations(currentRelations, prevRelations, data._id);
-
-		// let options = {
-		// 	body: JSON.stringify(data),
-		// 	headers: {
-		// 		Authorization: userState.user.get("token"),
-		// 		"Content-Type": "application/json",
-		// 		"VRE_ID": "WomenWriters"
-		// 	},
-		// 	method: "PUT",
-		// 	url: publicationUrl + "/" + model.get("_id")
-		// };
-
-		// let done = function(err) {
-		// 	if (err) { handleError(err); }
-		// };
-
-		// xhr(options, done);
 	},
 
 	getRelations() {
 		let options = {
-			url: `${baseUrl}/system/relationtypes`
+			url: `${baseUrl}/system/relationtypes`,
+			headers: {
+				"Content-Type": "application/json"
+			}
 		};
 
 		let done = function(err, resp, body) {
