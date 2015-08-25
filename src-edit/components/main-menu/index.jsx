@@ -41,9 +41,9 @@ class MainMenu extends React.Component {
 						appId="WomenWriters"
 						headers={{VRE_ID: "WomenWriters"}}
 						onChange={this.handleLoginChange.bind(this)}
-						userUrl="https://acc.repository.huygens.knaw.nl/system/users/me">
+						userUrl="https://acc.repository.huygens.knaw.nl/v2/system/users/me">
 						<Federated url="https://secure.huygens.knaw.nl/saml2/login" />
-						<Basic url="https://acc.repository.huygens.knaw.nl/authenticate" />
+						<Basic url="https://acc.repository.huygens.knaw.nl/v2/authenticate" />
 					</Login>
 				</li>
 				<li className="new-author">

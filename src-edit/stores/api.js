@@ -11,7 +11,13 @@ import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publ
 
 import saveRelations from "./utils/save-relations";
 
-let baseUrl = "https://acc.repository.huygens.knaw.nl";
+const DEFAULT_HEADERS = {
+	"Accept": "*/*",
+	"Content-Type": "application/json",
+	"VRE_ID": "WomenWriters"
+};
+
+let baseUrl = "https://acc.repository.huygens.knaw.nl/v2";
 let authorUrl = baseUrl + "/domain/wwpersons";
 let publicationUrl = baseUrl + "/domain/wwdocuments";
 
@@ -21,11 +27,8 @@ let handleError = function(err, resp, body) {
 
 let getAutocompleteValues = function(name, query, done) {
 	let options = {
-		headers: {
-			"Content-Type": "application/json",
-			"VRE_ID": "WomenWriters"
-		},
-		url: `${baseUrl}/v2/domain/ww${name}/autocomplete?query=*${query}*`
+		headers: DEFAULT_HEADERS,
+		url: `${baseUrl}/domain/ww${name}/autocomplete?query=*${query}*`
 	};
 
 	let xhrDone = function(err, resp, body) {
@@ -39,11 +42,8 @@ let getAutocompleteValues = function(name, query, done) {
 
 let getSelectValues = function(name, done) {
 	let options = {
-		headers: {
-			"Content-Type": "application/json",
-			"VRE_ID": "WomenWriters"
-		},
-		url: `${baseUrl}/v2/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
+		headers: DEFAULT_HEADERS,
+		url: `${baseUrl}/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
 	};
 
 	let xhrDone = function(err, resp, body) {
@@ -72,11 +72,9 @@ let save = function(type, token, model, serverModel, parse, url) {
 
 	let options = {
 		body: JSON.stringify(data),
-		headers: {
-			Authorization: token,
-			"Content-Type": "application/json",
-			"VRE_ID": "WomenWriters"
-		},
+		headers: {DEFAULT_HEADERS,	...{
+			Authorization: token
+		}},
 		method: method,
 		url: theUrl
 	};
@@ -99,9 +97,7 @@ let save = function(type, token, model, serverModel, parse, url) {
 export default {
 	getAuthor(id) {
 		let options = {
-			headers: {
-				"Content-Type": "application/json"
-			},
+			headers: DEFAULT_HEADERS,
 			url: authorUrl + "/" + id
 		};
 
@@ -133,11 +129,9 @@ export default {
 
 		let options = {
 			body: JSON.stringify(data),
-			headers: {
-				Authorization: userState.user.get("token"),
-				"Content-Type": "application/json",
-				"VRE_ID": "WomenWriters"
-			},
+			headers: {...DEFAULT_HEADERS, ...{
+				Authorization: userState.user.get("token")
+			}},
 			method: method,
 			url: url
 		};
@@ -159,9 +153,7 @@ export default {
 
 	getPublication(id) {
 		let options = {
-			headers: {
-				"Content-Type": "application/json"
-			},
+			headers: DEFAULT_HEADERS,
 			url: baseUrl + "/domain/wwdocuments/" + id
 		};
 
@@ -189,10 +181,8 @@ export default {
 
 	getRelations() {
 		let options = {
-			url: `${baseUrl}/system/relationtypes`,
-			headers: {
-				"Content-Type": "application/json"
-			}
+			headers: DEFAULT_HEADERS,
+			url: `${baseUrl}/system/relationtypes`
 		};
 
 		let done = function(err, resp, body) {
