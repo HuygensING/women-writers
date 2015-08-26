@@ -9,6 +9,18 @@ import NameForm from "./name";
 
 import API from "../../../stores/api";
 
+let validateDate = function(value) {
+    // Handle validation.
+    let re = /^(\d{2}-)?(\d{2}-)?\d{4}(~|\?)?$/;
+    let isValid = re.test(value);
+
+    // Return a validator object.
+    return {
+        isValid: isValid,
+        message: isValid ? "" : "A date should be formatted as: DD-MM-YYYY. \nOptionally a '~' (approximate) or '?' (uncertain) can be added."
+    };
+};
+
 class BasicInfoForm {
 	render() {
 		let model = this.props.value;
@@ -84,6 +96,7 @@ class BasicInfoForm {
 					<label>Birth date</label>
 					<Input
 						onChange={this.props.onChange.bind(this, "birthDate")}
+						validate={validateDate}
 						value={model.get("birthDate")} />
 				</li>
 				{birthPlace}
@@ -92,6 +105,7 @@ class BasicInfoForm {
 					<label>Death date</label>
 					<Input
 						onChange={this.props.onChange.bind(this, "deathDate")}
+						validate={validateDate}
 						value={model.get("deathDate")} />
 				</li>
 				{deathPlace}
