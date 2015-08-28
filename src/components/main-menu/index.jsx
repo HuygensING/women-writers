@@ -29,6 +29,10 @@ class MainMenu extends React.Component {
 	render() {
 		let [types] = window.location.pathname.substr(1).split("/").slice(1, 2);
 
+		if (types == null) {
+			types = "persons"
+		}
+
 		return (
 			<ul>
 				<li className={cx({active: types === "persons"})}>

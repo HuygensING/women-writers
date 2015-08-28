@@ -9,7 +9,7 @@ import ReceptionForm from "./form";
 import actions from "../../../actions/relations";
 import relationsStore from "../../../stores/relations";
 
-import Relation from "../../values/relation";
+import RelationDocument from "../../values/relation-document";
 
 let toKeyValue = function(displayNames) {
 	return (relationName) => {
@@ -65,7 +65,7 @@ class ReceptionsForm extends React.Component {
 			.map((relationName) =>
 				<li key={relationName}>
 					<label>{this.state.relationDisplayNames[relationName]}</label>
-					<Relation values={model.getIn(["@relations", relationName]).toJS()} />
+					<RelationDocument values={model.getIn(["@relations", relationName]).toJS()} />
 				</li>
 			);
 
@@ -76,7 +76,7 @@ class ReceptionsForm extends React.Component {
 			.map((relationName) =>
 				<li key={relationName}>
 					<label>{this.state.relationDisplayNames[relationName]}</label>
-					<Relation values={model.getIn(["@relations", relationName]).toJS()} />
+					<RelationDocument values={model.getIn(["@relations", relationName]).toJS()} />
 				</li>
 			);
 

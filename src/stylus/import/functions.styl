@@ -1,4 +1,58 @@
-inline-block()
+inline_block()
 	display inline-block
 	box-sizing border-box
 	vertical-align top
+
+input()
+	width 400px
+	height 32px
+	border 1px solid #CCC
+	padding-left 6px
+	box-sizing border-box
+	font-size 1em
+
+well()
+	background white
+	box-shadow 1px 1px 3px rgba(0, 0, 0, 0.12), -1px -1px 1px rgba(0, 0, 0, 0.04)
+	padding 20px
+
+small()
+	font-style italic
+	font-size 0.8em
+	color #AAA
+
+button_box_shadow()
+	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+
+button()
+	background none
+	border none
+	outline none
+	cursor pointer
+
+multi_form_button()
+	button()
+	position absolute
+	margin-top 4px
+	width 24px
+	height 24px
+	right -40px
+
+	&:hover
+		button_box_shadow()
+		color white
+
+	&.hire-add-form:hover
+		background wwGreen
+
+	&.hire-remove-form:hover
+		background wwRed
+
+
+select_button()
+	button()
+	position absolute
+	top 0
+	right -3px
+	width 31px
+	height 31px
