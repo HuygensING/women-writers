@@ -8,6 +8,7 @@ import MultiForm from "hire-forms-multi-form";
 import BasicInfoForm from "./basic-info";
 import PersonalForm from "./personal";
 import PublicForm from "./public";
+import PublicationsForm from "./publications";
 import LinkForm from "../edit-link";
 import NewButton from "../new-button";
 import SaveFooter from "../save-footer";
@@ -15,7 +16,7 @@ import SaveFooter from "../save-footer";
 import actions from "../../actions/author";
 import authorStore from "../../stores/author";
 
-class AuthorEditController extends React.Component {
+class AuthorForm extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -128,6 +129,17 @@ class AuthorEditController extends React.Component {
 				</div>
 			</Tab>;
 
+		let publicationsTab = (model.get("_id") == null) ?
+			null :
+			<Tab
+				active={this.state.activeTab === "Publications"}
+				label="Publications">
+				<PublicationsForm
+					onChange={this.handleFormChange}
+					onDelete={this.handleFormDelete}
+					value={model} />
+			</Tab>;
+
 		return (
 			<div className="edit-author">
 				<Tabs onChange={this.handleTabChange.bind(this)}>
@@ -175,6 +187,7 @@ class AuthorEditController extends React.Component {
 					{/* Works */}
 					{personalTab}
 					{publicTab}
+					{publicationsTab}
 					<Tab
 						active={this.state.activeTab === "Links"}
 						label="Links">
@@ -197,9 +210,9 @@ class AuthorEditController extends React.Component {
 	}
 }
 
-AuthorEditController.propTypes = {
+AuthorForm.propTypes = {
 	id: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "links"])
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "links"])
 };
 
-export default AuthorEditController;
+export default AuthorForm;
