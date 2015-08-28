@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 
 import {Login, Federated, Basic} from "hire-login";
+import Link from "../link";
 
 import userActions from "../../actions/user";
 import router from "../../router";
@@ -31,10 +32,14 @@ class MainMenu extends React.Component {
 		return (
 			<ul>
 				<li className={cx({active: types === "persons"})}>
-					<a href="/womenwriters/persons/">Women authors</a>
+					<Link
+						href="persons"
+						value="Women authors" />
 				</li>
 				<li className={cx({active: types === "documents"})}>
-					<a href="/womenwriters/documents/">Their publications</a>
+					<Link
+						href="documents"
+						value="Their publications" />
 				</li>
 				<li className="login">
 					<Login

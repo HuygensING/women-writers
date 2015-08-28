@@ -3,7 +3,7 @@ import router from "../../router";
 
 class Link extends React.Component {
 	handleClick() {
-		router.navigate(this.props.href);
+		router.navigate(this.props.href, {trigger: true});
 	}
 
 	render() {
