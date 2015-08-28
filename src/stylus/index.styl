@@ -19,9 +19,11 @@ body
 body, h1, h2, h3, h4, h5, input
 	font-family 'Open Sans'
 
-ul
+ul, h1, h2, h3
 	margin 0
 	padding 0
+
+ul
 	list-style none
 
 .app > .hire-tabs, body > header, #main-menu
@@ -66,23 +68,60 @@ body > header
 		&.new-publication
 			top 30px
 
-.app > div > .hire-tabs, .app > .hire-tabs
-	padding 40px 5% 120px 5%
+header.page
+	padding 30px 5%
+
+	& > h2
+		font-size 1.8em
+		margin-left 20%
+
+		small
+			font-size 0.6em
+			font-weight normal
+
+			&.years
+				margin 0 20px
+
+		small.pseudonyms
+			display block
+			font-size 0.5em
+			margin-top 0px
+
+			ul.relation
+				display inline
+				padding-left 12px
+
+				li
+					display inline
+
+					&:after
+						content ", "
+
+					&:last-child:after
+						content ""
+
+.author, .publication
 	position relative
 
-	& > button
+	& > button.edit
 		button()
 		background-color wwLightTurquoise
 		color wwLighterTurquoise
-		text-transform uppercase
-		padding 4px 12px
 		font-weight bold
-		position absolute
-		top 180px
 		left 5%
+		padding 4px 12px
+		position absolute
+		text-transform uppercase
+		top 240px
+		z-index 1000
 
 		&:hover
 			button_box_shadow()
+
+.app > div > .hire-tabs, .app > .hire-tabs
+	padding 0 5% 120px 5%
+	position relative
+
 
 	& > ul, & > .hire-tab
 		inline_block()

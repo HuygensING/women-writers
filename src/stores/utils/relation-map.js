@@ -40,6 +40,7 @@ let authorRelationMap = {
 	hasEducation: "wwkeywords",
 	hasFinancialSituation: "wwkeywords",
 	hasMaritalStatus: "wwkeywords",
+	hasObituary: "wwdocuments",
 	hasPersonLanguage: "wwlanguages",
 	hasProfession: "wwkeywords",
 	hasPseudonym: "wwpersons",

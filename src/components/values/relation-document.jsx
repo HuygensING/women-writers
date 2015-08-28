@@ -7,13 +7,15 @@ class DocumentRelation extends React.Component {
 			return <span>-</span>;
 		}
 
-		let relations = this.props.values.map((v, index) =>
-			<li key={index}>
-				<Link
-					href={`/documents/${v.key.substr(v.key.lastIndexOf("/") + 1)}`}
-					value={v.value} />
-			</li>
-		)
+		let relations = this.props.values.map((v, index) => {
+			return (
+				<li key={index}>
+					<Link
+						href={`/documents/${v.key.substr(v.key.lastIndexOf("/") + 1)}`}
+						value={v.value} />
+				</li>
+			);
+		});
 
 		return (
 			<span>

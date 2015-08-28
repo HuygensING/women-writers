@@ -15,21 +15,26 @@ class App extends React.Component {
 
 		switch(this.props.page) {
 			case "author":
-				return (<Author id={id} tab={this.props.tab} />);
-
-			case "authorForm":
-				return (<AuthorForm id={id} tab={this.props.tab} />);
+				return (
+					<Author
+						edit={this.props.edit}
+						id={id}
+						tab={this.props.tab} />
+				);
 
 			case "publication":
-				return (<Publication id={id} tab={this.props.tab} />);
-
-			case "publicationForm":
-				return (<PublicationForm id={id} tab={this.props.tab} />);
+				return (
+					<Publication
+						edit={this.props.edit}
+						id={id}
+						tab={this.props.tab} />
+				);
 		}
 	}
 }
 
 App.propTypes = {
+	edit: React.PropTypes.bool.isRequired,
 	id: React.PropTypes.string.isRequired,
 	page: React.PropTypes.string.isRequired,
 	tab: React.PropTypes.string

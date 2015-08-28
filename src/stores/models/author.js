@@ -18,6 +18,7 @@ export default new Immutable.Map({
 		hasFinancialSituation: emptyList,
 		hasMaritalStatus: emptyList,
 		hasObituary: emptyList,
+		hasPersonLanguage: emptyList,
 		hasProfession: emptyList,
 		hasPseudonym: emptyList,
 		hasReligion: emptyList,

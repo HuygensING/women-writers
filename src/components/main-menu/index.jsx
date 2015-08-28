@@ -30,7 +30,7 @@ class MainMenu extends React.Component {
 		let [types] = window.location.pathname.substr(1).split("/").slice(1, 2);
 
 		if (types == null) {
-			types = "persons"
+			types = "persons";
 		}
 
 		return (

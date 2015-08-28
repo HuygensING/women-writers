@@ -1,11 +1,10 @@
 import React from "react";
-import {Tabs, Tab} from "hire-tabs";
 
-import BasicInfo from "./basic-info";
-import Receptions from "./receptions";
-// import LinkForm from "../edit-link";
-import Links from "../links";
+import PublicationHeader from "./header";
 import EditButton from "../edit-button";
+import PublicationRecord from "./record";
+import PublicatioFnorm from "./form";
+import SaveFooter from "../save-footer";
 
 import actions from "../../actions/publication";
 import publicationStore from "../../stores/publication";
@@ -60,46 +59,54 @@ class PublicationController extends React.Component {
 		});
 	}
 
+	handleEditButtonClick() {
+		this.setState({
+			edit: true
+		});
+
+		router.navigate(`documents/${this.state.publication.get("_id")}/edit`);
+	}
+
+	handleFooterCancel() {
+		this.setState({
+			edit: false
+		});
+
+		router.navigate(`documents/${this.state.publication.get("_id")}`);
+	}
+
 	render() {
+		let editButton = (this.state.edit) ?
+			null :
+			<EditButton
+				onClick={this.handleEditButtonClick.bind(this)}
+				pid={this.state.publication.get("^pid")}
+				token={this.state.user.get("token")} />;
+
+		let body = (this.state.edit) ?
+			<PublicatioFnorm
+				{...this.props}
+				publication={this.state.publication}
+				router={router} /> :
+			<PublicationRecord
+				{...this.props}
+				publication={this.state.publication}
+				router={router} />;
+
+		let footer = (this.state.edit) ?
+			<SaveFooter
+				onCancel={this.handleFooterCancel.bind(this)}
+				type="publication" /> :
+			null;
+
 		return (
-			<Tabs onChange={this.handleTabChange.bind(this)}>
-				<Tab
-					active={this.state.activeTab === "Basic info"}
-					label="Basic info">
-					<BasicInfo
-						value={this.state.publication} />
-					<div className="temp-data">
-						<h2>Temporary data</h2>
-						<ul>
-							<li>
-								<label>Creator</label>
-								<span>{this.state.publication.get("tempCreator")}</span>
-							</li>
-							<li>
-								<label>Language</label>
-								<span>{this.state.publication.get("tempLanguage")}</span>
-							</li>
-							<li>
-								<label>Origin</label>
-								<span>{this.state.publication.get("tempOrigin")}</span>
-							</li>
-						</ul>
-					</div>
-				</Tab>
-				<Tab
-					active={this.state.activeTab === "Receptions"}
-					label="Receptions">
-					<Receptions value={this.state.publication} />
-				</Tab>
-				<Tab
-					active={this.state.activeTab === "Links"}
-					label="Links">
-					<Links values={this.state.publication.get("links").toJS()} />
-				</Tab>
-				<EditButton
-					pid={this.state.publication.get("^pid")}
-					token={this.state.user.get("token")} />
-			</Tabs>
+			<div className="publication">
+				<PublicationHeader
+					publication={this.state.publication} />
+				{editButton}
+				{body}
+				{footer}
+			</div>
 		);
 	}
 }

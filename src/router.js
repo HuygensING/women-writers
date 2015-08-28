@@ -13,9 +13,10 @@ let showPage = function(page) {
 	);
 };
 
-let appRender = function(name, id, tab) {
+let appRender = function(name, edit, id, tab) {
 	React.render(
 		<App
+			edit={edit}
 			id={id}
 			page={name}
 			tab={tab} />,
@@ -30,16 +31,16 @@ let R = Router.extend({
 		"": "searchAuthors",
 		"persons(/)": "searchAuthors",
 		"documents(/)": "searchPublications",
-		"persons/new": appRender.bind(this, "authorForm"),
-		"persons/:id/edit": appRender.bind(this, "authorForm"),
-		"persons/:id/:tab/edit": appRender.bind(this, "authorForm"),
-		"persons/:id/:tab": appRender.bind(this, "author"),
-		"persons/:id": appRender.bind(this, "author"),
-		"documents/new": appRender.bind(this, "publicationForm"),
-		"documents/:id/edit": appRender.bind(this, "publicationForm"),
-		"documents/:id/:tab/edit": appRender.bind(this, "publicationForm"),
-		"documents/:id/:tab": appRender.bind(this, "publication"),
-		"documents/:id": appRender.bind(this, "publication")
+		"persons/new": appRender.bind(this, "author", true),
+		"persons/:id/edit": appRender.bind(this, "author", true),
+		"persons/:id/:tab/edit": appRender.bind(this, "author", true),
+		"persons/:id/:tab": appRender.bind(this, "author"), false,
+		"persons/:id": appRender.bind(this, "author", false),
+		"documents/new": appRender.bind(this, "publication", true),
+		"documents/:id/edit": appRender.bind(this, "publication", true),
+		"documents/:id/:tab/edit": appRender.bind(this, "publication", true),
+		"documents/:id/:tab": appRender.bind(this, "publication", false),
+		"documents/:id": appRender.bind(this, "publication", false)
 	},
 
 	searchAuthors: function() {
