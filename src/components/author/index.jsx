@@ -40,7 +40,7 @@ class AuthorController extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.id !== nextProps.id) {
-			actions.getAuthor(this.props.id);
+			actions.getAuthor(nextProps.id);
 		}
 	}
 

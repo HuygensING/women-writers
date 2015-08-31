@@ -6,6 +6,7 @@
 @import "./link"
 @import "./faceted-search"
 @import "./page-transitions"
+@import "./multi-form"
 
 body
 	margin 0
@@ -246,26 +247,6 @@ ul.hire-options
 	ul.hire-options
 		width 367px
 		top 0
-
-
-.hire-multi-form
-	position relative
-	display inline-block
-
-	& > ul
-		margin-bottom 40px
-
-		& > li
-			position relative
-			margin-bottom 20px
-
-			& > button.hire-remove-form
-				multi_form_button()
-				top 0
-
-	& > ul + button.hire-add-form
-		multi_form_button()
-		bottom 0
 
 .hire-forms-form
 	&.names-form > ul

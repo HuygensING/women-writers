@@ -73,9 +73,13 @@ class BasicInfoForm {
 					<MultiForm
 						attr={"names"}
 						component = {NameForm}
+						model={{
+							firstName: "",
+							lastName: ""
+						}}
 						onChange={this.props.onChange}
 						onDelete={this.props.onDelete}
-						values={model.get("names")} />
+						values={model.get("names").toJS()} />
 				</li>
 				{pseudonyms}
 				<li>

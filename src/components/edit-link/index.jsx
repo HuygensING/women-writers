@@ -2,6 +2,10 @@ import React from "react";
 import form from "hire-forms-form";
 import Input from "hire-forms-input";
 
+let notEmpty = function(value) {
+	return value != null && value !== "";
+};
+
 /*
  * URLs are hard to validate, see: http://stackoverflow.com/a/1411800/997941
  * That's why we check simply for:
@@ -21,7 +25,7 @@ let validateURL = function(value) {
 	let isValid = !re.test(value) && oneDot && noEndDot;
 
 	return {
-		isValid: isValid,
+		isValid: notEmpty(value) && isValid,
 		message: isValid ? "" : "Please enter a valid email address."
 	};
 };
@@ -36,14 +40,15 @@ class LinkForm {
 					<Input
 						onChange={this.props.handleChange.bind(this, "label")}
 						placeholder="Label"
-						value={model.get("label")} />
+						value={this.props.value.label} />
 				</li>
 				<li>
 					<Input
 						onChange={this.props.handleChange.bind(this, "url")}
+						onInvalid={this.props.onInvalid}
 						placeholder="http://"
 						validate={validateURL}
-						value={model.get("url")} />
+						value={this.props.value.url} />
 				</li>
 			</ul>
 		);

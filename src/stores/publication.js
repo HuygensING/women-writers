@@ -53,21 +53,8 @@ class PublicationStore extends BaseStore {
 	setKey(key, value) {
 		key = castArray(key);
 		value = Immutable.fromJS(value);
-		// // Turn an array into an Immutable.List
-		// if (Array.isArray(value)) {
-		// 	value = new Immutable.List(value);
-		// }
-
-		// // Turn a key-value object into an Immutable.Map
-		// if (value.hasOwnProperty("key")) {
-		// 	value = new Immutable.Map(value);
-		// }
-
 
 		this.model = this.model.setIn(key, value);
-
-
-		console.log(key, value, this.model.toJS());
 	}
 
 	deleteKey(key) {
