@@ -17,7 +17,6 @@ import userStore from "../../stores/user";
  *
  * AuthorRecord and AuthorForm share a controller, because they
  * use the same data.
- *
  */
 class AuthorController extends React.Component {
 	constructor(props) {
@@ -39,6 +38,12 @@ class AuthorController extends React.Component {
 		userStore.listen(this.onStoreChange);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (this.props.id !== nextProps.id) {
+			actions.getAuthor(this.props.id);
+		}
+	}
+
 	componentWillUnmount() {
 		authorStore.stopListening(this.onStoreChange);
 		userStore.stopListening(this.onStoreChange);
@@ -51,7 +56,6 @@ class AuthorController extends React.Component {
 	}
 
 	handleEditButtonClick() {
-		console.log('CLICK');
 		this.setState({
 			edit: true
 		});

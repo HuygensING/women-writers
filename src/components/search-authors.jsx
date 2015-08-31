@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 
 import FacetedSearch from "hire-faceted-search";
 
@@ -10,8 +9,10 @@ class SearchAuthors extends React.Component {
 				config={{
 					baseURL: "https://acc.repository.huygens.knaw.nl/v2",
 					searchPath: "/search/wwpersons",
-					levels: [],
-					headers: {VRE_ID: "WomenWriters"}
+					headers: {
+						VRE_ID: "WomenWriters",
+						Accept: "*/*"
+					}
 				}}
 				facetList={[
 					"dynamic_s_gender",
@@ -52,7 +53,6 @@ class SearchAuthors extends React.Component {
 					"deathDate",
 					"residenceLocation"
 				]}
-				onChange={(results, query) => console.log({RESULTS: results, QUERY: query})}
 				onSelect={(item) =>
 					this.props.router.navigate(`/persons/${item.id}`)
 				}

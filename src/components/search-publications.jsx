@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 
 import FacetedSearch from "hire-faceted-search";
 
@@ -39,7 +38,6 @@ class SearchPublications extends React.Component {
 					"language",
 					"date"
 				]}
-				onChange={(results, query) => console.log({RESULTS: results, QUERY: query})}
 				onSelect={(item) =>
 					this.props.router.navigate(`/documents/${item.id}`)
 				}

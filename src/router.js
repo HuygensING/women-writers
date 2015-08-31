@@ -34,7 +34,7 @@ let R = Router.extend({
 		"persons/new": appRender.bind(this, "author", true),
 		"persons/:id/edit": appRender.bind(this, "author", true),
 		"persons/:id/:tab/edit": appRender.bind(this, "author", true),
-		"persons/:id/:tab": appRender.bind(this, "author"), false,
+		"persons/:id/:tab": appRender.bind(this, "author", false),
 		"persons/:id": appRender.bind(this, "author", false),
 		"documents/new": appRender.bind(this, "publication", true),
 		"documents/:id/edit": appRender.bind(this, "publication", true),

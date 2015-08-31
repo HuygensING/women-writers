@@ -1,11 +1,7 @@
 import React from "react";
-import cx from "classnames";
 
 import Author from "./author";
-import AuthorForm from "./author-form";
-
 import Publication from "./publication";
-import PublicationForm from "./publication-form";
 
 class App extends React.Component {
 	render() {
