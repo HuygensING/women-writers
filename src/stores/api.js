@@ -12,7 +12,7 @@ import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publ
 import saveRelations from "./utils/save-relations";
 
 const DEFAULT_HEADERS = {
-	"Accept": "*/*",
+	"Accept": "application/json",
 	"Content-Type": "application/json",
 	"VRE_ID": "WomenWriters"
 };

@@ -16,6 +16,8 @@ class PublicationController extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.onStoreChange = this.onStoreChange.bind(this);
+
 		let activeTab = (props.tab != null) ?
 			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
 			"Basic info";
@@ -30,8 +32,8 @@ class PublicationController extends React.Component {
 
 	componentDidMount() {
 		actions.getPublication(this.props.id);
-		publicationStore.listen(this.onStoreChange.bind(this));
-		userStore.listen(this.onStoreChange.bind(this));
+		publicationStore.listen(this.onStoreChange);
+		userStore.listen(this.onStoreChange);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -41,8 +43,8 @@ class PublicationController extends React.Component {
 	}
 
 	componentWillUnmount() {
-		publicationStore.stopListening(this.onStoreChange.bind(this));
-		userStore.stopListening(this.onStoreChange.bind(this));
+		publicationStore.stopListening(this.onStoreChange);
+		userStore.stopListening(this.onStoreChange);
 	}
 
 	onStoreChange() {

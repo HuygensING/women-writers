@@ -11,7 +11,7 @@ class SearchAuthors extends React.Component {
 					searchPath: "/search/wwpersons",
 					headers: {
 						VRE_ID: "WomenWriters",
-						Accept: "*/*"
+						Accept: "application/json"
 					}
 				}}
 				facetList={[

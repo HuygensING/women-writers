@@ -15,6 +15,8 @@ class Receptions extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.onStoreChange = this.onStoreChange.bind(this);
+
 		this.state = {
 			publicationPublicationRelations: [],
 			relationDisplayNames: {}
@@ -22,11 +24,11 @@ class Receptions extends React.Component {
 	}
 	componentDidMount() {
 		actions.getRelations();
-		relationsStore.listen(this.onStoreChange.bind(this));
+		relationsStore.listen(this.onStoreChange);
 	}
 
 	componentWillUnmount() {
-		relationsStore.stopListening(this.onStoreChange.bind(this));
+		relationsStore.stopListening(this.onStoreChange);
 	}
 
 	onStoreChange() {

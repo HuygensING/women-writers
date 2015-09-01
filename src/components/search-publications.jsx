@@ -10,7 +10,10 @@ class SearchPublications extends React.Component {
 					baseURL: "https://acc.repository.huygens.knaw.nl/v2",
 					searchPath: "/search/wwdocuments",
 					levels: ["dynamic_sort_creator", "dynamic_sort_title"],
-					headers: {VRE_ID: "WomenWriters"}
+					headers: {
+						Accept: "application/json",
+						VRE_ID: "WomenWriters"
+					}
 				}}
 				facetList={[
 					"dynamic_s_creator",
