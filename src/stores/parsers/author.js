@@ -43,8 +43,8 @@ let inComingParser = function(key, value, obj) {
 	if (key === "names") {
 		obj[key] = value.map((names) => {
 			return {
-				firstName: names.components[0].value,
-				lastName: names.components[1].value
+				firstName: names.components.length ? names.components[0].value : "",
+				lastName: names.components.length > 1 ? names.components[1].value : ""
 			};
 		});
 	}

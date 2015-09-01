@@ -55,8 +55,25 @@ let getSelectValues = function(name, done) {
 	xhr(options, xhrDone);
 };
 
-let save = function(type, token, model, serverModel, parse, url) {
-	let data = parse(model.toJS());
+let fetch = function(url, parse, action) {
+	let options = {
+		headers: DEFAULT_HEADERS,
+		url: url
+	};
+
+	let done = function(err, resp, body) {
+		if (err) { handleError(err, resp, body); }
+
+		body = parse(JSON.parse(body));
+
+		action(body);
+	};
+
+	xhr(options, done);
+};
+
+let save = function(type, model, serverModel, parseOut, parseIn, action) {
+	let data = parseOut(model.toJS());
 
 	// Only save relations if the entity has been saved (has an ID).
 	if (model.get("_id") != null ) {
@@ -66,14 +83,18 @@ let save = function(type, token, model, serverModel, parse, url) {
 		saveRelations(currentRelations, prevRelations, data._id);
 	}
 
+	let url = (type === "person") ?
+		authorUrl :
+		publicationUrl;
+
 	let [method, theUrl] = (model.get("_id") != null) ?
 		["PUT", url + "/" + model.get("_id")] :
 		["POST", url];
 
 	let options = {
 		body: JSON.stringify(data),
-		headers: {DEFAULT_HEADERS,	...{
-			Authorization: token
+		headers: {...DEFAULT_HEADERS,	...{
+			Authorization: userStore.getState().user.get("token")
 		}},
 		method: method,
 		url: theUrl
@@ -81,6 +102,9 @@ let save = function(type, token, model, serverModel, parse, url) {
 
 	let done = function(err, response, body) {
 		if (err) { handleError(err, response, body); }
+
+		body = parseIn(JSON.parse(body));
+		action(body);
 
 		if (model.get("_id") == null) {
 			let location = response.headers.location;
@@ -94,89 +118,79 @@ let save = function(type, token, model, serverModel, parse, url) {
 	xhr(options, done);
 };
 
+let remove = function(type, url) {
+	let options = {
+		headers: {...DEFAULT_HEADERS,	...{
+			Authorization: userStore.getState().user.get("token")
+		}},
+		method: "DELETE",
+		url: url
+	};
+
+	let done = function(err, response, body) {
+		if (err) { handleError(err, response, body); }
+
+		if (response.statusCode === 204) {
+			window.location.assign(`/womenwriters/${type}s`);
+		}
+	};
+
+	xhr(options, done);
+};
+
 export default {
 	getAuthor(id) {
-		let options = {
-			headers: DEFAULT_HEADERS,
-			url: authorUrl + "/" + id
-		};
-
-		let done = function(err, resp, body) {
-			if (err) { handleError(err, resp, body); }
-
-			body = parseIncomingAuthor(JSON.parse(body));
-
-			serverActions.receiveAuthor(body);
-		};
-
-		xhr(options, done);
-	},
-
-	saveAuthor() {
-		let userState = userStore.getState();
-		let authorState = authorStore.getState();
-		let model = authorState.author;
-		let data = parseOutgoingAuthor(model.toJS());
-
-		let currentRelations = model.get("@relations").toJS();
-		let prevRelations = authorState.serverAuthor.get("@relations").toJS();
-
-		saveRelations(currentRelations, prevRelations, data._id);
-
-		let [method, url] = (model.get("_id") != null) ?
-			["PUT", authorUrl + "/" + model.get("_id")] :
-			["POST", authorUrl];
-
-		let options = {
-			body: JSON.stringify(data),
-			headers: {...DEFAULT_HEADERS, ...{
-				Authorization: userState.user.get("token")
-			}},
-			method: method,
-			url: url
-		};
-
-		let done = function(err, response, body) {
-			if (err) { handleError(err, response, body); }
-
-			if (model.get("_id") == null) {
-				let location = response.headers.location;
-				let id = location.substr(location.lastIndexOf("/") + 1);
-				let locationUrl = `/womenwriters/persons/${id}`;
-
-				window.location.assign(locationUrl);
-			}
-		};
-
-		xhr(options, done);
+		let url = authorUrl + "/" + id;
+		fetch(
+			url,
+			parseIncomingAuthor,
+			serverActions.receiveAuthor
+		);
 	},
 
 	getPublication(id) {
-		let options = {
-			headers: DEFAULT_HEADERS,
-			url: baseUrl + "/domain/wwdocuments/" + id
-		};
+		let url = publicationUrl + "/" + id;
+		fetch(
+			url,
+			parseIncomingPublication,
+			serverActions.receivePublication
+		);
+	},
 
-		let done = function(err, resp, body) {
-			if (err) { handleError(err, resp, body); }
+	saveAuthor() {
+		let state = authorStore.getState();
 
-			body = parseIncomingPublication(JSON.parse(body));
-
-			serverActions.receivePublication(body);
-		};
-
-		xhr(options, done);
+		save(
+			"person",
+			state.author,
+			state.serverAuthor,
+			parseOutgoingAuthor,
+			parseIncomingAuthor,
+			serverActions.receiveAuthor
+		);
 	},
 
 	savePublication() {
 		let state = publicationStore.getState();
 
-		save("document",
-			userStore.getState().user.get("token"),
+		save(
+			"document",
 			state.publication,
 			state.serverPublication,
 			parseOutgoingPublication,
-			publicationUrl);
+			parseIncomingPublication,
+			serverActions.receivePublication
+		);
+	},
+
+	deleteAuthor() {
+		let id = authorStore.getState().author.get("_id");
+		remove("person", authorUrl + "/" + id);
+	},
+
+	deletePublication() {
+		let id = publicationStore.getState().publication.get("_id");
+		remove("document", publicationUrl + "/" + id);
 	},
 
 	getRelations() {

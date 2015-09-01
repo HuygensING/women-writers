@@ -9,6 +9,11 @@ let actions = {
 };
 
 class SaveFooter extends React.Component {
+	handleDelete() {
+		let method = "delete" + this.props.type.charAt(0).toUpperCase() + this.props.type.substr(1);
+		actions[this.props.type][method]();
+	}
+
 	handleSave() {
 		let method = "save" + this.props.type.charAt(0).toUpperCase() + this.props.type.substr(1);
 		actions[this.props.type][method]();
@@ -18,7 +23,7 @@ class SaveFooter extends React.Component {
 		return (
 			<footer>
 				<button className="cancel" onClick={this.props.onCancel}>Cancel</button>
-				<button className="delete">Delete</button>
+				<button className="delete" onClick={this.handleDelete.bind(this)}>Delete</button>
 				<button className="save" onClick={this.handleSave.bind(this)}>Save</button>
 			</footer>
 		);

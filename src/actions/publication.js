@@ -16,6 +16,10 @@ let publicationActions = {
 		API.savePublication();
 	},
 
+	deletePublication() {
+		API.deletePublication();
+	},
+
 	setKey(key, value) {
 		dispatcher.handleViewAction({
 			actionType: "PUBLICATION_SET_KEY",

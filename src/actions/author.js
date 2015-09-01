@@ -12,8 +12,12 @@ let authorActions = {
 		}
 	},
 
-	saveAuthor(id) {
-		API.saveAuthor(id);
+	saveAuthor() {
+		API.saveAuthor();
+	},
+
+	deleteAuthor() {
+		API.deleteAuthor();
 	},
 
 	setKey(key, value) {
