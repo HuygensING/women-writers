@@ -18,16 +18,9 @@ class PublicationController extends React.Component {
 
 		this.onStoreChange = this.onStoreChange.bind(this);
 
-		let activeTab = (props.tab != null) ?
-			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
-			"Basic info";
-
 		this.state = Object.assign(
 			publicationStore.getState(),
-			userStore.getState(),
-			{
-				activeTab: activeTab
-			});
+			userStore.getState());
 	}
 
 	componentDidMount() {
@@ -53,20 +46,15 @@ class PublicationController extends React.Component {
 		this.setState(state);
 	}
 
-	handleTabChange(label) {
-		router.navigate(`/documents/${this.props.id}/${label.toLowerCase()}`);
-
-		this.setState({
-			activeTab: label
-		});
-	}
-
 	handleEditButtonClick() {
 		this.setState({
 			edit: true
 		});
 
-		router.navigate(`documents/${this.state.publication.get("_id")}/edit`);
+		let id = this.state.publication.get("_id");
+		let tab = this.refs.publicationRecord.state.activeTab.toLowerCase();
+		let path = `documents/${id}/${tab}/edit`;
+		router.navigate(path);
 	}
 
 	handleFooterCancel() {
@@ -74,7 +62,10 @@ class PublicationController extends React.Component {
 			edit: false
 		});
 
-		router.navigate(`documents/${this.state.publication.get("_id")}`);
+		let id = this.state.publication.get("_id");
+		let tab = this.refs.publicationForm.state.activeTab.toLowerCase();
+		let path = `documents/${id}/${tab}`;
+		router.navigate(path);
 	}
 
 	render() {
@@ -89,10 +80,12 @@ class PublicationController extends React.Component {
 			<PublicatioFnorm
 				{...this.props}
 				publication={this.state.publication}
+				ref="publicationForm"
 				router={router} /> :
 			<PublicationRecord
 				{...this.props}
 				publication={this.state.publication}
+				ref="publicationRecord"
 				router={router} />;
 
 		let footer = (this.state.edit) ?
@@ -114,8 +107,14 @@ class PublicationController extends React.Component {
 }
 
 PublicationController.propTypes = {
+	edit: React.PropTypes.bool,
 	id: React.PropTypes.string,
 	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"])
+};
+
+PublicationController.defaultProps = {
+	edit: false,
+	tab: "basic info"
 };
 
 export default PublicationController;

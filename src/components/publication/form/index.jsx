@@ -96,9 +96,13 @@ class PublicationForm extends React.Component {
 					<MultiForm
 						attr={"links"}
 						component = {LinkForm}
+						model={{
+							label: "",
+							url: ""
+						}}
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
-						values={model.get("links")} />
+						values={model.get("links").toJS()} />
 				</Tab>
 			</Tabs>
 		);

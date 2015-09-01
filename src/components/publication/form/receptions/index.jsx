@@ -71,6 +71,10 @@ class ReceptionsForm extends React.Component {
 				</li>
 			);
 
+		regularRelations = regularRelations.length ?
+			<ul className="record">{regularRelations}</ul> :
+			null;
+
 		let inverseRelations = inverseRelationNames
 			.filter((relationName) =>
 				model.getIn(["@relations", relationName]).size > 0
@@ -82,6 +86,11 @@ class ReceptionsForm extends React.Component {
 				</li>
 			);
 
+		inverseRelations = inverseRelations.length ?
+			<ul className="record">{inverseRelations}</ul> :
+			null;
+
+
 		return (
 			<div>
 				<h3>Has</h3>
@@ -89,17 +98,13 @@ class ReceptionsForm extends React.Component {
 					onChange={this.handleFormChange.bind(this)}
 					selectOptions={regularRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
 					value={this.state.regularForm} />
-				<ul className="record">
-					{regularRelations}
-				</ul>
+				{regularRelations}
 				<h3>Is</h3>
 				<ReceptionForm
 					onChange={this.handleFormChange.bind(this)}
 					selectOptions={inverseRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
 					value={this.state.inverseForm} />
-				<ul className="record">
-					{inverseRelations}
-				</ul>
+				{inverseRelations}
 			</div>
 		);
 	}

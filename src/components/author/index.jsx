@@ -60,7 +60,10 @@ class AuthorController extends React.Component {
 			edit: true
 		});
 
-		router.navigate(`persons/${this.state.author.get("_id")}/edit`);
+		let id = this.state.author.get("_id");
+		let tab = this.refs.authorRecord.state.activeTab.toLowerCase();
+		let path = `persons/${id}/${tab}/edit`;
+		router.navigate(path);
 	}
 
 	handleFooterCancel() {
@@ -68,7 +71,10 @@ class AuthorController extends React.Component {
 			edit: false
 		});
 
-		router.navigate(`persons/${this.state.author.get("_id")}`);
+		let id = this.state.author.get("_id");
+		let tab = this.refs.authorForm.state.activeTab.toLowerCase();
+		let path = `persons/${id}/${tab}`;
+		router.navigate(path);
 	}
 
 	render() {
@@ -83,10 +89,12 @@ class AuthorController extends React.Component {
 			<AuthorForm
 				{...this.props}
 				author={this.state.author}
+				ref="authorForm"
 				router={router} /> :
 			<AuthorRecord
 				{...this.props}
 				author={this.state.author}
+				ref="authorRecord"
 				router={router} />;
 
 		let footer = (this.state.edit) ?
@@ -114,7 +122,8 @@ AuthorController.propTypes = {
 };
 
 AuthorController.defaultProps = {
-	edit: false
+	edit: false,
+	tab: "basic info"
 };
 
 export default AuthorController;

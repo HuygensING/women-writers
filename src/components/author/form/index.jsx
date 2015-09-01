@@ -9,7 +9,6 @@ import PersonalForm from "./personal";
 import PublicForm from "./public";
 import PublicationsForm from "./publications";
 import LinkForm from "../../edit-link";
-import NewButton from "../../new-button";
 
 import actions from "../../../actions/author";
 
@@ -184,11 +183,6 @@ class AuthorForm extends React.Component {
 						onDelete={this.handleFormDelete}
 						values={model.get("links").toJS()} />
 				</Tab>
-				{/* Links */}
-				<NewButton
-					key={model.get("_id")}
-					type="publication"
-					value={authorName} />
 			</Tabs>
 		);
 	}
