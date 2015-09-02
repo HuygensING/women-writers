@@ -53,6 +53,7 @@ class SearchAuthors extends React.Component {
 					"deathDate",
 					"residenceLocation"
 				]}
+				numberedResults={true}
 				onSelect={(item) =>
 					this.props.router.navigate(`/persons/${item.id}`)
 				}

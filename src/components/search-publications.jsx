@@ -41,6 +41,7 @@ class SearchPublications extends React.Component {
 					"language",
 					"date"
 				]}
+				numberedResults={true}
 				onSelect={(item) =>
 					this.props.router.navigate(`/documents/${item.id}`)
 				}
