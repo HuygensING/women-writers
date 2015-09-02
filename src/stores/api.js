@@ -1,6 +1,9 @@
 import xhr from "xhr";
 
+import config from "../config";
+
 import serverActions from "../actions/server";
+import messagesActions from "../actions/messages";
 
 import userStore from "./user";
 import authorStore from "./author";
@@ -11,28 +14,44 @@ import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publ
 
 import saveRelations from "./utils/save-relations";
 
-const DEFAULT_HEADERS = {
-	"Accept": "application/json",
-	"Content-Type": "application/json",
-	"VRE_ID": "WomenWriters"
+import router from "../router";
+
+const DEFAULT_GET_HEADERS = {
+	"Accept": "application/json"
 };
 
-let baseUrl = "https://acc.repository.huygens.knaw.nl/v2";
-let authorUrl = baseUrl + "/domain/wwpersons";
-let publicationUrl = baseUrl + "/domain/wwdocuments";
+const DEFAULT_HEADERS = {
+	...DEFAULT_GET_HEADERS,
+	...{
+		"Content-Type": "application/json",
+		"VRE_ID": "WomenWriters"
+	}
+};
 
-let handleError = function(err, resp, body) {
-	console.error("Some xhr request failed!", err, resp, body);
+let checkForError = function(err, response, body) {
+	switch (response.statusCode) {
+		case 401:
+			messagesActions.send("Unauthorized");
+			return true;
+
+		case 404:
+			router.navigate("not-found");
+			return true;
+	}
+
+	return false;
 };
 
 let getAutocompleteValues = function(name, query, done) {
 	let options = {
-		headers: DEFAULT_HEADERS,
-		url: `${baseUrl}/domain/ww${name}/autocomplete?query=*${query}*`
+		headers: DEFAULT_GET_HEADERS,
+		url: `${config.baseUrl}/domain/ww${name}/autocomplete?query=*${query}*`
 	};
 
-	let xhrDone = function(err, resp, body) {
-		if (err) { handleError(err); }
+	let xhrDone = function(err, response, body) {
+		if (checkForError(err, response, body)) {
+			return;
+		}
 
 		done(JSON.parse(body));
 	};
@@ -42,12 +61,14 @@ let getAutocompleteValues = function(name, query, done) {
 
 let getSelectValues = function(name, done) {
 	let options = {
-		headers: DEFAULT_HEADERS,
-		url: `${baseUrl}/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
+		headers: DEFAULT_GET_HEADERS,
+		url: `${config.baseUrl}/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
 	};
 
-	let xhrDone = function(err, resp, body) {
-		if (err) { handleError(err); }
+	let xhrDone = function(err, response, body) {
+		if (checkForError(err, response, body)) {
+			return;
+		}
 
 		done(JSON.parse(body));
 	};
@@ -57,12 +78,14 @@ let getSelectValues = function(name, done) {
 
 let fetch = function(url, parse, action) {
 	let options = {
-		headers: DEFAULT_HEADERS,
+		headers: DEFAULT_GET_HEADERS,
 		url: url
 	};
 
-	let done = function(err, resp, body) {
-		if (err) { handleError(err, resp, body); }
+	let done = function(err, response, body) {
+		if (checkForError(err, response, body)) {
+			return;
+		}
 
 		body = parse(JSON.parse(body));
 
@@ -84,8 +107,8 @@ let save = function(type, model, serverModel, parseOut, parseIn, action) {
 	}
 
 	let url = (type === "person") ?
-		authorUrl :
-		publicationUrl;
+		config.authorUrl :
+		config.publicationUrl;
 
 	let [method, theUrl] = (model.get("_id") != null) ?
 		["PUT", url + "/" + model.get("_id")] :
@@ -101,10 +124,12 @@ let save = function(type, model, serverModel, parseOut, parseIn, action) {
 	};
 
 	let done = function(err, response, body) {
-		if (err) { handleError(err, response, body); }
+		if (checkForError(err, response, body)) {
+			return;
+		}
 
-		body = parseIn(JSON.parse(body));
-		action(body);
+		// body = parseIn(JSON.parse(body));
+		// action(body);
 
 		if (model.get("_id") == null) {
 			let location = response.headers.location;
@@ -112,7 +137,12 @@ let save = function(type, model, serverModel, parseOut, parseIn, action) {
 			let locationUrl = `/womenwriters/${type}s/${id}`;
 
 			window.location.assign(locationUrl);
+
 		}
+
+		let message = ((type === "person") ? "author" : "publication");
+		message = message.charAt(0).toUpperCase() + message.substr(1) + " saved";
+		messagesActions.send(message);
 	};
 
 	xhr(options, done);
@@ -128,7 +158,9 @@ let remove = function(type, url) {
 	};
 
 	let done = function(err, response, body) {
-		if (err) { handleError(err, response, body); }
+		if (checkForError(err, response, body)) {
+			return;
+		}
 
 		if (response.statusCode === 204) {
 			window.location.assign(`/womenwriters/${type}s`);
@@ -140,7 +172,7 @@ let remove = function(type, url) {
 
 export default {
 	getAuthor(id) {
-		let url = authorUrl + "/" + id;
+		let url = config.authorUrl + "/" + id;
 		fetch(
 			url,
 			parseIncomingAuthor,
@@ -149,7 +181,7 @@ export default {
 	},
 
 	getPublication(id) {
-		let url = publicationUrl + "/" + id;
+		let url = config.publicationUrl + "/" + id;
 		fetch(
 			url,
 			parseIncomingPublication,
@@ -185,22 +217,22 @@ export default {
 
 	deleteAuthor() {
 		let id = authorStore.getState().author.get("_id");
-		remove("person", authorUrl + "/" + id);
+		remove("person", config.authorUrl + "/" + id);
 	},
 
 	deletePublication() {
 		let id = publicationStore.getState().publication.get("_id");
-		remove("document", publicationUrl + "/" + id);
+		remove("document", config.publicationUrl + "/" + id);
 	},
 
 	getRelations() {
 		let options = {
 			headers: DEFAULT_HEADERS,
-			url: `${baseUrl}/system/relationtypes`
+			url: `${config.baseUrl}/system/relationtypes`
 		};
 
-		let done = function(err, resp, body) {
-			if (err) { handleError(err, resp, body); }
+		let done = function(err, response, body) {
+			if (err) { handleError(err, response, body); }
 
 			serverActions.receiveRelations(JSON.parse(body));
 		};

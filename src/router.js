@@ -8,7 +8,7 @@ import SearchAuthors from "./components/search-authors";
 import SearchPublications from "./components/search-publications";
 
 let showPage = function(page) {
-	[".search-authors", ".search-publications", ".app"].forEach((pageClass) =>
+	[".search-authors", ".search-publications", ".app", ".not-found"].forEach((pageClass) =>
 		document.querySelector(pageClass).style.display = (page === pageClass) ? "block" : "none"
 	);
 };
@@ -29,6 +29,7 @@ let appRender = function(name, edit, id, tab) {
 let R = Router.extend({
 	routes: {
 		"": "searchAuthors",
+		"not-found": "notFound",
 		"persons(/)": "searchAuthors",
 		"documents(/)": "searchPublications",
 		"persons/new": appRender.bind(this, "author", true),
@@ -61,6 +62,10 @@ let R = Router.extend({
 		);
 
 		showPage(".search-publications");
+	},
+
+	notFound: function() {
+		showPage(".not-found");
 	}
 });
 

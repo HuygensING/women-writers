@@ -1,6 +1,8 @@
 import React from "react";
 import cx from "classnames";
 
+import config from "../../config";
+
 import {Login, Federated, Basic} from "hire-login";
 import Link from "../link";
 
@@ -50,9 +52,9 @@ class MainMenu extends React.Component {
 						appId="WomenWriters"
 						headers={{VRE_ID: "WomenWriters"}}
 						onChange={this.handleLoginChange.bind(this)}
-						userUrl="https://acc.repository.huygens.knaw.nl/v2/system/users/me">
-						<Federated url="https://secure.huygens.knaw.nl/saml2/login" />
-						<Basic url="https://acc.repository.huygens.knaw.nl/v2/authenticate" />
+						userUrl={config.userUrl}>
+						<Federated url={config.federatedAuthenticateUrl} />
+						<Basic url={config.basicAuthenticateUrl} />
 					</Login>
 				</li>
 				<li className="new-author">

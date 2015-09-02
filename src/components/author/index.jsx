@@ -42,6 +42,12 @@ class AuthorController extends React.Component {
 		if (this.props.id !== nextProps.id) {
 			actions.getAuthor(nextProps.id);
 		}
+
+		if (this.state.edit !== nextProps.edit) {
+			this.setState({
+				edit: nextProps.edit
+			});
+		}
 	}
 
 	componentWillUnmount() {

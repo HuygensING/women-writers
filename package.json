@@ -27,7 +27,9 @@
     "jadeify": "^4.4.0",
     "lodash.debounce": "^3.1.0",
     "nib": "^1.1.0",
+    "proxy-middleware": "^0.13.1",
     "stylus": "^0.52.0",
+    "url": "^0.11.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.1"
   },

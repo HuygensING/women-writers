@@ -1,5 +1,7 @@
 import React from "react";
 
+import config from "../config";
+
 import FacetedSearch from "hire-faceted-search";
 
 class SearchAuthors extends React.Component {
@@ -7,7 +9,7 @@ class SearchAuthors extends React.Component {
 		return (
 			<FacetedSearch
 				config={{
-					baseURL: "https://acc.repository.huygens.knaw.nl/v2",
+					baseURL: config.baseUrl,
 					searchPath: "/search/wwpersons",
 					headers: {
 						VRE_ID: "WomenWriters",

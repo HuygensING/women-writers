@@ -1,5 +1,7 @@
 import React from "react";
 
+import config from "../config";
+
 import FacetedSearch from "hire-faceted-search";
 
 class SearchPublications extends React.Component {
@@ -7,7 +9,7 @@ class SearchPublications extends React.Component {
 		return (
 			<FacetedSearch
 				config={{
-					baseURL: "https://acc.repository.huygens.knaw.nl/v2",
+					baseURL: config.baseUrl,
 					searchPath: "/search/wwdocuments",
 					levels: ["dynamic_sort_creator", "dynamic_sort_title"],
 					headers: {
