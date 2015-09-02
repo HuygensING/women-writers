@@ -31,7 +31,7 @@ class App extends React.Component {
 
 App.propTypes = {
 	edit: React.PropTypes.bool.isRequired,
-	id: React.PropTypes.string.isRequired,
+	id: React.PropTypes.string,
 	page: React.PropTypes.string.isRequired,
 	tab: React.PropTypes.string
 };

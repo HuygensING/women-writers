@@ -20,7 +20,9 @@ class PublicationController extends React.Component {
 
 		this.state = Object.assign(
 			publicationStore.getState(),
-			userStore.getState());
+			userStore.getState(), {
+				edit: this.props.edit
+			});
 	}
 
 	componentDidMount() {
