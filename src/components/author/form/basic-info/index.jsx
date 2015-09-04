@@ -7,19 +7,8 @@ import Input from "hire-forms-input";
 import AutocompleteList from "hire-forms-autocomplete-list";
 import NameForm from "./name";
 
+import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
-
-let validateDate = function(value) {
-    // Handle validation.
-    let re = /^(\d{2}-)?(\d{2}-)?\d{4}(~|\?)?$/;
-    let isValid = re.test(value);
-
-    // Return a validator object.
-    return {
-        isValid: isValid,
-        message: isValid ? "" : "A date should be formatted as: DD-MM-YYYY. \nOptionally a '~' (approximate) or '?' (uncertain) can be added."
-    };
-};
 
 class BasicInfoForm {
 	render() {

@@ -4,7 +4,7 @@ import PublicationHeader from "./header";
 import EditButton from "../edit-button";
 import PublicationRecord from "./record";
 import PublicatioFnorm from "./form";
-import SaveFooter from "../save-footer";
+import EditFooter from "../save-footer";
 
 import actions from "../../actions/publication";
 import publicationStore from "../../stores/publication";
@@ -34,6 +34,12 @@ class PublicationController extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.id !== nextProps.id) {
 			actions.getPublication(nextProps.id);
+		}
+
+		if (this.state.edit !== nextProps.edit) {
+			this.setState({
+				edit: nextProps.edit
+			});
 		}
 	}
 
@@ -91,7 +97,7 @@ class PublicationController extends React.Component {
 				router={router} />;
 
 		let footer = (this.state.edit) ?
-			<SaveFooter
+			<EditFooter
 				onCancel={this.handleFooterCancel.bind(this)}
 				type="publication" /> :
 			null;

@@ -16,16 +16,10 @@ import saveRelations from "./utils/save-relations";
 
 import router from "../router";
 
-const DEFAULT_GET_HEADERS = {
-	"Accept": "application/json"
-};
-
 const DEFAULT_HEADERS = {
-	...DEFAULT_GET_HEADERS,
-	...{
-		"Content-Type": "application/json",
-		"VRE_ID": "WomenWriters"
-	}
+	"Accept": "application/json",
+	"Content-Type": "application/json",
+	"VRE_ID": "WomenWriters"
 };
 
 let checkForError = function(err, response, body) {
@@ -34,8 +28,14 @@ let checkForError = function(err, response, body) {
 			messagesActions.send("Unauthorized");
 			return true;
 
+		case 403:
+			messagesActions.send("Forbidden");
+			return true;
+
 		case 404:
-			router.navigate("not-found");
+			router.navigate("not-found", {
+				trigger: true
+			});
 			return true;
 	}
 
@@ -44,7 +44,7 @@ let checkForError = function(err, response, body) {
 
 let getAutocompleteValues = function(name, query, done) {
 	let options = {
-		headers: DEFAULT_GET_HEADERS,
+		headers: DEFAULT_HEADERS,
 		url: `${config.baseUrl}/domain/ww${name}/autocomplete?query=*${query}*`
 	};
 
@@ -61,7 +61,7 @@ let getAutocompleteValues = function(name, query, done) {
 
 let getSelectValues = function(name, done) {
 	let options = {
-		headers: DEFAULT_GET_HEADERS,
+		headers: DEFAULT_HEADERS,
 		url: `${config.baseUrl}/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
 	};
 
@@ -78,7 +78,7 @@ let getSelectValues = function(name, done) {
 
 let fetch = function(url, parse, action) {
 	let options = {
-		headers: DEFAULT_GET_HEADERS,
+		headers: DEFAULT_HEADERS,
 		url: url
 	};
 
@@ -128,16 +128,26 @@ let save = function(type, model, serverModel, parseOut, parseIn, action) {
 			return;
 		}
 
-		// body = parseIn(JSON.parse(body));
-		// action(body);
+		switch (method) {
+			case "POST":
+				let location = response.headers.location;
+				let id = location.substr(location.lastIndexOf("/") + 1);
 
-		if (model.get("_id") == null) {
-			let location = response.headers.location;
-			let id = location.substr(location.lastIndexOf("/") + 1);
-			let locationUrl = `/womenwriters/${type}s/${id}`;
+				router.navigate(`${type}s/${id}`, {
+					trigger: true
+				});
 
-			window.location.assign(locationUrl);
+				break;
 
+			case "PUT":
+				body = parseIn(JSON.parse(body));
+				action(body);
+
+				router.navigate(`${type}s/${body._id}`, {
+					trigger: true
+				});
+
+				break;
 		}
 
 		let message = ((type === "person") ? "author" : "publication");
@@ -163,7 +173,9 @@ let remove = function(type, url) {
 		}
 
 		if (response.statusCode === 204) {
-			window.location.assign(`/womenwriters/${type}s`);
+			router.navigate(`${type}s`, {
+				trigger: true
+			});
 		}
 	};
 

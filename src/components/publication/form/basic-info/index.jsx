@@ -6,6 +6,7 @@ import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
 import AutocompleteList from "hire-forms-autocomplete-list";
 
+import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
 
 class BasicInfoForm {
@@ -86,6 +87,7 @@ class BasicInfoForm {
 					<label>Date</label>
 					<Input
 						onChange={this.props.onChange.bind(this, "date")}
+						validate={validateDate}
 						value={model.get("date")} />
 				</li>
 				{/* source */}

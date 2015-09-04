@@ -105,16 +105,18 @@ header.page
 .author, .publication
 	position relative
 
+	& > button.edit, div.button-edit
+		left 5%
+		position absolute
+		top 240px
+
 	& > button.edit
 		button()
 		background-color wwLightTurquoise
 		color wwLighterTurquoise
 		font-weight bold
-		left 5%
 		padding 4px 12px
-		position absolute
 		text-transform uppercase
-		top 240px
 		z-index 1000
 
 		&:hover

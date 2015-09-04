@@ -6,7 +6,7 @@ import AuthorHeader from "./header";
 import EditButton from "../edit-button";
 import AuthorRecord from "./record";
 import AuthorForm from "./form";
-import SaveFooter from "../save-footer";
+import EditFooter from "../save-footer";
 
 import actions from "../../actions/author";
 import authorStore from "../../stores/author";
@@ -104,7 +104,7 @@ class AuthorController extends React.Component {
 				router={router} />;
 
 		let footer = (this.state.edit) ?
-			<SaveFooter
+			<EditFooter
 				onCancel={this.handleFooterCancel.bind(this)}
 				type="author" /> :
 			null;

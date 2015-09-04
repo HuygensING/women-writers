@@ -73,7 +73,6 @@ class ReceptionsForm extends React.Component {
 
 		return (
 			<div>
-				<h3>Has</h3>
 				<PublicationForm
 					onChange={this.handleFormChange.bind(this)}
 					selectOptions={relationNames.map(toKeyValue(this.state.relationDisplayNames))}

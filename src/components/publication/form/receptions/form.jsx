@@ -36,6 +36,14 @@ class ReceptionForm extends React.Component {
 	render() {
 		let active = (this.state.relationType.key !== "" && this.state.relation.key !== "");
 
+		let button = (this.state.relation.key !== "" && this.state.relationType.key !== "") ?
+			<li>
+				<button onClick={this.handleSubmit.bind(this)}>
+					Add relation
+				</button>
+			</li> :
+			null;
+
 		return (
 			<ul className="well">
 				<li>
@@ -50,9 +58,7 @@ class ReceptionForm extends React.Component {
 						onChange={this.handleChange.bind(this, "relation")}
 						value={this.state.relation} />
 				</li>
-				<li>
-					<button onClick={this.handleSubmit.bind(this)}>Add relation</button>
-				</li>
+				{button}
 			</ul>
 		);
 	}
