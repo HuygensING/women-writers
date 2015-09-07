@@ -14,44 +14,44 @@ class BasicInfoForm {
 	render() {
 		let model = this.props.value;
 
-		let pseudonyms = (model.get("_id") == null) ?
+		let pseudonyms = (model._id == null) ?
 			null :
 			<li>
 				<label>Pseudonyms</label>
 				<AutocompleteList
 					async={API.getPersons}
 					onChange={this.props.onChange.bind(this, ["@relations", "hasPseudonym"])}
-					values={model.getIn(["@relations", "hasPseudonym"]).toJS()} />
+					values={model["@relations"].hasPseudonym} />
 			</li>;
 
-		let birthPlace = (model.get("_id") == null) ?
+		let birthPlace = (model._id == null) ?
 			null :
 			<li>
 				<label>Birth place</label>
 				<AutocompleteList
 					async={API.getLocations}
 					onChange={this.props.onChange.bind(this, ["@relations", "hasBirthPlace"])}
-					values={model.getIn(["@relations", "hasBirthPlace"]).toJS()} />
+					values={model["@relations"].hasBirthPlace} />
 			</li>;
 
-		let livedIn = (model.get("_id") == null) ?
+		let livedIn = (model._id == null) ?
 			null :
 			<li>
 				<label>Lived in</label>
 				<AutocompleteList
 					async={API.getLocations}
 					onChange={this.props.onChange.bind(this, ["@relations", "hasResidenceLocation"])}
-					values={model.getIn(["@relations", "hasResidenceLocation"]).toJS()} />
+					values={model["@relations"].hasResidenceLocation} />
 			</li>;
 
-		let deathPlace = (model.get("_id") == null) ?
+		let deathPlace = (model._id == null) ?
 			null :
 			<li>
 				<label>Death place</label>
 				<AutocompleteList
 					async={API.getLocations}
 					onChange={this.props.onChange.bind(this, ["@relations", "hasDeathPlace"])}
-					values={model.getIn(["@relations", "hasDeathPlace"]).toJS()} />
+					values={model["@relations"].hasDeathPlace} />
 			</li>;
 
 
@@ -68,7 +68,7 @@ class BasicInfoForm {
 						}}
 						onChange={this.props.onChange}
 						onDelete={this.props.onDelete}
-						values={model.get("names").toJS()} />
+						values={model.names} />
 				</li>
 				{pseudonyms}
 				<li>
@@ -76,21 +76,21 @@ class BasicInfoForm {
 					<SelectList
 						onChange={this.props.onChange.bind(this, "types")}
 						options={["Archetype", "Author", "Pseudonym"]}
-						values={model.get("types").toJS()} />
+						values={model.types} />
 				</li>
 				<li>
 					<label>Gender</label>
 					<Select
 						onChange={this.props.onChange.bind(this, "gender")}
 						options={["Female", "Male", "Unknown"]}
-						value={model.get("gender")} />
+						value={model.gender} />
 				</li>
 				<li>
 					<label>Birth date</label>
 					<Input
 						onChange={this.props.onChange.bind(this, "birthDate")}
 						validate={validateDate}
-						value={model.get("birthDate")} />
+						value={model.birthDate} />
 				</li>
 				{birthPlace}
 				{livedIn}
@@ -99,7 +99,7 @@ class BasicInfoForm {
 					<Input
 						onChange={this.props.onChange.bind(this, "deathDate")}
 						validate={validateDate}
-						value={model.get("deathDate")} />
+						value={model.deathDate} />
 				</li>
 				{deathPlace}
 			</ul>

@@ -5,10 +5,10 @@ import Relation from "../../../values/relation";
 
 class BasicInfo {
 	render() {
-		let model = this.props.value;
+		let model = this.props.author;
 
-		let names = (model.get("names").size) ?
-			model.get("names").toJS().map((name, index) => <li key={index}>{name.firstName} {name.lastName}</li>) :
+		let names = (model.names.length) ?
+			model.names.map((name, index) => <li key={index}>{name.firstName} {name.lastName}</li>) :
 			"-";
 
 		return (
@@ -19,35 +19,35 @@ class BasicInfo {
 				</li>
 				<li>
 					<label>Pseudonyms</label>
-					<Relation values={model.getIn(["@relations", "hasPseudonym"]).toJS()} />
+					<Relation values={model["@relations"].hasPseudonym} />
 				</li>
 				<li>
 					<label>Person type</label>
-					<StringComponent value={model.get("persontype")} />
+					<StringComponent value={model.persontype} />
 				</li>
 				<li>
 					<label>Gender</label>
-					<StringComponent value={model.get("gender")} />
+					<StringComponent value={model.gender} />
 				</li>
 				<li>
 					<label>Birth date</label>
-					<StringComponent value={model.get("birthDate")} />
+					<StringComponent value={model.birthDate} />
 				</li>
 				<li>
 					<label>Birth place</label>
-					<Relation values={model.getIn(["@relations", "hasBirthPlace"]).toJS()} />
+					<Relation values={model["@relations"].hasBirthPlace} />
 				</li>
 				<li>
 					<label>Lived in</label>
-					<Relation values={model.getIn(["@relations", "hasResidenceLocation"]).toJS()} />
+					<Relation values={model["@relations"].hasResidenceLocation} />
 				</li>
 				<li>
 					<label>Death date</label>
-					<StringComponent value={model.get("deathDate")} />
+					<StringComponent value={model.deathDate} />
 				</li>
 				<li>
 					<label>Death place</label>
-					<Relation values={model.getIn(["@relations", "hasDeathPlace"]).toJS()} />
+					<Relation values={model["@relations"].hasDeathPlace} />
 				</li>
 			</ul>
 		);

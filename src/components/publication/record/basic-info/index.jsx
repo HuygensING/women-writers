@@ -12,46 +12,46 @@ class BasicInfoForm {
 			<ul className="record">
 				<li>
 					<label>Author</label>
-					<PersonRelation values={model.getIn(["@relations", "isCreatedBy"]).toJS()} />
+					<PersonRelation values={model["@relations"].isCreatedBy} />
 				</li>
 				<li>
 					<label>Title</label>
-					<StringComponent value={model.get("title")} />
+					<StringComponent value={model.title} />
 				</li>
 				<li>
 					<label>Document type</label>
-					<StringComponent value={model.get("documentType")} />
+					<StringComponent value={model.documentType} />
 				</li>
 				<li>
 					<label>Genre</label>
-					<Relation values={model.getIn(["@relations", "hasGenre"]).toJS()} />
+					<Relation values={model["@relations"].hasGenre} />
 				</li>
 				<li>
 					<label>Language</label>
-					<Relation values={model.getIn(["@relations", "hasWorkLanguage"]).toJS()} />
+					<Relation values={model["@relations"].hasWorkLanguage} />
 				</li>
 				{/*
 					<li>
 						<label>First editor</label>
-						<Relation values={model.getIn(["@relations", "firstEditor"]).toJS()} />
+						<Relation values={model["@relations"].firstEditor} />
 					</li>
 				*/}
 				<li>
 					<label>Publish location</label>
-					<Relation values={model.getIn(["@relations", "hasPublishLocation"]).toJS()} />
+					<Relation values={model["@relations"].hasPublishLocation} />
 				</li>
 				<li>
 					<label>Date</label>
-					<StringComponent value={model.get("date")} />
+					<StringComponent value={model.date} />
 				</li>
 				{/* source */}
 				<li>
 					<label>Reference</label>
-					<StringComponent value={model.get("reference")} />
+					<StringComponent value={model.reference} />
 				</li>
 				<li>
 					<label>Notes</label>
-					<StringComponent value={model.get("notes")} />
+					<StringComponent value={model.notes} />
 				</li>
 			</ul>
 		);

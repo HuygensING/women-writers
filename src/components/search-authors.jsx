@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 
 import config from "../config";
 
@@ -8,6 +9,9 @@ class SearchAuthors extends React.Component {
 	render() {
 		return (
 			<FacetedSearch
+				className={cx({
+					visible: this.props.visible
+				})}
 				config={{
 					baseURL: config.baseUrl,
 					searchPath: "/search/wwpersons",
@@ -79,12 +83,14 @@ class SearchAuthors extends React.Component {
 					"residenceLocation"
 				]}
 				numberedResults={true}
-				onSelect={(item) =>
-					this.props.router.navigate(`/persons/${item.id}`)
-				}
+				onSelect={this.props.onSelect}
 			/>
 		);
 	}
 }
+
+SearchAuthors.propTypes = {
+	visible: React.PropTypes.bool
+};
 
 export default SearchAuthors;

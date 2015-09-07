@@ -4,25 +4,25 @@ import Relation from "../../../values/relation";
 
 class Public {
 	render() {
-		let model = this.props.value;
+		let model = this.props.author;
 
 		return (
 			<ul className="record">
 				<li>
 					<label>Profession</label>
-					<Relation values={model.getIn(["@relations", "hasProfession"]).toJS()} />
+					<Relation values={model["@relations"].hasProfession} />
 				</li>
 				<li>
 					<label>Financials</label>
-					<Relation values={model.getIn(["@relations", "hasFinancialSituation"]).toJS()} />
+					<Relation values={model["@relations"].hasFinancialSituation} />
 				</li>
 				<li>
 					<label>Collaborations</label>
-					<Relation values={model.getIn(["@relations", "isCollaboratorOf"]).toJS()} />
+					<Relation values={model["@relations"].isCollaboratorOf} />
 				</li>
 				<li>
 					<label>Memberships</label>
-					<Relation values={model.getIn(["@relations", "isMemberOf"]).toJS()} />
+					<Relation values={model["@relations"].isMemberOf} />
 				</li>
 			</ul>
 		);

@@ -6,27 +6,27 @@ import config from "../../config";
 import {Login, Federated, Basic} from "hire-login";
 import Link from "../link";
 
-import userActions from "../../actions/user";
-import router from "../../router";
+// import userActions from "../../actions/user";
+// import router from "../../router";
 
 class MainMenu extends React.Component {
-	handleLoginChange(response) {
-		if (response.authenticated && response.token != null) {
-			userActions.receive({
-				displayName: response.userData.displayName,
-				email: response.userData.email,
-				token: response.token
-			});
-		}
-	}
+	// handleLoginChange(response) {
+	// 	if (response.authenticated && response.token != null) {
+	// 		userActions.receive({
+	// 			displayName: response.userData.displayName,
+	// 			email: response.userData.email,
+	// 			token: response.token
+	// 		});
+	// 	}
+	// }
 
-	handleNew(type) {
-		let types = type === "author" ?
-			"persons" :
-			"documents";
+	// handleNew(type) {
+	// 	let types = type === "author" ?
+	// 		"persons" :
+	// 		"documents";
 
-		router.navigate(`/${types}/new`, {trigger: true});
-	}
+	// 	router.navigate(`/${types}/new`, {trigger: true});
+	// }
 
 	render() {
 		let [types] = window.location.pathname.substr(1).split("/").slice(1, 2);
@@ -51,19 +51,19 @@ class MainMenu extends React.Component {
 					<Login
 						appId="WomenWriters"
 						headers={{VRE_ID: "WomenWriters"}}
-						onChange={this.handleLoginChange.bind(this)}
+						onChange={(this.props.onLoginChange)}
 						userUrl={config.userUrl}>
 						<Federated url={config.federatedAuthenticateUrl} />
 						<Basic url={config.basicAuthenticateUrl} />
 					</Login>
 				</li>
 				<li className="new-author">
-					<button onClick={this.handleNew.bind(this, "author")}>
+					<button onClick={this.props.onNewAuthor}>
 						New author
 					</button>
 				</li>
 				<li className="new-publication">
-					<button onClick={this.handleNew.bind(this, "publication")}>
+					<button onClick={this.props.onNewPublication}>
 						New publication
 					</button>
 				</li>
@@ -72,6 +72,4 @@ class MainMenu extends React.Component {
 	}
 }
 
-export default function() {
-	return React.render(<MainMenu />, document.getElementById("main-menu"));
-}
+export default MainMenu;

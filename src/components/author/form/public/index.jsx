@@ -16,28 +16,28 @@ class PublicForm {
 					<SelectList
 						async={API.getProfession}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasProfession"])}
-						values={model.getIn(["@relations", "hasProfession"]).toJS()} />
+						values={model["@relations"].hasProfession} />
 				</li>
 				<li>
 					<label>Financials</label>
 					<SelectList
 						async={API.getFinancialSituation}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasFinancialSituation"])}
-						values={model.getIn(["@relations", "hasFinancialSituation"]).toJS()} />
+						values={model["@relations"].hasFinancialSituation} />
 				</li>
 				<li>
 					<label>Collaborations</label>
 					<AutocompleteList
 						async={API.getPersons}
 						onChange={this.props.onChange.bind(this, ["@relations", "isCollaboratorOf"])}
-						values={model.getIn(["@relations", "isCollaboratorOf"]).toJS()} />
+						values={model["@relations"].isCollaboratorOf} />
 				</li>
 				<li>
 					<label>Memberships</label>
 					<AutocompleteList
 						async={API.getCollectives}
 						onChange={this.props.onChange.bind(this, ["@relations", "isMemberOf"])}
-						values={model.getIn(["@relations", "isMemberOf"]).toJS()} />
+						values={model["@relations"].isMemberOf} />
 				</li>
 			</ul>
 		);

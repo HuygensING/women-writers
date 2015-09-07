@@ -1,7 +1,5 @@
 import React from "react";
 
-import actions from "../../../../actions/relations";
-import relationsStore from "../../../../stores/relations";
 import DocumentRelation from "../../../values/relation-document";
 
 let hasSourceType = function(type) {
@@ -16,40 +14,22 @@ let hasSourceType = function(type) {
 	};
 };
 
+let hasRelation = model => relationName =>
+	model["@relations"].hasOwnProperty(relationName);
+
+let toJSX = (model, displayNames) => relationName =>
+	<li key={relationName}>
+		<label>{displayNames[relationName]}</label>
+		<DocumentRelation values={model["@relations"][relationName]} />
+	</li>;
+
+
 class Publications extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.onStoreChange = this.onStoreChange.bind(this);
-
-		this.state = {
-			authorPublicationRelations: [],
-			relationDisplayNames: {}
-		};
-	}
-	componentDidMount() {
-		actions.getRelations();
-		relationsStore.listen(this.onStoreChange);
-	}
-
-	componentWillUnmount() {
-		relationsStore.stopListening(this.onStoreChange);
-	}
-
-	onStoreChange() {
-		this.setState(relationsStore.getState());
-	}
-
 	render() {
-		let model = this.props.value;
-
-		let relations = this.state.authorPublicationRelations.reduce(hasSourceType("person"), {});
-		let relationViews = Object.keys(relations).map((relationName) =>
-			<li key={relationName}>
-				<label>{this.state.relationDisplayNames[relationName]}</label>
-				<DocumentRelation values={model.getIn(["@relations", relationName]).toJS()} />
-			</li>
-		);
+		let relations = this.props.relations.authorPublication.reduce(hasSourceType("person"), {});
+		let relationViews = Object.keys(relations)
+			.filter(hasRelation(this.props.author))
+			.map(toJSX(this.props.author, this.props.relations.displayNames));
 
 		return (
 			<ul className="record">

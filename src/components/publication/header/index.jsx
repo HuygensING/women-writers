@@ -7,7 +7,7 @@ class PublicationHeader extends React.Component {
 		return (
 			<header className="page">
 				<h2>
-					{this.props.publication.get("title")}
+					{this.props.publication.title}
 				</h2>
 			</header>
 		);

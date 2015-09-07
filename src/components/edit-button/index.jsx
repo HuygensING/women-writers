@@ -2,9 +2,9 @@ import React from "react";
 
 class EditButton {
 	render() {
-		let show = this.props.token != null && this.props.pid != null;
+		let show = this.props.user.token != null && this.props.model["^pid"] != null;
 
-		let alt = this.props.pid ?
+		let alt = this.props.model["^pid"] ?
 			null :
 			<div className="button-edit hire-empty-list">
 				Unable to edit.<br />

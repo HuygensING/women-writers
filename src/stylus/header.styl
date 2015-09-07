@@ -1,0 +1,37 @@
+body > .app > header
+	background-color wwTurquoise
+
+	& > h1
+		margin 0
+		padding 0
+		line-height 75px
+		color wwLighterTurquoise
+
+	& > ul
+		background-color wwLightTurquoise
+		box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
+
+		li
+			inline_block()
+			padding 10px 20px
+			// width 120px
+			text-align center
+
+			&.active
+				border-bottom 2px solid wwYellow
+				font-weight bold
+				color white
+
+			a
+				color wwLighterTurquoise
+				text-decoration none
+				text-transform uppercase
+				font-size 0.9em
+
+			&.new-author, &.new-publication
+				position absolute
+				top 0
+				right 0
+
+			&.new-publication
+				top 30px

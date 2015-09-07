@@ -52,14 +52,10 @@ class AuthorForm extends React.Component {
 	render() {
 		let model = this.props.author;
 
-		let authorName = model.get("names").size ?
-			`${model.get("names").get(0).get("lastName")}, ${model.get("names").get(0).get("firstName")}` :
-			null;
-
-		let personalTab = (model.get("_id") == null) ?
+		let personalTab = (model._id == null) ?
 			null :
 			<Tab
-				active={this.state.activeTab === "Personal"}
+				active={this.props.tab === "personal"}
 				label="Personal">
 				<PersonalForm
 					onChange={this.handleFormChange}
@@ -70,24 +66,24 @@ class AuthorForm extends React.Component {
 					<ul>
 						<li>
 							<label>Spouse</label>
-							<span>{model.get("tempSpouse")}</span>
+							<span>{model.tempSpouse}</span>
 						</li>
 						<li>
 							<label>Children</label>
-							<span>{model.get("tempChildren")}</span>
+							<span>{model.tempChildren}</span>
 						</li>
 						<li>
 							<label>Ps Children</label>
-							<span>{model.get("tempPsChildren")}</span>
+							<span>{model.tempPsChildren}</span>
 						</li>
 					</ul>
 				</div>
 			</Tab>;
 
-		let publicTab = (model.get("_id") == null) ?
+		let publicTab = (model._id == null) ?
 			null :
 			<Tab
-				active={this.state.activeTab === "Public"}
+				active={this.props.tab === "public"}
 				label="Public">
 				<PublicForm
 					onChange={this.handleFormChange}
@@ -98,35 +94,36 @@ class AuthorForm extends React.Component {
 					<ul>
 						<li>
 							<label>Financial situation</label>
-							<span>{model.get("tempFinancialSituation")}</span>
+							<span>{model.tempFinancialSituation}</span>
 						</li>
 						<li>
 							<label>Collaborations</label>
-							<span>{model.get("tempCollaborations")}</span>
+							<span>{model.tempCollaborations}</span>
 						</li>
 						<li>
 							<label>Memberships</label>
-							<span>{model.get("tempMemberships")}</span>
+							<span>{model.tempMemberships}</span>
 						</li>
 					</ul>
 				</div>
 			</Tab>;
 
-		let publicationsTab = (model.get("_id") == null) ?
+		let publicationsTab = (model._id == null) ?
 			null :
 			<Tab
-				active={this.state.activeTab === "Publications"}
+				active={this.props.tab === "publications"}
 				label="Publications">
 				<PublicationsForm
 					onChange={this.handleFormChange}
 					onDelete={this.handleFormDelete}
-					value={model} />
+					relations={this.props.relations}
+					author={model} />
 			</Tab>;
 
 		return (
 			<Tabs onChange={this.handleTabChange.bind(this)}>
 				<Tab
-					active={this.state.activeTab === "Basic info"}
+					active={this.props.tab === "basic info"}
 					label="Basic info">
 					<BasicInfoForm
 						onChange={this.handleFormChange}
@@ -137,31 +134,31 @@ class AuthorForm extends React.Component {
 						<ul>
 							<li>
 								<label>Old ID</label>
-								<span>{model.get("tempOldId")}</span>
+								<span>{model.tempOldId}</span>
 							</li>
 							<li>
 								<label>Name</label>
-								<span>{model.get("tempName")}</span>
+								<span>{model.tempName}</span>
 							</li>
 							<li>
 								<label>Spouse</label>
-								<span>{model.get("tempSpouse")}</span>
+								<span>{model.tempSpouse}</span>
 							</li>
 							<li>
 								<label>Pseudonyms</label>
-								<span>{model.get("tempPseudonyms")}</span>
+								<span>{model.tempPseudonyms}</span>
 							</li>
 							<li>
 								<label>Birth Place</label>
-								<span>{model.get("tempBirthPlace")}</span>
+								<span>{model.tempBirthPlace}</span>
 							</li>
 							<li>
 								<label>Place Of Birth</label>
-								<span>{model.get("tempPlaceOfBirth")}</span>
+								<span>{model.tempPlaceOfBirth}</span>
 							</li>
 							<li>
 								<label>Death Place</label>
-								<span>{model.get("tempDeathPlace")}</span>
+								<span>{model.tempDeathPlace}</span>
 							</li>
 						</ul>
 					</div>
@@ -170,7 +167,7 @@ class AuthorForm extends React.Component {
 				{publicTab}
 				{publicationsTab}
 				<Tab
-					active={this.state.activeTab === "Links"}
+					active={this.props.tab === "links"}
 					label="Links">
 					<MultiForm
 						attr={"links"}
@@ -181,7 +178,7 @@ class AuthorForm extends React.Component {
 						}}
 						onChange={this.handleFormChange}
 						onDelete={this.handleFormDelete}
-						values={model.get("links").toJS()} />
+						values={model.links} />
 				</Tab>
 			</Tabs>
 		);
