@@ -63,6 +63,8 @@
     "jquery": "^2.1.1",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
+    "redux": "^2.0.0",
+    "redux-thunk": "^0.1.0",
     "underscore": "^1.7.0",
     "xhr": "^2.0.2"
   }

@@ -6,39 +6,39 @@ class AuthorHeader extends React.Component {
 	render() {
 		let model = this.props.author;
 
-		let name = model.get("names").reduce((str, current) => {
+		let name = model.names.reduce((str, current) => {
 			if (str !== "") {
 				str = str + "; ";
 			}
 
-			return str + current.get("firstName") + " " + current.get("lastName");
+			return str + current.firstName + " " + current.lastName;
 		}, "");
 
-		let birthYear = model.get("birthDate") === "" ?
+		let birthYear = model.birthDate === "" ?
 			"?" :
-			model.get("birthDate");
+			model.birthDate;
 
-		let deathYear = model.get("deathDate") === "" ?
+		let deathYear = model.deathDate === "" ?
 			"?" :
-			model.get("deathDate");
+			model.deathDate;
 
 		let years = (birthYear === "?" && deathYear === "?") ?
 			null :
 			<small className="years">({birthYear} - {deathYear})</small>;
 
 		let sex;
-		if (model.get("gender") === "Female") {
+		if (model.gender === "Female") {
 			sex = <small>♀</small>;
-		} else if (model.get("gender") === "Male") {
+		} else if (model.gender === "Male") {
 			sex = <small>♂</small>;
 		}
 
 		let pseudonyms;
-		if (model.get("@relations").get("hasPseudonym").size) {
+		if (model["@relations"].hasOwnProperty("hasPseudonym") && model["@relations"].hasPseudonym.length) {
 			pseudonyms = (
 				<small className="pseudonyms">
 					Pseudonyms
-					<RelationAuthor values={model.get("@relations").get("hasPseudonym").toJS()} />
+					<RelationAuthor values={model["@relations"].hasPseudonym} />
 				</small>
 			);
 		}

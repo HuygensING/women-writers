@@ -3,100 +3,46 @@ import {Tabs, Tab} from "hire-tabs";
 
 import BasicInfo from "./basic-info";
 import Receptions from "./receptions";
-// import LinkForm from "../../edit-link";
 import Links from "../../links";
-import EditButton from "../../edit-button";
-
-import actions from "../../../actions/publication";
-import publicationStore from "../../../stores/publication";
-import userStore from "../../../stores/user";
-
-import router from "../../../router";
 
 class PublicationRecord extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.onStoreChange = this.onStoreChange.bind(this);
-
-		let activeTab = (props.tab != null) ?
-			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
-			"Basic info";
-
-		this.state = Object.assign(
-			publicationStore.getState(),
-			userStore.getState(),
-			{
-				activeTab: activeTab
-			});
-	}
-
-	componentDidMount() {
-		actions.getPublication(this.props.id);
-		publicationStore.listen(this.onStoreChange);
-		userStore.listen(this.onStoreChange);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.id !== nextProps.id) {
-			actions.getPublication(nextProps.id);
-		}
-	}
-
-	componentWillUnmount() {
-		publicationStore.stopListening(this.onStoreChange);
-		userStore.stopListening(this.onStoreChange);
-	}
-
-	onStoreChange() {
-		let state = Object.assign(publicationStore.getState(), userStore.getState());
-
-		this.setState(state);
-	}
-
-	handleTabChange(label) {
-		router.navigate(`/documents/${this.props.id}/${label.toLowerCase()}`);
-
-		this.setState({
-			activeTab: label
-		});
-	}
-
 	render() {
 		return (
-			<Tabs onChange={this.handleTabChange.bind(this)}>
+			<Tabs onChange={this.props.onTabChange}>
 				<Tab
-					active={this.state.activeTab === "Basic info"}
+					active={this.props.tab === "basic info"}
 					label="Basic info">
 					<BasicInfo
-						value={this.state.publication} />
+						value={this.props.publication} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
 							<li>
 								<label>Creator</label>
-								<span>{this.state.publication.get("tempCreator")}</span>
+								<span>{this.props.publication.tempCreator}</span>
 							</li>
 							<li>
 								<label>Language</label>
-								<span>{this.state.publication.get("tempLanguage")}</span>
+								<span>{this.props.publication.tempLanguage}</span>
 							</li>
 							<li>
 								<label>Origin</label>
-								<span>{this.state.publication.get("tempOrigin")}</span>
+								<span>{this.props.publication.tempOrigin}</span>
 							</li>
 						</ul>
 					</div>
 				</Tab>
 				<Tab
-					active={this.state.activeTab === "Receptions"}
+					active={this.props.tab === "receptions"}
 					label="Receptions">
-					<Receptions value={this.state.publication} />
+					<Receptions
+						relations={this.props.relations}
+						publication={this.props.publication}/>
 				</Tab>
 				<Tab
-					active={this.state.activeTab === "Links"}
+					active={this.props.tab === "links"}
 					label="Links">
-					<Links values={this.state.publication.get("links").toJS()} />
+					<Links values={this.props.publication.links} />
 				</Tab>
 			</Tabs>
 		);
@@ -106,6 +52,10 @@ class PublicationRecord extends React.Component {
 PublicationRecord.propTypes = {
 	id: React.PropTypes.string,
 	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"])
+};
+
+PublicationRecord.defaultProps = {
+	tab: "basic info"
 };
 
 export default PublicationRecord;

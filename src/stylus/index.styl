@@ -2,6 +2,7 @@
 @import "./import/functions"
 @import "./import/fonts"
 
+@import "./header"
 @import "./footer"
 @import "./link"
 @import "./faceted-search"
@@ -28,47 +29,9 @@ ul, h1, h2, h3
 ul
 	list-style none
 
-.app > .hire-tabs, body > header, #main-menu
+.app > .hire-tabs
 	padding 0 5%
 	width 90%
-
-body > header
-	background-color wwTurquoise
-
-	h1
-		margin 0
-		padding 0
-		line-height 75px
-		color wwLighterTurquoise
-
-#main-menu
-	background-color wwLightTurquoise
-	box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
-
-	li
-		inline_block()
-		padding 10px 20px
-		// width 120px
-		text-align center
-
-		&.active
-			border-bottom 2px solid wwYellow
-			font-weight bold
-			color white
-
-		a
-			color wwLighterTurquoise
-			text-decoration none
-			text-transform uppercase
-			font-size 0.9em
-
-		&.new-author, &.new-publication
-			position absolute
-			top 0
-			right 0
-
-		&.new-publication
-			top 30px
 
 header.page
 	padding 30px 5%
@@ -101,6 +64,14 @@ header.page
 
 					&:last-child:after
 						content ""
+
+.author, .publication, .hire-faceted-search {
+	display: none;
+}
+
+.author.visible, .publication.visible, .hire-faceted-search.visible {
+	display: block;
+}
 
 .author, .publication
 	position relative

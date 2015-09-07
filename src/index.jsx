@@ -1,21 +1,21 @@
-import React from "react";
+// import React from "react";
 import router from "./router";
-import renderMainMenu from "./components/main-menu";
-import Message from "./components/messages";
+// import renderMainMenu from "./components/main-menu";
+// import Message from "./components/messages";
 
-import relationsActions from "./actions/relations";
+// import relationsActions from "./actions/relations";
 
-relationsActions.getRelations();
+// relationsActions.getRelations();
 
-router.history.start({
-	root: "/womenwriters"
-});
 
-router.on("route", renderMainMenu);
+// router.on("route", renderMainMenu);
 
 document.addEventListener("DOMContentLoaded", () => {
-		renderMainMenu();
-		React.render(<Message />, document.querySelector(".messages"));
+	router.history.start({
+		root: "/womenwriters"
+	});
+		// renderMainMenu();
+		// React.render(<Message />, document.querySelector(".messages"));
 	}
 );
 

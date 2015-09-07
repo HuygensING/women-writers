@@ -1,4 +1,4 @@
-let baseUrl = "/repository/api/v2.1";
+let baseUrl = "/repository/api/v2";
 
 export default {
 	authorUrl: baseUrl + "/domain/wwpersons",
@@ -6,5 +6,6 @@ export default {
 	federatedAuthenticateUrl: "https://secure.huygens.knaw.nl/saml2/login",
 	basicAuthenticateUrl: baseUrl + "/authenticate",
 	publicationUrl: baseUrl + "/domain/wwdocuments",
+	relationsUrl: baseUrl + "/system/relationtypes",
 	userUrl: baseUrl + "/system/users/me"
 };

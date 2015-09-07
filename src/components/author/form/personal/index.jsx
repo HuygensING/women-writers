@@ -19,49 +19,49 @@ class PersonalForm {
 						async={API.getMaritalStatus}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasMaritalStatus"])}
 						sort={true}
-						values={model.getIn(["@relations", "hasMaritalStatus"]).toJS()} />
+						values={model["@relations"].hasMaritalStatus} />
 				</li>
 				<li>
 					<label>Spouse of</label>
 					<AutocompleteList
 						async={API.getPersons}
 						onChange={this.props.onChange.bind(this, ["@relations", "isSpouseOf"])}
-						values={model.getIn(["@relations", "isSpouseOf"]).toJS()} />
+						values={model["@relations"].isSpouseOf} />
 				</li>
 				<li>
 					<label>Related to</label>
 					<AutocompleteList
 						async={API.getPersons}
 						onChange={this.props.onChange.bind(this, ["@relations", "isRelatedTo"])}
-						values={model.getIn(["@relations", "isRelatedTo"]).toJS()} />
+						values={model["@relations"].isRelatedTo} />
 				</li>
 				<li>
 					<label>Parent of</label>
 					<AutocompleteList
 						async={API.getPersons}
 						onChange={this.props.onChange.bind(this, ["@relations", "isParentOf"])}
-						values={model.getIn(["@relations", "isParentOf"]).toJS()} />
+						values={model["@relations"].isParentOf} />
 				</li>
 				<li>
 					<label>Sibling of</label>
 					<AutocompleteList
 						async={API.getPersons}
 						onChange={this.props.onChange.bind(this, ["@relations", "isSiblingOf"])}
-						values={model.getIn(["@relations", "isSiblingOf"]).toJS()} />
+						values={model["@relations"].isSiblingOf} />
 				</li>
 				<li>
 					<label>Grandparent of</label>
 					<AutocompleteList
 						async={API.getPersons}
 						onChange={this.props.onChange.bind(this, ["@relations", "isGrandparentOf"])}
-						values={model.getIn(["@relations", "isGrandparentOf"]).toJS()} />
+						values={model["@relations"].isGrandparentOf} />
 				</li>
 				<li>
 					<label>Children</label>
 					<Select
 						onChange={this.props.onChange.bind(this, "children")}
 						options={["Yes", "No", "Unknown"]}
-						value={model.get("children")} />
+						value={model.children} />
 				</li>
 				<li>
 					<label>Social class</label>
@@ -69,7 +69,7 @@ class PersonalForm {
 						async={API.getSocialClass}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasSocialClass"])}
 						sort={true}
-						values={model.getIn(["@relations", "hasSocialClass"]).toJS()} />
+						values={model["@relations"].hasSocialClass} />
 				</li>
 				<li>
 					<label>Education</label>
@@ -77,7 +77,7 @@ class PersonalForm {
 						async={API.getEducation}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasEducation"])}
 						sort={true}
-						values={model.getIn(["@relations", "hasEducation"]).toJS()} />
+						values={model["@relations"].hasEducation} />
 				</li>
 				<li>
 					<label>Religion</label>
@@ -85,19 +85,19 @@ class PersonalForm {
 						async={API.getReligion}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasReligion"])}
 						sort={true}
-						values={model.getIn(["@relations", "hasReligion"]).toJS()} />
+						values={model["@relations"].hasReligion} />
 				</li>
 				<li>
 					<label>Bibliography</label>
 					<Textarea
 						onChange={this.props.onChange.bind(this, "bibliography")}
-						value={model.get("bibliography")} />
+						value={model.bibliography} />
 				</li>
 				<li>
 					<label>Notes</label>
 					<Textarea
 						onChange={this.props.onChange.bind(this, "notes")}
-						value={model.get("notes")} />
+						value={model.notes} />
 				</li>
 			</ul>
 		);

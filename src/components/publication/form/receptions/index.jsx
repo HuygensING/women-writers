@@ -6,8 +6,8 @@ import form from "hire-forms-form";
 
 import ReceptionForm from "./form";
 
-import actions from "../../../../actions/relations";
-import relationsStore from "../../../../stores/relations";
+// import actions from "../../../../actions/relations";
+// import relationsStore from "../../../../stores/relations";
 
 import RelationDocument from "../../../values/relation-document";
 
@@ -24,7 +24,7 @@ class ReceptionsForm extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.onStoreChange = this.onStoreChange.bind(this);
+		// this.onStoreChange = this.onStoreChange.bind(this);
 
 		this.state = {
 			publicationPublicationRelations: [],
@@ -32,18 +32,18 @@ class ReceptionsForm extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		actions.getRelations();
-		relationsStore.listen(this.onStoreChange);
-	}
+	// componentDidMount() {
+	// 	actions.getRelations();
+	// 	relationsStore.listen(this.onStoreChange);
+	// }
 
-	componentWillUnmount() {
-		relationsStore.stopListening(this.onStoreChange);
-	}
+	// componentWillUnmount() {
+	// 	relationsStore.stopListening(this.onStoreChange);
+	// }
 
-	onStoreChange() {
-		this.setState(relationsStore.getState());
-	}
+	// onStoreChange() {
+	// 	this.setState(relationsStore.getState());
+	// }
 
 	handleFormChange(formData) {
 		let currentRelations = this.props.value.getIn(["@relations", formData.relationType.key]).toJS();

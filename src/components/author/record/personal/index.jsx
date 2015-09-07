@@ -5,41 +5,41 @@ import Relation from "../../../values/relation";
 
 class Personal {
 	render() {
-		let model = this.props.value;
+		let model = this.props.author;
 
 		return (
 			<ul className="record">
 				<li>
 					<label>Marital status</label>
-					<Relation values={model.getIn(["@relations", "hasMaritalStatus"]).toJS()} />
+					<Relation values={model["@relations"].hasMaritalStatus} />
 				</li>
 				<li>
 					<label>Spouse of</label>
-					<Relation values={model.getIn(["@relations", "isSpouseOf"]).toJS()} />
+					<Relation values={model["@relations"].isSpouseOf} />
 				</li>
 				<li>
 					<label>Children</label>
-					<StringComponent value={model.get("children")} />
+					<StringComponent value={model.children} />
 				</li>
 				<li>
 					<label>Social class</label>
-					<Relation values={model.getIn(["@relations", "hasSocialClass"]).toJS()} />
+					<Relation values={model["@relations"].hasSocialClass} />
 				</li>
 				<li>
 					<label>Education</label>
-					<Relation values={model.getIn(["@relations", "hasEducation"]).toJS()} />
+					<Relation values={model["@relations"].hasEducation} />
 				</li>
 				<li>
 					<label>Religion</label>
-					<Relation values={model.getIn(["@relations", "hasReligion"]).toJS()} />
+					<Relation values={model["@relations"].hasReligion} />
 				</li>
 				<li>
 					<label>Bibliography</label>
-					<StringComponent value={model.get("bibliography")} />
+					<StringComponent value={model.bibliography} />
 				</li>
 				<li>
 					<label>Notes</label>
-					<StringComponent value={model.get("notes")} />
+					<StringComponent value={model.notes} />
 				</li>
 			</ul>
 		);

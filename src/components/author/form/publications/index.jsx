@@ -4,10 +4,8 @@
 import React from "react";
 import form from "hire-forms-form";
 
+import RelationList from "../../../relation-list";
 import PublicationForm from "./form";
-
-import actions from "../../../../actions/relations";
-import relationsStore from "../../../../stores/relations";
 
 import RelationDocument from "../../../values/relation-document";
 
@@ -20,69 +18,48 @@ let toKeyValue = function(displayNames) {
 	};
 };
 
-class ReceptionsForm extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.onStoreChange = this.onStoreChange.bind(this);
-
-		this.state = {
-			authorPublicationRelations: [],
-			relationDisplayNames: {}
-		};
-	}
-
-	componentDidMount() {
-		actions.getRelations();
-		relationsStore.listen(this.onStoreChange);
-	}
-
-	componentWillUnmount() {
-		relationsStore.stopListening(this.onStoreChange);
-	}
-
-	onStoreChange() {
-		this.setState(relationsStore.getState());
-	}
-
+class PublicationsForm extends React.Component {
 	handleFormChange(formData) {
-		let currentRelations = this.props.value.getIn(["@relations", formData.relationType.key]).toJS();
+		let currentRelations = this.props.value["@relations"][formData.relationType.key];
 
 		this.props.onChange(["@relations", formData.relationType.key], [...currentRelations, formData.relation]);
 	}
 
 	render() {
-		let model = this.props.value;
+		// let model = this.props.value;
 
-		let relationNames = this.state.authorPublicationRelations
+		let relationNames = this.props.relations.authorPublication
 			.map((relation) =>
 				relation.sourceTypeName === "person" ? relation.regularName : relation.inverseName
 			);
 
 
-		let relations = relationNames
-			.filter((relationName) =>
-				model.getIn(["@relations", relationName]).size > 0
-			)
-			.map((relationName) =>
-				<li key={relationName}>
-					<label>{this.state.relationDisplayNames[relationName]}</label>
-					<RelationDocument values={model.getIn(["@relations", relationName]).toJS()} />
-				</li>
-			);
+		// let relations = relationNames
+		// 	.filter((relationName) =>
+		// 		model["@relations"][relationName].length > 0
+		// 	)
+		// 	.map((relationName) =>
+		// 		<li key={relationName}>
+		// 			<label>{this.state.relationDisplayNames[relationName]}</label>
+		// 			<RelationDocument values={model["@relations"][relationName]} />
+		// 		</li>
+		// 	);
+
+		let selectOptions = relationNames
+			.map(toKeyValue(this.props.relations.displayNames))
 
 		return (
 			<div>
 				<PublicationForm
 					onChange={this.handleFormChange.bind(this)}
-					selectOptions={relationNames.map(toKeyValue(this.state.relationDisplayNames))}
-					value={this.state.regularForm} />
-				<ul className="record">
-					{relations}
-				</ul>
+					selectOptions={selectOptions} />
+				<RelationList
+					model={this.props.author}
+					modelRelations={this.props.relations.authorPublication}
+					relations={this.props.relations} />
 			</div>
 		);
 	}
 }
 
-export default form(ReceptionsForm);
+export default form(PublicationsForm);

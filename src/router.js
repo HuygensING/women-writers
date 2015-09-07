@@ -4,69 +4,153 @@ import Router from "ampersand-router";
 import React from "react";
 
 import App from "./components/app";
-import SearchAuthors from "./components/search-authors";
-import SearchPublications from "./components/search-publications";
 
-let showPage = function(page) {
-	[".search-authors", ".search-publications", ".app", ".not-found"].forEach((pageClass) =>
-		document.querySelector(pageClass).style.display = (page === pageClass) ? "block" : "none"
-	);
-};
 
-let appRender = function(name, edit, id, tab) {
-	React.render(
-		<App
-			edit={edit}
-			id={id}
-			page={name}
-			tab={tab} />,
-		document.querySelector(".app")
-	);
 
-	showPage(".app");
-};
+let AppRouter = Router.extend({
+	initialize: function() {
+		this.state = {
+			visibleHandler: null
+		};
 
-let R = Router.extend({
+		this.on("route", this.updateState);
+	},
+
+	updatePath() {
+		let types = {
+			author: "persons",
+			publication: "documents"
+		};
+
+		let id = this.state[this.state.visibleHandler].id;
+		let type = types[this.state.visibleHandler];
+
+		let path = `${type}/${id}`;
+
+		if (this.state[this.state.visibleHandler].tab) {
+			path += "/" + this.state[this.state.visibleHandler].tab;
+		}
+
+		if (this.state[this.state.visibleHandler].edit) {
+			path += "/edit";
+		}
+
+		this.navigate(path);
+	},
+
+	handleCancelEdit() {
+		let nextState = {
+			[this.state.visibleHandler]: {...this.state[this.state.visibleHandler],
+				edit: false
+			}
+		};
+
+		this.createNextState(nextState);
+		this.updatePath();
+		this.renderApp();
+	},
+
+	handleEdit() {
+		let nextState = {
+			[this.state.visibleHandler]: {...this.state[this.state.visibleHandler],
+				edit: true
+			}
+		};
+
+		this.createNextState(nextState);
+		this.updatePath();
+		this.renderApp();
+	},
+
+	handleTabChange(label) {
+		let nextState = {
+			[this.state.visibleHandler]: {...this.state[this.state.visibleHandler],
+				tab: label.toLowerCase()
+			}
+		};
+
+		this.createNextState(nextState);
+		this.updatePath();
+		this.renderApp();
+	},
+
+	updateState(handler, props) {
+		let nextPageProps = {
+			visible: true
+		};
+
+		if (handler === "editAuthor" || handler === "editPublication") {
+			handler = handler.substr(4).toLowerCase();
+			nextPageProps.edit = true;
+		}
+
+		if (props.length) {
+			nextPageProps.id = (props[0] === "new") ? null : props[0];
+
+			if (props[1] != null) {
+				nextPageProps.tab = props[1];
+			}
+		}
+
+		let nextState = {
+			visibleHandler: handler,
+			[handler]: {...this.state[handler], ...nextPageProps}
+		};
+
+		// Set the current visible component to visible is false
+		// in the next state.
+		if (this.state.visibleHandler != null && this.state.visibleHandler !== handler) {
+			if (!nextState.hasOwnProperty(this.state.visibleHandler)) {
+				nextState[this.state.visibleHandler] = {};
+			}
+
+			nextState[this.state.visibleHandler].visible = false;
+		}
+
+		this.createNextState(nextState);
+		this.renderApp();
+	},
+
+	createNextState(nextState) {
+		this.state = {...this.state, ...nextState};
+	},
+
+	renderApp() {
+		React.render(
+			<App
+				{...this.state}
+				onCancelEdit={this.handleCancelEdit.bind(this)}
+				onEdit={this.handleEdit.bind(this)}
+				onNavigate={this.navigate.bind(this)}
+				onTabChange={this.handleTabChange.bind(this)} />,
+			document.body
+		);
+	},
+
 	routes: {
 		"": "searchAuthors",
 		"not-found": "notFound",
 		"persons(/)": "searchAuthors",
 		"documents(/)": "searchPublications",
-		"persons/new": appRender.bind(this, "author", true),
-		"persons/:id/edit": appRender.bind(this, "author", true),
-		"persons/:id/:tab/edit": appRender.bind(this, "author", true),
-		"persons/:id/:tab": appRender.bind(this, "author", false),
-		"persons/:id": appRender.bind(this, "author", false),
-		"documents/new": appRender.bind(this, "publication", true),
-		"documents/:id/edit": appRender.bind(this, "publication", true),
-		"documents/:id/:tab/edit": appRender.bind(this, "publication", true),
-		"documents/:id/:tab": appRender.bind(this, "publication", false),
-		"documents/:id": appRender.bind(this, "publication", false)
+		"persons/new": "editAuthor",
+		"persons/:id/edit": "editAuthor",
+		"persons/:id/:tab/edit": "editAuthor",
+		"persons/:id/:tab": "author",
+		"persons/:id": "author",
+		"documents/new": "editPublication",
+		"documents/:id/edit": "editPublication",
+		"documents/:id/:tab/edit": "editPublication",
+		"documents/:id/:tab": "publication",
+		"documents/:id": "publication"
 	},
 
-	searchAuthors: function() {
-		React.render(
-			<SearchAuthors
-				router={this} />,
-			document.querySelector(".search-authors")
-		);
-
-		showPage(".search-authors");
-	},
-
-	searchPublications: function() {
-		React.render(
-			<SearchPublications
-				router={this} />,
-			document.querySelector(".search-publications")
-		);
-
-		showPage(".search-publications");
-	},
-
-	notFound: function() {
-		showPage(".not-found");
-	}
+	searchAuthors: function() {},
+	searchPublications: function() {},
+	notFound: function() {},
+	author: function(id, tab) {},
+	editAuthor: function(id, tab) {},
+	publication: function(id, tab) {},
+	editPublication: function(id, tab) {}
 });
 
-export default new R();
+export default new AppRouter();
