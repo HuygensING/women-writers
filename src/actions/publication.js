@@ -1,89 +1,8 @@
-// import dispatcher from "../dispatcher";
-// import API from "../stores/api";
-
-// let publicationActions = {
-// 	getPublication(id) {
-// 		if (id != null) {
-// 			API.getPublication(id);
-// 		} else {
-// 			dispatcher.handleViewAction({
-// 				actionType: "PUBLICATION_NEW"
-// 			});
-// 		}
-// 	},
-
-// 	savePublication() {
-// 		API.savePublication();
-// 	},
-
-// 	deletePublication() {
-// 		API.deletePublication();
-// 	},
-
-// 	setKey(key, value) {
-// 		dispatcher.handleViewAction({
-// 			actionType: "PUBLICATION_SET_KEY",
-// 			key: key,
-// 			value: value
-// 		});
-// 	},
-
-// 	deleteKey(key) {
-// 		dispatcher.handleViewAction({
-// 			actionType: "PUBLICATION_DELETE_KEY",
-// 			key: key
-// 		});
-// 	}
-// };
-
-// export default publicationActions;
-
-import xhr from "xhr";
 import config from "../config";
+import {parseOutgoingPublication} from "../stores/parsers/publication";
 
-const DEFAULT_HEADERS = {
-	"Accept": "application/json",
-	"Content-Type": "application/json",
-	"VRE_ID": "WomenWriters"
-};
-
-let checkForError = function(err, response, body) {
-	// switch (response.statusCode) {
-	// 	case 401:
-	// 		messagesActions.send("Unauthorized");
-	// 		return true;
-
-	// 	case 403:
-	// 		messagesActions.send("Forbidden");
-	// 		return true;
-
-	// 	case 404:
-	// 		router.navigate("not-found", {
-	// 			trigger: true
-	// 		});
-	// 		return true;
-	// }
-
-	return false;
-};
-
-let fetch = function(url, cb) {
-	let options = {
-		headers: DEFAULT_HEADERS,
-		url: url
-	};
-
-	let done = function(err, response, body) {
-		if (checkForError(err, response, body)) {
-			return;
-		}
-
-		cb(JSON.parse(body));
-	};
-
-	xhr(options, done);
-};
-
+import {toggleEdit} from "./router";
+import {fetch, save, remove, saveRelations} from "./utils";
 
 export function fetchPublication(id) {
 	return function (dispatch, getState) {
@@ -111,5 +30,77 @@ export function fetchPublication(id) {
 				})
 			);
 		}
+	};
+}
+
+export function savePublication() {
+	return function (dispatch, getState) {
+		let publication = getState().publications.current;
+
+		if (publication._id != null) {
+			let unchangedPublication = getState().publications.all
+				.filter((x) => x._id === publication._id);
+
+			if (!unchangedPublication.length) {
+				throw new Error(`Publication ${publication._id} not found in publications state.`);
+			}
+
+			let currentRelations = publication["@relations"];
+			let prevRelations = unchangedPublication[0]["@relations"];
+
+			// saveRelations(currentRelations, prevRelations, publication._id);
+		}
+
+		save(
+			config.publicationUrl,
+			parseOutgoingPublication(publication),
+			getState().user.token,
+			(response) => {
+				dispatch({
+					type: "RECEIVE_PUBLICATION",
+					response: response
+				});
+
+				dispatch(toggleEdit(false));
+			}
+		);
+	};
+}
+
+export function deletePublication() {
+	return function (dispatch, getState) {
+		let id = getState().publications.current._id;
+
+		remove(
+			`${config.publicationUrl}/${id}`,
+			getState().user.token,
+			() =>
+				dispatch({
+					type: "PUBLICATION_DELETED",
+					id: id
+				})
+		);
+	};
+}
+
+
+export function setPublicationKey(key, value) {
+	return {
+		type: "SET_PUBLICATION_KEY",
+		key: key,
+		value: value
+	};
+}
+
+export function deletePublicationKey(key) {
+	return {
+		type: "DELETE_PUBLICATION_KEY",
+		key: key
+	};
+}
+
+export function newPublication() {
+	return {
+		type: "NEW_PUBLICATION"
 	};
 }

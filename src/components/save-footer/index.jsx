@@ -22,7 +22,7 @@ class SaveFooter extends React.Component {
 	render() {
 		return (
 			<footer>
-				<button className="cancel" onClick={this.props.onCancel}>Cancel</button>
+				<button className="cancel" onClick={this.props.onToggleEdit.bind(this, false)}>Cancel</button>
 				<button className="delete" onClick={this.props.onDelete}>Delete</button>
 				<button className="save" onClick={this.props.onSave}>Save</button>
 			</footer>

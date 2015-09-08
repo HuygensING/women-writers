@@ -11,98 +11,62 @@ import BasicInfoForm from "./basic-info";
 import ReceptionsForm from "./receptions";
 import LinkForm from "../../edit-link";
 
-import publicationActions from "../../../actions/publication";
-
-import router from "../../../router";
-
 class PublicationForm extends React.Component {
-	constructor(props) {
-		super(props);
-
-		let activeTab = (props.tab != null) ?
-			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
-			"Basic info";
-
-		this.state = {
-			activeTab: activeTab
-		};
-	}
-
-	handleTabChange(label) {
-		let id = (this.props.id != null) ?
-			this.props.id :
-			"new";
-
-		router.navigate(`/documents/${id}/${label.toLowerCase()}/edit`);
-
-		this.setState({
-			activeTab: label
-		});
-	}
-
-	handleFormChange(key, value) {
-		publicationActions.setKey(key, value);
-	}
-
-	handleFormDelete(key) {
-		publicationActions.deleteKey(key);
-	}
-
 	render() {
 		let model = this.props.publication;
 
-		let receptions = (model.get("_id") != null) ?
+		let receptions = (model._id != null) ?
 			<Tab
-				active={this.state.activeTab === "Receptions"}
+				active={this.props.tab === "receptions"}
 				label="Receptions">
 				<ReceptionsForm
-					onChange={this.handleFormChange}
-					onDelete={this.handleFormDelete}
-					value={model} />
+					onChange={this.props.onFormChange}
+					onDelete={this.props.onFormDelete}
+					publication={model} />
 			</Tab> :
 			null;
 
 		return (
-			<Tabs onChange={this.handleTabChange.bind(this)}>
+			<Tabs onChange={this.props.onTabChange}>
 				<Tab
-					active={this.state.activeTab === "Basic info"}
+					active={this.props.tab === "basic info"}
 					label="Basic info">
 					<BasicInfoForm
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						value={model} />
+						onChange={this.props.onFormChange}
+						onDelete={this.props.onFormDelete}
+						publication={model} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
 							<li>
 								<label>Creator</label>
-								<span>{model.get("tempCreator")}</span>
+								<span>{model.tempCreator}</span>
 							</li>
 							<li>
 								<label>Language</label>
-								<span>{model.get("tempLanguage")}</span>
+								<span>{model.tempLanguage}</span>
 							</li>
 							<li>
 								<label>Origin</label>
-								<span>{model.get("tempOrigin")}</span>
+								<span>{model.tempOrigin}</span>
 							</li>
 						</ul>
 					</div>
 				</Tab>
 				{receptions}
 				<Tab
-					active={this.state.activeTab === "Links"}
+					active={this.props.tab === "links"}
 					label="Links">
 					<MultiForm
 						attr={"links"}
-						component = {LinkForm}
+						component={LinkForm}
 						model={{
 							label: "",
 							url: ""
 						}}
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						values={model.get("links").toJS()} />
+						onChange={this.props.onFormChange}
+						onDelete={this.props.onFormDelete}
+						values={model.links} />
 				</Tab>
 			</Tabs>
 		);

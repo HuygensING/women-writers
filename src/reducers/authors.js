@@ -38,7 +38,7 @@ export default function(state=initialState, action) {
 				requesting: false
 			}};
 
-		case "AUTHOR_SET_KEY":
+		case "SET_AUTHOR_KEY":
 			current = Immutable.fromJS(state.current);
 			key = castArray(action.key);
 
@@ -46,7 +46,12 @@ export default function(state=initialState, action) {
 				current: current.setIn(key, action.value).toJS()
 			}};
 
-		case "AUTHOR_DELETE_KEY":
+		case "SET_CURRENT_AUTHOR":
+			return {...state, ...{
+				current: action.current
+			}};
+
+		case "DELETE_AUTHOR_KEY":
 			current = Immutable.fromJS(state.current);
 			key = castArray(action.key);
 
@@ -57,6 +62,11 @@ export default function(state=initialState, action) {
 		case "AUTHOR_DELETED":
 			return {...state, ...{
 				all: state.all.filter((author) => author._id !== action.id),
+				current: MODEL
+			}};
+
+		case "NEW_AUTHOR":
+			return {...state, ...{
 				current: MODEL
 			}};
 

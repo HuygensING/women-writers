@@ -14,7 +14,7 @@ class EditButton {
 		return show ?
 			<button
 				className="edit"
-				onClick={this.props.onClick}>
+				onClick={this.props.onToggleEdit.bind(this, true)}>
 				Edit
 			</button> :
 			alt;
