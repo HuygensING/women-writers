@@ -2,7 +2,7 @@ import React from "react";
 
 class EditButton {
 	render() {
-		let show = this.props.user.token != null && this.props.model["^pid"] != null;
+		let show = this.props.user != null && this.props.user.token != null && this.props.model["^pid"] != null;
 
 		let alt = this.props.model["^pid"] ?
 			null :
@@ -20,5 +20,15 @@ class EditButton {
 			alt;
 	}
 }
+
+EditButton.propTypes = {
+	model: React.PropTypes.object,
+	user: React.PropTypes.object
+};
+
+EditButton.defaultProps = {
+	model: {},
+	user: null
+};
 
 export default EditButton;
