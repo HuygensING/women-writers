@@ -1,4 +1,4 @@
-let baseUrl = "/repository/api/v2.1";
+let baseUrl = "/repository/api/v2";
 
 export default {
 	authorUrl: baseUrl + "/domain/wwpersons",
