@@ -12,7 +12,7 @@ import API from "../../../../stores/api";
 
 class BasicInfoForm {
 	render() {
-		let model = this.props.value;
+		let model = this.props.author;
 
 		let pseudonyms = (model._id == null) ?
 			null :

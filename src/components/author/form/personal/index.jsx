@@ -9,7 +9,7 @@ import API from "../../../../stores/api";
 
 class PersonalForm {
 	render() {
-		let model = this.props.value;
+		let model = this.props.author;
 
 		return (
 			<ul>

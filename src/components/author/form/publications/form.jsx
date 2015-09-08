@@ -15,12 +15,13 @@ const DEFAULT_STATE = {
 	}
 };
 
-class ReceptionForm extends React.Component {
+class AuthorPublicationsForm extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = DEFAULT_STATE;
 	}
+
 	handleChange(key, value) {
 		this.setState({
 			[key]: value
@@ -34,8 +35,6 @@ class ReceptionForm extends React.Component {
 	}
 
 	render() {
-		let active = (this.state.relationType.key !== "" && this.state.relation.key !== "");
-
 		return (
 			<ul className="well">
 				<li>
@@ -58,4 +57,4 @@ class ReceptionForm extends React.Component {
 	}
 }
 
-export default form(ReceptionForm);
+export default form(AuthorPublicationsForm);

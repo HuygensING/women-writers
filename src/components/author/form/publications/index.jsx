@@ -1,13 +1,8 @@
-// TODO Remove relations
-// TODO Add new relation to main model
-
 import React from "react";
 import form from "hire-forms-form";
 
 import RelationList from "../../../relation-list";
 import PublicationForm from "./form";
-
-import RelationDocument from "../../../values/relation-document";
 
 let toKeyValue = function(displayNames) {
 	return (relationName) => {
@@ -18,32 +13,22 @@ let toKeyValue = function(displayNames) {
 	};
 };
 
-class PublicationsForm extends React.Component {
+class AuthorPublicationsController extends React.Component {
 	handleFormChange(formData) {
-		let currentRelations = this.props.value["@relations"][formData.relationType.key];
+		let currentRelations = this.props.author["@relations"][formData.relationType.key];
+
+		if (currentRelations == null) {
+			currentRelations = [];
+		}
 
 		this.props.onChange(["@relations", formData.relationType.key], [...currentRelations, formData.relation]);
 	}
 
 	render() {
-		// let model = this.props.value;
-
 		let relationNames = this.props.relations.authorPublication
 			.map((relation) =>
 				relation.sourceTypeName === "person" ? relation.regularName : relation.inverseName
 			);
-
-
-		// let relations = relationNames
-		// 	.filter((relationName) =>
-		// 		model["@relations"][relationName].length > 0
-		// 	)
-		// 	.map((relationName) =>
-		// 		<li key={relationName}>
-		// 			<label>{this.state.relationDisplayNames[relationName]}</label>
-		// 			<RelationDocument values={model["@relations"][relationName]} />
-		// 		</li>
-		// 	);
 
 		let selectOptions = relationNames
 			.map(toKeyValue(this.props.relations.displayNames))
@@ -62,4 +47,4 @@ class PublicationsForm extends React.Component {
 	}
 }
 
-export default form(PublicationsForm);
+export default form(AuthorPublicationsController);

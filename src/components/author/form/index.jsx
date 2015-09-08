@@ -13,41 +13,17 @@ import LinkForm from "../../edit-link";
 import actions from "../../../actions/author";
 
 class AuthorForm extends React.Component {
-	constructor(props) {
-		super(props);
+	// props.onFormChange(key, value) {
+	// 	if (key[0] === "links" || key[0] === "names") {
+	// 		value = Immutable.fromJS(value);
+	// 	}
 
-		let activeTab = (props.tab != null) ?
-			props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
-			"Basic info";
+	// 	actions.setKey(key, value);
+	// }
 
-		this.state = {
-			activeTab: activeTab
-		};
-	}
-
-	handleTabChange(label) {
-		let id = (this.props.id != null) ?
-			this.props.id :
-			"new";
-
-		this.props.router.navigate(`/persons/${id}/${label.toLowerCase()}/edit`);
-
-		this.setState({
-			activeTab: label
-		});
-	}
-
-	handleFormChange(key, value) {
-		if (key[0] === "links" || key[0] === "names") {
-			value = Immutable.fromJS(value);
-		}
-
-		actions.setKey(key, value);
-	}
-
-	handleFormDelete(key) {
-		actions.deleteKey(key);
-	}
+	// props.onFormDelete(key) {
+	// 	actions.deleteKey(key);
+	// }
 
 	render() {
 		let model = this.props.author;
@@ -58,9 +34,9 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "personal"}
 				label="Personal">
 				<PersonalForm
-					onChange={this.handleFormChange}
-					onDelete={this.handleFormDelete}
-					value={model} />
+					onChange={this.props.onFormChange}
+					onDelete={this.props.onFormDelete}
+					author={model} />
 				<div className="temp-data">
 					<h2>Temporary data</h2>
 					<ul>
@@ -86,9 +62,9 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "public"}
 				label="Public">
 				<PublicForm
-					onChange={this.handleFormChange}
-					onDelete={this.handleFormDelete}
-					value={model} />
+					onChange={this.props.onFormChange}
+					onDelete={this.props.onFormDelete}
+					author={model} />
 				<div className="temp-data">
 					<h2>Temporary data</h2>
 					<ul>
@@ -114,21 +90,21 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "publications"}
 				label="Publications">
 				<PublicationsForm
-					onChange={this.handleFormChange}
-					onDelete={this.handleFormDelete}
+					onChange={this.props.onFormChange}
+					onDelete={this.props.onFormDelete}
 					relations={this.props.relations}
 					author={model} />
 			</Tab>;
 
 		return (
-			<Tabs onChange={this.handleTabChange.bind(this)}>
+			<Tabs onChange={this.props.onTabChange}>
 				<Tab
 					active={this.props.tab === "basic info"}
 					label="Basic info">
 					<BasicInfoForm
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
-						value={model} />
+						onChange={this.props.onFormChange}
+						onDelete={this.props.onFormDelete}
+						author={model} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -176,8 +152,8 @@ class AuthorForm extends React.Component {
 							label: "",
 							url: ""
 						}}
-						onChange={this.handleFormChange}
-						onDelete={this.handleFormDelete}
+						onChange={this.props.onFormChange}
+						onDelete={this.props.onFormDelete}
 						values={model.links} />
 				</Tab>
 			</Tabs>
