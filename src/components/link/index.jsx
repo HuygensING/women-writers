@@ -1,16 +1,14 @@
 import React from "react";
-import router from "../../router";
+// import router from "../../router";
 
 class Link extends React.Component {
-	handleClick() {
-		router.navigate(this.props.href, {trigger: true});
-	}
-
 	render() {
 		return (
 			<span
 				className="link"
-				onClick={this.handleClick.bind(this)}>
+				onClick={() =>
+					this.props.onNavigate(this.props.href)
+				}>
 				{this.props.value}
 			</span>
 		);

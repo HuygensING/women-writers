@@ -12,7 +12,9 @@ class BasicInfoForm {
 			<ul className="record">
 				<li>
 					<label>Author</label>
-					<PersonRelation values={model["@relations"].isCreatedBy} />
+					<PersonRelation
+						onNavigate={this.props.onNavigate}
+						values={model["@relations"].isCreatedBy} />
 				</li>
 				<li>
 					<label>Title</label>

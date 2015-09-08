@@ -14,7 +14,7 @@ import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publ
 
 import saveRelations from "./utils/save-relations";
 
-import router from "../router";
+// import router from "../router";
 
 const DEFAULT_HEADERS = {
 	"Accept": "application/json",

@@ -46,6 +46,7 @@ class App extends React.Component {
 					<h1>NEWW Women Writers</h1>
 					<MainMenu
 						onLoginChange={this.props.onLoginChange}
+						onNavigate={this.props.onNavigate}
 						onNewAuthor={this.props.onNewAuthor}
 						onNewPublication={this.props.onNewPublication}
 					/>

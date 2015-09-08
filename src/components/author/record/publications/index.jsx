@@ -20,7 +20,9 @@ let hasRelation = model => relationName =>
 let toJSX = (model, displayNames) => relationName =>
 	<li key={relationName}>
 		<label>{displayNames[relationName]}</label>
-		<DocumentRelation values={model["@relations"][relationName]} />
+		<DocumentRelation
+			onNavigate={this.props.onNavigate}
+			values={model["@relations"][relationName]} />
 	</li>;
 
 

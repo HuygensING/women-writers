@@ -11,6 +11,7 @@ class PersonRelation extends React.Component {
 			<li key={index}>
 				<Link
 					href={`/persons/${v.key.substr(v.key.lastIndexOf("/") + 1)}`}
+					onNavigate={this.props.onNavigate}
 					value={v.value} />
 			</li>
 		)
