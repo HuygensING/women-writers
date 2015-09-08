@@ -18,8 +18,8 @@ class AuthorController extends React.Component {
 		let editButton = (this.props.edit) ?
 			null :
 			<EditButton
-				onClick={this.props.onEdit}
 				model={this.props.author}
+				onToggleEdit={this.props.onToggleEdit}
 				user={this.props.user} />;
 
 		let body = (this.props.edit) ?
@@ -38,7 +38,7 @@ class AuthorController extends React.Component {
 
 		let footer = (this.props.edit) ?
 			<EditFooter
-				onCancel={this.props.onCancelEdit}
+				onToggleEdit={this.props.onToggleEdit}
 				onDelete={this.props.onDeleteAuthor}
 				onSave={this.props.onSaveAuthor}
 				type="author" /> :
@@ -63,6 +63,7 @@ class AuthorController extends React.Component {
 AuthorController.propTypes = {
 	edit: React.PropTypes.bool,
 	id: React.PropTypes.string,
+	onToggleEdit: React.PropTypes.func,
 	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "links"]),
 	user: React.PropTypes.object,
 	visible: React.PropTypes.bool

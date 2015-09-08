@@ -12,8 +12,8 @@ class PublicationController extends React.Component {
 		let editButton = (this.props.edit) ?
 			null :
 			<EditButton
-				model={this.props.publication["^pid"]}
-				onClick={this.props.onEdit}
+				model={this.props.publication}
+				onToggleEdit={this.props.onToggleEdit}
 				user={this.props.user} />;
 
 		let body = (this.props.edit) ?
@@ -30,7 +30,9 @@ class PublicationController extends React.Component {
 
 		let footer = (this.props.edit) ?
 			<EditFooter
-				onCancel={this.props.onCancelEdit}
+				onDelete={this.props.onDeletePublication}
+				onSave={this.props.onSavePublication}
+				onToggleEdit={this.props.onToggleEdit}
 				type="publication" /> :
 			null;
 

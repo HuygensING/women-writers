@@ -1,43 +1,126 @@
-// import React from "react";
-import router from "./router";
-// import renderMainMenu from "./components/main-menu";
-// import Message from "./components/messages";
+// VENDOR
+import Router from "ampersand-router";
+import React from "react";
 
-// import relationsActions from "./actions/relations";
+// STORE
+import store from "./store";
 
-// relationsActions.getRelations();
+// ACTIONS
+import {changeRoute, toggleEdit, changeTab} from "./actions/router";
+import {setUser} from "./actions/user";
+import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor} from "./actions/author";
+import {setPublicationKey, deletePublicationKey, deletePublication, savePublication} from "./actions/publication";
+import {fetchRelations} from "./actions/relations";
 
+// COMPONENTS
+import App from "./components/app";
 
-// router.on("route", renderMainMenu);
+const rootPath = "/womenwriters/";
 
-document.addEventListener("DOMContentLoaded", () => {
-	router.history.start({
-		root: "/womenwriters"
-	});
-		// renderMainMenu();
-		// React.render(<Message />, document.querySelector(".messages"));
-	}
+let AppRouter = Router.extend({
+	initialize: function() {
+		// Subscribe to the store. On every store change,
+		// render the app and adjust the location path.
+		store.subscribe(() => {
+			let state = store.getState();
+
+			this.renderApp(state);
+
+			if (this.history.location.pathname.substr(rootPath.length) !== state.router.path) {
+				this.navigate(state.router.path);
+			}
+		});
+
+		// When a new route is triggered, update the
+		// store with the new route.
+		this.on("route", (handler, props) =>
+			store.dispatch(changeRoute(handler, props))
+		);
+
+		store.dispatch(fetchRelations());
+	},
+
+	renderApp(nextState) {
+		React.render(
+			<App
+				{...nextState}
+				onChangeAuthorKey={(key, value) =>
+					store.dispatch(setAuthorKey(key, value))
+				}
+				onChangePublicationKey={(key, value) =>
+					store.dispatch(setPublicationKey(key, value))
+				}
+				onDeleteAuthor={() =>
+					store.dispatch(deleteAuthor())
+				}
+				onDeleteAuthorKey={(key) =>
+					store.dispatch(deleteAuthorKey(key))
+				}
+				onDeletePublication={() =>
+					store.dispatch(deletePublication())
+				}
+				onDeletePublicationKey={(key) =>
+					store.dispatch(deletePublicationKey(key))
+				}
+				onLoginChange={(response) =>
+					store.dispatch(setUser(response))
+				}
+				onNavigate={this.navigate.bind(this)}
+				onNewAuthor={() =>
+					this.navigate("/persons/new")
+				}
+				onNewPublication={() =>
+					this.navigate("/documents/new")
+				}
+				onResultSelect={(item) =>
+					this.navigate(item.path.replace("domain/ww", ""))
+				}
+				onSaveAuthor={() =>
+					store.dispatch(saveAuthor())
+				}
+				onSavePublication={() =>
+					store.dispatch(savePublication())
+				}
+				onTabChange={(label) =>
+					store.dispatch(changeTab(label))
+				}
+				onToggleEdit={(edit) =>{
+					console.log(edit);
+					store.dispatch(toggleEdit(edit))
+				}
+				} />,
+			document.body
+		);
+	},
+
+	routes: {
+		"": "searchAuthors",
+		"not-found": "notFound",
+		"persons(/)": "searchAuthors",
+		"documents(/)": "searchPublications",
+		// "persons/new": "editAuthor",
+		"persons/:id/edit": "editAuthor",
+		"persons/:id/:tab/edit": "editAuthor",
+		"persons/:id/:tab": "author",
+		"persons/:id": "author",
+		// "documents/new": "editPublication",
+		"documents/:id/edit": "editPublication",
+		"documents/:id/:tab/edit": "editPublication",
+		"documents/:id/:tab": "publication",
+		"documents/:id": "publication"
+	},
+
+	searchAuthors: function() {},
+	searchPublications: function() {},
+	notFound: function() {},
+	author: function(id, tab) {},
+	editAuthor: function(id, tab) {},
+	publication: function(id, tab) {},
+	editPublication: function(id, tab) {}
+});
+
+document.addEventListener("DOMContentLoaded", () =>
+	new AppRouter().history.start({
+		root: rootPath
+	})
 );
-
-// function callbackFn() {
-// 	console.log("CALLBSC");
-// 	console.log(arguments);
-// }
-
-// var request = new XMLHttpRequest();
-// request.onreadystatechange = function() {
-// 	if (request.readyState === 4) {
-// 		console.log(request.status);
-// 	}
-// };
-
-// request.addEventListener("error", callbackFn, false);
-// request.addEventListener("abort", callbackFn, false);
-
-
-// request.open("GET", "https://acc.repository.huygens.knaw.nl/v2/domain/wwpersons/newaa");
-// request.setRequestHeader("Accept", "application/json");
-// // request.setRequestHeader("Content-Type", "application/json");
-// // request.setRequestHeader("VRE_ID", "WomenWriters");
-// request.send(null);
-

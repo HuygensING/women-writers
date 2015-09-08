@@ -1,5 +1,4 @@
 import React from "react";
-import Immutable from "immutable";
 import {Tabs, Tab} from "hire-tabs";
 
 import MultiForm from "hire-forms-multi-form";
@@ -10,21 +9,7 @@ import PublicForm from "./public";
 import PublicationsForm from "./publications";
 import LinkForm from "../../edit-link";
 
-import actions from "../../../actions/author";
-
 class AuthorForm extends React.Component {
-	// props.onFormChange(key, value) {
-	// 	if (key[0] === "links" || key[0] === "names") {
-	// 		value = Immutable.fromJS(value);
-	// 	}
-
-	// 	actions.setKey(key, value);
-	// }
-
-	// props.onFormDelete(key) {
-	// 	actions.deleteKey(key);
-	// }
-
 	render() {
 		let model = this.props.author;
 
