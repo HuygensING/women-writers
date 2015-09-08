@@ -7,7 +7,7 @@ import API from "../../../../stores/api";
 
 class PublicForm {
 	render() {
-		let model = this.props.value;
+		let model = this.props.author;
 
 		return (
 			<ul>

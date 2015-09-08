@@ -26,6 +26,8 @@ class AuthorController extends React.Component {
 			<AuthorForm
 				{...this.props}
 				author={this.props.author}
+				onFormChange={this.props.onFormChange}
+				onFormDelete={this.props.onFormDelete}
 				onTabChange={this.props.onTabChange}
 				relations={this.props.relations} /> :
 			<AuthorRecord
@@ -37,6 +39,8 @@ class AuthorController extends React.Component {
 		let footer = (this.props.edit) ?
 			<EditFooter
 				onCancel={this.props.onCancelEdit}
+				onDelete={this.props.onDeleteAuthor}
+				onSave={this.props.onSaveAuthor}
 				type="author" /> :
 			null;
 

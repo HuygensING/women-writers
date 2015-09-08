@@ -1,29 +1,29 @@
 import React from "react";
 
 import MainMenu from "./main-menu";
-import Author from "./author";
-import Publication from "./publication";
+import AuthorController from "./author";
+import PublicationController from "./publication";
 import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
 
 import {setUser} from "../actions/user";
 import {fetchPublication} from "../actions/publication";
-import {fetchAuthor} from "../actions/author";
+import {fetchAuthor, authorSetKey, authorDeleteKey, deleteAuthor, saveAuthor} from "../actions/author";
 import {fetchRelations} from "../actions/relations";
 
 import {createStore, applyMiddleware} from "redux";
 import reducers from "../reducers";
 import thunkMiddleware from "redux-thunk";
 
-// const logger = store => next => action => {
-// 	if (action.hasOwnProperty("type")) {
-// 		console.log(action.type, action);
-// 	}
+const logger = store => next => action => {
+	if (action.hasOwnProperty("type")) {
+		console.log("[REDUX]", action.type, action);
+	}
 
-//   return next(action);
-// };
+  return next(action);
+};
 
-let createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+let createStoreWithMiddleware = applyMiddleware(logger, thunkMiddleware)(createStore);
 
 class App extends React.Component {
 	constructor(props) {
@@ -51,11 +51,11 @@ class App extends React.Component {
 	}
 
 	triggerActions(props) {
-		if (props.author.visible) {
+		if (props.author.id != null && props.author.visible) {
 			this.store.dispatch(fetchAuthor(props.author.id));
 		}
 
-		if (props.publication.visible) {
+		if (props.publication.id != null && props.publication.visible) {
 			this.store.dispatch(fetchPublication(props.publication.id));
 		}
 	}
@@ -67,12 +67,24 @@ class App extends React.Component {
 
 	render() {
 		let author = (this.state.authors.current != null) ?
-			<Author
+			<AuthorController
 				author={this.state.authors.current}
 				edit={this.props.author.edit}
 				id={this.props.author.id}
 				onCancelEdit={this.props.onCancelEdit}
+				onDeleteAuthor={() =>
+					this.store.dispatch(deleteAuthor())
+				}
 				onEdit={this.props.onEdit}
+				onFormChange={(key, value) =>
+					this.store.dispatch(authorSetKey(key, value))
+				}
+				onFormDelete={(key, value) =>
+					this.store.dispatch(authorDeleteKey(key))
+				}
+				onSaveAuthor={() =>
+					this.store.dispatch(saveAuthor())
+				}
 				onTabChange={this.props.onTabChange}
 				relations={this.state.relations}
 				tab={this.props.author.tab}
@@ -81,7 +93,7 @@ class App extends React.Component {
 			null;
 
 		let publication = (this.state.publications.current != null) ?
-			<Publication
+			<PublicationController
 				edit={this.props.publication.edit}
 				id={this.props.publication.id}
 				onCancelEdit={this.props.onCancelEdit}
