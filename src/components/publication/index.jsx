@@ -19,11 +19,13 @@ class PublicationController extends React.Component {
 		let body = (this.props.edit) ?
 			<PublicationForm
 				{...this.props}
+				onNavigate={this.props.onNavigate}
 				onTabChange={this.props.onTabChange}
 				publication={this.props.publication}
 				relations={this.props.relations} /> :
 			<PublicationRecord
 				{...this.props}
+				onNavigate={this.props.onNavigate}
 				onTabChange={this.props.onTabChange}
 				publication={this.props.publication}
 				relations={this.props.relations} />;

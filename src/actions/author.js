@@ -2,6 +2,7 @@ import config from "../config";
 import {parseOutgoingAuthor} from "../stores/parsers/author";
 
 import {fetch, save, remove, saveRelations} from "./utils";
+import {changeRoute, toggleEdit} from "./router";
 
 export function fetchAuthor(id) {
 	return function (dispatch, getState) {
@@ -47,18 +48,28 @@ export function saveAuthor() {
 			let currentRelations = author["@relations"];
 			let prevRelations = unchangedAuthor[0]["@relations"];
 
-			// saveRelations(currentRelations, prevRelations, author._id);
+			saveRelations(
+				currentRelations,
+				prevRelations,
+				getState().relations.all,
+				author._id,
+				getState().user.token
+			);
 		}
 
 		save(
 			config.authorUrl,
 			parseOutgoingAuthor(author),
 			getState().user.token,
-			(response) =>
+			(response) => {
 				dispatch({
 					type: "RECEIVE_AUTHOR",
 					response: response
-				})
+				});
+
+				dispatch(changeRoute("author", [response._id]));
+				dispatch(toggleEdit(false));
+			}
 		);
 	};
 }
@@ -70,11 +81,15 @@ export function deleteAuthor() {
 		remove(
 			`${config.authorUrl}/${id}`,
 			getState().user.token,
-			() =>
+			() => {
 				dispatch({
 					type: "AUTHOR_DELETED",
 					id: id
-				})
+				});
+
+				dispatch(changeRoute("searchAuthors"));
+				dispatch(toggleEdit(false));
+			}
 		);
 	};
 }

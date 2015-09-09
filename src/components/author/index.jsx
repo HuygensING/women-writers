@@ -28,11 +28,13 @@ class AuthorController extends React.Component {
 				author={this.props.author}
 				onFormChange={this.props.onFormChange}
 				onFormDelete={this.props.onFormDelete}
+				onNavigate={this.props.onNavigate}
 				onTabChange={this.props.onTabChange}
 				relations={this.props.relations} /> :
 			<AuthorRecord
 				{...this.props}
 				author={this.props.author}
+				onNavigate={this.props.onNavigate}
 				onTabChange={this.props.onTabChange}
 				relations={this.props.relations} />;
 

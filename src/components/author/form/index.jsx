@@ -77,6 +77,7 @@ class AuthorForm extends React.Component {
 				<PublicationsForm
 					onChange={this.props.onFormChange}
 					onDelete={this.props.onFormDelete}
+					onNavigate={this.props.onNavigate}
 					relations={this.props.relations}
 					author={model} />
 			</Tab>;

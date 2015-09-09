@@ -4,30 +4,10 @@ import {Tabs, Tab} from "hire-tabs";
 import BasicInfo from "./basic-info";
 import Personal from "./personal";
 import Public from "./public";
-import Publications from "./publications";
+import RelationList from "../../relation-list";
 import Links from "../../links";
 
 class AuthorRecord extends React.Component {
-	// constructor(props) {
-	// 	super(props);
-
-	// 	let activeTab = (props.tab != null) ?
-	// 		props.tab.charAt(0).toUpperCase() + props.tab.substr(1) :
-	// 		"Basic info";
-
-	// 	this.state = {
-	// 		activeTab: activeTab
-	// 	};
-	// }
-
-	// handleTabChange(label) {
-	// 	this.props.router.navigate(`/persons/${this.props.id}/${label.toLowerCase()}`);
-
-	// 	this.setState({
-	// 		activeTab: label
-	// 	});
-	// }
-
 	render() {
 		return (
 			<Tabs onChange={this.props.onTabChange}>
@@ -116,8 +96,10 @@ class AuthorRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "publications"}
 					label="Publications">
-					<Publications
-						author={this.props.author}
+					<RelationList
+						model={this.props.author}
+						modelRelations={this.props.relations.authorPublication}
+						onNavigate={this.props.onNavigate}
 						relations={this.props.relations} />
 				</Tab>
 				<Tab

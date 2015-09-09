@@ -41,7 +41,7 @@ export function fetch(url, cb) {
 	};
 
 	xhr(options, done);
-};
+}
 
 export function save(url, model, token, cb) {
 	let [method, theUrl] = (model._id == null) ?
@@ -120,7 +120,7 @@ export function remove(url, token, cb) {
 	};
 
 	xhr(options, done);
-};
+}
 
 export function fetch(url, cb) {
 	let options = {
@@ -137,13 +137,13 @@ export function fetch(url, cb) {
 	};
 
 	xhr(options, done);
-};
+}
 
 // SAVE RELATIONS
 // import relationsStore from "../relations";
-import userStore from "../user";
+// import userStore from "../user";
 
-let relationUrl = "https://acc.repository.huygens.knaw.nl/domain/wwrelations";
+import config from "../../config";
 
 let toXhrPromise = token => data =>
 	new Promise(
@@ -151,12 +151,12 @@ let toXhrPromise = token => data =>
 			let options = {
 				body: JSON.stringify(data),
 				headers: {
-					Authorization: userStore.getState().user.get("token"),
+					Authorization: token,
 					"Content-Type": "application/json",
 					VRE_ID: "WomenWriters"
 				},
 				method: "POST",
-				url: relationUrl
+				url: config.saveRelationUrl
 			};
 
 			let done = function(err, resp, body) {
@@ -169,7 +169,7 @@ let toXhrPromise = token => data =>
 
 			xhr(options, done);
 		}
-	)
+	);
 
 let toObject = (prev, current) => {
 	prev[current.regularName] = current;
@@ -196,10 +196,10 @@ let toRelationObject = (relationName, relationType, sourceId, accepted) =>
 		};
 	};
 
-let toRelationObjects = (relationsToSave, sourceId, accepted=true) =>
+let toRelationObjects = (relationsToSave, sourceId, allRelations, accepted=true) =>
 	(arr, relationName) => {
 		let ids = relationsToSave[relationName];
-		let relationTypes = relationsStore.getState().relations.reduce(toObject, {});
+		let relationTypes = allRelations.reduce(toObject, {});
 		let relationType = relationTypes[relationName];
 		let relationObjects = ids.map(toRelationObject(relationName, relationType, sourceId, accepted));
 
@@ -217,21 +217,24 @@ let toRelationObjects = (relationsToSave, sourceId, accepted=true) =>
  */
 let toFoundInCurrent = function(prevRelations, currentRelations) {
 	return (obj, relationName) => {
-		let found = currentRelations[relationName]
-			.filter((relation) =>
-				prevRelations[relationName].filter((prevRelation) =>
-					prevRelation.key === relation.key
-				).length === 0
-			);
+		if (currentRelations.hasOwnProperty(relationName)) {
+			let found = currentRelations[relationName]
+				.filter((relation) =>
+					!prevRelations.hasOwnProperty(relationName) || prevRelations[relationName].filter((prevRelation) =>
+						prevRelation.key === relation.key
+					).length === 0
+				);
 
-		if (found.length) {
-			obj[relationName] = found.map((f) => f.key);
+			if (found.length) {
+				obj[relationName] = found.map((f) => f.key);
+			}
 		}
+
 		return obj;
 	};
 };
 
-export function saveRelations(currentRelations, serverRelations, sourceId) {
+export function saveRelations(currentRelations, serverRelations, allRelations, sourceId, token) {
 	let relationNames = Object.keys(currentRelations);
 
 	let added = relationNames
@@ -240,8 +243,8 @@ export function saveRelations(currentRelations, serverRelations, sourceId) {
 	let removed = relationNames
 		.reduce(toFoundInCurrent(currentRelations, serverRelations), {});
 
-	added = Object.keys(added).reduce(toRelationObjects(added, sourceId), []);
-	removed = Object.keys(removed).reduce(toRelationObjects(removed, sourceId, false), []);
+	added = Object.keys(added).reduce(toRelationObjects(added, sourceId, allRelations), []);
+	removed = Object.keys(removed).reduce(toRelationObjects(removed, sourceId, allRelations, false), []);
 
 	let promisedRelations = added.concat(removed).map(toXhrPromise(token));
 	Promise.all(promisedRelations).then((response) => {

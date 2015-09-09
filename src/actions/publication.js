@@ -1,7 +1,7 @@
 import config from "../config";
 import {parseOutgoingPublication} from "../stores/parsers/publication";
 
-import {toggleEdit} from "./router";
+import {toggleEdit, changeRoute} from "./router";
 import {fetch, save, remove, saveRelations} from "./utils";
 
 export function fetchPublication(id) {
@@ -61,6 +61,7 @@ export function savePublication() {
 					response: response
 				});
 
+				dispatch(changeRoute("publication", [response._id]));
 				dispatch(toggleEdit(false));
 			}
 		);
@@ -74,11 +75,15 @@ export function deletePublication() {
 		remove(
 			`${config.publicationUrl}/${id}`,
 			getState().user.token,
-			() =>
+			() => {
 				dispatch({
 					type: "PUBLICATION_DELETED",
 					id: id
-				})
+				});
+
+				dispatch(changeRoute("searchPublications"));
+				dispatch(toggleEdit(false));
+			}
 		);
 	};
 }

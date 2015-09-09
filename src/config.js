@@ -6,6 +6,7 @@ export default {
 	federatedAuthenticateUrl: "https://secure.huygens.knaw.nl/saml2/login",
 	basicAuthenticateUrl: baseUrl + "/authenticate",
 	publicationUrl: baseUrl + "/domain/wwdocuments",
+	saveRelationUrl: baseUrl + "/domain/wwrelations",
 	relationsUrl: baseUrl + "/system/relationtypes",
 	userUrl: baseUrl + "/system/users/me"
 };

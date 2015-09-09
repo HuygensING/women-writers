@@ -1,7 +1,7 @@
 import {fetchAuthor, newAuthor} from "./author";
 import {fetchPublication, newPublication} from "./publication";
 
-export function changeRoute(handler, props) {
+export function changeRoute(handler, props=[]) {
 	return function (dispatch, getState) {
 		let hasAuthorHandler = (handler === "author" || handler === "editAuthor");
 		let hasPublicationHandler = (handler === "publication" || handler === "editPublication");
@@ -23,7 +23,6 @@ export function changeRoute(handler, props) {
 			dispatch(newPublication());
 		}
 
-		console.log("props", props);
 		dispatch({
 			type: "CHANGE_ROUTE",
 			handler: handler,

@@ -6,33 +6,29 @@ import config from "../../config";
 import {Login, Federated, Basic} from "hire-login";
 import Link from "../link";
 
-// import userActions from "../../actions/user";
-// import router from "../../router";
-
 class MainMenu extends React.Component {
-	// handleLoginChange(response) {
-	// 	if (response.authenticated && response.token != null) {
-	// 		userActions.receive({
-	// 			displayName: response.userData.displayName,
-	// 			email: response.userData.email,
-	// 			token: response.token
-	// 		});
-	// 	}
-	// }
-
-	// handleNew(type) {
-	// 	let types = type === "author" ?
-	// 		"persons" :
-	// 		"documents";
-
-	// 	router.navigate(`/${types}/new`, {trigger: true});
-	// }
-
 	render() {
 		let [types] = window.location.pathname.substr(1).split("/").slice(1, 2);
 
 		if (types == null) {
 			types = "persons";
+		}
+
+		let newAuthor, newPublication;
+		if (this.props.user != null && this.props.user.authenticated) {
+			newAuthor = (
+				<li className="new-author">
+					<button onClick={this.props.onNewAuthor}>
+						New author
+					</button>
+				</li>);
+
+			newPublication = (
+				<li className="new-publication">
+					<button onClick={this.props.onNewPublication}>
+						New publication
+					</button>
+				</li>);
 		}
 
 		return (
@@ -59,16 +55,8 @@ class MainMenu extends React.Component {
 						<Basic url={config.basicAuthenticateUrl} />
 					</Login>
 				</li>
-				<li className="new-author">
-					<button onClick={this.props.onNewAuthor}>
-						New author
-					</button>
-				</li>
-				<li className="new-publication">
-					<button onClick={this.props.onNewPublication}>
-						New publication
-					</button>
-				</li>
+				{newAuthor}
+				{newPublication}
 			</ul>
 		);
 	}

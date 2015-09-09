@@ -37,7 +37,7 @@ export default function(state=initialState, action) {
 			let publicationRelations = action.response.filter(hasType("document"));
 
 			return {...state, ...{
-				all: [...state.all, action.response],
+				all: action.response,
 				author: authorRelations,
 				authorPublication: authorRelations.filter(hasType("document")),
 				displayNames: action.response.reduce(toDisplayName, {}),

@@ -41,6 +41,7 @@ class AuthorPublicationsController extends React.Component {
 				<RelationList
 					model={this.props.author}
 					modelRelations={this.props.relations.authorPublication}
+					onNavigate={this.props.onNavigate}
 					relations={this.props.relations} />
 			</div>
 		);

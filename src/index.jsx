@@ -84,10 +84,8 @@ let AppRouter = Router.extend({
 				onTabChange={(label) =>
 					store.dispatch(changeTab(label))
 				}
-				onToggleEdit={(edit) =>{
-					console.log(edit);
+				onToggleEdit={(edit) =>
 					store.dispatch(toggleEdit(edit))
-				}
 				} />,
 			document.body
 		);

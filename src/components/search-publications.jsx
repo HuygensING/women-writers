@@ -5,7 +5,40 @@ import config from "../config";
 
 import FacetedSearch from "hire-faceted-search";
 
+let createFacet = function(el, title) {
+	let ul = el.querySelector("ul.hire-faceted-search-facets");
+
+	let li = document.createElement("li");
+	li.className = "hire-facet hire-list-facet";
+
+	let header = document.createElement("header");
+
+	let h3 = document.createElement("h3");
+	h3.innerHTML = title;
+
+	header.appendChild(h3);
+	li.appendChild(header);
+	ul.appendChild(li);
+};
+
 class SearchPublications extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.facetsAdded = false;
+	}
+
+	addFacets() {
+		if (!this.facetsAdded) {
+			setTimeout(() => {
+				let el = React.findDOMNode(this);
+				createFacet(el, "First publisher");
+
+				this.facetAdded = true;
+			}, 100);
+		}
+	}
+
 	render() {
 		return (
 			<FacetedSearch
@@ -60,6 +93,7 @@ class SearchPublications extends React.Component {
 					"date"
 				]}
 				numberedResults={true}
+				onChange={this.addFacets.bind(this)}
 				onSelect={this.props.onSelect}
 			/>
 		);

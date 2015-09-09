@@ -2,7 +2,7 @@ import React from "react";
 import {Tabs, Tab} from "hire-tabs";
 
 import BasicInfo from "./basic-info";
-import Receptions from "./receptions";
+import RelationList from "../../relation-list";
 import Links from "../../links";
 
 class PublicationRecord extends React.Component {
@@ -35,9 +35,11 @@ class PublicationRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "receptions"}
 					label="Receptions">
-					<Receptions
-						relations={this.props.relations}
-						publication={this.props.publication}/>
+					<RelationList
+						model={this.props.publication}
+						modelRelations={this.props.relations.publicationPublication}
+						onNavigate={this.props.onNavigate}
+						relations={this.props.relations} />
 				</Tab>
 				<Tab
 					active={this.props.tab === "links"}
