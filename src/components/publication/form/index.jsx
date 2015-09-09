@@ -22,7 +22,8 @@ class PublicationForm extends React.Component {
 				<ReceptionsForm
 					onChange={this.props.onFormChange}
 					onDelete={this.props.onFormDelete}
-					publication={model} />
+					publication={model}
+					relations={this.props.relations} />
 			</Tab> :
 			null;
 

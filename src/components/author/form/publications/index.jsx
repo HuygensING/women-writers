@@ -21,7 +21,19 @@ class AuthorPublicationsController extends React.Component {
 			currentRelations = [];
 		}
 
-		this.props.onChange(["@relations", formData.relationType.key], [...currentRelations, formData.relation]);
+		this.props.onChange(
+			["@relations", formData.relationType.key],
+			[...currentRelations, formData.relation]
+		);
+	}
+
+	handleRemove(relationName, id) {
+		this.props.onChange(
+			["@relations", relationName],
+			this.props.author["@relations"][relationName].filter((relation) =>
+				relation.key !== id
+			)
+		);
 	}
 
 	render() {
@@ -31,7 +43,7 @@ class AuthorPublicationsController extends React.Component {
 			);
 
 		let selectOptions = relationNames
-			.map(toKeyValue(this.props.relations.displayNames))
+			.map(toKeyValue(this.props.relations.displayNames));
 
 		return (
 			<div>
@@ -42,10 +54,18 @@ class AuthorPublicationsController extends React.Component {
 					model={this.props.author}
 					modelRelations={this.props.relations.authorPublication}
 					onNavigate={this.props.onNavigate}
+					onRemove={this.handleRemove.bind(this)}
 					relations={this.props.relations} />
 			</div>
 		);
 	}
 }
+
+AuthorPublicationsController.propTypes = {
+	author: React.PropTypes.object,
+	onChange: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
+	relations: React.PropTypes.object
+};
 
 export default form(AuthorPublicationsController);

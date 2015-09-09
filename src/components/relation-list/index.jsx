@@ -12,11 +12,13 @@ let toObject = (prev, current) => {
 let hasRelation = model => relationName =>
 	model["@relations"].hasOwnProperty(relationName);
 
-let toJSX = (model, displayNames, navigate) => relationName =>
+let toJSX = (model, displayNames, navigate, remove) => relationName =>
 	<li key={relationName}>
 		<label>{displayNames[relationName]}</label>
 		<DocumentRelation
 			onNavigate={navigate}
+			onRemove={remove}
+			relationName={relationName}
 			values={model["@relations"][relationName]} />
 	</li>;
 
@@ -28,7 +30,8 @@ class RelationList extends React.Component {
 			.map(toJSX(
 				this.props.model,
 				this.props.relations.displayNames,
-				this.props.onNavigate
+				this.props.onNavigate,
+				this.props.onRemove
 			));
 
 		return relationList.length > 0 ?
@@ -43,6 +46,7 @@ RelationList.propTypes = {
 	model: React.PropTypes.object,
 	modelRelations: React.PropTypes.array,
 	onNavigate: React.PropTypes.func.isRequired,
+	onRemove: React.PropTypes.func,
 	relations: React.PropTypes.object
 };
 

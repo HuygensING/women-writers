@@ -20,71 +20,58 @@ let toKeyValue = function(displayNames) {
 	};
 };
 
+let modelHasRelation = model => relationName =>
+	model["@relations"].hasOwnProperty(relationName) && model["@relations"][relationName].length > 0;
+
+let toJSX = (model, displayNames) => relationName =>
+	<li key={relationName}>
+		<label>{displayNames[relationName]}</label>
+		<RelationDocument values={model["@relations"][relationName]} />
+	</li>;
+
 class ReceptionsForm extends React.Component {
-	constructor(props) {
-		super(props);
+	handleFormChange(formData) {
+		let currentRelations = this.props.publication["@relations"][formData.relationType.key] || [];
 
-		// this.onStoreChange = this.onStoreChange.bind(this);
-
-		this.state = {
-			publicationPublicationRelations: [],
-			relationDisplayNames: {}
-		};
+		this.props.onChange(
+			["@relations", formData.relationType.key],
+			[...currentRelations, formData.relation]
+		);
 	}
 
-	// componentDidMount() {
-	// 	actions.getRelations();
-	// 	relationsStore.listen(this.onStoreChange);
-	// }
+	handleRemove(relationName, id) {
+		// Remove the relation from the current array of ["@relations"][relationName].
+		let updatedRelations = this.props.author["@relations"][relationName]
+			.filter((relation) =>
+				relation.key !== id
+			);
 
-	// componentWillUnmount() {
-	// 	relationsStore.stopListening(this.onStoreChange);
-	// }
-
-	// onStoreChange() {
-	// 	this.setState(relationsStore.getState());
-	// }
-
-	handleFormChange(formData) {
-		let currentRelations = this.props.value.getIn(["@relations", formData.relationType.key]).toJS();
-
-		this.props.onChange(["@relations", formData.relationType.key], [...currentRelations, formData.relation]);
+		this.props.onChange(
+			["@relations", relationName],
+			updatedRelations
+		);
 	}
 
 	render() {
-		let model = this.props.value;
+		let model = this.props.publication;
 
-		let regularRelationNames = this.state.publicationPublicationRelations
+		let regularRelationNames = this.props.relations.publicationPublication
 			.map((relation) => relation.regularName);
 
-		let inverseRelationNames = this.state.publicationPublicationRelations
+		let inverseRelationNames = this.props.relations.publicationPublication
 			.map((relation) => relation.inverseName);
 
 		let regularRelations = regularRelationNames
-			.filter((relationName) =>
-				model.getIn(["@relations", relationName]).size > 0
-			)
-			.map((relationName) =>
-				<li key={relationName}>
-					<label>{this.state.relationDisplayNames[relationName]}</label>
-					<RelationDocument values={model.getIn(["@relations", relationName]).toJS()} />
-				</li>
-			);
+			.filter(modelHasRelation(model))
+			.map(toJSX(model, this.props.relations.displayNames));
 
 		regularRelations = regularRelations.length ?
 			<ul className="record">{regularRelations}</ul> :
 			null;
 
 		let inverseRelations = inverseRelationNames
-			.filter((relationName) =>
-				model.getIn(["@relations", relationName]).size > 0
-			)
-			.map((relationName) =>
-				<li key={relationName}>
-					<label>{this.state.relationDisplayNames[relationName]}</label>
-					<RelationDocument values={model.getIn(["@relations", relationName]).toJS()} />
-				</li>
-			);
+			.filter(modelHasRelation(model))
+			.map(toJSX(model, this.props.relations.displayNames));
 
 		inverseRelations = inverseRelations.length ?
 			<ul className="record">{inverseRelations}</ul> :
@@ -96,18 +83,25 @@ class ReceptionsForm extends React.Component {
 				<h3>Has</h3>
 				<ReceptionForm
 					onChange={this.handleFormChange.bind(this)}
-					selectOptions={regularRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
-					value={this.state.regularForm} />
+					selectOptions={regularRelationNames.map(toKeyValue(this.props.relations.displayNames))}
+					value={this.props.relations.regularForm} />
 				{regularRelations}
 				<h3>Is</h3>
 				<ReceptionForm
 					onChange={this.handleFormChange.bind(this)}
-					selectOptions={inverseRelationNames.map(toKeyValue(this.state.relationDisplayNames))}
-					value={this.state.inverseForm} />
+					selectOptions={inverseRelationNames.map(toKeyValue(this.props.relations.displayNames))}
+					value={this.props.relations.inverseForm} />
 				{inverseRelations}
 			</div>
 		);
 	}
 }
+
+ReceptionsForm.propTypes = {
+	author: React.PropTypes.object,
+	onChange: React.PropTypes.func,
+	publication: React.PropTypes.object,
+	relations: React.PropTypes.object
+};
 
 export default form(ReceptionsForm);

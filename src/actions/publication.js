@@ -48,7 +48,13 @@ export function savePublication() {
 			let currentRelations = publication["@relations"];
 			let prevRelations = unchangedPublication[0]["@relations"];
 
-			// saveRelations(currentRelations, prevRelations, publication._id);
+			saveRelations(
+				currentRelations,
+				prevRelations,
+				getState().relations.all,
+				publication._id,
+				getState().user.token
+			);
 		}
 
 		save(
