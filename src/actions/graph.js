@@ -14,7 +14,6 @@ export function fetchGraph(domain, id) {
 				current: found[0]
 			});
 		} else {
-			dispatch({type: "REQUEST_GRAPH"});
 			fetch(`${config.graphUrl}/${domain}/${id}?depth=1`, (response) =>
 				dispatch({
 					type: "RECEIVE_GRAPH",
