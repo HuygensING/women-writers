@@ -14,7 +14,6 @@ node_modules/.bin/jade \
 	src/stylus/index.styl &
 
 node_modules/.bin/watchify src/index.jsx \
-	--detect-globals false \
 	--extension=.jsx \
 	--external classnames \
 	--external immutable \
