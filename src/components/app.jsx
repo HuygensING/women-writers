@@ -45,8 +45,11 @@ class App extends React.Component {
 
 		let graph = (this.props.graphs.current != null) ?
 			<GraphController
+				id={this.props.graphs.current.id}
 				data={this.props.graphs.current.data}
+				onEntityClick={this.props.onGraphEntityClick}
 				onNavigate={this.props.onNavigate}
+				table={this.props.graphs.table}
 				visible={this.props.router.graph.visible} /> : null;
 		return (
 			<div className="app">

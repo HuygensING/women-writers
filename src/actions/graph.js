@@ -21,6 +21,25 @@ export function fetchGraph(domain, id) {
 					id: `${domain}/${id}`
 				})
 			);
+			fetch(`${config.domainUrl}/${domain}/${id}`, (response) =>
+				dispatch({
+					type: "RECEIVE_GRAPH_TABLE",
+					response: response,
+					id: `${domain}/${id}`
+				})
+			);
 		}
+	};
+}
+
+export function fetchGraphTable(domain, id) {
+	return function (dispatch) {
+		fetch(`${config.domainUrl}/${domain}/${id}`, (response) =>
+			dispatch({
+				type: "RECEIVE_GRAPH_TABLE",
+				response: response,
+				id: `${domain}/${id}`
+			})
+		);
 	};
 }

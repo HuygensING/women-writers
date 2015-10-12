@@ -11,6 +11,7 @@ import {setUser} from "./actions/user";
 import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor} from "./actions/author";
 import {setPublicationKey, deletePublicationKey, deletePublication, savePublication} from "./actions/publication";
 import {fetchRelations} from "./actions/relations";
+import {fetchGraphTable} from "./actions/graph";
 
 // COMPONENTS
 import App from "./components/app";
@@ -61,6 +62,9 @@ let AppRouter = Router.extend({
 				}
 				onDeletePublicationKey={(key) =>
 					store.dispatch(deletePublicationKey(key))
+				}
+				onGraphEntityClick={(obj) =>
+					store.dispatch(fetchGraphTable(...obj.key.split("/")))
 				}
 				onLoginChange={(response) =>
 					store.dispatch(setUser(response))

@@ -1,6 +1,7 @@
 let initialState = {
 	all: [],
 	current: null,
+	table: null,
 	requesting: false
 };
 
@@ -12,6 +13,11 @@ export default function(state=initialState, action) {
 			return {...state, ...{
 				all: [...state.all, {id: action.id, data: action.response}],
 				current: {id: action.id, data: action.response},
+				requesting: false
+			}};
+		case "RECEIVE_GRAPH_TABLE":
+			return {...state, ...{
+				table: {id: action.id, data: action.response},
 				requesting: false
 			}};
 		case "SET_CURRENT_GRAPH":
