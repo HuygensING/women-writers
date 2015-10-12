@@ -65,13 +65,19 @@ header.page
 					&:last-child:after
 						content ""
 
-.author, .publication, .hire-faceted-search {
+.author, .publication, .hire-faceted-search, .graph {
 	display: none;
 }
 
-.author.visible, .publication.visible, .hire-faceted-search.visible {
+.author.visible, .publication.visible, .hire-faceted-search.visible, .graph.visible {
 	display: block;
 }
+
+.graph
+	height calc(100% - 125px)
+	top 125px
+	width 100%
+	position absolute
 
 .author, .publication
 	position relative

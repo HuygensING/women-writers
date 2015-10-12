@@ -6,7 +6,7 @@ import EditButton from "../edit-button";
 import AuthorRecord from "./record";
 import AuthorForm from "./form";
 import EditFooter from "../save-footer";
-
+import Link from "../link";
 /*
  * AuthorController for the AuthorRecord and AuthorForm
  *
@@ -46,6 +46,10 @@ class AuthorController extends React.Component {
 				type="author" /> :
 			null;
 
+		let graphLink = this.props.author._id ?
+			<Link href={"/graph/persons/" + this.props.author._id} onNavigate={this.props.onNavigate} value="Graph" /> :
+			null;
+
 		return (
 			<div
 				className={cx(
@@ -55,6 +59,7 @@ class AuthorController extends React.Component {
 				<AuthorHeader
 					author={this.props.author} />
 				{editButton}
+				{graphLink}
 				{body}
 				{footer}
 			</div>

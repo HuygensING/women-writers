@@ -105,7 +105,8 @@ let AppRouter = Router.extend({
 		"documents/:id/edit": "editPublication",
 		"documents/:id/:tab/edit": "editPublication",
 		"documents/:id/:tab": "publication",
-		"documents/:id": "publication"
+		"documents/:id": "publication",
+		"graph/:domain/:id": "graph",
 	},
 
 	searchAuthors: function() {},
@@ -114,7 +115,8 @@ let AppRouter = Router.extend({
 	author: function(id, tab) {},
 	editAuthor: function(id, tab) {},
 	publication: function(id, tab) {},
-	editPublication: function(id, tab) {}
+	editPublication: function(id, tab) {},
+	graph: function(domain, id) {}
 });
 
 document.addEventListener("DOMContentLoaded", () =>

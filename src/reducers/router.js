@@ -5,6 +5,9 @@ let STATE = {
 	searchAuthors: {
 		visible: false
 	},
+	graph: {
+		visible: false
+	},
 	path: "",
 	publication: {
 		visible: false
@@ -20,6 +23,7 @@ let getNextPath = function(state) {
 		author: "persons",
 		editAuthor: "persons",
 		searchAuthors: "persons",
+		graph: "graph",
 		publication: "documents",
 		editPublication: "documents",
 		searchPublications: "documents"

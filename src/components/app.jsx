@@ -2,6 +2,7 @@ import React from "react";
 
 import MainMenu from "./main-menu";
 import AuthorController from "./author";
+import GraphController from "./graph";
 import PublicationController from "./publication";
 import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
@@ -42,6 +43,11 @@ class App extends React.Component {
 				visible={this.props.router.publication.visible} /> :
 			null;
 
+		let graph = (this.props.graphs.current != null) ?
+			<GraphController
+				data={this.props.graphs.current.data}
+				onNavigate={this.props.onNavigate}
+				visible={this.props.router.graph.visible} /> : null;
 		return (
 			<div className="app">
 				<header>
@@ -62,6 +68,7 @@ class App extends React.Component {
 				<SearchPublications
 					onSelect={this.props.onResultSelect}
 					visible={this.props.router.searchPublications.visible} />
+				{graph}
 			</div>
 		);
 	}
