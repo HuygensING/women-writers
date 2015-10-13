@@ -42,7 +42,6 @@ class GraphTable extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.data);
 		return (
 			<ul className="graph-table">
 				<li><h4>{this.props.data.data["@type"].toUpperCase()}</h4></li>

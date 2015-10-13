@@ -1,6 +1,6 @@
 import config from "../config";
 import {fetch} from "./utils";
-import {parseOutgoingGraph} from "../stores/parsers/graph";
+import {parseIncomingGraph} from "../stores/parsers/graph";
 
 let fetchDomainMetadata = function(domain, id, dispatch) {
 	fetch(`${config.domainUrl}/${domain}/${id}`, (response) =>
@@ -27,7 +27,7 @@ export function fetchGraph(domain, id) {
 			fetch(`${config.graphUrl}/${domain}/${id}?depth=1`, (response) =>
 				dispatch({
 					type: "RECEIVE_GRAPH",
-					response: parseOutgoingGraph(response),
+					response: parseIncomingGraph(response),
 					id: `${domain}/${id}`
 				})
 			);
