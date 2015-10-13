@@ -6,6 +6,7 @@ import EditButton from "../edit-button";
 import PublicationRecord from "./record";
 import PublicationForm from "./form";
 import EditFooter from "../save-footer";
+import Link from "../link";
 
 class PublicationController extends React.Component {
 	render() {
@@ -38,6 +39,9 @@ class PublicationController extends React.Component {
 				type="publication" /> :
 			null;
 
+		let graphLink = this.props.publication._id ?
+			<Link href={"/graph/documents/" + this.props.publication._id} onNavigate={this.props.onNavigate} value="Graph" /> :
+			null;
 		return (
 			<div
 				className={cx(
@@ -47,6 +51,7 @@ class PublicationController extends React.Component {
 				<PublicationHeader
 					publication={this.props.publication} />
 				{editButton}
+				{graphLink}
 				{body}
 				{footer}
 			</div>

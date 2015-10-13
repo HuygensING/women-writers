@@ -34,8 +34,8 @@ class GraphController extends React.Component {
 	}
 
 	render() {
-		let table = this.props.table !== null && this.props.table.data !== null ?
-			<GraphTable data={this.props.table.data} onNavigate={this.props.onNavigate} /> :
+		let table = this.props.table !== null ?
+			<GraphTable data={this.props.table} onNavigate={this.props.onNavigate} /> :
 			null;
 		return this.props.data === null ?
 			(<div className={cx("graph", {visible: this.props.visible})}>Loading</div>)

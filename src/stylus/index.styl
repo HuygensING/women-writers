@@ -73,19 +73,43 @@ header.page
 	display: block;
 }
 
+
 .graph
 	height calc(100% - 125px)
 	top 125px
 	width 100%
 	position absolute
+ 
+.graph-table
+	position absolute
+	width 200px
+	background-color rgba(255,255,255,.6)
+	border-radius 8px
+	padding 8px
+	margin 20px
+	box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
+	color #666
+	& h4
+		color #000
+		margin 0
+	& label
+		color #000
 
 .author, .publication
 	position relative
+
+
+	& > .link
+		position absolute
+		left 5%
+		top 200px
+		z-index 100
 
 	& > button.edit, div.button-edit
 		left 5%
 		position absolute
 		top 240px
+
 
 	& > button.edit
 		button()

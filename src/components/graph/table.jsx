@@ -7,47 +7,52 @@ class GraphTable extends React.Component {
 	}
 
 	renderNames() {
-		if(this.props.data.names) {
+		if(this.props.data.data.names && this.props.data.data.names.length > 0) {
 			return (<div>
 				<label>Names</label>
 				<ul>
-					{this.props.data.names.map(this.makeName.bind(this))}
+					{this.props.data.data.names.map(this.makeName.bind(this))}
 				</ul>
 			</div>);
 		}
 		return null;
 	}
 
-	renderTitle() {
-		if(this.props.data.title) {
+	renderMD(field, label) {
+		if(this.props.data.data[field]) {
 			return (<div>
-				<label>Title</label>
-				<div>{this.props.data.title}</div>
+				<label>{label}</label>
+				<div>{this.props.data.data[field]}</div>
 			</div>);
 		}
 		return null;
 	}
 
 	renderDomainLink() {
-		if(this.props.data["@variationRefs"]) {
-
-			let found = this.props.data["@variationRefs"].filter((varRef) => varRef.type.match(/^ww/));
+		if(this.props.data.data["@variationRefs"]) {
+			let found = this.props.data.data["@variationRefs"].filter((varRef) => varRef.type.match(/^ww/));
 			if(!found) { return null; }
-
-			return (<div>
-				<Link href={`/${found[0].type.replace(/^ww/, "")}s/${found[0].id}`} onNavigate={this.props.onNavigate} value="Link" />
-			</div>);
+			if(found[0].type === "wwdocument" || found[0].type === "wwperson") {
+				return (<div>
+					<Link href={`/${found[0].type.replace(/^ww/, "")}s/${found[0].id}`} onNavigate={this.props.onNavigate} value="Link" />
+				</div>);
+			}
 		}
 		return null;
 	}
 
 	render() {
+		console.log(this.props.data);
 		return (
-			<div style={{position: "absolute", width: "200px"}}>
-				{this.renderTitle()}
-				{this.renderNames()}
-				{this.renderDomainLink()}
-			</div>
+			<ul className="graph-table">
+				<li><h4>{this.props.data.data["@type"].toUpperCase()}</h4></li>
+				<li>{this.renderMD("title", "Title")}</li>
+				<li>{this.renderNames()}</li>
+				<li>{this.renderMD("birthDate", "Date of birth")}</li>
+				<li>{this.renderMD("deathDate", "Date of death")}</li>
+				<li>{this.renderMD("date", "Date")}</li>
+				<li>{this.renderDomainLink()}</li>
+			</ul>
 		);
 
 	}
