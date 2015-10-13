@@ -29,9 +29,11 @@ class GraphTable extends React.Component {
 	}
 
 	renderDomainLink() {
+		console.log(this.props.data.data);
+
 		if(this.props.data.data["@variationRefs"]) {
 			let found = this.props.data.data["@variationRefs"].filter((varRef) => varRef.type.match(/^ww/));
-			if(!found) { return null; }
+			if(!found.length) { return null; }
 			if(found[0].type === "wwdocument" || found[0].type === "wwperson") {
 				return (<div>
 					<Link href={`/${found[0].type.replace(/^ww/, "")}s/${found[0].id}`} onNavigate={this.props.onNavigate} value="Link" />
