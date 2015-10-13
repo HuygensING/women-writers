@@ -178,10 +178,10 @@ let toObject = (prev, current) => {
 	return prev;
 };
 
-let toRelationObject = (relationName, relationType, sourceId, accepted) =>
-	(id) => {
+let toRelationObject = (relationName, relationType, sourceId, accepted) => {
+	return (id) => {
 		id = id.substr(id.lastIndexOf("/") + 1);
-		[sourceId, id] = (relationType.regularName === relationName) ?
+		let [newSourceId, newId] = (relationType.regularName === relationName) ?
 			[sourceId, id] :
 			[id, sourceId];
 
@@ -189,15 +189,16 @@ let toRelationObject = (relationName, relationType, sourceId, accepted) =>
 			"accepted": accepted,
 			"@type": "wwrelation",
 			"^typeId": relationType._id,
-			"^sourceId": sourceId,
+			"^sourceId": newSourceId,
 			"^sourceType": relationType.sourceTypeName,
-			"^targetId": id,
+			"^targetId": newId,
 			"^targetType": relationType.targetTypeName
 		};
 	};
+};
 
-let toRelationObjects = (relationsToSave, sourceId, allRelations, accepted=true) =>
-	(arr, relationName) => {
+let toRelationObjects = (relationsToSave, sourceId, allRelations, accepted=true) => {
+	return (arr, relationName) => {
 		let ids = relationsToSave[relationName];
 		let relationTypes = allRelations.reduce(toObject, {});
 		let relationType = relationTypes[relationName];
@@ -205,7 +206,7 @@ let toRelationObjects = (relationsToSave, sourceId, allRelations, accepted=true)
 
 		return arr.concat(relationObjects);
 	};
-
+};
 
 /*
  * Reduce to an object with relation keys found in currentRelations, but not
