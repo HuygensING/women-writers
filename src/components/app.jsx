@@ -51,6 +51,7 @@ class App extends React.Component {
 				onNavigate={this.props.onNavigate}
 				table={this.props.graphs.table}
 				visible={this.props.router.graph.visible} /> : null;
+
 		return (
 			<div className="app">
 				<header>
@@ -65,11 +66,15 @@ class App extends React.Component {
 				</header>
 				{author}
 				<SearchAuthors
+					onChange={this.props.onAuthorSearchChange}
 					onSelect={this.props.onResultSelect}
+					query={this.props.authors.query}
 					visible={this.props.router.searchAuthors.visible} />
 				{publication}
 				<SearchPublications
+					onChange={this.props.onPublicationSearchChange}
 					onSelect={this.props.onResultSelect}
+					query={this.props.publications.query}
 					visible={this.props.router.searchPublications.visible} />
 				{graph}
 			</div>
@@ -79,8 +84,9 @@ class App extends React.Component {
 
 App.propTypes = {
 	// author: React.PropTypes.object,
+	onAuthorSearchChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
-	onToggleEdit: React.PropTypes.func,
+	onToggleEdit: React.PropTypes.func
 	// publication: React.PropTypes.object,
 	// searchAuthors: React.PropTypes.object,
 	// searchPublications: React.PropTypes.object

@@ -19,7 +19,10 @@ let MODEL = {
 let initialState = {
 	all: [],
 	current: MODEL,
-	requesting: false
+	requesting: false,
+	query: {
+		facetValues: []
+	}
 };
 
 export default function(state=initialState, action) {
@@ -68,6 +71,11 @@ export default function(state=initialState, action) {
 		case "NEW_AUTHOR":
 			return {...state, ...{
 				current: MODEL
+			}};
+
+		case "SET_AUTHOR_QUERY":
+			return {...state, ...{
+				query: action.query
 			}};
 
 		default:

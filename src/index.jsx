@@ -8,8 +8,8 @@ import store from "./store";
 // ACTIONS
 import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
-import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor} from "./actions/author";
-import {setPublicationKey, deletePublicationKey, deletePublication, savePublication} from "./actions/publication";
+import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery} from "./actions/author";
+import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery} from "./actions/publication";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
 
@@ -45,6 +45,10 @@ let AppRouter = Router.extend({
 		React.render(
 			<App
 				{...nextState}
+				onAuthorSearchChange={(results, query) => {
+					store.dispatch(setPublicationQueryFromAuthorQuery(query));
+					store.dispatch({type: "SET_AUTHOR_QUERY", query: query});
+				}}
 				onChangeAuthorKey={(key, value) =>
 					store.dispatch(setAuthorKey(key, value))
 				}
@@ -76,6 +80,10 @@ let AppRouter = Router.extend({
 				onNewPublication={() =>
 					this.navigate("/documents/new")
 				}
+				onPublicationSearchChange={(results, query) => {
+					store.dispatch(setAuthorQueryFromPublicationQuery(query));
+					store.dispatch({type: "SET_PUBLICATION_QUERY", query: query});
+				}}
 				onResultSelect={(item) =>
 					this.navigate(item.path.replace("domain/ww", ""))
 				}

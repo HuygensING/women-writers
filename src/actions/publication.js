@@ -115,3 +115,22 @@ export function newPublication() {
 		type: "NEW_PUBLICATION"
 	};
 }
+
+const mapAuthorQueryToPublicationQuery = function(authorQuery) {
+	let newQuery = {
+		facetValues: []
+	};
+	for(let facetValue of authorQuery.facetValues) {
+		let {name, values} = facetValue;
+		let newName = name === "dynamic_s_language" ? name : name.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2");
+		newQuery.facetValues.push({name: newName, values: values});
+	}
+	return newQuery;
+};
+
+export function setPublicationQueryFromAuthorQuery(authorQuery) {
+	return {
+		type: "SET_PUBLICATION_QUERY",
+		query: mapAuthorQueryToPublicationQuery(authorQuery)
+	};
+}

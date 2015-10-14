@@ -114,3 +114,25 @@ export function newAuthor() {
 		type: "NEW_AUTHOR"
 	};
 }
+
+const mapPublicationQueryToAuthorQuery = function(publicationQuery) {
+	let newQuery = {
+		facetValues: []
+	};
+	for(let facetValue of publicationQuery.facetValues) {
+		let {name, values} = facetValue;
+		if(name === "dynamic_s_language") {
+			newQuery.facetValues.push({name: name, values: values});
+		} else if(name.match(/_author_/)) {
+			newQuery.facetValues.push({name: name.replace("_author_", "_"), values: values});
+		}
+	}
+	return newQuery;
+};
+
+export function setAuthorQueryFromPublicationQuery(publicationQuery) {
+	return {
+		type: "SET_AUTHOR_QUERY",
+		query: mapPublicationQueryToAuthorQuery(publicationQuery)
+	};
+}

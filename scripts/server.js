@@ -19,9 +19,10 @@ function onFilesChanged(event, file) {
 	}
 }
 
-browserSync.watch(watchFiles, debounce(onFilesChanged, 300));
+browserSync.watch(watchFiles, debounce(onFilesChanged, 600));
 
-var proxyOptions = url.parse("https://acc.repository.huygens.knaw.nl");
+//var proxyOptions = url.parse("https://acc.repository.huygens.knaw.nl");
+var proxyOptions = url.parse("https://test.repository.huygens.knaw.nl");
 proxyOptions.route = "/repository/api";
 
 browserSync.init({

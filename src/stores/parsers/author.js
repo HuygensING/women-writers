@@ -63,7 +63,8 @@ let inComingParser = function(key, value, obj) {
 			.filter((v) => v.accepted)
 			.map((v) => {
 				return {
-					key: `https://acc.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
+//					key: `https://acc.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
+					key: `https://test.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
 					value: v.displayName
 				};
 			});

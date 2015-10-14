@@ -5,22 +5,6 @@ import config from "../config";
 
 import FacetedSearch from "hire-faceted-search";
 
-let createFacet = function(el, title) {
-	let ul = el.querySelector("ul.hire-faceted-search-facets");
-
-	let li = document.createElement("li")
-	li.className = "hire-facet hire-list-facet";
-
-	let header = document.createElement("header");
-
-	let h3 = document.createElement("h3");
-	h3.innerHTML = title;
-
-	header.appendChild(h3);
-	li.appendChild(header);
-	ul.appendChild(li);
-};
-
 class SearchAuthors extends React.Component {
 	constructor(props) {
 		super(props);
@@ -28,21 +12,16 @@ class SearchAuthors extends React.Component {
 		this.facetsAdded = false;
 	}
 
-	addFacets() {
-		if (!this.facetsAdded) {
-			setTimeout(() => {
-				let el = React.findDOMNode(this);
-				createFacet(el, "Marital status");
-				createFacet(el, "Children");
-				createFacet(el, "Social class");
-				createFacet(el, "Education");
-
-				this.facetAdded = true;
-			}, 100);
+	onChange(results, query) {
+		if(this.props.visible) {
+			console.log("AUTHOR", this.props.visible);
+			this.props.onChange(results, query);
 		}
 	}
 
 	render() {
+		console.log("RENDER SearchAuthors", this.props.query);
+
 		return (
 			<FacetedSearch
 				className={cx({
@@ -72,7 +51,9 @@ class SearchAuthors extends React.Component {
 					"dynamic_s_marital_status",
 					"dynamic_s_education",
 					"dynamic_s_social_class",
-					"dynamic_s_types"
+					"dynamic_s_types",
+					"dynamic_s_financials",
+					"dynamic_s_profession"
 				]}
 				facetSortMap={{
 					"dynamic_s_birthDate": {
@@ -119,14 +100,17 @@ class SearchAuthors extends React.Component {
 					"residenceLocation"
 				]}
 				numberedResults={true}
-				onChange={this.addFacets.bind(this)}
+				onChange={this.onChange.bind(this)}
 				onSelect={this.props.onSelect}
+				query={this.props.query}
 			/>
 		);
 	}
 }
 
 SearchAuthors.propTypes = {
+	onSelect: React.PropTypes.func,
+	onChange: React.PropTypes.func,
 	visible: React.PropTypes.bool
 };
 
