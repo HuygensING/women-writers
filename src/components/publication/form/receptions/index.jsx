@@ -23,10 +23,12 @@ let toKeyValue = function(displayNames) {
 let modelHasRelation = model => relationName =>
 	model["@relations"].hasOwnProperty(relationName) && model["@relations"][relationName].length > 0;
 
-let toJSX = (model, displayNames) => relationName =>
+let toJSX = (model, displayNames, onNavigate) => relationName =>
 	<li key={relationName}>
 		<label>{displayNames[relationName]}</label>
-		<RelationDocument values={model["@relations"][relationName]} />
+		<RelationDocument
+			onNavigate={onNavigate}
+			values={model["@relations"][relationName]} />
 	</li>;
 
 class ReceptionsForm extends React.Component {
@@ -63,7 +65,7 @@ class ReceptionsForm extends React.Component {
 
 		let regularRelations = regularRelationNames
 			.filter(modelHasRelation(model))
-			.map(toJSX(model, this.props.relations.displayNames));
+			.map(toJSX(model, this.props.relations.displayNames, this.props.onNavigate));
 
 		regularRelations = regularRelations.length ?
 			<ul className="record">{regularRelations}</ul> :
@@ -71,7 +73,7 @@ class ReceptionsForm extends React.Component {
 
 		let inverseRelations = inverseRelationNames
 			.filter(modelHasRelation(model))
-			.map(toJSX(model, this.props.relations.displayNames));
+			.map(toJSX(model, this.props.relations.displayNames, this.props.onNavigate));
 
 		inverseRelations = inverseRelations.length ?
 			<ul className="record">{inverseRelations}</ul> :
@@ -100,6 +102,7 @@ class ReceptionsForm extends React.Component {
 ReceptionsForm.propTypes = {
 	author: React.PropTypes.object,
 	onChange: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object
 };
