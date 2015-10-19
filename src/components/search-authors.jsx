@@ -18,6 +18,20 @@ class SearchAuthors extends React.Component {
 			this.props.onChange(results, query);
 		}
 	}
+	groupCurrentQuery(queryProps, currentQueryComponentClass) {
+		let hasAuthorFacets = queryProps.queries.last.facetValues.length;
+		let hasAuthorFullTextSearchParameters = (queryProps.queries.last.fullTextSearchParameters || []).length;
+
+		return hasAuthorFacets || hasAuthorFullTextSearchParameters ? (
+			<ul>
+				<li><h3>Criteria</h3></li>
+				<li>
+					<h4>Woman authors</h4>
+					{React.createElement(currentQueryComponentClass, queryProps)}
+				</li>
+			</ul>
+		) : null;
+	}
 
 	render() {
 		return (
@@ -36,7 +50,8 @@ class SearchAuthors extends React.Component {
 					fullTextSearchFields: [
 						{name: "dynamic_t_name"},
 						{name: "dynamic_t_notes", position: "bottom"}
-					]
+					],
+					currentQueryGroupFunc: this.groupCurrentQuery.bind(this)
 				}}
 				facetList={[
 					"dynamic_s_gender",
