@@ -20,8 +20,6 @@ class SearchAuthors extends React.Component {
 	}
 
 	render() {
-		console.log("RENDER SearchAuthors", this.props.query);
-
 		return (
 			<FacetedSearch
 				className={cx({
@@ -33,7 +31,12 @@ class SearchAuthors extends React.Component {
 					headers: {
 						VRE_ID: "WomenWriters",
 						Accept: "application/json"
-					}
+					},
+					hideFreeTextSearch: true,
+					fullTextSearchFields: [
+						{name: "dynamic_t_name"},
+						{name: "dynamic_t_notes", position: "bottom"}
+					]
 				}}
 				facetList={[
 					"dynamic_s_gender",
@@ -81,8 +84,11 @@ class SearchAuthors extends React.Component {
 						"dynamic_s_relatedLocations": "Related country",
 						"dynamic_s_religion": "Religion",
 						"dynamic_s_social_class": "Social class",
-						"dynamic_s_types": "Types"
-
+						"dynamic_s_types": "Types",
+						"dynamic_s_financials": "Financials",
+						"dynamic_s_profession": "Profession",
+						"dynamic_t_name": "Name",
+						"dynamic_t_notes": "Provisional notes"
 					},
 					"dynamic_sort_name": "Name",
 					"dynamic_k_birthDate": "Date of Birth",

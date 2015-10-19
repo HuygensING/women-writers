@@ -15,7 +15,6 @@ class SearchPublications extends React.Component {
 
 	onChange(results, query) {
 		if(this.props.visible) {
-			console.log("PUBLI", this.props.visible);
 			this.props.onChange(results, query);
 		}
 	}
@@ -34,7 +33,11 @@ class SearchPublications extends React.Component {
 					headers: {
 						Accept: "application/json",
 						VRE_ID: "WomenWriters"
-					}
+					},
+					hideFreeTextSearch: true,
+					fullTextSearchFields: [
+						{name: "dynamic_t_title"}
+					]
 				}}
 				facetList={[
 					"dynamic_s_creator",
@@ -59,7 +62,8 @@ class SearchPublications extends React.Component {
 						"dynamic_s_document_type": "Document type",
 						"dynamic_s_genre": "Genre",
 						"dynamic_s_language": "Language",
-						"dynamic_s_origin": "Country of first publication"
+						"dynamic_s_origin": "Country of first publication",
+						"dynamic_t_title": "Title"
 					},
 					"createdBy": "Author",
 					"language": "Language",
