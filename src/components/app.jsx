@@ -4,6 +4,7 @@ import MainMenu from "./main-menu";
 import AuthorController from "./author";
 import GraphController from "./graph";
 import PublicationController from "./publication";
+import ReceptionsController from "./receptions";
 import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
 
@@ -45,8 +46,8 @@ class App extends React.Component {
 
 		let graph = (this.props.graphs.current != null) ?
 			<GraphController
-				id={this.props.graphs.current.id}
 				data={this.props.graphs.current.data}
+				id={this.props.graphs.current.id}
 				onEntityClick={this.props.onGraphEntityClick}
 				onNavigate={this.props.onNavigate}
 				table={this.props.graphs.table}
@@ -67,16 +68,23 @@ class App extends React.Component {
 				{author}
 				<SearchAuthors
 					onChange={this.props.onAuthorSearchChange}
+					onSearchId={this.props.onAuthorSearchId}
 					onSelect={this.props.onResultSelect}
 					query={this.props.authors.query}
 					visible={this.props.router.searchAuthors.visible} />
 				{publication}
 				<SearchPublications
 					onChange={this.props.onPublicationSearchChange}
+					onSearchId={this.props.onPublicationSearchId}
 					onSelect={this.props.onResultSelect}
 					query={this.props.publications.query}
 					visible={this.props.router.searchPublications.visible} />
 				{graph}
+				<ReceptionsController
+					onTabChange={this.props.onReceptionToggle}
+					receptions={this.props.receptions}
+					tab={this.props.router.receptions.id}
+					visible={this.props.router.receptions.visible} />
 			</div>
 		);
 	}

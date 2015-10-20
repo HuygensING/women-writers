@@ -10,6 +10,7 @@ import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
 import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery} from "./actions/author";
 import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery} from "./actions/publication";
+import {setPendingSearchId} from "./actions/receptions";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
 
@@ -49,6 +50,9 @@ let AppRouter = Router.extend({
 					store.dispatch(setPublicationQueryFromAuthorQuery(query));
 					store.dispatch({type: "SET_AUTHOR_QUERY", query: query});
 				}}
+				onAuthorSearchId={(searchId) => {
+					store.dispatch(setPendingSearchId(searchId, "author"));
+				}}
 				onChangeAuthorKey={(key, value) =>
 					store.dispatch(setAuthorKey(key, value))
 				}
@@ -84,6 +88,12 @@ let AppRouter = Router.extend({
 					store.dispatch(setAuthorQueryFromPublicationQuery(query));
 					store.dispatch({type: "SET_PUBLICATION_QUERY", query: query});
 				}}
+				onPublicationSearchId={(searchId) => {
+					store.dispatch(setPendingSearchId(searchId, "publication"));
+				}}
+				onReceptionToggle={(tab) =>
+					this.navigate("/receptions/" + tab.toLowerCase())
+				}
 				onResultSelect={(item) =>
 					this.navigate(item.path.replace("domain/ww", ""))
 				}
@@ -119,6 +129,7 @@ let AppRouter = Router.extend({
 		"documents/:id/:tab": "publication",
 		"documents/:id": "publication",
 		"graph/:domain/:id": "graph",
+		"receptions/:tab": "receptions"
 	},
 
 	searchAuthors: function() {},
@@ -128,7 +139,8 @@ let AppRouter = Router.extend({
 	editAuthor: function(id, tab) {},
 	publication: function(id, tab) {},
 	editPublication: function(id, tab) {},
-	graph: function(domain, id) {}
+	graph: function(domain, id) {},
+	receptions: function() {}
 });
 
 document.addEventListener("DOMContentLoaded", () =>

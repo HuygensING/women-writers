@@ -2,7 +2,6 @@ import React from "react";
 import cx from "classnames";
 
 import config from "../config";
-
 import FacetedSearch from "hire-faceted-search";
 
 class SearchAuthors extends React.Component {
@@ -14,10 +13,14 @@ class SearchAuthors extends React.Component {
 
 	onChange(results, query) {
 		if(this.props.visible) {
-			console.log("AUTHOR", this.props.visible);
 			this.props.onChange(results, query);
 		}
 	}
+
+	onSearchId(searchId) {
+		this.props.onSearchId(searchId);
+	}
+
 	groupCurrentQuery(queryProps, currentQueryComponentClass) {
 		let hasAuthorFacets = queryProps.queries.last.facetValues.length;
 		let hasAuthorFullTextSearchParameters = (queryProps.queries.last.fullTextSearchParameters || []).length;
@@ -65,7 +68,6 @@ class SearchAuthors extends React.Component {
 					"dynamic_s_collective",
 					"dynamic_s_relatedLocations",
 					"dynamic_s_children",
-					"dynamic_s_language",
 					"dynamic_s_marital_status",
 					"dynamic_s_education",
 					"dynamic_s_social_class",
@@ -122,6 +124,7 @@ class SearchAuthors extends React.Component {
 				]}
 				numberedResults={true}
 				onChange={this.onChange.bind(this)}
+				onSearchId={this.onSearchId.bind(this)}
 				onSelect={this.props.onSelect}
 				query={this.props.query}
 			/>
@@ -130,8 +133,10 @@ class SearchAuthors extends React.Component {
 }
 
 SearchAuthors.propTypes = {
-	onSelect: React.PropTypes.func,
 	onChange: React.PropTypes.func,
+	onSearchId: React.PropTypes.func,
+	onSelect: React.PropTypes.func,
+	query: React.PropTypes.object,
 	visible: React.PropTypes.bool
 };
 

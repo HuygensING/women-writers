@@ -18,6 +18,11 @@ class SearchPublications extends React.Component {
 		}
 	}
 
+	onSearchId(searchId) {
+		this.props.onSearchId(searchId);
+	}
+
+
 	groupCurrentQuery(queryProps, currentQueryComponentClass) {
 		let authorFacets = queryProps.queries.last.facetValues.filter((fv) => fv.name.indexOf("_author_") > -1);
 		let publicationFacets = queryProps.queries.last.facetValues.filter((fv) => fv.name.indexOf("_author_") < 0);
@@ -144,6 +149,7 @@ class SearchPublications extends React.Component {
 				]}
 				numberedResults={true}
 				onChange={this.onChange.bind(this)}
+				onSearchId={this.onSearchId.bind(this)}
 				onSelect={this.props.onSelect}
 				query={this.props.query}
 			/>
@@ -153,6 +159,7 @@ class SearchPublications extends React.Component {
 
 SearchPublications.propTypes = {
 	onChange: React.PropTypes.func,
+	onSearchId: React.PropTypes.func,
 	onSelect: React.PropTypes.func,
 	query: React.PropTypes.object,
 	visible: React.PropTypes.bool
