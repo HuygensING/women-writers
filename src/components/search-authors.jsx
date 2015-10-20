@@ -3,6 +3,7 @@ import cx from "classnames";
 
 import config from "../config";
 import FacetedSearch from "hire-faceted-search";
+import CurrentQuery from "./current-query/authors"
 
 class SearchAuthors extends React.Component {
 	constructor(props) {
@@ -19,21 +20,6 @@ class SearchAuthors extends React.Component {
 
 	onSearchId(searchId) {
 		this.props.onSearchId(searchId);
-	}
-
-	groupCurrentQuery(queryProps, currentQueryComponentClass) {
-		let hasAuthorFacets = queryProps.queries.last.facetValues.length;
-		let hasAuthorFullTextSearchParameters = (queryProps.queries.last.fullTextSearchParameters || []).length;
-
-		return hasAuthorFacets || hasAuthorFullTextSearchParameters ? (
-			<ul>
-				<li><h3>Criteria</h3></li>
-				<li>
-					<h4>Woman authors</h4>
-					{React.createElement(currentQueryComponentClass, queryProps)}
-				</li>
-			</ul>
-		) : null;
 	}
 
 	render() {
@@ -53,9 +39,9 @@ class SearchAuthors extends React.Component {
 					fullTextSearchFields: [
 						{name: "dynamic_t_name"},
 						{name: "dynamic_t_notes", position: "bottom"}
-					],
-					currentQueryGroupFunc: this.groupCurrentQuery.bind(this)
+					]
 				}}
+				currentQueryComponent={CurrentQuery}
 				facetList={[
 					"dynamic_s_gender",
 					"dynamic_s_residence",

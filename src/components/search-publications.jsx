@@ -3,7 +3,7 @@ import cx from "classnames";
 import config from "../config";
 
 import FacetedSearch from "hire-faceted-search";
-
+import CurrentQuery from "./current-query/publications";
 
 class SearchPublications extends React.Component {
 	constructor(props) {
@@ -22,58 +22,6 @@ class SearchPublications extends React.Component {
 		this.props.onSearchId(searchId);
 	}
 
-
-	groupCurrentQuery(queryProps, currentQueryComponentClass) {
-		let authorFacets = queryProps.queries.last.facetValues.filter((fv) => fv.name.indexOf("_author_") > -1);
-		let publicationFacets = queryProps.queries.last.facetValues.filter((fv) => fv.name.indexOf("_author_") < 0);
-		let authorFullTextSearchParameters = (queryProps.queries.last.fullTextSearchParameters || []).filter((p) => p.name.indexOf("_author_") > -1);
-		let publicationFullTextSearchParameters = (queryProps.queries.last.fullTextSearchParameters || []).filter((p) => p.name.indexOf("_author_") < 0);
-
-		let authorElem = authorFacets.length > 0 || authorFullTextSearchParameters.length > 0 ?
-			(
-				<li>
-					<h4>Woman authors</h4>
-					{React.createElement(currentQueryComponentClass, {
-						...queryProps,
-						queries: {
-							...queryProps.queries,
-							last: {
-								...queryProps.queries.last,
-								facetValues: authorFacets,
-								fullTextSearchParameters: authorFullTextSearchParameters
-							}
-						}
-					})}
-				</li>
-			) : null;
-
-		let publicationElem = publicationFacets.length > 0 || publicationFullTextSearchParameters.length > 0 ?
-			(
-				<li>
-					<h4>Their publications</h4>
-					{React.createElement(currentQueryComponentClass, {
-						...queryProps,
-						queries: {
-							...queryProps.queries,
-							last: {
-								...queryProps.queries.last,
-								facetValues: publicationFacets,
-								fullTextSearchParameters: publicationFullTextSearchParameters
-							}
-						}
-					})}
-				</li>
-			) : null;
-		return authorElem || publicationElem ? (
-			<ul>
-				<li><h3>Criteria</h3></li>
-				{authorElem}
-				{publicationElem}
-			</ul>
-		) : null;
-	}
-
-
 	render() {
 		return (
 			<FacetedSearch
@@ -91,9 +39,9 @@ class SearchPublications extends React.Component {
 					hideFreeTextSearch: true,
 					fullTextSearchFields: [
 						{name: "dynamic_t_title"}
-					],
-					currentQueryGroupFunc: this.groupCurrentQuery.bind(this)
+					]
 				}}
+				currentQueryComponent={CurrentQuery}
 				facetList={[
 					"dynamic_s_origin",
 					"dynamic_s_sources",
