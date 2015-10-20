@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import {Tabs, Tab} from "hire-tabs";
+import ReceptionSearch from "./reception-search";
 
 
 class ReceptionsController extends React.Component {
@@ -12,12 +13,12 @@ class ReceptionsController extends React.Component {
 					<Tab
 						active={this.props.tab === "authors"}
 						label="Authors">
-						<span>{JSON.stringify(this.props.receptions.author)}</span>
+						<ReceptionSearch {...this.props.receptions.author} onVisible={this.props.onShowAuthorReceptions} type="authors" visible={this.props.visible && this.props.tab === "authors"} />
 					</Tab>
 					<Tab
 						active={this.props.tab === "publications"}
 						label="Publications">
-						<span>{JSON.stringify(this.props.receptions.publication)}</span>
+						<ReceptionSearch {...this.props.receptions.publication} onVisible={this.props.onShowPublicationReceptions} type="publications" visible={this.props.visible && this.props.tab === "publications"} />
 					</Tab>
 				</Tabs>
 			</div>
@@ -26,6 +27,8 @@ class ReceptionsController extends React.Component {
 }
 
 ReceptionsController.propTypes = {
+	onShowAuthorReceptions: React.PropTypes.func,
+	onShowPublicationReceptions: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
 	receptions: React.PropTypes.object,
 	tab: React.PropTypes.string,

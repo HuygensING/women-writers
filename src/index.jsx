@@ -10,7 +10,7 @@ import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
 import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery} from "./actions/author";
 import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery} from "./actions/publication";
-import {setPendingSearchId} from "./actions/receptions";
+import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
 
@@ -102,6 +102,12 @@ let AppRouter = Router.extend({
 				}
 				onSavePublication={() =>
 					store.dispatch(savePublication())
+				}
+				onShowAuthorReceptions={(searchId) =>
+					store.dispatch(setSearchId(searchId, "author"))
+				}
+				onShowPublicationReceptions={(searchId) =>
+					store.dispatch(setSearchId(searchId, "publication"))
 				}
 				onTabChange={(label) =>
 					store.dispatch(changeTab(label))
