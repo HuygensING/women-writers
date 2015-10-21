@@ -121,15 +121,22 @@ let AppRouter = Router.extend({
 				onToggleEdit={(edit) =>
 					store.dispatch(toggleEdit(edit))
 				}
-				onUnsetAuthorFacetValue={(field, value) =>
-					store.dispatch({type: "UNSET_AUTHOR_FACET_VALUE", field: field, value: value})
-				}
+				onUnsetAuthorFacetValue={(field, value) => {
+					store.dispatch(setSearchId(null, "author"));
+					store.dispatch({type: "UNSET_AUTHOR_FACET_VALUE", field: field, value: value});
+					if (field !== "dynamic_s_language") {
+						store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2"), value: value});
+					}
+				}}
 				onUnsetAuthorFullTextField={(field) =>
 					store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: field})
 				}
 				onUnsetPublicationFacetValue={(field, value) => {
 					store.dispatch(setSearchId(null, "publication"));
 					store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field, value: value});
+					if (field.match(/_author_/)) {
+						store.dispatch({type: "UNSET_AUTHOR_FACET_VALUE", field: field.replace("_author_", "_"), value: value});
+					}
 				}}
 				onUnsetPublicationFullTextField={(field) =>
 					store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: field})
