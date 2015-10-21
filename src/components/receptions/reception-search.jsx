@@ -21,8 +21,8 @@ class ReceptionSearch extends React.Component {
 				activeFacets: this.props.activeFacets,
 				activeQuery: this.props.activeQuery,
 				onChangeSearchTerm: (...args) => { console.log(this.props.type, args); },
-				onChangeFullTextField: (...args) => { console.log(this.props.type, args); },
-				onSelectFacetValue: (...args) => { console.log(this.props.type, args); }
+				onChangeFullTextField: this.props.onUnsetFullTextField,
+				onSelectFacetValue: this.props.onUnsetFacetValue
 			};
 
 			let currentQuery = this.props.type === "authors" ?
@@ -64,6 +64,8 @@ ReceptionSearch.propTypes = {
 	activeFacets: React.PropTypes.array,
 	activeQuery: React.PropTypes.object,
 	onSelect: React.PropTypes.func,
+	onUnsetFacetValue: React.PropTypes.func,
+	onUnsetFullTextField: React.PropTypes.func,
 	onVisible: React.PropTypes.func,
 	searchId: React.PropTypes.string,
 	type: React.PropTypes.string,

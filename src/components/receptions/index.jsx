@@ -18,6 +18,8 @@ class ReceptionsController extends React.Component {
 							activeFacets={this.props.authors.activeFacets}
 							activeQuery={this.props.authors.query}
 							onSelect={this.props.onSelect}
+							onUnsetFacetValue={this.props.onUnsetAuthorFacetValue}
+							onUnsetFullTextField={this.props.onUnsetAuthorFullTextField}
 							onVisible={this.props.onShowAuthorReceptions}
 							type="authors"
 							visible={this.props.visible && this.props.tab === "authors"}
@@ -31,6 +33,8 @@ class ReceptionsController extends React.Component {
 							activeFacets={this.props.publications.activeFacets}
 							activeQuery={this.props.publications.query}
 							onSelect={this.props.onSelect}
+							onUnsetFacetValue={this.props.onUnsetPublicationFacetValue}
+							onUnsetFullTextField={this.props.onUnsetPublicationFullTextField}
 							onVisible={this.props.onShowPublicationReceptions}
 							type="publications"
 							visible={this.props.visible && this.props.tab === "publications"}
@@ -48,6 +52,10 @@ ReceptionsController.propTypes = {
 	onShowAuthorReceptions: React.PropTypes.func,
 	onShowPublicationReceptions: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
+	onUnsetAuthorFacetValue: React.PropTypes.func,
+	onUnsetAuthorFullTextField: React.PropTypes.func,
+	onUnsetPublicationFacetValue: React.PropTypes.func,
+	onUnsetPublicationFullTextField: React.PropTypes.func,
 	publications: React.PropTypes.object,
 	receptions: React.PropTypes.object,
 	tab: React.PropTypes.string,

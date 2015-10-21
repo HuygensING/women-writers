@@ -83,6 +83,14 @@ export default function(state=initialState, action) {
 				query: {...action.query, term: ""}
 			}};
 
+		case "UNSET_PUBLICATION_FACET_VALUE":
+			console.log("TODO: UNSET_PUBLICATION_FACET_VALUE", action.field, action.value);
+			return state;
+
+		case "UNSET_PUBLICATION_FULLTEXT_FIELD":
+			console.log("TODO: UNSET_PUBLICATION_FULLTEXT_FIELD", action.field);
+			return state;
+
 		case "SET_PUBLICATION_FACETS":
 			return {...state, ...{
 				activeFacets: action.activeFacets

@@ -88,6 +88,10 @@ class App extends React.Component {
 					onShowAuthorReceptions={this.props.onShowAuthorReceptions}
 					onShowPublicationReceptions={this.props.onShowPublicationReceptions}
 					onTabChange={this.props.onReceptionToggle}
+					onUnsetAuthorFacetValue={this.props.onUnsetAuthorFacetValue}
+					onUnsetAuthorFullTextField={this.props.onUnsetAuthorFullTextField}
+					onUnsetPublicationFacetValue={this.props.onUnsetPublicationFacetValue}
+					onUnsetPublicationFullTextField={this.props.onUnsetPublicationFullTextField}
 					publications={this.props.publications}
 					receptions={this.props.receptions}
 					tab={this.props.router.receptions.id}
