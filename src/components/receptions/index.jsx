@@ -13,12 +13,24 @@ class ReceptionsController extends React.Component {
 					<Tab
 						active={this.props.tab === "authors"}
 						label="Authors">
-						<ReceptionSearch {...this.props.receptions.author} onVisible={this.props.onShowAuthorReceptions} type="authors" visible={this.props.visible && this.props.tab === "authors"} />
+						<ReceptionSearch
+							{...this.props.receptions.author}
+							onSelect={this.props.onSelect}
+							onVisible={this.props.onShowAuthorReceptions}
+							type="authors"
+							visible={this.props.visible && this.props.tab === "authors"}
+						/>
 					</Tab>
 					<Tab
 						active={this.props.tab === "publications"}
 						label="Publications">
-						<ReceptionSearch {...this.props.receptions.publication} onVisible={this.props.onShowPublicationReceptions} type="publications" visible={this.props.visible && this.props.tab === "publications"} />
+						<ReceptionSearch
+							{...this.props.receptions.publication}
+							onSelect={this.props.onSelect}
+							onVisible={this.props.onShowPublicationReceptions}
+							type="publications"
+							visible={this.props.visible && this.props.tab === "publications"}
+						/>
 					</Tab>
 				</Tabs>
 			</div>
@@ -27,6 +39,7 @@ class ReceptionsController extends React.Component {
 }
 
 ReceptionsController.propTypes = {
+	onSelect: React.PropTypes.func,
 	onShowAuthorReceptions: React.PropTypes.func,
 	onShowPublicationReceptions: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,

@@ -81,6 +81,7 @@ class App extends React.Component {
 					visible={this.props.router.searchPublications.visible} />
 				{graph}
 				<ReceptionsController
+					onSelect={this.props.onResultSelect}
 					onShowAuthorReceptions={this.props.onShowAuthorReceptions}
 					onShowPublicationReceptions={this.props.onShowPublicationReceptions}
 					onTabChange={this.props.onReceptionToggle}

@@ -16,7 +16,8 @@ export default function(state=initialState, action) {
 				...state,
 				...{author: {
 					...state.author,
-					pendingSearchId: action.searchId
+					pendingSearchId: action.searchId,
+					searchId: null
 				}}
 			};
 		case "SET_PENDING_PUBLICATION_SEARCH_ID":
@@ -24,7 +25,8 @@ export default function(state=initialState, action) {
 				...state,
 				...{publication: {
 					...state.publication,
-					pendingSearchId: action.searchId
+					pendingSearchId: action.searchId,
+					searchId: null
 				}}
 			};
 		case "SET_AUTHOR_SEARCH_ID":
