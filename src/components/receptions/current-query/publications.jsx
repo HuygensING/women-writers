@@ -63,4 +63,13 @@ class PublicationReceptionsCurrentQuery extends React.Component {
 	}
 }
 
+
+PublicationReceptionsCurrentQuery.propTypes = {
+	activeFacets: React.PropTypes.array,
+	activeQuery: React.PropTypes.object,
+	onChangeFullTextField: React.PropTypes.func,
+	onChangeSearchTerm: React.PropTypes.func,
+	onSelectFacetValue: React.PropTypes.func
+};
+
 export default PublicationReceptionsCurrentQuery;

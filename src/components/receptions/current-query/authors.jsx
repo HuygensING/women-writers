@@ -30,19 +30,10 @@ class AuthorReceptionsCurrentQuery extends React.Component {
 
 AuthorReceptionsCurrentQuery.propTypes = {
 	activeFacets: React.PropTypes.array,
-	activeQuery: React.PropTypes.object
+	activeQuery: React.PropTypes.object,
+	onChangeFullTextField: React.PropTypes.func,
+	onChangeSearchTerm: React.PropTypes.func,
+	onSelectFacetValue: React.PropTypes.func
 };
 
 export default AuthorReceptionsCurrentQuery;
-
-/*
-CurrentQuery.propTypes = {
-	labels: React.PropTypes.object,
-	onChangeFullTextField: React.PropTypes.func,
-	onChangeSearchTerm: React.PropTypes.func,
-	onSelectFacetValue: React.PropTypes.func,
-	queries: React.PropTypes.object,
-	results: React.PropTypes.object
-};
-
-*/

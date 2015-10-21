@@ -80,7 +80,7 @@ export default function(state=initialState, action) {
 
 		case "SET_PUBLICATION_QUERY":
 			return {...state, ...{
-				query: action.query
+				query: {...action.query, term: ""}
 			}};
 
 		case "SET_PUBLICATION_FACETS":
