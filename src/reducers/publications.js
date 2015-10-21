@@ -24,8 +24,10 @@ let initialState = {
 	current: MODEL,
 	requesting: false,
 	query: {
+		term: "",
 		facetValues: []
-	}
+	},
+	activeFacets: []
 };
 
 export default function(state=initialState, action) {
@@ -79,6 +81,11 @@ export default function(state=initialState, action) {
 		case "SET_PUBLICATION_QUERY":
 			return {...state, ...{
 				query: action.query
+			}};
+
+		case "SET_PUBLICATION_FACETS":
+			return {...state, ...{
+				activeFacets: action.activeFacets
 			}};
 		default:
 			return state;

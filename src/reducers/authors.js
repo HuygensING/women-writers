@@ -21,8 +21,10 @@ let initialState = {
 	current: MODEL,
 	requesting: false,
 	query: {
+		term: "",
 		facetValues: []
-	}
+	},
+	activeFacets: []
 };
 
 export default function(state=initialState, action) {
@@ -75,7 +77,12 @@ export default function(state=initialState, action) {
 
 		case "SET_AUTHOR_QUERY":
 			return {...state, ...{
-				query: action.query
+				query: {...action.query, term: ""}
+			}};
+
+		case "SET_AUTHOR_FACETS":
+			return {...state, ...{
+				activeFacets: action.activeFacets
 			}};
 
 		default:

@@ -14,8 +14,9 @@ class SearchAuthors extends React.Component {
 
 	onChange(results, query) {
 		if(this.props.visible) {
-			this.props.onChange(results, query);
+			this.props.onQueryChange(results, query);
 		}
+		this.props.onResultsChange(results);
 	}
 
 	onSearchId(searchId) {
@@ -71,37 +72,7 @@ class SearchAuthors extends React.Component {
 						direction: "ascending"
 					}
 				}}
-				labels={{
-					facetTitles: {
-						"dynamic_s_birthDate": "Year of birth",
-						"dynamic_s_birthplace": "Place of birth",
-						"dynamic_s_children": "Children",
-						"dynamic_s_collective": "Memberships",
-						"dynamic_s_deathDate": "Year of Death",
-						"dynamic_s_deathplace": "Place of Death",
-						"dynamic_s_education": "Education",
-						"dynamic_s_gender": "Gender",
-						"dynamic_s_language": "Language",
-						"dynamic_s_marital_status": "Marital status",
-						"dynamic_s_residence": "Country of residence",
-						"dynamic_s_relatedLocations": "Related country",
-						"dynamic_s_religion": "Religion",
-						"dynamic_s_social_class": "Social class",
-						"dynamic_s_types": "Types",
-						"dynamic_s_financials": "Financials",
-						"dynamic_s_profession": "Profession",
-						"dynamic_t_name": "Name",
-						"dynamic_t_notes": "Provisional notes"
-					},
-					"dynamic_sort_name": "Name",
-					"dynamic_k_birthDate": "Date of Birth",
-					"dynamic_k_deathDate": "Date of Death",
-					"gender": "Gender",
-					"birthDate": "Date of birth",
-					"deathDate": "Date of death",
-					"name": "Name",
-					"residenceLocation": "Country of residence"
-				}}
+				labels={config.authors.labels}
 				metadataList={[
 					"name",
 					"birthDate",
@@ -119,7 +90,8 @@ class SearchAuthors extends React.Component {
 }
 
 SearchAuthors.propTypes = {
-	onChange: React.PropTypes.func,
+	onQueryChange: React.PropTypes.func,
+	onResultsChange: React.PropTypes.func,
 	onSearchId: React.PropTypes.func,
 	onSelect: React.PropTypes.func,
 	query: React.PropTypes.object,

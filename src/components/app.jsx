@@ -67,24 +67,28 @@ class App extends React.Component {
 				</header>
 				{author}
 				<SearchAuthors
-					onChange={this.props.onAuthorSearchChange}
+					onResultsChange={this.props.onAuthorResultsChange}
+					onQueryChange={this.props.onAuthorSearchChange}
 					onSearchId={this.props.onAuthorSearchId}
 					onSelect={this.props.onResultSelect}
 					query={this.props.authors.query}
 					visible={this.props.router.searchAuthors.visible} />
 				{publication}
 				<SearchPublications
-					onChange={this.props.onPublicationSearchChange}
+					onResultsChange={this.props.onPublicationResultsChange}
+					onQueryChange={this.props.onPublicationSearchChange}
 					onSearchId={this.props.onPublicationSearchId}
 					onSelect={this.props.onResultSelect}
 					query={this.props.publications.query}
 					visible={this.props.router.searchPublications.visible} />
 				{graph}
 				<ReceptionsController
+					authors={this.props.authors}
 					onSelect={this.props.onResultSelect}
 					onShowAuthorReceptions={this.props.onShowAuthorReceptions}
 					onShowPublicationReceptions={this.props.onShowPublicationReceptions}
 					onTabChange={this.props.onReceptionToggle}
+					publications={this.props.publications}
 					receptions={this.props.receptions}
 					tab={this.props.router.receptions.id}
 					visible={this.props.router.receptions.visible} />

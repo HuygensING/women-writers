@@ -46,6 +46,9 @@ let AppRouter = Router.extend({
 		React.render(
 			<App
 				{...nextState}
+				onAuthorResultsChange={(results) =>
+					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets})
+				}
 				onAuthorSearchChange={(results, query) => {
 					store.dispatch(setPublicationQueryFromAuthorQuery(query));
 					store.dispatch({type: "SET_AUTHOR_QUERY", query: query});
@@ -83,6 +86,9 @@ let AppRouter = Router.extend({
 				}
 				onNewPublication={() =>
 					this.navigate("/documents/new")
+				}
+				onPublicationResultsChange={(results) =>
+					store.dispatch({type: "SET_PUBLICATION_FACETS", activeFacets: results.facets})
 				}
 				onPublicationSearchChange={(results, query) => {
 					store.dispatch(setAuthorQueryFromPublicationQuery(query));

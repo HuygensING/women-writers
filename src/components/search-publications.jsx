@@ -14,8 +14,9 @@ class SearchPublications extends React.Component {
 
 	onChange(results, query) {
 		if(this.props.visible) {
-			this.props.onChange(results, query);
+			this.props.onQueryChange(results, query);
 		}
+		this.props.onResultsChange(results);
 	}
 
 	onSearchId(searchId) {
@@ -62,7 +63,8 @@ class SearchPublications extends React.Component {
 }
 
 SearchPublications.propTypes = {
-	onChange: React.PropTypes.func,
+	onQueryChange: React.PropTypes.func,
+	onResultsChange: React.PropTypes.func,
 	onSearchId: React.PropTypes.func,
 	onSelect: React.PropTypes.func,
 	query: React.PropTypes.object,

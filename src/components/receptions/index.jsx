@@ -15,6 +15,8 @@ class ReceptionsController extends React.Component {
 						label="Authors">
 						<ReceptionSearch
 							{...this.props.receptions.author}
+							activeFacets={this.props.authors.activeFacets}
+							activeQuery={this.props.authors.query}
 							onSelect={this.props.onSelect}
 							onVisible={this.props.onShowAuthorReceptions}
 							type="authors"
@@ -26,6 +28,8 @@ class ReceptionsController extends React.Component {
 						label="Publications">
 						<ReceptionSearch
 							{...this.props.receptions.publication}
+							activeFacets={this.props.publications.activeFacets}
+							activeQuery={this.props.publications.query}
 							onSelect={this.props.onSelect}
 							onVisible={this.props.onShowPublicationReceptions}
 							type="publications"
@@ -39,10 +43,12 @@ class ReceptionsController extends React.Component {
 }
 
 ReceptionsController.propTypes = {
+	authors: React.PropTypes.object,
 	onSelect: React.PropTypes.func,
 	onShowAuthorReceptions: React.PropTypes.func,
 	onShowPublicationReceptions: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
+	publications: React.PropTypes.object,
 	receptions: React.PropTypes.object,
 	tab: React.PropTypes.string,
 	visible: React.PropTypes.bool
