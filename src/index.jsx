@@ -127,9 +127,10 @@ let AppRouter = Router.extend({
 				onUnsetAuthorFullTextField={(field) =>
 					store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: field})
 				}
-				onUnsetPublicationFacetValue={(field, value) =>
-					store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field, value: value})
-				}
+				onUnsetPublicationFacetValue={(field, value) => {
+					store.dispatch(setSearchId(null, "publication"));
+					store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field, value: value});
+				}}
 				onUnsetPublicationFullTextField={(field) =>
 					store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: field})
 				}

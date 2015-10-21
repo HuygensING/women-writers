@@ -4,59 +4,60 @@ import AuthorResult from "./result/author";
 import PublicationResult from "./result/publication";
 import PublicationReceptionsCurrentQuery from "./current-query/publications";
 import AuthorReceptionsCurrentQuery from "./current-query/authors";
+import Loader from "../icons/loader";
 import config from "../../config";
 
 
 class ReceptionSearch extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.visible && nextProps.pendingSearchId) {
+		if (nextProps.visible && nextProps.pendingSearchId) {
 			this.props.onVisible(nextProps.pendingSearchId);
 		}
 	}
 
 	render() {
-		if (this.props.searchId) {
-			let currentQueryProps = {
-				activeFacets: this.props.activeFacets,
-				activeQuery: this.props.activeQuery,
-				onChangeSearchTerm: (...args) => { console.log(this.props.type, args); },
-				onChangeFullTextField: this.props.onUnsetFullTextField,
-				onSelectFacetValue: this.props.onUnsetFacetValue
-			};
+		let currentQueryProps = {
+			activeFacets: this.props.activeFacets,
+			activeQuery: this.props.activeQuery,
+			onChangeSearchTerm: (...args) => { console.log(this.props.type, args); },
+			onChangeFullTextField: this.props.onUnsetFullTextField,
+			onSelectFacetValue: this.props.onUnsetFacetValue
+		};
 
-			let currentQuery = this.props.type === "authors" ?
-				<AuthorReceptionsCurrentQuery {...currentQueryProps} /> :
-				<PublicationReceptionsCurrentQuery {...currentQueryProps} />;
+		let currentQuery = this.props.type === "authors" ?
+			<AuthorReceptionsCurrentQuery {...currentQueryProps} /> :
+			<PublicationReceptionsCurrentQuery {...currentQueryProps} />;
+		let search = this.props.searchId ? (
+			<FacetedSearch
+						config={{
+							baseURL: config.baseUrl,
+							searchPath: "/search/wwrelations/wwdocuments",
+							headers: {
+								VRE_ID: "WomenWriters",
+								Accept: "application/json"
+							},
+							queryDefaults: {otherSearchId: this.props.searchId},
+							hideFreeTextSearch: true,
+							fullTextSearchFields: [
+								{name: "dynamic_t_title"}
+							]
+						}}
+						facetList={["dynamic_s_relation", ...config.publications.facetList]}
+						facetSortMap={config.publications.facetSortMap}
+						labels={config.publications.labels}
+						onSelect={this.props.onSelect}
+						resultComponent={this.props.type === "authors" ? AuthorResult : PublicationResult}
+			/>
+		) : null;
 
-			return (
-				<div className="reception-search">
-					{currentQuery}
-					<FacetedSearch
-							config={{
-								baseURL: config.baseUrl,
-								searchPath: "/search/wwrelations/wwdocuments",
-								headers: {
-									VRE_ID: "WomenWriters",
-									Accept: "application/json"
-								},
-								queryDefaults: {otherSearchId: this.props.searchId},
-								hideFreeTextSearch: true,
-								fullTextSearchFields: [
-									{name: "dynamic_t_title"}
-								]
-							}}
-							facetList={["dynamic_s_relation", ...config.publications.facetList]}
-							facetSortMap={config.publications.facetSortMap}
-							labels={config.publications.labels}
-							onSelect={this.props.onSelect}
-							resultComponent={this.props.type === "authors" ? AuthorResult : PublicationResult}
-					/>
-				</div>
-			);
-		} else {
-			return <span>{JSON.stringify(this.props)}</span>;
-		}
+		return (
+			<div className="reception-search">
+				{currentQuery}
+				<Loader className={!this.props.searchId ? "reception-loader" : "reception-loader hidden"} />
+				{search}
+			</div>
+		);
 	}
 }
 

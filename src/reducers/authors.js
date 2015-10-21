@@ -1,5 +1,6 @@
 import Immutable from "immutable";
 import {parseIncomingAuthor} from "../stores/parsers/author";
+import {unsetFacetValue} from "./utils";
 
 function castArray(arr) {
 	return (Array.isArray(arr)) ? arr : [arr];
@@ -81,8 +82,9 @@ export default function(state=initialState, action) {
 			}};
 
 		case "UNSET_AUTHOR_FACET_VALUE":
-			console.log("TODO: UNSET_AUTHOR_FACET_VALUE", action.field, action.value);
-			return state;
+			return {...state,
+				query: {...state.query, facetValues: unsetFacetValue(state.query.facetValues, action.field, action.value) }
+			};
 
 		case "UNSET_AUTHOR_FULLTEXT_FIELD":
 			console.log("TODO: UNSET_AUTHOR_FULLTEXT_FIELD", action.field);
