@@ -133,8 +133,34 @@ export default {
 					"isWorkReferencedIn": "is referenced in",
 
 					"isDocumentSourceOf": "Is document source of",
-					"hasDocumentSource": "has source"
+					"hasDocumentSource": "has source",
 
+					"isBiographyOf": "Is biography of",
+					"hasBiography": "has biography",
+
+					"commentsOnPerson": "Comments on person",
+					"isPersonCommentedOnIn": "is commented on in",
+
+					"isDedicatedTo": "Is dedicated to",
+					"isDedicatedPersonOf": "is subject of dedication in",
+
+					"isAwardForPerson": "Is award for person",
+					"isPersonAwarded": "is awarded with",
+
+					"listsPerson": "Lists person",
+					"isPersonListedOn": "is listed on",
+
+					"mentionsPerson": "Mentions person",
+					"isPersonMentionedIn": "is mentioned in",
+
+					"isObituaryOf": "Is obituary of",
+					"hasObituary": "has obituary",
+
+					"quotesPerson": "Quoted person",
+					"isPersonQuotedIn": "is quoted in",
+
+					"referencesPerson": "References person",
+					"isPersonReferencedIn": "is referenced in"
 				}
 			},
 			"createdBy": "Author",
