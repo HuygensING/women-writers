@@ -72,6 +72,71 @@ export default {
 				"dynamic_s_author_financials": "Financials",
 				"dynamic_s_author_profession": "Profession"
 			},
+			facetValues: {
+				"dynamic_s_relation": {
+					"isEditionOf": "Is edition of",
+					"hasEdition": "has edition",
+
+					"isSequelOf": "Is sequel of",
+					"hasSequel": "has sequel",
+
+					"isTranslationOf": "Is translation of",
+					"hasTranslation": "has translation",
+
+					"isAdaptationOf": "Is adaptation of",
+					"hasAdaptation": "has adaptation",
+
+					"isPlagiarismOf": "Is plagiarism of",
+					"hasPlagiarismBy": "has plagiarism",
+
+					"hasAnnotationsOn": "Has annotations on",
+					"isAnnotatedIn": "is annotated in",
+
+					"isBibliographyOf": "Is bibliography of",
+					"hasBibliography": "has bibliography",
+
+					"isCensoringOf": "Is censoring of",
+					"isCensoredBy": "is censored by",
+
+					"commentsOnWork": "Comments on work",
+					"isWorkCommentedOnIn": "is commented on in",
+
+					"isAnthologyContaining": "Is anthology containing",
+					"containedInAnthology": "is contained in anthology",
+
+					"isCopyOf": "Is copy of",
+					"isCopiedBy": "is copied by",
+
+
+					"isAwardForWork": "Is award for work",
+					"isWorkAwarded": "is awarded with",
+
+					"isPrefaceOf": "Is preface of",
+					"hasPreface": "has preface",
+
+					"isIntertextualTo": "Is intertextual to",
+					"isIntertextualOf": "is intertextual of",
+
+					"listsWork": "Lists work",
+					"isWorkListedOn": "is listed on",
+
+					"mentionsWork": "Mentions work",
+					"isWorkMentionedIn": "is mentioned in",
+
+					"isParodyOf": "Is parody of",
+					"isParodiedBy": "is parodied by",
+
+					"quotesWork": "Quotes work",
+					"isWorkQuotedIn": "is quoted in",
+
+					"referencesWork": "References work",
+					"isWorkReferencedIn": "is referenced in",
+
+					"isDocumentSourceOf": "Is document source of",
+					"hasDocumentSource": "has source"
+
+				}
+			},
 			"createdBy": "Author",
 			"language": "Language",
 			"publishLocation": "Country of first publication",

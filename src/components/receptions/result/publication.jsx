@@ -9,6 +9,12 @@ class Result extends React.Component {
 		this.props.onSelect({path: "documents/" + this.props.data.targetData._id});
 	}
 
+	getLabel(relationName) {
+		return this.props.labels.facetValues.dynamic_s_relation[relationName] ?
+			this.props.labels.facetValues.dynamic_s_relation[relationName] :
+			relationName;
+	}
+
 	render() {
 		let sourceData = this.props.data.sourceData;
 		let targetData = this.props.data.targetData;
@@ -19,7 +25,7 @@ class Result extends React.Component {
 				<li>{sourceData.date} {sourceData.publishLocation}</li>
 			</ul>
 			<ul>
-				<li>{this.props.data.relationName}</li>
+				<li>{this.getLabel(this.props.data.relationName)}</li>
 			</ul>
 			<ul>
 				<li><label onClick={this.onSelectTarget.bind(this)}>{targetData.title}</label></li>
@@ -32,6 +38,7 @@ class Result extends React.Component {
 
 Result.propTypes = {
 	data: React.PropTypes.object,
+	labels: React.PropTypes.object,
 	onSelect: React.PropTypes.func
 };
 

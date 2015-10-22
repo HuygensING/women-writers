@@ -23,7 +23,8 @@ let initialState = {
 	requesting: false,
 	query: {
 		term: "",
-		facetValues: []
+		facetValues: [],
+		fullTextSearchParameters: []
 	},
 	activeFacets: []
 };
@@ -87,9 +88,9 @@ export default function(state=initialState, action) {
 			};
 
 		case "UNSET_AUTHOR_FULLTEXT_FIELD":
-			console.log("TODO: UNSET_AUTHOR_FULLTEXT_FIELD", action.field);
-			return state;
-
+			return {...state,
+				query: {...state.query, fullTextSearchParameters: state.query.fullTextSearchParameters.filter((param) => param.name !== action.field) }
+			};
 		case "SET_AUTHOR_FACETS":
 			return {...state, ...{
 				activeFacets: action.activeFacets

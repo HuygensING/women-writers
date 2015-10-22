@@ -128,9 +128,10 @@ let AppRouter = Router.extend({
 						store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2"), value: value});
 					}
 				}}
-				onUnsetAuthorFullTextField={(field) =>
-					store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: field})
-				}
+				onUnsetAuthorFullTextField={(field) => {
+					store.dispatch(setSearchId(null, "author"));
+					store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: field});
+				}}
 				onUnsetPublicationFacetValue={(field, value) => {
 					store.dispatch(setSearchId(null, "publication"));
 					store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field, value: value});
@@ -138,9 +139,10 @@ let AppRouter = Router.extend({
 						store.dispatch({type: "UNSET_AUTHOR_FACET_VALUE", field: field.replace("_author_", "_"), value: value});
 					}
 				}}
-				onUnsetPublicationFullTextField={(field) =>
-					store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: field})
-				}
+				onUnsetPublicationFullTextField={(field) => {
+					store.dispatch(setSearchId(null, "publication"));
+					store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: field});
+				}}
 			/>,
 			document.body
 		);
