@@ -16,6 +16,8 @@ let outGoingParser = function(key, value, obj) {
 	if (key === "documentType") {
 		obj[key] = value.toUpperCase();
 	}
+
+	delete obj["@removedRelations"];
 };
 export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);
