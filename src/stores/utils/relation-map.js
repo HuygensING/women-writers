@@ -1,38 +1,3 @@
-// import xhr from "xhr";
-
-// let baseUrl = "https://acc.repository.huygens.knaw.nl";
-
-// let hasType = function(type) {
-// 	return (relation) =>
-// 		relation.sourceTypeName === type || relation.targetTypeName === type
-// };
-
-// xhr({
-// 	url: `${baseUrl}/system/relationtypes`
-// }, function(err, resp, body) {
-// 	if (err) {
-// 		console.error("Fetching relation types failed!", err, resp);
-// 	}
-
-// 	let toObject = function(prev, current) {
-// 		prev[current.regularName] = current;
-// 		prev[current.inverseName] = current;
-
-// 		return prev;
-// 	};
-
-// 	let relations = JSON.parse(body);
-
-// 	let authorRelations = relations.filter(hasType("person"));
-// 	let authorPublicationRelations = authorRelations.filter(hasType("document"));
-// 	let publicationRelations = relations.filter(hasType("document"));
-
-// 	// console.log("relations", relations);
-// 	console.log("authorRelations", authorRelations);
-// 	console.log("authorPublicationRelations", authorPublicationRelations);
-// 	console.log("publicationRelations", publicationRelations);
-// });
-
 let authorRelationMap = {
 	hasBirthPlace: "wwlocations",
 	hasBiography: "wwdocuments",

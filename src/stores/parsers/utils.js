@@ -1,3 +1,6 @@
+import config from "../../config";
+import relationMap from "../utils/relation-map";
+
 const filterAccepted = function(v) { return v.accepted; };
 const filterRemoved = function(v) { return !v.accepted; };
 
@@ -38,4 +41,17 @@ export function iterateObjectKeys(obj, parser) {
 
 		parser(key, value, obj);
 	});
+}
+
+export function parseRelations(key, value, obj) {
+	if (relationMap.hasOwnProperty(key)) {
+		obj[key] = value
+			.filter((v) => v.accepted)
+			.map((v) => {
+				return {
+					key: `${config.domainUrl}/${relationMap[key]}/${v.id}`,
+					value: v.displayName
+				};
+			});
+	}
 }

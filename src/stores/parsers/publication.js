@@ -1,23 +1,11 @@
-import relationMap from "../utils/relation-map";
-import config from "../../config";
-import {iterateObjectKeys} from "./utils";
+import {iterateObjectKeys, parseRelations} from "./utils";
 
 let inComingParser = function(key, value, obj) {
 	if (key === "documentType") {
 		obj[key] = value.charAt(0) + value.substr(1).toLowerCase();
 	}
 
-
-	if (relationMap.hasOwnProperty(key)) {
-		obj[key] = value
-			.filter((v) => v.accepted)
-			.map((v) => {
-				return {
-					key: `${config.domainUrl}/${relationMap[key]}/${v.id}`,
-					value: v.displayName
-				};
-			});
-	}
+	parseRelations(key, value, obj);
 };
 
 let outGoingParser = function(key, value, obj) {
