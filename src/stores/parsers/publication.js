@@ -13,7 +13,6 @@ let outGoingParser = function(key, value, obj) {
 		obj[key] = value.toUpperCase();
 	}
 
-	delete obj["@removedRelations"];
 };
 export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);
@@ -23,6 +22,7 @@ export let parseIncomingPublication = function(data) {
 
 export let parseOutgoingPublication = function(data) {
 	iterateObjectKeys(data, outGoingParser);
+	delete data["@removedRelations"];
 
 	return data;
 };

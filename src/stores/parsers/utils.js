@@ -48,7 +48,7 @@ export function parseRelations(key, value, obj) {
 		obj[key] = value
 			.map((v) => {
 				return {
-					key: `${config.domainUrl}/${relationMap[key]}/${v.id}`,
+					key: v.path,
 					value: v.displayName,
 					accepted: v.accepted
 				};

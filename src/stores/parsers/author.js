@@ -51,7 +51,6 @@ let outGoingParser = function(key, value, obj) {
 		delete obj[key];
 	}
 
-	delete obj["@removedRelations"];
 };
 
 export let parseIncomingAuthor = function(data) {
@@ -62,6 +61,7 @@ export let parseIncomingAuthor = function(data) {
 
 export let parseOutgoingAuthor = function(data) {
 	iterateObjectKeys(data, outGoingParser);
+	delete data["@removedRelations"];
 
 	return data;
 };

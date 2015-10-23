@@ -47,7 +47,11 @@ export function savePublication() {
 
 			let currentRelations = publication["@relations"];
 			let prevRelations = unchangedPublication[0]["@relations"];
+			let currentRemovedRelations = unchangedPublication[0]["@removedRelations"];
 
+			console.log("saveAuthor():currentRelations", currentRelations);
+			console.log("saveAuthor():prevRelations", prevRelations);
+			console.log("saveAuthor():currentRemovedRelations", currentRemovedRelations);
 			saveRelations(
 				currentRelations,
 				prevRelations,
