@@ -1,4 +1,5 @@
 import relationMap from "../utils/relation-map";
+import config from "../../config";
 
 let iterateObjectKeys = function(obj, parser) {
 	let isObject = function(o) {
@@ -33,8 +34,7 @@ let inComingParser = function(key, value, obj) {
 			.filter((v) => v.accepted)
 			.map((v) => {
 				return {
-//					key: `https://acc.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
-					key: `https://test.repository.huygens.knaw.nl/domain/${relationMap[key]}/${v.id}`,
+					key: `${config.domainUrl}/${relationMap[key]}/${v.id}`,
 					value: v.displayName
 				};
 			});
