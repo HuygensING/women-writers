@@ -23,10 +23,6 @@ let inComingParser = function(key, value, obj) {
 };
 
 let outGoingParser = function(key, value, obj) {
-	if (key.substr(0, 4) === "temp") {
-		delete obj[key];
-	}
-
 	if (key === "types") {
 		obj[key] = value.map((v) =>
 			v.toUpperCase());

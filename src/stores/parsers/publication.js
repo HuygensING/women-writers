@@ -9,10 +9,6 @@ let inComingParser = function(key, value, obj) {
 };
 
 let outGoingParser = function(key, value, obj) {
-	if (key.substr(0, 4) === "temp") {
-		delete obj[key];
-	}
-
 	if (key === "documentType") {
 		obj[key] = value.toUpperCase();
 	}
