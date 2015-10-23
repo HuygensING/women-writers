@@ -46,11 +46,11 @@ export function iterateObjectKeys(obj, parser) {
 export function parseRelations(key, value, obj) {
 	if (relationMap.hasOwnProperty(key)) {
 		obj[key] = value
-			.filter((v) => v.accepted)
 			.map((v) => {
 				return {
 					key: `${config.domainUrl}/${relationMap[key]}/${v.id}`,
-					value: v.displayName
+					value: v.displayName,
+					accepted: v.accepted
 				};
 			});
 	}

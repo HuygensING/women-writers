@@ -1,4 +1,4 @@
-import {iterateObjectKeys, parseRelations} from "./utils";
+import {iterateObjectKeys, parseRelations, splitRelations} from "./utils";
 
 let inComingParser = function(key, value, obj) {
 	if (key === "documentType") {
@@ -19,7 +19,7 @@ let outGoingParser = function(key, value, obj) {
 };
 export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);
-
+	splitRelations(data);
 	return data;
 };
 
