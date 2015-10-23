@@ -55,6 +55,7 @@ export function savePublication() {
 			saveRelations(
 				currentRelations,
 				prevRelations,
+				prevRemovedRelations,
 				getState().relations.all,
 				publication._id,
 				getState().user.token

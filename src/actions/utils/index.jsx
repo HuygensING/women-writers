@@ -235,9 +235,9 @@ let toFoundInCurrent = function(prevRelations, currentRelations) {
 	};
 };
 
-export function saveRelations(currentRelations, serverRelations, allRelations, sourceId, token) {
+export function saveRelations(currentRelations, serverRelations, serverRemovedRelations, allRelations, sourceId, token) {
 	let relationNames = Object.keys(currentRelations);
-
+	console.log("saveRelations::serverRemovedRelations", serverRemovedRelations);
 	let added = relationNames
 		.reduce(toFoundInCurrent(serverRelations, currentRelations), {});
 
