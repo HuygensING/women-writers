@@ -1,6 +1,3 @@
-import config from "../../config";
-import relationMap from "../utils/relation-map";
-
 const filterAccepted = function(v) { return v.accepted; };
 const filterRemoved = function(v) { return !v.accepted; };
 
