@@ -5,7 +5,6 @@ let inComingParser = function(key, value, obj) {
 		obj[key] = value.charAt(0) + value.substr(1).toLowerCase();
 	}
 
-	parseRelations(key, value, obj);
 };
 
 let outGoingParser = function(key, value, obj) {
@@ -16,6 +15,7 @@ let outGoingParser = function(key, value, obj) {
 };
 export let parseIncomingPublication = function(data) {
 	iterateObjectKeys(data, inComingParser);
+	parseRelations(data);
 	splitRelations(data);
 	return data;
 };

@@ -43,15 +43,19 @@ export function iterateObjectKeys(obj, parser) {
 	});
 }
 
-export function parseRelations(key, value, obj) {
-	if (relationMap.hasOwnProperty(key)) {
-		obj[key] = value
-			.map((v) => {
-				return {
-					key: v.path,
-					value: v.displayName,
-					accepted: v.accepted
-				};
-			});
+const parseRelation = function(key, value, obj) {
+	obj[key] = value
+		.map((v) => {
+			return {
+				key: v.path,
+				value: v.displayName,
+				accepted: v.accepted
+			};
+		});
+};
+
+export function parseRelations(data) {
+	for(let key in data["@relations"]) {
+		parseRelation(key, data["@relations"][key], data["@relations"]);
 	}
 }
