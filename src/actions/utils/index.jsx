@@ -220,8 +220,11 @@ let toRelationObjects = (relationsToSave, sourceId, allRelations, accepted=true)
  * Reduce to an object with relation keys found in currentRelations, but not
  * in prevRelations. To find the removed relations, the parameters are flipped.
  *
- * @param {Array} prevRelations The relations received from the server, before editing.
- * @param {Array} currentRelations The edited relations, before being persisted to the server.
+ * @param {object} prevRelations The relations received from the server, before editing.
+ * @param {object} currentRelations The edited relations, before being persisted to the server.
+ * @param {object} serverRemoved Relations which were previously removed on the server
+ * 		if relation was previously removed then readding it requires a PUT request with its original
+ *		ID.
  * @returns {Function} Returns a reduce function with prevRelations and currentRelations in scope.
  */
 let toFoundInCurrent = function(prevRelations, currentRelations, serverRemoved = {}) {
