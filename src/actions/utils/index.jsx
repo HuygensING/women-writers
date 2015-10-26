@@ -7,22 +7,6 @@ const DEFAULT_HEADERS = {
 };
 
 let checkForError = function(err, response, body) {
-	// switch (response.statusCode) {
-	// 	case 401:
-	// 		messagesActions.send("Unauthorized");
-	// 		return true;
-
-	// 	case 403:
-	// 		messagesActions.send("Forbidden");
-	// 		return true;
-
-	// 	case 404:
-	// 		router.navigate("not-found", {
-	// 			trigger: true
-	// 		});
-	// 		return true;
-	// }
-
 	return false;
 };
 
@@ -67,35 +51,10 @@ export function save(url, model, token, cb) {
 		} else {
 			cb(JSON.parse(body));
 		}
-		// switch (method) {
-		// 	case "POST":
-		// 		let location = response.headers.location;
-		// 		let id = location.substr(location.lastIndexOf("/") + 1);
-
-		// 		router.navigate(`${type}s/${id}`, {
-		// 			trigger: true
-		// 		});
-
-		// 		break;
-
-		// 	case "PUT":
-		// 		body = parseIn(JSON.parse(body));
-		// 		action(body);
-
-		// 		router.navigate(`${type}s/${body._id}`, {
-		// 			trigger: true
-		// 		});
-
-		// 		break;
-		// }
-
-		// let message = ((type === "person") ? "author" : "publication");
-		// message = message.charAt(0).toUpperCase() + message.substr(1) + " saved";
-		// messagesActions.send(message);
 	};
 
 	xhr(options, done);
-};
+}
 
 export function remove(url, token, cb) {
 	let options = {
@@ -112,11 +71,6 @@ export function remove(url, token, cb) {
 		}
 
 		cb();
-		// if (response.statusCode === 204) {
-		// 	router.navigate(`${type}s`, {
-		// 		trigger: true
-		// 	});
-		// }
 	};
 
 	xhr(options, done);
