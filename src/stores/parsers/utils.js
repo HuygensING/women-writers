@@ -46,7 +46,9 @@ const parseRelation = function(key, value, obj) {
 			return {
 				key: v.path,
 				value: v.displayName,
-				accepted: v.accepted
+				accepted: v.accepted,
+				rev: v.rev,
+				relationId: v.relationId
 			};
 		});
 };
