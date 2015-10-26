@@ -130,6 +130,16 @@ const mapAuthorQueryToPublicationQuery = function(authorQuery) {
 		let newName = name === "dynamic_s_language" ? name : name.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2");
 		newQuery.facetValues.push({name: newName, values: values});
 	}
+	if(authorQuery.fullTextSearchParameters && authorQuery.fullTextSearchParameters.length) {
+		for(let param of authorQuery.fullTextSearchParameters) {
+			if(param.name === "dynamic_t_name") {
+				newQuery.fullTextSearchParameters = [
+					{name: "dynamic_t_author_name", term: param.term}
+				];
+				break;
+			}
+		}
+	}
 	return newQuery;
 };
 

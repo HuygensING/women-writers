@@ -38,7 +38,7 @@ export default function(state=initialState, action) {
 
 		case "RECEIVE_AUTHOR":
 			let parsedAuthor = parseIncomingAuthor(action.response);
-
+			console.log("RECEIVE_AUTHOR, parsed", parsedAuthor);
 			return {...state, ...{
 				all: [...state.all, parsedAuthor],
 				current: parsedAuthor,

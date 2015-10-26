@@ -49,12 +49,13 @@ export default {
 			facetTitles: {
 				"dynamic_s_relation": "Reception type",
 				"dynamic_s_sources": "Sources",
-				"dynamic_s_date": "Date",
+				"dynamic_i_date": "Date",
 				"dynamic_s_document_type": "Document type",
 				"dynamic_s_genre": "Genre",
 				"dynamic_s_language": "Language",
 				"dynamic_s_origin": "Country of first publication",
 				"dynamic_t_title": "Title",
+				"dynamic_t_author_name": "Name",
 				"dynamic_s_author_birthDate": "Year of birth",
 				"dynamic_s_author_birthplace": "Place of birth",
 				"dynamic_s_author_children": "Children",
@@ -173,7 +174,7 @@ export default {
 		facetList: [
 			"dynamic_s_origin",
 			"dynamic_s_sources",
-			"dynamic_s_date",
+			"dynamic_i_date",
 			"dynamic_s_document_type",
 			"dynamic_s_language",
 			"dynamic_s_genre"

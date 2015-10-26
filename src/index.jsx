@@ -131,6 +131,9 @@ let AppRouter = Router.extend({
 				onUnsetAuthorFullTextField={(field) => {
 					store.dispatch(setSearchId(null, "author"));
 					store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: field});
+					if (field === "dynamic_t_name") {
+						store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: "dynamic_t_author_name"});
+					}
 				}}
 				onUnsetPublicationFacetValue={(field, value) => {
 					store.dispatch(setSearchId(null, "publication"));
@@ -142,6 +145,9 @@ let AppRouter = Router.extend({
 				onUnsetPublicationFullTextField={(field) => {
 					store.dispatch(setSearchId(null, "publication"));
 					store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: field});
+					if (field === "dynamic_t_author_name") {
+						store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: "dynamic_t_name"});
+					}
 				}}
 			/>,
 			document.body

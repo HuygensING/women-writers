@@ -123,7 +123,8 @@ export function newAuthor() {
 
 const mapPublicationQueryToAuthorQuery = function(publicationQuery) {
 	let newQuery = {
-		facetValues: []
+		facetValues: [],
+		fullTextSearchParameters: []
 	};
 	for(let facetValue of publicationQuery.facetValues) {
 		let {name, values} = facetValue;
@@ -131,6 +132,16 @@ const mapPublicationQueryToAuthorQuery = function(publicationQuery) {
 			newQuery.facetValues.push({name: name, values: values});
 		} else if(name.match(/_author_/)) {
 			newQuery.facetValues.push({name: name.replace("_author_", "_"), values: values});
+		}
+	}
+	if(publicationQuery.fullTextSearchParameters && publicationQuery.fullTextSearchParameters.length) {
+		for(let param of publicationQuery.fullTextSearchParameters) {
+			if(param.name === "dynamic_t_author_name") {
+				newQuery.fullTextSearchParameters = [
+					{name: "dynamic_t_name", term: param.term}
+				];
+				break;
+			}
 		}
 	}
 	return newQuery;
