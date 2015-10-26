@@ -14,11 +14,11 @@ export default {
 	authors: {
 		labels: {
 			facetTitles: {
-				"dynamic_s_birthDate": "Year of birth",
+				"dynamic_i_birthDate": "Year of birth",
 				"dynamic_s_birthplace": "Place of birth",
 				"dynamic_s_children": "Children",
 				"dynamic_s_collective": "Memberships",
-				"dynamic_s_deathDate": "Year of Death",
+				"dynamic_i_deathDate": "Year of Death",
 				"dynamic_s_deathplace": "Place of Death",
 				"dynamic_s_education": "Education",
 				"dynamic_s_gender": "Gender",
