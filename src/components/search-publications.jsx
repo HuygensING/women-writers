@@ -12,6 +12,10 @@ class SearchPublications extends React.Component {
 		this.facetsAdded = false;
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.visible || this.props.visible;
+	}
+
 	onChange(results, query) {
 		if(this.props.visible) {
 			this.props.onQueryChange(results, query);

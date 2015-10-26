@@ -6,6 +6,10 @@ import ReceptionSearch from "./reception-search";
 
 class ReceptionsController extends React.Component {
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.visible || this.props.visible;
+	}
+
 	render() {
 		return (
 			<div className={cx("receptions", {visible: this.props.visible})}>
