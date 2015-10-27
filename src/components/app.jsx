@@ -4,6 +4,7 @@ import MainMenu from "./main-menu";
 import AuthorController from "./author";
 import GraphController from "./graph";
 import PublicationController from "./publication";
+import ReceptionsController from "./receptions";
 import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
 
@@ -45,12 +46,13 @@ class App extends React.Component {
 
 		let graph = (this.props.graphs.current != null) ?
 			<GraphController
-				id={this.props.graphs.current.id}
 				data={this.props.graphs.current.data}
+				id={this.props.graphs.current.id}
 				onEntityClick={this.props.onGraphEntityClick}
 				onNavigate={this.props.onNavigate}
 				table={this.props.graphs.table}
 				visible={this.props.router.graph.visible} /> : null;
+
 		return (
 			<div className="app">
 				<header>
@@ -65,13 +67,35 @@ class App extends React.Component {
 				</header>
 				{author}
 				<SearchAuthors
+					onResultsChange={this.props.onAuthorResultsChange}
+					onQueryChange={this.props.onAuthorSearchChange}
+					onSearchId={this.props.onAuthorSearchId}
 					onSelect={this.props.onResultSelect}
+					query={this.props.authors.query}
 					visible={this.props.router.searchAuthors.visible} />
 				{publication}
 				<SearchPublications
+					onResultsChange={this.props.onPublicationResultsChange}
+					onQueryChange={this.props.onPublicationSearchChange}
+					onSearchId={this.props.onPublicationSearchId}
 					onSelect={this.props.onResultSelect}
+					query={this.props.publications.query}
 					visible={this.props.router.searchPublications.visible} />
 				{graph}
+				<ReceptionsController
+					authors={this.props.authors}
+					onSelect={this.props.onResultSelect}
+					onShowAuthorReceptions={this.props.onShowAuthorReceptions}
+					onShowPublicationReceptions={this.props.onShowPublicationReceptions}
+					onTabChange={this.props.onReceptionToggle}
+					onUnsetAuthorFacetValue={this.props.onUnsetAuthorFacetValue}
+					onUnsetAuthorFullTextField={this.props.onUnsetAuthorFullTextField}
+					onUnsetPublicationFacetValue={this.props.onUnsetPublicationFacetValue}
+					onUnsetPublicationFullTextField={this.props.onUnsetPublicationFullTextField}
+					publications={this.props.publications}
+					receptions={this.props.receptions}
+					tab={this.props.router.receptions.id}
+					visible={this.props.router.receptions.visible} />
 			</div>
 		);
 	}
@@ -79,8 +103,9 @@ class App extends React.Component {
 
 App.propTypes = {
 	// author: React.PropTypes.object,
+	onAuthorSearchChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
-	onToggleEdit: React.PropTypes.func,
+	onToggleEdit: React.PropTypes.func
 	// publication: React.PropTypes.object,
 	// searchAuthors: React.PropTypes.object,
 	// searchPublications: React.PropTypes.object

@@ -29,7 +29,7 @@
 	"plugins": [
 		"react"
 	],
-	"ecmaFeatures": [
+	"ecmaFeatures": {
 		"jsx": true
-	]
+	}
 }

@@ -1,5 +1,6 @@
 import Immutable from "immutable";
 import {parseIncomingAuthor} from "../stores/parsers/author";
+import {unsetFacetValue} from "./utils";
 
 function castArray(arr) {
 	return (Array.isArray(arr)) ? arr : [arr];
@@ -19,7 +20,13 @@ let MODEL = {
 let initialState = {
 	all: [],
 	current: MODEL,
-	requesting: false
+	requesting: false,
+	query: {
+		term: "",
+		facetValues: [],
+		fullTextSearchParameters: []
+	},
+	activeFacets: []
 };
 
 export default function(state=initialState, action) {
@@ -31,7 +38,7 @@ export default function(state=initialState, action) {
 
 		case "RECEIVE_AUTHOR":
 			let parsedAuthor = parseIncomingAuthor(action.response);
-
+			console.log("RECEIVE_AUTHOR, parsed", parsedAuthor);
 			return {...state, ...{
 				all: [...state.all, parsedAuthor],
 				current: parsedAuthor,
@@ -68,6 +75,25 @@ export default function(state=initialState, action) {
 		case "NEW_AUTHOR":
 			return {...state, ...{
 				current: MODEL
+			}};
+
+		case "SET_AUTHOR_QUERY":
+			return {...state, ...{
+				query: {...action.query, term: ""}
+			}};
+
+		case "UNSET_AUTHOR_FACET_VALUE":
+			return {...state,
+				query: {...state.query, facetValues: unsetFacetValue(state.query.facetValues, action.field, action.value) }
+			};
+
+		case "UNSET_AUTHOR_FULLTEXT_FIELD":
+			return {...state,
+				query: {...state.query, fullTextSearchParameters: state.query.fullTextSearchParameters.filter((param) => param.name !== action.field) }
+			};
+		case "SET_AUTHOR_FACETS":
+			return {...state, ...{
+				activeFacets: action.activeFacets
 			}};
 
 		default:

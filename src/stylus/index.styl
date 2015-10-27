@@ -65,13 +65,63 @@ header.page
 					&:last-child:after
 						content ""
 
-.author, .publication, .hire-faceted-search, .graph {
+.author, .publication, .hire-faceted-search, .graph, .receptions {
 	display: none;
 }
 
-.author.visible, .publication.visible, .hire-faceted-search.visible, .graph.visible {
+.author.visible, .publication.visible, .hire-faceted-search.visible, .graph.visible, .receptions.visible {
 	display: block;
 }
+
+.reception-loader
+	margin-top 20px
+.reception-loader.hidden
+	display: none
+
+.receptions.visible .hire-faceted-search
+	display: block
+	padding: 0
+	margin-top: 20px
+
+.receptions .hire-faceted-search-results > header > ul
+	top 60px
+	border none
+	position static
+	padding 0
+	right auto
+	width auto
+	border-radius 0
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li
+	cursor default
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul
+	width 30%
+	margin-right 3%
+	display inline-block
+	vertical-align top
+	font-size 0.7em
+	color #888
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li > label
+	font-size 1.4em
+	color #000
+	cursor pointer
+
+.receptions li.hire-list-facet > ul > li.hire-list-facet-list-item > span.count
+	display: none
+
+.app > .receptions > .hire-tabs > ul, .app > .hire-tabs > ul
+	margin-top 20px
+	width 100%
+
+.app > .receptions > .hire-tabs > ul li, .app > .hire-tabs > ul li
+	display inline-block
+	margin-right 20px
+
+.app > .receptions > .hire-tabs > .hire-tab, .app > .hire-tabs > .hire-tab
+	width 100%
+
 
 
 .graph

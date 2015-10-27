@@ -12,6 +12,10 @@ let STATE = {
 	publication: {
 		visible: false
 	},
+	receptions: {
+		visible: false,
+		tab: "publications"
+	},
 	searchPublications: {
 		visible: false
 	},
@@ -26,7 +30,8 @@ let getNextPath = function(state) {
 		graph: "graph",
 		publication: "documents",
 		editPublication: "documents",
-		searchPublications: "documents"
+		searchPublications: "documents",
+		receptions: "receptions"
 	};
 
 	if (state.visibleHandler == null) {

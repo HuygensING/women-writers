@@ -47,10 +47,15 @@ export function savePublication() {
 
 			let currentRelations = publication["@relations"];
 			let prevRelations = unchangedPublication[0]["@relations"];
+			let prevRemovedRelations = unchangedPublication[0]["@removedRelations"];
 
+			console.log("savePublication():currentRelations", currentRelations);
+			console.log("savePublication():prevRelations", prevRelations);
+			console.log("savePublication():prevRemovedRelations", prevRemovedRelations);
 			saveRelations(
 				currentRelations,
 				prevRelations,
+				prevRemovedRelations,
 				getState().relations.all,
 				publication._id,
 				getState().user.token
@@ -113,5 +118,34 @@ export function deletePublicationKey(key) {
 export function newPublication() {
 	return {
 		type: "NEW_PUBLICATION"
+	};
+}
+
+const mapAuthorQueryToPublicationQuery = function(authorQuery) {
+	let newQuery = {
+		facetValues: []
+	};
+	for(let facetValue of authorQuery.facetValues) {
+		let {name, values} = facetValue;
+		let newName = name === "dynamic_s_language" ? name : name.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2");
+		newQuery.facetValues.push({name: newName, values: values});
+	}
+	if(authorQuery.fullTextSearchParameters && authorQuery.fullTextSearchParameters.length) {
+		for(let param of authorQuery.fullTextSearchParameters) {
+			if(param.name === "dynamic_t_name") {
+				newQuery.fullTextSearchParameters = [
+					{name: "dynamic_t_author_name", term: param.term}
+				];
+				break;
+			}
+		}
+	}
+	return newQuery;
+};
+
+export function setPublicationQueryFromAuthorQuery(authorQuery) {
+	return {
+		type: "SET_PUBLICATION_QUERY",
+		query: mapAuthorQueryToPublicationQuery(authorQuery)
 	};
 }

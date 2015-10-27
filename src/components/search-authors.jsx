@@ -2,8 +2,9 @@ import React from "react";
 import cx from "classnames";
 
 import config from "../config";
-
 import FacetedSearch from "hire-faceted-search";
+import CurrentQuery from "./current-query/authors";
+import isEqual from "lodash.isequal";
 
 
 class SearchAuthors extends React.Component {
@@ -13,6 +14,20 @@ class SearchAuthors extends React.Component {
 		this.facetsAdded = false;
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return this.props.visible || nextProps.visible || !isEqual(this.props.query, nextProps.query);
+	}
+
+	onChange(results, query) {
+		if(this.props.visible) {
+			this.props.onQueryChange(results, query);
+		}
+		this.props.onResultsChange(results);
+	}
+
+	onSearchId(searchId) {
+		this.props.onSearchId(searchId);
+	}
 
 	render() {
 		return (
@@ -26,25 +41,32 @@ class SearchAuthors extends React.Component {
 					headers: {
 						VRE_ID: "WomenWriters",
 						Accept: "application/json"
-					}
+					},
+					hideFreeTextSearch: true,
+					fullTextSearchFields: [
+						{name: "dynamic_t_name"},
+						{name: "dynamic_t_notes", position: "bottom"}
+					]
 				}}
+				currentQueryComponent={CurrentQuery}
 				facetList={[
 					"dynamic_s_gender",
 					"dynamic_s_residence",
 					"dynamic_s_language",
-					"dynamic_s_birthDate",
+					"dynamic_i_birthDate",
+					"dynamic_i_deathDate",
 					"dynamic_s_birthplace",
-					"dynamic_s_deathDate",
 					"dynamic_s_deathplace",
 					"dynamic_s_religion",
 					"dynamic_s_collective",
 					"dynamic_s_relatedLocations",
 					"dynamic_s_children",
-					"dynamic_s_language",
 					"dynamic_s_marital_status",
 					"dynamic_s_education",
 					"dynamic_s_social_class",
-					"dynamic_s_types"
+					"dynamic_s_types",
+					"dynamic_s_financials",
+					"dynamic_s_profession"
 				]}
 				facetSortMap={{
 					"dynamic_s_birthDate": {
@@ -56,34 +78,7 @@ class SearchAuthors extends React.Component {
 						direction: "ascending"
 					}
 				}}
-				labels={{
-					facetTitles: {
-						"dynamic_s_birthDate": "Year of birth",
-						"dynamic_s_birthplace": "Place of birth",
-						"dynamic_s_children": "Children",
-						"dynamic_s_collective": "Memberships",
-						"dynamic_s_deathDate": "Year of Death",
-						"dynamic_s_deathplace": "Place of Death",
-						"dynamic_s_education": "Education",
-						"dynamic_s_gender": "Gender",
-						"dynamic_s_language": "Language",
-						"dynamic_s_marital_status": "Marital status",
-						"dynamic_s_residence": "Country of residence",
-						"dynamic_s_relatedLocations": "Related country",
-						"dynamic_s_religion": "Religion",
-						"dynamic_s_social_class": "Social class",
-						"dynamic_s_types": "Types"
-
-					},
-					"dynamic_sort_name": "Name",
-					"dynamic_k_birthDate": "Date of Birth",
-					"dynamic_k_deathDate": "Date of Death",
-					"gender": "Gender",
-					"birthDate": "Date of birth",
-					"deathDate": "Date of death",
-					"name": "Name",
-					"residenceLocation": "Country of residence"
-				}}
+				labels={config.authors.labels}
 				metadataList={[
 					"name",
 					"birthDate",
@@ -91,13 +86,21 @@ class SearchAuthors extends React.Component {
 					"residenceLocation"
 				]}
 				numberedResults={true}
+				onChange={this.onChange.bind(this)}
+				onSearchId={this.onSearchId.bind(this)}
 				onSelect={this.props.onSelect}
+				query={this.props.query}
 			/>
 		);
 	}
 }
 
 SearchAuthors.propTypes = {
+	onQueryChange: React.PropTypes.func,
+	onResultsChange: React.PropTypes.func,
+	onSearchId: React.PropTypes.func,
+	onSelect: React.PropTypes.func,
+	query: React.PropTypes.object,
 	visible: React.PropTypes.bool
 };
 

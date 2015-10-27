@@ -7,22 +7,6 @@ const DEFAULT_HEADERS = {
 };
 
 let checkForError = function(err, response, body) {
-	// switch (response.statusCode) {
-	// 	case 401:
-	// 		messagesActions.send("Unauthorized");
-	// 		return true;
-
-	// 	case 403:
-	// 		messagesActions.send("Forbidden");
-	// 		return true;
-
-	// 	case 404:
-	// 		router.navigate("not-found", {
-	// 			trigger: true
-	// 		});
-	// 		return true;
-	// }
-
 	return false;
 };
 
@@ -67,35 +51,10 @@ export function save(url, model, token, cb) {
 		} else {
 			cb(JSON.parse(body));
 		}
-		// switch (method) {
-		// 	case "POST":
-		// 		let location = response.headers.location;
-		// 		let id = location.substr(location.lastIndexOf("/") + 1);
-
-		// 		router.navigate(`${type}s/${id}`, {
-		// 			trigger: true
-		// 		});
-
-		// 		break;
-
-		// 	case "PUT":
-		// 		body = parseIn(JSON.parse(body));
-		// 		action(body);
-
-		// 		router.navigate(`${type}s/${body._id}`, {
-		// 			trigger: true
-		// 		});
-
-		// 		break;
-		// }
-
-		// let message = ((type === "person") ? "author" : "publication");
-		// message = message.charAt(0).toUpperCase() + message.substr(1) + " saved";
-		// messagesActions.send(message);
 	};
 
 	xhr(options, done);
-};
+}
 
 export function remove(url, token, cb) {
 	let options = {
@@ -112,11 +71,6 @@ export function remove(url, token, cb) {
 		}
 
 		cb();
-		// if (response.statusCode === 204) {
-		// 	router.navigate(`${type}s`, {
-		// 		trigger: true
-		// 	});
-		// }
 	};
 
 	xhr(options, done);
@@ -166,7 +120,10 @@ let toXhrPromise = token => data =>
 					resolve(body);
 				}
 			};
-
+			if(data._id && data["^rev"]) {
+				options.method = "PUT";
+				options.url = options.url + "/" + data._id;
+			}
 			xhr(options, done);
 		}
 	);
@@ -179,13 +136,14 @@ let toObject = (prev, current) => {
 };
 
 let toRelationObject = (relationName, relationType, sourceId, accepted) => {
-	return (id) => {
+	return (obj) => {
+		let id = obj.key;
 		id = id.substr(id.lastIndexOf("/") + 1);
 		let [newSourceId, newId] = (relationType.regularName === relationName) ?
 			[sourceId, id] :
 			[id, sourceId];
 
-		return {
+		let saveObj = {
 			"accepted": accepted,
 			"@type": "wwrelation",
 			"^typeId": relationType._id,
@@ -194,6 +152,10 @@ let toRelationObject = (relationName, relationType, sourceId, accepted) => {
 			"^targetId": newId,
 			"^targetType": relationType.targetTypeName
 		};
+		if(obj["^rev"]) { saveObj["^rev"] = obj["^rev"]; }
+		if(obj.relationId) { saveObj._id = obj.relationId; }
+
+		return saveObj;
 	};
 };
 
@@ -212,11 +174,14 @@ let toRelationObjects = (relationsToSave, sourceId, allRelations, accepted=true)
  * Reduce to an object with relation keys found in currentRelations, but not
  * in prevRelations. To find the removed relations, the parameters are flipped.
  *
- * @param {Array} prevRelations The relations received from the server, before editing.
- * @param {Array} currentRelations The edited relations, before being persisted to the server.
+ * @param {object} prevRelations The relations received from the server, before editing.
+ * @param {object} currentRelations The edited relations, before being persisted to the server.
+ * @param {object} serverRemoved Relations which were previously removed on the server
+ * 		if relation was previously removed then readding it requires a PUT request with its original
+ *		ID.
  * @returns {Function} Returns a reduce function with prevRelations and currentRelations in scope.
  */
-let toFoundInCurrent = function(prevRelations, currentRelations) {
+let toFoundInCurrent = function(prevRelations, currentRelations, serverRemoved = {}) {
 	return (obj, relationName) => {
 		if (currentRelations.hasOwnProperty(relationName)) {
 			let found = currentRelations[relationName]
@@ -224,22 +189,36 @@ let toFoundInCurrent = function(prevRelations, currentRelations) {
 					!prevRelations.hasOwnProperty(relationName) || prevRelations[relationName].filter((prevRelation) =>
 						prevRelation.key === relation.key
 					).length === 0
-				);
+				).map((relation) => {
+					if(serverRemoved.hasOwnProperty(relationName)) {
+						for(let remRel of serverRemoved[relationName]) {
+							if(remRel.key.replace(/.+\//, "") === relation.key.replace(/.+\//, "")) {
+								relation.rev = remRel.rev;
+								relation.relationId = remRel.relationId;
+							}
+						}
+					}
+					return relation;
+				});
 
 			if (found.length) {
-				obj[relationName] = found.map((f) => f.key);
+				obj[relationName] = found.map((f) => {
+					return {
+						key: f.key,
+						"^rev": f.rev || false,
+						relationId: f.relationId || false
+					};
+				});
 			}
 		}
-
 		return obj;
 	};
 };
 
-export function saveRelations(currentRelations, serverRelations, allRelations, sourceId, token) {
+export function saveRelations(currentRelations, serverRelations, serverRemovedRelations, allRelations, sourceId, token) {
 	let relationNames = Object.keys(currentRelations);
-
 	let added = relationNames
-		.reduce(toFoundInCurrent(serverRelations, currentRelations), {});
+		.reduce(toFoundInCurrent(serverRelations, currentRelations, serverRemovedRelations), {});
 
 	let removed = relationNames
 		.reduce(toFoundInCurrent(currentRelations, serverRelations), {});
@@ -248,7 +227,7 @@ export function saveRelations(currentRelations, serverRelations, allRelations, s
 	removed = Object.keys(removed).reduce(toRelationObjects(removed, sourceId, allRelations, false), []);
 
 	let promisedRelations = added.concat(removed).map(toXhrPromise(token));
-	Promise.all(promisedRelations).then((response) => {
-		console.log(response);
+	Promise.all(promisedRelations).then((responses) => {
+		console.log(responses);
 	});
 }

@@ -8,8 +8,9 @@ import store from "./store";
 // ACTIONS
 import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
-import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor} from "./actions/author";
-import {setPublicationKey, deletePublicationKey, deletePublication, savePublication} from "./actions/publication";
+import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery} from "./actions/author";
+import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery} from "./actions/publication";
+import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
 
@@ -45,6 +46,16 @@ let AppRouter = Router.extend({
 		React.render(
 			<App
 				{...nextState}
+				onAuthorResultsChange={(results) =>
+					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets})
+				}
+				onAuthorSearchChange={(results, query) => {
+					store.dispatch(setPublicationQueryFromAuthorQuery(query));
+					store.dispatch({type: "SET_AUTHOR_QUERY", query: query});
+				}}
+				onAuthorSearchId={(searchId) => {
+					store.dispatch(setPendingSearchId(searchId, "author"));
+				}}
 				onChangeAuthorKey={(key, value) =>
 					store.dispatch(setAuthorKey(key, value))
 				}
@@ -76,6 +87,19 @@ let AppRouter = Router.extend({
 				onNewPublication={() =>
 					this.navigate("/documents/new")
 				}
+				onPublicationResultsChange={(results) =>
+					store.dispatch({type: "SET_PUBLICATION_FACETS", activeFacets: results.facets})
+				}
+				onPublicationSearchChange={(results, query) => {
+					store.dispatch(setAuthorQueryFromPublicationQuery(query));
+					store.dispatch({type: "SET_PUBLICATION_QUERY", query: query});
+				}}
+				onPublicationSearchId={(searchId) => {
+					store.dispatch(setPendingSearchId(searchId, "publication"));
+				}}
+				onReceptionToggle={(tab) =>
+					this.navigate("/receptions/" + tab.toLowerCase())
+				}
 				onResultSelect={(item) =>
 					this.navigate(item.path.replace("domain/ww", ""))
 				}
@@ -85,12 +109,47 @@ let AppRouter = Router.extend({
 				onSavePublication={() =>
 					store.dispatch(savePublication())
 				}
+				onShowAuthorReceptions={(searchId) =>
+					store.dispatch(setSearchId(searchId, "author"))
+				}
+				onShowPublicationReceptions={(searchId) =>
+					store.dispatch(setSearchId(searchId, "publication"))
+				}
 				onTabChange={(label) =>
 					store.dispatch(changeTab(label))
 				}
 				onToggleEdit={(edit) =>
 					store.dispatch(toggleEdit(edit))
-				} />,
+				}
+				onUnsetAuthorFacetValue={(field, value) => {
+					store.dispatch(setSearchId(null, "author"));
+					store.dispatch({type: "UNSET_AUTHOR_FACET_VALUE", field: field, value: value});
+					if (field !== "dynamic_s_language") {
+						store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2"), value: value});
+					}
+				}}
+				onUnsetAuthorFullTextField={(field) => {
+					store.dispatch(setSearchId(null, "author"));
+					store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: field});
+					if (field === "dynamic_t_name") {
+						store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: "dynamic_t_author_name"});
+					}
+				}}
+				onUnsetPublicationFacetValue={(field, value) => {
+					store.dispatch(setSearchId(null, "publication"));
+					store.dispatch({type: "UNSET_PUBLICATION_FACET_VALUE", field: field, value: value});
+					if (field.match(/_author_/)) {
+						store.dispatch({type: "UNSET_AUTHOR_FACET_VALUE", field: field.replace("_author_", "_"), value: value});
+					}
+				}}
+				onUnsetPublicationFullTextField={(field) => {
+					store.dispatch(setSearchId(null, "publication"));
+					store.dispatch({type: "UNSET_PUBLICATION_FULLTEXT_FIELD", field: field});
+					if (field === "dynamic_t_author_name") {
+						store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: "dynamic_t_name"});
+					}
+				}}
+			/>,
 			document.body
 		);
 	},
@@ -111,6 +170,7 @@ let AppRouter = Router.extend({
 		"documents/:id/:tab": "publication",
 		"documents/:id": "publication",
 		"graph/:domain/:id": "graph",
+		"receptions/:tab": "receptions"
 	},
 
 	searchAuthors: function() {},
@@ -120,7 +180,8 @@ let AppRouter = Router.extend({
 	editAuthor: function(id, tab) {},
 	publication: function(id, tab) {},
 	editPublication: function(id, tab) {},
-	graph: function(domain, id) {}
+	graph: function(domain, id) {},
+	receptions: function() {}
 });
 
 document.addEventListener("DOMContentLoaded", () =>

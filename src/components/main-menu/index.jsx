@@ -45,6 +45,12 @@ class MainMenu extends React.Component {
 						onNavigate={this.props.onNavigate}
 						value="Their publications" />
 				</li>
+				<li className={cx({active: types === "receptions"})}>
+					<Link
+						href="receptions/publications"
+						onNavigate={this.props.onNavigate}
+						value="Receptions" />
+				</li>
 				<li className="login">
 					<Login
 						appId="WomenWriters"

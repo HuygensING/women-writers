@@ -1,10 +1,10 @@
 import React from "react";
 import cx from "classnames";
-
 import config from "../config";
 
 import FacetedSearch from "hire-faceted-search";
-
+import CurrentQuery from "./current-query/publications";
+import isEqual from "lodash.isequal";
 
 class SearchPublications extends React.Component {
 	constructor(props) {
@@ -13,6 +13,20 @@ class SearchPublications extends React.Component {
 		this.facetsAdded = false;
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return this.props.visible || nextProps.visible || !isEqual(this.props.query, nextProps.query);
+	}
+
+	onChange(results, query) {
+		if(this.props.visible) {
+			this.props.onQueryChange(results, query);
+		}
+		this.props.onResultsChange(results);
+	}
+
+	onSearchId(searchId) {
+		this.props.onSearchId(searchId);
+	}
 
 	render() {
 		return (
@@ -27,40 +41,16 @@ class SearchPublications extends React.Component {
 					headers: {
 						Accept: "application/json",
 						VRE_ID: "WomenWriters"
-					}
-				}}
-				facetList={[
-					"dynamic_s_creator",
-					"dynamic_s_origin",
-					"dynamic_b_is_source",
-					"dynamic_s_date",
-					"dynamic_s_document_type",
-					"dynamic_s_language",
-					"dynamic_s_genre"
-				]}
-				facetSortMap={{
-					"dynamic_s_creator": {
-						type: "alphabet",
-						direction: "ascending"
-					}
-				}}
-				labels={{
-					facetTitles: {
-						"dynamic_b_is_source": "Is source",
-						"dynamic_s_creator": "Author",
-						"dynamic_s_date": "Date",
-						"dynamic_s_document_type": "Document type",
-						"dynamic_s_genre": "Genre",
-						"dynamic_s_language": "Language",
-						"dynamic_s_origin": "Country of first publication"
 					},
-					"createdBy": "Author",
-					"language": "Language",
-					"publishLocation": "Country of first publication",
-					"date": "Date",
-					"dynamic_sort_creator": "Author",
-					"dynamic_sort_title": "Title"
+					hideFreeTextSearch: true,
+					fullTextSearchFields: [
+						{name: "dynamic_t_title"}
+					]
 				}}
+				currentQueryComponent={CurrentQuery}
+				facetList={config.publications.facetList}
+				facetSortMap={config.publications.facetSortMap}
+				labels={config.publications.labels}
 				metadataList={[
 					"createdBy",
 					"publishLocation",
@@ -68,10 +58,22 @@ class SearchPublications extends React.Component {
 					"date"
 				]}
 				numberedResults={true}
+				onChange={this.onChange.bind(this)}
+				onSearchId={this.onSearchId.bind(this)}
 				onSelect={this.props.onSelect}
+				query={this.props.query}
 			/>
 		);
 	}
 }
+
+SearchPublications.propTypes = {
+	onQueryChange: React.PropTypes.func,
+	onResultsChange: React.PropTypes.func,
+	onSearchId: React.PropTypes.func,
+	onSelect: React.PropTypes.func,
+	query: React.PropTypes.object,
+	visible: React.PropTypes.bool
+};
 
 export default SearchPublications;
