@@ -4,6 +4,7 @@ import config from "../config";
 
 import FacetedSearch from "hire-faceted-search";
 import CurrentQuery from "./current-query/publications";
+import isEqual from "lodash.isequal";
 
 class SearchPublications extends React.Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ class SearchPublications extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
-		return nextProps.visible || this.props.visible;
+		return this.props.visible || nextProps.visible || !isEqual(this.props.query, nextProps.query);
 	}
 
 	onChange(results, query) {

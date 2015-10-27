@@ -2,12 +2,14 @@ import React from "react";
 import cx from "classnames";
 import {Tabs, Tab} from "hire-tabs";
 import ReceptionSearch from "./reception-search";
-
+import isEqual from "lodash.isequal";
 
 class ReceptionsController extends React.Component {
 
 	shouldComponentUpdate(nextProps) {
-		return nextProps.visible || this.props.visible;
+		return this.props.visible || nextProps.visible ||
+			!isEqual(this.props.authors.query, nextProps.authors.query) ||
+			!isEqual(this.props.publications.query, nextProps.publications.query);
 	}
 
 	render() {

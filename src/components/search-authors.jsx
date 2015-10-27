@@ -3,7 +3,9 @@ import cx from "classnames";
 
 import config from "../config";
 import FacetedSearch from "hire-faceted-search";
-import CurrentQuery from "./current-query/authors"
+import CurrentQuery from "./current-query/authors";
+import isEqual from "lodash.isequal";
+
 
 class SearchAuthors extends React.Component {
 	constructor(props) {
@@ -13,7 +15,7 @@ class SearchAuthors extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
-		return nextProps.visible || this.props.visible;
+		return this.props.visible || nextProps.visible || !isEqual(this.props.query, nextProps.query);
 	}
 
 	onChange(results, query) {
