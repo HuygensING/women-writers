@@ -121,6 +121,12 @@ export function newPublication() {
 	};
 }
 
+export function rollbackPublication() {
+	return {
+		type: "ROLLBACK_PUBLICATION"
+	};
+}
+
 const mapAuthorQueryToPublicationQuery = function(authorQuery) {
 	let newQuery = {
 		facetValues: []

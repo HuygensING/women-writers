@@ -79,6 +79,14 @@ export default function(state=initialState, action) {
 				current: MODEL
 			}};
 
+		case "ROLLBACK_PUBLICATION":
+			if(state.all.length > 0) {
+				return {...state, ...{
+					current: state.all[state.all.length - 1]
+				}};
+			}
+			return state;
+
 		case "SET_PUBLICATION_QUERY":
 			return {...state, ...{
 				query: {...action.query, term: ""}

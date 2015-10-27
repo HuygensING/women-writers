@@ -35,7 +35,7 @@ class PublicationController extends React.Component {
 			<EditFooter
 				onDelete={this.props.onDeletePublication}
 				onSave={this.props.onSavePublication}
-				onToggleEdit={this.props.onToggleEdit}
+				onCancel={this.props.onCancel.bind(this, "publication")}
 				type="publication" /> :
 			null;
 

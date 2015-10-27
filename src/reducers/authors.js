@@ -38,7 +38,6 @@ export default function(state=initialState, action) {
 
 		case "RECEIVE_AUTHOR":
 			let parsedAuthor = parseIncomingAuthor(action.response);
-			console.log("RECEIVE_AUTHOR, parsed", parsedAuthor);
 			return {...state, ...{
 				all: [...state.all, parsedAuthor],
 				current: parsedAuthor,
@@ -76,6 +75,15 @@ export default function(state=initialState, action) {
 			return {...state, ...{
 				current: MODEL
 			}};
+
+		case "ROLLBACK_AUTHOR":
+			if(state.all.length > 0) {
+				return {...state, ...{
+					current: state.all[state.all.length - 1]
+				}};
+			}
+			return state;
+
 
 		case "SET_AUTHOR_QUERY":
 			return {...state, ...{

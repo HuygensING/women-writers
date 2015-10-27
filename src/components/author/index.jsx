@@ -40,7 +40,7 @@ class AuthorController extends React.Component {
 
 		let footer = (this.props.edit) ?
 			<EditFooter
-				onToggleEdit={this.props.onToggleEdit}
+				onCancel={this.props.onCancel.bind(this, "author")}
 				onDelete={this.props.onDeleteAuthor}
 				onSave={this.props.onSaveAuthor}
 				type="author" /> :

@@ -8,8 +8,8 @@ import store from "./store";
 // ACTIONS
 import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
-import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery} from "./actions/author";
-import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery} from "./actions/publication";
+import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery, rollbackAuthor} from "./actions/author";
+import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery, rollbackPublication} from "./actions/publication";
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
@@ -55,6 +55,11 @@ let AppRouter = Router.extend({
 				}}
 				onAuthorSearchId={(searchId) => {
 					store.dispatch(setPendingSearchId(searchId, "author"));
+				}}
+				onCancel={(type) => {
+					if(type === "author") { store.dispatch(rollbackAuthor()); }
+					else if(type === "publication") { store.dispatch(rollbackPublication()); }
+					store.dispatch(toggleEdit(false));
 				}}
 				onChangeAuthorKey={(key, value) =>
 					store.dispatch(setAuthorKey(key, value))

@@ -14,6 +14,7 @@ class App extends React.Component {
 			<AuthorController
 				author={this.props.authors.current}
 				edit={this.props.router.author.edit}
+				onCancel={this.props.onCancel}
 				onDeleteAuthor={this.props.onDeleteAuthor}
 				onFormChange={this.props.onChangeAuthorKey}
 				onFormDelete={this.props.onDeleteAuthorKey}
@@ -30,6 +31,7 @@ class App extends React.Component {
 		let publication = (this.props.publications.current != null) ?
 			<PublicationController
 				edit={this.props.router.publication.edit}
+				onCancel={this.props.onCancel}
 				onDeletePublication={this.props.onDeletePublication}
 				onFormChange={this.props.onChangePublicationKey}
 				onFormDelete={this.props.onDeletePublicationKey}
