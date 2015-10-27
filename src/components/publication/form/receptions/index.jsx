@@ -23,11 +23,13 @@ let toKeyValue = function(displayNames) {
 let modelHasRelation = model => relationName =>
 	model["@relations"].hasOwnProperty(relationName) && model["@relations"][relationName].length > 0;
 
-let toJSX = (model, displayNames, onNavigate) => relationName =>
+let toJSX = (model, displayNames, onNavigate, onRemove) => relationName =>
 	<li key={relationName}>
 		<label>{displayNames[relationName]}</label>
 		<RelationDocument
 			onNavigate={onNavigate}
+			onRemove={onRemove}
+			relationName={relationName}
 			values={model["@relations"][relationName]} />
 	</li>;
 
@@ -43,7 +45,7 @@ class ReceptionsForm extends React.Component {
 
 	handleRemove(relationName, id) {
 		// Remove the relation from the current array of ["@relations"][relationName].
-		let updatedRelations = this.props.author["@relations"][relationName]
+		let updatedRelations = this.props.publication["@relations"][relationName]
 			.filter((relation) =>
 				relation.key !== id
 			);
@@ -65,7 +67,7 @@ class ReceptionsForm extends React.Component {
 
 		let regularRelations = regularRelationNames
 			.filter(modelHasRelation(model))
-			.map(toJSX(model, this.props.relations.displayNames, this.props.onNavigate));
+			.map(toJSX(model, this.props.relations.displayNames, this.props.onNavigate, this.handleRemove.bind(this)));
 
 		regularRelations = regularRelations.length ?
 			<ul className="record">{regularRelations}</ul> :
@@ -73,7 +75,7 @@ class ReceptionsForm extends React.Component {
 
 		let inverseRelations = inverseRelationNames
 			.filter(modelHasRelation(model))
-			.map(toJSX(model, this.props.relations.displayNames, this.props.onNavigate));
+			.map(toJSX(model, this.props.relations.displayNames, this.props.onNavigate, this.handleRemove.bind(this)));
 
 		inverseRelations = inverseRelations.length ?
 			<ul className="record">{inverseRelations}</ul> :
