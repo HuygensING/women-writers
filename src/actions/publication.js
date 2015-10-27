@@ -4,6 +4,19 @@ import {parseOutgoingPublication} from "../stores/parsers/publication";
 import {toggleEdit, changeRoute} from "./router";
 import {fetch, save, remove, saveRelations} from "./utils";
 
+export function refreshPublication(id) {
+	return function (dispatch) {
+		dispatch({type: "REQUEST_PUBLICATION"});
+
+		fetch(`${config.publicationUrl}/${id}`, (response) =>
+			dispatch({
+				type: "RECEIVE_PUBLICATION",
+				response: response
+			})
+		);
+	};
+}
+
 export function fetchPublication(id) {
 	return function (dispatch, getState) {
 		let publications = getState().publications;

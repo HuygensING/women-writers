@@ -19,6 +19,7 @@ class App extends React.Component {
 				onFormChange={this.props.onChangeAuthorKey}
 				onFormDelete={this.props.onDeleteAuthorKey}
 				onNavigate={this.props.onNavigate}
+				onRefresh={this.props.onAuthorRefresh.bind(this, this.props.authors.current._id)}
 				onSaveAuthor={this.props.onSaveAuthor}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
@@ -36,6 +37,7 @@ class App extends React.Component {
 				onFormChange={this.props.onChangePublicationKey}
 				onFormDelete={this.props.onDeletePublicationKey}
 				onNavigate={this.props.onNavigate}
+				onRefresh={this.props.onPublicationRefresh.bind(this, this.props.publications.current._id)}
 				onSavePublication={this.props.onSavePublication}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}

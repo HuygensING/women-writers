@@ -4,6 +4,20 @@ import {parseOutgoingAuthor} from "../stores/parsers/author";
 import {fetch, save, remove, saveRelations} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
+export function refreshAuthor(id) {
+	return function (dispatch) {
+		dispatch({type: "REQUEST_AUTHOR"});
+
+		fetch(`${config.authorUrl}/${id}`, (response) =>
+			dispatch({
+				type: "RECEIVE_AUTHOR",
+				response: response
+			})
+		);
+	};
+}
+
+
 export function fetchAuthor(id) {
 	return function (dispatch, getState) {
 		let authors = getState().authors;

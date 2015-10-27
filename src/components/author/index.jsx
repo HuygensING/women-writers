@@ -19,6 +19,7 @@ class AuthorController extends React.Component {
 			null :
 			<EditButton
 				model={this.props.author}
+				onRefresh={this.props.onRefresh}
 				onToggleEdit={this.props.onToggleEdit}
 				user={this.props.user} />;
 

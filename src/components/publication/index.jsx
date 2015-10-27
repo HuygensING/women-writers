@@ -14,6 +14,7 @@ class PublicationController extends React.Component {
 			null :
 			<EditButton
 				model={this.props.publication}
+				onRefresh={this.props.onRefresh}
 				onToggleEdit={this.props.onToggleEdit}
 				user={this.props.user} />;
 
