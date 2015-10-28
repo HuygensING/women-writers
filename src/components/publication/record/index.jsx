@@ -13,6 +13,7 @@ class PublicationRecord extends React.Component {
 					active={this.props.tab === "basic info"}
 					label="Basic info">
 					<BasicInfo
+						onNavigate={this.props.onNavigate}
 						value={this.props.publication} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
