@@ -1,6 +1,8 @@
 import Immutable from "immutable";
 import {parseIncomingAuthor} from "../stores/parsers/author";
 import {unsetFacetValue} from "./utils";
+import cloneDeep from "lodash.clonedeep";
+
 
 function castArray(arr) {
 	return (Array.isArray(arr)) ? arr : [arr];
@@ -20,6 +22,7 @@ let MODEL = {
 let initialState = {
 	all: [],
 	current: MODEL,
+	unchanged: null,
 	requesting: false,
 	query: {
 		term: "",
@@ -41,6 +44,7 @@ export default function(state=initialState, action) {
 			return {...state, ...{
 				all: [...state.all, parsedAuthor],
 				current: parsedAuthor,
+				unchanged: cloneDeep(parsedAuthor),
 				requesting: false
 			}};
 
@@ -77,12 +81,9 @@ export default function(state=initialState, action) {
 			}};
 
 		case "ROLLBACK_AUTHOR":
-			if(state.all.length > 0) {
-				return {...state, ...{
-					current: state.all[state.all.length - 1]
-				}};
-			}
-			return state;
+			return {...state, ...{
+				current: state.unchanged
+			}};
 
 
 		case "SET_AUTHOR_QUERY":

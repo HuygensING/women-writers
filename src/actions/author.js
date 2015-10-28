@@ -4,7 +4,8 @@ import {parseOutgoingAuthor} from "../stores/parsers/author";
 import {fetch, save, remove, saveRelations} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
-export function refreshAuthor(id) {
+
+export function fetchAuthor(id) {
 	return function (dispatch) {
 		dispatch({type: "REQUEST_AUTHOR"});
 
@@ -17,51 +18,20 @@ export function refreshAuthor(id) {
 	};
 }
 
-
-export function fetchAuthor(id) {
-	return function (dispatch, getState) {
-		let authors = getState().authors;
-
-		if (authors.current != null && authors.current._id === id) {
-			return;
-		}
-
-		let found = authors.all.filter((author) =>
-			author._id === id);
-
-		if (found.length) {
-			dispatch({
-				type: "SET_CURRENT_AUTHOR",
-				current: found[0]
-			});
-		} else {
-			dispatch({type: "REQUEST_AUTHOR"});
-
-			fetch(`${config.authorUrl}/${id}`, (response) =>
-				dispatch({
-					type: "RECEIVE_AUTHOR",
-					response: response
-				})
-			);
-		}
-	};
-}
-
 export function saveAuthor() {
 	return function (dispatch, getState) {
 		let author = getState().authors.current;
 
 		if (author._id != null) {
-			let unchangedAuthor = getState().authors.all
-				.filter((x) => x._id === author._id);
+			let unchangedAuthor = getState().authors.unchanged;
 
-			if (!unchangedAuthor.length) {
-				throw new Error(`Author ${author._id} not found in authors state.`);
+			if (unchangedAuthor === null) {
+				throw new Error("unchangedAuthor not set.");
 			}
 
 			let currentRelations = author["@relations"];
-			let prevRelations = unchangedAuthor[0]["@relations"];
-			let prevRemovedRelations = unchangedAuthor[0]["@removedRelations"];
+			let prevRelations = unchangedAuthor["@relations"];
+			let prevRemovedRelations = unchangedAuthor["@removedRelations"];
 
 			console.log("saveAuthor():currentRelations", currentRelations);
 			console.log("saveAuthor():prevRelations", prevRelations);

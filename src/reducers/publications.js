@@ -1,6 +1,7 @@
 import Immutable from "immutable";
 import {parseIncomingPublication} from "../stores/parsers/publication";
 import {unsetFacetValue} from "./utils";
+import cloneDeep from "lodash.clonedeep";
 
 function castArray(arr) {
 	return (Array.isArray(arr)) ? arr : [arr];
@@ -23,6 +24,7 @@ const MODEL = {
 let initialState = {
 	all: [],
 	current: MODEL,
+	unchanged: null,
 	requesting: false,
 	query: {
 		term: "",
@@ -44,6 +46,7 @@ export default function(state=initialState, action) {
 			return {...state, ...{
 				all: [...state.all, parsedPublication],
 				current: parsedPublication,
+				unchanged: cloneDeep(parsedPublication),
 				requesting: false
 			}};
 
@@ -80,12 +83,9 @@ export default function(state=initialState, action) {
 			}};
 
 		case "ROLLBACK_PUBLICATION":
-			if(state.all.length > 0) {
-				return {...state, ...{
-					current: state.all[state.all.length - 1]
-				}};
-			}
-			return state;
+			return {...state, ...{
+				current: state.unchanged
+			}};
 
 		case "SET_PUBLICATION_QUERY":
 			return {...state, ...{

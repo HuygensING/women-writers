@@ -4,7 +4,8 @@ import {parseOutgoingPublication} from "../stores/parsers/publication";
 import {toggleEdit, changeRoute} from "./router";
 import {fetch, save, remove, saveRelations} from "./utils";
 
-export function refreshPublication(id) {
+
+export function fetchPublication(id) {
 	return function (dispatch) {
 		dispatch({type: "REQUEST_PUBLICATION"});
 
@@ -17,50 +18,20 @@ export function refreshPublication(id) {
 	};
 }
 
-export function fetchPublication(id) {
-	return function (dispatch, getState) {
-		let publications = getState().publications;
-
-		if (publications.current != null && publications.current._id === id) {
-			return;
-		}
-
-		let found = publications.all.filter((publication) =>
-			publication._id === id);
-
-		if (found.length) {
-			dispatch({
-				type: "SET_CURRENT_PUBLICATION",
-				current: found[0]
-			});
-		} else {
-			dispatch({type: "REQUEST_PUBLICATION"});
-
-			fetch(`${config.publicationUrl}/${id}`, (response) =>
-				dispatch({
-					type: "RECEIVE_PUBLICATION",
-					response: response
-				})
-			);
-		}
-	};
-}
-
 export function savePublication() {
 	return function (dispatch, getState) {
 		let publication = getState().publications.current;
 
 		if (publication._id != null) {
-			let unchangedPublication = getState().publications.all
-				.filter((x) => x._id === publication._id);
+			let unchangedPublication = getState().publications.unchanged;
 
-			if (!unchangedPublication.length) {
-				throw new Error(`Publication ${publication._id} not found in publications state.`);
+			if (unchangedPublication === null) {
+				throw new Error("unchangedPublication is not set");
 			}
 
 			let currentRelations = publication["@relations"];
-			let prevRelations = unchangedPublication[0]["@relations"];
-			let prevRemovedRelations = unchangedPublication[0]["@removedRelations"];
+			let prevRelations = unchangedPublication["@relations"];
+			let prevRemovedRelations = unchangedPublication["@removedRelations"];
 
 			console.log("savePublication():currentRelations", currentRelations);
 			console.log("savePublication():prevRelations", prevRelations);

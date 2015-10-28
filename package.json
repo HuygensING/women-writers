@@ -61,6 +61,7 @@
     "hire-tabs": "^1.0.3",
     "immutable": "^3.7.2",
     "jquery": "^2.1.1",
+    "lodash.clonedeep": "^3.0.2",
     "lodash.isequal": "^3.0.4",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
