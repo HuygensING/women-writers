@@ -122,7 +122,7 @@ export default {
 	isWorkQuotedIn: "Quoted in",
 	isWorkReferencedIn: "Referenced in",
 	listsPerson: "",
-	listsWork: "",
+	listsWork: "Listing",
 	mentionsPerson: "",
 	mentionsWork: "",
 	referencesPerson: "",
