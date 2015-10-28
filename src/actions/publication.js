@@ -145,9 +145,13 @@ const mapAuthorQueryToPublicationQuery = function(authorQuery) {
 		facetValues: []
 	};
 	for(let facetValue of authorQuery.facetValues) {
-		let {name, values} = facetValue;
+		let {name, values, lowerLimit, upperLimit} = facetValue;
 		let newName = name === "dynamic_s_language" ? name : name.replace(/(dynamic_[a-z]+_)(.*)$/, "$1author_$2");
-		newQuery.facetValues.push({name: newName, values: values});
+		if (values) {
+			newQuery.facetValues.push({name: newName, values: values});
+		} else if(lowerLimit && upperLimit) {
+			newQuery.facetValues.push({name: newName, lowerLimit: lowerLimit, upperLimit: upperLimit});
+		}
 	}
 	if(authorQuery.fullTextSearchParameters && authorQuery.fullTextSearchParameters.length) {
 		for(let param of authorQuery.fullTextSearchParameters) {
