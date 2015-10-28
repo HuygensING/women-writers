@@ -43,11 +43,13 @@ class ReceptionSearch extends React.Component {
 								{name: "dynamic_t_title"}
 							]
 						}}
+						customComponents={{
+							result: this.props.type === "authors" ? AuthorResult : PublicationResult
+						}}
 						facetList={["dynamic_s_relation", ...config.publications.facetList]}
 						facetSortMap={config.publications.facetSortMap}
 						labels={config.publications.labels}
 						onSelect={this.props.onSelect}
-						resultComponent={this.props.type === "authors" ? AuthorResult : PublicationResult}
 			/>
 		) : null;
 

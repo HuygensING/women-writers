@@ -48,7 +48,9 @@ class SearchAuthors extends React.Component {
 						{name: "dynamic_t_notes", position: "bottom"}
 					]
 				}}
-				currentQueryComponent={CurrentQuery}
+				customComponents={{
+					currentQuery: CurrentQuery
+				}}
 				facetList={[
 					"dynamic_s_gender",
 					"dynamic_s_residence",

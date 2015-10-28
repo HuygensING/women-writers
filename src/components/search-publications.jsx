@@ -47,7 +47,9 @@ class SearchPublications extends React.Component {
 						{name: "dynamic_t_title"}
 					]
 				}}
-				currentQueryComponent={CurrentQuery}
+				customComponents={{
+					currentQuery: CurrentQuery
+				}}
 				facetList={config.publications.facetList}
 				facetSortMap={config.publications.facetSortMap}
 				labels={config.publications.labels}
