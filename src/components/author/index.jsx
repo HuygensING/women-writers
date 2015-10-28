@@ -72,7 +72,7 @@ AuthorController.propTypes = {
 	edit: React.PropTypes.bool,
 	id: React.PropTypes.string,
 	onToggleEdit: React.PropTypes.func,
-	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "links"]),
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"]),
 	user: React.PropTypes.object,
 	visible: React.PropTypes.bool
 };

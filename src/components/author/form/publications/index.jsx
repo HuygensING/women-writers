@@ -3,6 +3,7 @@ import form from "hire-forms-form";
 
 import RelationList from "../../../relation-list";
 import PublicationForm from "./form";
+import {hasRegularName} from "../../util";
 
 let toKeyValue = function(displayNames) {
 	return (relationName) => {
@@ -37,7 +38,7 @@ class AuthorPublicationsController extends React.Component {
 	}
 
 	render() {
-		let relationNames = this.props.relations.authorPublication
+		let relationNames = this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", this.props.isReceptions))
 			.map((relation) =>
 				relation.sourceTypeName === "person" ? relation.regularName : relation.inverseName
 			);
@@ -52,7 +53,7 @@ class AuthorPublicationsController extends React.Component {
 					selectOptions={selectOptions} />
 				<RelationList
 					model={this.props.author}
-					modelRelations={this.props.relations.authorPublication}
+					modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", this.props.isReceptions))}
 					onNavigate={this.props.onNavigate}
 					onRemove={this.handleRemove.bind(this)}
 					relations={this.props.relations} />
@@ -63,9 +64,14 @@ class AuthorPublicationsController extends React.Component {
 
 AuthorPublicationsController.propTypes = {
 	author: React.PropTypes.object,
+	isReceptions: React.PropTypes.bool,
 	onChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	relations: React.PropTypes.object
+};
+
+AuthorPublicationsController.defaultProps = {
+	isReceptions: false
 };
 
 export default form(AuthorPublicationsController);

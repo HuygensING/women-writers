@@ -6,6 +6,8 @@ import Personal from "./personal";
 import Public from "./public";
 import RelationList from "../../relation-list";
 import Links from "../../links";
+import {hasRegularName} from "../util";
+
 
 class AuthorRecord extends React.Component {
 	render() {
@@ -93,15 +95,27 @@ class AuthorRecord extends React.Component {
 						</ul>
 					</div>
 				</Tab>
+
 				<Tab
 					active={this.props.tab === "publications"}
 					label="Publications">
 					<RelationList
 						model={this.props.author}
-						modelRelations={this.props.relations.authorPublication}
+						modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy"))}
 						onNavigate={this.props.onNavigate}
 						relations={this.props.relations} />
 				</Tab>
+
+				<Tab
+					active={this.props.tab === "receptions"}
+					label="Receptions">
+					<RelationList
+						model={this.props.author}
+						modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", true))}
+						onNavigate={this.props.onNavigate}
+						relations={this.props.relations} />
+				</Tab>
+
 				<Tab
 					active={this.props.tab === "links"}
 					label="Links">
@@ -114,7 +128,7 @@ class AuthorRecord extends React.Component {
 
 AuthorRecord.propTypes = {
 	id: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "links"])
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"])
 };
 
 export default AuthorRecord;

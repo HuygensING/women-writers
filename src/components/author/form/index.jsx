@@ -75,11 +75,27 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "publications"}
 				label="Publications">
 				<PublicationsForm
+					author={model}
 					onChange={this.props.onFormChange}
 					onDelete={this.props.onFormDelete}
 					onNavigate={this.props.onNavigate}
 					relations={this.props.relations}
-					author={model} />
+					/>
+			</Tab>;
+
+		let receptionsTab = (model._id == null) ?
+			null :
+			<Tab
+				active={this.props.tab === "receptions"}
+				label="Receptions">
+				<PublicationsForm
+					author={model}
+					isReceptions={true}
+					onChange={this.props.onFormChange}
+					onDelete={this.props.onFormDelete}
+					onNavigate={this.props.onNavigate}
+					relations={this.props.relations}
+					/>
 			</Tab>;
 
 		return (
@@ -128,6 +144,7 @@ class AuthorForm extends React.Component {
 				{personalTab}
 				{publicTab}
 				{publicationsTab}
+				{receptionsTab}
 				<Tab
 					active={this.props.tab === "links"}
 					label="Links">
@@ -149,7 +166,7 @@ class AuthorForm extends React.Component {
 
 AuthorForm.propTypes = {
 	id: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "links"])
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"])
 };
 
 export default AuthorForm;
