@@ -1,34 +1,42 @@
 import React from "react";
-import Immutable from "immutable";
 import form from "hire-forms-form";
 import Input from "hire-forms-input";
 
-// let name = new Immutable.Map({
-// 	firstName: "",
-// 	lastName: ""
-// });
+const placeholders = {
+	FORENAME: "First name",
+	SURNAME: "Last name",
+	NAME_LINK: "Infix"
+};
 
 class NameForm {
-	render() {
-		// let model = name.merge(this.props.value);
 
-		return (
-			<ul>
-				<li>
+	render() {
+		let components = this.props.value.components;
+		let inputs = components.length ?
+			components.map((component, i) => (
+				<li key={i}>
 					<Input
-						onChange={this.props.handleChange.bind(this, "firstName")}
-						placeholder="First name"
-						value={this.props.value.firstName} />
+						onChange={this.props.handleChange.bind(this, ["components", i, component.type])}
+						placeholder={placeholders[component.type]}
+						value={component.value} />
 				</li>
-				<li>
+			)) :
+			["FORENAME", "SURNAME"].map((type, i) => (
+				<li key={i}>
 					<Input
-						onChange={this.props.handleChange.bind(this, "lastName")}
-						placeholder="Last name"
-						value={this.props.value.lastName} />
+						onChange={this.props.handleChange.bind(this, type)}
+						placeholder={placeholders[type]}
+						value={this.props.value[type]} />
 				</li>
-			</ul>
-		);
+			));
+
+		return (<ul>{inputs}</ul>);
 	}
 }
+
+NameForm.propTypes = {
+	handleChange: React.PropTypes.func,
+	value: React.PropTypes.object
+};
 
 export default form(NameForm, "names-form");

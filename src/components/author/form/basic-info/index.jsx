@@ -11,6 +11,26 @@ import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
 
 class BasicInfoForm {
+
+	onNameChange(key, value) {
+		let newKey, newValue;
+		if(key.length > 2) {
+			newKey = key.slice(0, 4);
+			newValue = {
+				type: key[4],
+				value: value
+			};
+		} else {
+			newKey = [...key, "components"];
+			newValue = [
+				{type: "FORENAME", value: value.FORENAME || ""},
+				{type: "SURNAME", value: value.SURNAME || ""}
+			];
+
+		}
+		this.props.onChange(newKey, newValue);
+	}
+
 	render() {
 		let model = this.props.author;
 
@@ -63,10 +83,11 @@ class BasicInfoForm {
 						attr={"names"}
 						component = {NameForm}
 						model={{
-							firstName: "",
-							lastName: ""
+							FORENAME: "",
+							SURNAME: "",
+							components: []
 						}}
-						onChange={this.props.onChange}
+						onChange={this.onNameChange.bind(this)}
 						onDelete={this.props.onDelete}
 						values={model.names} />
 				</li>

@@ -8,7 +8,7 @@ class BasicInfo {
 		let model = this.props.author;
 
 		let names = (model.names.length) ?
-			model.names.map((name, index) => <li key={index}>{name.firstName} {name.lastName}</li>) :
+			model.names.map((name, index) => <li key={index}>{name.components.map((c) => c.value).join(" ")}</li>) :
 			"-";
 
 		return (

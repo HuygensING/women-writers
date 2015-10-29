@@ -1,14 +1,6 @@
 import {iterateObjectKeys, parseRelations, splitRelations} from "./utils";
 
 let inComingParser = function(key, value, obj) {
-	if (key === "names") {
-		obj[key] = value.map((names) => {
-			return {
-				firstName: names.components.length ? names.components[0].value : "",
-				lastName: names.components.length > 1 ? names.components[1].value : ""
-			};
-		});
-	}
 
 	if (key === "types") {
 		obj[key] = value.map((v) =>
@@ -29,21 +21,6 @@ let outGoingParser = function(key, value, obj) {
 
 	if ((key === "gender") || (key === "children")) {
 		obj[key] = value.toUpperCase();
-	}
-
-	if (key === "names") {
-		obj[key] = value.map((names) => {
-			return {
-				components: [{
-						type: "FORENAME",
-						value: names.firstName
-					}, {
-						type: "SURNAME",
-						value: names.lastName
-					}
-				]
-			};
-		});
 	}
 
 	if (key === "persontype") {

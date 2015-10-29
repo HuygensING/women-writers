@@ -58,6 +58,7 @@ class AuthorController extends React.Component {
 					{visible: this.props.visible}
 				)}>
 				<AuthorHeader
+					onNavigate={this.props.onNavigate}
 					author={this.props.author} />
 				{editButton}
 				{graphLink}

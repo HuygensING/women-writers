@@ -11,7 +11,7 @@ class AuthorHeader extends React.Component {
 				str = str + "; ";
 			}
 
-			return str + current.firstName + " " + current.lastName;
+			return str + current.components.map((component) => component.value).join(" ");
 		}, "");
 
 		let birthYear = model.birthDate === "" ?
@@ -38,7 +38,7 @@ class AuthorHeader extends React.Component {
 			pseudonyms = (
 				<small className="pseudonyms">
 					Pseudonyms
-					<RelationAuthor values={model["@relations"].hasPseudonym} />
+					<RelationAuthor onNavigate={this.props.onNavigate} values={model["@relations"].hasPseudonym} />
 				</small>
 			);
 		}
