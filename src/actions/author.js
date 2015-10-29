@@ -5,7 +5,7 @@ import {fetch, save, remove, saveRelations} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
 
-export function fetchAuthor(id) {
+export function refreshAuthor(id) {
 	return function (dispatch) {
 		dispatch({type: "REQUEST_AUTHOR"});
 
@@ -17,6 +17,36 @@ export function fetchAuthor(id) {
 		);
 	};
 }
+
+export function fetchAuthor(id) {
+	return function (dispatch, getState) {
+		let authors = getState().authors;
+
+		if (authors.current != null && authors.current._id === id) {
+			return;
+		}
+
+		let found = authors.all.filter((author) =>
+			author._id === id);
+
+		if (found.length) {
+			dispatch({
+				type: "SET_CURRENT_AUTHOR",
+				current: found[found.length - 1]
+			});
+		} else {
+			dispatch({type: "REQUEST_AUTHOR"});
+
+			fetch(`${config.authorUrl}/${id}`, (response) =>
+				dispatch({
+					type: "RECEIVE_AUTHOR",
+					response: response
+				})
+			);
+		}
+	};
+}
+
 
 export function saveAuthor() {
 	return function (dispatch, getState) {

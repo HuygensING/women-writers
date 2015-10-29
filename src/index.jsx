@@ -8,8 +8,8 @@ import store from "./store";
 // ACTIONS
 import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
-import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery, rollbackAuthor, fetchAuthor} from "./actions/author";
-import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery, rollbackPublication, fetchPublication} from "./actions/publication";
+import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery, rollbackAuthor, refreshAuthor} from "./actions/author";
+import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery, rollbackPublication, refreshPublication} from "./actions/publication";
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
@@ -46,7 +46,7 @@ let AppRouter = Router.extend({
 		React.render(
 			<App
 				{...nextState}
-				onAuthorRefresh={(id) =>store.dispatch(fetchAuthor(id)) }
+				onAuthorRefresh={(id) =>store.dispatch(refreshAuthor(id)) }
 				onAuthorResultsChange={(results) =>
 					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets})
 				}
@@ -93,7 +93,7 @@ let AppRouter = Router.extend({
 				onNewPublication={() =>
 					this.navigate("/documents/new")
 				}
-				onPublicationRefresh={(id) => store.dispatch(fetchPublication(id)) }
+				onPublicationRefresh={(id) => store.dispatch(refreshPublication(id)) }
 				onPublicationResultsChange={(results) =>
 					store.dispatch({type: "SET_PUBLICATION_FACETS", activeFacets: results.facets})
 				}

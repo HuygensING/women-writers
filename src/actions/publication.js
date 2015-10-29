@@ -5,7 +5,7 @@ import {toggleEdit, changeRoute} from "./router";
 import {fetch, save, remove, saveRelations} from "./utils";
 
 
-export function fetchPublication(id) {
+export function refreshPublication(id) {
 	return function (dispatch) {
 		dispatch({type: "REQUEST_PUBLICATION"});
 
@@ -17,6 +17,36 @@ export function fetchPublication(id) {
 		);
 	};
 }
+
+export function fetchPublication(id) {
+	return function (dispatch, getState) {
+		let publications = getState().publications;
+
+		if (publications.current != null && publications.current._id === id) {
+			return;
+		}
+
+		let found = publications.all.filter((publication) =>
+			publication._id === id);
+
+		if (found.length) {
+			dispatch({
+				type: "SET_CURRENT_PUBLICATION",
+				current: found[found.length - 1]
+			});
+		} else {
+			dispatch({type: "REQUEST_PUBLICATION"});
+
+			fetch(`${config.publicationUrl}/${id}`, (response) =>
+				dispatch({
+					type: "RECEIVE_PUBLICATION",
+					response: response
+				})
+			);
+		}
+	};
+}
+
 
 export function savePublication() {
 	return function (dispatch, getState) {
