@@ -30,41 +30,40 @@ class SearchPublications extends React.Component {
 
 	render() {
 		return (
-			<FacetedSearch
-				className={cx({
-					visible: this.props.visible
-				})}
-				config={{
-					baseURL: config.baseUrl,
-					searchPath: "/search/wwdocuments",
-					levels: ["dynamic_sort_creator", "dynamic_sort_title"],
-					headers: {
-						Accept: "application/json",
-						VRE_ID: "WomenWriters"
-					},
-					hideFreeTextSearch: true,
-					fullTextSearchFields: [
-						{name: "dynamic_t_title"}
-					]
-				}}
-				customComponents={{
-					currentQuery: CurrentQuery
-				}}
-				facetList={config.publications.facetList}
-				facetSortMap={config.publications.facetSortMap}
-				labels={config.publications.labels}
-				metadataList={[
-					"createdBy",
-					"publishLocation",
-					"language",
-					"date"
-				]}
-				numberedResults={true}
-				onChange={this.onChange.bind(this)}
-				onSearchId={this.onSearchId.bind(this)}
-				onSelect={this.props.onSelect}
-				query={this.props.query}
-			/>
+			<div className={cx({visible: this.props.visible})}>
+				<FacetedSearch
+					config={{
+						baseURL: config.baseUrl,
+						searchPath: "/search/wwdocuments",
+						levels: ["dynamic_sort_creator", "dynamic_sort_title"],
+						headers: {
+							Accept: "application/json",
+							VRE_ID: "WomenWriters"
+						},
+						hideFreeTextSearch: true,
+						fullTextSearchFields: [
+							{name: "dynamic_t_title"}
+						]
+					}}
+					customComponents={{
+						currentQuery: CurrentQuery
+					}}
+					facetList={config.publications.facetList}
+					facetSortMap={config.publications.facetSortMap}
+					labels={config.publications.labels}
+					metadataList={[
+						"createdBy",
+						"publishLocation",
+						"language",
+						"date"
+					]}
+					numberedResults={true}
+					onChange={this.onChange.bind(this)}
+					onSearchId={this.onSearchId.bind(this)}
+					onSelect={this.props.onSelect}
+					query={this.props.query}
+				/>
+			</div>
 		);
 	}
 }

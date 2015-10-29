@@ -37,7 +37,6 @@ class ReceptionSearch extends React.Component {
 								VRE_ID: "WomenWriters",
 								Accept: "application/json"
 							},
-							queryDefaults: {otherSearchId: this.props.searchId},
 							hideFreeTextSearch: true,
 							fullTextSearchFields: [
 								{name: "dynamic_t_title"}
@@ -50,6 +49,7 @@ class ReceptionSearch extends React.Component {
 						facetSortMap={config.publications.facetSortMap}
 						labels={config.publications.labels}
 						onSelect={this.props.onSelect}
+						query={{otherSearchId: this.props.searchId}}
 			/>
 		) : null;
 
