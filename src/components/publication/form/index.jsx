@@ -28,6 +28,23 @@ class PublicationForm extends React.Component {
 			</Tab> :
 			null;
 
+		let links = (model._id != null) ?
+			<Tab
+				active={this.props.tab === "links"}
+				label="Links">
+				<MultiForm
+					attr={"links"}
+					component={LinkForm}
+					model={{
+						label: "",
+						url: ""
+					}}
+					onChange={this.props.onFormChange}
+					onDelete={this.props.onFormDelete}
+					values={model.links} />
+			</Tab> :
+			null;
+
 		return (
 			<Tabs onChange={this.props.onTabChange}>
 				<Tab
@@ -56,20 +73,7 @@ class PublicationForm extends React.Component {
 					</div>
 				</Tab>
 				{receptions}
-				<Tab
-					active={this.props.tab === "links"}
-					label="Links">
-					<MultiForm
-						attr={"links"}
-						component={LinkForm}
-						model={{
-							label: "",
-							url: ""
-						}}
-						onChange={this.props.onFormChange}
-						onDelete={this.props.onFormDelete}
-						values={model.links} />
-				</Tab>
+				{links}
 			</Tabs>
 		);
 	}
