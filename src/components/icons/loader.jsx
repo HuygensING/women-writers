@@ -1,6 +1,6 @@
 import React from "react";
 
-const getNextState = function(prevState, progress) {
+let getNextState = function(prevState, progress) {
 	let state = Object.keys(prevState).reduce((obj, currentProp) => {
 		let delta = prevState[currentProp].max - prevState[currentProp].min;
 		let amplitude = delta / 2;
@@ -62,19 +62,23 @@ class LoaderThreeDots extends React.Component {
 				}}
 			}
 		};
+
+		this.animationFrameListener = this.step.bind(this);
 	}
 
 	componentDidMount() {
 		this.mounted = true;
-		window.requestAnimationFrame(this.step.bind(this));
+		window.requestAnimationFrame(this.animationFrameListener);
 	}
 
 	componentWillUnmount() {
 		this.mounted = false;
+		window.cancelAnimationFrame(this.animationFrameListener);
 	}
 
 	step(timestamp) {
 		if (!this.mounted) {
+			window.cancelAnimationFrame(this.animationFrameListener);
 			return;
 		}
 
@@ -83,13 +87,14 @@ class LoaderThreeDots extends React.Component {
 		}
 
 		let progress = timestamp - this.start;
-
-		this.setState({
-			circle1: getNextState(this.state.circle1, progress),
-			circle2: getNextState(this.state.circle2, progress),
-			circle3: getNextState(this.state.circle3, progress)
-		});
-		if (this.mounted) { window.requestAnimationFrame(this.step.bind(this)); }
+		if(React.findDOMNode(this).getBoundingClientRect().width) {
+			this.setState({
+				circle1: getNextState(this.state.circle1, progress),
+				circle2: getNextState(this.state.circle2, progress),
+				circle3: getNextState(this.state.circle3, progress)
+			});
+		}
+		window.requestAnimationFrame(this.animationFrameListener);
 	}
 
 	render() {
@@ -126,3 +131,6 @@ LoaderThreeDots.propTypes = {
 };
 
 export default LoaderThreeDots;
+
+
+
