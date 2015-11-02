@@ -9,7 +9,7 @@ import AutocompleteList from "hire-forms-autocomplete-list";
 import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
 
-class BasicInfoForm {
+class BasicInfoForm extends React.Component {
 	render() {
 		let model = this.props.publication;
 

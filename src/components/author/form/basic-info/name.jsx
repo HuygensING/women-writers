@@ -8,7 +8,7 @@ const placeholders = {
 	NAME_LINK: "Infix"
 };
 
-class NameForm {
+class NameForm extends React.Component {
 
 	render() {
 		let components = this.props.value.components;

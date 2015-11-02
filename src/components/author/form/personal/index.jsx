@@ -7,7 +7,7 @@ import Textarea from "hire-forms-textarea";
 
 import API from "../../../../stores/api";
 
-class PersonalForm {
+class PersonalForm extends React.Component {
 	render() {
 		let model = this.props.author;
 

@@ -10,7 +10,7 @@ import NameForm from "./name";
 import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
 
-class BasicInfoForm {
+class BasicInfoForm extends React.Component {
 
 	onNameChange(key, value) {
 		let newKey, newValue;

@@ -5,7 +5,7 @@ import AutocompleteList from "hire-forms-autocomplete-list";
 
 import API from "../../../../stores/api";
 
-class PublicForm {
+class PublicForm extends React.Component {
 	render() {
 		let model = this.props.author;
 

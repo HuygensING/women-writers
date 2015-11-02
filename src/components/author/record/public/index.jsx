@@ -2,7 +2,7 @@ import React from "react";
 
 import Relation from "../../../values/relation";
 
-class Public {
+class Public extends React.Component {
 	render() {
 		let model = this.props.author;
 

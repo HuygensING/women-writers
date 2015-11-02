@@ -30,7 +30,7 @@ let validateURL = function(value) {
 	};
 };
 
-class LinkForm {
+class LinkForm extends React.Component {
 	render() {
 		let model = this.props.value;
 

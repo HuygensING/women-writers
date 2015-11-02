@@ -3,7 +3,7 @@ import React from "react";
 import StringComponent from "../../../values/string";
 import Relation from "../../../values/relation";
 
-class BasicInfo {
+class BasicInfo extends React.Component {
 	render() {
 		let model = this.props.author;
 

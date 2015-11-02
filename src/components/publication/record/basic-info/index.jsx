@@ -4,7 +4,7 @@ import StringComponent from "../../../values/string";
 import PersonRelation from "../../../values/relation-person";
 import Relation from "../../../values/relation";
 
-class BasicInfoForm {
+class BasicInfoForm extends React.Component {
 	render() {
 		let model = this.props.value;
 

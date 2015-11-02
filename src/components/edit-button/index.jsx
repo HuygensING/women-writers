@@ -1,7 +1,7 @@
 import React from "react";
 import RefreshIcon from "../icons/refresh";
 
-class EditButton {
+class EditButton extends React.Component {
 
 	render() {
 		let show = this.props.user != null && this.props.user.token != null && this.props.model["^pid"] != null;

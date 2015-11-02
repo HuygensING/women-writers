@@ -1,6 +1,6 @@
 import React from "react";
 
-class Links {
+class Links extends React.Component {
 	render() {
 		let links;
 
