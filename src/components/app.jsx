@@ -19,11 +19,13 @@ class App extends React.Component {
 				onFormChange={this.props.onChangeAuthorKey}
 				onFormDelete={this.props.onDeleteAuthorKey}
 				onNavigate={this.props.onNavigate}
+				onNavigateNextPage={this.props.onNavigateNextAuthorPage}
 				onRefresh={this.props.onAuthorRefresh.bind(this, this.props.authors.current._id)}
 				onSaveAuthor={this.props.onSaveAuthor}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
 				relations={this.props.relations}
+				results={this.props.authors.results}
 				tab={this.props.router.author.tab}
 				user={this.props.user}
 				visible={this.props.router.author.visible} /> :
@@ -38,11 +40,13 @@ class App extends React.Component {
 				onFormDelete={this.props.onDeletePublicationKey}
 				onNavigate={this.props.onNavigate}
 				onRefresh={this.props.onPublicationRefresh.bind(this, this.props.publications.current._id)}
+				onNavigateNextPage={this.props.onNavigateNextPublicationPage}
 				onSavePublication={this.props.onSavePublication}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
 				publication={this.props.publications.current}
 				relations={this.props.relations}
+				results={this.props.publications.results}
 				tab={this.props.router.publication.tab}
 				user={this.props.user}
 				visible={this.props.router.publication.visible} /> :

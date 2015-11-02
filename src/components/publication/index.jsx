@@ -7,6 +7,7 @@ import PublicationRecord from "./record";
 import PublicationForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
+import PaginationLinks from "../links/pagination";
 
 class PublicationController extends React.Component {
 	render() {
@@ -41,16 +42,29 @@ class PublicationController extends React.Component {
 			null;
 
 		let graphLink = this.props.publication._id ?
-			<Link href={"/graph/documents/" + this.props.publication._id} onNavigate={this.props.onNavigate} value="Graph" /> :
+			<Link className="graph-link" href={"/graph/documents/" + this.props.publication._id} onNavigate={this.props.onNavigate} value="Graph" /> :
 			null;
+
+		let resultsLink = <Link className="pagination-link" href="/documents" onNavigate={this.props.onNavigate} value="◂ Results" />;
+		let paginationLinks = this.props.publication._id ?
+			<PaginationLinks
+				href="/documents/"
+				id={this.props.publication._id}
+				onNavigate={this.props.onNavigate}
+				onNavigateNextPage={this.props.onNavigateNextPage}
+				results={this.props.results} /> :
+			null;
+
 		return (
 			<div
 				className={cx(
 					"publication",
 					{visible: this.props.visible}
 				)}>
+				{resultsLink}
 				<PublicationHeader
 					publication={this.props.publication} />
+				{paginationLinks}
 				{editButton}
 				{graphLink}
 				{body}

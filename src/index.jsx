@@ -8,8 +8,30 @@ import store from "./store";
 // ACTIONS
 import {changeRoute, toggleEdit, changeTab} from "./actions/router";
 import {setUser} from "./actions/user";
-import {setAuthorKey, deleteAuthorKey, deleteAuthor, saveAuthor, setAuthorQueryFromPublicationQuery, rollbackAuthor, refreshAuthor} from "./actions/author";
-import {setPublicationKey, deletePublicationKey, deletePublication, savePublication, setPublicationQueryFromAuthorQuery, rollbackPublication, refreshPublication} from "./actions/publication";
+import {
+	setAuthorKey,
+	deleteAuthorKey,
+	deleteAuthor,
+	saveAuthor,
+	setAuthorQueryFromPublicationQuery,
+	rollbackAuthor,
+	refreshAuthor,
+	setAuthorResultIds,
+	requestNextAuthorResults
+} from "./actions/author";
+
+import {
+	setPublicationKey,
+	deletePublicationKey,
+	deletePublication,
+	savePublication,
+	setPublicationQueryFromAuthorQuery,
+	rollbackPublication,
+	refreshPublication,
+	setPublicationResultIds,
+	requestNextPublicationResults
+} from "./actions/publication";
+
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
@@ -47,9 +69,10 @@ let AppRouter = Router.extend({
 			<App
 				{...nextState}
 				onAuthorRefresh={(id) =>store.dispatch(refreshAuthor(id)) }
-				onAuthorResultsChange={(results) =>
-					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets})
-				}
+				onAuthorResultsChange={(results) => {
+					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets});
+					store.dispatch(setAuthorResultIds(results));
+				}}
 				onAuthorSearchChange={(results, query) => {
 					store.dispatch(setPublicationQueryFromAuthorQuery(query));
 					store.dispatch({type: "SET_AUTHOR_QUERY", query: query});
@@ -87,6 +110,9 @@ let AppRouter = Router.extend({
 					store.dispatch(setUser(response))
 				}
 				onNavigate={this.navigate.bind(this)}
+				onNavigateNextAuthorPage={(url) => store.dispatch(requestNextAuthorResults(url, this.navigate.bind(this))) }
+				onNavigateNextPublicationPage={(url) => store.dispatch(requestNextPublicationResults(url, this.navigate.bind(this))) }
+
 				onNewAuthor={() =>
 					this.navigate("/persons/new")
 				}
@@ -94,9 +120,10 @@ let AppRouter = Router.extend({
 					this.navigate("/documents/new")
 				}
 				onPublicationRefresh={(id) => store.dispatch(refreshPublication(id)) }
-				onPublicationResultsChange={(results) =>
-					store.dispatch({type: "SET_PUBLICATION_FACETS", activeFacets: results.facets})
-				}
+				onPublicationResultsChange={(results) => {
+					store.dispatch({type: "SET_PUBLICATION_FACETS", activeFacets: results.facets});
+					store.dispatch(setPublicationResultIds(results));
+				}}
 				onPublicationSearchChange={(results, query) => {
 					store.dispatch(setAuthorQueryFromPublicationQuery(query));
 					store.dispatch({type: "SET_PUBLICATION_QUERY", query: query});

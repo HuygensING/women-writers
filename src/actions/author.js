@@ -179,3 +179,24 @@ export function setAuthorQueryFromPublicationQuery(publicationQuery) {
 		query: mapPublicationQueryToAuthorQuery(publicationQuery)
 	};
 }
+
+export function setAuthorResultIds(results) {
+	return {
+		type: "SET_AUTHOR_RESULT_IDS",
+		ids: results.refs.map((ref) => ref.id),
+		_next: results._next || null
+	};
+}
+
+export function requestNextAuthorResults(url, onNavigate) {
+	return function(dispatch) {
+		fetch(url, (results) => {
+			dispatch({
+				type: "APPEND_AUTHOR_RESULT_IDS",
+				ids: results.refs.map((ref) => ref.id),
+				_next: results._next || null
+			});
+			onNavigate("/persons/" + results.refs[0].id);
+		});
+	};
+}

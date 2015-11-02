@@ -29,7 +29,11 @@ let initialState = {
 		facetValues: [],
 		fullTextSearchParameters: []
 	},
-	activeFacets: []
+	activeFacets: [],
+	results: {
+		ids: [],
+		_next: null
+	}
 };
 
 export default function(state=initialState, action) {
@@ -103,6 +107,22 @@ export default function(state=initialState, action) {
 		case "SET_AUTHOR_FACETS":
 			return {...state, ...{
 				activeFacets: action.activeFacets
+			}};
+
+		case "SET_AUTHOR_RESULT_IDS":
+			return {...state, ...{
+				results: {
+					ids: action.ids,
+					_next: action._next
+				}
+			}};
+
+		case "APPEND_AUTHOR_RESULT_IDS":
+			return {...state, ...{
+				results: {
+					ids: [...state.results.ids, ...action.ids],
+					_next: action._next
+				}
 			}};
 
 		default:

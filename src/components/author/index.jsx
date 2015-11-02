@@ -7,6 +7,8 @@ import AuthorRecord from "./record";
 import AuthorForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
+import PaginationLinks from "../links/pagination";
+
 /*
  * AuthorController for the AuthorRecord and AuthorForm
  *
@@ -48,7 +50,17 @@ class AuthorController extends React.Component {
 			null;
 
 		let graphLink = this.props.author._id ?
-			<Link href={"/graph/persons/" + this.props.author._id} onNavigate={this.props.onNavigate} value="Graph" /> :
+			<Link className="graph-link" href={"/graph/persons/" + this.props.author._id} onNavigate={this.props.onNavigate} value="Graph" /> :
+			null;
+
+		let resultsLink = <Link className="pagination-link" href="/persons" onNavigate={this.props.onNavigate} value="◂ Results" />;
+		let paginationLinks = this.props.author._id ?
+			<PaginationLinks
+				href="/persons/"
+				id={this.props.author._id}
+				onNavigate={this.props.onNavigate}
+				onNavigateNextPage={this.props.onNavigateNextPage}
+				results={this.props.results} /> :
 			null;
 
 		return (
@@ -57,9 +69,11 @@ class AuthorController extends React.Component {
 					"author",
 					{visible: this.props.visible}
 				)}>
+				{resultsLink}
 				<AuthorHeader
 					onNavigate={this.props.onNavigate}
 					author={this.props.author} />
+				{paginationLinks}
 				{editButton}
 				{graphLink}
 				{body}

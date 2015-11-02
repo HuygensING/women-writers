@@ -173,3 +173,24 @@ export function setPublicationQueryFromAuthorQuery(authorQuery) {
 		query: mapAuthorQueryToPublicationQuery(authorQuery)
 	};
 }
+
+export function setPublicationResultIds(results) {
+	return {
+		type: "SET_PUBLICATION_RESULT_IDS",
+		ids: results.refs.map((ref) => ref.id),
+		_next: results._next || null
+	};
+}
+
+export function requestNextPublicationResults(url, onNavigate) {
+	return function(dispatch) {
+		fetch(url, (results) => {
+			dispatch({
+				type: "APPEND_PUBLICATION_RESULT_IDS",
+				ids: results.refs.map((ref) => ref.id),
+				_next: results._next || null
+			});
+			onNavigate("/documents/" + results.refs[0].id);
+		});
+	};
+}

@@ -30,7 +30,11 @@ let initialState = {
 		term: "",
 		facetValues: []
 	},
-	activeFacets: []
+	activeFacets: [],
+	results: {
+		ids: [],
+		_next: null
+	}
 };
 
 export default function(state=initialState, action) {
@@ -108,5 +112,22 @@ export default function(state=initialState, action) {
 			}};
 		default:
 			return state;
+
+		case "SET_PUBLICATION_RESULT_IDS":
+			return {...state, ...{
+				results: {
+					ids: action.ids,
+					_next: action._next
+				}
+			}};
+
+		case "APPEND_PUBLICATION_RESULT_IDS":
+			return {...state, ...{
+				results: {
+					ids: [...state.results.ids, ...action.ids],
+					_next: action._next
+				}
+			}};
+
 	}
 }
