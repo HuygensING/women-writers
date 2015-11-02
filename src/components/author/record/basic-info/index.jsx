@@ -9,13 +9,13 @@ class BasicInfo {
 
 		let names = (model.names.length) ?
 			model.names.map((name, index) => <li key={index}>{name.components.map((c) => c.value).join(" ")}</li>) :
-			"-";
+			<li>-</li>;
 
 		return (
 			<ul className="record">
 				<li>
 					<label>Names</label>
-					<span>{names}</span>
+					<ul>{names}</ul>
 				</li>
 				<li>
 					<label>Pseudonyms</label>

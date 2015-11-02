@@ -26,7 +26,6 @@ class SearchAuthors extends React.Component {
 	}
 
 	onSearchId(searchId) {
-		console.log("ON SEARCH ID SearchAuthors", searchId);
 		this.props.onSearchId(searchId);
 	}
 

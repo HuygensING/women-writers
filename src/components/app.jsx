@@ -25,6 +25,7 @@ class App extends React.Component {
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
 				relations={this.props.relations}
+				requesting={this.props.authors.requesting}
 				results={this.props.authors.results}
 				tab={this.props.router.author.tab}
 				user={this.props.user}
@@ -46,6 +47,7 @@ class App extends React.Component {
 				onToggleEdit={this.props.onToggleEdit}
 				publication={this.props.publications.current}
 				relations={this.props.relations}
+				requesting={this.props.publications.requesting}
 				results={this.props.publications.results}
 				tab={this.props.router.publication.tab}
 				user={this.props.user}

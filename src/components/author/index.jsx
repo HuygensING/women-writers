@@ -67,6 +67,7 @@ class AuthorController extends React.Component {
 			<div
 				className={cx(
 					"author",
+					{requesting: this.props.requesting},
 					{visible: this.props.visible}
 				)}>
 				{resultsLink}

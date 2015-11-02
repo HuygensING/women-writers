@@ -59,6 +59,7 @@ class PublicationController extends React.Component {
 			<div
 				className={cx(
 					"publication",
+					{requesting: this.props.requesting},
 					{visible: this.props.visible}
 				)}>
 				{resultsLink}

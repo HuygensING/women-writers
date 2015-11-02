@@ -16,7 +16,6 @@ class PaginationLinks extends React.Component {
 		if (this.props.results._next !== null && nextLink === null && curIndex > -1) {
 			nextLink = <Link onNavigate={this.props.onNavigateNextPage.bind(this, this.props.results._next)} value="Next ▸" />;
 		}
-		console.log(curIndex);
 
 		return (
 			<span className="pagination-links">
