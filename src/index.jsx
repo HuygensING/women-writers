@@ -17,7 +17,8 @@ import {
 	rollbackAuthor,
 	refreshAuthor,
 	setAuthorResultIds,
-	requestNextAuthorResults
+	requestNextAuthorResults,
+	selectAuthorVariation
 } from "./actions/author";
 
 import {
@@ -143,8 +144,8 @@ let AppRouter = Router.extend({
 				onSavePublication={() =>
 					store.dispatch(savePublication())
 				}
-				onSelectAuthorVariation={(type) =>
-					store.dispatch({type: "SELECT_AUTHOR_VARIATION", variationType: type})
+				onSelectAuthorVariation={(type, id) =>
+					store.dispatch(selectAuthorVariation(type, id))
 
 				}
 				onShowAuthorReceptions={(searchId) =>

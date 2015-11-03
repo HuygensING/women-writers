@@ -25,6 +25,7 @@ let initialState = {
 	unchanged: null,
 	requesting: false,
 	showVariation: null,
+	variationData: null,
 	query: {
 		term: "",
 		facetValues: [],
@@ -51,6 +52,7 @@ export default function(state=initialState, action) {
 				current: parsedAuthor,
 				unchanged: cloneDeep(parsedAuthor),
 				showVariation: null,
+				variationData: null,
 				requesting: false
 			}};
 
@@ -65,7 +67,8 @@ export default function(state=initialState, action) {
 		case "SET_CURRENT_AUTHOR":
 			return {...state, ...{
 				current: action.current,
-				showVariation: null
+				showVariation: null,
+				variationData: null
 			}};
 
 		case "DELETE_AUTHOR_KEY":
@@ -130,8 +133,11 @@ export default function(state=initialState, action) {
 				}
 			}};
 
-		case "SELECT_AUTHOR_VARIATION":
+		case "SELECT_AUTHOR_VARIATION_TYPE":
 			return {...state, showVariation: action.variationType};
+
+		case "RECEIVE_AUTHOR_VARIATION_DATA":
+			return {...state, variationData: action.data};
 
 		default:
 			return state;

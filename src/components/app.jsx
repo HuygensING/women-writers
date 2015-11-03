@@ -31,6 +31,7 @@ class App extends React.Component {
 				showVariation={this.props.authors.showVariation}
 				tab={this.props.router.author.tab}
 				user={this.props.user}
+				variationData={this.props.authors.variationData}
 				visible={this.props.router.author.visible} /> :
 			null;
 

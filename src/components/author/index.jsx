@@ -8,6 +8,7 @@ import AuthorForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
+import VariationData from "../values/variation-data";
 import Select from "hire-forms-select";
 
 
@@ -23,6 +24,8 @@ class AuthorController extends React.Component {
 		let found = (this.props.author["@variationRefs"] || []).filter((v) => v.type === type);
 		if (found.length) {
 			this.props.onSelectVariation(type, found[0].id);
+		} else {
+			this.props.onSelectVariation(null);
 		}
 	}
 
@@ -81,6 +84,10 @@ class AuthorController extends React.Component {
 				value={this.props.showVariation ? this.props.showVariation : "Show other data"} />
 			: null;
 
+		let variationDataComponent = this.props.variationData ?
+			<VariationData data={this.props.variationData} /> :
+			null;
+
 		return (
 			<div
 				className={cx(
@@ -90,7 +97,10 @@ class AuthorController extends React.Component {
 				)}>
 				{resultsLink}
 				<AuthorHeader author={this.props.author} onNavigate={this.props.onNavigate} />
-				{variationSelect}
+				<div className="variations">
+					{variationSelect}
+					{variationDataComponent}
+				</div>
 				{paginationLinks}
 				{editButton}
 				{graphLink}
@@ -122,6 +132,7 @@ AuthorController.propTypes = {
 	showVariation: React.PropTypes.string,
 	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"]),
 	user: React.PropTypes.object,
+	variationData: React.PropTypes.object,
 	visible: React.PropTypes.bool
 };
 

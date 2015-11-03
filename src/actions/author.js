@@ -198,3 +198,18 @@ export function requestNextAuthorResults(url, onNavigate) {
 		});
 	};
 }
+
+export function selectAuthorVariation(type, id) {
+
+	return function(dispatch) {
+		dispatch({type: "SELECT_AUTHOR_VARIATION_TYPE", variationType: type});
+		if(id) {
+			let url = config.baseUrl + "/domain/" + type + "s/" + id;
+			fetch(url, (results) => {
+				dispatch({type: "RECEIVE_AUTHOR_VARIATION_DATA", data: results});
+			});
+		} else {
+			dispatch({type: "RECEIVE_AUTHOR_VARIATION_DATA", data: null});
+		}
+	};
+}
