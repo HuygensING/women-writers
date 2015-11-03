@@ -22,11 +22,13 @@ class App extends React.Component {
 				onNavigateNextPage={this.props.onNavigateNextAuthorPage}
 				onRefresh={this.props.onAuthorRefresh.bind(this, this.props.authors.current._id)}
 				onSaveAuthor={this.props.onSaveAuthor}
+				onSelectVariation={this.props.onSelectAuthorVariation}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
 				relations={this.props.relations}
 				requesting={this.props.authors.requesting}
 				results={this.props.authors.results}
+				showVariation={this.props.authors.showVariation}
 				tab={this.props.router.author.tab}
 				user={this.props.user}
 				visible={this.props.router.author.visible} /> :

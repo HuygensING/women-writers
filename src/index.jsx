@@ -143,6 +143,10 @@ let AppRouter = Router.extend({
 				onSavePublication={() =>
 					store.dispatch(savePublication())
 				}
+				onSelectAuthorVariation={(type) =>
+					store.dispatch({type: "SELECT_AUTHOR_VARIATION", variationType: type})
+
+				}
 				onShowAuthorReceptions={(searchId) =>
 					store.dispatch(setSearchId(searchId, "author"))
 				}

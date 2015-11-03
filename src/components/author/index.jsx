@@ -8,6 +8,8 @@ import AuthorForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
+import Select from "hire-forms-select";
+
 
 /*
  * AuthorController for the AuthorRecord and AuthorForm
@@ -16,6 +18,14 @@ import PaginationLinks from "../links/pagination";
  * use the same data.
  */
 class AuthorController extends React.Component {
+
+	onSelectVariation(type) {
+		let found = (this.props.author["@variationRefs"] || []).filter((v) => v.type === type);
+		if (found.length) {
+			this.props.onSelectVariation(type, found[0].id);
+		}
+	}
+
 	render() {
 		let editButton = (this.props.edit && this.props.user && this.props.user.token) ?
 			null :
@@ -63,6 +73,14 @@ class AuthorController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
+		let variations = (this.props.author["@variationRefs"] || []).filter((v) => v.type !== "wwperson").map((v) => v.type);
+		let variationSelect = variations.length ?
+			<Select
+				onChange={this.onSelectVariation.bind(this)}
+				options={["Show other data", ...variations]}
+				value={this.props.showVariation ? this.props.showVariation : "Show other data"} />
+			: null;
+
 		return (
 			<div
 				className={cx(
@@ -71,9 +89,8 @@ class AuthorController extends React.Component {
 					{visible: this.props.visible}
 				)}>
 				{resultsLink}
-				<AuthorHeader
-					onNavigate={this.props.onNavigate}
-					author={this.props.author} />
+				<AuthorHeader author={this.props.author} onNavigate={this.props.onNavigate} />
+				{variationSelect}
 				{paginationLinks}
 				{editButton}
 				{graphLink}
@@ -85,9 +102,24 @@ class AuthorController extends React.Component {
 }
 
 AuthorController.propTypes = {
+	author: React.PropTypes.object,
 	edit: React.PropTypes.bool,
 	id: React.PropTypes.string,
+	onCancel: React.PropTypes.func,
+	onDeleteAuthor: React.PropTypes.func,
+	onFormChange: React.PropTypes.func,
+	onFormDelete: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
+	onNavigateNextPage: React.PropTypes.func,
+	onRefresh: React.PropTypes.func,
+	onSaveAuthor: React.PropTypes.func,
+	onSelectVariation: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
 	onToggleEdit: React.PropTypes.func,
+	relations: React.PropTypes.object,
+	requesting: React.PropTypes.bool,
+	results: React.PropTypes.object,
+	showVariation: React.PropTypes.string,
 	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"]),
 	user: React.PropTypes.object,
 	visible: React.PropTypes.bool
