@@ -10,10 +10,19 @@ import config from "../../config";
 
 class ReceptionSearch extends React.Component {
 
+	constructor(props) {
+		super(props);
+		this.state = { excelUrl: null };
+	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.visible && nextProps.pendingSearchId) {
 			this.props.onVisible(nextProps.pendingSearchId);
 		}
+	}
+
+	onSearchId(searchId) {
+		this.setState({excelUrl: config.baseUrl + "/search/" + searchId + "/xls"});
 	}
 
 	render() {
@@ -24,6 +33,10 @@ class ReceptionSearch extends React.Component {
 			onChangeFullTextField: this.props.onUnsetFullTextField,
 			onSelectFacetValue: this.props.onUnsetFacetValue
 		};
+
+		let excelLink = this.state.excelUrl ?
+			<a href={this.state.excelUrl} target="_blank">Download excel</a> :
+			null;
 
 		let currentQuery = this.props.type === "authors" ?
 			<AuthorReceptionsCurrentQuery {...currentQueryProps} /> :
@@ -48,6 +61,7 @@ class ReceptionSearch extends React.Component {
 						facetList={["dynamic_s_relation", ...config.publications.facetList]}
 						facetSortMap={config.publications.facetSortMap}
 						labels={config.publications.labels}
+						onSearchId={this.onSearchId.bind(this)}
 						onSelect={this.props.onSelect}
 						query={{otherSearchId: this.props.searchId}}
 			/>
@@ -55,6 +69,7 @@ class ReceptionSearch extends React.Component {
 
 		return (
 			<div className="reception-search">
+				{excelLink}
 				{currentQuery}
 				<Loader className={!this.props.searchId ? "reception-loader" : "reception-loader hidden"} />
 				{search}
