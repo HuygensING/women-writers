@@ -2,6 +2,42 @@ import config from "../config";
 import {fetch} from "./utils";
 import {parseIncomingGraph} from "../stores/parsers/graph";
 
+const types = [
+	"hasEdition",
+	"hasSequel",
+	"hasTranslation",
+	"hasAdaptation",
+	"hasPlagiarismBy",
+	"isAnnotatedIn",
+	"hasBibliography",
+	"isCensoredBy",
+	"isWorkCommentedOnIn",
+	"containedInAnthology",
+	"isCopiedBy",
+	"isWorkAwarded",
+	"hasPreface",
+	"isIntertextualOf",
+	"isWorkListedOn",
+	"isWorkMentionedIn",
+	"isParodiedBy",
+	"isWorkQuotedIn",
+	"isWorkReferencedIn",
+	"hasDocumentSource",
+	"hasBiography",
+	"isPersonCommentedOnIn",
+	"isDedicatedPersonOf",
+	"isPersonAwarded",
+	"isPersonListedOn",
+	"isPersonMentionedIn",
+	"hasObituary",
+	"isPersonQuotedIn",
+	"isPersonReferencedIn",
+	"isCreatorOf",
+	"isRelatedTo",
+	"isParentOf",
+	"isSpouseOf"
+].join("&types=");
+
 let fetchDomainMetadata = function(domain, id, dispatch) {
 	fetch(`${config.domainUrl}/${domain}/${id}`, (response) =>
 		dispatch({
@@ -24,7 +60,7 @@ export function fetchGraph(domain, id) {
 				current: found[0]
 			});
 		} else {
-			fetch(`${config.graphUrl}/${domain}/${id}?depth=1`, (response) =>
+			fetch(`${config.graphUrl}/${domain}/${id}?depth=2&types=${types}`, (response) =>
 				dispatch({
 					type: "RECEIVE_GRAPH",
 					response: parseIncomingGraph(response),
