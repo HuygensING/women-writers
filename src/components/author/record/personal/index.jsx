@@ -2,11 +2,11 @@ import React from "react";
 
 import StringComponent from "../../../values/string";
 import Relation from "../../../values/relation";
+import PersonRelation from "../../../values/relation-person";
 
 class Personal extends React.Component {
 	render() {
 		let model = this.props.author;
-
 		return (
 			<ul className="record">
 				<li>
@@ -15,11 +15,11 @@ class Personal extends React.Component {
 				</li>
 				<li>
 					<label>Spouse of</label>
-					<Relation values={model["@relations"].isSpouseOf} />
+					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isSpouseOf} />
 				</li>
 				<li>
 					<label>Related to</label>
-					<Relation values={model["@relations"].isRelatedTo} />
+					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />
 				</li>
 				<li>
 					<label>Children</label>

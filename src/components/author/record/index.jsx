@@ -54,7 +54,7 @@ class AuthorRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "personal"}
 					label="Personal">
-					<Personal author={this.props.author} />
+					<Personal author={this.props.author} onNavigate={this.props.onNavigate} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
