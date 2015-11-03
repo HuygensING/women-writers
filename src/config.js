@@ -28,7 +28,7 @@ export default {
 				"dynamic_s_relatedLocations": "Related country",
 				"dynamic_s_religion": "Religion",
 				"dynamic_s_social_class": "Social class",
-				"dynamic_s_types": "Types",
+				"dynamic_s_types": "Person Types",
 				"dynamic_s_financials": "Financials",
 				"dynamic_s_profession": "Profession",
 				"dynamic_t_name": "Name",
