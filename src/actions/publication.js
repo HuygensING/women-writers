@@ -26,13 +26,10 @@ export function fetchPublication(id) {
 			return;
 		}
 
-		let found = publications.all.filter((publication) =>
-			publication._id === id);
-
-		if (found.length) {
+		if (publications.cached[id]) {
 			dispatch({
 				type: "SET_CURRENT_PUBLICATION",
-				current: found[found.length - 1]
+				current: publications.cached[id]
 			});
 		} else {
 			dispatch({type: "REQUEST_PUBLICATION"});

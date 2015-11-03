@@ -22,7 +22,7 @@ const MODEL = {
 };
 
 let initialState = {
-	all: [],
+	cached: {},
 	current: MODEL,
 	unchanged: null,
 	requesting: false,
@@ -48,7 +48,7 @@ export default function(state=initialState, action) {
 			let parsedPublication = parseIncomingPublication(action.response);
 
 			return {...state, ...{
-				all: [...state.all, parsedPublication],
+				cached: {...state.cached, ...{[parsedPublication._id]: parsedPublication}},
 				current: parsedPublication,
 				unchanged: cloneDeep(parsedPublication),
 				requesting: false
@@ -76,8 +76,10 @@ export default function(state=initialState, action) {
 			}};
 
 		case "PUBLICATION_DELETED":
+			let c = state.cached;
+			delete c[action.id];
 			return {...state, ...{
-				all: state.all.filter((author) => author._id !== action.id),
+				cached: c,
 				current: MODEL
 			}};
 

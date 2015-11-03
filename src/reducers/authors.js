@@ -20,7 +20,7 @@ let MODEL = {
 };
 
 let initialState = {
-	all: [],
+	cached: {},
 	current: MODEL,
 	unchanged: null,
 	requesting: false,
@@ -46,7 +46,7 @@ export default function(state=initialState, action) {
 		case "RECEIVE_AUTHOR":
 			let parsedAuthor = parseIncomingAuthor(action.response);
 			return {...state, ...{
-				all: [...state.all, parsedAuthor],
+				cached: {...state.cached, ...{[parsedAuthor._id]: parsedAuthor}},
 				current: parsedAuthor,
 				unchanged: cloneDeep(parsedAuthor),
 				requesting: false
@@ -74,8 +74,10 @@ export default function(state=initialState, action) {
 			}};
 
 		case "AUTHOR_DELETED":
+			let c = state.cached;
+			delete c[action.id];
 			return {...state, ...{
-				all: state.all.filter((author) => author._id !== action.id),
+				cached: c,
 				current: MODEL
 			}};
 

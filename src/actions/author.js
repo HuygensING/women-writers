@@ -26,13 +26,10 @@ export function fetchAuthor(id) {
 			return;
 		}
 
-		let found = authors.all.filter((author) =>
-			author._id === id);
-
-		if (found.length) {
+		if (authors.cached[id]) {
 			dispatch({
 				type: "SET_CURRENT_AUTHOR",
-				current: found[found.length - 1]
+				current: authors.cached[id]
 			});
 		} else {
 			dispatch({type: "REQUEST_AUTHOR"});
@@ -62,10 +59,6 @@ export function saveAuthor() {
 			let currentRelations = author["@relations"];
 			let prevRelations = unchangedAuthor["@relations"];
 			let prevRemovedRelations = unchangedAuthor["@removedRelations"];
-
-			console.log("saveAuthor():currentRelations", currentRelations);
-			console.log("saveAuthor():prevRelations", prevRelations);
-			console.log("saveAuthor():prevRemovedRelations", prevRemovedRelations);
 
 			saveRelations(
 				currentRelations,
