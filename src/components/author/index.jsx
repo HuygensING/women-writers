@@ -17,7 +17,7 @@ import PaginationLinks from "../links/pagination";
  */
 class AuthorController extends React.Component {
 	render() {
-		let editButton = (this.props.edit) ?
+		let editButton = (this.props.edit && this.props.user && this.props.user.token) ?
 			null :
 			<EditButton
 				model={this.props.author}
@@ -25,7 +25,7 @@ class AuthorController extends React.Component {
 				onToggleEdit={this.props.onToggleEdit}
 				user={this.props.user} />;
 
-		let body = (this.props.edit) ?
+		let body = (this.props.edit && this.props.user && this.props.user.token) ?
 			<AuthorForm
 				{...this.props}
 				author={this.props.author}
@@ -41,7 +41,7 @@ class AuthorController extends React.Component {
 				onTabChange={this.props.onTabChange}
 				relations={this.props.relations} />;
 
-		let footer = (this.props.edit) ?
+		let footer = (this.props.edit && this.props.user && this.props.user.token) ?
 			<EditFooter
 				onCancel={this.props.onCancel.bind(this, "author")}
 				onDelete={this.props.onDeleteAuthor}

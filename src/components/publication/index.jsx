@@ -11,7 +11,7 @@ import PaginationLinks from "../links/pagination";
 
 class PublicationController extends React.Component {
 	render() {
-		let editButton = (this.props.edit) ?
+		let editButton = (this.props.edit && this.props.user && this.props.user.token) ?
 			null :
 			<EditButton
 				model={this.props.publication}
@@ -19,7 +19,7 @@ class PublicationController extends React.Component {
 				onToggleEdit={this.props.onToggleEdit}
 				user={this.props.user} />;
 
-		let body = (this.props.edit) ?
+		let body = (this.props.edit && this.props.user && this.props.user.token) ?
 			<PublicationForm
 				{...this.props}
 				onNavigate={this.props.onNavigate}
@@ -33,7 +33,7 @@ class PublicationController extends React.Component {
 				publication={this.props.publication}
 				relations={this.props.relations} />;
 
-		let footer = (this.props.edit) ?
+		let footer = (this.props.edit && this.props.user && this.props.user.token) ?
 			<EditFooter
 				onDelete={this.props.onDeletePublication}
 				onSave={this.props.onSavePublication}
