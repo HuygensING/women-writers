@@ -18,6 +18,10 @@ class Personal extends React.Component {
 					<Relation values={model["@relations"].isSpouseOf} />
 				</li>
 				<li>
+					<label>Related to</label>
+					<Relation values={model["@relations"].isRelatedTo} />
+				</li>
+				<li>
 					<label>Children</label>
 					<StringComponent value={model.children} />
 				</li>
