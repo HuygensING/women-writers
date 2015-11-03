@@ -26,7 +26,7 @@ class BasicInfoForm extends React.Component {
 		let hasGenre = (model._id == null) ?
 			null :
 			<li>
-				<label>Genre</label>
+				<label>Genres</label>
 				<SelectList
 					async={API.getGenre}
 					onChange={this.props.onChange.bind(this, ["@relations", "hasGenre"])}

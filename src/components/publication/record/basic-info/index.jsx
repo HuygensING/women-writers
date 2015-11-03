@@ -25,7 +25,7 @@ class BasicInfoForm extends React.Component {
 					<StringComponent value={model.documentType} />
 				</li>
 				<li>
-					<label>Genre</label>
+					<label>Genres</label>
 					<Relation values={model["@relations"].hasGenre} />
 				</li>
 				<li>
