@@ -215,7 +215,7 @@ let toFoundInCurrent = function(prevRelations, currentRelations, serverRemoved =
 	};
 };
 
-export function saveRelations(currentRelations, serverRelations, serverRemovedRelations, allRelations, sourceId, token) {
+export function saveRelations(currentRelations, serverRelations, serverRemovedRelations, allRelations, sourceId, token, saveCallback) {
 	let relationNames = Object.keys(currentRelations);
 	let added = relationNames
 		.reduce(toFoundInCurrent(serverRelations, currentRelations, serverRemovedRelations), {});
@@ -228,6 +228,8 @@ export function saveRelations(currentRelations, serverRelations, serverRemovedRe
 
 	let promisedRelations = added.concat(removed).map(toXhrPromise(token));
 	Promise.all(promisedRelations).then((responses) => {
-		console.log(responses);
+		console.log("promises done ", responses);
+		console.log("invoke save callback", saveCallback);
+		saveCallback();
 	});
 }

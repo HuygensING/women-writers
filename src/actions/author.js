@@ -44,10 +44,25 @@ export function fetchAuthor(id) {
 	};
 }
 
-
 export function saveAuthor() {
 	return function (dispatch, getState) {
 		let author = getState().authors.current;
+		let saveCallback = function() {
+			save(
+				config.authorUrl,
+				parseOutgoingAuthor(author),
+				getState().user.token,
+				(response) => {
+					dispatch({
+						type: "RECEIVE_AUTHOR",
+						response: response
+					});
+
+					dispatch(changeRoute("author", [response._id]));
+					dispatch(toggleEdit(false));
+				}
+			);
+		};
 
 		if (author._id != null) {
 			let unchangedAuthor = getState().authors.unchanged;
@@ -66,24 +81,14 @@ export function saveAuthor() {
 				prevRemovedRelations,
 				getState().relations.all,
 				author._id,
-				getState().user.token
+				getState().user.token,
+				saveCallback
 			);
+		} else {
+			saveCallback();
 		}
 
-		save(
-			config.authorUrl,
-			parseOutgoingAuthor(author),
-			getState().user.token,
-			(response) => {
-				dispatch({
-					type: "RECEIVE_AUTHOR",
-					response: response
-				});
 
-				dispatch(changeRoute("author", [response._id]));
-				dispatch(toggleEdit(false));
-			}
-		);
 	};
 }
 

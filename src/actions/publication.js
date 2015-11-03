@@ -44,11 +44,25 @@ export function fetchPublication(id) {
 	};
 }
 
-
 export function savePublication() {
 	return function (dispatch, getState) {
 		let publication = getState().publications.current;
+		let saveCallback = function() {
+			save(
+				config.publicationUrl,
+				parseOutgoingPublication(publication),
+				getState().user.token,
+				(response) => {
+					dispatch({
+						type: "RECEIVE_PUBLICATION",
+						response: response
+					});
 
+					dispatch(changeRoute("publication", [response._id]));
+					dispatch(toggleEdit(false));
+				}
+			);
+		};
 		if (publication._id != null) {
 			let unchangedPublication = getState().publications.unchanged;
 
@@ -59,34 +73,19 @@ export function savePublication() {
 			let currentRelations = publication["@relations"];
 			let prevRelations = unchangedPublication["@relations"];
 			let prevRemovedRelations = unchangedPublication["@removedRelations"];
-
-			console.log("savePublication():currentRelations", currentRelations);
-			console.log("savePublication():prevRelations", prevRelations);
-			console.log("savePublication():prevRemovedRelations", prevRemovedRelations);
 			saveRelations(
 				currentRelations,
 				prevRelations,
 				prevRemovedRelations,
 				getState().relations.all,
 				publication._id,
-				getState().user.token
+				getState().user.token,
+				saveCallback
 			);
+		} else {
+			saveCallback();
 		}
 
-		save(
-			config.publicationUrl,
-			parseOutgoingPublication(publication),
-			getState().user.token,
-			(response) => {
-				dispatch({
-					type: "RECEIVE_PUBLICATION",
-					response: response
-				});
-
-				dispatch(changeRoute("publication", [response._id]));
-				dispatch(toggleEdit(false));
-			}
-		);
 	};
 }
 

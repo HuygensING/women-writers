@@ -23,7 +23,7 @@ class BasicInfo extends React.Component {
 				</li>
 				<li>
 					<label>Person type</label>
-					<StringComponent value={model.persontype} />
+					<StringComponent value={model.types.join(", ")} />
 				</li>
 				<li>
 					<label>Gender</label>
