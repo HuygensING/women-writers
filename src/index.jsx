@@ -214,11 +214,11 @@ let AppRouter = Router.extend({
 	searchAuthors: function() {},
 	searchPublications: function() {},
 	notFound: function() {},
-	author: function(id, tab) {},
-	editAuthor: function(id, tab) {},
-	publication: function(id, tab) {},
-	editPublication: function(id, tab) {},
-	graph: function(domain, id) {},
+	author: function() {},
+	editAuthor: function() {},
+	publication: function() {},
+	editPublication: function() {},
+	graph: function() {},
 	receptions: function() {}
 });
 
