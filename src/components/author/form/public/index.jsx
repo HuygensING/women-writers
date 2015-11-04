@@ -44,4 +44,9 @@ class PublicForm extends React.Component {
 	}
 }
 
+PublicForm.propTypes = {
+	author: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
+
 export default form(PublicForm);

@@ -54,4 +54,8 @@ class BasicInfo extends React.Component {
 	}
 }
 
+BasicInfo.propTypes = {
+	author: React.PropTypes.object
+};
+
 export default BasicInfo;

@@ -127,7 +127,11 @@ class AuthorRecord extends React.Component {
 }
 
 AuthorRecord.propTypes = {
+	author: React.PropTypes.object,
 	id: React.PropTypes.string,
+	onNavigate: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
+	relations: React.PropTypes.object,
 	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"])
 };
 

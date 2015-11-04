@@ -56,4 +56,9 @@ class AuthorHeader extends React.Component {
 	}
 }
 
+AuthorHeader.propTypes = {
+	author: React.PropTypes.object,
+	onNavigate: React.PropTypes.func
+};
+
 export default AuthorHeader;
