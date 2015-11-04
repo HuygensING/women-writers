@@ -35,9 +35,9 @@ class PublicationController extends React.Component {
 
 		let footer = (this.props.edit && this.props.user && this.props.user.token) ?
 			<EditFooter
+				onCancel={this.props.onCancel.bind(this, "publication")}
 				onDelete={this.props.onDeletePublication}
 				onSave={this.props.onSavePublication}
-				onCancel={this.props.onCancel.bind(this, "publication")}
 				type="publication" /> :
 			null;
 
