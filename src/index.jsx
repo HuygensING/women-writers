@@ -63,7 +63,7 @@ let AppRouter = Router.extend({
 		this.on("route", (handler, props) =>
 			store.dispatch(changeRoute(handler, props))
 		);
-		store.dispatch(fetchRelations());	
+		store.dispatch(fetchRelations());
 	},
 
 	renderApp(nextState) {

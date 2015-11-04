@@ -16,5 +16,4 @@ export function unsetFacetValue(facetValues, field, value) {
 		return facetValues
 			.filter((facetValue) => field !== facetValue.name);
 	}
-
 }

@@ -1,14 +1,7 @@
-// TODO Remove relations
-// TODO Add new relation to main model
-
 import React from "react";
 import form from "hire-forms-form";
 
 import ReceptionForm from "./form";
-
-// import actions from "../../../../actions/relations";
-// import relationsStore from "../../../../stores/relations";
-
 import RelationDocument from "../../../values/relation-document";
 
 let toKeyValue = function(displayNames) {
