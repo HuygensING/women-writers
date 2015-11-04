@@ -66,6 +66,12 @@ class App extends React.Component {
 				table={this.props.graphs.table}
 				visible={this.props.router.graph.visible} /> : null;
 
+		let errorMessage = this.props.errors ?
+			(<div className="error-message">
+				Server error {this.props.errors.statusCode}: {this.props.errors.localMessage} {this.props.errors.message ? " - " + this.props.errors.message : null}
+			</div>)
+			: null;
+
 		return (
 			<div className="app">
 				<header>
@@ -78,6 +84,7 @@ class App extends React.Component {
 						user={this.props.user}
 					/>
 				</header>
+				{errorMessage}
 				{author}
 				<SearchAuthors
 					onResultsChange={this.props.onAuthorResultsChange}

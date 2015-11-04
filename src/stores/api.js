@@ -1,27 +1,11 @@
 import xhr from "xhr";
-
+import checkForError from "../server-error";
 import config from "../config";
 
 const DEFAULT_HEADERS = {
 	"Accept": "application/json",
 	"Content-Type": "application/json",
 	"VRE_ID": "WomenWriters"
-};
-
-let checkForError = function(err, response, body) {
-	if(err) { console.warn(err, body); }
-	switch (response.statusCode) {
-		case 401:
-			return true;
-
-		case 403:
-			return true;
-
-		case 404:
-			return true;
-	}
-
-	return false;
 };
 
 let getAutocompleteValues = function(name, query, done) {
@@ -56,6 +40,7 @@ let getSelectValues = function(name, done) {
 
 	let xhrDone = function(err, response, body) {
 		if (checkForError(err, response, body)) {
+			done();
 			return;
 		}
 		selectValues[name] = JSON.parse(body);

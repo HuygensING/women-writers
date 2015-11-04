@@ -1,13 +1,10 @@
 import xhr from "xhr";
+import checkForError from "../../server-error";
 
 const DEFAULT_HEADERS = {
 	"Accept": "application/json",
 	"Content-Type": "application/json",
 	"VRE_ID": "WomenWriters"
-};
-
-let checkForError = function(err, response, body) {
-	return false;
 };
 
 export function fetch(url, cb) {
@@ -114,7 +111,7 @@ let toXhrPromise = token => data =>
 			};
 
 			let done = function(err, resp, body) {
-				if (err) {
+				if (checkForError(err, resp, body)) {
 					reject(err);
 				} else {
 					resolve(body);

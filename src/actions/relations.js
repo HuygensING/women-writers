@@ -1,5 +1,7 @@
 import xhr from "xhr";
 import config from "../config";
+import checkForError from "../server-error";
+
 
 const DEFAULT_HEADERS = {
 	"Accept": "application/json",
@@ -17,7 +19,10 @@ export function requestRelations(cb) {
 	};
 
 	let done = function(err, response, body) {
-		if (err) { return; }
+		if (checkForError(err, response, body)) {
+			cb();
+			return;
+		}
 		cachedRelations = JSON.parse(body);
 		cb(cachedRelations);
 	};
