@@ -1,8 +1,0 @@
-{
-  "ids" : {
-    "type" : "String[]"
-  },
-  "type" : {
-    "type" : "String"
-  }
-}

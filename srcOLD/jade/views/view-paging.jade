@@ -1,8 +1,0 @@
-if resultIndex > 0
-	.paging-controls.smaller-text
-		span
-			= resultIndex
-			| &nbsp;of&nbsp;
-			= resultTotal
-		a.prev(href=config.viewUrl(prevId), style=prevId ? '' : 'visibility:hidden;') Prev
-		a.next(href=config.viewUrl(nextId), style=nextId ? '' : 'visibility:hidden;') Next
