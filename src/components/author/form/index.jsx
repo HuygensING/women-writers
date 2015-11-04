@@ -48,7 +48,7 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "public"}
 				label="Public">
 				<PublicForm
-					author={model} 
+					author={model}
 					onChange={this.props.onFormChange}
 					onDelete={this.props.onFormDelete}
 				/>

@@ -104,4 +104,9 @@ class PersonalForm extends React.Component {
 	}
 }
 
+PersonalForm.propTypes = {
+	author: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
+
 export default form(PersonalForm);
