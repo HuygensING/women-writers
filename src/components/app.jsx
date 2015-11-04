@@ -43,8 +43,8 @@ class App extends React.Component {
 				onFormChange={this.props.onChangePublicationKey}
 				onFormDelete={this.props.onDeletePublicationKey}
 				onNavigate={this.props.onNavigate}
-				onRefresh={this.props.onPublicationRefresh.bind(this, this.props.publications.current._id)}
 				onNavigateNextPage={this.props.onNavigateNextPublicationPage}
+				onRefresh={this.props.onPublicationRefresh.bind(this, this.props.publications.current._id)}
 				onSavePublication={this.props.onSavePublication}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
@@ -87,16 +87,16 @@ class App extends React.Component {
 				{errorMessage}
 				{author}
 				<SearchAuthors
-					onResultsChange={this.props.onAuthorResultsChange}
 					onQueryChange={this.props.onAuthorSearchChange}
+					onResultsChange={this.props.onAuthorResultsChange}
 					onSearchId={this.props.onAuthorSearchId}
 					onSelect={this.props.onResultSelect}
 					query={this.props.authors.query}
 					visible={this.props.router.searchAuthors.visible} />
 				{publication}
 				<SearchPublications
-					onResultsChange={this.props.onPublicationResultsChange}
 					onQueryChange={this.props.onPublicationSearchChange}
+					onResultsChange={this.props.onPublicationResultsChange}
 					onSearchId={this.props.onPublicationSearchId}
 					onSelect={this.props.onResultSelect}
 					query={this.props.publications.query}
@@ -122,13 +122,49 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-	// author: React.PropTypes.object,
+	authors: React.PropTypes.object,
+	errors: React.PropTypes.object,
+	graphs: React.PropTypes.object,
+	onAuthorRefresh: React.PropTypes.func,
+	onAuthorResultsChange: React.PropTypes.func,
 	onAuthorSearchChange: React.PropTypes.func,
+	onAuthorSearchId: React.PropTypes.func,
+	onCancel: React.PropTypes.func,
+	onChangeAuthorKey: React.PropTypes.func,
+	onChangePublicationKey: React.PropTypes.func,
+	onDeleteAuthor: React.PropTypes.func,
+	onDeleteAuthorKey: React.PropTypes.func,
+	onDeletePublication: React.PropTypes.func,
+	onDeletePublicationKey: React.PropTypes.func,
+	onGraphEntityClick: React.PropTypes.func,
+	onLoginChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
-	onToggleEdit: React.PropTypes.func
-	// publication: React.PropTypes.object,
-	// searchAuthors: React.PropTypes.object,
-	// searchPublications: React.PropTypes.object
+	onNavigateNextAuthorPage: React.PropTypes.func,
+	onNavigateNextPublicationPage: React.PropTypes.func,
+	onNewAuthor: React.PropTypes.func,
+	onNewPublication: React.PropTypes.func,
+	onPublicationRefresh: React.PropTypes.func,
+	onPublicationResultsChange: React.PropTypes.func,
+	onPublicationSearchChange: React.PropTypes.func,
+	onPublicationSearchId: React.PropTypes.func,
+	onReceptionToggle: React.PropTypes.func,
+	onResultSelect: React.PropTypes.func,
+	onSaveAuthor: React.PropTypes.func,
+	onSavePublication: React.PropTypes.func,
+	onSelectAuthorVariation: React.PropTypes.func,
+	onShowAuthorReceptions: React.PropTypes.func,
+	onShowPublicationReceptions: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
+	onToggleEdit: React.PropTypes.func,
+	onUnsetAuthorFacetValue: React.PropTypes.func,
+	onUnsetAuthorFullTextField: React.PropTypes.func,
+	onUnsetPublicationFacetValue: React.PropTypes.func,
+	onUnsetPublicationFullTextField: React.PropTypes.func,
+	publications: React.PropTypes.object,
+	receptions: React.PropTypes.object,
+	relations: React.PropTypes.object,
+	router: React.PropTypes.object,
+	user: React.PropTypes.object
 };
 
 export default App;
