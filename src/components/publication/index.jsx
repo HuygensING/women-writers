@@ -78,6 +78,18 @@ class PublicationController extends React.Component {
 PublicationController.propTypes = {
 	edit: React.PropTypes.bool,
 	id: React.PropTypes.string,
+	onCancel: React.PropTypes.func,
+	onDeletePublication: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
+	onNavigateNextPage: React.PropTypes.func,
+	onRefresh: React.PropTypes.func,
+	onSavePublication: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
+	onToggleEdit: React.PropTypes.func,
+	publication: React.PropTypes.object,
+	relations: React.PropTypes.object,
+	requesting: React.PropTypes.bool,
+	results: React.PropTypes.object,
 	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"]),
 	user: React.PropTypes.object,
 	visible: React.PropTypes.bool

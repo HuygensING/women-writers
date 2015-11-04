@@ -54,6 +54,10 @@ class PublicationRecord extends React.Component {
 
 PublicationRecord.propTypes = {
 	id: React.PropTypes.string,
+	onNavigate: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
+	publication: React.PropTypes.object,
+	relations: React.PropTypes.object,
 	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"])
 };
 
