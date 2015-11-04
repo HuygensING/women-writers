@@ -14,8 +14,6 @@ import {parseIncomingPublication, parseOutgoingPublication} from "./parsers/publ
 
 import saveRelations from "./utils/save-relations";
 
-// import router from "../router";
-
 const DEFAULT_HEADERS = {
 	"Accept": "application/json",
 	"Content-Type": "application/json",
@@ -59,7 +57,14 @@ let getAutocompleteValues = function(name, query, done) {
 	xhr(options, xhrDone);
 };
 
+let selectValues = {};
+
 let getSelectValues = function(name, done) {
+	if(selectValues[name]) {
+		done(selectValues[name]);
+		return;
+	}
+
 	let options = {
 		headers: DEFAULT_HEADERS,
 		url: `${config.baseUrl}/domain/wwkeywords/autocomplete?type=${name}&rows=1000`
@@ -69,8 +74,8 @@ let getSelectValues = function(name, done) {
 		if (checkForError(err, response, body)) {
 			return;
 		}
-
-		done(JSON.parse(body));
+		selectValues[name] = JSON.parse(body);
+		done(selectValues[name]);
 	};
 
 	xhr(options, xhrDone);
@@ -302,5 +307,12 @@ export default {
 
 	getGenre(done) {
 		getSelectValues("genre", done);
+	},
+
+	autoWarm(next) {
+		let promises = ["religion", "socialClass", "education", "maritalStatus", "profession", "financialSituation", "genre"]
+			.map((selVal) => new Promise((resolve) => getSelectValues(selVal, resolve)));
+
+		Promise.all(promises).then(() => next());
 	}
 };

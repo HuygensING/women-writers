@@ -35,7 +35,6 @@ export default function(state=initialState, action) {
 		case "RECEIVE_RELATIONS":
 			let authorRelations = action.response.filter(hasType("person"));
 			let publicationRelations = action.response.filter(hasType("document"));
-
 			return {...state, ...{
 				all: action.response,
 				author: authorRelations,

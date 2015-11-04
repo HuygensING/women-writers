@@ -1,16 +1,3 @@
-// import API from "../stores/api";
-
-// let firstTime = true;
-
-// let relationsActions = {
-// 	getRelations() {
-// 		if (firstTime) {
-// 			API.getRelations();
-// 		}
-// 	}
-// };
-
-// export default relationsActions;
 import xhr from "xhr";
 import config from "../config";
 
@@ -20,27 +7,29 @@ const DEFAULT_HEADERS = {
 	"VRE_ID": "WomenWriters"
 };
 
-let fetch = function(url, cb) {
+let cachedRelations = null;
+
+export function requestRelations(cb) {
+	if (cachedRelations) { cb(cachedRelations); return; }
 	let options = {
 		headers: DEFAULT_HEADERS,
-		url: url
+		url: config.relationsUrl
 	};
 
 	let done = function(err, response, body) {
-		if (err) { handleError(err, response, body); }
-
-		cb(JSON.parse(body));
+		if (err) { return; }
+		cachedRelations = JSON.parse(body);
+		cb(cachedRelations);
 	};
 
 	xhr(options, done);
-};
+}
 
 export function fetchRelations() {
-	return function (dispatch, getState) {
+	return function (dispatch) {
 		dispatch({type: "REQUEST_RELATIONS"});
 
-		return fetch(
-			config.relationsUrl,
+		return requestRelations(
 			(response) => dispatch({
 				type: "RECEIVE_RELATIONS",
 				response: response

@@ -34,11 +34,13 @@ import {
 } from "./actions/publication";
 
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
-import {fetchRelations} from "./actions/relations";
+import {fetchRelations, requestRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
 
 // COMPONENTS
 import App from "./components/app";
+import Loader from "./components/icons/loader";
+import API from "./stores/api";
 
 const rootPath = "/womenwriters/";
 
@@ -61,8 +63,7 @@ let AppRouter = Router.extend({
 		this.on("route", (handler, props) =>
 			store.dispatch(changeRoute(handler, props))
 		);
-
-		store.dispatch(fetchRelations());
+		store.dispatch(fetchRelations());	
 	},
 
 	renderApp(nextState) {
@@ -223,8 +224,7 @@ let AppRouter = Router.extend({
 	receptions: function() {}
 });
 
-document.addEventListener("DOMContentLoaded", () =>
-	new AppRouter().history.start({
-		root: rootPath
-	})
-);
+document.addEventListener("DOMContentLoaded", () => {
+	React.render(<Loader />, document.body);
+	requestRelations(() => API.autoWarm(() => new AppRouter().history.start({root: rootPath})));
+});
