@@ -1,4 +1,5 @@
 {
+	"extends": "eslint:recommended",
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
@@ -7,6 +8,7 @@
 	"rules": {
 		"eol-last": [0],
 		"strict": 0,
+		"no-console": 0,
 		"no-underscore-dangle": 0,
 		"react/display-name": 0,
 		"react/jsx-boolean-value": 1,

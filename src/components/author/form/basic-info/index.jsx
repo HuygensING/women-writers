@@ -128,4 +128,10 @@ class BasicInfoForm extends React.Component {
 	}
 }
 
+BasicInfoForm.propTypes = {
+	author: React.PropTypes.object,
+	onChange: React.PropTypes.func,
+	onDelete: React.PropTypes.func
+};
+
 export default form(BasicInfoForm);

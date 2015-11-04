@@ -19,9 +19,10 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "personal"}
 				label="Personal">
 				<PersonalForm
+					author={model}
 					onChange={this.props.onFormChange}
 					onDelete={this.props.onFormDelete}
-					author={model} />
+				/>
 				<div className="temp-data">
 					<h2>Temporary data</h2>
 					<ul>
@@ -47,9 +48,10 @@ class AuthorForm extends React.Component {
 				active={this.props.tab === "public"}
 				label="Public">
 				<PublicForm
+					author={model} 
 					onChange={this.props.onFormChange}
 					onDelete={this.props.onFormDelete}
-					author={model} />
+				/>
 				<div className="temp-data">
 					<h2>Temporary data</h2>
 					<ul>
@@ -122,9 +124,10 @@ class AuthorForm extends React.Component {
 					active={this.props.tab === "basic info"}
 					label="Basic info">
 					<BasicInfoForm
+						author={model}
 						onChange={this.props.onFormChange}
 						onDelete={this.props.onFormDelete}
-						author={model} />
+					/>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -170,7 +173,13 @@ class AuthorForm extends React.Component {
 }
 
 AuthorForm.propTypes = {
+	author: React.PropTypes.object,
 	id: React.PropTypes.string,
+	onFormChange: React.PropTypes.func,
+	onFormDelete: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
+	relations: React.PropTypes.object,
 	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"])
 };
 
