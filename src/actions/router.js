@@ -3,14 +3,14 @@ import {fetchAuthor, newAuthor} from "./author";
 import {fetchPublication, newPublication} from "./publication";
 
 export function changeRoute(handler, props=[]) {
-	return function (dispatch, getState) {
+	return function (dispatch) {
 		let hasAuthorHandler = (handler === "author" || handler === "editAuthor");
 		let hasPublicationHandler = (handler === "publication" || handler === "editPublication");
 		let hasGraphHandler = (handler === "graph");
 
 		let hasId = hasGraphHandler ?
 			(props[1] != null) :
-			(props[0] != null && props[0] != "new");
+			(props[0] != null && props[0] !== "new");
 
 		let hasGraphDomain = props[0] != null;
 

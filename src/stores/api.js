@@ -9,7 +9,7 @@ const DEFAULT_HEADERS = {
 };
 
 let checkForError = function(err, response, body) {
-	if(err) { console.warn(err); }
+	if(err) { console.warn(err, body); }
 	switch (response.statusCode) {
 		case 401:
 			return true;
