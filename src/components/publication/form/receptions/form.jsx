@@ -62,4 +62,9 @@ class ReceptionForm extends React.Component {
 	}
 }
 
+ReceptionForm.propTypes = {
+	onChange: React.PropTypes.func,
+	selectOptions: React.PropTypes.array
+};
+
 export default form(ReceptionForm);

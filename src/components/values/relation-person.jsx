@@ -27,6 +27,7 @@ class PersonRelation extends React.Component {
 }
 
 PersonRelation.propTypes = {
+	onNavigate: React.PropTypes.func,
 	values: React.PropTypes.array
 };
 

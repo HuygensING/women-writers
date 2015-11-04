@@ -12,4 +12,8 @@ class PublicationHeader extends React.Component {
 	}
 }
 
+PublicationHeader.propTypes = {
+	publication: React.PropTypes.object
+};
+
 export default PublicationHeader;

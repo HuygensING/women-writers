@@ -60,4 +60,9 @@ class BasicInfoForm extends React.Component {
 	}
 }
 
+BasicInfoForm.propTypes = {
+	onNavigate: React.PropTypes.func,
+	value: React.PropTypes.object
+};
+
 export default BasicInfoForm;
