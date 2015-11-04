@@ -51,6 +51,7 @@ class GraphController extends React.Component {
 
 GraphController.propTypes = {
 	data: React.PropTypes.object,
+	id: React.PropTypes.string,
 	onEntityClick: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	table: React.PropTypes.object,

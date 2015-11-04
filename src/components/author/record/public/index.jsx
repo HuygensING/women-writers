@@ -29,4 +29,8 @@ class Public extends React.Component {
 	}
 }
 
+Public.propTypes = {
+	author: React.PropTypes.object
+};
+
 export default Public;

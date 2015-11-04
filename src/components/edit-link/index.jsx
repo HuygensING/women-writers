@@ -53,4 +53,10 @@ class LinkForm extends React.Component {
 	}
 }
 
+LinkForm.propTypes = {
+	handleChange: React.PropTypes.func,
+	onInvalid: React.PropTypes.func,
+	value: React.PropTypes.string
+};
+
 export default form(LinkForm, "hire-forms-link-form");

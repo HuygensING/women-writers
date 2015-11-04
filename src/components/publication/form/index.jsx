@@ -81,6 +81,12 @@ class PublicationForm extends React.Component {
 
 PublicationForm.propTypes = {
 	id: React.PropTypes.string,
+	onFormChange: React.PropTypes.func,
+	onFormDelete: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
+	onTabChange: React.PropTypes.func,
+	publication: React.PropTypes.object,
+	relations: React.PropTypes.object,
 	tab: React.PropTypes.oneOf(["basic info", "receptions", "links"])
 };
 

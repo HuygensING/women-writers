@@ -25,6 +25,8 @@ class EditButton extends React.Component {
 
 EditButton.propTypes = {
 	model: React.PropTypes.object,
+	onRefresh: React.PropTypes.func,
+	onToggleEdit: React.PropTypes.func,
 	user: React.PropTypes.object
 };
 

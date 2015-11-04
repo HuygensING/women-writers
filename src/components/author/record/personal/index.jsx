@@ -50,4 +50,9 @@ class Personal extends React.Component {
 	}
 }
 
+Personal.propTypes = {
+	author: React.PropTypes.object,
+	onNavigate: React.PropTypes.func
+};
+
 export default Personal;

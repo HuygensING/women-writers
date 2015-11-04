@@ -68,4 +68,12 @@ class MainMenu extends React.Component {
 	}
 }
 
+MainMenu.propTypes = {
+	onLoginChange: React.PropTypes.func,
+	onNavigate: React.PropTypes.func,
+	onNewAuthor: React.PropTypes.func,
+	onNewPublication: React.PropTypes.func,
+	user: React.PropTypes.object
+};
+
 export default MainMenu;
