@@ -8,4 +8,4 @@ export function validateDate(value) {
 		isValid: isValid,
 		message: isValid ? "" : "A date should be formatted as: DD-MM-YYYY. \nOptionally a '~' (approximate) or '?' (uncertain) can be added."
 	};
-};
+}
