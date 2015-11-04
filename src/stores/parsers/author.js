@@ -22,11 +22,6 @@ let outGoingParser = function(key, value, obj) {
 	if ((key === "gender") || (key === "children")) {
 		obj[key] = value.toUpperCase();
 	}
-
-	if (key === "persontype") {
-		delete obj[key];
-	}
-
 };
 
 export let parseIncomingAuthor = function(data) {
