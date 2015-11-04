@@ -12,9 +12,9 @@ class Links extends React.Component {
 				</li>
 			);
 
-			links = <ul>{links}</ul>
+			links = <ul>{links}</ul>;
 		} else {
-			links = <div className="hire-empty-list">The list of links is empty.</div>
+			links = <div className="hire-empty-list">The list of links is empty.</div>;
 		}
 
 		return links;

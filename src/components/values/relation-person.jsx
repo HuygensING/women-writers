@@ -14,7 +14,7 @@ class PersonRelation extends React.Component {
 					onNavigate={this.props.onNavigate}
 					value={v.value} />
 			</li>
-		)
+		);
 
 		return (
 			<span>

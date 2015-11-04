@@ -14,10 +14,10 @@ class Str extends React.Component {
 
 Str.propTypes = {
 	value: React.PropTypes.string
-}
+};
 
 Str.defaultProps = {
 	value: ""
-}
+};
 
 export default Str;

@@ -1,7 +1,5 @@
 import React from "react";
 
-import RelationAuthor from "../../values/relation-person";
-
 class PublicationHeader extends React.Component {
 	render() {
 		return (

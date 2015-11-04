@@ -32,8 +32,6 @@ let validateURL = function(value) {
 
 class LinkForm extends React.Component {
 	render() {
-		let model = this.props.value;
-
 		return (
 			<ul>
 				<li>

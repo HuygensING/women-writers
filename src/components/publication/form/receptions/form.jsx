@@ -34,8 +34,6 @@ class ReceptionForm extends React.Component {
 	}
 
 	render() {
-		let active = (this.state.relationType.key !== "" && this.state.relation.key !== "");
-
 		let button = (this.state.relation.key !== "" && this.state.relationType.key !== "") ?
 			<li>
 				<button onClick={this.handleSubmit.bind(this)}>
