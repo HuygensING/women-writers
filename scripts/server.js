@@ -31,11 +31,11 @@ browserSync.init({
 		middleware: [
 			proxy(proxyOptions),
 			modRewrite([
-				"^/womenwriters/css/(.*)$ /css/$1 [L]",
-				"^/womenwriters/js/(.*).js$ /js/$1.js [L]",
-				"^/womenwriters/images/(.*)$ /images/$1 [L]",
-				"^/womenwriters/fonts/(.*)$ /fonts/$1 [L]",
-				"^/womenwriters/?.*$ /index.html [L]"
+				"^/womenwriters/fe/css/(.*)$ /css/$1 [L]",
+				"^/womenwriters/fe/js/(.*).js$ /js/$1.js [L]",
+				"^/womenwriters/fe/images/(.*)$ /images/$1 [L]",
+				"^/womenwriters/fe/fonts/(.*)$ /fonts/$1 [L]",
+				"^/womenwriters/fe/?.*$ /index.html [L]"
 			])
 		]
 	}
