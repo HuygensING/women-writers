@@ -8,9 +8,8 @@ import AuthorForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
+import VariationSelect from "../values/variation-select";
 import VariationData from "../values/variation-data";
-import Select from "hire-forms-select";
-
 
 /*
  * AuthorController for the AuthorRecord and AuthorForm
@@ -19,15 +18,6 @@ import Select from "hire-forms-select";
  * use the same data.
  */
 class AuthorController extends React.Component {
-
-	onSelectVariation(type) {
-		let found = (this.props.author["@variationRefs"] || []).filter((v) => v.type === type);
-		if (found.length) {
-			this.props.onSelectVariation(type, found[0].id);
-		} else {
-			this.props.onSelectVariation(null);
-		}
-	}
 
 	render() {
 		let editButton = (this.props.edit && this.props.user && this.props.user.token) ?
@@ -76,13 +66,12 @@ class AuthorController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
-		let variations = (this.props.author["@variationRefs"] || []).filter((v) => v.type !== "wwperson").map((v) => v.type);
-		let variationSelect = variations.length ?
-			<Select
-				onChange={this.onSelectVariation.bind(this)}
-				options={["Show other data", ...variations]}
-				value={this.props.showVariation ? this.props.showVariation : "Show other data"} />
-			: null;
+		let variationSelect = (<VariationSelect
+				onSelectVariation={this.props.onSelectVariation}
+				showVariation={this.props.showVariation}
+				variationRefs={this.props.author["@variationRefs"]}
+			/>);
+
 
 		let variationDataComponent = this.props.variationData ?
 			<VariationData data={this.props.variationData} /> :
