@@ -18,9 +18,25 @@ class AuthorRecord extends React.Component {
 				variationRefs={this.props.author["@variationRefs"]}
 			/>);
 
-		let variationBasicComponent = this.props.variationData ?
-			<BasicInfo author={this.props.variationData} /> :
-			null;
+		let variationBasicComponent = this.props.variationData ? <BasicInfo author={this.props.variationData} /> : null;
+		let variationPersonalComponent = this.props.variationData ? <Personal author={this.props.variationData} onNavigate={this.props.onNavigate} /> : null;
+		let variationPublicComponent = this.props.variationData ? <Public author={this.props.variationData} onNavigate={this.props.onNavigate} /> : null;
+		let variationPublicationsComponent = this.props.variationData ? (
+			<RelationList
+				model={this.props.variationData}
+				modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy"))}
+				onNavigate={this.props.onNavigate}
+				relations={this.props.relations} />) : null;
+
+		let variationReceptionsComponent = this.props.variationData ? (
+			<RelationList
+				model={this.props.variationData}
+				modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", true))}
+				onNavigate={this.props.onNavigate}
+				relations={this.props.relations} />) : null;
+
+		let variationLinksComponent = this.props.variationData ? <Links values={this.props.variationData} /> : null;
+
 
 		return (
 			<Tabs onChange={this.props.onTabChange}>
@@ -68,7 +84,10 @@ class AuthorRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "personal"}
 					label="Personal">
-					<Personal author={this.props.author} onNavigate={this.props.onNavigate} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationPersonalComponent}</div>
+						<Personal author={this.props.author} onNavigate={this.props.onNavigate} />
+					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -90,7 +109,10 @@ class AuthorRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "public"}
 					label="Public">
-					<Public author={this.props.author} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationPublicComponent}</div>
+						<Public author={this.props.author} />
+					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -113,27 +135,36 @@ class AuthorRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "publications"}
 					label="Publications">
-					<RelationList
-						model={this.props.author}
-						modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy"))}
-						onNavigate={this.props.onNavigate}
-						relations={this.props.relations} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationPublicationsComponent}</div>
+						<RelationList
+							model={this.props.author}
+							modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy"))}
+							onNavigate={this.props.onNavigate}
+							relations={this.props.relations} />
+					</div>
 				</Tab>
 
 				<Tab
 					active={this.props.tab === "receptions"}
 					label="Receptions">
-					<RelationList
-						model={this.props.author}
-						modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", true))}
-						onNavigate={this.props.onNavigate}
-						relations={this.props.relations} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationReceptionsComponent}</div>
+						<RelationList
+							model={this.props.author}
+							modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", true))}
+							onNavigate={this.props.onNavigate}
+							relations={this.props.relations} />
+					</div>
 				</Tab>
 
 				<Tab
 					active={this.props.tab === "links"}
 					label="Links">
-					<Links values={this.props.author.links} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationLinksComponent}</div>
+						<Links values={this.props.author.links} />
+					</div>
 				</Tab>
 			</Tabs>
 		);

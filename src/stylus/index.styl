@@ -391,7 +391,7 @@ ul.hire-options
 .author .variations,
 .publication .variations
 	float right
-	width 50%
+	width 48%
 	& header
 		margin-bottom -24px
 		font-size 0.8em
@@ -409,5 +409,18 @@ ul.hire-options
 .record-container
 	padding 0
 	overflow hidden
+	min-height 100px
+
 .record-container > .record
 	box-shadow none
+
+.variations + .record
+	width 48%
+
+.variations:empty + .record
+	width 100%
+
+.relation.document-relation li
+	width 100%
+	margin-bottom 20px
+
