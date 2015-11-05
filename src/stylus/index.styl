@@ -333,8 +333,6 @@ ul.hire-options
 
 .hire-forms-form
 	&.names-form > ul
-		width 600px
-
 		& > li
 			inline_block()
 			margin-bottom 0
@@ -411,10 +409,15 @@ ul.hire-options
 	overflow hidden
 	min-height 100px
 
+.record-container > .hire-forms-form,
+.record-container > .hire-multi-form
+	padding 20px
+
 .record-container > .record
 	box-shadow none
 
-.variations + .record
+.variations + .record,
+.variations + .hire-forms-form
 	width 48%
 
 .variations:empty + .record
@@ -424,3 +427,5 @@ ul.hire-options
 	width 100%
 	margin-bottom 20px
 
+.variations > .hire-select
+	float right
