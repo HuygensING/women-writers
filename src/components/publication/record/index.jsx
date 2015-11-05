@@ -18,6 +18,15 @@ class PublicationRecord extends React.Component {
 			<BasicInfo onNavigate={this.props.onNavigate} value={this.props.variationData} /> :
 			null;
 
+		let variationReceptionComponent = this.props.variationData ?
+			<RelationList
+				model={this.props.variationData}
+				modelRelations={this.props.relations.publicationPublication}
+				onNavigate={this.props.onNavigate}
+				relations={this.props.relations} /> : null;
+
+		let variationLinksComponent = this.props.variationData ? <Links values={this.props.variationData} /> : null;
+
 		return (
 			<Tabs onChange={this.props.onTabChange}>
 				<Tab
@@ -50,16 +59,22 @@ class PublicationRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "receptions"}
 					label="Receptions">
-					<RelationList
-						model={this.props.publication}
-						modelRelations={this.props.relations.publicationPublication}
-						onNavigate={this.props.onNavigate}
-						relations={this.props.relations} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationReceptionComponent}</div>
+						<RelationList
+							model={this.props.publication}
+							modelRelations={this.props.relations.publicationPublication}
+							onNavigate={this.props.onNavigate}
+							relations={this.props.relations} />
+					</div>
 				</Tab>
 				<Tab
 					active={this.props.tab === "links"}
 					label="Links">
-					<Links values={this.props.publication.links} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationLinksComponent}</div>
+						<Links values={this.props.publication.links} />
+					</div>
 				</Tab>
 			</Tabs>
 		);
