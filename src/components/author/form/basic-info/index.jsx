@@ -14,7 +14,11 @@ class BasicInfoForm extends React.Component {
 
 	onNameChange(key, value) {
 		let newKey, newValue;
-		if(key.length > 2) {
+
+		if(key[4] === "REMOVE") {
+			newKey = key.slice(0, 3);
+			newValue = this.props.author.names[key[1]].components.filter((v, i) => i !== key[3]);
+		} else if(key.length > 2) {
 			newKey = key.slice(0, 4);
 			newValue = {
 				type: key[4],
@@ -22,11 +26,10 @@ class BasicInfoForm extends React.Component {
 			};
 		} else {
 			newKey = [...key, "components"];
-			newValue = [
-				{type: "FORENAME", value: value.FORENAME || ""},
-				{type: "SURNAME", value: value.SURNAME || ""}
-			];
-
+			newValue = [];
+			if(value.FORENAME) { newValue.push({type: "FORENAME", value: value.FORENAME || ""}); }
+			if(value.NAME_LINK) { newValue.push({type: "NAME_LINK", value: value.NAME_LINK || ""}); }
+			if(value.SURNAME) { newValue.push({type: "SURNAME", value: value.SURNAME || ""}); }
 		}
 		this.props.onChange(newKey, newValue);
 	}
@@ -96,7 +99,7 @@ class BasicInfoForm extends React.Component {
 					<label>Type</label>
 					<SelectList
 						onChange={this.props.onChange.bind(this, "types")}
-						options={["Archetype", "Author", "Pseudonym"]}
+						options={["Archetype", "Author", "Pseudonym", "Reader"]}
 						values={model.types} />
 				</li>
 				<li>
