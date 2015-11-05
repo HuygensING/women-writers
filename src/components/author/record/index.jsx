@@ -27,8 +27,10 @@ class AuthorRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "basic info"}
 					label="Basic info">
-					<div className="variations">{variationSelect}{variationBasicComponent}</div>
-					<BasicInfo author={this.props.author} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationBasicComponent}</div>
+						<BasicInfo author={this.props.author} />
+					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>

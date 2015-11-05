@@ -23,10 +23,12 @@ class PublicationRecord extends React.Component {
 				<Tab
 					active={this.props.tab === "basic info"}
 					label="Basic info">
-					<div className="variations">{variationSelect}{variationBasicComponent}</div>
-					<BasicInfo
-						onNavigate={this.props.onNavigate}
-						value={this.props.publication} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationBasicComponent}</div>
+						<BasicInfo
+							onNavigate={this.props.onNavigate}
+							value={this.props.publication} />
+					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>
@@ -67,7 +69,7 @@ class PublicationRecord extends React.Component {
 PublicationRecord.propTypes = {
 	id: React.PropTypes.string,
 	onNavigate: React.PropTypes.func,
-	onSelectVariation: React.PropTypes.func,	
+	onSelectVariation: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object,
