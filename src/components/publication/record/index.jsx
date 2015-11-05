@@ -4,14 +4,26 @@ import {Tabs, Tab} from "hire-tabs";
 import BasicInfo from "./basic-info";
 import RelationList from "../../relation-list";
 import Links from "../../links";
+import VariationSelect from "../../values/variation-select";
 
 class PublicationRecord extends React.Component {
 	render() {
+		let variationSelect = (<VariationSelect
+				onSelectVariation={this.props.onSelectVariation}
+				showVariation={this.props.showVariation}
+				variationRefs={this.props.publication["@variationRefs"]}
+			/>);
+
+		let variationBasicComponent = this.props.variationData ?
+			<BasicInfo onNavigate={this.props.onNavigate} value={this.props.variationData} /> :
+			null;
+
 		return (
 			<Tabs onChange={this.props.onTabChange}>
 				<Tab
 					active={this.props.tab === "basic info"}
 					label="Basic info">
+					<div className="variations">{variationSelect}{variationBasicComponent}</div>
 					<BasicInfo
 						onNavigate={this.props.onNavigate}
 						value={this.props.publication} />
@@ -55,10 +67,13 @@ class PublicationRecord extends React.Component {
 PublicationRecord.propTypes = {
 	id: React.PropTypes.string,
 	onNavigate: React.PropTypes.func,
+	onSelectVariation: React.PropTypes.func,	
 	onTabChange: React.PropTypes.func,
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object,
-	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"])
+	showVariation: React.PropTypes.string,
+	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"]),
+	variationData: React.PropTypes.object
 };
 
 PublicationRecord.defaultProps = {

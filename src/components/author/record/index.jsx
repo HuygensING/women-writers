@@ -7,15 +7,27 @@ import Public from "./public";
 import RelationList from "../../relation-list";
 import Links from "../../links";
 import {hasRegularName} from "../util";
+import VariationSelect from "../../values/variation-select";
 
 
 class AuthorRecord extends React.Component {
 	render() {
+		let variationSelect = (<VariationSelect
+				onSelectVariation={this.props.onSelectVariation}
+				showVariation={this.props.showVariation}
+				variationRefs={this.props.author["@variationRefs"]}
+			/>);
+
+		let variationBasicComponent = this.props.variationData ?
+			<BasicInfo author={this.props.variationData} /> :
+			null;
+
 		return (
 			<Tabs onChange={this.props.onTabChange}>
 				<Tab
 					active={this.props.tab === "basic info"}
 					label="Basic info">
+					<div className="variations">{variationSelect}{variationBasicComponent}</div>
 					<BasicInfo author={this.props.author} />
 					<div className="temp-data">
 						<h2>Temporary data</h2>
@@ -130,9 +142,12 @@ AuthorRecord.propTypes = {
 	author: React.PropTypes.object,
 	id: React.PropTypes.string,
 	onNavigate: React.PropTypes.func,
+	onSelectVariation: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
 	relations: React.PropTypes.object,
-	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"])
+	showVariation: React.PropTypes.string,
+	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"]),
+	variationData: React.PropTypes.object
 };
 
 export default AuthorRecord;

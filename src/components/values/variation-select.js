@@ -15,7 +15,10 @@ class VariationSelect extends React.Component {
 		let variations = (this.props.variationRefs || [])
 			.filter((v) => ["wwperson", "wwdocument", "person", "document"].indexOf(v.type) < 0)
 			.map((v) => v.type);
-		if(variations.length) {
+
+		if(this.props.showVariation) {
+			return (<header>{this.props.showVariation}<button onClick={this.onSelectVariation.bind(this, null)}>✕</button></header>);
+		} else if(variations.length) {
 			return (<Select
 				onChange={this.onSelectVariation.bind(this)}
 				options={["Show other data", ...variations]}

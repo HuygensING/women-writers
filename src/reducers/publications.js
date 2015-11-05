@@ -137,7 +137,7 @@ export default function(state=initialState, action) {
 			return {...state, showVariation: action.variationType};
 
 		case "RECEIVE_PUBLICATION_VARIATION_DATA":
-			return {...state, variationData: action.data};
+			return {...state, variationData: action.data === null ? null : parseIncomingPublication(action.data)};
 
 	}
 }

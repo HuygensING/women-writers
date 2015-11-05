@@ -8,8 +8,6 @@ import PublicationForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
-import VariationSelect from "../values/variation-select";
-import VariationData from "../values/variation-data";
 
 class PublicationController extends React.Component {
 	render() {
@@ -57,18 +55,6 @@ class PublicationController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
-		let variationSelect = (<VariationSelect
-				onSelectVariation={this.props.onSelectVariation}
-				showVariation={this.props.showVariation}
-				variationRefs={this.props.publication["@variationRefs"]}
-			/>);
-
-
-		let variationDataComponent = this.props.variationData ?
-			<VariationData data={this.props.variationData} /> :
-			null;
-
-
 		return (
 			<div
 				className={cx(
@@ -78,10 +64,6 @@ class PublicationController extends React.Component {
 				)}>
 				{resultsLink}
 				<PublicationHeader publication={this.props.publication} />
-				<div className="variations">
-					{variationSelect}
-					{variationDataComponent}
-				</div>
 				{paginationLinks}
 				{editButton}
 				{graphLink}

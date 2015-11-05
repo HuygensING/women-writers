@@ -8,8 +8,7 @@ import AuthorForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
-import VariationSelect from "../values/variation-select";
-import VariationData from "../values/variation-data";
+
 
 /*
  * AuthorController for the AuthorRecord and AuthorForm
@@ -66,17 +65,6 @@ class AuthorController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
-		let variationSelect = (<VariationSelect
-				onSelectVariation={this.props.onSelectVariation}
-				showVariation={this.props.showVariation}
-				variationRefs={this.props.author["@variationRefs"]}
-			/>);
-
-
-		let variationDataComponent = this.props.variationData ?
-			<VariationData data={this.props.variationData} /> :
-			null;
-
 		return (
 			<div
 				className={cx(
@@ -86,10 +74,6 @@ class AuthorController extends React.Component {
 				)}>
 				{resultsLink}
 				<AuthorHeader author={this.props.author} onNavigate={this.props.onNavigate} />
-				<div className="variations">
-					{variationSelect}
-					{variationDataComponent}
-				</div>
 				{paginationLinks}
 				{editButton}
 				{graphLink}

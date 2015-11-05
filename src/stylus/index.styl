@@ -390,10 +390,19 @@ ul.hire-options
 
 .author .variations,
 .publication .variations
-	position absolute
-	right 5%
-	z-index 9999
+	float right
+	width 50%
+	& header
+		margin-bottom -24px
+		font-size 0.8em
+		text-align right
+		& > button
+			multi_form_button()
+			position static
+			margin 0
+			&:hover
+				background-color red
+	& > .record
+		color #666
+		box-shadow none
 
-.author .variation-data,
-.publication .variation-data
-	max-width 15%
