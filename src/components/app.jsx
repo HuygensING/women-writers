@@ -46,14 +46,17 @@ class App extends React.Component {
 				onNavigateNextPage={this.props.onNavigateNextPublicationPage}
 				onRefresh={this.props.onPublicationRefresh.bind(this, this.props.publications.current._id)}
 				onSavePublication={this.props.onSavePublication}
+				onSelectVariation={this.props.onSelectPublicationVariation}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
 				publication={this.props.publications.current}
 				relations={this.props.relations}
 				requesting={this.props.publications.requesting}
 				results={this.props.publications.results}
+				showVariation={this.props.publications.showVariation}
 				tab={this.props.router.publication.tab}
 				user={this.props.user}
+				variationData={this.props.publications.variationData}
 				visible={this.props.router.publication.visible} /> :
 			null;
 
@@ -152,6 +155,7 @@ App.propTypes = {
 	onSaveAuthor: React.PropTypes.func,
 	onSavePublication: React.PropTypes.func,
 	onSelectAuthorVariation: React.PropTypes.func,
+	onSelectPublicationVariation: React.PropTypes.func,
 	onShowAuthorReceptions: React.PropTypes.func,
 	onShowPublicationReceptions: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,

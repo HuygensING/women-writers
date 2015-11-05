@@ -30,7 +30,8 @@ import {
 	rollbackPublication,
 	refreshPublication,
 	setPublicationResultIds,
-	requestNextPublicationResults
+	requestNextPublicationResults,
+	selectPublicationVariation
 } from "./actions/publication";
 
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
@@ -147,7 +148,9 @@ let AppRouter = Router.extend({
 				}
 				onSelectAuthorVariation={(type, id) =>
 					store.dispatch(selectAuthorVariation(type, id))
-
+				}
+				onSelectPublicationVariation={(type, id) =>
+					store.dispatch(selectPublicationVariation(type, id))
 				}
 				onShowAuthorReceptions={(searchId) =>
 					store.dispatch(setSearchId(searchId, "author"))

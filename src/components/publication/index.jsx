@@ -8,6 +8,8 @@ import PublicationForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
+import VariationSelect from "../values/variation-select";
+import VariationData from "../values/variation-data";
 
 class PublicationController extends React.Component {
 	render() {
@@ -55,6 +57,18 @@ class PublicationController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
+		let variationSelect = (<VariationSelect
+				onSelectVariation={this.props.onSelectVariation}
+				showVariation={this.props.showVariation}
+				variationRefs={this.props.publication["@variationRefs"]}
+			/>);
+
+
+		let variationDataComponent = this.props.variationData ?
+			<VariationData data={this.props.variationData} /> :
+			null;
+
+
 		return (
 			<div
 				className={cx(
@@ -63,8 +77,11 @@ class PublicationController extends React.Component {
 					{visible: this.props.visible}
 				)}>
 				{resultsLink}
-				<PublicationHeader
-					publication={this.props.publication} />
+				<PublicationHeader publication={this.props.publication} />
+				<div className="variations">
+					{variationSelect}
+					{variationDataComponent}
+				</div>
 				{paginationLinks}
 				{editButton}
 				{graphLink}
@@ -84,14 +101,17 @@ PublicationController.propTypes = {
 	onNavigateNextPage: React.PropTypes.func,
 	onRefresh: React.PropTypes.func,
 	onSavePublication: React.PropTypes.func,
+	onSelectVariation: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
 	onToggleEdit: React.PropTypes.func,
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object,
 	requesting: React.PropTypes.bool,
 	results: React.PropTypes.object,
+	showVariation: React.PropTypes.string,
 	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"]),
 	user: React.PropTypes.object,
+	variationData: React.PropTypes.object,	
 	visible: React.PropTypes.bool
 };
 

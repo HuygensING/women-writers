@@ -12,7 +12,9 @@ class VariationSelect extends React.Component {
 	}
 
 	render() {
-		let variations = (this.props.variationRefs || []).filter((v) => v.type !== "wwperson").map((v) => v.type);
+		let variations = (this.props.variationRefs || [])
+			.filter((v) => ["wwperson", "wwdocument", "person", "document"].indexOf(v.type) < 0)
+			.map((v) => v.type);
 		if(variations.length) {
 			return (<Select
 				onChange={this.onSelectVariation.bind(this)}

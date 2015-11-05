@@ -190,3 +190,18 @@ export function requestNextPublicationResults(url, onNavigate) {
 		});
 	};
 }
+
+export function selectPublicationVariation(type, id) {
+
+	return function(dispatch) {
+		dispatch({type: "SELECT_PUBLICATION_VARIATION_TYPE", variationType: type});
+		if(id) {
+			let url = config.baseUrl + "/domain/" + type + "s/" + id;
+			fetch(url, (results) => {
+				dispatch({type: "RECEIVE_PUBLICATION_VARIATION_DATA", data: results});
+			});
+		} else {
+			dispatch({type: "RECEIVE_PUBLICATION_VARIATION_DATA", data: null});
+		}
+	};
+}

@@ -26,6 +26,8 @@ let initialState = {
 	current: MODEL,
 	unchanged: null,
 	requesting: false,
+	showVariation: null,
+	variationData: null,
 	query: {
 		term: "",
 		facetValues: []
@@ -130,6 +132,12 @@ export default function(state=initialState, action) {
 					_next: action._next
 				}
 			}};
+
+		case "SELECT_PUBLICATION_VARIATION_TYPE":
+			return {...state, showVariation: action.variationType};
+
+		case "RECEIVE_PUBLICATION_VARIATION_DATA":
+			return {...state, variationData: action.data};
 
 	}
 }
