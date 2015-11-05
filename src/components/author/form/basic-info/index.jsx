@@ -14,8 +14,10 @@ class BasicInfoForm extends React.Component {
 
 	onNameChange(key, value) {
 		let newKey, newValue;
-
-		if(key[4] === "REMOVE") {
+		if(key.length === 4) {
+			newKey = key;
+			newValue = {type: value, value: ""};
+		} else if(key[4] === "REMOVE") {
 			newKey = key.slice(0, 3);
 			newValue = this.props.author.names[key[1]].components.filter((v, i) => i !== key[3]);
 		} else if(key.length > 2) {
