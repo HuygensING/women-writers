@@ -11,20 +11,48 @@ import BasicInfoForm from "./basic-info";
 import ReceptionsForm from "./receptions";
 import LinkForm from "../../edit-link";
 
+import BasicInfo from "../record/basic-info";
+import RelationList from "../../relation-list";
+import Links from "../../links";
+import VariationSelect from "../../values/variation-select";
+
 class PublicationForm extends React.Component {
 	render() {
 		let model = this.props.publication;
+		let variationSelect = (<VariationSelect
+				onSelectVariation={this.props.onSelectVariation}
+				showVariation={this.props.showVariation}
+				variationRefs={this.props.publication["@variationRefs"]}
+			/>);
+
+		let variationBasicComponent = this.props.variationData ?
+			<BasicInfo onNavigate={this.props.onNavigate} value={this.props.variationData} /> :
+			null;
+
+		let variationReceptionsComponent = this.props.variationData ?
+			<RelationList
+				model={this.props.variationData}
+				modelRelations={this.props.relations.publicationPublication}
+				onNavigate={this.props.onNavigate}
+				relations={this.props.relations} /> : null;
+
+		let variationLinksComponent = this.props.variationData ? <Links values={this.props.variationData} /> : null;
+
+
 
 		let receptions = (model._id != null) ?
 			<Tab
 				active={this.props.tab === "receptions"}
 				label="Receptions">
-				<ReceptionsForm
-					onChange={this.props.onFormChange}
-					onDelete={this.props.onFormDelete}
-					onNavigate={this.props.onNavigate}
-					publication={model}
-					relations={this.props.relations} />
+				<div className="record-container">
+					<div className="variations">{variationSelect}{variationReceptionsComponent}</div>
+					<ReceptionsForm
+						onChange={this.props.onFormChange}
+						onDelete={this.props.onFormDelete}
+						onNavigate={this.props.onNavigate}
+						publication={model}
+						relations={this.props.relations} />
+				</div>
 			</Tab> :
 			null;
 
@@ -32,16 +60,19 @@ class PublicationForm extends React.Component {
 			<Tab
 				active={this.props.tab === "links"}
 				label="Links">
-				<MultiForm
-					attr={"links"}
-					component={LinkForm}
-					model={{
-						label: "",
-						url: ""
-					}}
-					onChange={this.props.onFormChange}
-					onDelete={this.props.onFormDelete}
-					values={model.links} />
+				<div className="record-container">
+					<div className="variations">{variationSelect}{variationLinksComponent}</div>
+					<MultiForm
+						attr={"links"}
+						component={LinkForm}
+						model={{
+							label: "",
+							url: ""
+						}}
+						onChange={this.props.onFormChange}
+						onDelete={this.props.onFormDelete}
+						values={model.links} />
+				</div>
 			</Tab> :
 			null;
 
@@ -50,10 +81,13 @@ class PublicationForm extends React.Component {
 				<Tab
 					active={this.props.tab === "basic info"}
 					label="Basic info">
-					<BasicInfoForm
-						onChange={this.props.onFormChange}
-						onDelete={this.props.onFormDelete}
-						publication={model} />
+					<div className="record-container">
+						<div className="variations">{variationSelect}{variationBasicComponent}</div>
+						<BasicInfoForm
+							onChange={this.props.onFormChange}
+							onDelete={this.props.onFormDelete}
+							publication={model} />
+					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
 						<ul>

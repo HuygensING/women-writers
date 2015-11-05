@@ -53,12 +53,16 @@ export default function(state=initialState, action) {
 				cached: {...state.cached, ...{[parsedPublication._id]: parsedPublication}},
 				current: parsedPublication,
 				unchanged: cloneDeep(parsedPublication),
+				showVariation: null,
+				variationData: null,
 				requesting: false
 			}};
 
 		case "SET_CURRENT_PUBLICATION":
 			return {...state, ...{
-				current: action.current
+				current: action.current,
+				showVariation: null,
+				variationData: null
 			}};
 
 		case "SET_PUBLICATION_KEY":
