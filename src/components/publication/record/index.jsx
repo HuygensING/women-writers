@@ -8,11 +8,12 @@ import VariationSelect from "../../values/variation-select";
 
 class PublicationRecord extends React.Component {
 	render() {
-		let variationSelect = (<VariationSelect
+		let variationSelect = (this.props.publication["@variationRefs"] || []).filter((v) => ["wwdocument", "document"].indexOf(v.type) < 0) .length ?
+			(<VariationSelect
 				onSelectVariation={this.props.onSelectVariation}
 				showVariation={this.props.showVariation}
 				variationRefs={this.props.publication["@variationRefs"]}
-			/>);
+			/>) : null;
 
 		let variationBasicComponent = this.props.variationData ?
 			<BasicInfo onNavigate={this.props.onNavigate} value={this.props.variationData} /> :

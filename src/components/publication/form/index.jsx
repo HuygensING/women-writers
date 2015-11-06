@@ -19,11 +19,13 @@ import VariationSelect from "../../values/variation-select";
 class PublicationForm extends React.Component {
 	render() {
 		let model = this.props.publication;
-		let variationSelect = (<VariationSelect
+		let variationSelect = (this.props.publication["@variationRefs"] || []).filter((v) => ["wwdocument", "document"].indexOf(v.type) < 0) .length ?
+			(<VariationSelect
 				onSelectVariation={this.props.onSelectVariation}
 				showVariation={this.props.showVariation}
 				variationRefs={this.props.publication["@variationRefs"]}
-			/>);
+			/>) : null;
+
 
 		let variationBasicComponent = this.props.variationData ?
 			<BasicInfo onNavigate={this.props.onNavigate} value={this.props.variationData} /> :
@@ -118,10 +120,13 @@ PublicationForm.propTypes = {
 	onFormChange: React.PropTypes.func,
 	onFormDelete: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
+	onSelectVariation: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object,
-	tab: React.PropTypes.oneOf(["basic info", "receptions", "links"])
+	showVariation: React.PropTypes.string,
+	tab: React.PropTypes.oneOf(["basic info", "receptions", "links"]),
+	variationData: React.PropTypes.object
 };
 
 export default PublicationForm;

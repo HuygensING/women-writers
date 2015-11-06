@@ -12,11 +12,12 @@ import VariationSelect from "../../values/variation-select";
 
 class AuthorRecord extends React.Component {
 	render() {
-		let variationSelect = (<VariationSelect
+		let variationSelect = (this.props.author["@variationRefs"] || []).filter((v) => ["wwperson", "person"].indexOf(v.type) < 0) .length ?
+			(<VariationSelect
 				onSelectVariation={this.props.onSelectVariation}
 				showVariation={this.props.showVariation}
 				variationRefs={this.props.author["@variationRefs"]}
-			/>);
+			/>) : null;
 
 		let variationBasicComponent = this.props.variationData ? <BasicInfo author={this.props.variationData} /> : null;
 		let variationPersonalComponent = this.props.variationData ? <Personal author={this.props.variationData} onNavigate={this.props.onNavigate} /> : null;
