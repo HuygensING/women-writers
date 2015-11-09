@@ -80,9 +80,9 @@ class AuthorController extends React.Component {
 				{paginationLinks}
 				<div className="extra-info">
 					{graphLink}
-					{editButton}
 					{createdBy}
 					{modifiedBy}
+					{editButton}
 				</div>
 				{body}
 				{footer}

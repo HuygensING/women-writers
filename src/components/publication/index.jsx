@@ -72,9 +72,9 @@ class PublicationController extends React.Component {
 
 				<div className="extra-info">
 					{graphLink}
-					{editButton}
 					{createdBy}
 					{modifiedBy}
+					{editButton}
 				</div>
 				{body}
 				{footer}

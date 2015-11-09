@@ -9,8 +9,8 @@ class EditButton extends React.Component {
 		let alt = this.props.model["^pid"] ?
 			null :
 			<div className="button-edit hire-empty-list">
-				Unable to edit. <button className="refresh-button" onClick={this.props.onRefresh}><RefreshIcon /></button> <br />
-				No persistent ID found.
+				We are updating the persistent ID.<br />
+				Please <button className="refresh-button" onClick={this.props.onRefresh}>refresh</button> the page.
 			</div>;
 
 		return show ?

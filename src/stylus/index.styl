@@ -397,20 +397,17 @@ ul.hire-options
 
 .refresh-button
 	button()
-	display inline-block
-	position relative
-	z-index 999
-	float right
+	padding 0
+	color #3bcbfb
 	cursor pointer
-	& .refresh-icon
-		width 20px
-		fill #009688
+	text-decoration underline
 
 .author .variations,
 .publication .variations
 	float right
 	width 48%
 	& header
+		color #666
 		margin-bottom -24px
 		font-size 0.8em
 		text-align right
@@ -450,6 +447,17 @@ ul.hire-options
 
 .variations > .hire-select
 	float right
+	margin-top 20px
+	margin-right 20px
+	width 180px
+	& > .input-container
+		border-radius 4px
+		padding-left 20px
+		color #666
+		height 36px
+	& > .hire-options
+		width 180px
+		border-radius 4px
 
 .modified-by
 	display block
