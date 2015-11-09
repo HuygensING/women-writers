@@ -28,9 +28,9 @@ class AuthorHeader extends React.Component {
 
 		let sex;
 		if (model.gender === "Female") {
-			sex = <small>♀</small>;
+			sex = <small className="gender" >♀</small>;
 		} else if (model.gender === "Male") {
-			sex = <small>♂</small>;
+			sex = <small className="gender">♂</small>;
 		}
 
 		let pseudonyms;
