@@ -41,9 +41,21 @@ header.page
 		font-size 1.8em
 		margin-left 20%
 
+		& > span
+			display inline-block
+			max-width 85%
+			height 1em
+			overflow hidden
+			white-space: nowrap;
+			text-overflow: ellipsis;
+
 		small
 			font-size 0.6em
 			font-weight normal
+
+			&.years, &.years + small
+				position relative
+				top -10px
 
 			&.years
 				margin 0 20px
@@ -52,6 +64,7 @@ header.page
 			display block
 			font-size 0.5em
 			margin-top 0px
+			margin-bottom -22px
 
 			ul.relation
 				display inline
@@ -65,6 +78,9 @@ header.page
 
 					&:last-child:after
 						content ""
+
+.publication header.page > h2 > span
+	max-width 100%
 
 .author, .publication, .hire-faceted-search, .graph, .receptions {
 	display: none;
@@ -164,16 +180,14 @@ header.page
 	fill #f0bfff
 
 
+
 .author, .publication
 	position relative
 
-
-	& > .link
+	& > .link.pagination-link
 		position absolute
 		left 5%
 		z-index 100
-
-	& > .link.pagination-link
 		top 40px
 
 	& > span.pagination-links
@@ -181,26 +195,32 @@ header.page
 		top 40px
 		right 5%
 
-	& > .link.graph-link
-		top 290px
 
-	& > button.edit, div.button-edit
-		left 5%
+	.extra-info
 		position absolute
-		top 240px
-
-
-	& > button.edit
-		button()
-		background-color wwLightTurquoise
-		color wwLighterTurquoise
-		font-weight bold
-		padding 4px 12px
-		text-transform uppercase
+		left 5%
+		width 15%
+		top 250px
 		z-index 1000
 
-		&:hover
-			button_box_shadow()
+		& > *
+			display block
+			margin-bottom 5px
+		& > .graph-link
+			border none
+		& > button.edit
+			button()
+			background-color wwLightTurquoise
+			color wwLighterTurquoise
+			font-weight bold
+			padding 4px 12px
+			text-transform uppercase
+
+			&:hover
+				button_box_shadow()
+
+.publication > .extra-info
+	top 154px
 
 .app > div > .hire-tabs, .app > .hire-tabs
 	padding 0 5% 120px 5%

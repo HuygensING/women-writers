@@ -78,10 +78,12 @@ class AuthorController extends React.Component {
 				{resultsLink}
 				<AuthorHeader author={this.props.author} onNavigate={this.props.onNavigate} />
 				{paginationLinks}
-				{editButton}
-				{graphLink}
-				{createdBy}
-				{modifiedBy}
+				<div className="extra-info">
+					{graphLink}
+					{editButton}
+					{createdBy}
+					{modifiedBy}
+				</div>
 				{body}
 				{footer}
 			</div>

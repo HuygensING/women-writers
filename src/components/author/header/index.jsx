@@ -45,7 +45,7 @@ class AuthorHeader extends React.Component {
 
 		return (
 			<header className="page">
-				<h2>
+				<h2 title={name}>
 					{name}
 					{years}
 					{sex}

@@ -69,10 +69,13 @@ class PublicationController extends React.Component {
 				{resultsLink}
 				<PublicationHeader publication={this.props.publication} />
 				{paginationLinks}
-				{editButton}
-				{graphLink}
-				{createdBy}
-				{modifiedBy}
+
+				<div className="extra-info">
+					{graphLink}
+					{editButton}
+					{createdBy}
+					{modifiedBy}
+				</div>
 				{body}
 				{footer}
 			</div>
