@@ -158,18 +158,22 @@ header.page
  
 .graph-table
 	position absolute
+	right 0
 	width 200px
 	background-color rgba(255,255,255,.6)
+	border 1px solid #ddd
 	border-radius 8px
 	padding 8px
 	margin 20px
-	box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
 	color #666
 	& h4
 		color #000
 		margin 0
 	& label
 		color #000
+	& .link
+		color wwLink
+		font-style italic
 
 .hire-force-directed-graph svg text.label:first-of-type
 	fill #000
@@ -189,12 +193,17 @@ header.page
 		left 5%
 		z-index 100
 		top 40px
+		color #666
+		border none
 
 	& > span.pagination-links
 		position absolute
 		top 40px
 		right 5%
-
+		& > .link
+			color #666
+			border none
+			margin-left 10px
 
 	.extra-info
 		position absolute

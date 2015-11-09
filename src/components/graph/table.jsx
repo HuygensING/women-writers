@@ -3,7 +3,7 @@ import Link from "../link";
 class GraphTable extends React.Component {
 
 	makeName(name, i) {
-		return <li key={i}>{name.components.map((component) => component.value).join(", ")}</li>;
+		return <li key={i}>{name.components.map((component) => component.value).join(" ")}</li>;
 	}
 
 	renderNames() {
@@ -28,15 +28,20 @@ class GraphTable extends React.Component {
 		return null;
 	}
 
-	renderDomainLink() {
-		console.log(this.props.data.data);
+	linkText() {
+		console.log(this.props.data.data.names);
+		return this.props.data.data.names && this.props.data.data.names.length ?
+			"More " + this.props.data.data.names[0].components.map((component) => component.value).join(" ") :
+			(this.props.data.data.title ? "More " + this.props.data.data.title : "More");
+	}
 
+	renderDomainLink() {
 		if(this.props.data.data["@variationRefs"]) {
 			let found = this.props.data.data["@variationRefs"].filter((varRef) => varRef.type.match(/^ww/));
 			if(!found.length) { return null; }
 			if(found[0].type === "wwdocument" || found[0].type === "wwperson") {
 				return (<div>
-					<Link href={`/${found[0].type.replace(/^ww/, "")}s/${found[0].id}`} onNavigate={this.props.onNavigate} value="Link" />
+					<Link href={`/${found[0].type.replace(/^ww/, "")}s/${found[0].id}`} onNavigate={this.props.onNavigate} value={this.linkText()} />
 				</div>);
 			}
 		}

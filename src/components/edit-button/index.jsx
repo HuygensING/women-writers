@@ -1,5 +1,4 @@
 import React from "react";
-import RefreshIcon from "../icons/refresh";
 
 class EditButton extends React.Component {
 
