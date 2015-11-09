@@ -8,6 +8,7 @@ import PublicationForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
+import ModifiedBy from "../values/modified-by";
 
 class PublicationController extends React.Component {
 	render() {
@@ -55,6 +56,9 @@ class PublicationController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
+		let createdBy = <ModifiedBy {...this.props.publication["^created"]} label="Created by" />;
+		let modifiedBy = <ModifiedBy {...this.props.publication["^modified"]} label="Modified by" />;
+
 		return (
 			<div
 				className={cx(
@@ -67,6 +71,8 @@ class PublicationController extends React.Component {
 				{paginationLinks}
 				{editButton}
 				{graphLink}
+				{createdBy}
+				{modifiedBy}
 				{body}
 				{footer}
 			</div>

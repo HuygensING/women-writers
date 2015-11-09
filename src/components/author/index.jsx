@@ -8,7 +8,7 @@ import AuthorForm from "./form";
 import EditFooter from "../save-footer";
 import Link from "../link";
 import PaginationLinks from "../links/pagination";
-
+import ModifiedBy from "../values/modified-by";
 
 /*
  * AuthorController for the AuthorRecord and AuthorForm
@@ -65,6 +65,9 @@ class AuthorController extends React.Component {
 				results={this.props.results} /> :
 			null;
 
+		let createdBy = <ModifiedBy {...this.props.author["^created"]} label="Created by" />;
+		let modifiedBy = <ModifiedBy {...this.props.author["^modified"]} label="Modified by" />;
+
 		return (
 			<div
 				className={cx(
@@ -77,6 +80,8 @@ class AuthorController extends React.Component {
 				{paginationLinks}
 				{editButton}
 				{graphLink}
+				{createdBy}
+				{modifiedBy}
 				{body}
 				{footer}
 			</div>
