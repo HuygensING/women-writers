@@ -33,7 +33,7 @@ class AuthorHeader extends React.Component {
 			sex = <small className="gender">♂</small>;
 		}
 
-		let pseudonyms;
+		let pseudonyms, isPseudonymOf;
 		if (model["@relations"].hasOwnProperty("hasPseudonym") && model["@relations"].hasPseudonym.length) {
 			pseudonyms = (
 				<small className="pseudonyms">
@@ -42,7 +42,14 @@ class AuthorHeader extends React.Component {
 				</small>
 			);
 		}
-
+		if (model["@relations"].hasOwnProperty("isPseudonymOf") && model["@relations"].isPseudonymOf.length) {
+			pseudonyms = (
+				<small className="pseudonyms">
+					Is pseudonym of
+					<RelationAuthor onNavigate={this.props.onNavigate} values={model["@relations"].isPseudonymOf} />
+				</small>
+			);
+		}
 		return (
 			<header className="page">
 				<h2 title={name}>
@@ -50,6 +57,7 @@ class AuthorHeader extends React.Component {
 					{years}
 					{sex}
 					{pseudonyms}
+					{isPseudonymOf}
 				</h2>
 			</header>
 		);
