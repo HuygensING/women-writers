@@ -19,7 +19,7 @@ class AuthorRecord extends React.Component {
 				variationRefs={this.props.author["@variationRefs"]}
 			/>) : null;
 
-		let variationBasicComponent = this.props.variationData ? <BasicInfo author={this.props.variationData} /> : null;
+		let variationBasicComponent = this.props.variationData ? <BasicInfo author={this.props.variationData} onNavigate={this.props.onNavigate} /> : null;
 		let variationPersonalComponent = this.props.variationData ? <Personal author={this.props.variationData} onNavigate={this.props.onNavigate} /> : null;
 		let variationPublicComponent = this.props.variationData ? <Public author={this.props.variationData} onNavigate={this.props.onNavigate} /> : null;
 		let variationPublicationsComponent = this.props.variationData ? (
@@ -46,7 +46,7 @@ class AuthorRecord extends React.Component {
 					label="Basic info">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationBasicComponent}</div>
-						<BasicInfo author={this.props.author} />
+						<BasicInfo author={this.props.author} onNavigate={this.props.onNavigate} />
 					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>

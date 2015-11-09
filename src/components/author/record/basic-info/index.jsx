@@ -2,6 +2,7 @@ import React from "react";
 
 import StringComponent from "../../../values/string";
 import Relation from "../../../values/relation";
+import PersonRelation from "../../../values/relation-person";
 
 class BasicInfo extends React.Component {
 	render() {
@@ -49,13 +50,18 @@ class BasicInfo extends React.Component {
 					<label>Death place</label>
 					<Relation values={model["@relations"].hasDeathPlace} />
 				</li>
+				<li>
+					<label>Related to</label>
+					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />
+				</li>
 			</ul>
 		);
 	}
 }
 
 BasicInfo.propTypes = {
-	author: React.PropTypes.object
+	author: React.PropTypes.object,
+	onNavigate: React.PropTypes.func
 };
 
 export default BasicInfo;
