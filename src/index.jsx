@@ -210,6 +210,9 @@ let AppRouter = Router.extend({
 		"documents/:id/:tab/edit": "editPublication",
 		"documents/:id/:tab": "publication",
 		"documents/:id": "publication",
+		"collectives(/)": "searchCollectives",
+		"collectives/:id": "collective",
+		"collectives/:id/edit": "editCollective",
 		"graph/:domain/:id": "graph",
 		"receptions/:tab": "receptions"
 	},

@@ -5,6 +5,12 @@ let STATE = {
 	searchAuthors: {
 		visible: false
 	},
+	collective: {
+		visible: false
+	},
+	searchCollectives: {
+		visible: false
+	},
 	graph: {
 		visible: false
 	},
@@ -27,6 +33,9 @@ let getNextPath = function(state) {
 		author: "persons",
 		editAuthor: "persons",
 		searchAuthors: "persons",
+		collective: "collectives",
+		editCollective: "collectives",
+		searchCollectives: "collectives",
 		graph: "graph",
 		publication: "documents",
 		editPublication: "documents",

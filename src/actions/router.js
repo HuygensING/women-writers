@@ -6,6 +6,7 @@ export function changeRoute(handler, props=[]) {
 	return function (dispatch) {
 		let hasAuthorHandler = (handler === "author" || handler === "editAuthor");
 		let hasPublicationHandler = (handler === "publication" || handler === "editPublication");
+		let hasCollectiveHandler = (handler === "collective" || handler === "editCollective");
 		let hasGraphHandler = (handler === "graph");
 
 		let hasId = hasGraphHandler ?
@@ -25,6 +26,11 @@ export function changeRoute(handler, props=[]) {
 		if (hasPublicationHandler && hasId) {
 			dispatch(fetchPublication(props[0]));
 		}
+
+		if (hasCollectiveHandler && hasId) {
+			console.log("actions/router.js: TODO dispatch fetchCollective");
+		}
+
 
 		if (hasAuthorHandler && !hasId) {
 			dispatch(newAuthor());

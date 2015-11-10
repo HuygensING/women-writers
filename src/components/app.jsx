@@ -4,9 +4,13 @@ import MainMenu from "./main-menu";
 import AuthorController from "./author";
 import GraphController from "./graph";
 import PublicationController from "./publication";
+import CollectiveController from "./collective";
+
 import ReceptionsController from "./receptions";
 import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
+import SearchCollectives from "./search-collectives";
+
 
 class App extends React.Component {
 	render() {
@@ -59,6 +63,8 @@ class App extends React.Component {
 				variationData={this.props.publications.variationData}
 				visible={this.props.router.publication.visible} /> :
 			null;
+
+		let collective = <CollectiveController visible={this.props.router.collective.visible} />;
 
 		let graph = (this.props.graphs.current != null) ?
 			<GraphController
@@ -119,6 +125,10 @@ class App extends React.Component {
 					receptions={this.props.receptions}
 					tab={this.props.router.receptions.id}
 					visible={this.props.router.receptions.visible} />
+				<SearchCollectives
+					onSelect={this.props.onResultSelect}
+					visible={this.props.router.searchCollectives.visible} />
+				{collective}
 			</div>
 		);
 	}
