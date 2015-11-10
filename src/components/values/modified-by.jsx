@@ -9,8 +9,8 @@ class ModifiedBy extends React.Component {
 
 	render() {
 
-		return this.props.userId ?
-			<span className="modified-by">{this.props.label} {this.props.userId} on {formatDate(this.props.timeStamp)}</span> :
+		return this.props.username ?
+			<span className="modified-by">{this.props.label} {this.props.username} on {formatDate(this.props.timeStamp)}</span> :
 			null;
 	}
 }
@@ -18,7 +18,7 @@ class ModifiedBy extends React.Component {
 ModifiedBy.propTypes = {
 	label: React.PropTypes.string,
 	timeStamp: React.PropTypes.number,
-	userId: React.PropTypes.string
+	username: React.PropTypes.string
 };
 
 export default ModifiedBy;
