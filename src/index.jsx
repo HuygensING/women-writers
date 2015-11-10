@@ -43,7 +43,7 @@ import App from "./components/app";
 import Loader from "./components/icons/loader";
 import API from "./stores/api";
 
-const rootPath = "/womenwriters/";
+const rootPath = "/womenwriters/vre/";
 
 let AppRouter = Router.extend({
 	initialize: function() {
