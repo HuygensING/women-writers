@@ -122,17 +122,35 @@ header.page
 	cursor default
 
 .receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul
-	width 30%
+	width 35.5%
 	margin-right 3%
 	display inline-block
 	vertical-align top
-	font-size 0.7em
+	font-size 0.8em
+	line-height 1.25em
 	color #888
+	&:nth-of-type(2)
+		width 20%
+		text-align center
+		font-style italic
+		> li
+			padding-top 20px
 
 .receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li > label
-	font-size 1.4em
+	font-size 1.1em
+	font-style italic
 	color #000
 	cursor pointer
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li
+	margin-bottom 8px
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li > .date
+	float right
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li.created-by
+	font-size 1.1em
+	color #000
 
 .receptions li.hire-list-facet > ul > li.hire-list-facet-list-item > span.count
 	display: none

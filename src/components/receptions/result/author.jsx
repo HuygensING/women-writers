@@ -23,16 +23,16 @@ class Result extends React.Component {
 		return (<li>
 			<ul>
 				<li><label onClick={this.onSelectSource.bind(this)}>{sourceData.name}</label></li>
-				<li>{sourceData.birthDate} - {sourceData.deathDate}</li>
-				<li>{sourceData.gender} {sourceData.residenceLocation}</li>
+				<li className="created-by">{sourceData.birthDate} - {sourceData.deathDate}</li>
+				<li><span className="date">{sourceData.residenceLocation}</span>{sourceData.gender}</li>
 			</ul>
 			<ul>
 				<li>{this.getLabel(this.props.data.relationName)}</li>
 			</ul>
 			<ul>
 				<li><label onClick={this.onSelectTarget.bind(this)}>{targetData.title}</label></li>
-				<li>{targetData.createdBy}</li>
-				<li>{targetData.date} {targetData.publishLocation}</li>
+				<li className="created-by">{targetData.authorName}</li>
+				<li><span className="date">{targetData.date}</span>{targetData.publishLocation}</li>
 			</ul>
 		</li>);
 	}
