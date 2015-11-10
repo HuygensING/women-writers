@@ -14,6 +14,13 @@ class GraphTable extends React.Component {
 					{this.props.data.data.names.map(this.makeName.bind(this))}
 				</ul>
 			</div>);
+		} else if(this.props.data.data.tempName) {
+			return (<div>
+				<label>Names</label>
+				<ul>
+					<li>{this.props.data.data.tempName}</li>
+				</ul>
+			</div>);
 		}
 		return null;
 	}
@@ -29,10 +36,9 @@ class GraphTable extends React.Component {
 	}
 
 	linkText() {
-		console.log(this.props.data.data.names);
 		return this.props.data.data.names && this.props.data.data.names.length ?
 			"More " + this.props.data.data.names[0].components.map((component) => component.value).join(" ") :
-			(this.props.data.data.title ? "More " + this.props.data.data.title : "More");
+			(this.props.data.data.title || this.props.data.data.tempName ? "More " + (this.props.data.data.title || this.props.data.data.tempName) : "More");
 	}
 
 	renderDomainLink() {
@@ -51,7 +57,7 @@ class GraphTable extends React.Component {
 	render() {
 		return (
 			<ul className="graph-table">
-				<li><h4>{this.props.data.data["@type"].toUpperCase()}</h4></li>
+				<li><h4>{this.props.data.data["@type"].replace(/^ww/, "").toUpperCase()}</h4></li>
 				<li>{this.renderMD("title", "Title")}</li>
 				<li>{this.renderNames()}</li>
 				<li>{this.renderMD("birthDate", "Date of birth")}</li>

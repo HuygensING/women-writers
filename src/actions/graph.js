@@ -39,13 +39,17 @@ const types = [
 ].join("&types=");
 
 let fetchDomainMetadata = function(domain, id, dispatch) {
-	fetch(`${config.domainUrl}/${domain}/${id}`, (response) =>
-		dispatch({
-			type: "RECEIVE_GRAPH_TABLE",
-			response: response,
-			id: `${domain}/${id}`
-		})
-	);
+	fetch(`${config.domainUrl}/${domain}/${id}`, (response) => {
+		if(domain === "persons" && response["@variationRefs"].map((v) => v.type).indexOf("wwperson") > -1) {
+			fetchDomainMetadata("wwpersons", id, dispatch);
+		} else {
+			dispatch({
+				type: "RECEIVE_GRAPH_TABLE",
+				response: response,
+				id: `${domain}/${id}`
+			});
+		}
+	});
 };
 
 
@@ -60,7 +64,7 @@ export function fetchGraph(domain, id) {
 				current: found[0]
 			});
 		} else {
-			fetch(`${config.graphUrl}/${domain}/${id}?depth=2&types=${types}`, (response) =>
+			fetch(`${config.graphUrl}/ww${domain}/${id}?depth=2&types=${types}`, (response) =>
 				dispatch({
 					type: "RECEIVE_GRAPH",
 					response: parseIncomingGraph(response),
