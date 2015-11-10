@@ -8,6 +8,7 @@ class BasicInfoForm extends React.Component {
 	render() {
 		let model = this.props.value;
 
+		let pid = model["^pid"] ? <a className="link" href={model["^pid"]} target="_blank">{model["^pid"]}</a> : "-";
 		return (
 			<ul className="record">
 				<li>
@@ -19,6 +20,10 @@ class BasicInfoForm extends React.Component {
 				<li>
 					<label>Title</label>
 					<StringComponent value={model.title} />
+				</li>
+				<li>
+					<label>Persistent ID</label>
+					{pid}
 				</li>
 				<li>
 					<label>Document type</label>

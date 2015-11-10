@@ -12,11 +12,16 @@ class BasicInfo extends React.Component {
 			model.names.map((name, index) => <li key={index}>{name.components.map((c) => c.value).join(" ")}</li>) :
 			<li>-</li>;
 
+		let pid = model["^pid"] ? <a className="link" href={model["^pid"]} target="_blank">{model["^pid"]}</a> : "-";
 		return (
 			<ul className="record">
 				<li>
 					<label>Names</label>
 					<ul>{names}</ul>
+				</li>
+				<li>
+					<label>Persistent ID</label>
+					{pid}
 				</li>
 				<li>
 					<label>Pseudonyms</label>
