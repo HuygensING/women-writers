@@ -64,7 +64,15 @@ class App extends React.Component {
 				visible={this.props.router.publication.visible} /> :
 			null;
 
-		let collective = <CollectiveController visible={this.props.router.collective.visible} />;
+		let collective = (this.props.collectives.current !== null) ?
+			<CollectiveController
+				collective={this.props.collectives.current}
+				onNavigate={this.props.onNavigate}
+				onNavigateNextPage={this.props.onNavigateNextCollectivePage}
+				requesting={this.props.collectives.requesting}
+				results={this.props.collectives.results}
+				visible={this.props.router.collective.visible} /> :
+			null;
 
 		let graph = (this.props.graphs.current != null) ?
 			<GraphController
@@ -126,6 +134,7 @@ class App extends React.Component {
 					tab={this.props.router.receptions.id}
 					visible={this.props.router.receptions.visible} />
 				<SearchCollectives
+					onResultsChange={this.props.onCollectiveResultsChange}
 					onSelect={this.props.onResultSelect}
 					visible={this.props.router.searchCollectives.visible} />
 				{collective}
@@ -136,6 +145,7 @@ class App extends React.Component {
 
 App.propTypes = {
 	authors: React.PropTypes.object,
+	collectives: React.PropTypes.object,
 	errors: React.PropTypes.object,
 	graphs: React.PropTypes.object,
 	onAuthorRefresh: React.PropTypes.func,
@@ -145,6 +155,7 @@ App.propTypes = {
 	onCancel: React.PropTypes.func,
 	onChangeAuthorKey: React.PropTypes.func,
 	onChangePublicationKey: React.PropTypes.func,
+	onCollectiveResultsChange: React.PropTypes.func,
 	onDeleteAuthor: React.PropTypes.func,
 	onDeleteAuthorKey: React.PropTypes.func,
 	onDeletePublication: React.PropTypes.func,
@@ -153,6 +164,7 @@ App.propTypes = {
 	onLoginChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	onNavigateNextAuthorPage: React.PropTypes.func,
+	onNavigateNextCollectivePage: React.PropTypes.func,
 	onNavigateNextPublicationPage: React.PropTypes.func,
 	onNewAuthor: React.PropTypes.func,
 	onNewPublication: React.PropTypes.func,

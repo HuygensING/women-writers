@@ -34,6 +34,8 @@ import {
 	selectPublicationVariation
 } from "./actions/publication";
 
+import {setCollectiveResultIds, requestNextCollectiveResults} from "./actions/collective";
+
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations, requestRelations} from "./actions/relations";
 import {fetchGraphTable} from "./actions/graph";
@@ -94,6 +96,9 @@ let AppRouter = Router.extend({
 				onChangePublicationKey={(key, value) =>
 					store.dispatch(setPublicationKey(key, value))
 				}
+				onCollectiveResultsChange={(results) => {
+					store.dispatch(setCollectiveResultIds(results));
+				}}
 				onDeleteAuthor={() =>
 					store.dispatch(deleteAuthor())
 				}
@@ -115,6 +120,7 @@ let AppRouter = Router.extend({
 				onNavigate={this.navigate.bind(this)}
 				onNavigateNextAuthorPage={(url) => store.dispatch(requestNextAuthorResults(url, this.navigate.bind(this))) }
 				onNavigateNextPublicationPage={(url) => store.dispatch(requestNextPublicationResults(url, this.navigate.bind(this))) }
+				onNavigateNextCollectivePage={(url) => store.dispatch(requestNextCollectiveResults(url, this.navigate.bind(this))) }
 
 				onNewAuthor={() =>
 					this.navigate("/persons/new")

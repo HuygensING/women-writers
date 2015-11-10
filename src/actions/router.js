@@ -1,6 +1,7 @@
 import {fetchGraph} from "./graph";
 import {fetchAuthor, newAuthor} from "./author";
 import {fetchPublication, newPublication} from "./publication";
+import {fetchCollective} from "./collective";
 
 export function changeRoute(handler, props=[]) {
 	return function (dispatch) {
@@ -28,7 +29,7 @@ export function changeRoute(handler, props=[]) {
 		}
 
 		if (hasCollectiveHandler && hasId) {
-			console.log("actions/router.js: TODO dispatch fetchCollective");
+			dispatch(fetchCollective(props[0]));
 		}
 
 

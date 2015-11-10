@@ -30,7 +30,7 @@ class SearchPublications extends React.Component {
 
 	render() {
 		return (
-			<div className={cx({visible: this.props.visible})}>
+			<div className={cx("search-publications", {visible: this.props.visible})}>
 				<FacetedSearch
 					config={{
 						baseURL: config.baseUrl,

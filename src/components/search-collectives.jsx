@@ -19,7 +19,9 @@ class SearchCollectives extends React.Component {
 							Accept: "application/json"
 						}
 					}}
+					labels={{facetTitles: {term: "Search term"}}}
 					numberedResults={true}
+					onChange={this.props.onResultsChange}
 					onSelect={this.props.onSelect}
 				/>
 			</div>
@@ -28,6 +30,7 @@ class SearchCollectives extends React.Component {
 }
 
 SearchCollectives.propTypes = {
+	onResultsChange: React.PropTypes.func,
 	onSelect: React.PropTypes.func,
 	visible: React.PropTypes.bool
 };

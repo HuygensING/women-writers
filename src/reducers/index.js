@@ -1,6 +1,7 @@
 import {combineReducers} from "redux";
 
 import authors from "./authors";
+import collectives from "./collectives";
 import errors from "./errors";
 import graphs from "./graphs";
 import publications from "./publications";
@@ -11,6 +12,7 @@ import user from "./user";
 
 export default combineReducers({
 	authors: authors,
+	collectives: collectives,
 	errors: errors,
 	graphs: graphs,
 	publications: publications,

@@ -8,6 +8,7 @@ export default {
 	domainUrl: baseUrl + "/domain",
 	basicAuthenticateUrl: baseUrl + "/authenticate",
 	publicationUrl: baseUrl + "/domain/wwdocuments",
+	collectiveUrl: baseUrl + "/domain/wwcollectives",
 	saveRelationUrl: baseUrl + "/domain/wwrelations",
 	relationsUrl: baseUrl + "/system/relationtypes",
 	userUrl: baseUrl + "/system/users/me",
