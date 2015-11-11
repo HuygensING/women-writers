@@ -35,7 +35,8 @@ let initialState = {
 	results: {
 		ids: [],
 		_next: null
-	}
+	},
+	genderMap: {}
 };
 
 export default function(state=initialState, action) {
@@ -138,6 +139,9 @@ export default function(state=initialState, action) {
 
 		case "RECEIVE_AUTHOR_VARIATION_DATA":
 			return {...state, variationData: action.data === null ? null : parseIncomingAuthor(action.data)};
+
+		case "SET_GENDER_MAP":
+			return {...state, genderMap: action.genderMap};
 
 		default:
 			return state;

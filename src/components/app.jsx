@@ -18,6 +18,7 @@ class App extends React.Component {
 			<AuthorController
 				author={this.props.authors.current}
 				edit={this.props.router.author.edit}
+				genderMap={this.props.authors.genderMap}
 				onCancel={this.props.onCancel}
 				onDeleteAuthor={this.props.onDeleteAuthor}
 				onFormChange={this.props.onChangeAuthorKey}

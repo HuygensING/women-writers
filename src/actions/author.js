@@ -5,16 +5,36 @@ import {fetch, save, remove, saveRelations} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
 
+let cachedGenders = {};
+
+const scrapeGenders = (relatedTo, dispatch) => {
+	if(!relatedTo) { return; }
+	let paths = relatedTo.map((r) => config.baseUrl + "/" + r.path);
+
+	const digestGender = (response) => {
+		cachedGenders[response._id] = response.gender;
+		dispatch({type: "SET_GENDER_MAP", genderMap: cachedGenders});
+	};
+
+	for(let i in paths) {
+		if(!cachedGenders[paths[i].replace(/.*\//, "")]) {
+			fetch(paths[i], digestGender);
+		}
+	}
+};
+
+
 export function refreshAuthor(id) {
 	return function (dispatch) {
 		dispatch({type: "REQUEST_AUTHOR"});
 
-		fetch(`${config.authorUrl}/${id}`, (response) =>
+		fetch(`${config.authorUrl}/${id}`, (response) => {
+			scrapeGenders(response["@relations"].isRelatedTo, dispatch);
 			dispatch({
 				type: "RECEIVE_AUTHOR",
 				response: response
-			})
-		);
+			});
+		});
 	};
 }
 
@@ -34,12 +54,13 @@ export function fetchAuthor(id) {
 		} else {
 			dispatch({type: "REQUEST_AUTHOR"});
 
-			fetch(`${config.authorUrl}/${id}`, (response) =>
+			fetch(`${config.authorUrl}/${id}`, (response) => {
+				scrapeGenders(response["@relations"].isRelatedTo, dispatch);
 				dispatch({
 					type: "RECEIVE_AUTHOR",
 					response: response
-				})
-			);
+				});
+			});
 		}
 	};
 }
@@ -53,6 +74,8 @@ export function saveAuthor() {
 				parseOutgoingAuthor(author),
 				getState().user.token,
 				(response) => {
+					scrapeGenders(response["@relations"].isRelatedTo, dispatch);
+
 					dispatch({
 						type: "RECEIVE_AUTHOR",
 						response: response

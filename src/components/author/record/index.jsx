@@ -46,7 +46,7 @@ class AuthorRecord extends React.Component {
 					label="Basic info">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationBasicComponent}</div>
-						<BasicInfo author={this.props.author} onNavigate={this.props.onNavigate} />
+						<BasicInfo author={this.props.author} genderMap={this.props.genderMap} onNavigate={this.props.onNavigate} />
 					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>
@@ -174,6 +174,7 @@ class AuthorRecord extends React.Component {
 
 AuthorRecord.propTypes = {
 	author: React.PropTypes.object,
+	genderMap: React.PropTypes.object,
 	id: React.PropTypes.string,
 	onNavigate: React.PropTypes.func,
 	onSelectVariation: React.PropTypes.func,

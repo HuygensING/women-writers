@@ -57,7 +57,7 @@ class BasicInfo extends React.Component {
 				</li>
 				<li>
 					<label>Related to</label>
-					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />
+					<PersonRelation genderMap={this.props.genderMap} onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />
 				</li>
 			</ul>
 		);
@@ -66,6 +66,7 @@ class BasicInfo extends React.Component {
 
 BasicInfo.propTypes = {
 	author: React.PropTypes.object,
+	genderMap: React.PropTypes.object,
 	onNavigate: React.PropTypes.func
 };
 
