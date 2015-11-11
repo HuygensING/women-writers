@@ -1,4 +1,10 @@
+import Immutable from "immutable";
 import cloneDeep from "lodash.clonedeep";
+
+function castArray(arr) {
+	return (Array.isArray(arr)) ? arr : [arr];
+}
+
 
 let initialState = {
 	cached: {},
@@ -61,6 +67,14 @@ export default function(state=initialState, action) {
 			return {...state, ...{
 				cached: c,
 				current: null
+			}};
+
+		case "SET_COLLECTIVE_KEY":
+			let current = Immutable.fromJS(state.current);
+			let key = castArray(action.key);
+
+			return {...state, ...{
+				current: current.setIn(key, action.value).toJS()
 			}};
 
 		default:

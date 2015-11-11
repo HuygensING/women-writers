@@ -107,3 +107,10 @@ export function rollbackCollective() {
 	};
 }
 
+export function setCollectiveKey(key, value) {
+	return {
+		type: "SET_COLLECTIVE_KEY",
+		key: key,
+		value: value
+	};
+}

@@ -1,8 +1,12 @@
 import React from "react";
 import Link from "../link";
+
+import Select from "hire-forms-select";
+import Input from "hire-forms-input";
 import EditButton from "../edit-button";
 import EditFooter from "../save-footer";
 import PaginationLinks from "../links/pagination";
+
 import cx from "classnames";
 
 
@@ -73,6 +77,18 @@ class CollectiveController extends React.Component {
 				type="collective" /> :
 			null;
 
+		let name = (this.props.edit && this.props.user && this.props.user.token) ?
+			<Input onChange={this.props.onChange.bind(this, "name")} value={this.props.collective.name} /> :
+			this.props.collective.name;
+
+
+		let type = (this.props.edit && this.props.user && this.props.user.token) ?
+			<Select onChange={this.props.onChange.bind(this, "type")}
+						options={["UNKNOWN", "ACADEMY", "ASSOCIATION", "LIBRARY", "PUBLISHER", "SHOP"]}
+						value={this.props.collective.type} /> :
+			this.props.collective.type;
+
+
 		return (
 			<div
 				className={cx(
@@ -90,19 +106,19 @@ class CollectiveController extends React.Component {
 					<ul className="record">
 						<li>
 							<label>Name</label>
-							{this.props.collective.name}
+							{name}
 						</li>
 						<li>
 							<label>Type</label>
-							{this.props.collective.type}
-						</li>
-						<li>
-							<label>Persistent ID</label>
-							{pid}
+							{type}
 						</li>
 						<li>
 							<label>Has location</label>
 							{(this.props.collective["@relations"].hasLocation || []).map((r) => r.displayName).join(", ")}
+						</li>
+						<li>
+							<label>Persistent ID</label>
+							{pid}
 						</li>
 						<li>
 							<label>Links</label>
@@ -123,6 +139,7 @@ CollectiveController.propTypes = {
 	collective: React.PropTypes.object,
 	edit: React.PropTypes.bool,
 	onCancel: React.PropTypes.func,
+	onChange: React.PropTypes.func,
 	onDeleteCollective: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	onNavigateNextPage: React.PropTypes.func,

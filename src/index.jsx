@@ -38,6 +38,7 @@ import {
 	deleteCollective,
 	saveCollective,
 	setCollectiveResultIds,
+	setCollectiveKey,
 	requestNextCollectiveResults,
 	refreshCollective,
 	rollbackCollective
@@ -101,9 +102,13 @@ let AppRouter = Router.extend({
 				onChangeAuthorKey={(key, value) =>
 					store.dispatch(setAuthorKey(key, value))
 				}
+				onChangeCollectiveKey={(key, value) =>
+					store.dispatch(setCollectiveKey(key, value))
+				}
 				onChangePublicationKey={(key, value) =>
 					store.dispatch(setPublicationKey(key, value))
 				}
+
 				onCollectiveRefresh={(id) => store.dispatch(refreshCollective(id))}
 				onCollectiveResultsChange={(results) => {
 					store.dispatch(setCollectiveResultIds(results));

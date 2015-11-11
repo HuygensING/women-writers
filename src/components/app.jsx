@@ -69,6 +69,7 @@ class App extends React.Component {
 				collective={this.props.collectives.current}
 				edit={this.props.router.collective.edit}
 				onCancel={this.props.onCancel}
+				onChange={this.props.onChangeCollectiveKey}
 				onDeleteCollective={this.props.onDeleteCollective}
 				onNavigate={this.props.onNavigate}
 				onNavigateNextPage={this.props.onNavigateNextCollectivePage}
@@ -161,6 +162,7 @@ App.propTypes = {
 	onAuthorSearchId: React.PropTypes.func,
 	onCancel: React.PropTypes.func,
 	onChangeAuthorKey: React.PropTypes.func,
+	onChangeCollectiveKey: React.PropTypes.func,
 	onChangePublicationKey: React.PropTypes.func,
 	onCollectiveRefresh: React.PropTypes.func,
 	onCollectiveResultsChange: React.PropTypes.func,
