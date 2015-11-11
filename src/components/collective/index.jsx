@@ -29,7 +29,7 @@ class CollectiveController extends React.Component {
 						<li key={i}><Link href={"documents/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
 					))}
 				</ul></span>
-			</li>) : null;
+			</li>) : <li><label>Is storage of</label>-</li>;
 
 		let publishedDocuments = this.props.collective["@relations"].isPublisherOf ? (
 			<li>
@@ -39,7 +39,7 @@ class CollectiveController extends React.Component {
 						<li key={i}><Link href={"documents/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
 					))}
 				</ul></span>
-			</li>) : null;
+			</li>) : <li><label>Is publisher of</label>-</li>;
 
 
 		let members = this.props.collective["@relations"].hasMember ? (
@@ -50,7 +50,7 @@ class CollectiveController extends React.Component {
 						<li key={i}><Link href={"persons/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
 					))}
 				</ul></span>
-			</li>) : null;
+			</li>) : <li><label>Has members</label>-</li>;
 
 		let pid = this.props.collective["^pid"] ?
 			<a className="link" href={this.props.collective["^pid"]} target="_blank">{this.props.collective["^pid"]}</a> : "-";
