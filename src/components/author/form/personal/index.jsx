@@ -29,13 +29,6 @@ class PersonalForm extends React.Component {
 						values={model["@relations"].isSpouseOf} />
 				</li>
 				<li>
-					<label>Related to</label>
-					<AutocompleteList
-						async={API.getPersons}
-						onChange={this.props.onChange.bind(this, ["@relations", "isRelatedTo"])}
-						values={model["@relations"].isRelatedTo} />
-				</li>
-				<li>
 					<label>Parent of</label>
 					<AutocompleteList
 						async={API.getPersons}

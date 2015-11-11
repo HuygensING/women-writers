@@ -128,6 +128,13 @@ class BasicInfoForm extends React.Component {
 						value={model.deathDate} />
 				</li>
 				{deathPlace}
+				<li>
+					<label>Related to</label>
+					<AutocompleteList
+						async={API.getPersons}
+						onChange={this.props.onChange.bind(this, ["@relations", "isRelatedTo"])}
+						values={model["@relations"].isRelatedTo} />
+				</li>
 			</ul>
 		);
 	}
