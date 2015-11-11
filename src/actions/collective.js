@@ -114,3 +114,9 @@ export function setCollectiveKey(key, value) {
 		value: value
 	};
 }
+
+export function newCollective() {
+	return {
+		type: "NEW_COLLECTIVE"
+	};
+}

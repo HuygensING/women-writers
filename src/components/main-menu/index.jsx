@@ -14,7 +14,7 @@ class MainMenu extends React.Component {
 			types = "persons";
 		}
 
-		let newAuthor, newPublication;
+		let newAuthor, newPublication, newCollective;
 		if (this.props.user != null && this.props.user.authenticated) {
 			newAuthor = (
 				<li className="new-author">
@@ -27,6 +27,13 @@ class MainMenu extends React.Component {
 				<li className="new-publication">
 					<button onClick={this.props.onNewPublication}>
 						New publication
+					</button>
+				</li>);
+
+			newCollective = (
+				<li className="new-collective">
+					<button onClick={this.props.onNewCollective}>
+						New collective
 					</button>
 				</li>);
 		}
@@ -70,6 +77,7 @@ class MainMenu extends React.Component {
 				</li>
 				{newAuthor}
 				{newPublication}
+				{newCollective}
 			</ul>
 		);
 	}
@@ -79,6 +87,7 @@ MainMenu.propTypes = {
 	onLoginChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	onNewAuthor: React.PropTypes.func,
+	onNewCollective: React.PropTypes.func,
 	onNewPublication: React.PropTypes.func,
 	user: React.PropTypes.object
 };

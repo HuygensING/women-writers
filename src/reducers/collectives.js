@@ -23,7 +23,6 @@ export default function(state=initialState, action) {
 			return {...state, ...{requesting: true}};
 
 		case "RECEIVE_COLLECTIVE":
-
 			return {...state, ...{
 				cached: {...state.cached, ...{[action.response._id]: action.response}},
 				current: action.response,
@@ -75,6 +74,11 @@ export default function(state=initialState, action) {
 
 			return {...state, ...{
 				current: current.setIn(key, action.value).toJS()
+			}};
+
+		case "NEW_COLLECTIVE":
+			return {...state, ...{
+				current: {name: "", type: "", links: [], "@relations": {}, "@type": "wwcollective"}
 			}};
 
 		default:

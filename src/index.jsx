@@ -141,6 +141,9 @@ let AppRouter = Router.extend({
 				onNewAuthor={() =>
 					this.navigate("/persons/new")
 				}
+				onNewCollective={() =>
+					this.navigate("/collectives/new")
+				}
 				onNewPublication={() =>
 					this.navigate("/documents/new")
 				}

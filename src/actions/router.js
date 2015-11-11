@@ -1,7 +1,7 @@
 import {fetchGraph} from "./graph";
 import {fetchAuthor, newAuthor} from "./author";
 import {fetchPublication, newPublication} from "./publication";
-import {fetchCollective} from "./collective";
+import {fetchCollective, newCollective} from "./collective";
 
 export function changeRoute(handler, props=[]) {
 	return function (dispatch) {
@@ -36,6 +36,11 @@ export function changeRoute(handler, props=[]) {
 		if (hasAuthorHandler && !hasId) {
 			dispatch(newAuthor());
 		}
+
+		if (hasCollectiveHandler && !hasId) {
+			dispatch(newCollective());
+		}
+
 
 		if (hasPublicationHandler && !hasId) {
 			dispatch(newPublication());

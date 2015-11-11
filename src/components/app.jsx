@@ -105,6 +105,7 @@ class App extends React.Component {
 						onLoginChange={this.props.onLoginChange}
 						onNavigate={this.props.onNavigate}
 						onNewAuthor={this.props.onNewAuthor}
+						onNewCollective={this.props.onNewCollective}
 						onNewPublication={this.props.onNewPublication}
 						user={this.props.user}
 					/>
@@ -178,6 +179,7 @@ App.propTypes = {
 	onNavigateNextCollectivePage: React.PropTypes.func,
 	onNavigateNextPublicationPage: React.PropTypes.func,
 	onNewAuthor: React.PropTypes.func,
+	onNewCollective: React.PropTypes.func,
 	onNewPublication: React.PropTypes.func,
 	onPublicationRefresh: React.PropTypes.func,
 	onPublicationResultsChange: React.PropTypes.func,
