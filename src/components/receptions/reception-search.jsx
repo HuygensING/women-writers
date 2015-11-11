@@ -35,7 +35,7 @@ class ReceptionSearch extends React.Component {
 		};
 
 		let excelLink = this.state.excelUrl ?
-			<a href={this.state.excelUrl} target="_blank">Download excel</a> :
+			<a className="excel-link" href={this.state.excelUrl} target="_blank">Download excel</a> :
 			null;
 
 		let currentQuery = this.props.type === "authors" ?
