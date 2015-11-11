@@ -35,6 +35,7 @@ import {
 } from "./actions/publication";
 
 import {
+	deleteCollective,
 	saveCollective,
 	setCollectiveResultIds,
 	requestNextCollectiveResults,
@@ -112,6 +113,9 @@ let AppRouter = Router.extend({
 				}
 				onDeleteAuthorKey={(key) =>
 					store.dispatch(deleteAuthorKey(key))
+				}
+				onDeleteCollective={() =>
+					store.dispatch(deleteCollective())
 				}
 				onDeletePublication={() =>
 					store.dispatch(deletePublication())

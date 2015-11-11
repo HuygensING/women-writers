@@ -1,5 +1,5 @@
 import config from "../config";
-import {fetch, save} from "./utils";
+import {fetch, save, remove} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
 
@@ -53,6 +53,26 @@ export function saveCollective() {
 					response: response
 				});
 				dispatch(changeRoute("collective", [response._id]));
+				dispatch(toggleEdit(false));
+			}
+		);
+	};
+}
+
+export function deleteCollective() {
+	return function (dispatch, getState) {
+		let id = getState().collectives.current._id;
+
+		remove(
+			`${config.collectiveUrl}/${id}`,
+			getState().user.token,
+			() => {
+				dispatch({
+					type: "COLLECTIVE_DELETED",
+					id: id
+				});
+
+				dispatch(changeRoute("searchCollectives"));
 				dispatch(toggleEdit(false));
 			}
 		);

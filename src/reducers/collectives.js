@@ -55,6 +55,14 @@ export default function(state=initialState, action) {
 				current: state.unchanged
 			}};
 
+		case "COLLECTIVE_DELETED":
+			let c = state.cached;
+			delete c[action.id];
+			return {...state, ...{
+				cached: c,
+				current: null
+			}};
+
 		default:
 			return state;
 /*
