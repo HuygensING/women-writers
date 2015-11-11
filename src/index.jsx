@@ -34,7 +34,13 @@ import {
 	selectPublicationVariation
 } from "./actions/publication";
 
-import {setCollectiveResultIds, requestNextCollectiveResults} from "./actions/collective";
+import {
+	saveCollective,
+	setCollectiveResultIds,
+	requestNextCollectiveResults,
+	refreshCollective,
+	rollbackCollective
+} from "./actions/collective";
 
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations, requestRelations} from "./actions/relations";
@@ -73,7 +79,7 @@ let AppRouter = Router.extend({
 		React.render(
 			<App
 				{...nextState}
-				onAuthorRefresh={(id) =>store.dispatch(refreshAuthor(id)) }
+				onAuthorRefresh={(id) => store.dispatch(refreshAuthor(id)) }
 				onAuthorResultsChange={(results) => {
 					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets});
 					store.dispatch(setAuthorResultIds(results));
@@ -88,6 +94,7 @@ let AppRouter = Router.extend({
 				onCancel={(type) => {
 					if(type === "author") { store.dispatch(rollbackAuthor()); }
 					else if(type === "publication") { store.dispatch(rollbackPublication()); }
+					else if(type === "collective") { store.dispatch(rollbackCollective()); }
 					store.dispatch(toggleEdit(false));
 				}}
 				onChangeAuthorKey={(key, value) =>
@@ -96,6 +103,7 @@ let AppRouter = Router.extend({
 				onChangePublicationKey={(key, value) =>
 					store.dispatch(setPublicationKey(key, value))
 				}
+				onCollectiveRefresh={(id) => store.dispatch(refreshCollective(id))}
 				onCollectiveResultsChange={(results) => {
 					store.dispatch(setCollectiveResultIds(results));
 				}}
@@ -119,9 +127,8 @@ let AppRouter = Router.extend({
 				}
 				onNavigate={this.navigate.bind(this)}
 				onNavigateNextAuthorPage={(url) => store.dispatch(requestNextAuthorResults(url, this.navigate.bind(this))) }
-				onNavigateNextPublicationPage={(url) => store.dispatch(requestNextPublicationResults(url, this.navigate.bind(this))) }
 				onNavigateNextCollectivePage={(url) => store.dispatch(requestNextCollectiveResults(url, this.navigate.bind(this))) }
-
+				onNavigateNextPublicationPage={(url) => store.dispatch(requestNextPublicationResults(url, this.navigate.bind(this))) }
 				onNewAuthor={() =>
 					this.navigate("/persons/new")
 				}
@@ -148,6 +155,9 @@ let AppRouter = Router.extend({
 				}
 				onSaveAuthor={() =>
 					store.dispatch(saveAuthor())
+				}
+				onSaveCollective={() =>
+					store.dispatch(saveCollective())
 				}
 				onSavePublication={() =>
 					store.dispatch(savePublication())

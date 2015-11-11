@@ -67,10 +67,16 @@ class App extends React.Component {
 		let collective = (this.props.collectives.current !== null) ?
 			<CollectiveController
 				collective={this.props.collectives.current}
+				edit={this.props.router.collective.edit}
+				onCancel={this.props.onCancel}
 				onNavigate={this.props.onNavigate}
 				onNavigateNextPage={this.props.onNavigateNextCollectivePage}
+				onRefresh={this.props.onCollectiveRefresh.bind(this, this.props.collectives.current._id)}
+				onSaveCollective={this.props.onSaveCollective}
+				onToggleEdit={this.props.onToggleEdit}
 				requesting={this.props.collectives.requesting}
 				results={this.props.collectives.results}
+				user={this.props.user}
 				visible={this.props.router.collective.visible} /> :
 			null;
 
@@ -155,6 +161,7 @@ App.propTypes = {
 	onCancel: React.PropTypes.func,
 	onChangeAuthorKey: React.PropTypes.func,
 	onChangePublicationKey: React.PropTypes.func,
+	onCollectiveRefresh: React.PropTypes.func,
 	onCollectiveResultsChange: React.PropTypes.func,
 	onDeleteAuthor: React.PropTypes.func,
 	onDeleteAuthorKey: React.PropTypes.func,
@@ -175,6 +182,7 @@ App.propTypes = {
 	onReceptionToggle: React.PropTypes.func,
 	onResultSelect: React.PropTypes.func,
 	onSaveAuthor: React.PropTypes.func,
+	onSaveCollective: React.PropTypes.func,
 	onSavePublication: React.PropTypes.func,
 	onSelectAuthorVariation: React.PropTypes.func,
 	onSelectPublicationVariation: React.PropTypes.func,

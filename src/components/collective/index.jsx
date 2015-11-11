@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "../link";
+import EditButton from "../edit-button";
+import EditFooter from "../save-footer";
 import PaginationLinks from "../links/pagination";
 import cx from "classnames";
 
@@ -55,6 +57,22 @@ class CollectiveController extends React.Component {
 		let pid = this.props.collective["^pid"] ?
 			<a className="link" href={this.props.collective["^pid"]} target="_blank">{this.props.collective["^pid"]}</a> : "-";
 
+		let editButton = (this.props.edit && this.props.user && this.props.user.token) ?
+			null :
+			<EditButton
+				model={this.props.collective}
+				onRefresh={this.props.onRefresh}
+				onToggleEdit={this.props.onToggleEdit}
+				user={this.props.user} />;
+
+		let footer = (this.props.edit && this.props.user && this.props.user.token) ?
+			<EditFooter
+				onCancel={this.props.onCancel.bind(this, "collective")}
+				onDelete={this.props.onDeleteCollective}
+				onSave={this.props.onSaveCollective}
+				type="collective" /> :
+			null;
+
 		return (
 			<div
 				className={cx(
@@ -65,6 +83,9 @@ class CollectiveController extends React.Component {
 				{resultsLink}
 				<header className="page"><h2>{this.props.collective.name}</h2></header>
 				{paginationLinks}
+				<div className="extra-info">
+					{editButton}
+				</div>
 				<div className="record-container">
 					<ul className="record">
 						<li>
@@ -92,6 +113,7 @@ class CollectiveController extends React.Component {
 						{members}
 					</ul>
 				</div>
+				{footer}
 			</div>
 		);
 	}
@@ -99,10 +121,17 @@ class CollectiveController extends React.Component {
 
 CollectiveController.propTypes = {
 	collective: React.PropTypes.object,
+	edit: React.PropTypes.bool,
+	onCancel: React.PropTypes.func,
+	onDeleteCollective: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	onNavigateNextPage: React.PropTypes.func,
+	onRefresh: React.PropTypes.func,
+	onSaveCollective: React.PropTypes.func,
+	onToggleEdit: React.PropTypes.func,
 	requesting: React.PropTypes.bool,
 	results: React.PropTypes.object,
+	user: React.PropTypes.object,
 	visible: React.PropTypes.bool
 };
 

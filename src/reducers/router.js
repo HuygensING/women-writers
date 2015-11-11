@@ -89,7 +89,7 @@ let handleChangeRoute = function(state, handler, props) {
 		handler = "editPublication";
 	}
 
-	if (handler === "editAuthor" || handler === "editPublication") {
+	if (handler === "editAuthor" || handler === "editPublication" || handler === "editCollective") {
 		handler = handler.substr(4).toLowerCase();
 		nextPageProps.edit = true;
 	}

@@ -16,7 +16,7 @@ SaveFooter.propTypes = {
 	onCancel: React.PropTypes.func,
 	onDelete: React.PropTypes.func,
 	onSave: React.PropTypes.func,
-	type: React.PropTypes.oneOf(["author", "publication"])
+	type: React.PropTypes.oneOf(["author", "publication", "collective"])
 };
 
 export default SaveFooter;

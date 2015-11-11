@@ -1,5 +1,6 @@
 import config from "../config";
-import {fetch} from "./utils";
+import {fetch, save} from "./utils";
+import {changeRoute, toggleEdit} from "./router";
 
 
 export function refreshCollective(id) {
@@ -39,6 +40,25 @@ export function fetchCollective(id) {
 	};
 }
 
+export function saveCollective() {
+	return function (dispatch, getState) {
+		let collective = getState().collectives.current;
+		save(
+			config.collectiveUrl,
+			collective,
+			getState().user.token,
+			(response) => {
+				dispatch({
+					type: "RECEIVE_COLLECTIVE",
+					response: response
+				});
+				dispatch(changeRoute("collective", [response._id]));
+				dispatch(toggleEdit(false));
+			}
+		);
+	};
+}
+
 
 export function setCollectiveResultIds(results) {
 	return {
@@ -60,3 +80,10 @@ export function requestNextCollectiveResults(url, onNavigate) {
 		});
 	};
 }
+
+export function rollbackCollective() {
+	return {
+		type: "ROLLBACK_COLLECTIVE"
+	};
+}
+

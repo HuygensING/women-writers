@@ -50,6 +50,11 @@ export default function(state=initialState, action) {
 				}
 			}};
 
+		case "ROLLBACK_COLLECTIVE":
+			return {...state, ...{
+				current: state.unchanged
+			}};
+
 		default:
 			return state;
 /*
@@ -82,10 +87,7 @@ export default function(state=initialState, action) {
 				current: MODEL
 			}};
 
-		case "ROLLBACK_PUBLICATION":
-			return {...state, ...{
-				current: state.unchanged
-			}};
+
 
 		case "SET_PUBLICATION_QUERY":
 			return {...state, ...{
