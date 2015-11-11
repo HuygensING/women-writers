@@ -3,7 +3,7 @@ import React from "react";
 class Relation extends React.Component {
 	render() {
 		let values = (this.props.values.length) ?
-			<ul className="relation">{this.props.values.map((v, index) => <li key={index}>{v.value}</li>)}</ul> :
+			<ul className="relation">{this.props.values.map((v, index) => <li key={index}>{v.value} {v.date ? `(${v.date})` : null}</li>)}</ul> :
 			"-";
 
 		return (

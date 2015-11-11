@@ -43,13 +43,15 @@ export function iterateObjectKeys(obj, parser) {
 const parseRelation = function(key, value, obj) {
 	obj[key] = value
 		.map((v) => {
-			return {
+			let v1 = {
 				key: v.path,
 				value: v.displayName,
 				accepted: v.accepted,
 				rev: v.rev,
 				relationId: v.relationId
 			};
+			if(v.date) { v1.date = v.date; }
+			return v1;
 		});
 };
 
