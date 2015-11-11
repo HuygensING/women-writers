@@ -151,7 +151,7 @@ let toRelationObject = (relationName, relationType, sourceId, accepted) => {
 		};
 		if(obj["^rev"]) { saveObj["^rev"] = obj["^rev"]; }
 		if(obj.relationId) { saveObj._id = obj.relationId; }
-
+		if(obj.date) { saveObj.date = obj.date; }
 		return saveObj;
 	};
 };
@@ -184,7 +184,7 @@ let toFoundInCurrent = function(prevRelations, currentRelations, serverRemoved =
 			let found = currentRelations[relationName]
 				.filter((relation) =>
 					!prevRelations.hasOwnProperty(relationName) || prevRelations[relationName].filter((prevRelation) =>
-						prevRelation.key === relation.key
+						prevRelation.key === relation.key && prevRelation.date === relation.date
 					).length === 0
 				).map((relation) => {
 					if(serverRemoved.hasOwnProperty(relationName)) {
@@ -203,7 +203,8 @@ let toFoundInCurrent = function(prevRelations, currentRelations, serverRemoved =
 					return {
 						key: f.key,
 						"^rev": f.rev || false,
-						relationId: f.relationId || false
+						relationId: f.relationId || false,
+						date: f.date || false
 					};
 				});
 			}
@@ -229,4 +230,6 @@ export function saveRelations(currentRelations, serverRelations, serverRemovedRe
 		console.log("invoke save callback", saveCallback);
 		saveCallback();
 	});
+
+
 }

@@ -6,6 +6,8 @@ import Input from "hire-forms-input";
 import Textarea from "hire-forms-textarea";
 import AutocompleteList from "hire-forms-autocomplete-list";
 
+import FirstPublisherForm from "./first-publisher";
+
 import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
 
@@ -55,6 +57,17 @@ class BasicInfoForm extends React.Component {
 					values={model["@relations"].hasPublishLocation} />
 			</li>;
 
+		let firstPublisher = (model._id === null) ?
+			null :
+			<li>
+				<label>First publisher</label>
+				<FirstPublisherForm
+					async={API.getCollectives}
+					onChange={this.props.onChange.bind(this, ["@relations", "isPublishedBy"])}
+					values={model["@relations"].isPublishedBy}
+					/>
+			</li>;
+
 		return (
 			<ul>
 				{isCreatedBy}
@@ -73,15 +86,7 @@ class BasicInfoForm extends React.Component {
 				</li>
 				{hasGenre}
 				{hasWorkLanguage}
-				{/*
-					<li>
-						<label>First editor</label>
-						<AutocompleteList
-							async={API.getPersons}
-							onChange={this.props.onChange.bind(this, ["@relations", "firstEditor"])}
-							value={model["@relations"].firstEditor} />
-					</li>
-				*/}
+				{firstPublisher}
 				{hasPublishLocation}
 				<li>
 					<label>Date</label>

@@ -56,6 +56,7 @@ export default {
 				"dynamic_s_language": "Language",
 				"dynamic_s_origin": "Country of first publication",
 				"dynamic_t_title": "Title",
+				"dynamic_s_firstPublisher": "First publisher",
 				"dynamic_t_author_name": "Name",
 				"dynamic_i_author_birthDate": "Year of birth",
 				"dynamic_s_author_birthplace": "Place of birth",
@@ -174,6 +175,7 @@ export default {
 		},
 		facetList: [
 			"dynamic_s_origin",
+			"dynamic_s_firstPublisher",
 			"dynamic_s_sources",
 			"dynamic_i_date",
 			"dynamic_s_document_type",
