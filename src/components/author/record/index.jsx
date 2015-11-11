@@ -112,7 +112,7 @@ class AuthorRecord extends React.Component {
 					label="Public">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationPublicComponent}</div>
-						<Public author={this.props.author} />
+						<Public author={this.props.author} onNavigate={this.props.onNavigate} />
 					</div>
 					<div className="temp-data">
 						<h2>Temporary data</h2>

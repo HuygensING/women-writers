@@ -21,10 +21,39 @@ class CollectiveController extends React.Component {
 			this.props.collective.links.map((l, i) => <li key={i}><a className="link" href={l.url} target="_blank">{l.label}</a></li>) :
 			"-";
 
-		let documents = this.props.collective["@relations"].isStorageOf ?
-			this.props.collective["@relations"].isStorageOf.map((r, i) => (
-				<li key={i}><Link href={"documents/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
-			)) : "-";
+		let storageDocuments = this.props.collective["@relations"].isStorageOf ? (
+			<li>
+				<label>Is storage of</label>
+				<span><ul className="relation">
+					{this.props.collective["@relations"].isStorageOf.map((r, i) => (
+						<li key={i}><Link href={"documents/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
+					))}
+				</ul></span>
+			</li>) : null;
+
+		let publishedDocuments = this.props.collective["@relations"].isPublisherOf ? (
+			<li>
+				<label>Is publisher of</label>
+				<span><ul className="relation">
+					{this.props.collective["@relations"].isPublisherOf.map((r, i) => (
+						<li key={i}><Link href={"documents/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
+					))}
+				</ul></span>
+			</li>) : null;
+
+
+		let members = this.props.collective["@relations"].hasMember ? (
+			<li>
+				<label>Has members</label>
+				<span><ul className="relation">
+					{this.props.collective["@relations"].hasMember.map((r, i) => (
+						<li key={i}><Link href={"persons/" + r.id} onNavigate={this.props.onNavigate} value={r.displayName} /></li>
+					))}
+				</ul></span>
+			</li>) : null;
+
+		let pid = this.props.collective["^pid"] ?
+			<a className="link" href={this.props.collective["^pid"]} target="_blank">{this.props.collective["^pid"]}</a> : "-";
 
 		return (
 			<div
@@ -47,17 +76,20 @@ class CollectiveController extends React.Component {
 							{this.props.collective.type}
 						</li>
 						<li>
+							<label>Persistent ID</label>
+							{pid}
+						</li>
+						<li>
 							<label>Has location</label>
 							{(this.props.collective["@relations"].hasLocation || []).map((r) => r.displayName).join(", ")}
 						</li>
 						<li>
 							<label>Links</label>
-							<ul className="relation">{links}</ul>
+							<span><ul className="relation">{links}</ul></span>
 						</li>
-						<li>
-							<label>Is storage of</label>
-							<ul className="relation">{documents}</ul>
-						</li>
+						{storageDocuments}
+						{publishedDocuments}
+						{members}
 					</ul>
 				</div>
 			</div>
