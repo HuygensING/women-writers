@@ -29,7 +29,12 @@ let initialState = {
 	query: {
 		term: "",
 		facetValues: [],
-		fullTextSearchParameters: []
+		fullTextSearchParameters: [],
+		sortParameters: [
+			{ fieldname: "dynamic_sort_name", direction: "asc"},
+			{ fieldname: "dynamic_k_birthDate", direction: "asc"},
+			{ fieldname: "dynamic_k_deathDate", direction: "asc"}
+		]
 	},
 	activeFacets: [],
 	results: {

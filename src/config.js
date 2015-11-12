@@ -39,6 +39,7 @@ export default {
 			"dynamic_sort_name": "Name",
 			"dynamic_k_birthDate": "Date of Birth",
 			"dynamic_k_deathDate": "Date of Death",
+			"dynamic_k_modified": "Modified",
 			"gender": "Gender",
 			"birthDate": "Date of birth",
 			"deathDate": "Date of death",

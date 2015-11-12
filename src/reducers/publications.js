@@ -30,7 +30,11 @@ let initialState = {
 	variationData: null,
 	query: {
 		term: "",
-		facetValues: []
+		facetValues: [],
+		sortParameters: [
+			{ fieldname: "dynamic_sort_creator", direction: "asc"},
+			{ fieldname: "dynamic_sort_title", direction: "asc"}
+		]
 	},
 	activeFacets: [],
 	results: {
