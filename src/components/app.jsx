@@ -10,6 +10,7 @@ import ReceptionsController from "./receptions";
 import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
 import SearchCollectives from "./search-collectives";
+import ModifiedController from "./modified";
 
 
 class App extends React.Component {
@@ -148,6 +149,9 @@ class App extends React.Component {
 					onSelect={this.props.onResultSelect}
 					visible={this.props.router.searchCollectives.visible} />
 				{collective}
+				<ModifiedController
+					onSelect={this.props.onResultSelect}				
+					visible={this.props.router.lastModified.visible} />
 			</div>
 		);
 	}

@@ -242,18 +242,20 @@ let AppRouter = Router.extend({
 		"collectives/:id": "collective",
 		"collectives/:id/edit": "editCollective",
 		"graph/:domain/:id": "graph",
-		"receptions/:tab": "receptions"
-	},
-
+		"receptions/:tab": "receptions",
+		"modified(/)": "lastModified"
+	}
+/*
 	searchAuthors: function() {},
 	searchPublications: function() {},
+	lastModified: function () {},
 	notFound: function() {},
 	author: function() {},
 	editAuthor: function() {},
 	publication: function() {},
 	editPublication: function() {},
 	graph: function() {},
-	receptions: function() {}
+	receptions: function() {}*/
 });
 
 document.addEventListener("DOMContentLoaded", () => {

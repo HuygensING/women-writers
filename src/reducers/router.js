@@ -14,6 +14,9 @@ let STATE = {
 	graph: {
 		visible: false
 	},
+	lastModified: {
+		visible: false
+	},
 	path: "",
 	publication: {
 		visible: false
@@ -36,6 +39,7 @@ let getNextPath = function(state) {
 		collective: "collectives",
 		editCollective: "collectives",
 		searchCollectives: "collectives",
+		lastModified: "modified",
 		graph: "graph",
 		publication: "documents",
 		editPublication: "documents",

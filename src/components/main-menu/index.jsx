@@ -14,7 +14,7 @@ class MainMenu extends React.Component {
 			types = "persons";
 		}
 
-		let newAuthor, newPublication, newCollective;
+		let newAuthor, newPublication, newCollective, lastModified;
 		if (this.props.user != null && this.props.user.authenticated) {
 			newAuthor = (
 				<li className="new-author">
@@ -36,6 +36,15 @@ class MainMenu extends React.Component {
 						New collective
 					</button>
 				</li>);
+
+			lastModified = (
+				<li className={cx({active: types === "modified"})}>
+					<Link
+						href="modified"
+						onNavigate={this.props.onNavigate}
+						value="Last modified" />
+				</li>
+			);
 		}
 
 		return (
@@ -64,7 +73,7 @@ class MainMenu extends React.Component {
 						onNavigate={this.props.onNavigate}
 						value="Collectives" />
 				</li>
-
+				{lastModified}
 				<li className="login">
 					<Login
 						appId="WomenWriters"

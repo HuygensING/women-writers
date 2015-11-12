@@ -82,13 +82,21 @@ header.page
 .publication header.page > h2 > span
 	max-width 100%
 
-.author, .publication, .hire-faceted-search, .graph, .receptions, .collective {
+.author, .publication, .hire-faceted-search, .graph, .receptions, .collective, .last-modified {
 	display: none;
 }
 
-.author.visible, .publication.visible, .visible > .hire-faceted-search, .graph.visible, .receptions.visible, .collective.visible {
+.author.visible, 
+.publication.visible, 
+.visible > .hire-faceted-search, 
+.graph.visible, 
+.receptions.visible, 
+.collective.visible, 
+.last-modified.visible {
 	display: block;
 }
+
+
 
 .author.visible.requesting, .publication.visible.requesting, .collective.visible.requesting {
 	opacity: 0.5
@@ -511,3 +519,22 @@ ul.hire-options
 
 .relation.person-relation.genderified:empty
 	display none
+
+.last-modified > div
+	float left
+	width 50%
+
+.last-modified .hire-faceted-search-results > header > .hire-faceted-search-results-sort-menu
+	display none
+
+
+.last-modified > div > .hire-faceted-search
+	display block
+	width 100%
+	& > .hire-faceted-search-results
+		padding 0
+		width 100%
+		& > ol.hire-faceted-search-result-list.numbered
+			padding-left 20px
+	& ul.hire-faceted-search-current-query
+		display none
