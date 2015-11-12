@@ -150,7 +150,7 @@ class App extends React.Component {
 					visible={this.props.router.searchCollectives.visible} />
 				{collective}
 				<ModifiedController
-					onSelect={this.props.onResultSelect}				
+					onSelect={this.props.onResultSelect}
 					visible={this.props.router.lastModified.visible} />
 			</div>
 		);

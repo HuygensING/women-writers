@@ -17,50 +17,52 @@ class ModifiedController extends React.Component {
 		return (
 			<div className={cx("last-modified",	{visible: this.props.visible})}>
 				<div className="modified-authors">
-				<FacetedSearch
-					config={{
-						baseURL: config.baseUrl,
-						searchPath: "/search/wwpersons",
-						headers: {
-							VRE_ID: "WomenWriters",
-							Accept: "application/json"
-						}
-					}}
-					customComponents={{
-						filters: ModifiedFilters,
-						result: ModifiedResult
-					}}
-					facetList={["dynamic_i_modified"]}
-					numberedResults={true}
-					onSelect={this.props.onSelect}
-					query={{
-						facetValues: [{name: "dynamic_i_modified", lowerLimit: twoMonthsAgo, upperLimit: now}],
-						sortParameters: [{ fieldname: "dynamic_k_modified", direction: "desc"}]
-					}}
-				/>
+					<header>Authors</header>
+					<FacetedSearch
+						config={{
+							baseURL: config.baseUrl,
+							searchPath: "/search/wwpersons",
+							headers: {
+								VRE_ID: "WomenWriters",
+								Accept: "application/json"
+							}
+						}}
+						customComponents={{
+							filters: ModifiedFilters,
+							result: ModifiedResult
+						}}
+						facetList={["dynamic_i_modified"]}
+						numberedResults={true}
+						onSelect={this.props.onSelect}
+						query={{
+							facetValues: [{name: "dynamic_i_modified", lowerLimit: twoMonthsAgo, upperLimit: now}],
+							sortParameters: [{ fieldname: "dynamic_k_modified", direction: "desc"}]
+						}}
+					/>
 				</div>
 				<div className="modified-publications">
-				<FacetedSearch
-					config={{
-						baseURL: config.baseUrl,
-						searchPath: "/search/wwdocuments",
-						headers: {
-							Accept: "application/json",
-							VRE_ID: "WomenWriters"
-						}
-					}}
-					customComponents={{
-						filters: ModifiedFilters,
-						result: ModifiedResult
-					}}
-					facetList={["dynamic_i_modified"]}
-					numberedResults={true}
-					onSelect={this.props.onSelect}
-					query={{
-						facetValues: [{name: "dynamic_i_modified", lowerLimit: twoMonthsAgo, upperLimit: now}],
-						sortParameters: [{ fieldname: "dynamic_k_modified", direction: "desc"}]
-					}}
-				/>
+					<header>Publications</header>
+					<FacetedSearch
+						config={{
+							baseURL: config.baseUrl,
+							searchPath: "/search/wwdocuments",
+							headers: {
+								Accept: "application/json",
+								VRE_ID: "WomenWriters"
+							}
+						}}
+						customComponents={{
+							filters: ModifiedFilters,
+							result: ModifiedResult
+						}}
+						facetList={["dynamic_i_modified"]}
+						numberedResults={true}
+						onSelect={this.props.onSelect}
+						query={{
+							facetValues: [{name: "dynamic_i_modified", lowerLimit: twoMonthsAgo, upperLimit: now}],
+							sortParameters: [{ fieldname: "dynamic_k_modified", direction: "desc"}]
+						}}
+					/>
 				</div>
 			</div>
 		);
