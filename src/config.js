@@ -33,7 +33,8 @@ export default {
 				"dynamic_s_financials": "Financials",
 				"dynamic_s_profession": "Profession",
 				"dynamic_t_name": "Name",
-				"dynamic_t_notes": "Provisional notes"
+				"dynamic_t_notes": "Provisional notes",
+				"dynamic_k_modified": "Modified"
 			},
 			"dynamic_sort_name": "Name",
 			"dynamic_k_birthDate": "Date of Birth",
@@ -58,6 +59,7 @@ export default {
 				"dynamic_t_title": "Title",
 				"dynamic_s_firstPublisher": "First publisher",
 				"dynamic_t_author_name": "Name",
+				"dynamic_t_notes": "Provisional notes",
 				"dynamic_i_author_birthDate": "Year of birth",
 				"dynamic_s_author_birthplace": "Place of birth",
 				"dynamic_s_author_children": "Children",
@@ -171,7 +173,8 @@ export default {
 			"publishLocation": "Country of first publication",
 			"date": "Date",
 			"dynamic_sort_creator": "Author",
-			"dynamic_sort_title": "Title"
+			"dynamic_sort_title": "Title",
+			"dynamic_k_modified": "Modified"
 		},
 		facetList: [
 			"dynamic_s_origin",

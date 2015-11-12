@@ -42,7 +42,8 @@ class SearchPublications extends React.Component {
 						},
 						hideFreeTextSearch: true,
 						fullTextSearchFields: [
-							{name: "dynamic_t_title"}
+							{name: "dynamic_t_title"},
+							{name: "dynamic_t_notes", position: "bottom"}
 						]
 					}}
 					customComponents={{
