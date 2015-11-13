@@ -19,7 +19,7 @@ class SearchCollectives extends React.Component {
 							Accept: "application/json"
 						}
 					}}
-					labels={{facetTitles: {term: "Search term"}}}
+					labels={{facetTitles: {term: "Search term", "dynamic_s_type": "Type"}}}
 					numberedResults={true}
 					onChange={this.props.onResultsChange}
 					onSelect={this.props.onSelect}
