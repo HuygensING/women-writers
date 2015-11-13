@@ -82,21 +82,26 @@ header.page
 .publication header.page > h2 > span
 	max-width 100%
 
-.author, .publication, .hire-faceted-search, .graph, .receptions, .collective, .last-modified, .search-authors > input, .search-publications > input {
+.author, .publication, .hire-faceted-search, .graph, .receptions, .collective, .last-modified, .search-authors > .permalink, .search-publications > .permalink, .stored-search {
 	display: none;
 }
 
 .author.visible, 
 .publication.visible, 
 .visible > .hire-faceted-search, 
-.visible > input,
+.visible > .permalink,
 .graph.visible, 
 .receptions.visible, 
 .collective.visible, 
-.last-modified.visible {
+.last-modified.visible,
+.stored-search.visible {
 	display: block;
 }
-
+.permalink 
+	float right
+	margin 20px
+	& > input
+		margin-left 10px
 
 
 .author.visible.requesting, .publication.visible.requesting, .collective.visible.requesting {

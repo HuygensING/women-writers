@@ -28,6 +28,9 @@ let STATE = {
 	searchPublications: {
 		visible: false
 	},
+	storedSearch: {
+		visible: false
+	},
 	visibleHandler: null
 };
 

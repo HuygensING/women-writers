@@ -41,7 +41,10 @@ class SearchAuthors extends React.Component {
 	render() {
 		return (
 			<div className={cx("search-authors", {visible: this.props.visible})}>
-				<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink()} />
+				<div className="permalink">
+					Store this search:
+					<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink()} />
+				</div>
 				<FacetedSearch
 					config={{
 						baseURL: config.baseUrl,

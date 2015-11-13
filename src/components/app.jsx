@@ -11,6 +11,7 @@ import SearchAuthors from "./search-authors";
 import SearchPublications from "./search-publications";
 import SearchCollectives from "./search-collectives";
 import ModifiedController from "./modified";
+import StoredSearchController from "./stored-search";
 
 
 class App extends React.Component {
@@ -152,6 +153,7 @@ class App extends React.Component {
 				<ModifiedController
 					onSelect={this.props.onResultSelect}
 					visible={this.props.router.lastModified.visible} />
+				<StoredSearchController visible={this.props.router.storedSearch.visible} />
 			</div>
 		);
 	}
