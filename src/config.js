@@ -76,7 +76,8 @@ export default {
 				"dynamic_s_author_social_class": "Social class",
 				"dynamic_s_author_types": "Types",
 				"dynamic_s_author_financials": "Financials",
-				"dynamic_s_author_profession": "Profession"
+				"dynamic_s_author_profession": "Profession",
+				"dynamic_s_creator": "Reception Author"
 			},
 			facetValues: {
 				"dynamic_s_relation": {
