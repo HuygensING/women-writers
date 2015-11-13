@@ -1,6 +1,6 @@
 import React from "react";
 import RangeSlider from "hire-range-slider";
-import {makeDate} from "./date";
+import {makeDate, makeLabel} from "./date";
 
 const lowestDate = () => new Date(new Date().setMonth(new Date().getMonth() - 12));
 const highestLimit = makeDate(new Date());
@@ -11,10 +11,7 @@ const makeDays = (value) =>
 	(parseInt(("" + value).substr(4, 2)) * 31) +
 	parseInt(("" + value).substr(6, 2));
 
-const makeLabel = (value) =>
-	("" + value).substr(6, 2) + "-" +
-	("" + value).substr(4, 2) + "-" +
-	("" + value).substr(0, 4);
+
 
 const calcRange = (value) => (makeDays(value) - makeDays(lowestLimit)) / (makeDays(highestLimit) - makeDays(lowestLimit));
 

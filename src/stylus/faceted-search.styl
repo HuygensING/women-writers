@@ -47,7 +47,7 @@ svg.hire-icon.checked
 		fill #009688
 
 
-.search-authors .hire-faceted-search-results > header > ul,,
+.search-authors .hire-faceted-search-results > header > ul,
 .search-publications .hire-faceted-search-results > header > ul,
 .reception-search > ul
 	position absolute
@@ -88,4 +88,21 @@ ul.hire-faceted-search-current-query > li > ul
 
 
 .search-collectives .hire-faceted-search-filters .hire-faceted-search-text-search header > h3
-	display none	
+	display none
+
+.last-modified .hire-faceted-search-results li > span
+	display inline-block
+	width calc(100% - 120px)
+	height 1.5em
+	vertical-align middle
+	white-space nowrap
+	overflow hidden
+	text-overflow ellipsis
+
+.last-modified .hire-faceted-search-results li > .modified-date
+	display inline-block
+	vertical-align top
+	width 120px
+	float right
+	font-size 0.9em
+	color #666
