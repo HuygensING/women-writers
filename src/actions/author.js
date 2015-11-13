@@ -236,3 +236,13 @@ export function selectAuthorVariation(type, id) {
 		}
 	};
 }
+
+export function checkForStoredAuthorSearch() {
+	return function (dispatch, getState) {
+		let storedSearchQuery = getState().authors.storedSearchQuery;
+		if(storedSearchQuery) {
+			dispatch({type: "SET_AUTHOR_QUERY", query: storedSearchQuery});
+			dispatch(changeRoute("searchAuthors"));
+		}
+	};
+}

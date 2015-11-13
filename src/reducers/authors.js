@@ -36,6 +36,7 @@ let initialState = {
 			{ fieldname: "dynamic_k_deathDate", direction: "asc"}
 		]
 	},
+	storedSearchQuery: null,
 	activeFacets: [],
 	results: {
 		ids: [],
@@ -106,7 +107,8 @@ export default function(state=initialState, action) {
 
 		case "SET_AUTHOR_QUERY":
 			return {...state, ...{
-				query: {...action.query, term: ""}
+				query: {...action.query, term: ""},
+				storedSearchQuery: null
 			}};
 
 		case "UNSET_AUTHOR_FACET_VALUE":
@@ -147,6 +149,12 @@ export default function(state=initialState, action) {
 
 		case "SET_GENDER_MAP":
 			return {...state, genderMap: action.genderMap};
+
+		case "CHANGE_ROUTE":
+			if(action.handler === "storedSearch" && action.props[0] === "authors") {
+				return {...state, storedSearchQuery: JSON.parse(action.props[1])};
+			}
+			return state;
 
 		default:
 			return state;

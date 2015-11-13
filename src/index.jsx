@@ -18,7 +18,8 @@ import {
 	refreshAuthor,
 	setAuthorResultIds,
 	requestNextAuthorResults,
-	selectAuthorVariation
+	selectAuthorVariation,
+	checkForStoredAuthorSearch
 } from "./actions/author";
 
 import {
@@ -31,7 +32,8 @@ import {
 	refreshPublication,
 	setPublicationResultIds,
 	requestNextPublicationResults,
-	selectPublicationVariation
+	selectPublicationVariation,
+	checkForStoredPublicationSearch
 } from "./actions/publication";
 
 import {
@@ -85,6 +87,7 @@ let AppRouter = Router.extend({
 				onAuthorResultsChange={(results) => {
 					store.dispatch({type: "SET_AUTHOR_FACETS", activeFacets: results.facets});
 					store.dispatch(setAuthorResultIds(results));
+					store.dispatch(checkForStoredAuthorSearch());
 				}}
 				onAuthorSearchChange={(results, query) => {
 					store.dispatch(setPublicationQueryFromAuthorQuery(query));
@@ -151,6 +154,7 @@ let AppRouter = Router.extend({
 				onPublicationResultsChange={(results) => {
 					store.dispatch({type: "SET_PUBLICATION_FACETS", activeFacets: results.facets});
 					store.dispatch(setPublicationResultIds(results));
+					store.dispatch(checkForStoredPublicationSearch());
 				}}
 				onPublicationSearchChange={(results, query) => {
 					store.dispatch(setAuthorQueryFromPublicationQuery(query));
@@ -243,7 +247,8 @@ let AppRouter = Router.extend({
 		"collectives/:id/edit": "editCollective",
 		"graph/:domain/:id": "graph",
 		"receptions/:tab": "receptions",
-		"modified(/)": "lastModified"
+		"modified(/)": "lastModified",
+		"stored-search/:type/:query": "storedSearch"
 	}
 /*
 	searchAuthors: function() {},

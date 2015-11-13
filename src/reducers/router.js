@@ -44,7 +44,8 @@ let getNextPath = function(state) {
 		publication: "documents",
 		editPublication: "documents",
 		searchPublications: "documents",
-		receptions: "receptions"
+		receptions: "receptions",
+		storedSearch: "stored-search"
 	};
 
 	if (state.visibleHandler == null) {

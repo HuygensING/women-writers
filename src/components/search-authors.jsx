@@ -29,9 +29,19 @@ class SearchAuthors extends React.Component {
 		this.props.onSearchId(searchId);
 	}
 
+	permalink() {
+		let arr = window.location.href.split("/");
+		return arr[0] + "//" + arr[2] + "/womenwriters/vre/stored-search/authors/" + encodeURIComponent(JSON.stringify(this.props.query));
+	}
+
+	onPermaClick(ev) {
+		ev.target.select();
+	}
+
 	render() {
 		return (
 			<div className={cx("search-authors", {visible: this.props.visible})}>
+				<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink()} />
 				<FacetedSearch
 					config={{
 						baseURL: config.baseUrl,

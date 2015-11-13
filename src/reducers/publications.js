@@ -36,6 +36,8 @@ let initialState = {
 			{ fieldname: "dynamic_sort_title", direction: "asc"}
 		]
 	},
+	storedSearchQuery: null,
+	storedSearchPending: false,
 	activeFacets: [],
 	results: {
 		ids: [],
@@ -105,7 +107,8 @@ export default function(state=initialState, action) {
 
 		case "SET_PUBLICATION_QUERY":
 			return {...state, ...{
-				query: {...action.query, term: ""}
+				query: {...action.query, term: ""},
+				storedSearchQuery: null
 			}};
 
 		case "UNSET_PUBLICATION_FACET_VALUE":
@@ -147,5 +150,10 @@ export default function(state=initialState, action) {
 		case "RECEIVE_PUBLICATION_VARIATION_DATA":
 			return {...state, variationData: action.data === null ? null : parseIncomingPublication(action.data)};
 
+		case "CHANGE_ROUTE":
+			if(action.handler === "storedSearch" && action.props[0] === "publications") {
+				return {...state, storedSearchPending: true, storedSearchQuery: JSON.parse(action.props[1])};
+			}
+			return state;
 	}
 }

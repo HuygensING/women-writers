@@ -205,3 +205,13 @@ export function selectPublicationVariation(type, id) {
 		}
 	};
 }
+
+export function checkForStoredPublicationSearch() {
+	return function (dispatch, getState) {
+		let storedSearchQuery = getState().publications.storedSearchQuery;
+		if(storedSearchQuery) {
+			dispatch({type: "SET_PUBLICATION_QUERY", query: storedSearchQuery});
+			dispatch(changeRoute("searchPublications"));
+		}
+	};
+}

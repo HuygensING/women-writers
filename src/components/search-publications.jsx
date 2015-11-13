@@ -28,9 +28,19 @@ class SearchPublications extends React.Component {
 		this.props.onSearchId(searchId);
 	}
 
+	permalink() {
+		let arr = window.location.href.split("/");
+		return arr[0] + "//" + arr[2] + "/womenwriters/vre/stored-search/publications/" + encodeURIComponent(JSON.stringify(this.props.query));
+	}
+
+	onPermaClick(ev) {
+		ev.target.select();
+	}
+
 	render() {
 		return (
 			<div className={cx("search-publications", {visible: this.props.visible})}>
+				<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink()} />
 				<FacetedSearch
 					config={{
 						baseURL: config.baseUrl,
