@@ -6,7 +6,9 @@ let initialState = {
 	publication: {
 		pendingSearchId: null,
 		searchId: null
-	}
+	},
+	storedSearchQuery: null,
+	awaitingQuery: null
 };
 
 export default function(state=initialState, action) {
@@ -47,6 +49,17 @@ export default function(state=initialState, action) {
 					searchId: action.searchId
 				}}
 			};
+
+		case "CHANGE_ROUTE":
+			if(action.handler === "storedSearch" && action.props[0] === "receptions") {
+				return {...state, storedSearchQuery: JSON.parse(action.props[1])};
+			}
+			return state;
+
+		case "UPDATE_RECEPTION_STORED_QUERY":
+			console.log("TODO do something with awaitingQuery", action.query);
+			return {...state, storedSearchQuery: null, awaitingQuery: action.query};
+
 		default:
 			return state;
 	}

@@ -62,6 +62,7 @@ class ReceptionSearch extends React.Component {
 						facetSortMap={config.publications.facetSortMap}
 						labels={config.publications.labels}
 						numbered={true}
+						onChange={this.props.onChange}
 						onSearchId={this.onSearchId.bind(this)}
 						onSelect={this.props.onSelect}
 						query={{otherSearchId: this.props.searchId}}
@@ -82,6 +83,7 @@ class ReceptionSearch extends React.Component {
 ReceptionSearch.propTypes = {
 	activeFacets: React.PropTypes.array,
 	activeQuery: React.PropTypes.object,
+	onChange: React.PropTypes.func,
 	onSelect: React.PropTypes.func,
 	onUnsetFacetValue: React.PropTypes.func,
 	onUnsetFullTextField: React.PropTypes.func,

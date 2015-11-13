@@ -6,10 +6,45 @@ import isEqual from "lodash.isequal";
 
 class ReceptionsController extends React.Component {
 
-	shouldComponentUpdate(nextProps) {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			authors: this.props.authors.query,
+			publications: this.props.publications.query
+		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log("ReceptionsController::componentWillReceiveProps nextProps.receptions.awaitingQuery", nextProps.receptions.awaitingQuery);
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
 		return this.props.visible || nextProps.visible ||
 			!isEqual(this.props.authors.query, nextProps.authors.query) ||
-			!isEqual(this.props.publications.query, nextProps.publications.query);
+			!isEqual(this.props.publications.query, nextProps.publications.query) ||
+			!isEqual(this.state, nextState);
+	}
+
+	setReceptionQuery(type, results, query) {
+		this.setState({[type]: query});
+	}
+
+	permalink(type) {
+		let arr = window.location.href.split("/");
+		let query = {
+			query: {
+				[type]: this.props[type].query,
+				receptions: this.state[type]
+			},
+			type: type
+		};
+
+		return arr[0] + "//" + arr[2] + "/womenwriters/vre/stored-search/receptions/" + encodeURIComponent(JSON.stringify(query));
+	}
+
+	onPermaClick(ev) {
+		ev.target.select();
 	}
 
 	render() {
@@ -19,10 +54,15 @@ class ReceptionsController extends React.Component {
 					<Tab
 						active={this.props.tab === "authors"}
 						label="Authors">
+						<div className="permalink">
+							Store this search:
+							<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink("authors")} />
+						</div>
 						<ReceptionSearch
 							{...this.props.receptions.author}
 							activeFacets={this.props.authors.activeFacets}
 							activeQuery={this.props.authors.query}
+							onChange={this.setReceptionQuery.bind(this, "authors")}
 							onSelect={this.props.onSelect}
 							onUnsetFacetValue={this.props.onUnsetAuthorFacetValue}
 							onUnsetFullTextField={this.props.onUnsetAuthorFullTextField}
@@ -34,10 +74,15 @@ class ReceptionsController extends React.Component {
 					<Tab
 						active={this.props.tab === "publications"}
 						label="Publications">
+						<div className="permalink">
+							Store this search:
+							<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink("publications")} />
+						</div>
 						<ReceptionSearch
 							{...this.props.receptions.publication}
 							activeFacets={this.props.publications.activeFacets}
 							activeQuery={this.props.publications.query}
+							onChange={this.setReceptionQuery.bind(this, "publications")}
 							onSelect={this.props.onSelect}
 							onUnsetFacetValue={this.props.onUnsetPublicationFacetValue}
 							onUnsetFullTextField={this.props.onUnsetPublicationFullTextField}

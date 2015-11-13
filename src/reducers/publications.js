@@ -37,7 +37,6 @@ let initialState = {
 		]
 	},
 	storedSearchQuery: null,
-	storedSearchPending: false,
 	activeFacets: [],
 	results: {
 		ids: [],
@@ -125,8 +124,7 @@ export default function(state=initialState, action) {
 			return {...state, ...{
 				activeFacets: action.activeFacets
 			}};
-		default:
-			return state;
+
 
 		case "SET_PUBLICATION_RESULT_IDS":
 			return {...state, ...{
@@ -152,8 +150,17 @@ export default function(state=initialState, action) {
 
 		case "CHANGE_ROUTE":
 			if(action.handler === "storedSearch" && action.props[0] === "publications") {
-				return {...state, storedSearchPending: true, storedSearchQuery: JSON.parse(action.props[1])};
+				return {...state, storedSearchQuery: JSON.parse(action.props[1])};
 			}
+			return state;
+
+		case "SET_STORED_SEARCH":
+			if(action.handler === "publications") {
+				return {...state, storedSearchQuery: action.storedSearchQuery};
+			}
+			return state;
+
+		default:
 			return state;
 	}
 }

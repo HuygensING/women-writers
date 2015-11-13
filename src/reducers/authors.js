@@ -156,6 +156,12 @@ export default function(state=initialState, action) {
 			}
 			return state;
 
+		case "SET_STORED_SEARCH":
+			if(action.handler === "authors") {
+				return {...state, storedSearchQuery: action.storedSearchQuery};
+			}
+			return state;
+
 		default:
 			return state;
 	}

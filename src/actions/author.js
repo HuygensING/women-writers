@@ -240,9 +240,14 @@ export function selectAuthorVariation(type, id) {
 export function checkForStoredAuthorSearch() {
 	return function (dispatch, getState) {
 		let storedSearchQuery = getState().authors.storedSearchQuery;
+		let storedReceptionQuery = getState().receptions.storedSearchQuery;
 		if(storedSearchQuery) {
 			dispatch({type: "SET_AUTHOR_QUERY", query: storedSearchQuery});
 			dispatch(changeRoute("searchAuthors"));
+		} else if(storedReceptionQuery && storedReceptionQuery.type === "authors") {
+			dispatch({type: "SET_AUTHOR_QUERY", query: storedReceptionQuery.query.authors});
+			dispatch({type: "UPDATE_RECEPTION_STORED_QUERY", query: storedReceptionQuery.query.receptions});
+			dispatch(changeRoute("receptions", ["authors"]));
 		}
 	};
 }
