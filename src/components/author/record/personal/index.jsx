@@ -37,14 +37,6 @@ class Personal extends React.Component {
 					<label>Religion</label>
 					<Relation values={model["@relations"].hasReligion} />
 				</li>
-				<li>
-					<label>Bibliography</label>
-					<StringComponent value={model.bibliography} />
-				</li>
-				<li>
-					<label>Notes</label>
-					<StringComponent value={model.notes} />
-				</li>
 			</ul>
 		);
 	}

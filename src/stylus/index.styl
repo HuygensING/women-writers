@@ -29,9 +29,70 @@ ul, h1, h2, h3
 ul
 	list-style none
 
+.app
+	max-width 1200px
+	margin 0 auto
+
 .app > .hire-tabs
 	padding 0 5%
 	width 90%
+
+.app > header
+	position absolute
+	width 100%
+	left 0
+	top 0
+
+.app > header > .header-body {
+	max-width 1200px;
+	margin: 0 auto;
+}
+.app > header > .header-body > h1
+	float left
+
+.app > div
+	margin-top 120px
+
+.app > header > .header-body .button-container
+	float right
+	width 320px
+	text-align right
+
+.app > header > .header-body .button-container > button
+	max-width 120px
+	margin-top 10px
+
+
+.app > header .login
+	list-style none
+	float right
+
+.app > header .login > .hire-login
+	width 320px
+	color #fff
+	& > button
+		float right
+		position relative
+		z-index 2
+	& > #hire-login-form
+		width 320px
+		background-color rgba(0,0,0,0)
+		float right
+		z-index 1
+		& > div
+			float right
+			width 200px
+			background-color #fff
+			&:first-of-type
+				padding-top 30px
+
+			& button
+				width 100%
+			& input
+				width calc(100% - 10px)
+
+.app > header > ul
+	clear both
 
 header.page
 	padding 30px 7%
@@ -99,14 +160,22 @@ header.page
 }
 .permalink 
 	float right
-	margin 20px
+	margin 0
+	margin-top 20px
 	& > input
 		margin-left 10px
 
 .receptions .permalink
 	position absolute
-	right 20px
+	right 0
 	top 0
+
+.receptions .excel-link
+	position absolute
+	right 400px
+	top 20px
+	color wwLink
+
 
 .author.visible.requesting, .publication.visible.requesting, .collective.visible.requesting {
 	opacity: 0.5
@@ -141,7 +210,7 @@ header.page
 
 
 .receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul
-	width 34%
+	width 33%
 	margin-right 3%
 	display inline-block
 	vertical-align top
@@ -548,8 +617,6 @@ ul.hire-options
 	& > .hire-faceted-search-results
 		padding 0
 		width 100%
-		& > ol.hire-faceted-search-result-list.numbered
-			padding-left 20px
 	& ul.hire-faceted-search-current-query
 		display none
 
@@ -559,3 +626,24 @@ ul.hire-options
 	font-size 2em
 	margin-top 5%
 	margin-left 5%
+
+
+
+.record ol { 
+	counter-reset: item;
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.record ol > li:before {
+	content: counter(item) " ";
+	counter-increment: item;
+	display: inline-block;
+	width 20px
+	vertical-align top
+	color wwLink
+}
+
+.record ol > li >span {
+	margin-left 20px
+}

@@ -22,10 +22,6 @@ class BasicInfoForm extends React.Component {
 					<StringComponent value={model.title} />
 				</li>
 				<li>
-					<label>Persistent ID</label>
-					{pid}
-				</li>
-				<li>
 					<label>Document type</label>
 					<StringComponent value={model.documentType} />
 				</li>
@@ -57,6 +53,10 @@ class BasicInfoForm extends React.Component {
 				<li>
 					<label>Notes</label>
 					<StringComponent value={model.notes} />
+				</li>
+				<li>
+					<label>Persistent ID</label>
+					{pid}
 				</li>
 			</ul>
 		);

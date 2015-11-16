@@ -1,3 +1,16 @@
+.hire-faceted-search
+	padding 0
+	padding-top 70px
+
+
+.hire-faceted-search > .hire-faceted-search-filters
+	width 25%
+	float left
+
+.hire-faceted-search > .hire-faceted-search-results
+	width 75%
+	float right
+
 svg
 	circle
 		fill #009688
@@ -50,24 +63,29 @@ svg.hire-icon.checked
 .search-authors .hire-faceted-search-results > header > ul,
 .search-publications .hire-faceted-search-results > header > ul,
 .reception-search > ul
-	position absolute
-	width 220px
+	margin-top 10px
 	border 1px solid #ccc
 	border-radius 8px
-	padding 20px
-	top 200px
-	right 5%
+	padding 10px 20px
+	& > li
+		width 50%
+		display inline-block
+		vertical-align top
+	& h4
+		margin 0
+		margin-bottom 10px
 
-.excel-link
-	position absolute
-	right calc(5% + 280px)	
-	top 60px
+.reception-search > ul
+	width 67%
+	margin-bottom 20px
+	float right
+
 
 .reception-search > ul
 	top auto
 
-.hire-faceted-search
-	width calc(100% - 220px)
+.app > div.receptions > .hire-tabs, .app > .hire-tabs
+	padding 0
 
 ul.hire-faceted-search-current-query > li > label
 	width auto
@@ -87,7 +105,7 @@ ul.hire-faceted-search-current-query > li > ul
 .search-collectives .hire-faceted-search-filters .hire-faceted-search-text-search header > h3
 	display none
 
-.last-modified .hire-faceted-search-results li > span
+.last-modified .hire-faceted-search-results li > label > span
 	display inline-block
 	width calc(100% - 120px)
 	height 1.5em
@@ -96,7 +114,7 @@ ul.hire-faceted-search-current-query > li > ul
 	overflow hidden
 	text-overflow ellipsis
 
-.last-modified .hire-faceted-search-results li > .modified-date
+.last-modified .hire-faceted-search-results li > label > .modified-date
 	display inline-block
 	vertical-align top
 	width 120px
@@ -151,6 +169,17 @@ ul.hire-faceted-search-current-query > li > ul
 		overflow hidden
 		font-size .8em
 		text-overflow ellipsis
+
+
+li.hire-list-facet > header > h3,
+li.hire-faceted-search-text-search > header > h3
+	font-size 1em
+
+
+li.hire-list-facet > ul > li.hire-list-facet-list-item label,
+li.hire-list-facet > ul > li.hire-list-facet-list-item > span.count
+	font-size .8em
+
 
 .hire-faceted-search-results > ol.hire-faceted-search-result-list.numbered, 
 .hire-faceted-search-results > ol.hire-faceted-search-result-list { 

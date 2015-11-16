@@ -45,7 +45,8 @@ export default {
 			"birthDate": "Date of birth",
 			"deathDate": "Date of death",
 			"name": "Name",
-			"residenceLocation": "Country of residence"
+			"residenceLocation": "Country of residence",
+			resultsFound: "authors"
 		}
 	},
 	publications: {
@@ -177,7 +178,8 @@ export default {
 			"date": "Date",
 			"dynamic_sort_creator": "Author",
 			"dynamic_sort_title": "Title",
-			"dynamic_k_modified": "Modified"
+			"dynamic_k_modified": "Modified",
+			resultsFound: "publications"
 		},
 		facetList: [
 			"dynamic_i_date",

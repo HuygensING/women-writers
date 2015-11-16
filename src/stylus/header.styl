@@ -4,19 +4,22 @@ body > .app > header
 		color #000
 		text-decoration none
 
-	& > h1
-		margin 0
-		padding 0
+	& h1
 		line-height 75px
 		color wwLighterTurquoise
 
-	& > ul
-		background-color wwLightTurquoise
+	& > .main-menu
 		box-shadow 0 1px 3px rgba(0, 0, 0, 0.2)
+		clear both
+		background-color wwLightTurquoise
+
+	& > .main-menu > ul
+		max-width 1200px
+		margin 0 auto
 
 		li
 			inline_block()
-			padding 10px 20px
+			padding 10px 8px
 			// width 120px
 			text-align center
 
@@ -36,9 +39,9 @@ body > .app > header
 			&.new-collective
 				right 100px
 
-html > body > div.app > header > ul > li > ul > li
+html > body > div.app > header >  .main-menu > ul > li > ul > li
 	padding 0
 	&:first-of-type
-		padding-right 20px
+		padding-right 8px
 	&:last-of-type
-		padding-left 20px
+		padding-left 8px

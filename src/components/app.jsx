@@ -14,8 +14,33 @@ import ModifiedController from "./modified";
 import StoredSearchController from "./stored-search";
 
 
+import config from "../config";
+import {Login, Federated, Basic} from "hire-login";
+
 class App extends React.Component {
 	render() {
+
+		let newAuthor, newPublication, newCollective;
+		if (this.props.user != null && this.props.user.authenticated) {
+			newAuthor = (
+				<button onClick={this.props.onNewAuthor}>
+					New author
+				</button>
+			);
+
+			newPublication = (
+				<button onClick={this.props.onNewPublication}>
+					New publication
+				</button>
+			);
+
+			newCollective = (
+				<button onClick={this.props.onNewCollective}>
+					New collective
+				</button>
+			);
+		}
+
 		let author = (this.props.authors.current != null) ?
 			<AuthorController
 				author={this.props.authors.current}
@@ -103,7 +128,24 @@ class App extends React.Component {
 		return (
 			<div className="app">
 				<header>
-					<h1>NEWW Women Writers</h1>
+					<div className="header-body">
+						<h1>NEWW Women Writers</h1>
+						<span className="button-container">
+							<li className="login">
+								<Login
+									appId="WomenWriters"
+									headers={{VRE_ID: "WomenWriters"}}
+									onChange={(this.props.onLoginChange)}
+									userUrl={config.userUrl}>
+									<Federated url={config.federatedAuthenticateUrl} />
+									<Basic url={config.basicAuthenticateUrl} />
+								</Login>
+							</li>
+							{newAuthor}
+							{newPublication}
+							{newCollective}
+						</span>
+					</div>
 					<MainMenu
 						onLoginChange={this.props.onLoginChange}
 						onNavigate={this.props.onNavigate}

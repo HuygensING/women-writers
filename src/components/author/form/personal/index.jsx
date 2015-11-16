@@ -3,7 +3,6 @@ import form from "hire-forms-form";
 import Select from "hire-forms-select";
 import SelectList from "hire-forms-select-list";
 import AutocompleteList from "hire-forms-autocomplete-list";
-import Textarea from "hire-forms-textarea";
 
 import API from "../../../../stores/api";
 
@@ -79,18 +78,6 @@ class PersonalForm extends React.Component {
 						onChange={this.props.onChange.bind(this, ["@relations", "hasReligion"])}
 						sort={true}
 						values={model["@relations"].hasReligion} />
-				</li>
-				<li>
-					<label>Bibliography</label>
-					<Textarea
-						onChange={this.props.onChange.bind(this, "bibliography")}
-						value={model.bibliography} />
-				</li>
-				<li>
-					<label>Notes</label>
-					<Textarea
-						onChange={this.props.onChange.bind(this, "notes")}
-						value={model.notes} />
 				</li>
 			</ul>
 		);

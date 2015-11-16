@@ -10,7 +10,7 @@ class Result extends React.Component {
 
 		return (<li>
 			<label onClick={this.onSelect.bind(this)}>
-				<span className="title">{this.props.data.data.title}</span>
+				<span className="title">{this.props.data.data.title} ({this.props.data.data.date})</span>
 				<span className="author-name" title={this.props.data.data.authorName}>
 					{this.props.data.data.authorName}
 				</span>

@@ -20,10 +20,6 @@ class BasicInfo extends React.Component {
 					<ul>{names}</ul>
 				</li>
 				<li>
-					<label>Persistent ID</label>
-					{pid}
-				</li>
-				<li>
 					<label>Pseudonyms</label>
 					<Relation values={model["@relations"].hasPseudonym} />
 				</li>
@@ -58,6 +54,18 @@ class BasicInfo extends React.Component {
 				<li>
 					<label>Related to</label>
 					<PersonRelation genderMap={this.props.genderMap} onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />
+				</li>
+				<li>
+					<label>Bibliography</label>
+					<StringComponent value={model.bibliography} />
+				</li>
+				<li>
+					<label>Notes</label>
+					<StringComponent value={model.notes} />
+				</li>
+				<li>
+					<label>Persistent ID</label>
+					{pid}
 				</li>
 			</ul>
 		);

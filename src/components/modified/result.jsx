@@ -11,10 +11,12 @@ class ModifiedResult extends React.Component {
 
 	render() {
 		return (<li onClick={this.onSelect.bind(this)}>
-			{this.props.data.data.title || this.props.data.displayName}
-			<span className="modified-date">
-				{this.props.data.data.modified_date ? makeLabel(this.props.data.data.modified_date) : null}
-			</span>
+			<label>
+				{this.props.data.data.title || this.props.data.displayName}
+				<span className="modified-date">
+					{this.props.data.data.modified_date ? makeLabel(this.props.data.data.modified_date) : null}
+				</span>
+			</label>
 		</li>);
 	}
 }

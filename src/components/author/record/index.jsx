@@ -83,8 +83,8 @@ class AuthorRecord extends React.Component {
 					</div>
 				</Tab>
 				<Tab
-					active={this.props.tab === "personal"}
-					label="Personal">
+					active={this.props.tab === "personal situation"}
+					label="Personal situation">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationPersonalComponent}</div>
 						<Personal author={this.props.author} onNavigate={this.props.onNavigate} />

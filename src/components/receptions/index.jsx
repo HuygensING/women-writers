@@ -58,7 +58,7 @@ class ReceptionsController extends React.Component {
 						active={this.props.tab === "authors"}
 						label="Authors">
 						<div className="permalink">
-							Store this search:
+							Share / store this search:
 							<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink("authors")} />
 						</div>
 						<ReceptionSearch
@@ -79,7 +79,7 @@ class ReceptionsController extends React.Component {
 						active={this.props.tab === "publications"}
 						label="Publications">
 						<div className="permalink">
-							Store this search:
+							Share / store this search:
 							<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink("publications")} />
 						</div>
 						<ReceptionSearch

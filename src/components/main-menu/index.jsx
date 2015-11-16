@@ -1,9 +1,5 @@
 import React from "react";
 import cx from "classnames";
-
-import config from "../../config";
-
-import {Login, Federated, Basic} from "hire-login";
 import Link from "../link";
 
 class MainMenu extends React.Component {
@@ -14,29 +10,8 @@ class MainMenu extends React.Component {
 			types = "persons";
 		}
 
-		let newAuthor, newPublication, newCollective, lastModified;
+		let lastModified, collectives;
 		if (this.props.user != null && this.props.user.authenticated) {
-			newAuthor = (
-				<li className="new-author">
-					<button onClick={this.props.onNewAuthor}>
-						New author
-					</button>
-				</li>);
-
-			newPublication = (
-				<li className="new-publication">
-					<button onClick={this.props.onNewPublication}>
-						New publication
-					</button>
-				</li>);
-
-			newCollective = (
-				<li className="new-collective">
-					<button onClick={this.props.onNewCollective}>
-						New collective
-					</button>
-				</li>);
-
 			lastModified = (
 				<li className={cx({active: types === "modified"})}>
 					<Link
@@ -45,53 +20,45 @@ class MainMenu extends React.Component {
 						value="Last modified" />
 				</li>
 			);
-		}
-
-		return (
-			<ul>
-				<li>
-					<a href="/womenwriters">Home</a>
-				</li>
-				<li className={cx({active: types === "persons"})}>
-					<Link
-						href="persons"
-						onNavigate={this.props.onNavigate}
-						value="Women authors" />
-				</li>
-				<li className={cx({active: types === "documents"})}>
-					<Link
-						href="documents"
-						onNavigate={this.props.onNavigate}
-						value="Their publications" />
-				</li>
-				<li className={cx({active: types === "receptions"})}>
-					<Link
-						href="receptions/publications"
-						onNavigate={this.props.onNavigate}
-						value="Receptions" />
-				</li>
-				<li dangerouslySetInnerHTML={{__html: this.props.wordpressLinks || ""}}></li>
-				<li className="login">
-					<Login
-						appId="WomenWriters"
-						headers={{VRE_ID: "WomenWriters"}}
-						onChange={(this.props.onLoginChange)}
-						userUrl={config.userUrl}>
-						<Federated url={config.federatedAuthenticateUrl} />
-						<Basic url={config.basicAuthenticateUrl} />
-					</Login>
-				</li>
+			collectives = (
 				<li className={cx({active: types === "collectives"})}>
 					<Link
 						href="collectives"
 						onNavigate={this.props.onNavigate}
 						value="Collectives" />
 				</li>
-				{lastModified}
-				{newAuthor}
-				{newPublication}
-				{newCollective}
-			</ul>
+			);
+		}
+
+		return (
+			<div className="main-menu">
+				<ul>
+					<li>
+						<a href="/womenwriters">Home</a>
+					</li>
+					<li className={cx({active: types === "persons"})}>
+						<Link
+							href="persons"
+							onNavigate={this.props.onNavigate}
+							value="Women authors" />
+					</li>
+					<li className={cx({active: types === "documents"})}>
+						<Link
+							href="documents"
+							onNavigate={this.props.onNavigate}
+							value="Their publications" />
+					</li>
+					<li className={cx({active: types === "receptions"})}>
+						<Link
+							href="receptions/publications"
+							onNavigate={this.props.onNavigate}
+							value="Receptions" />
+					</li>
+					{collectives}
+					<li dangerouslySetInnerHTML={{__html: this.props.wordpressLinks || ""}}></li>
+					{lastModified}
+				</ul>
+			</div>
 		);
 	}
 }

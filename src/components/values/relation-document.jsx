@@ -34,9 +34,9 @@ class DocumentRelation extends React.Component {
 
 		return (
 			<span>
-				<ul className="relation document-relation">
+				<ol className="relation document-relation">
 					{relations}
-				</ul>
+				</ol>
 			</span>
 		);
 	}

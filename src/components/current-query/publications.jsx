@@ -47,7 +47,6 @@ class PublicationsCurrentQuery extends React.Component {
 			) : null;
 		return authorElem || publicationElem ? (
 			<ul>
-				<li><h3>Criteria</h3></li>
 				{authorElem}
 				{publicationElem}
 			</ul>

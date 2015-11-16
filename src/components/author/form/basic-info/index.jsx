@@ -9,6 +9,7 @@ import NameForm from "./name";
 
 import {validateDate} from "../../../../validation";
 import API from "../../../../stores/api";
+import Textarea from "hire-forms-textarea";
 
 class BasicInfoForm extends React.Component {
 
@@ -138,6 +139,18 @@ class BasicInfoForm extends React.Component {
 				</li>
 				{deathPlace}
 				{relatedTo}
+				<li>
+					<label>Bibliography</label>
+					<Textarea
+						onChange={this.props.onChange.bind(this, "bibliography")}
+						value={model.bibliography} />
+				</li>
+				<li>
+					<label>Notes</label>
+					<Textarea
+						onChange={this.props.onChange.bind(this, "notes")}
+						value={model.notes} />
+				</li>
 			</ul>
 		);
 	}

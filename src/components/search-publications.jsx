@@ -42,7 +42,7 @@ class SearchPublications extends React.Component {
 		return (
 			<div className={cx("search-publications", {visible: this.props.visible})}>
 				<div className="permalink">
-					Store this search:
+					Share / store this search:
 					<input onClick={this.onPermaClick.bind(this)} readOnly value={this.permalink()} />
 				</div>
 				<FacetedSearch

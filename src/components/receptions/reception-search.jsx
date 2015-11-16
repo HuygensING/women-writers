@@ -71,7 +71,7 @@ class ReceptionSearch extends React.Component {
 						}}
 						facetList={["dynamic_s_relation", "dynamic_s_creator", ...config.publications.facetList]}
 						facetSortMap={config.publications.facetSortMap}
-						labels={config.publications.labels}
+						labels={{...config.publications.labels, resultsFound: "receptions"}}
 						numbered={true}
 						onChange={this.props.onChange}
 						onSearchId={this.onSearchId.bind(this)}

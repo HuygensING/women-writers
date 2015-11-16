@@ -10,7 +10,6 @@ class AuthorsCurrentQuery extends React.Component {
 
 		return hasAuthorFacets || hasAuthorFullTextSearchParameters ? (
 			<ul>
-				<li><h3>Criteria</h3></li>
 				<li>
 					<h4>Woman authors</h4>
 					<CurrentQuery {...queryProps} />

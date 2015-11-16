@@ -52,8 +52,8 @@ class AuthorForm extends React.Component {
 		let personalTab = (model._id == null) ?
 			null :
 			<Tab
-				active={this.props.tab === "personal"}
-				label="Personal">
+				active={this.props.tab === "personal situation"}
+				label="Personal situation">
 				<div className="record-container">
 					<div className="variations">{variationSelect}{variationPersonalComponent}</div>
 					<PersonalForm
