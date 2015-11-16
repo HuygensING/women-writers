@@ -11,12 +11,12 @@ class ReceptionsController extends React.Component {
 
 		this.state = {
 			authors: this.props.authors.query,
-			publications: this.props.publications.query
+			publications: this.props.publications.query,
+			storedQueries: {
+				authors: null,
+				publications: null
+			}
 		};
-	}
-
-	componentWillReceiveProps(nextProps) {
-		console.log("ReceptionsController::componentWillReceiveProps nextProps.receptions.awaitingQuery", nextProps.receptions.awaitingQuery);
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -28,6 +28,9 @@ class ReceptionsController extends React.Component {
 
 	setReceptionQuery(type, results, query) {
 		this.setState({[type]: query});
+		if(this.props.receptions.awaitingQuery) {
+			this.setState({storedQueries: {[this.props.receptions.awaitingQuery.type]: this.props.receptions.awaitingQuery.query}});
+		}
 	}
 
 	permalink(type) {
@@ -67,6 +70,7 @@ class ReceptionsController extends React.Component {
 							onUnsetFacetValue={this.props.onUnsetAuthorFacetValue}
 							onUnsetFullTextField={this.props.onUnsetAuthorFullTextField}
 							onVisible={this.props.onShowAuthorReceptions}
+							storedQuery={this.state.storedQueries.authors}
 							type="authors"
 							visible={this.props.visible && this.props.tab === "authors"}
 						/>
@@ -87,6 +91,7 @@ class ReceptionsController extends React.Component {
 							onUnsetFacetValue={this.props.onUnsetPublicationFacetValue}
 							onUnsetFullTextField={this.props.onUnsetPublicationFullTextField}
 							onVisible={this.props.onShowPublicationReceptions}
+							storedQuery={this.state.storedQueries.publications}
 							type="publications"
 							visible={this.props.visible && this.props.tab === "publications"}
 						/>

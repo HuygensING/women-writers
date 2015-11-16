@@ -246,7 +246,7 @@ export function checkForStoredAuthorSearch() {
 			dispatch(changeRoute("searchAuthors"));
 		} else if(storedReceptionQuery && storedReceptionQuery.type === "authors") {
 			dispatch({type: "SET_AUTHOR_QUERY", query: storedReceptionQuery.query.authors});
-			dispatch({type: "UPDATE_RECEPTION_STORED_QUERY", query: storedReceptionQuery.query.receptions});
+			dispatch({type: "UPDATE_RECEPTION_STORED_QUERY", query: storedReceptionQuery});
 			dispatch(changeRoute("receptions", ["authors"]));
 		}
 	};

@@ -57,8 +57,8 @@ export default function(state=initialState, action) {
 			return state;
 
 		case "UPDATE_RECEPTION_STORED_QUERY":
-			console.log("TODO do something with awaitingQuery", action.query);
 			return {...state, storedSearchQuery: null, awaitingQuery: action.query};
+
 
 		default:
 			return state;

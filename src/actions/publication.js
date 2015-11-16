@@ -215,7 +215,7 @@ export function checkForStoredPublicationSearch() {
 			dispatch(changeRoute("searchPublications"));
 		} else if(storedReceptionQuery && storedReceptionQuery.type === "publications") {
 			dispatch({type: "SET_PUBLICATION_QUERY", query: storedReceptionQuery.query.publications});
-			dispatch({type: "UPDATE_RECEPTION_STORED_QUERY", query: storedReceptionQuery.query.receptions});
+			dispatch({type: "UPDATE_RECEPTION_STORED_QUERY", query: storedReceptionQuery});
 			dispatch(changeRoute("receptions", ["publications"]));
 		}
 	};

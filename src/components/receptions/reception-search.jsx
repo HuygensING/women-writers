@@ -13,6 +13,7 @@ class ReceptionSearch extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { excelUrl: null };
+		this.receivedStoredQuery = false;
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -41,6 +42,16 @@ class ReceptionSearch extends React.Component {
 		let currentQuery = this.props.type === "authors" ?
 			<AuthorReceptionsCurrentQuery {...currentQueryProps} /> :
 			<PublicationReceptionsCurrentQuery {...currentQueryProps} />;
+
+		let queryProps = {otherSearchId: this.props.searchId};
+		if(!this.receivedStoredQuery && this.props.storedQuery) {
+			queryProps = {
+				...queryProps,
+				facetValues: this.props.storedQuery.receptions.facetValues,
+				fullTextSearchParameters: this.props.storedQuery.receptions.fullTextSearchParameters
+			};
+			this.receivedStoredQuery = true;
+		}
 		let search = this.props.searchId ? (
 			<FacetedSearch
 						config={{
@@ -65,7 +76,7 @@ class ReceptionSearch extends React.Component {
 						onChange={this.props.onChange}
 						onSearchId={this.onSearchId.bind(this)}
 						onSelect={this.props.onSelect}
-						query={{otherSearchId: this.props.searchId}}
+						query={queryProps}
 			/>
 		) : null;
 
@@ -89,6 +100,7 @@ ReceptionSearch.propTypes = {
 	onUnsetFullTextField: React.PropTypes.func,
 	onVisible: React.PropTypes.func,
 	searchId: React.PropTypes.string,
+	storedQuery: React.PropTypes.object,
 	type: React.PropTypes.string,
 	visible: React.PropTypes.bool
 };
