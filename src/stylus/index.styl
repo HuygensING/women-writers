@@ -139,16 +139,20 @@ header.page
 .receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li
 	cursor default
 
+
 .receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul
-	width 35.5%
+	width 34%
 	margin-right 3%
 	display inline-block
 	vertical-align top
 	font-size 0.8em
 	line-height 1.25em
 	color #888
+	&:first-of-type
+		margin-left 20px
+
 	&:nth-of-type(2)
-		width 20%
+		width calc(20% - 20px)
 		text-align center
 		font-style italic
 		> li

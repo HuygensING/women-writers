@@ -6,6 +6,7 @@ import FacetedSearch from "hire-faceted-search";
 import CurrentQuery from "./current-query/authors";
 import isEqual from "lodash.isequal";
 
+import AuthorResult from "./result/author";
 
 class SearchAuthors extends React.Component {
 	constructor(props) {
@@ -60,7 +61,8 @@ class SearchAuthors extends React.Component {
 						]
 					}}
 					customComponents={{
-						currentQuery: CurrentQuery
+						currentQuery: CurrentQuery,
+						result: AuthorResult
 					}}
 					facetList={[
 						"dynamic_s_types",

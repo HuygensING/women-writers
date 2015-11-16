@@ -31,6 +31,10 @@ let getSelectValues = function(name, done) {
 	if(selectValues[name]) {
 		done(selectValues[name]);
 		return;
+	} else if(localStorage.getItem(name)) {
+		selectValues[name] = JSON.parse(localStorage.getItem(name));
+		done(selectValues[name]);
+		return;
 	}
 
 	let options = {
@@ -43,6 +47,7 @@ let getSelectValues = function(name, done) {
 			done();
 			return;
 		}
+		localStorage.setItem(name, body);
 		selectValues[name] = JSON.parse(body);
 		done(selectValues[name]);
 	};
@@ -53,12 +58,19 @@ let getSelectValues = function(name, done) {
 let wordpressExternal = null;
 
 let getWordpressExternal = function(done) {
-	if(wordpressExternal) { done(wordpressExternal); }
+	if(wordpressExternal) { done(wordpressExternal); return; }
+	else if(localStorage.getItem("wordpressExternal")) {
+		wordpressExternal = localStorage.getItem("wordpressExternal");
+		done(wordpressExternal);
+		return;
+	}
 	let xhrDone = function(err, response, body) {
 		if (checkForError(err, response, body)) {
 			done();
 			return;
 		}
+		localStorage.setItem("wordpressExternal", body);
+
 		wordpressExternal = body;
 		done(wordpressExternal);
 	};

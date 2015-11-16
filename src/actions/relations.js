@@ -13,6 +13,11 @@ let cachedRelations = null;
 
 export function requestRelations(cb) {
 	if (cachedRelations) { cb(cachedRelations); return; }
+	else if(localStorage.getItem("relations")) {
+		cachedRelations = JSON.parse(localStorage.getItem("relations"));
+		cb(cachedRelations);
+		return;
+	}
 	let options = {
 		headers: DEFAULT_HEADERS,
 		url: config.relationsUrl
@@ -23,6 +28,7 @@ export function requestRelations(cb) {
 			cb();
 			return;
 		}
+		localStorage.setItem("relations", body);
 		cachedRelations = JSON.parse(body);
 		cb(cachedRelations);
 	};

@@ -5,6 +5,7 @@ import config from "../config";
 import FacetedSearch from "hire-faceted-search";
 import CurrentQuery from "./current-query/publications";
 import isEqual from "lodash.isequal";
+import PublicationResult from "./result/publication";
 
 class SearchPublications extends React.Component {
 	constructor(props) {
@@ -60,7 +61,8 @@ class SearchPublications extends React.Component {
 						]
 					}}
 					customComponents={{
-						currentQuery: CurrentQuery
+						currentQuery: CurrentQuery,
+						result: PublicationResult
 					}}
 					facetList={config.publications.facetList}
 					facetSortMap={config.publications.facetSortMap}
