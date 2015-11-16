@@ -63,6 +63,7 @@ class SearchAuthors extends React.Component {
 						currentQuery: CurrentQuery
 					}}
 					facetList={[
+						"dynamic_s_types",
 						"dynamic_s_gender",
 						"dynamic_s_residence",
 						"dynamic_s_language",
@@ -70,16 +71,16 @@ class SearchAuthors extends React.Component {
 						"dynamic_i_deathDate",
 						"dynamic_s_birthplace",
 						"dynamic_s_deathplace",
-						"dynamic_s_religion",
-						"dynamic_s_collective",
 						"dynamic_s_relatedLocations",
-						"dynamic_s_children",
 						"dynamic_s_marital_status",
-						"dynamic_s_education",
+						"dynamic_s_children",
 						"dynamic_s_social_class",
-						"dynamic_s_types",
+						"dynamic_s_education",
+						"dynamic_s_religion",
+
+						"dynamic_s_profession",
 						"dynamic_s_financials",
-						"dynamic_s_profession"
+						"dynamic_s_collective"
 					]}
 					facetSortMap={{
 						"dynamic_s_birthDate": {

@@ -25,13 +25,13 @@ export default {
 				"dynamic_s_gender": "Gender",
 				"dynamic_s_language": "Language",
 				"dynamic_s_marital_status": "Marital status",
-				"dynamic_s_residence": "Country of residence",
+				"dynamic_s_residence": "Country",
 				"dynamic_s_relatedLocations": "Related country",
-				"dynamic_s_religion": "Religion",
+				"dynamic_s_religion": "Religion/ideology",
 				"dynamic_s_social_class": "Social class",
-				"dynamic_s_types": "Person Types",
-				"dynamic_s_financials": "Financials",
-				"dynamic_s_profession": "Profession",
+				"dynamic_s_types": "Person Type",
+				"dynamic_s_financials": "Financial aspects",
+				"dynamic_s_profession": "Profession and other activities",
 				"dynamic_t_name": "Name",
 				"dynamic_t_notes": "Provisional notes",
 				"dynamic_k_modified": "Modified"
@@ -52,15 +52,15 @@ export default {
 			facetTitles: {
 				"dynamic_s_relation": "Reception type",
 				"dynamic_s_sources": "Sources",
-				"dynamic_i_date": "Date",
+				"dynamic_i_date": "Publication date",
 				"dynamic_s_document_type": "Document type",
 				"dynamic_s_genre": "Genre",
 				"dynamic_s_language": "Language",
 				"dynamic_s_origin": "Country of first publication",
 				"dynamic_t_title": "Title",
 				"dynamic_s_firstPublisher": "First publisher",
-				"dynamic_t_author_name": "Name",
 				"dynamic_t_notes": "Provisional notes",
+				"dynamic_t_author_name": "Name",
 				"dynamic_i_author_birthDate": "Year of birth",
 				"dynamic_s_author_birthplace": "Place of birth",
 				"dynamic_s_author_children": "Children",
@@ -179,13 +179,13 @@ export default {
 			"dynamic_k_modified": "Modified"
 		},
 		facetList: [
+			"dynamic_i_date",
 			"dynamic_s_origin",
+			"dynamic_s_language",
+			"dynamic_s_genre",
 			"dynamic_s_firstPublisher",
 			"dynamic_s_sources",
-			"dynamic_i_date",
-			"dynamic_s_document_type",
-			"dynamic_s_language",
-			"dynamic_s_genre"
+			"dynamic_s_document_type"
 		],
 		facetSortMap: {
 			"dynamic_s_creator": {
