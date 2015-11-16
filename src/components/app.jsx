@@ -111,6 +111,7 @@ class App extends React.Component {
 						onNewCollective={this.props.onNewCollective}
 						onNewPublication={this.props.onNewPublication}
 						user={this.props.user}
+						wordpressLinks={this.props.wordpressLinks}
 					/>
 				</header>
 				{errorMessage}
@@ -211,7 +212,8 @@ App.propTypes = {
 	receptions: React.PropTypes.object,
 	relations: React.PropTypes.object,
 	router: React.PropTypes.object,
-	user: React.PropTypes.object
+	user: React.PropTypes.object,
+	wordpressLinks: React.PropTypes.string
 };
 
 export default App;

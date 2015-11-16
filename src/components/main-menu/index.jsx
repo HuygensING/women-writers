@@ -49,6 +49,9 @@ class MainMenu extends React.Component {
 
 		return (
 			<ul>
+				<li>
+					<a href="/womenwriters">Home</a>
+				</li>
 				<li className={cx({active: types === "persons"})}>
 					<Link
 						href="persons"
@@ -67,13 +70,7 @@ class MainMenu extends React.Component {
 						onNavigate={this.props.onNavigate}
 						value="Receptions" />
 				</li>
-				<li className={cx({active: types === "collectives"})}>
-					<Link
-						href="collectives"
-						onNavigate={this.props.onNavigate}
-						value="Collectives" />
-				</li>
-				{lastModified}
+				<li dangerouslySetInnerHTML={{__html: this.props.wordpressLinks || ""}}></li>
 				<li className="login">
 					<Login
 						appId="WomenWriters"
@@ -84,6 +81,13 @@ class MainMenu extends React.Component {
 						<Basic url={config.basicAuthenticateUrl} />
 					</Login>
 				</li>
+				<li className={cx({active: types === "collectives"})}>
+					<Link
+						href="collectives"
+						onNavigate={this.props.onNavigate}
+						value="Collectives" />
+				</li>
+				{lastModified}
 				{newAuthor}
 				{newPublication}
 				{newCollective}
@@ -98,7 +102,8 @@ MainMenu.propTypes = {
 	onNewAuthor: React.PropTypes.func,
 	onNewCollective: React.PropTypes.func,
 	onNewPublication: React.PropTypes.func,
-	user: React.PropTypes.object
+	user: React.PropTypes.object,
+	wordpressLinks: React.PropTypes.string
 };
 
 export default MainMenu;

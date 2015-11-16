@@ -25,6 +25,10 @@ var proxyOptions = url.parse("https://acc.repository.huygens.knaw.nl");
 //var proxyOptions = url.parse("https://test.repository.huygens.knaw.nl");
 proxyOptions.route = "/repository/api";
 
+var proxyOptions2 = url.parse("http://test.resources.huygens.knaw.nl/womenwriters");
+proxyOptions2.route = "/womenwriters";
+
+
 browserSync.init({
 	server: {
 		baseDir: baseDir,
@@ -36,7 +40,8 @@ browserSync.init({
 				"^/womenwriters/vre/images/(.*)$ /images/$1 [L]",
 				"^/womenwriters/vre/fonts/(.*)$ /fonts/$1 [L]",
 				"^/womenwriters/vre/?.*$ /index.html [L]"
-			])
+			]),
+			proxy(proxyOptions2)
 		]
 	}
 });

@@ -50,7 +50,28 @@ let getSelectValues = function(name, done) {
 	xhr(options, xhrDone);
 };
 
+let wordpressExternal = null;
+
+let getWordpressExternal = function(done) {
+	if(wordpressExternal) { done(wordpressExternal); }
+	let xhrDone = function(err, response, body) {
+		if (checkForError(err, response, body)) {
+			done();
+			return;
+		}
+		wordpressExternal = body;
+		done(wordpressExternal);
+	};
+	xhr({
+		headers: {"Accept": "text/html"},
+		url: config.wordpressExternalUrl
+	}, xhrDone);
+};
+
 export default {
+	getWordpressLinks() {
+		return wordpressExternal;
+	},
 
 	getLanguages(query, done) {
 		getAutocompleteValues("languages", query, done);
@@ -107,7 +128,7 @@ export default {
 	autoWarm(next) {
 		let promises = ["religion", "socialClass", "education", "maritalStatus", "profession", "financialSituation", "genre"]
 			.map((selVal) => new Promise((resolve) => getSelectValues(selVal, resolve)));
-
+		promises.push(new Promise((resolve) => getWordpressExternal(resolve)));
 		Promise.all(promises).then(() => next());
 	}
 };

@@ -12,6 +12,7 @@ export default {
 	saveRelationUrl: baseUrl + "/domain/wwrelations",
 	relationsUrl: baseUrl + "/system/relationtypes",
 	userUrl: baseUrl + "/system/users/me",
+	wordpressExternalUrl: "/womenwriters?page_id=19",
 	authors: {
 		labels: {
 			facetTitles: {

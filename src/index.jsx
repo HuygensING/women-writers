@@ -224,6 +224,7 @@ let AppRouter = Router.extend({
 						store.dispatch({type: "UNSET_AUTHOR_FULLTEXT_FIELD", field: "dynamic_t_name"});
 					}
 				}}
+				wordpressLinks={API.getWordpressLinks()}
 			/>,
 			document.body
 		);
@@ -250,17 +251,6 @@ let AppRouter = Router.extend({
 		"modified(/)": "lastModified",
 		"stored-search/:type/:query": "storedSearch"
 	}
-/*
-	searchAuthors: function() {},
-	searchPublications: function() {},
-	lastModified: function () {},
-	notFound: function() {},
-	author: function() {},
-	editAuthor: function() {},
-	publication: function() {},
-	editPublication: function() {},
-	graph: function() {},
-	receptions: function() {}*/
 });
 
 document.addEventListener("DOMContentLoaded", () => {
