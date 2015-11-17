@@ -21,8 +21,8 @@ function onFilesChanged(event, file) {
 
 browserSync.watch(watchFiles, debounce(onFilesChanged, 300));
 
-//var proxyOptions = url.parse("https://acc.repository.huygens.knaw.nl");
-var proxyOptions = url.parse("https://test.repository.huygens.knaw.nl");
+var proxyOptions = url.parse("https://acc.repository.huygens.knaw.nl");
+//var proxyOptions = url.parse("https://test.repository.huygens.knaw.nl");
 proxyOptions.route = "/repository/api";
 
 var proxyOptions2 = url.parse("http://test.resources.huygens.knaw.nl/womenwriters");

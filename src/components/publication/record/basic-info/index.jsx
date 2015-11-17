@@ -1,6 +1,8 @@
 import React from "react";
 
 import StringComponent from "../../../values/string";
+import TextComponent from "../../../values/text";
+
 import PersonRelation from "../../../values/relation-person";
 import Relation from "../../../values/relation";
 
@@ -52,7 +54,7 @@ class BasicInfoForm extends React.Component {
 				</li>
 				<li>
 					<label>Notes</label>
-					<StringComponent value={model.notes} />
+					<TextComponent value={model.notes} />
 				</li>
 				<li>
 					<label>Persistent ID</label>
