@@ -34,6 +34,7 @@ class PersonalForm extends React.Component {
 						onChange={this.props.onChange.bind(this, ["@relations", "isParentOf"])}
 						values={model["@relations"].isParentOf} />
 				</li>
+				{/*
 				<li>
 					<label>Sibling of</label>
 					<AutocompleteList
@@ -48,6 +49,7 @@ class PersonalForm extends React.Component {
 						onChange={this.props.onChange.bind(this, ["@relations", "isGrandparentOf"])}
 						values={model["@relations"].isGrandparentOf} />
 				</li>
+				*/}
 				<li>
 					<label>Children</label>
 					<Select
