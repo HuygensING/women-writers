@@ -13,7 +13,7 @@ class PublicationsCurrentQuery extends React.Component {
 		let authorElem = authorFacets.length > 0 || authorFullTextSearchParameters.length > 0 ?
 			(
 				<li>
-					<h4>Woman authors</h4>
+					<h4>Women authors</h4>
 					{React.createElement(CurrentQuery, {
 						...queryProps,
 						queries: {

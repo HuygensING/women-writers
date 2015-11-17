@@ -1,6 +1,8 @@
 import React from "react";
 
 import StringComponent from "../../../values/string";
+import TextComponent from "../../../values/text";
+
 import Relation from "../../../values/relation";
 import PersonRelation from "../../../values/relation-person";
 
@@ -57,11 +59,11 @@ class BasicInfo extends React.Component {
 				</li>
 				<li>
 					<label>Bibliography</label>
-					<StringComponent value={model.bibliography} />
+					<TextComponent value={model.bibliography} />
 				</li>
 				<li>
 					<label>Notes</label>
-					<StringComponent value={model.notes} />
+					<TextComponent value={model.notes} />
 				</li>
 				<li>
 					<label>Persistent ID</label>
