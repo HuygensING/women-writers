@@ -1,3 +1,6 @@
+//POLYFILLS
+require("babel-polyfill");
+
 // VENDOR
 import Router from "ampersand-router";
 import React from "react";

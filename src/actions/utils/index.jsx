@@ -7,6 +7,8 @@ const DEFAULT_HEADERS = {
 	"VRE_ID": "WomenWriters"
 };
 
+const Promise = Promise || require("es6-promise").Promise;
+
 export function fetch(url, cb) {
 	let options = {
 		headers: DEFAULT_HEADERS,

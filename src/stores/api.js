@@ -8,6 +8,8 @@ const DEFAULT_HEADERS = {
 	"VRE_ID": "WomenWriters"
 };
 
+const Promise = Promise || require("es6-promise").Promise;
+
 let getAutocompleteValues = function(name, query, done) {
 	let options = {
 		headers: DEFAULT_HEADERS,
