@@ -51,7 +51,7 @@ import {
 
 import {setPendingSearchId, setSearchId} from "./actions/receptions";
 import {fetchRelations, requestRelations} from "./actions/relations";
-import {fetchGraphTable} from "./actions/graph";
+import {fetchGraphTable, setGraphRelationTypes} from "./actions/graph";
 
 // COMPONENTS
 import App from "./components/app";
@@ -136,6 +136,9 @@ let AppRouter = Router.extend({
 				}
 				onGraphEntityClick={(obj) =>
 					store.dispatch(fetchGraphTable(...obj.key.split("/")))
+				}
+				onGraphRelationsChange={(relationTypes) =>
+					store.dispatch(setGraphRelationTypes(relationTypes.filter((rlt) => rlt.checked).map((rlt) => rlt.name)))
 				}
 				onLoginChange={(response) =>
 					store.dispatch(setUser(response))

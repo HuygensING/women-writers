@@ -2,7 +2,7 @@ import config from "../config";
 import {fetch} from "./utils";
 import {parseIncomingGraph} from "../stores/parsers/graph";
 
-const types = [
+const allTypes = [
 	"hasEdition",
 	"hasSequel",
 	"hasTranslation",
@@ -35,8 +35,9 @@ const types = [
 	"isCreatorOf",
 	"isRelatedTo",
 	"isParentOf",
-	"isSpouseOf"
-].join("&types=");
+	"isSpouseOf",
+	"isPseudonymOf"
+];
 
 let fetchDomainMetadata = function(domain, id, dispatch) {
 	fetch(`${config.domainUrl}/${domain}/${id}`, (response) => {
@@ -53,18 +54,17 @@ let fetchDomainMetadata = function(domain, id, dispatch) {
 };
 
 
-export function fetchGraph(domain, id) {
+export function fetchGraph(domain, id, types = null) {
 	return function (dispatch, getState) {
 
-		let found = getState().graphs.all.filter((graph) => graph.id === `${domain}/${id}`);
-
-		if (found.length) {
+		let found = getState().graphs.cached[`${domain}/${id}`];
+		if (found && !types) {
 			dispatch({
 				type: "SET_CURRENT_GRAPH",
-				current: found[0]
+				current: found
 			});
 		} else {
-			fetch(`${config.graphUrl}/ww${domain}/${id}?depth=2&types=${types}`, (response) =>
+			fetch(`${config.graphUrl}/ww${domain}/${id}?depth=2&types=${(types || allTypes).join("&types=")}`, (response) =>
 				dispatch({
 					type: "RECEIVE_GRAPH",
 					response: parseIncomingGraph(response),
@@ -73,6 +73,13 @@ export function fetchGraph(domain, id) {
 			);
 		}
 		fetchDomainMetadata(domain, id, dispatch);
+	};
+}
+
+export function setGraphRelationTypes(types) {
+	return function(dispatch, getState) {
+		let [domain, id] = getState().graphs.current.id.split("/");
+		dispatch(fetchGraph(domain, id, types));
 	};
 }
 

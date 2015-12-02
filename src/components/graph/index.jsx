@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import ForceDirectedGraph from "hire-force-directed-graph";
 import GraphTable from "./table";
+import isEqual from "lodash.isequal";
 
 class GraphController extends React.Component {
 
@@ -14,7 +15,7 @@ class GraphController extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.id !== this.props.id) {
+		if(nextProps.id !== this.props.id || !isEqual(nextProps.data.relationTypes, this.props.data.relationTypes)) {
 			this.renderedGraph = null;
 		}
 	}
@@ -40,16 +41,33 @@ class GraphController extends React.Component {
 		this.setState({hideRelationLabels: !this.state.hideRelationLabels});
 	}
 
+	onCheckChange(ev) {
+		let newRelationTypes = this.props.data.relationTypes.map((rlt) => {
+			return {
+				checked: rlt.name === ev.target.id ? !rlt.checked : rlt.checked,
+				name: rlt.name
+			};
+		});
+		this.props.onRelationsChange(newRelationTypes);
+	}
+
 	render() {
 		let table = this.props.table !== null ?
 			<GraphTable data={this.props.table} onNavigate={this.props.onNavigate} /> :
 			null;
+		let checkBoxes = this.props.data.relationTypes.sort((a, b) => a.name.localeCompare(b.name)).map((rlt, i) => (
+			<div key={i}><input checked={rlt.checked} id={rlt.name} onChange={this.onCheckChange.bind(this)} type="checkbox" /><label htmlFor={rlt.name}>{rlt.name}</label></div>
+		));
 		return this.props.data === null ?
 			(<div className={cx("graph", {visible: this.props.visible})}>Loading</div>)
 			:
 			(
 				<div className={cx("graph", {visible: this.props.visible, "hide-relation-labels": this.state.hideRelationLabels})}>
 					{table}
+					<div className="checkboxes">
+						<h4>Relation types</h4>
+						{checkBoxes}
+					</div>
 					<button onClick={this.toggleRelationLabels.bind(this)} style={{position: "absolute", right: "260px", top: "28px"}}>
 						{this.state.hideRelationLabels ? "Show relation labels" : "Hide relation labels"}
 					</button>
@@ -64,6 +82,7 @@ GraphController.propTypes = {
 	id: React.PropTypes.string,
 	onEntityClick: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
+	onRelationsChange: React.PropTypes.func,
 	table: React.PropTypes.object,
 	visible: React.PropTypes.bool
 };

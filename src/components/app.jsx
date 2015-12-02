@@ -116,6 +116,7 @@ class App extends React.Component {
 				id={this.props.graphs.current.id}
 				onEntityClick={this.props.onGraphEntityClick}
 				onNavigate={this.props.onNavigate}
+				onRelationsChange={this.props.onGraphRelationsChange}
 				table={this.props.graphs.table}
 				visible={this.props.router.graph.visible} /> : null;
 
@@ -223,6 +224,7 @@ App.propTypes = {
 	onDeletePublication: React.PropTypes.func,
 	onDeletePublicationKey: React.PropTypes.func,
 	onGraphEntityClick: React.PropTypes.func,
+	onGraphRelationsChange: React.PropTypes.func,
 	onLoginChange: React.PropTypes.func,
 	onNavigate: React.PropTypes.func,
 	onNavigateNextAuthorPage: React.PropTypes.func,
