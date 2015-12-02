@@ -5,8 +5,8 @@
   "main": "src/app/main.coffee",
   "scripts": {
     "start": "scripts/server.js",
-    "watch": "scripts/watch.sh",
-    "build": "scripts/build-libs.sh && scripts/build.sh"
+    "watch": "NODE_ENV=production scripts/watch.sh",
+    "build": "NODE_ENV=production scripts/build-libs.sh && scripts/build.sh"
   },
   "repository": {
     "type": "git",

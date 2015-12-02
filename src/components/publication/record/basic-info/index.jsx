@@ -24,6 +24,10 @@ class BasicInfoForm extends React.Component {
 					<StringComponent value={model.title} />
 				</li>
 				<li>
+					<label>English Title</label>
+					<StringComponent value={model.englishTitle} />
+				</li>
+				<li>
 					<label>Document type</label>
 					<StringComponent value={model.documentType} />
 				</li>

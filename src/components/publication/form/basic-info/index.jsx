@@ -78,6 +78,12 @@ class BasicInfoForm extends React.Component {
 						value={model.title} />
 				</li>
 				<li>
+					<label>English Title</label>
+					<Input
+						onChange={this.props.onChange.bind(this, "englishTitle")}
+						value={model.englishTitle} />
+				</li>
+				<li>
 					<label>Document type</label>
 					<Select
 						onChange={this.props.onChange.bind(this, "documentType")}
