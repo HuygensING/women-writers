@@ -1,11 +1,17 @@
 import React from "react";
 
 class SaveFooter extends React.Component {
+
+	confirmDelete() {
+		if(confirm("Delete this record, are you sure?")) {
+			this.props.onDelete();
+		}
+	}
 	render() {
 		return (
 			<footer>
 				<button className="cancel" onClick={this.props.onCancel}>Cancel</button>
-				<button className="delete" onClick={this.props.onDelete}>Delete</button>
+				<button className="delete" onClick={this.confirmDelete.bind(this)}>Delete</button>
 				<button className="save" onClick={this.props.onSave}>Save</button>
 			</footer>
 		);
