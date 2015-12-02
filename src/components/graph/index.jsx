@@ -67,10 +67,10 @@ class GraphController extends React.Component {
 					<div className="checkboxes">
 						<h4>Relation types</h4>
 						{checkBoxes}
+						<button onClick={this.toggleRelationLabels.bind(this)}>
+							{this.state.hideRelationLabels ? "Show relation labels" : "Hide relation labels"}
+						</button>
 					</div>
-					<button onClick={this.toggleRelationLabels.bind(this)} style={{position: "absolute", right: "260px", top: "28px"}}>
-						{this.state.hideRelationLabels ? "Show relation labels" : "Hide relation labels"}
-					</button>
 					{this.renderGraph()}
 				</div>
 			);
