@@ -6,13 +6,7 @@ class AuthorHeader extends React.Component {
 	render() {
 		let model = this.props.author;
 
-		let name = model.names.reduce((str, current) => {
-			if (str !== "") {
-				str = str + "; ";
-			}
-
-			return str + current.components.map((component) => component.value).join(" ");
-		}, "");
+		let name = model.names.map((current) => current.components.map((component) => component.value).join(" "))[0] || "-";
 
 		let birthYear = model.birthDate === "" ?
 			"?" :
