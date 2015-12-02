@@ -8,6 +8,9 @@ class GraphController extends React.Component {
 	constructor(props) {
 		super(props);
 		this.renderedGraph = null;
+		this.state = {
+			hideRelationLabels: false
+		};
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -33,6 +36,10 @@ class GraphController extends React.Component {
 		return this.renderedGraph;
 	}
 
+	toggleRelationLabels() {
+		this.setState({hideRelationLabels: !this.state.hideRelationLabels});
+	}
+
 	render() {
 		let table = this.props.table !== null ?
 			<GraphTable data={this.props.table} onNavigate={this.props.onNavigate} /> :
@@ -41,9 +48,12 @@ class GraphController extends React.Component {
 			(<div className={cx("graph", {visible: this.props.visible})}>Loading</div>)
 			:
 			(
-				<div className={cx("graph", {visible: this.props.visible})}>
+				<div className={cx("graph", {visible: this.props.visible, "hide-relation-labels": this.state.hideRelationLabels})}>
 					{table}
 					{this.renderGraph()}
+					<button onClick={this.toggleRelationLabels.bind(this)} style={{position: "absolute", right: "260px", top: "28px"}}>
+						{this.state.hideRelationLabels ? "Show relation labels" : "Hide relation labels"}
+					</button>
 				</div>
 			);
 	}

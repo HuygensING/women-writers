@@ -266,6 +266,17 @@ header.page
 	left 0
 	width 100%
 	position absolute
+	& button
+		button()
+		background-color wwLightTurquoise
+		color wwLighterTurquoise
+		font-weight bold
+		padding 4px 12px
+		text-transform uppercase
+
+		&:hover
+			button_box_shadow()
+
 
 .graph-table
 	position absolute
@@ -295,6 +306,8 @@ header.page
 	font 14px sans-serif
 	margin-left: 10px
 
+.hide-relation-labels .hire-force-directed-graph svg text[text-anchor='middle']
+	display none
 
 .hire-force-directed-graph svg .node.person
 	fill #f0bfff
