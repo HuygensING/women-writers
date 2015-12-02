@@ -20,6 +20,7 @@ class PersonalForm extends React.Component {
 						sort={true}
 						values={model["@relations"].hasMaritalStatus} />
 				</li>
+				{/*
 				<li>
 					<label>Spouse of</label>
 					<AutocompleteList
@@ -27,6 +28,7 @@ class PersonalForm extends React.Component {
 						onChange={this.props.onChange.bind(this, ["@relations", "isSpouseOf"])}
 						values={model["@relations"].isSpouseOf} />
 				</li>
+				*/}
 				<li>
 					<label>Parent of</label>
 					<AutocompleteList

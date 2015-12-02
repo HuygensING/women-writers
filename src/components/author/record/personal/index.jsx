@@ -13,10 +13,10 @@ class Personal extends React.Component {
 					<label>Marital status</label>
 					<Relation values={model["@relations"].hasMaritalStatus} />
 				</li>
-				<li>
+				{/*<li>
 					<label>Spouse of</label>
 					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isSpouseOf} />
-				</li>
+				</li>*/}
 				<li>
 					<label>Sibling of</label>
 					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isSiblingOf} />
