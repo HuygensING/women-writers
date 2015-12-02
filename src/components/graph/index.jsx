@@ -50,10 +50,10 @@ class GraphController extends React.Component {
 			(
 				<div className={cx("graph", {visible: this.props.visible, "hide-relation-labels": this.state.hideRelationLabels})}>
 					{table}
-					{this.renderGraph()}
 					<button onClick={this.toggleRelationLabels.bind(this)} style={{position: "absolute", right: "260px", top: "28px"}}>
 						{this.state.hideRelationLabels ? "Show relation labels" : "Hide relation labels"}
 					</button>
+					{this.renderGraph()}
 				</div>
 			);
 	}
