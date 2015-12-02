@@ -60,7 +60,6 @@ export default {
 				"dynamic_s_language": "Language",
 				"dynamic_s_origin": "Country of first publication",
 				"dynamic_t_title": "Title",
-				"dynamic_s_firstPublisher": "First publisher",
 				"dynamic_t_notes": "Provisional notes",
 				"dynamic_t_author_name": "Name",
 				"dynamic_i_author_birthDate": "Year of birth",
@@ -186,7 +185,6 @@ export default {
 			"dynamic_s_origin",
 			"dynamic_s_language",
 			"dynamic_s_genre",
-			"dynamic_s_firstPublisher",
 			"dynamic_s_sources",
 			"dynamic_s_document_type"
 		],

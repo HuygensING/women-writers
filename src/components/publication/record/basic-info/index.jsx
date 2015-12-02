@@ -35,10 +35,10 @@ class BasicInfoForm extends React.Component {
 					<label>Language</label>
 					<Relation values={model["@relations"].hasWorkLanguage} />
 				</li>
-				<li>
+{/*				<li>
 					<label>First publisher</label>
 					<Relation values={model["@relations"].isPublishedBy} />
-				</li>
+				</li>*/}
 				<li>
 					<label>Publish location</label>
 					<Relation values={model["@relations"].hasPublishLocation} />

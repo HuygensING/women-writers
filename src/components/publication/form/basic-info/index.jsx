@@ -86,7 +86,7 @@ class BasicInfoForm extends React.Component {
 				</li>
 				{hasGenre}
 				{hasWorkLanguage}
-				{firstPublisher}
+				{/*firstPublisher*/}
 				{hasPublishLocation}
 				<li>
 					<label>Date</label>

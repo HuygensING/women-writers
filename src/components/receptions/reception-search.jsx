@@ -69,9 +69,16 @@ class ReceptionSearch extends React.Component {
 						customComponents={{
 							result: this.props.type === "authors" ? AuthorResult : PublicationResult
 						}}
-						facetList={["dynamic_s_relation", "dynamic_s_creator", ...config.publications.facetList]}
+						facetList={["dynamic_s_relation", "dynamic_s_creator", "dynamic_s_author_gender", ...config.publications.facetList]}
 						facetSortMap={config.publications.facetSortMap}
-						labels={{...config.publications.labels, resultsFound: "receptions"}}
+						labels={{
+							...config.publications.labels,
+							resultsFound: "receptions",
+							facetTitles: {
+								...config.publications.labels.facetTitles,
+								"dynamic_s_author_gender": "Reception gender"
+							}
+						}}
 						numbered={true}
 						onChange={this.props.onChange}
 						onSearchId={this.onSearchId.bind(this)}
