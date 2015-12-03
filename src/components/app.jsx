@@ -130,7 +130,10 @@ class App extends React.Component {
 			<div className="app">
 				<header>
 					<div className="header-body">
-						<h1>NEWW Women Writers</h1>
+						<h1>
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAkBAMAAABLURayAAAAA3NCSVQICAjb4U/gAAAAMFBMVEX///////////////////////////////////////////////////////////////9Or7hAAAAAEHRSTlMAESIzRFVmd4iZqrvM3e7/dpUBFQAAAAlwSFlzAAALEgAACxIB0t1+/AAAABV0RVh0Q3JlYXRpb24gVGltZQAxMi8zLzE1mSRSyAAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAADZSURBVBiVJc89bsJAFATgsSJMIL99JIsLoFyBG6RO5dwgR3BDnbigSQXiAkhcgChVlBSbOo05AZaVGAz+GeaZlXa/3Vmt3ltAo7t5MjzHzBySuR0Tbgp5SbqDnJKrEuiQjRmQh3QPvJIFP+DR/Ma5/GKNa/kiQ/nMxl5TeziyimRKzh8kuUO3NYaXNkjrW5Wq4bYqGVaYWkv3JcIfeVMgWJs5en+WZzhTC4hmwGIAJCNl7+hUyvw9gn/7ziJ2sdlf/6Idy9HJcbv6b5+PE3nBMira5O50jSvNIxcieD2pu/pyAAAAAElFTkSuQmCC" />
+							NEWW Women Writers
+						</h1>
 						<span className="button-container">
 							<li className="login">
 								<Login
