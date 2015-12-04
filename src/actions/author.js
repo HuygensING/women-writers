@@ -1,7 +1,7 @@
 import config from "../config";
 import {parseOutgoingAuthor} from "../stores/parsers/author";
 
-import {fetch, save, remove, saveRelations} from "./utils";
+import {fetch, fetchPost, save, remove, saveRelations} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
 
@@ -23,6 +23,52 @@ const scrapeGenders = (relatedTo, dispatch) => {
 	}
 };
 
+
+let publicationPropsCacheForAuthor = {};
+
+const scrapePublicationProps = (author, getState, dispatch) => {
+	if(publicationPropsCacheForAuthor[author._id]) {
+		dispatch({
+			type: "SET_AUTHOR_PUBLICATION_RECEPTION_PROPS",
+			props: publicationPropsCacheForAuthor[author._id],
+			authorId: author._id
+		});
+		return;
+	}
+	if(!author.names[0]) { return; }
+
+	if(!getState().publications.initialSearchId) {
+		setTimeout(function() {
+			scrapePublicationProps(author, getState, dispatch);
+		}, 50);
+	} else {
+		let authorName = author.names[0].components.map((c) => c.value).join(" ");
+		let payload = {
+			facetValues: [{"name": "dynamic_s_creator", "values": [authorName]}],
+			term: "",
+			otherSearchId: getState().publications.initialSearchId
+		};
+
+		const digestProps = (response) => {
+			publicationPropsCacheForAuthor[author._id] = response.refs.map((ref) => {
+				return {id: ref.id, receptionTitle: ref.sourceName, sourceId: ref.sourceData._id, targetId: ref.targetData._id};
+			});
+			dispatch({
+				type: "SET_AUTHOR_PUBLICATION_RECEPTION_PROPS",
+				props: publicationPropsCacheForAuthor[author._id],
+				authorId: author._id
+			});
+			return;
+		};
+
+
+		const fetchProps = (url) => {
+			fetch(url, digestProps);
+		};
+
+		fetchPost(config.baseUrl + "/search/wwrelations/wwdocuments", payload, fetchProps);
+	}
+};
 
 export function refreshAuthor(id) {
 	return function (dispatch) {
@@ -56,6 +102,7 @@ export function fetchAuthor(id) {
 
 			fetch(`${config.authorUrl}/${id}`, (response) => {
 				scrapeGenders(response["@relations"].isRelatedTo, dispatch);
+				scrapePublicationProps(response, getState, dispatch);
 				dispatch({
 					type: "RECEIVE_AUTHOR",
 					response: response

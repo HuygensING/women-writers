@@ -7,7 +7,13 @@ class DocumentRelation extends React.Component {
 			return <span>-</span>;
 		}
 
-		let relations = this.props.values.map((v, index) => {
+		let relations = this.props.values
+			.sort((a, b) => {
+				return a.isReceptionOf && !b.isReceptionOf ? -1 :
+					b.isReceptionOf && !a.isReceptionOf ? 1 :
+					a.value.localeCompare(b.value);
+			})
+			.map((v, index) => {
 			let id = v.key.substr(v.key.lastIndexOf("/") + 1);
 
 			let button = (this.props.onRemove != null) ?
@@ -20,7 +26,15 @@ class DocumentRelation extends React.Component {
 					x
 				</button> :
 				null;
-
+			let receptionData = v.isReceptionOf ?
+				<div className="reception-data">
+					{v.isReceptionOf.map((receptionOf) =>
+						<Link
+							href={`/documents/${receptionOf.sourceId}`}
+							onNavigate={this.props.onNavigate}
+							value={receptionOf.receptionTitle} />
+					)}
+				</div> : null;
 			return (
 				<li key={index}>
 					{button}
@@ -28,6 +42,7 @@ class DocumentRelation extends React.Component {
 						href={`/documents/${id}`}
 						onNavigate={this.props.onNavigate}
 						value={v.value} />
+					{receptionData}
 				</li>
 			);
 		});

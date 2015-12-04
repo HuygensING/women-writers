@@ -26,6 +26,25 @@ export function fetch(url, cb) {
 	xhr(options, done);
 }
 
+export function fetchPost(url, data, cb) {
+	let options = {
+		headers: DEFAULT_HEADERS,
+		url: url,
+		method: "POST",
+		data: JSON.stringify(data)
+	};
+
+	let done = function(err, response, body) {
+		if (checkForError(err, response, body)) {
+			return;
+		}
+
+		cb(response.headers.location);
+	};
+
+	xhr(options, done);
+}
+
 export function save(url, model, token, cb) {
 	let [method, theUrl] = (model._id == null) ?
 		["POST", url] :

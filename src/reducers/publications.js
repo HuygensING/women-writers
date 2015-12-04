@@ -36,6 +36,7 @@ let initialState = {
 			{ fieldname: "dynamic_sort_creator", direction: "asc"}
 		]
 	},
+	initialSearchId: null,
 	storedSearchQuery: null,
 	activeFacets: [],
 	results: {
@@ -159,6 +160,13 @@ export default function(state=initialState, action) {
 				return {...state, storedSearchQuery: action.storedSearchQuery};
 			}
 			return state;
+
+		case "SET_PENDING_PUBLICATION_SEARCH_ID":
+			if(!state.initialSearchId) {
+				state.initialSearchId = action.searchId;
+			}
+			return state;
+
 
 		default:
 			return state;

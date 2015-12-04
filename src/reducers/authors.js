@@ -45,6 +45,28 @@ let initialState = {
 	genderMap: {}
 };
 
+const enrichPublications = (state, props) => {
+	let enrichedPublications = state.current["@relations"]
+		.isCreatorOf
+		.map((rel) => {
+			let found = props.filter((prop) => prop.targetId === rel.key.replace(/.*\//, ""));
+			if(found.length) {
+				return {...rel, isReceptionOf: found};
+			}
+			return rel;
+		});
+	return {
+		...state,
+		current: {
+			...state.current,
+			"@relations": {
+				...state.current["@relations"],
+				isCreatorOf: enrichedPublications
+			}
+		}
+	};
+};
+
 export default function(state=initialState, action) {
 	let current, key;
 
@@ -159,6 +181,12 @@ export default function(state=initialState, action) {
 		case "SET_STORED_SEARCH":
 			if(action.handler === "authors") {
 				return {...state, storedSearchQuery: action.storedSearchQuery};
+			}
+			return state;
+
+		case "SET_AUTHOR_PUBLICATION_RECEPTION_PROPS":
+			if(state.current._id === action.authorId) {
+				return enrichPublications(state, action.props);
 			}
 			return state;
 
