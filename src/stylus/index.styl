@@ -104,7 +104,7 @@ header.page
 	& > h2
 		font-size 1.8em
 		margin-left 20%
-
+		max-width calc(100% - 245px)
 		& > span
 			display inline-block
 			max-width 85%
@@ -124,12 +124,16 @@ header.page
 			&.years
 				margin 0 20px
 
-		small.pseudonyms
+		small.pseudonyms,
+		small.receptions
 			display block
 			font-size 0.5em
 			margin-top 0px
 			margin-bottom -22px
-
+			overflow hidden
+			height 20px
+			white-space nowrap
+			text-overflow ellipsis
 			ul.relation
 				display inline
 				padding-left 12px
