@@ -60,8 +60,8 @@ class PublicationForm extends React.Component {
 
 		let links = (model._id != null) ?
 			<Tab
-				active={this.props.tab === "links"}
-				label="Links">
+				active={this.props.tab === "links to online text"}
+				label="Links to online text">
 				<div className="record-container">
 					<div className="variations">{variationSelect}{variationLinksComponent}</div>
 					<MultiForm
@@ -125,7 +125,7 @@ PublicationForm.propTypes = {
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "receptions", "links"]),
+	tab: React.PropTypes.oneOf(["basic info", "receptions", "links to online text"]),
 	variationData: React.PropTypes.object
 };
 

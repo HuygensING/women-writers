@@ -84,8 +84,8 @@ class AuthorForm extends React.Component {
 		let publicTab = (model._id == null) ?
 			null :
 			<Tab
-				active={this.props.tab === "public"}
-				label="Public">
+				active={this.props.tab === "professional situation"}
+				label="Professional situation">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationPublicComponent}</div>
 						<PublicForm
@@ -151,8 +151,8 @@ class AuthorForm extends React.Component {
 		let linksTab = (model._id == null) ?
 			null :
 			<Tab
-				active={this.props.tab === "links"}
-				label="Links">
+				active={this.props.tab === "links to relevant projects and sites"}
+				label="Links to relevant projects and sites">
 				<div className="record-container">
 					<div className="variations">{variationSelect}{variationLinksComponent}</div>
 					<MultiForm
@@ -236,7 +236,7 @@ AuthorForm.propTypes = {
 	onTabChange: React.PropTypes.func,
 	relations: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal situation", "public", "publications", "receptions", "links"]),
+	tab: React.PropTypes.oneOf(["basic info", "personal situation", "professional situation", "publications", "receptions", "links to relevant projects and sites"]),
 	variationData: React.PropTypes.object
 };
 

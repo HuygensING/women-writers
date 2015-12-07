@@ -18,8 +18,8 @@ class BasicInfo extends React.Component {
 		return (
 			<ul className="record">
 				<li>
-					<label>Names</label>
-					<ul>{names}</ul>
+					<label>Name variations / spellings</label>
+					<span><ul>{names}</ul></span>
 				</li>
 				<li>
 					<label>Pseudonyms</label>
@@ -62,7 +62,7 @@ class BasicInfo extends React.Component {
 					<TextComponent value={model.bibliography} />
 				</li>
 				<li>
-					<label>Notes</label>
+					<label>Provisional Notes</label>
 					<TextComponent value={model.notes} />
 				</li>
 				<li>
