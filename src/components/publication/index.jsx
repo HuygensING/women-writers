@@ -67,7 +67,7 @@ class PublicationController extends React.Component {
 					{visible: this.props.visible}
 				)}>
 				{resultsLink}
-				<PublicationHeader publication={this.props.publication} />
+				<PublicationHeader onNavigate={this.props.onNavigate} publication={this.props.publication} />
 				{paginationLinks}
 
 				<div className="extra-info">
