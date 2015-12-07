@@ -27,6 +27,7 @@ const scrapeGenders = (relatedTo, dispatch) => {
 let publicationPropsCacheForAuthor = {};
 
 const scrapePublicationProps = (author, getState, dispatch) => {
+	if(!author["@relations"].isCreatorOf) { return; }
 	if(publicationPropsCacheForAuthor[author._id]) {
 		dispatch({
 			type: "SET_AUTHOR_PUBLICATION_RECEPTION_PROPS",
