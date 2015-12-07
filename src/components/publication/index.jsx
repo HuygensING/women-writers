@@ -100,7 +100,7 @@ PublicationController.propTypes = {
 	requesting: React.PropTypes.bool,
 	results: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"]),
+	tab: React.PropTypes.oneOf(["basic info", "links to online text", "receptions"]),
 	user: React.PropTypes.object,
 	variationData: React.PropTypes.object,
 	visible: React.PropTypes.bool

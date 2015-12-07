@@ -70,8 +70,8 @@ class PublicationRecord extends React.Component {
 					</div>
 				</Tab>
 				<Tab
-					active={this.props.tab === "links"}
-					label="Links">
+					active={this.props.tab === "links to online text"}
+					label="Links to online text">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationLinksComponent}</div>
 						<Links values={this.props.publication.links} />
@@ -90,7 +90,7 @@ PublicationRecord.propTypes = {
 	publication: React.PropTypes.object,
 	relations: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "links", "receptions"]),
+	tab: React.PropTypes.oneOf(["basic info", "links to online text", "receptions"]),
 	variationData: React.PropTypes.object
 };
 

@@ -91,7 +91,7 @@ class BasicInfoForm extends React.Component {
 		return (
 			<ul>
 				<li>
-					<label>Names</label>
+					<label>Name variations / spellings</label>
 					<MultiForm
 						attr={"names"}
 						component = {NameForm}
@@ -144,7 +144,7 @@ class BasicInfoForm extends React.Component {
 						value={model.bibliography} />
 				</li>
 				<li>
-					<label>Notes</label>
+					<label>Provisional Notes</label>
 					<Textarea
 						onChange={this.props.onChange.bind(this, "notes")}
 						value={model.notes} />

@@ -76,7 +76,7 @@ class PersonalForm extends React.Component {
 						values={model["@relations"].hasEducation} />
 				</li>
 				<li>
-					<label>Religion</label>
+					<label>Religion / ideology</label>
 					<SelectList
 						async={API.getReligion}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasReligion"])}

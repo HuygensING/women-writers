@@ -34,7 +34,7 @@ class Personal extends React.Component {
 					<Relation values={model["@relations"].hasEducation} />
 				</li>
 				<li>
-					<label>Religion</label>
+					<label>Religion / ideology</label>
 					<Relation values={model["@relations"].hasReligion} />
 				</li>
 			</ul>
