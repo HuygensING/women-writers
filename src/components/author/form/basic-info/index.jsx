@@ -15,7 +15,11 @@ class BasicInfoForm extends React.Component {
 
 	onNameChange(key, value) {
 		let newKey, newValue;
-		if(key.length === 4) {
+		if(key === "names") {
+			newKey = ["names", this.props.author.names.length, "components"];
+			newValue = [];
+			newValue.push({type: "FORENAME", value: value.FORENAME || ""});
+		} else if(key.length === 4) {
 			newKey = key;
 			newValue = {type: value, value: ""};
 		} else if(key[4] === "REMOVE") {
@@ -27,12 +31,6 @@ class BasicInfoForm extends React.Component {
 				type: key[4],
 				value: value
 			};
-		} else {
-			newKey = [...key, "components"];
-			newValue = [];
-			if(value.FORENAME) { newValue.push({type: "FORENAME", value: value.FORENAME || ""}); }
-			if(value.NAME_LINK) { newValue.push({type: "NAME_LINK", value: value.NAME_LINK || ""}); }
-			if(value.SURNAME) { newValue.push({type: "SURNAME", value: value.SURNAME || ""}); }
 		}
 		this.props.onChange(newKey, newValue);
 	}

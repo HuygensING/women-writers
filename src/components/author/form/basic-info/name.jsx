@@ -22,8 +22,9 @@ const componentTypes = [
 class NameForm extends React.Component {
 
 	render() {
-		let components = this.props.value.components;
-		let inputs = components.length ?
+//		console.log(this.props);
+		let components = this.props.formData.components;
+		let inputs = /*components.length ?*/
 			components.map((component, i) => (
 				<li key={i}>
 					<div>
@@ -35,15 +36,15 @@ class NameForm extends React.Component {
 						placeholder={component.type}
 						value={component.value} />
 				</li>
-			)) :
+			))/* :
 			["FORENAME", "NAME_LINK", "SURNAME"].map((type, i) => (
 				<li key={i}>
 					<Input
 						onChange={this.props.handleChange.bind(this, type)}
 						placeholder={type}
-						value={this.props.value[type]} />
+						value={this.props.formData[type]} />
 				</li>
-			));
+			))*/;
 		if(components.length) {
 			inputs.push((<li key={components.length}>
 				<div>

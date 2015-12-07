@@ -38,7 +38,7 @@ class LinkForm extends React.Component {
 					<Input
 						onChange={this.props.handleChange.bind(this, "label")}
 						placeholder="Label"
-						value={this.props.value.label} />
+						value={this.props.formData.label} />
 				</li>
 				<li>
 					<Input
@@ -46,7 +46,7 @@ class LinkForm extends React.Component {
 						onInvalid={this.props.onInvalid}
 						placeholder="http://"
 						validate={validateURL}
-						value={this.props.value.url} />
+						value={this.props.formData.url} />
 				</li>
 			</ul>
 		);
