@@ -236,7 +236,7 @@ AuthorForm.propTypes = {
 	onTabChange: React.PropTypes.func,
 	relations: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal", "public", "publications", "receptions", "links"]),
+	tab: React.PropTypes.oneOf(["basic info", "personal situation", "public", "publications", "receptions", "links"]),
 	variationData: React.PropTypes.object
 };
 

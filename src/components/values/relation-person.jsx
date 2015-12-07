@@ -50,8 +50,8 @@ class PersonRelation extends React.Component {
 
 		return this.props.genderMap ?
 			(<span>
-				{genders.map((g) => (
-					<ul className="relation person-relation genderified">
+				{genders.map((g, idx) => (
+					<ul className="relation person-relation genderified" key={idx}>
 						{this.renderGender(g)}
 					</ul>
 				))}
