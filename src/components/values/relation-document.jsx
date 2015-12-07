@@ -28,9 +28,10 @@ class DocumentRelation extends React.Component {
 				null;
 			let receptionData = v.isReceptionOf ?
 				<div className="reception-data">
-					{v.isReceptionOf.map((receptionOf) =>
+					{v.isReceptionOf.map((receptionOf, i) =>
 						<Link
 							href={`/documents/${receptionOf.sourceId}`}
+							key={i}
 							onNavigate={this.props.onNavigate}
 							value={receptionOf.receptionTitle} />
 					)}
