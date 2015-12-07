@@ -50,7 +50,7 @@
     "hire-forms-autocomplete-list": "1.0.2",
     "hire-forms-form": "2.0.1",
     "hire-forms-input": "1.2.1",
-    "hire-forms-multi-form": "3.0.0",
+    "hire-forms-multi-form": "^3.2.0",
     "hire-forms-select": "^1.0.10",
     "hire-forms-select-list": "^1.0.7",
     "hire-forms-textarea": "1.0.4",

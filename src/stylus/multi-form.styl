@@ -1,6 +1,7 @@
 html body div.app div.author.visible div.hire-tabs div.hire-tab div.hire-forms-form ul li div.hire-multi-form ul li div.hire-forms-form.names-form ul li
 	width 31%
 	margin-right 2%
+	min-width: 120px
 	& > div:first-child
 		font-size .7em
 		color #999
@@ -19,7 +20,7 @@ html body div.app div.author.visible div.hire-tabs div.hire-tab div.hire-forms-f
 		margin 0
 		color #000
 
-.hire-multi-form > .names-form + button.add
+.hire-multi-form > .names-form + button
 	right 0
 
 .hire-multi-form
@@ -33,24 +34,19 @@ html body div.app div.author.visible div.hire-tabs div.hire-tab div.hire-forms-f
 	& > .names-form + button + ul
 		margin 10px 0 0 0
 
-	button.add
+	& > button
 		button()
 		background-color wwLightTurquoise
 		color wwLighterTurquoise
 		font-weight bold
-		right -70px
+		width 90px
 		padding 4px 12px
 		text-transform uppercase
-		top 5px
 		z-index 1000
 		position absolute
 
 		&:hover
 			button_box_shadow()
-
-	& > .hire-forms-link-form + button.add
-		top 56px
-
 
 	& > ul
 		margin-top 40px
