@@ -110,7 +110,7 @@ AuthorController.propTypes = {
 	requesting: React.PropTypes.bool,
 	results: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal situation", "professional situation", "publications", "receptions", "links to relevant projects and sites"]),
+	tab: React.PropTypes.oneOf(["basic info", "personal situation", "professional situation", "publications of this author", "receptions", "links to relevant projects and sites"]),
 	user: React.PropTypes.object,
 	variationData: React.PropTypes.object,
 	visible: React.PropTypes.bool

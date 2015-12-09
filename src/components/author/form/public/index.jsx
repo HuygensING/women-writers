@@ -12,14 +12,14 @@ class PublicForm extends React.Component {
 		return (
 			<ul>
 				<li>
-					<label>Profession</label>
+					<label>Profession(s) and other activities</label>
 					<SelectList
 						async={API.getProfession}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasProfession"])}
 						values={model["@relations"].hasProfession} />
 				</li>
 				<li>
-					<label>Financials</label>
+					<label>Financial aspects</label>
 					<SelectList
 						async={API.getFinancialSituation}
 						onChange={this.props.onChange.bind(this, ["@relations", "hasFinancialSituation"])}

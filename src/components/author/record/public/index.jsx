@@ -20,11 +20,11 @@ class Public extends React.Component {
 		return (
 			<ul className="record">
 				<li>
-					<label>Profession</label>
+					<label>Profession(s) and other activities</label>
 					<Relation values={model["@relations"].hasProfession} />
 				</li>
 				<li>
-					<label>Financials</label>
+					<label>Financial aspects</label>
 					<Relation values={model["@relations"].hasFinancialSituation} />
 				</li>
 				<li>

@@ -65,7 +65,7 @@ const displayNameMap = {
 	isCensoringOf: "Censoring of",
 	isCollaboratorOf: "Collaborator of",
 	isCreatedBy: "Created by",
-	isCreatorOf: "Creator of",
+	isCreatorOf: "Author of",
 	isCopiedBy: "Copied by",
 	isCopyOf: "Copy of",
 	isChildOf: "Child of",

@@ -134,8 +134,8 @@ class AuthorRecord extends React.Component {
 				</Tab>
 
 				<Tab
-					active={this.props.tab === "publications"}
-					label="Publications">
+					active={this.props.tab === "publications of this author"}
+					label="Publications of this author">
 					<div className="record-container">
 						<div className="variations">{variationSelect}{variationPublicationsComponent}</div>
 						<RelationList
@@ -181,7 +181,7 @@ AuthorRecord.propTypes = {
 	onTabChange: React.PropTypes.func,
 	relations: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
-	tab: React.PropTypes.oneOf(["basic info", "personal situation", "professional situation", "publications", "receptions", "links to relevant projects and sites"]),
+	tab: React.PropTypes.oneOf(["basic info", "personal situation", "professional situation", "publications of this author", "receptions", "links to relevant projects and sites"]),
 	variationData: React.PropTypes.object
 };
 
