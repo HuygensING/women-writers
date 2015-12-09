@@ -1,6 +1,0 @@
-if canEdit
-	.last-modified
-		| Last modified by user&nbsp;
-		span.user-id= modified.userId.replace(/USER0+/g, '')
-		| &nbsp;on&nbsp;
-		span.time= new Date(modified.timeStamp).toDateString()

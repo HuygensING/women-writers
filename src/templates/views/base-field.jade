@@ -1,8 +1,0 @@
-.field(class=field.classes.join(" "))
-	label= field.title
-	if field.type == 'Array'
-		.value
-			each v in field.value
-				p!= v
-	else
-		.value!= field.value

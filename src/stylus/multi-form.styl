@@ -1,0 +1,110 @@
+html body div.app div.author.visible div.hire-tabs div.hire-tab div.hire-forms-form ul li div.hire-multi-form ul li div.hire-forms-form.names-form ul li
+	width 31%
+	margin-right 2%
+	min-width: 120px
+	& > div:first-child
+		font-size .7em
+		color #999
+		& > button
+			multi_form_button()
+			position static
+			float right
+			margin 0
+
+html body div.app div.author.visible div.hire-tabs div.hire-tab div.hire-forms-form ul li div.hire-multi-form ul li div.hire-forms-form.names-form  div.hire-select
+	margin-top 2px
+	width 100%
+	background-color #fff
+	li.hire-forms-option
+		width 98%
+		margin 0
+		color #000
+
+.hire-multi-form > .names-form + button
+	right 0
+
+.hire-multi-form
+	position relative
+	display inline-block
+
+	& > .hire-forms-link-form, & > .names-form
+		max-width calc(100% - 60px)
+		margin-bottom 20px
+
+	& > .names-form + button + ul
+		margin 10px 0 0 0
+
+	& > button
+		button()
+		background-color wwLightTurquoise
+		color wwLighterTurquoise
+		font-weight bold
+		width 90px
+		padding 4px 12px
+		text-transform uppercase
+		z-index 1000
+		position absolute
+
+		&:hover
+			button_box_shadow()
+
+	& > ul
+		margin-top 40px
+		margin-bottom 40px
+
+		& > li
+			position relative
+			margin-bottom 10
+			padding-bottom 10px
+
+			& > button.hire-remove-form
+				multi_form_button()
+				top 0
+
+			.hire-forms-link-form, .names-form
+				ul
+					li
+						margin-bottom 0
+						transition margin-bottom 300ms
+
+						input
+							background none
+							border 1px solid #EFEFEF
+							height 32px
+							outline none
+							transition all 300ms
+
+			.hire-forms-link-form
+				margin-bottom 0
+
+				ul
+					li:last-child
+						input
+							color #AAA
+
+			button.hire-remove-form
+				top -4px
+				transition top 300ms
+
+
+			&:hover
+				background-color #f3fff3
+				.hire-forms-link-form, .names-form
+					ul
+						li
+							input
+								background white
+								border 1px solid #AAA
+								height 32px
+
+				.hire-forms-link-form
+					ul
+						li
+							margin-bottom 20px
+
+							&:last-child
+								input
+									color initial
+
+.record-container.basic .hire-forms-form > ul > li label
+	width 120px

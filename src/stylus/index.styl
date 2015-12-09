@@ -1,0 +1,704 @@
+@import "./import/variables"
+@import "./import/functions"
+@import "./import/fonts"
+
+@import "./header"
+@import "./footer"
+@import "./link"
+@import "./faceted-search"
+@import "./page-transitions"
+@import "./multi-form"
+@import "./message"
+
+body
+	margin 0
+	padding 0
+	background #EEE
+	font-size 100%
+	line-height 1.375em
+	font-size 16px
+	overflow-y scroll
+
+body, h1, h2, h3, h4, h5, input
+	font-family 'Open Sans'
+
+ul, h1, h2, h3
+	margin 0
+	padding 0
+
+ul
+	list-style none
+
+.app
+	max-width 1200px
+	margin 0 auto
+
+.app > .hire-tabs
+	padding 0 5%
+	width 90%
+
+.app > header
+	position absolute
+	width 100%
+	left 0
+	top 0
+
+.app > header > .header-body {
+	max-width 1200px;
+	margin: 0 auto;
+}
+.app > header > .header-body > h1
+	float left
+
+.app > header > .header-body > h1 > img
+	margin-right 20px
+
+.app > div
+	margin-top 120px
+
+.app > header > .header-body .button-container
+	float right
+	width 320px
+	text-align right
+
+.app > header > .header-body .button-container > button
+	max-width 120px
+	margin-top 10px
+
+
+.app > header .login
+	list-style none
+	float right
+
+.app > header .login > .hire-login
+	width 320px
+	color #fff
+	& > button
+		float right
+		position relative
+		z-index 2
+	& > #hire-login-form
+		width 320px
+		background-color rgba(0,0,0,0)
+		float right
+		z-index 1
+		& > div
+			float right
+			width 200px
+			background-color #fff
+			&:first-of-type
+				padding-top 30px
+
+			& button
+				width 100%
+			& input
+				width calc(100% - 10px)
+
+.app > header > ul
+	clear both
+
+header.page
+	padding 30px 7%
+	width 80%
+
+	& > h2
+		font-size 1.8em
+		margin-left 20%
+		max-width calc(100% - 245px)
+		& > span
+			display inline-block
+			max-width 85%
+			height 1em
+			overflow hidden
+			white-space: nowrap;
+			text-overflow: ellipsis;
+
+		small
+			font-size 0.6em
+			font-weight normal
+
+			&.years, &.gender
+				position relative
+				top -10px
+
+			&.years
+				margin 0 20px
+
+		small.pseudonyms,
+		small.receptions
+			display block
+			font-size 0.5em
+			margin-top 0px
+			margin-bottom -22px
+			overflow hidden
+			height 20px
+			white-space nowrap
+			text-overflow ellipsis
+			ul.relation
+				display inline
+				padding-left 12px
+
+				li
+					display inline
+
+					&:after
+						content ", "
+
+					&:last-child:after
+						content ""
+
+.publication header.page > h2 > span
+	max-width 100%
+
+.author, .publication, .hire-faceted-search, .graph, .receptions, .collective, .last-modified, .search-authors > .permalink, .search-publications > .permalink, .stored-search {
+	display: none;
+}
+
+.author.visible, 
+.publication.visible, 
+.visible > .hire-faceted-search, 
+.visible > .permalink,
+.graph.visible, 
+.receptions.visible, 
+.collective.visible, 
+.last-modified.visible,
+.stored-search.visible {
+	display: block;
+}
+.permalink 
+	float right
+	margin 0
+	margin-top 20px
+	& > input
+		margin-left 10px
+
+.receptions .permalink
+	position absolute
+	right 0
+	top 0
+
+.receptions .excel-link
+	position absolute
+	right 400px
+	top 20px
+	color wwLink
+
+
+.author.visible.requesting, .publication.visible.requesting, .collective.visible.requesting {
+	opacity: 0.5
+}
+
+.error-message
+	text-align center
+	border 10px solid #faa
+	background-color #fdd
+
+.reception-loader
+	margin-top 20px
+.reception-loader.hidden
+	display: none
+
+.receptions.visible .hire-faceted-search
+	display: block
+	padding: 0
+	margin-top: 20px
+
+.receptions .hire-faceted-search-results > header > ul
+	top 60px
+	border none
+	position static
+	padding 0
+	right auto
+	width auto
+	border-radius 0
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li
+	cursor default
+
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul
+	width 33%
+	margin-right 3%
+	display inline-block
+	vertical-align top
+	font-size 0.8em
+	line-height 1.25em
+	color #888
+	&:first-of-type
+		margin-left 20px
+
+	&:nth-of-type(2)
+		width calc(20% - 20px)
+		text-align center
+		font-style italic
+		> li
+			padding-top 20px
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li > label
+	font-size 1.1em
+	font-style italic
+	color #000
+	cursor pointer
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li
+	margin-bottom 8px
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li > .date
+	float right
+
+.receptions .hire-faceted-search-results > ol.hire-faceted-search-result-list > li > ul > li.created-by
+	font-size 1.1em
+	color #000
+
+.receptions li.hire-list-facet > ul > li.hire-list-facet-list-item > span.count
+	display: none
+
+.app > .receptions > .hire-tabs > ul, .app > .hire-tabs > ul
+	margin-top 20px
+	width 100%
+
+.app > .receptions > .hire-tabs > ul li, .app > .hire-tabs > ul li
+	display inline-block
+	margin-right 20px
+
+.app > .receptions > .hire-tabs > .hire-tab, .app > .hire-tabs > .hire-tab
+	width 100%
+
+
+
+.app > .graph
+	height calc(100% - 117px)
+	top 117px
+	margin-top 0
+	left 0
+	width 100%
+	position absolute
+	& button
+		button()
+		background-color wwLightTurquoise
+		color wwLighterTurquoise
+		font-weight bold
+		padding 4px 12px
+		text-transform uppercase
+
+		&:hover
+			button_box_shadow()
+
+
+button::-moz-focus-inner {
+	border: 0;
+}
+
+
+
+.graph-table, .graph .checkboxes
+	position absolute
+	right 0
+	width 200px
+	background-color rgba(255,255,255,.6)
+	border 1px solid #ddd
+	border-radius 8px
+	padding 8px
+	margin 20px
+	color #666
+	& h4
+		color #000
+		margin 0
+	& label
+		color #000
+	& .link
+		color wwLink
+		font-style italic
+
+.graph .checkboxes
+	width 250px
+	left: 20px
+
+.hire-force-directed-graph svg text {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.hire-force-directed-graph svg text.label:first-of-type
+	fill #000
+	font 18px sans-serif
+	margin-left: 12px
+
+.hire-force-directed-graph svg text.label
+	font 14px sans-serif
+	margin-left: 10px
+
+.hide-relation-labels .hire-force-directed-graph svg text[text-anchor='middle']
+	display none
+
+.hire-force-directed-graph svg .node.person
+	fill #f0bfff
+
+
+
+.author, .publication, .collective
+	position relative
+
+	header .link,
+	.record-container .link
+		color wwLink
+
+	.record-container .reception-data 
+		padding-left 40px
+		& .link
+			font-style italic
+			color #888
+
+
+	& > .link.pagination-link
+		position absolute
+		left 5%
+		z-index 100
+		top 40px
+		color #666
+		border none
+
+	& > span.pagination-links
+		position absolute
+		top 40px
+		right 5%
+		& > .link
+			color #666
+			border none
+			margin-left 10px
+
+	.extra-info
+		position absolute
+		left 5%
+		width 15%
+		top 275px
+		z-index 1000
+
+		& > *
+			display block
+			margin-bottom 5px
+		
+		& > .graph-link.link
+			border none
+			color 0
+
+		& > button.edit
+			button()
+			background-color wwLightTurquoise
+			color wwLighterTurquoise
+			font-weight bold
+			padding 4px 12px
+			text-transform uppercase
+
+			&:hover
+				button_box_shadow()
+
+.publication > .extra-info
+	top 178px
+
+.app > div > .hire-tabs, .app > .hire-tabs
+	padding 0 5% 120px 5%
+	position relative
+
+
+
+	& > ul, & > .hire-tab
+		inline_block()
+
+	& > ul
+		width 20%
+
+		li
+			cursor pointer
+
+			&.active
+				font-weight bold
+				font-size 1.1em
+				transition font-size 150ms
+
+	& > .hire-tab
+		width 80%
+
+		.well
+			well()
+			margin-bottom 20px
+
+		& > .hire-forms-form > ul
+			well()
+
+		& > .temp-data
+			well()
+			margin-top 20px
+			background-color #EEE
+			color #AAA
+			font-size 0.8em
+
+			ul > li
+				margin-bottom 4px
+
+			h2
+				font-size 1.2em
+				margin 0 0 10px 0
+
+			label, span
+				inline_block()
+
+			label
+				width labelWidth
+
+			span
+				max-width 500px
+
+.hire-empty-list
+	small()
+
+
+.record, .record-container
+	well()
+	& > li
+		margin-bottom 4px
+
+.hire-forms-form > ul > li, .record
+	margin-bottom 20px
+
+	label, label + div, label + span
+		inline_block()
+
+	label + span, label + div
+		max-width calc(100% - 200px)
+
+	label
+		width labelWidth
+
+	input, textarea
+		input()
+
+.hire-select, .hire-forms-autocomplete
+	position relative
+
+	.input-container
+		position relative
+		height 32px
+		border 1px solid #CCC
+		padding-left 6px
+		line-height 32px
+		box-sizing border-box
+		cursor pointer
+
+		&:hover
+			button
+				cursor pointer
+				color baseColor
+
+		button
+			select_button()
+
+ul.hire-options
+	position absolute
+	background white
+	border 1px solid #CCC
+	max-height 200px
+	overflow-y auto
+	width 100%
+	box-sizing border-box
+
+	li
+		line-height 32px
+		padding-left 6px
+		cursor pointer
+
+		&:hover, &.highlight
+			background lightyellow
+
+		&.selected:before
+			color baseColor
+			content "✓"
+
+		span.highlight
+			font-weight bold
+			text-decoration underline
+
+
+.hire-select
+	width 397px
+
+	ul.hire-options
+		width 367px
+		top 0
+
+.hire-forms-form
+	&.names-form > ul
+		& > li
+			inline_block()
+			margin-bottom 0
+
+			&:first-child
+				width 25%
+				margin-right 2%
+			
+			&:nth-child(2)
+				width 20%
+				margin-right 2%
+			&:last-child
+				width 45%
+
+			input
+				width 100%
+
+	.hire-input.invalid
+		input
+			border 1px solid red
+
+		.hire-forms-invalid-message
+			small()
+			color red
+			white-space pre
+
+.hire-forms-link-form
+	margin-bottom 40px
+
+	& > ul > li:last-child
+		.hire-input.invalid
+			.hire-forms-invalid-message
+				display none
+
+			input
+				border 1px solid red
+
+.not-found
+	margin 5%
+	color #888
+	font-size 0.8em
+
+.refresh-button
+	button()
+	padding 0
+	color #3bcbfb
+	cursor pointer
+	text-decoration underline
+
+.author .variations,
+.publication .variations
+	float right
+	width 48%
+	& header
+		color #666
+		margin-bottom -24px
+		font-size 0.8em
+		text-align right
+		& > button
+			multi_form_button()
+			position static
+			margin 0
+			&:hover
+				background-color red
+	& > .record
+		color #666
+		box-shadow none
+
+.record-container
+	padding 0
+	overflow hidden
+	min-height 100px
+
+.record-container > .hire-forms-form,
+.record-container > .hire-multi-form
+	padding 20px
+	padding-bottom 190px
+
+.record-container > .record
+	box-shadow none
+
+.variations + .record,
+.variations + .hire-forms-form
+	width 48%
+
+.variations:empty + .record,
+.variations:empty + .hire-forms-form
+	width 100%
+
+.relation.document-relation li
+	width 100%
+	margin-bottom 20px
+
+.variations > .hire-select
+	float right
+	margin-top 20px
+	margin-right 20px
+	width 180px
+	& > .input-container
+		border-radius 4px
+		padding-left 20px
+		color #666
+		height 36px
+	& > .hire-options
+		width 180px
+		border-radius 4px
+
+.modified-by
+	display block
+	font-size .8em
+	color #666
+
+.collective .record-container
+	margin-right 5%
+	padding 20px
+	width calc(74% - 40px)
+	float right
+
+.relation.person-relation.genderified
+	margin-bottom 10px
+	border-bottom 1px dotted #dedede
+
+.relation.person-relation.genderified:empty
+	display none
+
+.last-modified > div
+	float left
+	width 50%
+
+.last-modified .hire-faceted-search-results > header > .hire-faceted-search-results-sort-menu
+	display none
+
+
+
+.last-modified > div > .hire-faceted-search
+	display block
+	width 100%
+	& > .hire-faceted-search-results
+		padding 0
+		width 100%
+	& ul.hire-faceted-search-current-query
+		display none
+
+.last-modified > div > header
+	float left
+	display inline-block
+	font-size 2em
+	margin-top 5%
+	margin-left 5%
+
+
+
+.record ol { 
+	counter-reset: item;
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.record ol > li:before {
+	content: counter(item) " ";
+	counter-increment: item;
+	display: inline-block;
+	width 20px
+	vertical-align top
+	color wwLink
+}
+
+.record ol > li >span {
+	margin-left 20px
+}
