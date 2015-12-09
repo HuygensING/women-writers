@@ -73,7 +73,6 @@ class SearchAuthors extends React.Component {
 						"dynamic_i_deathDate",
 						"dynamic_s_birthplace",
 						"dynamic_s_deathplace",
-						"dynamic_s_relatedLocations",
 						"dynamic_s_marital_status",
 						"dynamic_s_children",
 						"dynamic_s_social_class",
