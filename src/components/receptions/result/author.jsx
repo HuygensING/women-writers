@@ -30,8 +30,8 @@ class Result extends React.Component {
 				<li>{this.getLabel(this.props.data.relationName)}</li>
 			</ul>
 			<ul>
-				<li><label onClick={this.onSelectTarget.bind(this)}>{targetData.title}</label></li>
 				<li className="created-by">{targetData.authorName}</li>
+				<li><label onClick={this.onSelectTarget.bind(this)}>{targetData.title}</label></li>
 				<li><span className="date">{targetData.date}</span>{targetData.publishLocation}</li>
 			</ul>
 		</li>);
