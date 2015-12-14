@@ -155,6 +155,7 @@ class AuthorRecord extends React.Component {
 							model={this.props.author}
 							modelRelations={this.props.relations.authorPublication.filter(hasRegularName("isCreatedBy", true))}
 							onNavigate={this.props.onNavigate}
+							receptionAuthorMap={this.props.receptionAuthorMap}
 							relations={this.props.relations} />
 					</div>
 				</Tab>
@@ -179,6 +180,7 @@ AuthorRecord.propTypes = {
 	onNavigate: React.PropTypes.func,
 	onSelectVariation: React.PropTypes.func,
 	onTabChange: React.PropTypes.func,
+	receptionAuthorMap: React.PropTypes.object,
 	relations: React.PropTypes.object,
 	showVariation: React.PropTypes.string,
 	tab: React.PropTypes.oneOf(["basic info", "personal situation", "professional situation", "publications of this author", "receptions", "links to relevant projects and sites"]),

@@ -42,12 +42,12 @@ let initialState = {
 		ids: [],
 		_next: null
 	},
-	genderMap: {}
+	genderMap: {},
+	receptionAuthorMap: {}
 };
 
 const enrichPublications = (state, props) => {
-	let enrichedPublications = state.current["@relations"]
-		.isCreatorOf
+	let enrichedPublications = (state.current["@relations"].isCreatorOf || [])
 		.map((rel) => {
 			let found = props.filter((prop) => prop.targetId === rel.key.replace(/.*\//, ""));
 			if(found.length) {
@@ -171,6 +171,9 @@ export default function(state=initialState, action) {
 
 		case "SET_GENDER_MAP":
 			return {...state, genderMap: action.genderMap};
+
+		case "SET_RECEPTION_AUTHOR_MAP":
+			return {...state, receptionAuthorMap: action.authorMap};
 
 		case "CHANGE_ROUTE":
 			if(action.handler === "storedSearch" && action.props[0] === "authors") {

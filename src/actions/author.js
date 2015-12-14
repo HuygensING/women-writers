@@ -5,8 +5,24 @@ import {fetch, fetchPost, save, remove, saveRelations} from "./utils";
 import {changeRoute, toggleEdit} from "./router";
 
 
-let cachedGenders = {};
 
+/**
+ !!WARNING!! Bad code disclaimer, resulting from last-minute MUST have feature requests. !!
+ Scrapes all the genders of the persons this author is related to
+ As of Timbuctoo API 2.1 the server only returns @relations of an author containing display name.
+ However, the customer also wishes to see the genders of the persons this author is related to
+ This necessitates a fetch per person to the server to retrieve the corresponding gender
+ for each person.
+ Each person's gender is cached in cachedGenders to prevent overfetching.
+ Desired solution:
+ Allow the client to specify which properties of a related entity it wants to receive directly
+ from the backend.
+ (Visual representation of problem, square brackets signify data still to be fetched from the server):
+ Author isRelatedTo [Person with gender]
+*/
+
+// [START PROBLEMATIC CODE]
+let cachedGenders = {};
 const scrapeGenders = (relatedTo, dispatch) => {
 	if(!relatedTo) { return; }
 	let paths = relatedTo.map((r) => config.baseUrl + "/" + r.path);
@@ -22,10 +38,80 @@ const scrapeGenders = (relatedTo, dispatch) => {
 		}
 	}
 };
+// [END PROBLEMATIC CODE]
 
 
+
+/**
+ !!WARNING!! Bad code disclaimer, resulting from last-minute MUST have feature requests. !!
+ Scrapes all the authors of a given author's receptions.
+ As of Timbuctoo API 2.1 the server only returns @relations of an author containing display name.
+ However, the customer also wishes to see the authors of these receptions in the overview.
+ This necessitates a fetch per reception to the server to retrieve the corresponding author
+ for each reception.
+ Each reception's author is cached in cachedAuthorsForReceptions to prevent overfetching.
+ Desired solution:
+ Allow the client to specify which properties of a related entity it wants to receive directly
+ from the backend.
+ (Visual representation of problem, square brackets signify data still to be fetched from the server):
+ Author isRelatedTo [Document [isCreatedBy Author with name]]
+*/
+
+// [START PROBLEMATIC CODE]
+const authorReceptionRelations = [
+	"hasBiography",
+	"isPersonCommentedOnIn",
+	"isDedicatedPersonOf",
+	"isPersonAwarded",
+	"isPersonListedOn",
+	"isPersonMentionedIn",
+	"hasObituary",
+	"isPersonQuotedIn",
+	"isPersonReferencedIn"
+];
+let cachedAuthorsForReceptions = {};
+const scrapeAuthorsForReceptions = (relatedTo, dispatch) => {
+	if(!relatedTo) { return; }
+	let paths = Object.keys(relatedTo)
+		.filter((key) => authorReceptionRelations.indexOf(key) > -1)
+		.map((key) => relatedTo[key].map((rel) => rel.path))
+		.reduce((a, b) => a.concat(b), [])
+		.map((path) => config.baseUrl + "/" + path);
+
+	const digestReception = (response) => {
+		let author = response["@relations"].isCreatedBy && response["@relations"].isCreatedBy.length ?
+			response["@relations"].isCreatedBy.map((cb) => cb.displayName).join(", ")
+			: "-";
+		cachedAuthorsForReceptions[response._id] = author;
+		dispatch({type: "SET_RECEPTION_AUTHOR_MAP", authorMap: cachedAuthorsForReceptions});
+	};
+
+	for(let i in paths) {
+		if(!cachedAuthorsForReceptions[paths[i].replace(/.*\//, "")]) {
+			fetch(paths[i], digestReception);
+		}
+	}
+};
+// [END PROBLEMATIC CODE]
+
+/**
+ !!WARNING!! Bad code disclaimer, resulting from last-minute MUST have feature requests. !!
+ Searches for all the titles and idś of publications this author's publications are a reception of.
+ As of Timbuctoo API 2.1 the server only returns @relations of an author containing display name.
+ However, the customer also wishes to see the publications this author's publications are a reception on in the overview.
+ This necessitates an extra reception search in the background with the following parameters:
+ - otherSearchId (ID of document search for all documents - is retrieved automatically on initial page load)
+ - the name of the author as indexed in dynamic_s_author (names[0].components.join(" "))
+ For each found publication its props are cached in publicationPropsCacheForAuthor
+ Desired solution:
+ Allow the client to specify which properties of a related entity it wants to receive directly
+ from the backend.
+ (Visual representation of problem, square brackets signify data still to be fetched from the server):
+ Author isCreatorOf [Document [isReceptionOf document with title]]
+*/
+
+// [START PROBLEMATIC CODE]
 let publicationPropsCacheForAuthor = {};
-
 const scrapePublicationProps = (author, getState, dispatch) => {
 	if(!author["@relations"].isCreatorOf) { return; }
 	if(publicationPropsCacheForAuthor[author._id]) {
@@ -70,6 +156,8 @@ const scrapePublicationProps = (author, getState, dispatch) => {
 		fetchPost(config.baseUrl + "/search/wwrelations/wwdocuments", payload, fetchProps);
 	}
 };
+// [END PROBLEMATIC CODE]
+
 
 export function refreshAuthor(id) {
 	return function (dispatch) {
@@ -103,6 +191,7 @@ export function fetchAuthor(id) {
 
 			fetch(`${config.authorUrl}/${id}`, (response) => {
 				scrapeGenders(response["@relations"].isRelatedTo, dispatch);
+				scrapeAuthorsForReceptions(response["@relations"], dispatch);
 				scrapePublicationProps(response, getState, dispatch);
 				dispatch({
 					type: "RECEIVE_AUTHOR",
@@ -123,7 +212,7 @@ export function saveAuthor() {
 				getState().user.token,
 				(response) => {
 					scrapeGenders(response["@relations"].isRelatedTo, dispatch);
-
+					scrapeAuthorsForReceptions(response["@relations"], dispatch);
 					dispatch({
 						type: "RECEIVE_AUTHOR",
 						response: response

@@ -57,6 +57,7 @@ class App extends React.Component {
 				onSelectVariation={this.props.onSelectAuthorVariation}
 				onTabChange={this.props.onTabChange}
 				onToggleEdit={this.props.onToggleEdit}
+				receptionAuthorMap={this.props.authors.receptionAuthorMap}
 				relations={this.props.relations}
 				requesting={this.props.authors.requesting}
 				results={this.props.authors.results}

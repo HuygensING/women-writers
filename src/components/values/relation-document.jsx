@@ -36,6 +36,9 @@ class DocumentRelation extends React.Component {
 							value={receptionOf.receptionTitle} />
 					)}
 				</div> : null;
+
+			let authorNode = !receptionData && this.props.receptionAuthorMap[id] ?
+				<div className="reception-data">{this.props.receptionAuthorMap[id]}</div> : null;
 			return (
 				<li key={index}>
 					{button}
@@ -44,6 +47,7 @@ class DocumentRelation extends React.Component {
 						onNavigate={this.props.onNavigate}
 						value={v.value} />
 					{receptionData}
+					{authorNode}
 				</li>
 			);
 		});
@@ -61,6 +65,7 @@ class DocumentRelation extends React.Component {
 DocumentRelation.propTypes = {
 	onNavigate: React.PropTypes.func,
 	onRemove: React.PropTypes.func,
+	receptionAuthorMap: React.PropTypes.object,
 	relationName: React.PropTypes.string,
 	values: React.PropTypes.array
 };
