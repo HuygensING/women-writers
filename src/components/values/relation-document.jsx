@@ -37,7 +37,7 @@ class DocumentRelation extends React.Component {
 					)}
 				</div> : null;
 
-			let authorNode = !receptionData && this.props.receptionAuthorMap[id] ?
+			let authorNode = !receptionData && this.props.receptionAuthorMap && this.props.receptionAuthorMap[id] ?
 				<div className="reception-data">{this.props.receptionAuthorMap[id]}</div> : null;
 			return (
 				<li key={index}>
