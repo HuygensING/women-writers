@@ -31,9 +31,9 @@ let initialState = {
 		facetValues: [],
 		fullTextSearchParameters: [],
 		sortParameters: [
-			{ fieldname: "dynamic_sort_name", direction: "asc"},
+/*			{ fieldname: "dynamic_sort_name", direction: "asc"},
 			{ fieldname: "dynamic_k_birthDate", direction: "asc"},
-			{ fieldname: "dynamic_k_deathDate", direction: "asc"}
+			{ fieldname: "dynamic_k_deathDate", direction: "asc"}*/
 		]
 	},
 	storedSearchQuery: null,

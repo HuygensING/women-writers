@@ -32,8 +32,8 @@ let initialState = {
 		term: "",
 		facetValues: [],
 		sortParameters: [
-			{ fieldname: "dynamic_sort_title", direction: "asc"},
-			{ fieldname: "dynamic_sort_creator", direction: "asc"}
+/*			{ fieldname: "dynamic_sort_title", direction: "asc"},
+			{ fieldname: "dynamic_sort_creator", direction: "asc"}*/
 		]
 	},
 	initialSearchId: null,
