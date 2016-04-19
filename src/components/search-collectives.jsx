@@ -17,9 +17,13 @@ class SearchCollectives extends React.Component {
 						headers: {
 							VRE_ID: "WomenWriters",
 							Accept: "application/json"
-						}
+						},
+						hideFreeTextSearch: true,
+						fullTextSearchFields: [
+							{name: "dynamic_t_name"}
+						]
 					}}
-					labels={{facetTitles: {term: "Search term", "dynamic_s_type": "Type"}}}
+					labels={{facetTitles: {"dynamic_s_type": "Type", "dynamic_t_name": "Search term"}}}
 					numberedResults={true}
 					onChange={this.props.onResultsChange}
 					onSelect={this.props.onSelect}
