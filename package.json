@@ -43,7 +43,7 @@
     "classnames": "^2.1.1",
     "d3": "^3.4.13",
     "es6-promise": "^3.0.2",
-    "hire-current-query": "^1.2.1",
+    "hire-current-query": "^1.2.3",
     "hire-faceted-search": "^5.2.7",
     "hire-force-directed-graph": "^1.1.1",
     "hire-forms-autocomplete": "1.0.3",
