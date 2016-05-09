@@ -63,8 +63,7 @@ export function save(url, model, token, cb) {
 		if (checkForError(err, response, body)) {
 			return;
 		}
-
-		if (body == null && response.headers.location != null) {
+		if (response.statusCode === 201 && response.headers.location) {
 			fetch(response.headers.location, cb);
 		} else {
 			cb(JSON.parse(body));
