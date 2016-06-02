@@ -1,43 +1,7 @@
 import config from "../config";
 import {fetch} from "./utils";
 import {parseIncomingGraph} from "../stores/parsers/graph";
-
-const allTypes = [
-	"hasEdition",
-	"hasSequel",
-	"hasTranslation",
-	"hasAdaptation",
-	"hasPlagiarismBy",
-	"isAnnotatedIn",
-	"hasBibliography",
-	"isCensoredBy",
-	"isWorkCommentedOnIn",
-	"containedInAnthology",
-	"isCopiedBy",
-	"isWorkAwarded",
-	"hasPreface",
-	"isIntertextualOf",
-	"isWorkListedOn",
-	"isWorkMentionedIn",
-	"isParodiedBy",
-	"isWorkQuotedIn",
-	"isWorkReferencedIn",
-	"hasDocumentSource",
-	"hasBiography",
-	"isPersonCommentedOnIn",
-	"isDedicatedPersonOf",
-	"isPersonAwarded",
-	"isPersonListedOn",
-	"isPersonMentionedIn",
-	"hasObituary",
-	"isPersonQuotedIn",
-	"isPersonReferencedIn",
-	"isCreatorOf",
-	"isRelatedTo",
-	"isParentOf",
-	"isSpouseOf",
-	"isPseudonymOf"
-];
+import {allTypes} from "../stores/all-relation-types";
 
 let fetchDomainMetadata = function(domain, id, dispatch) {
 	fetch(`${config.domainUrl}/${domain}/${id}`, (response) => {

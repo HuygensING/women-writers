@@ -6,7 +6,7 @@ import PublicationReceptionsCurrentQuery from "./current-query/publications";
 import AuthorReceptionsCurrentQuery from "./current-query/authors";
 import Loader from "../icons/loader";
 import config from "../../config";
-
+import {receptionTypesPerson, receptionTypesDocument} from "../../stores/all-relation-types";
 
 class ReceptionSearch extends React.Component {
 
@@ -23,7 +23,9 @@ class ReceptionSearch extends React.Component {
 	}
 
 	onSearchId(searchId) {
-		this.setState({excelUrl: config.baseUrl + "/search/" + searchId + "/xls"});
+		const receptionTypes = this.props.type === "authors" ? receptionTypesPerson : receptionTypesDocument;
+
+		this.setState({excelUrl: `${config.baseUrl}/search/${searchId}/xls?depth=2&types=${receptionTypes.join("&types=")}`});
 	}
 
 	render() {
