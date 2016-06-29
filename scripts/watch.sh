@@ -18,7 +18,7 @@ node_modules/.bin/watchify src/index.jsx \
 	--external classnames \
 	--external immutable \
 	--external react \
-	--outfile build/development/js/react-src.js \
+	--outfile build/development/js/react-src-v3.js \
 	--standalone WomenWritersEdit \
 	--transform [ babelify --plugins object-assign ] \
 	--verbose

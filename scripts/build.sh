@@ -28,4 +28,4 @@ node_modules/.bin/browserify src/index.jsx \
 	--external react \
 	--standalone WomenWritersEdit \
 	--transform [ babelify --plugins object-assign ] \
-	--verbose > build/development/js/react-src.js
+	--verbose > build/development/js/react-src-v3.js
