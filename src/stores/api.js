@@ -140,6 +140,10 @@ export default {
 	},
 
 	autoWarm(next) {
+		if (!localStorage.getItem("releaseV3")) {
+			localStorage.clear();
+		}
+		localStorage.setItem("releaseV3", "true");
 		let promises = ["religion", "socialClass", "education", "maritalStatus", "profession", "financialSituation", "genre"]
 			.map((selVal) => new Promise((resolve) => getSelectValues(selVal, resolve)));
 		promises.push(new Promise((resolve) => getWordpressExternal(resolve)));

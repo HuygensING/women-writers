@@ -12,8 +12,7 @@ const DEFAULT_HEADERS = {
 let cachedRelations = null;
 
 export function requestRelations(cb) {
-	if (cachedRelations) { cb(cachedRelations); return; }
-	else if(localStorage.getItem("relations")) {
+	if(localStorage.getItem("relations")) {
 		cachedRelations = JSON.parse(localStorage.getItem("relations"));
 		cb(cachedRelations);
 		return;
