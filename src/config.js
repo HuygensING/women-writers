@@ -1,4 +1,4 @@
-let baseUrl = "//acc.repository.huygens.knaw.nl/v2.1";
+let baseUrl = "//repository.huygens.knaw.nl/v2.1";
 
 export default {
 	authorUrl: baseUrl + "/domain/wwpersons",
