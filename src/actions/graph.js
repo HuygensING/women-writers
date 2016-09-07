@@ -1,54 +1,48 @@
 import config from "../config";
-import {fetch} from "./utils";
-import {parseIncomingGraph} from "../stores/parsers/graph";
-import {allTypes} from "../stores/all-relation-types";
+import server from "./server";
 
-let fetchDomainMetadata = function(domain, id, dispatch) {
-	fetch(`${config.domainUrl}/${domain}/${id}`, (response) => {
-		if(domain === "persons" && response["@variationRefs"].map((v) => v.type).indexOf("wwperson") > -1) {
-			fetchDomainMetadata("wwpersons", id, dispatch);
-		} else {
+import authorReceptionDefinitions from "../definitions/author-receptions";
+import publicationReceptionDefinitions from "../definitions/publication-receptions";
+
+const allTypes = authorReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.outBound).concat("isCreatedBy");
+
+
+
+const fetchGraphTable = (collection, id, dispatch) => {
+	server.fastXhr(`${config.apiUrl["v2.1"]}/domain/ww${collection}/${id}`, (err, resp, body) => {
 			dispatch({
 				type: "RECEIVE_GRAPH_TABLE",
-				response: response,
-				id: `${domain}/${id}`
+				response: JSON.parse(body),
+				id: id,
+				collection: collection
 			});
-		}
 	});
 };
 
 
-export function fetchGraph(domain, id, types = null) {
-	return function (dispatch, getState) {
+const parseIncomingGraph = function(data) {
+	for(let i in data.links) {
+		data.links[i].source = data.nodes[data.links[i].source];
+		data.links[i].target = data.nodes[data.links[i].target];
+	}
+	return data;
+};
 
-		let found = getState().graphs.cached[`${domain}/${id}`];
-		if (found && !types) {
-			dispatch({
-				type: "SET_CURRENT_GRAPH",
-				current: found
-			});
-		} else {
-			fetch(`${config.graphUrl}/ww${domain}/${id}?depth=2&types=${(types || allTypes).join("&types=")}`, (response) =>
-				dispatch({
-					type: "RECEIVE_GRAPH",
-					response: parseIncomingGraph(response),
-					id: `${domain}/${id}`
-				})
-			);
-		}
-		fetchDomainMetadata(domain, id, dispatch);
-	};
-}
+const fetchGraph = (collection, id, requestedTypes = null) => (dispatch) => {
+	const types = requestedTypes ?
+		requestedTypes.filter((type) => type.checked).map((type) => type.name)
+		: allTypes;
 
-export function setGraphRelationTypes(types) {
-	return function(dispatch, getState) {
-		let [domain, id] = getState().graphs.current.id.split("/");
-		dispatch(fetchGraph(domain, id, types));
-	};
-}
+	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=2&types=${types.join("&types=")}`, (err, resp, body) =>
+		dispatch({
+			type: "RECEIVE_GRAPH",
+			response: parseIncomingGraph(JSON.parse(body)),
+			collection: collection,
+			id: id,
+			currentTypes: requestedTypes
+		})
+	);
+	fetchGraphTable(collection, id, dispatch);
+};
 
-export function fetchGraphTable(domain, id) {
-	return function (dispatch) {
-		fetchDomainMetadata(domain, id, dispatch);
-	};
-}
+export { fetchGraph, fetchGraphTable }
