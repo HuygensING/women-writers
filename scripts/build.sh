@@ -1,31 +1,19 @@
 #!/bin/sh
 
-# Build React HTML
-node_modules/.bin/jade \
-	--no-debug \
-	--out build/development \
-	src/index.jade
+mkdir -p build/development
+mkdir build/development/js
+cp -R src/index.html build/development/
+cp -R src/static/css build/development/
+cp -R src/static/fonts build/development/
 
-# # Build Backbone CSS
-# ./node_modules/.bin/stylus \
-# 	--use nib \
-# 	--compress \
-# 	--out build/development/css/backbone.css \
-# 	src/stylus/main.styl
+node_modules/.bin/browserify \
+	--require react \
+	--require classnames \
+	--require react-dom > build/development/js/react-libs.js
 
-# Build React CSS
-./node_modules/.bin/stylus \
-	--use nib \
-	--compress \
-	--out build/development/css/react.css \
-	src/stylus/index.styl
-
-# Build React JS
-node_modules/.bin/browserify src/index.jsx \
-	--extension=.jsx \
-	--external classnames \
-	--external immutable \
+node_modules/.bin/browserify src/index.js \
 	--external react \
-	--standalone WomenWritersEdit \
-	--transform [ babelify --plugins object-assign ] \
-	--verbose > build/development/js/react-src-v3.js
+	--external react-dom \
+	--standalone WwPersonSearchVerify \
+	--transform [ babelify ] \
+	--transform [ envify --SERVER="${SERVER}" ] > build/development/js/index.js

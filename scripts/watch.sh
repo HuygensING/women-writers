@@ -1,24 +1,23 @@
 #!/bin/sh
 
-node_modules/.bin/jade \
-	--no-debug \
-	--out build/development \
-	--watch \
-	src/index.jade &
+mkdir -p build/development
+mkdir build/development/js
+cp -R src/index.html build/development/
+cp -R src/static/css build/development/
+cp -R src/static/fonts build/development/
 
-./node_modules/.bin/stylus \
-	--use nib \
-	--compress \
-	--out build/development/css/react.css \
-	--watch \
-	src/stylus/index.styl &
 
-node_modules/.bin/watchify src/index.jsx \
-	--extension=.jsx \
-	--external classnames \
-	--external immutable \
+node_modules/.bin/browserify \
+	--require react \
+	--require react-dom \
+	--require classnames > build/development/js/react-libs.js
+
+node_modules/.bin/watchify src/index.js \
+	--outfile build/development/js/index.js \
 	--external react \
-	--outfile build/development/js/react-src-v3.js \
-	--standalone WomenWritersEdit \
-	--transform [ babelify --plugins object-assign ] \
+	--external react-dom \
+	--external classnames \
+	--standalone WwPersonSearchVerify \
+	--transform [ babelify ] \
+	--transform [ envify --SERVER="${SERVER}" ]
 	--verbose

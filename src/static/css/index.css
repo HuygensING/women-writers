@@ -1,0 +1,351 @@
+body {
+    background-color: #eee;
+}
+small.pseudonyms,
+small.receptions {
+    display: block;
+    font-size: 0.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+small.pseudonyms > a,
+small.receptions > a {
+    display: inline-block;
+    margin-left: 0.2em;
+}
+
+label {
+    font-weight: 500;
+    color: #666;
+}
+
+.overview > div:nth-of-type(2) {
+    margin-bottom: 60px;
+}
+
+.overview footer {
+    background: #eee none repeat scroll 0 0;
+    bottom: 0;
+    box-shadow: -1px 0 3px #ccc;
+    height: 60px;
+    left: 0;
+    position: fixed;
+    right: 0;
+}
+.overview footer > button {
+    margin: 14px 0 0 14px;
+}
+.overview footer > button:nth-of-type(2) {
+    margin-right: 14px;
+}
+
+.overview label {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+}
+
+.overview label + span {
+    display: inline-block;
+    width: calc(100% - 200px);
+}
+
+.overview label + span ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.overview textarea,
+.overview .hire-input input {
+    width: 100%;
+    max-width: 600px
+}
+
+.overview .variation-select {
+    right: 26px; top: 12px; z-index: 10; position: absolute;
+}
+
+.overview .variation-select + div > ul > .list-group-item:first-of-type {
+    padding-top: 46px;
+}
+
+.overview label + span .other-data-list {
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+}
+
+.overview .other-data {
+    color: #888
+}
+.hire-select {
+    border: 1px solid #aaa;
+    width: 226px;
+    height: 26px;
+}
+
+.hire-select .input-container .input {
+    display: inline-block;
+    width: 196px;
+    line-height: 22px;
+}
+
+.hire-select .input-container > button {
+    float: right;
+    height: 24px;
+}
+
+.hire-select .hire-options {
+    position: absolute;
+    background-color: white;
+    z-index: 100;
+    width: 226px;
+    max-height: 140px;
+    overflow-y: auto;
+    border: 1px solid #aaaaaa;
+    border-top: none;
+    margin-left: -1px;
+    margin-top: 2px;
+    list-style: none;
+    padding:0;
+}
+.hire-options li,
+.hire-list-item {
+    cursor: pointer
+}
+.hire-options li:hover {
+    background-color: #ddd
+}
+
+.hire-list-item:hover > .value {
+    text-decoration: underline;
+}
+
+.overview label + span.names-form-wrap {
+    display: block;
+    width: 100%;
+}
+.names-form > ul > li {
+    display: inline-block;
+    width: 247px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+    padding: 10px;
+    float: left;
+    height: 70px;
+}
+
+.names-form > ul > li > div:nth-of-type(1) {
+    height: 20px;
+}
+
+
+.names-form > ul > li button.hire-remove-form {
+    width: 24px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    margin-right: 8px;
+    position: relative;
+    top: -4px;
+}
+
+.names-form > ul > li button.hire-remove-form:hover {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+.hire-multi-form > .form-list > .form {
+    margin-top: 20px;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 12px;
+}
+
+.hire-multi-form > .form-list > .form  > .hire-forms-form {
+    width: calc(100% - 60px);
+    display: inline-block;
+}
+
+.hire-multi-form > .form-list > .form > button.hire-remove-form {
+    float: right;
+}
+
+.hire-multi-form > .form-list > .form > button.hire-remove-form:hover {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+.hire-forms-autocomplete-list .hire-list-item > button.remove,
+.hire-select-list .hire-list-item > button.remove {
+    max-width: 25px;
+    float: right;
+}
+
+.hire-forms-autocomplete-list .hire-list-item {
+    margin-bottom: 6px;
+}
+.hire-list {
+    width: 100%;
+    max-width: 600px;
+}
+
+.hire-forms-autocomplete .hire-options{
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #aaa;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.hire-options .highlight {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.transaction-pending * {
+    background-color: #ddd;
+}
+
+.temp-data *, .temp-data, .temp-data > .panel-heading {
+    background-color: #EEE;
+    color: #888;
+}
+
+.messages {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+.overview header h2 {
+    margin: 0;
+}
+.overview > .row {
+    margin-bottom: 1em;
+}
+.overview .relation-author {
+    color: #888;
+    font-style: italic;
+    display: inline-block;
+    margin-right: 10px;
+}
+.messages .alert {
+    margin-bottom: 0;
+}
+.hire-force-directed-graph svg text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.hire-force-directed-graph svg text.label:first-of-type {
+    fill: #000;
+    font: 18px sans-serif;
+    margin-left: 12px
+}
+.hire-force-directed-graph svg text.label {
+    font: 14px sans-serif;
+    margin-left: 10px
+}
+
+.hide-relation-labels .hire-force-directed-graph svg text[text-anchor='middle'] {
+    display: none
+}
+
+.hire-force-directed-graph svg .node.person {
+    fill: #f0bfff
+}
+
+.hire-force-directed-graph svg .link {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 1.5px;
+}
+
+.hire-force-directed-graph svg circle {
+    fill: #009688;
+    stroke: #333;
+    stroke-width: 0;
+}
+
+.hire-force-directed-graph svg text {
+    font: 10px sans-serif;
+    fill: #666;
+}
+
+.hire-force-directed-graph svg text.label.document {
+    fill: #000;
+    cursor: pointer;
+}
+
+.graph-table {
+    position: absolute;
+    width: 250px;
+    right: 20px;
+}
+.graph .checkboxes {
+    position: absolute;
+    left: 20px;
+    width: 250px;
+}
+.graph .checkboxes h4 {
+    color: #000;
+    margin: 0;
+}
+
+.graph .checkboxes label {
+    color: #000;
+}
+
+.hide-relation-labels .hire-force-directed-graph svg text[text-anchor='middle'] {
+    display: none
+}
+
+.hire-login .login-form,
+.hire-login > button {
+    position: absolute;
+    right: 20px;
+}
+.login-status {
+    color: #fafafa;
+    font-weight: 500;
+    position: relative;
+    top: -4px;
+}
+.login-status + button {
+    float: right;
+}
+
+.navbar.navbar-default {
+    background: none;
+    background-color: #00bfa5;
+    border: 0;
+    border-radius: 0;
+    font-size: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    background: none;
+    background-color:  #00bfa5;
+    color: #fafafa;
+    font-weight: 500;
+    border-bottom: 2px solid #f2fc90;
+}
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{
+    color: #000
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    font-weight: 500;
+}
