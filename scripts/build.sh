@@ -16,4 +16,4 @@ node_modules/.bin/browserify src/index.js \
 	--external react-dom \
 	--standalone WwPersonSearchVerify \
 	--transform [ babelify ] \
-	--transform [ envify --SERVER="${SERVER}" ] > build/development/js/index.js
+	--transform [ envify --SERVER="${SERVER}" --NODE_ENV="production" ] > build/development/js/index.js
