@@ -21,7 +21,7 @@ class RelationList extends React.Component {
 										{i + 1}. {relation.displayName}
 									</Link>
 								</div>
-								{(relation.authors || []).map((author, j) => <span className="relation-author" key={j}>
+								{this.props.suppressExtras ? null : (relation.authors || []).map((author, j) => <span className="relation-author" key={j}>
 									{author.displayName}{author.gender ? genderMap[author.gender] : ""}
 								</span> )}
 							</li>

@@ -20,7 +20,7 @@ class Publications extends React.Component {
 					</li>
 				) : publications.length === 0 ?
 					<li className="list-group-item">The list is empty</li>
-				: <RelationList label="Author of" relations={publications} linkTo="publicationIndex" />
+				: <RelationList label="Author of" relations={publications} linkTo="publicationIndex" suppressExtras={true} />
 			}</ul>
 		);
 	}
