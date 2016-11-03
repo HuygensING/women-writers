@@ -4,7 +4,8 @@ import server from "./server";
 import authorReceptionDefinitions from "../definitions/author-receptions";
 import publicationReceptionDefinitions from "../definitions/publication-receptions";
 
-const allTypes = authorReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.outBound).concat("isCreatedBy");
+const allTypes = authorReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.outBound)
+	.concat(["isCreatedBy", "isPseudonymOf"]);
 
 
 
