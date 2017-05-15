@@ -1,10 +1,12 @@
 #!/bin/sh
 
 mkdir -p build/development
-mkdir build/development/js
 cp -R src/index.html build/development/
 cp -R src/static/css build/development/
 cp -R src/static/fonts build/development/
+cp -R src/static/js build/development/
+
+sed -i 's/{GIT_HASH}/'$GIT_COMMIT'/g' build/development/index.html
 
 node_modules/.bin/browserify \
 	--require react \
