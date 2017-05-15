@@ -21,7 +21,7 @@ function onFilesChanged(event, file) {
 
 browserSync.watch(watchFiles, debounce(onFilesChanged, 300));
 
-var localSolr = process.env.SOLR || "http://10.152.32.51:8983/solr";
+var localSolr = process.env.SOLR || "http://localhost:8983/solr";
 var wwdocumentsOptions = url.parse(localSolr + "/wwdocuments/select");
 wwdocumentsOptions .route = "/repositorysolr/wwdocuments";
 
@@ -47,7 +47,7 @@ browserSync.init({
 			proxy(wwpersonreceptionsOptions),
 			proxy(wwcollectivesOptions),
 			modRewrite([
-				"^/womenwriters/vre/css/(.*).css(.*)$/css/$1.css [L]",
+				"^/womenwriters/vre/css/(.*).css(.*)$ /css/$1.css [L]",
 				"^/womenwriters/vre/js/(.*).js(.*)$ /js/$1.js [L]",
 				"^/womenwriters/vre/images/(.*)$ /images/$1 [L]",
 				"^/womenwriters/vre/fonts/(.*)$ /fonts/$1 [L]",
