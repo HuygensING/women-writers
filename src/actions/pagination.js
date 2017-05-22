@@ -1,6 +1,7 @@
 import server from "./server";
 
 import solrPaginationQuery from "../util/solr-pagination-query";
+import config from "../config"
 
 const setCollectivePages = (state) => (redispatch, getState) => {
 	const { query } = state;
@@ -10,7 +11,7 @@ const setCollectivePages = (state) => (redispatch, getState) => {
 
 	const timeStamp = new Date().getTime();
 	server.fastXhr({
-		url: "/repositorysolr/wwcollectives",
+		url: config.solrUrls.wwcollectives,
 		method: "POST",
 		data: newQuery,
 		headers: {
@@ -29,7 +30,7 @@ const setAuthorPages = (state) => (redispatch, getState) => {
 
 	const timeStamp = new Date().getTime();
 	server.fastXhr({
-		url: "/repositorysolr/wwpersons",
+		url: config.solrUrls.wwpersons,
 		method: "POST",
 		data: newQuery,
 		headers: {
@@ -49,7 +50,7 @@ const setPublicationPages = (state) => (redispatch, getState) => {
 
 	const timeStamp = new Date().getTime();
 	server.fastXhr({
-		url: "/repositorysolr/wwdocuments",
+		url: config.solrUrls.wwdocuments,
 		method: "POST",
 		data: newQuery,
 		headers: {
@@ -68,7 +69,7 @@ const setPublicationReceptionPages = (state) => (redispatch, getState) => {
 
 	const timeStamp = new Date().getTime();
 	server.fastXhr({
-		url: "/repositorysolr/wwdocumentreceptions",
+		url: config.solrUrls.wwdocumentreceptions,
 		method: "POST",
 		data: newQuery,
 		headers: {
@@ -92,7 +93,7 @@ const setAuthorReceptionPages = (state) => (redispatch, getState) => {
 
 	const timeStamp = new Date().getTime();
 	server.fastXhr({
-		url: "/repositorysolr/wwpersonreceptions",
+		url: config.solrUrls.wwpersonreceptions,
 		method: "POST",
 		data: newQuery,
 		headers: {

@@ -1,6 +1,7 @@
 import { SolrClient } from "solr-faceted-search-react";
 
 import store from "../reducers/store";
+import config from "../config"
 
 const personFields = [{
 	label: "Authors",
@@ -18,7 +19,7 @@ const personFilters = [
 ];
 
 const personSearchClient = new SolrClient({
-	url: "/repositorysolr/wwpersons",
+	url: config.solrUrls.wwpersons,
 	searchFields: personFields,
 	sortFields: personSortFields,
 	rows: 100,

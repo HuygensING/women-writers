@@ -4,6 +4,7 @@ import { setPersonReceptionsFiltersFromPersonQuery } from "./person-reception-se
 import { setAuthorPages } from "../actions/pagination";
 
 import store from "../reducers/store";
+import config from "../config"
 
 const personFields = [
 	{label: "Name", field: "name_t", type: "text"},
@@ -40,7 +41,7 @@ const personFilters = [
 ];
 
 const personSearchClient = new SolrClient({
-	url: "/repositorysolr/wwpersons",
+	url: config.solrUrls.wwpersons,
 	searchFields: personFields,
 	sortFields: personSortFields,
 	rows: 25,

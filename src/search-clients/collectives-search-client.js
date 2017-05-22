@@ -2,6 +2,7 @@ import { SolrClient } from "solr-faceted-search-react";
 
 import store from "../reducers/store";
 import {setCollectivePages} from "../actions/pagination";
+import config from "../config";
 
 const collectiveFields = [
 	{ label: "Name", field: "name_t", type: "text" },
@@ -13,7 +14,7 @@ const collectiveSortFields = [
 ];
 
 const collectiveSearchClient = new SolrClient({
-	url: "/repositorysolr/wwcollectives",
+	url: config.solrUrls.wwcollectives,
 	searchFields: collectiveFields,
 	sortFields: collectiveSortFields,
 	rows: 25,

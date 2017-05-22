@@ -4,6 +4,7 @@ import clone from "../util/clone";
 import filtersAreEqual from "../util/filters-are-equal";
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./document-reception-search-client";
 import { setPublicationPages } from "../actions/pagination";
+import config from "../config"
 
 const documentFilters = [
 	{field: "type_s", value: "document"}
@@ -30,7 +31,7 @@ const documentFields = [
 
 
 const documentSearchClient = new SolrClient({
-	url: "/repositorysolr/wwdocuments",
+	url: config.solrUrls.wwdocuments,
 	searchFields: documentFields,
 	sortFields: documentSortFields,
 	rows: 25,

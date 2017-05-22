@@ -1,6 +1,7 @@
 import { SolrClient } from "solr-faceted-search-react";
 
 import store from "../reducers/store";
+import config from "../config"
 
 const documentFields = [{
 	label: "Publications",
@@ -18,7 +19,7 @@ const documentFilters = [
 ];
 
 const documentSearchClient = new SolrClient({
-	url: "/repositorysolr/wwdocuments",
+	url: config.solrUrls.wwdocuments,
 	searchFields: documentFields,
 	sortFields: documentSortFields,
 	rows: 100,
