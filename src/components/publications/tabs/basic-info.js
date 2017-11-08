@@ -101,6 +101,16 @@ class BasicInfo extends React.Component {
 						}
 					</li>
 					<li className="list-group-item">
+						<label>Sources</label>
+						{editable
+							? <RelationField name="hasDocumentSource"
+								path={metadata.properties.find((p) => p.name === "hasDocumentSource").quicksearch}
+								onChange={onChange}
+								entity={this.props.entity} />
+							: <Relation values={model["@relations"].hasDocumentSource} otherValues={otherRelations.hasDocumentSource} linkTo="publicationIndex" />
+						}
+					</li>
+					<li className="list-group-item">
 						<label>Notes</label>
 						{ editable
 							? <TextField name="notes" onChange={onChange} entity={this.props.entity} />
