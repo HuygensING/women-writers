@@ -349,3 +349,7 @@ label {
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     font-weight: 500;
 }
+
+.hire-login-error {
+    display: none;
+}
