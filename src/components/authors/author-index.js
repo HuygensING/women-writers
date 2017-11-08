@@ -46,11 +46,11 @@ class AuthorIndex extends React.Component {
 		if (!entity.data || entity.data["@type"] !== "wwperson") { return null; }
 
 		const pageIndex = authorPages.indexOf(entity.data._id);
-		const nextAuthor = pageIndex > -1 && pageIndex < authorPages.length - 1 ?
-			<Link className="btn btn-default" to={urls.authorIndex(authorPages[pageIndex + 1])}>Next ▸</Link> : null;
+		const nextAuthor = location.hash.indexOf("prevnext") > -1 && pageIndex > -1 && pageIndex < authorPages.length - 1 ?
+			<Link className="btn btn-default" to={urls.authorIndex(authorPages[pageIndex + 1])} hash="#prevnext=1">Next ▸</Link> : null;
 
-		const prevAuthor = pageIndex > -1 && pageIndex > 0 ?
-			<Link className="btn btn-default" to={urls.authorIndex(authorPages[pageIndex - 1])}>◂ Previous</Link> : null;
+		const prevAuthor = location.hash.indexOf("prevnext") > -1 && pageIndex > -1 && pageIndex > 0 ?
+			<Link className="btn btn-default" to={urls.authorIndex(authorPages[pageIndex - 1])} hash="#prevnext=1">◂ Previous</Link> : null;
 
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;

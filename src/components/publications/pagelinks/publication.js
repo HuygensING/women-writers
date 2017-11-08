@@ -10,10 +10,10 @@ class PublicationPageLinks extends React.Component {
 
 		const pageIndex = publicationPages.indexOf(entity.data._id);
 		const nextPublication = pageIndex > -1 && pageIndex < publicationPages.length - 1 ?
-			<Link className="btn btn-default" to={urls.publicationIndex(publicationPages[pageIndex + 1])}>Next ▸</Link> : null;
+			<Link className="btn btn-default" to={urls.publicationIndex(publicationPages[pageIndex + 1])} hash="#prevnext=1">Next ▸</Link> : null;
 
 		const prevPublication = pageIndex > -1 && pageIndex > 0 ?
-			<Link className="btn btn-default" to={urls.publicationIndex(publicationPages[pageIndex - 1])}>◂ Previous</Link> : null;
+			<Link className="btn btn-default" to={urls.publicationIndex(publicationPages[pageIndex - 1])} hash="#prevnext=1">◂ Previous</Link> : null;
 
 
 		return (

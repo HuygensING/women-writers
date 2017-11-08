@@ -55,11 +55,14 @@ class PublicationIndex extends React.Component {
 		const inPublicationReceptions = pathname.match(/\/receptions\/publications\//);
 		const inAuthorReceptions = pathname.match(/\/receptions\/authors\//);
 
-		const resultLocation = inPublicationReceptions
-			? urls.publicationReceptionSearch()
-			: inAuthorReceptions
-			? urls.authorReceptionSearch()
-			: urls.publicationSearch();
+		let resultLocation = null;
+		if (inPublicationReceptions) {
+			resultLocation = urls.publicationReceptionSearch();
+		} else if (inAuthorReceptions) {
+			resultLocation = urls.authorReceptionSearch();
+		} else {
+			resultLocation = urls.publicationSearch()
+		}
 
 		const tabRoute = (toTab, setToEdit = false) => {
 			const toEdit = setToEdit ? true : editing;
@@ -72,12 +75,16 @@ class PublicationIndex extends React.Component {
 			return toEdit ? urls.publicationEdit(id, toTab) : urls.publicationTab(id, toTab);
 		};
 
-		const pageLinks = inPublicationReceptions
-			? <PublicationReceptionPageLinks entity={entity} publicationReceptionPages={publicationReceptionPages} />
-			: inAuthorReceptions
-			? <AuthorReceptionPageLinks entity={entity} authorReceptionPages={authorReceptionPages} />
-			: <PublicationPageLinks entity={entity} publicationPages={publicationPages} />
-
+		let pageLinks = null;
+		if (location.hash.indexOf("prevnext") > -1) {
+			if (inPublicationReceptions) {
+				pageLinks = <PublicationReceptionPageLinks entity={entity} publicationReceptionPages={publicationReceptionPages} />
+			} else if (inAuthorReceptions) {
+				pageLinks = <AuthorReceptionPageLinks entity={entity} authorReceptionPages={authorReceptionPages} />
+			} else {
+				pageLinks = <PublicationPageLinks entity={entity} publicationPages={publicationPages} />
+			}
+		}
 
 		const editButton = loggedIn && id && !editing ?
 			<Link className="btn btn-default" to={tabRoute(tab || "basic-info", true)}>

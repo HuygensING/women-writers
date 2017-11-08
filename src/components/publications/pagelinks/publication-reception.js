@@ -13,11 +13,11 @@ class PublicationReceptionPageLinks extends React.Component {
 		if (pageIndex > -1) {
 			const nextPublication = pageIndex < publicationReceptionPages.receptionIds.length - 1 ?
 				<Link className="btn btn-default"
-					  to={urls.publicationReceptionIndex(publicationReceptionPages.receptionIds[pageIndex + 1])}>Next ▸</Link> : null;
+					to={urls.publicationReceptionIndex(publicationReceptionPages.receptionIds[pageIndex + 1])} hash="#prevnext=1">Next ▸</Link> : null;
 
 			const prevPublication = pageIndex > 0 ?
 				<Link className="btn btn-default"
-					  to={urls.publicationReceptionIndex(publicationReceptionPages.receptionIds[pageIndex - 1])}>◂ Previous</Link> : null;
+					to={urls.publicationReceptionIndex(publicationReceptionPages.receptionIds[pageIndex - 1])} hash="#prevnext=1">◂ Previous</Link> : null;
 
 
 			return (
@@ -31,11 +31,11 @@ class PublicationReceptionPageLinks extends React.Component {
 		} else if (otherPageIndex > -1) {
 			const nextPublication = otherPageIndex < publicationReceptionPages.documentIds.length - 1 ?
 				<Link className="btn btn-default"
-					  to={urls.publicationReceptionIndex(publicationReceptionPages.documentIds[otherPageIndex + 1])}>Next ▸</Link> : null;
+					to={urls.publicationReceptionIndex(publicationReceptionPages.documentIds[otherPageIndex + 1])} hash="#prevnext=1">Next ▸</Link> : null;
 
 			const prevPublication = otherPageIndex > 0 ?
 				<Link className="btn btn-default"
-					  to={urls.publicationReceptionIndex(publicationReceptionPages.documentIds[otherPageIndex - 1])}>◂ Previous</Link> : null;
+					to={urls.publicationReceptionIndex(publicationReceptionPages.documentIds[otherPageIndex - 1])} hash="#prevnext=1">◂ Previous</Link> : null;
 
 
 			return (

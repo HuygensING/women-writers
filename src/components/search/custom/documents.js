@@ -20,7 +20,7 @@ const documentComponents = {
 					</span>
 					<span style={{flexGrow: 1}}>
 						{authorName}
-						<Link to={urls.publicationIndex(props.doc.id)}>
+						<Link to={urls.publicationIndex(props.doc.id)} hash="#prevnext=1">
 							{props.doc.displayName_s}
 						</Link>
 					</span>

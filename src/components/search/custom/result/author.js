@@ -10,7 +10,7 @@ class AuthorResult extends React.Component {
 				<span style={{flexShrink: 1, textAlign: "right", display: "inline-block", width: "40px", paddingRight: "10px"}}>
 					{start / rows * rows + resultIndex + 1}.
 				</span>
-				<Link to={urls.authorIndex(doc.id)} style={{"flexGrow": "1", whiteSpace: "nowrap", paddingRight: "1em"}}>{doc.displayName_s}</Link>
+				<Link to={urls.authorIndex(doc.id)} style={{ "flexGrow": "1", whiteSpace: "nowrap", paddingRight: "1em" }} hash="#prevnext=1">{doc.displayName_s}</Link>
 				{doc.birthDate_i || doc.deathDate_i
 					? <span style={{color: "#666", whiteSpace: "nowrap", paddingRight: "1em"}}>
 							{doc.birthDate_i || "?"}

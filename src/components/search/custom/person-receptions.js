@@ -26,7 +26,7 @@ const documentComponents = {
 					</span>
 
 					<div style={{width: "calc(42% - 25px)", display: "inline-block", verticalAlign: "top", paddingRight: "20px"}}>
-						<Link to={urls.authorIndex(props.doc.person_id_s)}>
+						<Link to={urls.authorIndex(props.doc.person_id_s)} hash="#prevnext=1">
 							{props.doc.person_displayName_s}
 						</Link>
 						<br />
@@ -46,7 +46,7 @@ const documentComponents = {
 
 					<div style={{width: "calc(42% - 25px)", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
 						{authorName}
-						<Link to={urls.authorReceptionIndex(props.doc.reception_id_s)}>
+						<Link to={urls.authorReceptionIndex(props.doc.reception_id_s)} hash="#prevnext=1">
 							{props.doc.displayName_s}
 						</Link>
 						<br />
