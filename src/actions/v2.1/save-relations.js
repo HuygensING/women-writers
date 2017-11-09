@@ -26,7 +26,7 @@ const saveRelationsV21 = (data, relationData, fieldDefs, token, vreId, next) => 
 			relationSaveData
 		];
 	};
-
+	debugger;
 	// Constructs an array of arguments for saving new relations:
 	// [
 	//   ["wwrelations", { ... }],
@@ -46,7 +46,7 @@ const saveRelationsV21 = (data, relationData, fieldDefs, token, vreId, next) => 
 	const reAddRelations = Object.keys(relationData).map((key) =>
 		(data["@relations"][key] || [])
 			.filter((origRelation) => origRelation.accepted === false)
-			.filter((origRelation) => (relationData[key] || []).filter((relation) => relation.accepted).map((relation) => relation.id).indexOf(origRelation.id) > -1)
+			.filter((origRelation) => (relationData[key] || []).filter((relation) => relation.accepted).map((relation) => relation.relationId).indexOf(origRelation.relationId) > -1)
 			.map((origRelation) => makeRelationArgs(origRelation, key, true, origRelation.relationId, origRelation.rev))
 		).reduce((a, b) => a.concat(b), []);
 
@@ -54,7 +54,7 @@ const saveRelationsV21 = (data, relationData, fieldDefs, token, vreId, next) => 
 	const deleteRelations = Object.keys(data["@relations"]).map((key) =>
 		data["@relations"][key]
 			.filter((origRelation) => origRelation.accepted)
-			.filter((origRelation) => (relationData[key] || []).map((relation) => relation.id).indexOf(origRelation.id) < 0)
+			.filter((origRelation) => (relationData[key] || []).map((relation) => relation.relationId).indexOf(origRelation.relationId) < 0)
 			.map((origRelation) => makeRelationArgs(origRelation, key, false, origRelation.relationId, origRelation.rev))
 		).reduce((a, b) => a.concat(b), []);
 
