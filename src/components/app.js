@@ -31,6 +31,7 @@ class App extends React.Component {
 			<Link to={pathname}>Receptions</Link> :
 			<Link to={urls.publicationReceptionSearch()}>Receptions</Link>;
 
+		const disabledLoginButton = loggedIn ? null : <button className="btn btn-default" disabled={true}>Login</button>;
 		const newAuthorButton = loggedIn ? <button className="btn btn-default" onClick={this.props.onNewAuthor}>New author</button> : null;
 		const newPublicationButton = loggedIn ? <button className="btn btn-default" onClick={this.props.onNewPublication}>New publication</button> : null;
 		const newCollectiveButton = loggedIn ? <button className="btn btn-default" onClick={this.props.onNewCollective}>New collective</button> : null;
@@ -44,15 +45,16 @@ class App extends React.Component {
 					</h1>
 
 					<div style={{display: "inline-block", width: "420px"}}>
-						<Login
-							appId="WomenWriters"
-							headers={{VRE_ID: "WomenWriters"}}
-							onChange={(this.props.onLoginChange)}
-							userUrl={config.userUrl}>
-							<Federated url={config.federatedAuthenticateUrl} />
-							<Basic url={config.basicAuthenticateUrl} />
-						</Login>
+						{/*<Login*/}
+						{/*	appId="WomenWriters"*/}
+						{/*	headers={{VRE_ID: "WomenWriters"}}*/}
+						{/*	onChange={(this.props.onLoginChange)}*/}
+						{/*	userUrl={config.userUrl}>*/}
+						{/*	<Federated url={config.federatedAuthenticateUrl} />*/}
+						{/*	<Basic url={config.basicAuthenticateUrl} />*/}
+						{/*</Login>*/}
 						<div className="btn-group">
+							{disabledLoginButton}
 							{newAuthorButton}
 							{newPublicationButton}
 							{newCollectiveButton}
